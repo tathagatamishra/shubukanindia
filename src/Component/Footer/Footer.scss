@@ -1,0 +1,371 @@
+.Footer {
+    z-index: 1;
+    height: fit-content;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    background-image: url("https://www.tilingtextures.com/wp-content/uploads/2018/11/0068-1-768x768.jpg");
+    box-shadow: inset 0px -800px 200px -200px #ffffff;
+    background-size: 250px 250px;
+    // border: solid 1px blueviolet;
+
+    & .footSub {
+        z-index: 1;
+        width: 50%;
+
+        padding: 1rem;
+        margin: 10rem 0 2rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // height: 50%;
+        // margin-top: 8rem;
+        // border: solid 1px rgb(57, 229, 45);
+        transition: 200ms;
+
+        & h1 {
+            margin: 0;
+            // border: solid yellow;
+            text-align: center;
+            color: #686060;
+            font-size: 1.7rem;
+            line-height: 2.5rem;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            font-family: 'Forum', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+            // transform: translateY(40%);
+            user-select: none;
+            transition: 200ms;
+        }
+
+        & form {
+            width: fit-content;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            & input {
+                width: 18rem;
+                height: 3.2rem;
+                padding: 0 0 0;
+                background: transparent;
+                border: none;
+                // border: solid;
+
+                color: #605a5a;
+                font-size: 1.5rem;
+                // font-family: 'Amarante', cursive;
+                // font-family: 'Andika', sans-serif;
+                // font-family: 'Bellefair', serif;
+                // font-family: 'Capriola', sans-serif;
+                // font-family: 'Flamenco', cursive;
+                // font-family: 'Fredericka the Great', cursive;
+                // font-family: 'GFS Neohellenic', sans-serif;
+                // font-family: 'Pompiere', cursive;
+                font-family: 'Tenali Ramakrishna', sans-serif;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &::selection {
+                    color: #ffffff;
+                    background: #858E78;
+                }
+            }
+
+            & button {
+                // border-radius: 50px;
+                height: 2rem;
+                width: 4rem;
+                font-size: 2rem;
+                padding: 0 0 4px 0;
+                line-height: 0;
+                // transform: rotate(-10deg);
+                color: #565250;
+                background: #bcb3b3;
+                background: linear-gradient(to left, #bcb3b3 0%, transparent 100%);
+                border: 3px solid #777270;
+                border: none;
+                transition: 200ms;
+                user-select: none;
+
+                &:hover {
+                    // border: 3px solid #D9C8A9;
+                    padding: 0 0 4px 2.8rem;
+                    transform: translateX(-30%);
+                }
+
+                &:active {
+                    // border: 3px solid #777270;
+                    padding: 0 0 4px 2rem;
+                    transform: translateX(0%);
+                }
+            }
+        }
+
+        & .underLine {
+            // border-bottom: solid 2px #5f443f;
+            background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 20%, transparent 100%);
+            width: 10rem;
+            height: 2px;
+            // transform: translate(0%);
+            transition: 200ms;
+        }
+
+        &:hover {
+            transition: 200ms;
+
+            & h1 {
+                text-shadow: 0 0 10px #b8aa8fa7;
+            }
+
+            & .underLine {
+                width: 20rem;
+                // transform: translate(-20%);
+                background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 0%, transparent 100%);
+            }
+        }
+    }
+
+    & .footContent {
+        width: 80%;
+        height: 15rem;
+        margin: 2rem 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        // border: solid red 1px;
+
+        & p {
+            margin: 0;
+
+            font-size: 1.2rem;
+
+            font-family: 'Amarante', cursive;
+            font-family: 'Andika', sans-serif;
+            font-family: 'Bellefair', serif;
+            font-family: 'Capriola', sans-serif;
+            font-family: 'Flamenco', cursive;
+            font-family: 'Forum', cursive;
+            font-family: 'Fredericka the Great', cursive;
+            font-family: 'GFS Neohellenic', sans-serif;
+            font-family: 'Philosopher', sans-serif;
+            font-family: 'Pompiere', cursive;
+            font-family: 'Tenali Ramakrishna', sans-serif;
+
+            &::selection {
+                color: rgb(216, 86, 86);
+                background: rgb(248, 235, 141);
+            }
+        }
+
+        & .footOptions1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+
+            width: 10rem;
+            margin-right: 4rem;
+            transition: 200ms;
+        }
+
+        & .footOptions2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 4rem;
+            transition: 200ms;
+        }
+
+        & .footOptions3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+
+            width: 10rem;
+            margin-left: 4rem;
+            transition: 200ms;
+        }
+
+        & .midLine {
+            height: 100%;
+            width: 1px;
+            background: linear-gradient(#403D3C, transparent);
+        }
+
+        @media screen and (max-width: 700px) {
+            & .footOptions1 {
+                width: 10rem;
+                margin-right: 2rem;
+            }
+
+            & .footOptions2 {
+                margin: 0 2rem;
+            }
+
+            & .footOptions3 {
+                width: 10rem;
+                margin-left: 2rem;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            width: 90%;
+            height: 13rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            & p {
+                text-align: right;
+            }
+
+            & .footOptions1 {
+                width: 10rem;
+                margin-right: .5rem;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            & .footOptions2 {
+                margin: 0 1rem;
+            }
+
+            & .footOptions3 {
+                width: 10rem;
+                margin-left: .5rem;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            width: 100%;
+            height: 13rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            & .footOptions1 {
+                width: 8.5rem;
+                margin-right: .5rem;
+            }
+
+            & .footOptions2 {
+                margin: 0 .5rem;
+            }
+
+            & .footOptions3 {
+                width: 8.5rem;
+                margin-left: .5rem;
+            }
+        }
+    }
+
+    & .footLogo {
+        height: fit-content;
+        width: 80%;
+        // margin-bottom: 2rem;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        // border: solid blue;
+
+        & .logoImg {
+            width: fit-content;
+            margin: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            & img {
+                height: 12rem;
+                // width: 100px;
+                // border-radius: 8px;
+                filter: sepia(10%) grayscale(10%);
+                user-select: none;
+                display: block;
+                background-size: cover;
+                transition: 200ms;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            & .logoImg {
+                & img {
+                    height: 10rem;
+                }
+            }
+        }
+        @media screen and (max-width: 500px) {
+            & .logoImg {
+                & img {
+                    height: 8rem;
+                }
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            & .logoImg {
+                & img {
+                    height: 6rem;
+                }
+            }
+        }
+    }
+
+    & .footLine {
+        height: 1px;
+        width: 100%;
+        margin: 1rem 0;
+        background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 20%, transparent 100%);
+    }
+
+    & .footExtra {
+        width: 100%;
+        // padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & p {
+            margin: 0 1rem 1rem;
+            font-size: .8rem;
+            font-family: Arial, Helvetica, sans-serif;
+
+            &::selection {
+                color: rgb(216, 86, 86);
+                background: rgb(248, 235, 141);
+            }
+        }
+    }
+}

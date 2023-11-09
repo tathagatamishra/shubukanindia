@@ -1,0 +1,330 @@
+#Navbar {
+    z-index: 50;
+
+    height: 10rem;
+    width: 100%;
+    position: fixed;
+    top: 0rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    // background-image: linear-gradient(white, white, transparent);
+    box-shadow: inset 0px 260px 40px -150px white;
+    transition: all 1s ease-in-out 0s;
+    // transition: 1s;
+
+    // border-bottom: solid red 1px;
+
+    & .logo {
+        height: 5rem;
+        margin: 1rem 0 0 1rem;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        transition: 300ms;
+
+        & canvas {
+            height: 5rem !important;
+            width: 5rem !important;
+            display: block;
+        }
+
+        & .logo1 {
+            height: 5rem;
+            margin-left: .5rem;
+            user-select: none;
+            transition: 300ms;
+        }
+
+        & .logo2 {
+            height: 5rem;
+            margin-left: .5rem;
+            user-select: none;
+            transition: 300ms;
+        }
+    }
+
+    & .menu {
+        // border: solid;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        transition: 200ms;
+
+        & .menuStart {
+            z-index: 1;
+            width: 5rem;
+            height: 1.6rem;
+            margin: 1.5rem 0;
+            // background: rgb(125, 203, 255);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            & .lines {
+                width: 100px;
+                height: 4px;
+                background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(42, 32, 28, 1) 100%);
+                transition: 200ms;
+            }
+
+            // &:hover {
+
+            //     // background: rgb(244, 45, 0);
+            //     & .lines {
+            //         width: 150px;
+            //     }
+            // }
+        }
+
+        & .menuBox {
+            position: fixed;
+            height: 100vh;
+            width: 32rem;
+            top: 0;
+            right: 0;
+            // border: solid;
+            overflow: hidden;
+            // background: rgb(169, 176, 167);
+            // background-image: url('https://github.com/tathagatamishra/Shubukan-India/blob/main/client/public/old-paper.png?raw=true');
+            background-repeat: repeat-y;
+            background-size: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+
+            animation-name: menuSlide;
+            animation-duration: .2s;
+            animation-timing-function: ease-in-out;
+
+            @keyframes menuSlide {
+                from {
+                    filter: opacity(0%);
+                    transform: translateX(80%);
+                }
+
+                to {
+                    filter: opacity(60%);
+                    transform: translateX(0%);
+                }
+            }
+
+            & .nav {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                padding-left: 2.5rem;
+                // border: solid;
+                width: 100%;
+
+                & .opt {
+                    height: 4rem;
+                    // border: solid;
+                    color: rgb(36, 35, 35);
+                    text-decoration: none;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    transition: 200ms;
+
+                    & p {
+                        // padding: 0;
+                        // margin: 0;
+
+                        transition: 300ms;
+
+                        text-decoration: none;
+                        font-size: 18px;
+                        font-weight: 900;
+                        text-shadow: 0 0 15px rgb(163, 150, 140);
+                        font-family: 'Philosopher', sans-serif;
+
+                        transition: 0.3s ease 0s, left 0.3s ease 0s;
+
+                        &::selection {
+                            color: rgb(216, 86, 86);
+                            background: rgb(248, 235, 141);
+                        }
+                    }
+
+                    &:hover {
+
+                        & p {
+                            padding: 0;
+                            font-size: 1.5rem;
+                            // padding-bottom: 1rem;
+                            // transform: translateY(-2px);
+                        }
+                    }
+
+                    &:active {
+
+                        & p {
+                            transform: translateY(6px);
+                        }
+                    }
+                }
+            }
+        }
+
+        & .menuBG {
+            background: rgba(255, 255, 255, 0.317);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            left: 0;
+            top: 0;
+
+            animation-name: BGBlur;
+            animation-duration: .4s;
+            animation-timing-function: ease-in-out;
+
+            @keyframes BGBlur {
+                from {
+                    backdrop-filter: blur(0px);
+                }
+
+                to {
+                    backdrop-filter: blur(8px);
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 9rem;
+        box-shadow: inset 0px 240px 50px -150px rgb(255, 255, 255);
+
+        & .logo {
+            margin: .2rem 0 0 .5rem;
+
+            & .logo1 {
+                height: 4.5rem;
+            }
+
+            & .logo2 {
+                height: 4rem;
+            }
+        }
+    }
+
+    @media screen and (min-width: 800px) {
+
+        & .menu {
+            & .menuStart {
+                &:hover {
+                    & .lines {
+                        width: 150px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        height: 8rem;
+        box-shadow: inset 0px 225px 48px -150px rgb(255, 255, 255);
+
+        & .logo {
+            margin: .1rem 0 0 .5rem;
+
+            & .logo1 {
+                height: 4rem;
+            }
+
+            & .logo2 {
+                height: 3rem;
+            }
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        height: 7rem;
+        box-shadow: inset 0px 215px 45px -150px rgb(255, 255, 255);
+
+        & .logo {
+            margin: .1rem 0 0 .2rem;
+        }
+
+        & .options {
+            margin: .5rem .5rem 0 0;
+        }
+    }
+
+    @media screen and (max-height: 660px) {
+        height: 7rem;
+        box-shadow: inset 0px 210px 45px -150px rgb(255, 255, 255);
+
+        & .logo {
+            margin: .1rem 0 0 .5rem;
+
+            & .logo1 {
+                height: 4rem;
+            }
+
+            & .logo2 {
+                height: 3rem;
+            }
+        }
+
+        & .options {
+            margin: .5rem .5rem 0 0;
+        }
+    }
+
+    @media screen and (max-height: 600px) {
+        & .menu {
+            & .menuBox {
+                & .nav {
+                    & .opt {
+                        height: 3.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-height: 515px) {
+        & .menu {
+            & .menuBox {
+                & .nav {
+                    & .opt {
+                        height: 3rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-height: 430px) {
+        & .menu {
+            & .menuBox {
+                & .nav {
+                    & .opt {
+                        height: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}

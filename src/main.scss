@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
+
+
+// font-family: 'Amarante', cursive;
+// font-family: 'Andika', sans-serif;
+// font-family: 'Bellefair', serif;
+// font-family: 'Capriola', sans-serif;
+// font-family: 'Flamenco', cursive;
+// font-family: 'Forum', cursive;
+// font-family: 'Fredericka the Great', cursive;
+// font-family: 'GFS Neohellenic', sans-serif;
+// font-family: 'Philosopher', sans-serif;
+// font-family: 'Pompiere', cursive;
+// font-family: 'Tenali Ramakrishna', sans-serif;
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0px;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+
+  background: rgb(231, 221, 211);
+  // background-image: url("https://www.tilingtextures.com/wp-content/uploads/2018/11/0068-1-768x768.jpg");
+  // background-size: 250px 250px;
+
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: black;
+    border-top: solid 10px tomato;
+    border-bottom: solid 10px tomato;
+  }
+}
