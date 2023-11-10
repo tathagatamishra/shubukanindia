@@ -547,6 +547,21 @@
             width: 100rem;
             top: 0;
             right: 0;
+
+            backdrop-filter: blur(3px);
+            animation-name: popUpBGBlur;
+            animation-duration: .4s;
+            animation-timing-function: ease-in-out;
+
+            @keyframes popUpBGBlur {
+                from {
+                    backdrop-filter: blur(0px);
+                }
+
+                to {
+                    backdrop-filter: blur(3px);
+                }
+            }
         }
 
         & .imgPop {
@@ -556,28 +571,44 @@
             left: 50%;
             transform: translate(-50%, -50%);
 
-            width: fit-content;
+            // max-width: 500px;
+            // max-height: 500px;
             margin-bottom: 1rem;
 
             display: block;
             overflow: hidden;
-            box-shadow: 0 0 10px #ebe1d6df;
+            // box-shadow: 0 0 10px #ebe1d6df;
             border-radius: 8px;
             transition: 300ms;
             border-top: solid 1.5px transparent;
             border-left: solid 1.5px transparent;
 
             & img {
-                height: auto;
-                width: 100%;
+                max-width: 80vw;
+                max-height: 80vh;
+
                 border-radius: 8px;
-                filter: sepia(30%) grayscale(30%);
+                filter: sepia(10%) grayscale(10%);
 
                 display: block;
                 background-size: cover;
                 transition: transform 0.4s;
 
                 user-select: none;
+
+                animation-name: popImg;
+                animation-duration: .2s;
+                animation-timing-function: ease-in-out;
+    
+                @keyframes popImg {
+                    from {
+                        transform: scale(0%);
+                    }
+    
+                    to {
+                        transform: scale(100%);
+                    }
+                }
             }
         }
     }

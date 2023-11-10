@@ -10,19 +10,19 @@ import "./Navbar.scss";
 export default function Navbar() {
   const [position, setPosition] = useState({ top: "0rem" });
   const [lastScrollTop, setLastScrollTop] = useState(Infinity);
-
+  
   const [isMenu, setIsMenu] = useState(false);
   const [menuStyle, setMenuStyle] = useState({});
 
   // This Variable will store the top position
-
+  
   window.addEventListener("scroll", function () {
     //on every scroll this function will be called
-
+    
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     //This line will get the location on scroll
 
-    if (scrollTop > lastScrollTop) {
+    if ((scrollTop > lastScrollTop)) {
       //if it will be greater than the previous
       setPosition({ top: "-10rem" });
       //set the value to the negative of height of navbar
@@ -86,6 +86,7 @@ export default function Navbar() {
         {isMenu && (
           <>
             <div className="menuBG" onClick={showMenu}></div>
+            {/* menu is forced to be hidden but it's css is not be hidden, so when it appears, it appears with transition, but when it get killed, it killed immediately, so there is no end transition */}
             <div
               className="menuBox"
               style={{ backgroundImage: `url(${oldPaper})` }}

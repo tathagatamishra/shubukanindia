@@ -2,8 +2,19 @@ import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import birdImg from '../../assets/bird.png'
 import treeImg from '../../assets/tree.png'
+import img1 from '../../assets/uemaImg1.svg'
+import img2 from '../../assets/uemaImg2.svg'
+import img3 from '../../assets/chibana.jpg'
+import img4 from '../../assets/mag2.jpg'
+import img5 from '../../assets/uema.jpg'
+import img6 from '../../assets/jokiUema.svg'
+import img7 from '../../assets/takeshi.jpg'
+import img8 from '../../assets/yasuhiro.jpg'
+let unsplash1 = 'https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
+let unsplash2 = 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWJzdHJhY3QlMjAlMjBza3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
 
-export default function Home() {
+
+export default function Home({setShowNav}) {
   const [slider, setSlider] = useState(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(null);
@@ -62,7 +73,9 @@ export default function Home() {
     if (imgClicked == true) {
       setPopImg("");
       setImgClicked(false);
+      setShowNav(true)
     } else if (imgClicked == false) {
+      setShowNav(false)
       setPopImg(srcValue);
       setImgClicked(true);
     }
@@ -75,7 +88,7 @@ export default function Home() {
       </div>
       <div className="line">
         <div className="lineColor"></div>
-        <img src="bushido.png" alt="" />
+        {/* <img src="bushido.png" alt="" /> */}
       </div>
 
       <section className="hero">
@@ -131,38 +144,34 @@ export default function Home() {
       <section className="gallery">
         <h1 className="galleryTop">Gallery</h1>
         <div>
-          <div className="image" onClick={()=>imgPop('../../assets/chibana.jpg')}>
-            <img src="../../assets/chibana.jpg" alt="image" />
+          <div className="image" onClick={()=>imgPop(img3)}>
+            <img src={img3} alt="chosin chibana" />
           </div>
-          <div className="image" onClick={()=>imgPop('../../assets/mag.jpg')}>
-            <img src="../../assets/mag.jpg" alt="image" />
+          <div className="image" onClick={()=>imgPop(img2)}>
+            <img src={img2} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('../../assets/uema.jpg')}>
-            <img src="../../assets/uema.jpg" alt="image" />
+          <div className="image" onClick={()=>imgPop(img4)}>
+            <img src={img4} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('../../assets/yasuhiro.jpg')}>
-            <img src="../../assets/yasuhiro.jpg" alt="image" />
+          <div className="image" onClick={()=>imgPop(img8)}>
+            <img src={img8} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60')}>
-            <img
-              src="https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-              alt="image"
-            />
+          <div className="image" onClick={()=>imgPop(img1)}>
+            <img src={img1} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('../../assets/mag2.jpg')}>
-            <img src="../../assets/mag2.jpg" alt="image" />
+          <div className="image" onClick={()=>imgPop(unsplash1)}>
+            <img src={unsplash1} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('../../assets/takeshi.jpg')}>
-            <img src="../../assets/takeshi.jpg" alt="image" />
+          <div className="image" onClick={()=>imgPop(img5)}>
+            <img src={img5} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWJzdHJhY3QlMjAlMjBza3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60')}>
-            <img
-              src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWJzdHJhY3QlMjAlMjBza3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-              alt="image"
-            />
+          <div className="image" onClick={()=>imgPop(img7)}>
+            <img src={img7} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop('../../assets/sensei.jpg')}>
-            <img src="../../assets/sensei.jpg" alt="image" />
+          
+          
+          <div className="image" onClick={()=>imgPop(img6)}>
+            <img src={img6} alt="image" />
           </div>
         </div>
       </section>

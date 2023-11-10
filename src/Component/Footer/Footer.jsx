@@ -1,5 +1,7 @@
 import React from "react";
 import "./Footer.scss";
+import logo1 from '../../assets/shubukanIndia.png'
+import logo2 from '../../assets/Shorin-ryu.png'
 
 export default function Footer() {
   function news(event) {
@@ -50,13 +52,10 @@ export default function Footer() {
 
       <div className="footLogo">
         <div className="logoImg">
-          <img src="shubukanIndia.png" alt="" />
+          <img src={logo1} alt="" />
         </div>
         <div className="logoImg">
-          <img src="Shorin-ryu.png" alt="" />
-        </div>
-        <div className="logoImg">
-          <img src="wbk.png" alt="" />
+          <img src={logo2} alt="" />
         </div>
       </div>
 

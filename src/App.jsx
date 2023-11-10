@@ -10,7 +10,7 @@ import Blog from "./Component/Blog/Blog";
 
 function App() {
 
-  const [hidePopup, setHidePopup] = useState({})
+  const [showNav, setShowNav] = useState(true)
 
   document.addEventListener("mousemove", (ev) => {
     const x = ev.clientX,
@@ -29,11 +29,11 @@ function App() {
       <BrowserRouter>
         <div id="cursor"></div>
 
-        <Navbar />
+        {showNav && <Navbar showNav={showNav} />}
 
-        <div className="webBody" onClick={()=>setHidePopup({})}>
+        <div className="webBody">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home setShowNav={setShowNav} />} />
             <Route path="/kata" element={<Kata />} />
             <Route path="/blog" element={<Blog />} />
           </Routes>

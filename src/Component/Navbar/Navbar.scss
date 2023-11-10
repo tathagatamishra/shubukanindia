@@ -15,7 +15,19 @@
     box-shadow: inset 0px 260px 40px -150px white;
     transition: all 1s ease-in-out 0s;
     // transition: 1s;
+    animation-name: navSlide;
+    animation-duration: .2s;
+    animation-timing-function: ease-in-out;
 
+    @keyframes navSlide {
+        from {
+            top: -10rem;
+        }
+
+        to {
+            top: 0rem;
+        }
+    }
     // border-bottom: solid red 1px;
 
     & .logo {
