@@ -5,8 +5,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Navbar from "./Component/Navbar/Navbar";
 import Footer from "./Component/Footer/Footer";
-import Kata from "./Component/Kata/Kata";
+import History from "./Component/History/History";
+import ShubukanIndia from "./Component/ShubukanIndia/ShubukanIndia";
+import ShubukanOkinawa from "./Component/ShubukanOkinawa/ShubukanOkinawa";
+import ShubukanWorld from "./Component/ShubukanWorld/ShubukanWorld";
+import Hozonkai from "./Component/Hozonkai/Hozonkai";
+import LineageAndDojoKun from "./Component/LineageAndDojoKun/LineageAndDojoKun";
+import KataAndKobudo from "./Component/KataAndKobudo/KataAndKobudo";
+import CalenderAndNotice from "./Component/CalenderAndNotice/CalenderAndNotice";
+import Membership from "./Component/Membership/Membership";
+import Services from "./Component/Services/Services";
+import Gallery from "./Component/Gallery/Gallery";
 import Blog from "./Component/Blog/Blog";
+import Contact from "./Component/Contact/Contact";
+
 
 function App() {
 
@@ -34,8 +46,19 @@ function App() {
         <div className="webBody">
           <Routes>
             <Route path="/" element={<Home setShowNav={setShowNav} />} />
-            <Route path="/kata" element={<Kata />} />
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/History" element={<History />} />
+            <Route path="/ShubukanIndia" element={<ShubukanIndia />} />
+            <Route path="/ShubukanOkinawa" element={<ShubukanOkinawa />} />
+            <Route path="/ShubukanWorld" element={<ShubukanWorld />} />
+            <Route path="/Hozonkai" element={<Hozonkai />} />
+            <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
+            <Route path="/KataAndKobudo" element={<KataAndKobudo />} />
+            <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} />
+            <Route path="/Membership" element={<Membership />} />
+            <Route path="/Services" element={<Services />} />
+            <Route path="/Gallery" element={<Gallery />} />
+            <Route path="/Blog" element={<Blog />} />
+            <Route path="/Contact" element={<Contact />} />
           </Routes>
         </div>
 

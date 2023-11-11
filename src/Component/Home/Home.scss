@@ -1,3 +1,5 @@
+@import '../../assets/variables';
+
 .Home {
     // z-index: 5;
     height: fit-content;
@@ -143,8 +145,8 @@
             // font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
-                color: #403D3C;
-                background: #BFB2AA;
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 
@@ -185,8 +187,8 @@
             }
 
             &::selection {
-                color: #A64B37;
-                background: #D9C8A9;
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 
@@ -343,8 +345,8 @@
                 font-family: 'Tenali Ramakrishna', sans-serif;
 
                 &::selection {
-                    color: #403D3C;
-                    background: #BFB2AA;
+                    color: $---selection-color;
+                    background: $---selection-bg;
                 }
             }
 
@@ -376,8 +378,8 @@
                     // font-family: 'Tenali Ramakrishna', sans-serif;
 
                     &::selection {
-                        color: #A64B37;
-                        background: #D9C8A9;
+                        color: $---selection-color;
+                        background: $---selection-bg;
                     }
                 }
             }
@@ -439,8 +441,8 @@
                 transition: 200ms;
 
                 &::selection {
-                    color: #403D3C;
-                    background: #BFB2AA;
+                    color: $---selection-color;
+                    background: $---selection-bg;
                 }
             }
 
@@ -458,8 +460,8 @@
                 // font-family: 'Tenali Ramakrishna', sans-serif;
 
                 &::selection {
-                    color: #A64B37;
-                    background: #D9C8A9;
+                    color: $---selection-color;
+                    background: $---selection-bg;
                 }
             }
 
@@ -599,12 +601,12 @@
                 animation-name: popImg;
                 animation-duration: .2s;
                 animation-timing-function: ease-in-out;
-    
+
                 @keyframes popImg {
                     from {
                         transform: scale(0%);
                     }
-    
+
                     to {
                         transform: scale(100%);
                     }
@@ -644,8 +646,8 @@
             // transform: translate(10px, 10px);
 
             &::selection {
-                color: rgb(216, 86, 86);
-                background: rgb(248, 235, 141);
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 
@@ -749,8 +751,8 @@
             }
 
             &::selection {
-                color: rgb(216, 86, 86);
-                background: rgb(248, 235, 141);
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 
@@ -775,8 +777,8 @@
             }
 
             &::selection {
-                color: rgb(216, 86, 86);
-                background: rgb(248, 235, 141);
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 

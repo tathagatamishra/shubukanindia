@@ -93,46 +93,45 @@ export default function Navbar() {
             >
               {/* <img src="oldpaper.png" alt="" /> */}
               <nav className="nav">
-                <NavLink to="/history" className="opt" onClick={showMenu}>
+                <NavLink to="/History" className="opt" onClick={showMenu}>
                   <p>HISTORY</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+                <NavLink to="/ShubukanIndia" className="opt" onClick={showMenu}>
                   <p>SHUBUKAN INDIA</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+                <NavLink to="/ShubukanOkinawa" className="opt" onClick={showMenu}>
                   <p>SHUBUKAN OKINAWA</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+                <NavLink to="/ShubukanWorld" className="opt" onClick={showMenu}>
+                  <p>SHUBUKAN WORLD</p>
+                </NavLink>
+                <NavLink to="/Hozonkai" className="opt" onClick={showMenu}>
                   <p>SURI KARATE KOBUDO HOZONKAI</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
-                  <p>LINEAGE</p>
+
+                <NavLink to="/LineageAndDojoKun" className="opt" onClick={showMenu}>
+                  <p>LINEAGE & DOJO KUN</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
-                  <p>DOJO KUN</p>
+                <NavLink to="/KataAndKobudo" className="opt" onClick={showMenu}>
+                  <p>KARATE & KOBUDO</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
-                  <p>KARATE</p>
-                </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
-                  <p>KOBUDO</p>
-                </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
-                  <p>BLOG</p>
-                </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+
+                <NavLink to="/CalenderAndNotice" className="opt" onClick={showMenu}>
                   <p>CALENDER & NOTICE</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+                <NavLink to="/Membership" className="opt" onClick={showMenu}>
                   <p>MEMBERSHIP</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+                <NavLink to="/Services" className="opt" onClick={showMenu}>
                   <p>SERVICES</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
-                  <p>DOWNLOADS</p>
+                <NavLink to="/Gallery" className="opt" onClick={showMenu}>
+                  <p>GALLERY</p>
                 </NavLink>
-                <NavLink to="/" className="opt" onClick={showMenu}>
+                <NavLink to="/Blog" className="opt" onClick={showMenu}>
+                  <p>BLOG</p>
+                </NavLink>
+                <NavLink to="/Contact" className="opt" onClick={showMenu}>
                   <p>CONTACT</p>
                 </NavLink>
               </nav>
