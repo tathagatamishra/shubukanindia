@@ -1,3 +1,5 @@
+@import '../../assets/variables';
+
 #Navbar {
     z-index: 50;
 
@@ -270,6 +272,25 @@
         }
     }
 
+    @media screen and (max-width: 550px) {
+        height: 7rem;
+        box-shadow: inset 0px 215px 45px -150px rgb(255, 255, 255);
+
+        & .logo {
+            margin: .1rem 0 0 .2rem;
+        }
+
+        & .options {
+            margin: .5rem .5rem 0 0;
+        }
+
+        & .menu {
+            & .menuBox {
+                width: 450px;
+            }
+        }
+
+    }
     @media screen and (max-width: 500px) {
         height: 7rem;
         box-shadow: inset 0px 215px 45px -150px rgb(255, 255, 255);
@@ -281,6 +302,34 @@
         & .options {
             margin: .5rem .5rem 0 0;
         }
+
+        & .menu {
+            & .menuBox {
+                width: 100vw;
+                transform: translateX(0%);
+            }
+        }
+    }
+    @media screen and (max-width: 350px) {
+        height: 7rem;
+        box-shadow: inset 0px 215px 45px -150px rgb(255, 255, 255);
+
+        & .logo {
+            margin: .1rem 0 0 .2rem;
+        }
+
+        & .options {
+            margin: .5rem .5rem 0 0;
+        }
+
+        & .menu {
+            & .menuBox {
+                width: 120vw;
+                height: 113vh;
+                transform: translateX(0%);
+            }
+        }
+
     }
 
     @media screen and (max-height: 660px) {
@@ -304,31 +353,64 @@
         }
     }
 
-    @media screen and (max-height: 600px) {
+    @media screen and (max-height: 930px) {
         & .menu {
             & .menuBox {
                 & .nav {
                     & .opt {
-                        height: 3.5rem;
+                        height: 60px;
                     }
                 }
             }
         }
     }
 
-    @media screen and (max-height: 515px) {
+    @media screen and (max-height: 840px) {
         & .menu {
             & .menuBox {
                 & .nav {
                     & .opt {
-                        height: 3rem;
+                        height: 50px;
                     }
                 }
             }
         }
     }
 
-    @media screen and (max-height: 430px) {
+    @media screen and (max-height: 700px) {
+        & .menu {
+            & .menuBox {
+                & .nav {
+                    & .opt {
+                        height: 45px;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-height: 650px) {
+        & .menu {
+            & .menuBox {
+                & .nav {
+                    & .opt {
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-height: 550px) {
+        & .menu {
+            & .menuBox {
+                & .nav {
+                    & .opt {
+                        height: 35px;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-height: 500px) {
         & .menu {
             & .menuBox {
                 & .nav {

@@ -1,3 +1,5 @@
+@import '../../assets/variables';
+
 .Footer {
     z-index: 1;
     height: fit-content;
@@ -146,8 +148,8 @@
 
     & .footContent {
         width: 80%;
-        height: 15rem;
-        margin: 2rem 0;
+        height: 10rem;
+        margin: 60px 0 80px 0;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -158,16 +160,16 @@
 
             font-size: 1.2rem;
 
-            font-family: 'Amarante', cursive;
-            font-family: 'Andika', sans-serif;
-            font-family: 'Bellefair', serif;
-            font-family: 'Capriola', sans-serif;
-            font-family: 'Flamenco', cursive;
-            font-family: 'Forum', cursive;
-            font-family: 'Fredericka the Great', cursive;
-            font-family: 'GFS Neohellenic', sans-serif;
-            font-family: 'Philosopher', sans-serif;
-            font-family: 'Pompiere', cursive;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Forum', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
             font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
@@ -213,51 +215,65 @@
             background: linear-gradient(#403D3C, transparent);
         }
 
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: 880px) {
             & .footOptions1 {
                 width: 10rem;
-                margin-right: 2rem;
+                margin-right: 40px;
             }
 
             & .footOptions2 {
-                margin: 0 2rem;
+                margin: 0 40px;
             }
 
             & .footOptions3 {
                 width: 10rem;
-                margin-left: 2rem;
+                margin-left: 40px;
+            }
+        }
+        @media screen and (max-width: 760px) {
+            & .footOptions1 {
+                width: 130px;
+                margin-right: 30px;
+            }
+
+            & .footOptions2 {
+                margin: 0 30px;
+            }
+
+            & .footOptions3 {
+                width: 130px;
+                margin-left: 30px;
             }
         }
 
-        @media screen and (max-width: 500px) {
+        @media screen and (max-width: 630px) {
             width: 90%;
             height: 13rem;
             display: flex;
             flex-direction: row;
             justify-content: center;
-
-            & p {
-                text-align: right;
-            }
-
+            
             & .footOptions1 {
                 width: 10rem;
                 margin-right: .5rem;
-
+                text-align: left;
+                
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
             }
-
+            
             & .footOptions2 {
                 margin: 0 1rem;
+                text-align: center;
             }
-
+            
             & .footOptions3 {
                 width: 10rem;
                 margin-left: .5rem;
-
+                text-align: right;
+                
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

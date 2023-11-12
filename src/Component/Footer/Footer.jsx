@@ -23,28 +23,21 @@ export default function Footer() {
 
       <div className="footContent">
         <div className="footOptions1">
-          <p>Organization</p>
-          <p>Contact Us</p>
-          <p>Calender</p>
-          <p>Member</p>
+          <p>Shubukan India</p>
+          <p>Membership</p>
           <p>Service</p>
         </div>
         <div className="midLine"></div>
         <div className="footOptions2">
           <p>Blog</p>
-          <p>Sprit</p>
-          <p>Kata</p>
-          <p>History</p>
-          <p>syllabus</p>
           <p>Downloads</p>
+          <p>Calender & Notice</p>
         </div>
         <div className="midLine"></div>
         <div className="footOptions3">
           <p>Terms & Conditions</p>
-          <p>Privacy Policy</p>
-          <p>Refund Policy</p>
           <p>Help and FAQ</p>
-          <p>Pricing</p>
+          <p>Contact Us</p>
         </div>
       </div>
 

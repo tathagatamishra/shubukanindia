@@ -1,13 +1,17 @@
+@import '../../assets/variables';
+
 .Blog {
     height: fit-content;
     width: 80%;
-    // border: solid 1px;
+    border: solid 1px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 10rem;
 
     @media screen and (max-width: 400px) {
         width: 90%;
+        padding-top: 5rem;
     }
 
     & #searchBar {
@@ -141,10 +145,10 @@
                 // font-family: 'Pompiere', cursive;
                 // font-family: 'Tenali Ramakrishna', sans-serif;
 
-                &::selection {
-                    color: #403D3C;
-                    background: #BFB2AA;
-                }
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
             }
 
             & p {
@@ -160,10 +164,10 @@
                 // font-family: 'Pompiere', cursive;
                 // font-family: 'Tenali Ramakrishna', sans-serif;
 
-                &::selection {
-                    color: #A64B37;
-                    background: #D9C8A9;
-                }
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
             }
 
             @media screen and (max-width: 700px) {
