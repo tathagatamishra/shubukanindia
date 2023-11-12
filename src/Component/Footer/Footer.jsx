@@ -2,6 +2,8 @@ import React from "react";
 import "./Footer.scss";
 import logo1 from '../../assets/shubukanIndia.png'
 import logo2 from '../../assets/Shorin-ryu.png'
+import logo3 from '../../assets/ShubukanKanji.png'
+import logo4 from '../../assets/ShuriKarateKobudoHozonkai.png'
 
 export default function Footer() {
   function news(event) {
@@ -10,7 +12,7 @@ export default function Footer() {
 
   return (
     <div className="Footer">
-      <div className="footSub">
+      {/* <div className="footSub">
         <h1>Subscribe to our newsletter</h1>
 
         <form action="">
@@ -19,7 +21,7 @@ export default function Footer() {
         </form>
 
         <div className="underLine"></div>
-      </div>
+      </div> */}
 
       <div className="footContent">
         <div className="footOptions1">
@@ -50,12 +52,18 @@ export default function Footer() {
         <div className="logoImg">
           <img src={logo2} alt="" />
         </div>
+        <div className="logoImg">
+          <img src={logo3} alt="" />
+        </div>
+        <div className="logoImg">
+          <img src={logo4} alt="" />
+        </div>
       </div>
 
       <div className="footLine"></div>
 
       <div className="footExtra">
-        <p>© 2023 Shubokan India</p>
+        <p>© 2023 Shubukan India</p>
       </div>
     </div>
   );

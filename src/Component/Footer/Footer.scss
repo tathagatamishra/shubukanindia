@@ -4,6 +4,7 @@
     z-index: 1;
     height: fit-content;
     bottom: 0;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -11,7 +12,7 @@
     align-items: center;
 
     background-image: url("https://www.tilingtextures.com/wp-content/uploads/2018/11/0068-1-768x768.jpg");
-    box-shadow: inset 0px -800px 200px -200px #ffffff;
+    box-shadow: inset 0px -680px 80px -200px #ffffff;
     background-size: 250px 250px;
     // border: solid 1px blueviolet;
 
@@ -29,7 +30,7 @@
 
         // height: 50%;
         // margin-top: 8rem;
-        // border: solid 1px rgb(57, 229, 45);
+        border: solid 1px rgb(57, 229, 45);
         transition: 200ms;
 
         & h1 {
@@ -246,7 +247,7 @@
             }
         }
 
-        @media screen and (max-width: 630px) {
+        @media screen and (max-width: 635px) {
             width: 90%;
             height: 13rem;
             display: flex;
@@ -334,15 +335,25 @@
             }
         }
 
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: 800px) {
             & .logoImg {
+                margin: 0 1rem;
                 & img {
                     height: 10rem;
                 }
             }
         }
+        @media screen and (max-width: 700px) {
+            & .logoImg {
+                margin: 0 10px;
+                & img {
+                    height: 9rem;
+                }
+            }
+        }
         @media screen and (max-width: 500px) {
             & .logoImg {
+                margin: 0 5px;
                 & img {
                     height: 8rem;
                 }
@@ -351,8 +362,16 @@
 
         @media screen and (max-width: 400px) {
             & .logoImg {
+                margin: 0;
                 & img {
-                    height: 6rem;
+                    height: 6.5rem;
+                }
+            }
+        }
+        @media screen and (max-width: 320px) {
+            & .logoImg {
+                & img {
+                    height: 5rem;
                 }
             }
         }
@@ -368,6 +387,7 @@
     & .footExtra {
         width: 100%;
         // padding: 0 1rem;
+        // border: solid red 1px;
         display: flex;
         flex-direction: column;
         justify-content: center;
