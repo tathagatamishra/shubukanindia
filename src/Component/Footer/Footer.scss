@@ -154,12 +154,13 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         // border: solid red 1px;
 
         & p {
-            margin: 0;
-
             font-size: 1.2rem;
+            line-height: 20px;
+            margin: 7px 0;
 
             // font-family: 'Amarante', cursive;
             // font-family: 'Andika', sans-serif;
@@ -249,11 +250,8 @@
 
         @media screen and (max-width: 635px) {
             width: 90%;
-            height: 13rem;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            
+            height: 10rem;
+
             & .footOptions1 {
                 width: 10rem;
                 margin-right: .5rem;
@@ -282,24 +280,43 @@
             }
         }
         @media screen and (max-width: 400px) {
-            width: 100%;
-            height: 13rem;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
 
             & .footOptions1 {
-                width: 8.5rem;
-                margin-right: .5rem;
+                width: 7rem;
+                margin-right: 2px;
             }
 
             & .footOptions2 {
-                margin: 0 .5rem;
+                margin: 0 2px;
+                width: 7rem;
             }
 
             & .footOptions3 {
-                width: 8.5rem;
-                margin-left: .5rem;
+                width: 7rem;
+                margin-left: 2px;
+            }
+        }
+        @media screen and (max-width: 370px) {
+            height: 8rem;
+            margin: 60px 0 60px 0;
+    
+            & p {
+                font-size: 1rem;
+            }
+
+            & .footOptions1 {
+                width: 6rem;
+                margin-right: 2px;
+            }
+
+            & .footOptions2 {
+                margin: 0 2px;
+                width: 7rem;
+            }
+
+            & .footOptions3 {
+                width: 6rem;
+                margin-left: 2px;
             }
         }
     }
@@ -307,7 +324,7 @@
     & .footLogo {
         height: fit-content;
         width: 80%;
-        // margin-bottom: 2rem;
+        margin-bottom: 2rem;
 
         display: flex;
         flex-direction: row;
@@ -362,7 +379,7 @@
 
         @media screen and (max-width: 400px) {
             & .logoImg {
-                margin: 0;
+                margin: 0 2px;
                 & img {
                     height: 6.5rem;
                 }
@@ -403,5 +420,21 @@
                 background: rgb(248, 235, 141);
             }
         }
+    }
+
+    @media screen and (max-width: 810px) {
+        box-shadow: inset 0px -650px 80px -200px #ffffff;
+    }
+    @media screen and (max-width: 500px) {
+        box-shadow: inset 0px -600px 80px -200px #ffffff;
+    }
+    @media screen and (max-width: 400px) {
+        box-shadow: inset 0px -560px 80px -200px #ffffff;
+    }
+    @media screen and (max-width: 370px) {
+        box-shadow: inset 0px -520px 80px -200px #ffffff;
+    }
+    @media screen and (max-width: 320px) {
+        box-shadow: inset 0px -480px 80px -200px #ffffff;
     }
 }

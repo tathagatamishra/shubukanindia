@@ -56,7 +56,7 @@ function App() {
             <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} />
             <Route path="/Membership" element={<Membership />} />
             <Route path="/Services" element={<Services />} />
-            <Route path="/Gallery" element={<Gallery />} />
+            <Route path="/Gallery" element={<Gallery setShowNav={setShowNav} />} />
             <Route path="/Blog" element={<Blog />} />
             <Route path="/Contact" element={<Contact />} />
           </Routes>
