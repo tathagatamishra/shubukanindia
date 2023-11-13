@@ -80,6 +80,7 @@ export default function Navbar() {
       <section className="menu">
         <div className="menuStart" onClick={lineFunc} style={menuStyle}>
           <div className="lines" style={lineStyle}></div>
+          <p>MENU</p>
           <div className="lines" style={lineStyle}></div>
         </div>
 
