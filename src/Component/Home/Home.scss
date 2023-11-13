@@ -164,28 +164,28 @@
             // font-family: 'Pompiere', cursive;
             // font-family: 'Tenali Ramakrishna', sans-serif;
 
-            &:nth-child(2) {
-                display: flex;
-                align-items: center;
+            // &:nth-child(2) {
+            //     display: flex;
+            //     align-items: center;
 
-                & i {
-                    border-bottom: 1.5px solid #8C8177;
-                    height: 5px;
-                    padding: 0 2rem;
-                    margin: 0 1rem 0 2rem;
-                    font-size: 0px;
-                }
-            }
+            //     & i {
+            //         border-bottom: 1.5px solid #8C8177;
+            //         height: 5px;
+            //         padding: 0 2rem;
+            //         margin: 0 1rem 0 2rem;
+            //         font-size: 0px;
+            //     }
+            // }
 
-            &:nth-child(3) {
-                & i {
-                    border-bottom: 1.5px solid #8C8177;
-                    height: 5px;
-                    padding: 0 4rem;
-                    margin: 0 0 0 1rem;
-                    font-size: 0px;
-                }
-            }
+            // &:nth-child(3) {
+            //     & i {
+            //         border-bottom: 1.5px solid #8C8177;
+            //         height: 5px;
+            //         padding: 0 4rem;
+            //         margin: 0 0 0 1rem;
+            //         font-size: 0px;
+            //     }
+            // }
 
             &::selection {
                 color: $---selection-color;
@@ -278,7 +278,7 @@
             & h1 {
                 margin: 1.5rem 0 2rem;
                 color: #2a2727;
-                font-size: 2.8rem;
+                font-size: 2rem;
                 letter-spacing: 0.2rem;
             }
 
@@ -403,6 +403,7 @@
                     }
                 }
             }
+
             @media screen and (max-width: 400px) {
                 & h1 {
                     font-size: 2.2rem;
@@ -539,7 +540,7 @@
             }
         }
 
-        
+
     }
 
     & .popUp {
@@ -632,10 +633,17 @@
         column-count: 4;
         gap: 1rem;
 
+        & a:-webkit-any-link {
+            color: rgba(125, 103, 97, 0.808);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
         & h1 {
             width: 100%;
-            height: 1px;
-            margin: 0 0 2.5rem;
+            height: 2px;
+            margin: 0 0 3.5rem;
+            font-size: 28px;
 
             // font-family: 'Amarante', cursive;
             // font-family: 'Andika', sans-serif;
@@ -650,11 +658,33 @@
             // border-bottom: solid 2px ;
             color: rgba(125, 103, 97, 0.808);
             background: linear-gradient(-90deg, transparent 0%, rgba(88, 78, 78, 0.514) 100%);
-            // transform: translate(10px, 10px);
 
+            // transform: translate(10px, 10px);
+            
             &::selection {
                 color: $---selection-color;
                 background: $---selection-bg;
+            }
+
+            & p {
+                transition: 200ms;
+            }
+
+            &:hover {
+
+                & p {
+                    // padding: 0;
+                    transform: scale(.9);
+                    // padding-bottom: 1rem;
+                    // transform: translateY(-2px);
+                }
+            }
+
+            &:active {
+
+                & p {
+                    transform: translateY(6px) scale(.9);
+                }
             }
         }
 
@@ -960,8 +990,7 @@
             }
         }
 
-        @media screen and (max-width: 400px) {
-        }
+        @media screen and (max-width: 400px) {}
     }
 }
 

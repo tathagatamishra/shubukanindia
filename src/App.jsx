@@ -11,13 +11,14 @@ import ShubukanOkinawa from "./Component/ShubukanOkinawa/ShubukanOkinawa";
 import ShubukanWorld from "./Component/ShubukanWorld/ShubukanWorld";
 import Hozonkai from "./Component/Hozonkai/Hozonkai";
 import LineageAndDojoKun from "./Component/LineageAndDojoKun/LineageAndDojoKun";
-import KataAndKobudo from "./Component/KataAndKobudo/KataAndKobudo";
+import KarateAndKobudo from "./Component/KarateAndKobudo/KarateAndKobudo";
 import CalenderAndNotice from "./Component/CalenderAndNotice/CalenderAndNotice";
 import Membership from "./Component/Membership/Membership";
 import Services from "./Component/Services/Services";
 import Gallery from "./Component/Gallery/Gallery";
 import Blog from "./Component/Blog/Blog";
 import Contact from "./Component/Contact/Contact";
+import TAndC from "./Component/TAndC/TAndC";
 
 
 function App() {
@@ -52,13 +53,14 @@ function App() {
             <Route path="/ShubukanWorld" element={<ShubukanWorld />} />
             <Route path="/Hozonkai" element={<Hozonkai />} />
             <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
-            <Route path="/KataAndKobudo" element={<KataAndKobudo />} />
+            <Route path="/KarateAndKobudo" element={<KarateAndKobudo />} />
             <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} />
             <Route path="/Membership" element={<Membership />} />
             <Route path="/Services" element={<Services />} />
             <Route path="/Gallery" element={<Gallery setShowNav={setShowNav} />} />
             <Route path="/Blog" element={<Blog />} />
             <Route path="/Contact" element={<Contact />} />
+            <Route path="/TAndC" element={<TAndC />} />
           </Routes>
         </div>
 

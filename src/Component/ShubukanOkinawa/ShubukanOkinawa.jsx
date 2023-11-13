@@ -1,11 +1,18 @@
 import React from "react";
 import "./ShubukanOkinawa.scss";
 
+import img1 from "../../assets/shubukanDojo.jpg";
+
 export default function ShubukanOkinawa() {
   return (
     <div className="ShubukanOkinawa">
       <section className="Hero">
         <h1>Shubukan Okinawa</h1>
+
+        <div className="img-div">
+          <img src={img1} alt="" />
+        </div>
+
         <p>
           Shubukan was founded by Sensei Uema Joki Sensei. Now his Son Sensei
           Uema Yasuhiro is now chairman of Okinawa Shubukan.

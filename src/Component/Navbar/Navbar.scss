@@ -30,6 +30,7 @@
             top: 0rem;
         }
     }
+
     // border-bottom: solid red 1px;
 
     & .logo {
@@ -71,7 +72,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
+
         transition: 200ms;
 
         & .menuStart {
@@ -291,6 +292,7 @@
         }
 
     }
+
     @media screen and (max-width: 500px) {
         height: 7rem;
         box-shadow: inset 0px 215px 45px -150px rgb(255, 255, 255);
@@ -310,6 +312,7 @@
             }
         }
     }
+
     @media screen and (max-width: 350px) {
         height: 7rem;
         box-shadow: inset 0px 215px 45px -150px rgb(255, 255, 255);
@@ -388,6 +391,7 @@
             }
         }
     }
+
     @media screen and (max-height: 650px) {
         & .menu {
             & .menuBox {
@@ -399,6 +403,7 @@
             }
         }
     }
+
     @media screen and (max-height: 550px) {
         & .menu {
             & .menuBox {
@@ -410,6 +415,7 @@
             }
         }
     }
+
     @media screen and (max-height: 500px) {
         & .menu {
             & .menuBox {

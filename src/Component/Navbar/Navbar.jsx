@@ -112,7 +112,7 @@ export default function Navbar() {
                 <NavLink to="/LineageAndDojoKun" className="opt" onClick={showMenu}>
                   <p>LINEAGE & DOJO KUN</p>
                 </NavLink>
-                <NavLink to="/KataAndKobudo" className="opt" onClick={showMenu}>
+                <NavLink to="/KarateAndKobudo" className="opt" onClick={showMenu}>
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 

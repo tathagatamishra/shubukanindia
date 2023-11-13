@@ -157,7 +157,10 @@
         align-items: center;
         // border: solid red 1px;
 
+        text-decoration: none;
+        
         & p {
+            text-decoration: none;
             font-size: 1.2rem;
             line-height: 20px;
             margin: 7px 0;
@@ -178,6 +181,12 @@
                 color: rgb(216, 86, 86);
                 background: rgb(248, 235, 141);
             }
+        }
+
+        & a:-webkit-any-link {
+            color: black;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         & .footOptions1 {
@@ -205,10 +214,19 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-
+            
             width: 10rem;
             margin-left: 4rem;
             transition: 200ms;
+            text-decoration: none;
+           
+            & .nav {
+                text-decoration: none;
+                
+                & p {
+                    text-decoration: none;
+                }
+            }
         }
 
         & .midLine {

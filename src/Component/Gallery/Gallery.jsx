@@ -113,8 +113,8 @@ export default function Gallery({setShowNav}) {
         {/* <h1 className="galleryTop">Gallery</h1> */}
         <div>
           {imgArray.map((image, index) => (
-            <div className="image" onClick={() => imgPop(image)}>
-              <img key={index} src={image} alt={`Image ${index + 1}`} />
+            <div className="image" key={index} onClick={() => imgPop(image)}>
+              <img src={image} alt={`Image ${index + 1}`} />
             </div>
           ))}
         </div>

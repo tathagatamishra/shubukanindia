@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Home.scss";
-import birdImg from '../../assets/bird.png'
-import treeImg from '../../assets/tree.png'
-import img1 from '../../assets/uemaImg1.svg'
-import img2 from '../../assets/uemaImg2.svg'
-import img3 from '../../assets/chibana.jpg'
-import img4 from '../../assets/mag2.jpg'
-import img5 from '../../assets/uema.jpg'
-import img6 from '../../assets/jokiUema.svg'
-import img7 from '../../assets/takeshi.jpg'
-import img8 from '../../assets/yasuhiro.jpg'
-let unsplash1 = 'https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-let unsplash2 = 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWJzdHJhY3QlMjAlMjBza3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
 
+import birdImg from "../../assets/bird.png";
+import treeImg from "../../assets/tree.png";
+import img1 from "../../assets/uemaImg1.svg";
+import img2 from "../../assets/uemaImg2.svg";
+import img3 from "../../assets/chibana.jpg";
+import img4 from "../../assets/mag2.jpg";
+import img5 from "../../assets/uema.jpg";
+import img6 from "../../assets/jokiUema.svg";
+import img7 from "../../assets/takeshi.jpg";
+import img8 from "../../assets/yasuhiro.jpg";
+let unsplash1 =
+  "https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+let unsplash2 =
+  "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWJzdHJhY3QlMjAlMjBza3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 
-export default function Home({setShowNav}) {
+export default function Home({ setShowNav }) {
   const [slider, setSlider] = useState(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(null);
@@ -69,13 +72,13 @@ export default function Home({setShowNav}) {
     };
   }, [slider, isDown, startX, scrollLeft, item]);
 
-  function imgPop(srcValue ) {
+  function imgPop(srcValue) {
     if (imgClicked == true) {
       setPopImg("");
       setImgClicked(false);
-      setShowNav(true)
+      setShowNav(true);
     } else if (imgClicked == false) {
-      setShowNav(false)
+      setShowNav(false);
       setPopImg(srcValue);
       setImgClicked(true);
     }
@@ -92,12 +95,12 @@ export default function Home({setShowNav}) {
       </div>
 
       <section className="hero">
-        <h1>SHORIN RYU</h1>
+        <h1>Shorin Ryu Shubukan Karate Uema Dojo</h1>
         <p>
-          <i>&nbsp;</i> Beneath the instinct to fight
+          {/* <i>&nbsp;</i> Beneath the instinct to fight
         </p>
-        <p>
-          there is a diviner instinct to love <i>&nbsp;</i>
+        <p> */}
+          Pure soul is the preserver of true karate<i>&nbsp;</i>
         </p>
         <div className="bird">
           <img src={birdImg} alt="" />
@@ -118,15 +121,12 @@ export default function Home({setShowNav}) {
         <div className="description">
           <h1>SHORIN RYU SHUBUKAN</h1>
           <p>
-            Today, karate is a martial art known and respected worldwide as an
-            effective combative art. Its birthplace, the small islands of
-            Okinawa in Japan, was once known as Ryukyu, an independent kingdom.
-            Shorin Ryu is one of Okinawa's three main streams of Karate (Goju
-            Ryu, Uechi Ryu, Shorin Ryu). In 1933, Master Choshin Chibana named
-            Shorin Ryu. In 1948, they organized Okinawa Shorin Ryu Karate-do
-            Association. They took over the Shuri-te stream. There is a Dojo not
-            only in Okinawa but also overseas. Shorin Ryu Shubukan was founded
-            by Sensei Joki Uema.
+            Okinawan Karate is simply designed for self-defense and it is the
+            bearer of Okinawan tradition, culture and history. Shorin ryu of
+            shubukan school carries the orthodox way of karate-kobudo and
+            preserving its beauty. Shubukanis are strong and like to walk on a
+            pure path of karate. We shubukan members are strong family, always
+            trying to educate ourselves through the journey of Okinawan karate.
           </p>
           <div></div>
         </div>
@@ -142,35 +142,38 @@ export default function Home({setShowNav}) {
       )}
 
       <section className="gallery">
-        <h1 className="galleryTop">Gallery</h1>
+        <h1 className="galleryTop">
+          <NavLink to="/Gallery" className="opt">
+            <p>GALLERY</p>
+          </NavLink>
+        </h1>
         <div>
-          <div className="image" onClick={()=>imgPop(img3)}>
+          <div className="image" onClick={() => imgPop(img3)}>
             <img src={img3} alt="chosin chibana" />
           </div>
-          <div className="image" onClick={()=>imgPop(img2)}>
+          <div className="image" onClick={() => imgPop(img2)}>
             <img src={img2} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop(img4)}>
+          <div className="image" onClick={() => imgPop(img4)}>
             <img src={img4} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop(img8)}>
+          <div className="image" onClick={() => imgPop(img8)}>
             <img src={img8} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop(img1)}>
+          <div className="image" onClick={() => imgPop(img1)}>
             <img src={img1} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop(unsplash1)}>
+          <div className="image" onClick={() => imgPop(unsplash1)}>
             <img src={unsplash1} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop(img5)}>
+          <div className="image" onClick={() => imgPop(img5)}>
             <img src={img5} alt="image" />
           </div>
-          <div className="image" onClick={()=>imgPop(img7)}>
+          <div className="image" onClick={() => imgPop(img7)}>
             <img src={img7} alt="image" />
           </div>
-          
-          
-          <div className="image" onClick={()=>imgPop(img6)}>
+
+          <div className="image" onClick={() => imgPop(img6)}>
             <img src={img6} alt="image" />
           </div>
         </div>
@@ -178,14 +181,14 @@ export default function Home({setShowNav}) {
 
       <section className="blog">
         <div className="blogLine"></div>
-        <h1>Never Fade Away</h1>
+        {/* <h1>Never Fade Away</h1> */}
         <p>
           Karate as a martial art is about self-defense. Overcoming your own
           weaknesses, never bending in any circumstance, it is about developing
           an unshakable spirit. In karate what is important is to cultivate the
           strength to concentrate your spirit on one thing with heart and soul.
         </p>
-        <h1>Blog</h1>
+        {/* <h1>Blog</h1>
         <div className="row1">
           <div className="leftBar"></div>
           <div className="items1" onMouseOver={() => setItem(".items1")}>
@@ -207,7 +210,7 @@ export default function Home({setShowNav}) {
             <div className="item2"></div>
           </div>
           <div className="rightBar"></div>
-        </div>
+        </div> */}
         <p>
           Empty-handed and carrying no weapon, dominating an adversary with body
           and soul only, karate, a martial art of self-defense. To master the

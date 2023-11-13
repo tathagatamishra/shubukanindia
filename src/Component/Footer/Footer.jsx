@@ -1,9 +1,11 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./Footer.scss";
-import logo1 from '../../assets/shubukanIndia.png'
-import logo2 from '../../assets/Shorin-ryu.png'
-import logo3 from '../../assets/ShubukanKanji.png'
-import logo4 from '../../assets/ShuriKarateKobudoHozonkai.png'
+
+import logo1 from "../../assets/shubukanIndia.png";
+import logo2 from "../../assets/Shorin-ryu.png";
+import logo3 from "../../assets/ShubukanKanji.png";
+import logo4 from "../../assets/ShuriKarateKobudoHozonkai.png";
 
 export default function Footer() {
   function news(event) {
@@ -37,7 +39,9 @@ export default function Footer() {
         </div>
         <div className="midLine"></div>
         <div className="footOptions3">
-          <p>Terms & Conditions</p>
+          <NavLink to="/TAndC" className="opt">
+            <p>Terms & Conditions</p>
+          </NavLink>
           <p>Help and FAQ</p>
           <p>Contact Us</p>
         </div>
