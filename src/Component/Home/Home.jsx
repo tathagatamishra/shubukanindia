@@ -95,7 +95,7 @@ export default function Home({ setShowNav }) {
       </div>
 
       <section className="hero">
-        <h1>Shorin Ryu Shubukan Karate Uema Dojo</h1>
+        <h1>Shubukan Uema Dojo India</h1>
         <p>
           {/* <i>&nbsp;</i> Beneath the instinct to fight
         </p>
