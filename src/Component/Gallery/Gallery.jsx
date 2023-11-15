@@ -9,35 +9,35 @@ import img_5 from "../../assets/uema.jpg";
 import img_6 from "../../assets/jokiUema.svg";
 import img_7 from "../../assets/takeshi.jpg";
 import img_8 from "../../assets/yasuhiro.jpg";
-// import img_jpeg_1 from "./images/img (1).jpeg";
-import img_jpeg_2 from "./images/img (2).jpeg";
-import img_jpeg_3 from "./images/img (3).jpeg";
-import img_jpeg_4 from "./images/img (4).jpeg";
-import img_jpeg_5 from "./images/img (5).jpeg";
-import img_jpeg_6 from "./images/img (6).jpeg";
-import img_jpeg_7 from "./images/img (7).jpeg";
-import img_jpeg_8 from "./images/img (8).jpeg";
-import img_jpeg_9 from "./images/img (9).jpeg";
-import img_jpeg_10 from "./images/img (10).jpeg";
-import img_jpg_1 from "./images/img (1).jpg";
-import img_jpg_2 from "./images/img (2).jpg";
-import img_jpg_3 from "./images/img (3).jpg";
-import img_jpg_4 from "./images/img (4).jpg";
-import img_jpg_5 from "./images/img (5).jpg";
-import img_jpg_6 from "./images/img (6).jpg";
-import img_jpg_7 from "./images/img (7).jpg";
-// import img_jpg_8 from "./images/img (8).jpg";
-import img_jpg_9 from "./images/img (9).jpg";
-import img_jpg_10 from "./images/img (10).jpg";
-import img_jpg_11 from "./images/img (11).jpg";
-// import img_jpg_12 from "./images/img (12).jpg";
-// import img_jpg_13 from "./images/img (13).jpg";
-// import img_jpg_14 from "./images/img (14).jpg";
-// import img_jpg_15 from "./images/img (15).jpg";
-import img_jpg_16 from "./images/img (16).jpg";
-// import img_jpg_17 from "./images/img (17).jpg";
-import img_webp_1 from "./images/img (1).webp";
-import img_webp_2 from "./images/img (2).webp";
+import img_jpeg_1 from "../../images/img (1).jpeg";
+import img_jpeg_2 from "../../images/img (2).jpeg";
+import img_jpeg_3 from "../../images/img (3).jpeg";
+import img_jpeg_4 from "../../images/img (4).jpeg";
+import img_jpeg_5 from "../../images/img (5).jpeg";
+import img_jpeg_6 from "../../images/img (6).jpeg";
+import img_jpeg_7 from "../../images/img (7).jpeg";
+import img_jpeg_8 from "../../images/img (8).jpeg";
+import img_jpeg_9 from "../../images/img (9).jpeg";
+import img_jpeg_10 from "../../images/img (10).jpeg";
+import img_jpg_1 from "../../images/img (1).jpg";
+import img_jpg_2 from "../../images/img (2).jpg";
+import img_jpg_3 from "../../images/img (3).jpg";
+import img_jpg_4 from "../../images/img (4).jpg";
+import img_jpg_5 from "../../images/img (5).jpg";
+import img_jpg_6 from "../../images/img (6).jpg";
+import img_jpg_7 from "../../images/img (7).jpg";
+// import img_jpg_8 from "../../images/img (8).jpg";
+import img_jpg_9 from "../../images/img (9).jpg";
+import img_jpg_10 from "../../images/img (10).jpg";
+import img_jpg_11 from "../../images/img (11).jpg";
+// import img_jpg_12 from "../../images/img (12).jpg";
+// import img_jpg_13 from "../../images/img (13).jpg";
+// import img_jpg_14 from "../../images/img (14).jpg";
+// import img_jpg_15 from "../../images/img (15).jpg";
+import img_jpg_16 from "../../images/img (16).jpg";
+// import img_jpg_17 from "../../images/img (17).jpg";
+import img_webp_1 from "../../images/img (1).webp";
+import img_webp_2 from "../../images/img (2).webp";
 
 export default function Gallery({setShowNav}) {
   const imgArray = [
@@ -48,7 +48,7 @@ export default function Gallery({setShowNav}) {
     img_6,
     img_7,
     img_8,
-    // img_jpeg_1,
+    img_jpeg_1,
     img_jpeg_2,
     img_jpeg_3,
     img_jpeg_4,

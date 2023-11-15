@@ -1,7 +1,13 @@
 import React from "react";
 import "./ShubukanOkinawa.scss";
+import { NavLink } from "react-router-dom";
+import { IonIcon } from "@ionic/react";
+import { logoFacebook } from "ionicons/icons";
 
 import img1 from "../../assets/shubukanDojo.jpg";
+import img2 from "../../images/Frame 1.png";
+import img3 from "../../images/Frame 2.png";
+import img4 from "../../images/Frame 3.png";
 
 export default function ShubukanOkinawa() {
   return (
@@ -17,19 +23,35 @@ export default function ShubukanOkinawa() {
           Shubukan was founded by Sensei Uema Joki Sensei. Now his Son Sensei
           Uema Yasuhiro is now chairman of Okinawa Shubukan.
         </p>
-        <p>Sensei Uema Joki (10th Dan) (DOB- 13 June1920 DOD- 20 July 2011)</p>
-        <p>Sensei Uema Yasuhiro (10th Dan) (DOB- 15 August 1945)</p>
-        <p>Sensei Uema Takeshi (7th Dan) (DOB- 11 February 1975)</p>
-        <p>
-          <a
-            href="https://www.facebook.com/shubukan"
+
+        <div className="family">
+          <div className="child">
+            <img src={img2} alt="" />
+            <p>Sensei Uema Yasuhiro <br /> (10th Dan) <br /> (DOB- 15 August 1945)</p>
+          </div>
+          <div className="parent">
+            <img src={img3} alt="" />
+            <p>
+              Sensei Uema Joki <br /> (10th Dan) <br /> (DOB- 13 June1920 DOD- 20 July 2011)
+            </p>
+          </div>
+          <div className="child">
+            <img src={img4} alt="" />
+            <p>Sensei Uema Takeshi <br /> (7th Dan) <br /> (DOB- 11 February 1975)</p>
+          </div>
+        </div>
+
+        <div className="link">
+          <IonIcon icon={logoFacebook} className="label" />
+          <NavLink
+            to="https://www.facebook.com/shubukan"
+            className="opt"
             target="_blank"
             rel="facebook link"
           >
             https://www.facebook.com/shubukan
-          </a>{" "}
-          (facebook link)
-        </p>
+          </NavLink>
+        </div>
       </section>
     </div>
   );

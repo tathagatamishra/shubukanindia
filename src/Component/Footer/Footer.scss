@@ -176,11 +176,8 @@
             // font-family: 'Philosopher', sans-serif;
             // font-family: 'Pompiere', cursive;
             font-family: 'Tenali Ramakrishna', sans-serif;
-
-            &::selection {
-                color: rgb(216, 86, 86);
-                background: rgb(248, 235, 141);
-            }
+            
+            user-select: none;
         }
 
         & a:-webkit-any-link {
@@ -433,10 +430,7 @@
             font-size: .8rem;
             font-family: Arial, Helvetica, sans-serif;
 
-            &::selection {
-                color: rgb(216, 86, 86);
-                background: rgb(248, 235, 141);
-            }
+            user-select: none;
         }
     }
 
