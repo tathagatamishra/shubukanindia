@@ -133,6 +133,13 @@
                 transition: 200ms;
                 
                 user-select: none;
+                
+                &:active {
+                    & p {
+                        font-size: 1.2rem;
+        
+                    }
+                }
             }
             
         }
@@ -144,13 +151,6 @@
                     & .lines {
                         // background: red;
                         width: 150px !important;
-                    }
-                }
-                
-                &:active {
-                    & p {
-                        font-size: 1.2rem;
-
                     }
                 }
             }
