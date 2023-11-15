@@ -77,8 +77,8 @@ export default function Navbar() {
         <img className="logo2" src={shubukanText} />
       </NavLink>
 
-      <section className="menu">
-        <div className="menuStart" onClick={lineFunc} style={menuStyle}>
+      <section className="menu" onClick={lineFunc}>
+        <div className="menuStart" style={menuStyle}>
           <div className="lines" style={lineStyle}></div>
           <p>MENU</p>
           <div className="lines" style={lineStyle}></div>

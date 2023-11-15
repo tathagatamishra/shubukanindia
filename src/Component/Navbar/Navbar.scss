@@ -77,8 +77,8 @@
 
         & .menuStart {
             z-index: 1;
-            width: 5rem;
-            // height: 1.6rem;
+            width: 8rem;
+            // height: 1.6rem !important;
             margin: 1.5rem 0;
             // background: rgb(125, 203, 255);
             // border: 1px solid red;
@@ -115,14 +115,33 @@
                     background: $---selection-bg;
                 }
             }
+
         }
 
-        @media screen and (min-width: 800px) {
+        @media screen and (min-width: 720px) {
+            
+            & .menuStart {
+                
+            }
+        }
+        @media screen and (min-width: 720px) {
+            
             & .menuStart {
                 &:hover {
                     & .lines {
-
-                        width: 150px;
+                        // background: red;
+                        width: 150px !important;
+                    }
+                }
+            }
+        }
+        @media screen and (min-width: 720px) {
+            
+            & .menuStart {
+                &:hover {
+                    & .lines {
+                        // background: red;
+                        width: 150px !important;
                     }
                 }
             }
