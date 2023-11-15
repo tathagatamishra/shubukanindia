@@ -95,7 +95,7 @@
                 background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(42, 32, 28, 1) 100%);
                 transition: 200ms;
             }
-            
+
             & p {
                 margin: 0 10px 0 0;
                 font-size: 1.5rem;
@@ -131,21 +131,18 @@
                 // font-family: 'Tulpen One';
                 // font-family: 'swap';
                 transition: 200ms;
-                
+
                 user-select: none;
-                
+
                 &:active {
-                    & p {
-                        font-size: 1.2rem;
-        
-                    }
+                    font-size: 1.2rem;
                 }
             }
-            
+
         }
-        
+
         @media screen and (min-width: 720px) {
-            
+
             & .menuStart {
                 &:hover {
                     & .lines {
