@@ -107,7 +107,29 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        
+
+        & h1 {
+            margin: 1.5rem 0 2rem;
+            color: #2a2727;
+            font-size: 2rem;
+            letter-spacing: 0.2rem;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+            width: 100%;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
+
         & p {
             font-size: 1.5rem;
             text-align: justify;
@@ -120,13 +142,20 @@
             font-family: 'GFS Neohellenic', sans-serif;
             // font-family: 'Pompiere', cursive;
             // font-family: 'Tenali Ramakrishna', sans-serif;
-            
-            & img {
+
+            // border: 1px solid red;
+
+            & .img {
                 width: 240px;
+                height: 240px;
                 float: left;
                 margin: 0 100px;
                 margin-left: 0;
-                shape-outside: circle(); 
+                shape-outside: circle();
+                // border: 1px solid red;
+                background-image: url('https://github.com/tathagatamishra/shubukanindia/blob/main/src/assets/shubukan.png?raw=true');
+                background-size: contain;
+                // background-position: 100%;
             }
 
             &::selection {
@@ -134,13 +163,90 @@
                 background: $---selection-bg;
             }
 
-            @media screen and (max-width: 380px) {
-                & img {
-                    width: 240px;
+            // @media screen and (max-width: 380px) {
+            //     & img {
+            //         width: 240px;
+            //         float: none;
+            //         margin: 0 100px;
+            //         margin-left: 0;
+            //         shape-outside: circle();
+            //     }
+            // }
+        }
+    }
+
+    & .link {
+        height: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 40px 0;
+        // border: 1px solid red;
+
+        & .label {
+            line-height: 50px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+
+            color: #2a2727;
+            // border: 1px solid red;
+        }
+
+        & .opt {
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            font-family: 'Tenali Ramakrishna', sans-serif;
+
+            line-height: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 3px;
+            text-decoration: none;
+            // line-height: 0;
+            color: #2a2727;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+
+        & .family {
+            margin: 80px 0;
+
+            & p {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        & .Content {
+            & h1 {
+                margin: 1rem 0 .5rem;
+            }
+
+            & p {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                & .img {
                     float: none;
-                    margin: 0 100px;
+
+                    margin: 0 0 15px 0;
                     margin-left: 0;
-                    shape-outside: circle(); 
+                    shape-outside: circle();
                 }
             }
         }

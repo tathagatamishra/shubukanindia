@@ -1,5 +1,8 @@
 import React from "react";
 import "./ShubukanIndia.scss";
+import { NavLink } from "react-router-dom";
+import { IonIcon } from "@ionic/react";
+import { logoFacebook } from "ionicons/icons";
 import logo from "../../assets/shubukan.png";
 
 export default function ShubukanIndia() {
@@ -26,8 +29,10 @@ export default function ShubukanIndia() {
       </section>
 
       <section className="Content">
+        <h1>Explication The of Emblem</h1>
         <p>
-          <img src={logo} alt="" />
+          {/* <img src={logo} alt="" /> */}
+          <div className="img"></div>
           Shubukan India lead by Sensei Sabyasachi Giri . Shubukan India logo is
           brain child of sensei Sabyasachi. There is a very nice idea behind
           Shubukan India logo. This logo presents an elephant standing in famous
@@ -42,6 +47,18 @@ export default function ShubukanIndia() {
           education. Thus, the symbol of Shubukan India took birth.
         </p>
       </section>
+
+      <div className="link">
+          <IonIcon icon={logoFacebook} className="label" />
+          <NavLink
+            to="https://www.facebook.com/ShorinRyuShubukanIndia"
+            className="opt"
+            target="_blank"
+            rel="facebook link"
+          >
+            ShorinRyuShubukanIndia
+          </NavLink>
+        </div>
     </div>
   );
 }
