@@ -138,14 +138,30 @@
 
 
             }
+        }
 
-            &:active {
-                & p {
+        @media screen and (max-width: 720px) {
+
+            & .menuStart {
+                & P {
                     font-size: 1.2rem;
+                    line-height: 20px;
+                }
+                & .lines {
+                    width: 100px;
+                    height: 3px;
+                }
+                &:active {
+                    & P {
+                        font-size: 1rem;
+                    }
+                    & .lines {
+                        // background: red;
+                        width: 150px !important;
+                    }
                 }
             }
         }
-
         @media screen and (min-width: 720px) {
 
             & .menuStart {
@@ -153,6 +169,11 @@
                     & .lines {
                         // background: red;
                         width: 150px !important;
+                    }
+                }
+                &:active {
+                    & p {
+                        font-size: 1.2rem;
                     }
                 }
             }

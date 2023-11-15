@@ -47,10 +47,6 @@ export default function Navbar() {
     }
   }
 
-  const [lineStyle, setLineStyle] = useState({
-    width: "100px",
-  });
-
   function lineFunc() {
     if (isMenu == true) {
       setIsMenu(false);
@@ -63,10 +59,6 @@ export default function Navbar() {
         right: "0",
       });
     }
-    setLineStyle({ width: "150px" });
-    setTimeout(() => {
-      setLineStyle({ width: "100px" });
-    }, 800);
   }
 
   return (
@@ -79,9 +71,9 @@ export default function Navbar() {
 
       <section className="menu">
         <div className="menuStart" style={menuStyle}  onClick={lineFunc}>
-          <div className="lines" style={lineStyle}></div>
+          <div className="lines" ></div>
           <p>MENU</p>
-          <div className="lines" style={lineStyle}></div>
+          <div className="lines" ></div>
         </div>
 
         {isMenu && (
