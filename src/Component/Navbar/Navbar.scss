@@ -88,12 +88,14 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: flex-end;
+            user-select: none;
 
             & .lines {
                 width: 100px;
                 height: 4px;
                 background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(42, 32, 28, 1) 100%);
                 transition: 200ms;
+                user-select: none;
             }
 
             & p {
