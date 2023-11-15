@@ -19,6 +19,7 @@ import Gallery from "./Component/Gallery/Gallery";
 import Blog from "./Component/Blog/Blog";
 import Contact from "./Component/Contact/Contact";
 import TAndC from "./Component/TAndC/TAndC";
+import flag from './assets/ryukyu-flag.png'
 
 
 function App() {
@@ -40,7 +41,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div id="cursor"></div>
+        <div id="cursor">
+          <img src={flag} alt="" />
+        </div>
 
         {showNav && <Navbar showNav={showNav} />}
 
