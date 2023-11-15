@@ -7,7 +7,7 @@ export default function KarateAndKobudo() {
   return (
     <div className="KarateAndKobudo">
       <section className="Kata-Hero">
-        <h1>Kata</h1>
+        <h1>Karate</h1>
         {/* <p>Discovering the Way of Words</p> */}
         <p>
           Karate means Empty hand. Karate makes its practitioner physically and

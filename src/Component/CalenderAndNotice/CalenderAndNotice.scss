@@ -3,12 +3,14 @@
 .CalenderAndNotice {
     // border: 1px solid red;
     height: fit-content;
+    padding-top: 10rem;
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     @media screen and (max-width: 400px) {
+        padding-top: 5rem;
         width: 90%;
     }
 

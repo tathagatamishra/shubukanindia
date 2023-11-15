@@ -53,7 +53,7 @@ function App() {
             <Route path="/History" element={<History />} />
             <Route path="/ShubukanIndia" element={<ShubukanIndia />} />
             <Route path="/ShubukanOkinawa" element={<ShubukanOkinawa />} />
-            <Route path="/ShubukanWorld" element={<ShubukanWorld />} />
+            <Route path="/ShubukanWorld" element={<ShubukanWorld setShowNav={setShowNav} />} />
             <Route path="/Hozonkai" element={<Hozonkai />} />
             <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
             <Route path="/KarateAndKobudo" element={<KarateAndKobudo />} />
