@@ -31,8 +31,8 @@ export default function ShubukanIndia() {
       <section className="Content">
         <h1>Explication The of Emblem</h1>
         <p>
-          {/* <img src={logo} alt="" /> */}
-          <div className="img"></div>
+          <img src={logo} alt="" />
+          {/* <div className="img"></div> */}
           Shubukan India lead by Sensei Sabyasachi Giri . Shubukan India logo is
           brain child of sensei Sabyasachi. There is a very nice idea behind
           Shubukan India logo. This logo presents an elephant standing in famous
