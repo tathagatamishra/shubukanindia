@@ -145,10 +145,10 @@
                 // font-family: 'Pompiere', cursive;
                 // font-family: 'Tenali Ramakrishna', sans-serif;
 
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
-            }
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
             }
 
             & p {
@@ -164,10 +164,10 @@
                 // font-family: 'Pompiere', cursive;
                 // font-family: 'Tenali Ramakrishna', sans-serif;
 
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
-            }
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
             }
 
             @media screen and (max-width: 700px) {
@@ -221,7 +221,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            
+
             & .blog {
                 // border: solid blue;
                 background-color: $blog-bg;
@@ -511,7 +511,7 @@
             .blog-right {
                 overflow: auto;
                 height: calc(100% + 60px);
-                
+
 
                 .rounded {
                     font-style: italic;

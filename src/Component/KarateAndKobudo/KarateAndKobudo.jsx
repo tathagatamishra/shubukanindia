@@ -1,7 +1,10 @@
 import React from "react";
 import "./KarateAndKobudo.scss";
 
-import img1 from "../../assets/eku.webp";
+import bo from "../../assets/staff.png";
+import kama from "../../assets/kama.png";
+import sai from "../../assets/sai.png";
+import tonfa from "../../assets/tonfa.png";
 
 export default function KarateAndKobudo() {
   return (
@@ -15,25 +18,28 @@ export default function KarateAndKobudo() {
           karateka use legs and hand parts for block, strike, hold, throw etc.
           Karate has three elements.
         </p>
+        <h2>KihonDosa</h2>
         <p>
-          1. KihonDosa- Study of basics. Kartateka learn block(uke),
-          strike(uchi), kick(Keri), stance(Tachi/Dachi), Punch(Tsuki) . Main
-          stances in Shorin Ryu is Siko Dachi, Neko Ashi Dachi, Zenkutsu Dachi,
-          Kosa Dachi, Kokutsu Dachi etc.. Blocks are mainly age uke, soto uke,
-          uchi uke, gedan uke and shuto uke etc. kicks ar Mae keri, Mawashi
-          keri, Kansetsu keri etc.
+          Study of basics Kartateka learn block (uke), strike (uchi), kick
+          (Keri), stance (Tachi/Dachi), Punch (Tsuki). Main stances in Shorin
+          Ryu is Siko Dachi, Neko Ashi Dachi, Zenkutsu Dachi, Kosa Dachi,
+          Kokutsu Dachi etc. Blocks are mainly age uke, soto uke, uchi uke,
+          gedan uke and shuto uke etc. kicks ar Mae keri, Mawashi keri, Kansetsu
+          keri etc.
         </p>
+        <h2>Kata</h2>
         <p>
-          2. Kata.- Kata is predesigned form using kihons. There are lot of
-          katas in Shubukan School. We practice above 50 katas in shubukan
-          Shorin Ryu. In our school we study Fukyugata ichi, ni , San and pinan
-          katas, passai katas, Kushanku Katas and Rohai, Wanshu etc.
+          Kata is predesigned form using kihons. There are lot of katas in
+          Shubukan School. We practice above 50 katas in shubukan Shorin Ryu. In
+          our school we study Fukyugata ichi, ni, San and pinan katas, passai
+          katas, Kushanku Katas and Rohai, Wanshu etc.
         </p>
+        <h2>Kumite</h2>
         <p>
-          3. Kumite.- Kumite means sparring of fighting. Shubukan maintain
-          traditional old style full contact kumite. With care shubukan focus on
-          self defense and teaches its members the true practical application of
-          katas in effective way.
+          Kumite means sparring of fighting. Shubukan maintain traditional old
+          style full contact kumite. With care Shubukan focus on self defense
+          and teaches its members the true practical application of katas in
+          effective way.
         </p>
       </section>
 
@@ -43,13 +49,53 @@ export default function KarateAndKobudo() {
         <p>
           Shubukan has many kobudo katas also. We shubukani studies these kata
           in a practical and applicable way. There are many weapons we use in
-          shubukan school. Bo:- Long stick. There are lot of Bo katas in
-          shubukan. Kama:- It is sickle. Previously it was used in farming.
-          Sai:- Fully metal weapon. Sai is excellent defense tool against long
-          weapon and sword. Tonfa:- It is a wooden weapon. Shubukan has many
-          tonfa katas.
+          shubukan school.
         </p>
-        <img src={img1} alt="" />
+
+        <div className="weapon">
+          <div className="bo">
+            <div className="text">
+              <h2>Bo</h2>
+              <p>Long stick. There are lot of Bo katas in shubukan.</p>
+            </div>
+            <div className="img">
+              <img src={bo} alt="" />
+            </div>
+          </div>
+
+          <div className="kama">
+            <div className="text">
+              <h2>Kama</h2>
+              <p>It is sickle. Previously it was used in farming.</p>
+            </div>
+            <div className="img">
+              <img src={kama} alt="" />
+            </div>
+          </div>
+
+          <div className="sai">
+            <div className="text">
+              <h2>Sai</h2>
+              <p>
+                Fully metal weapon. Sai is excellent defense tool against long
+                weapon and sword.
+              </p>
+            </div>
+            <div className="img">
+              <img src={sai} alt="" />
+            </div>
+          </div>
+
+          <div className="tonfa">
+            <div className="text">
+              <h2>Tonfa</h2>
+              <p>It is a wooden weapon. Shubukan has many tonfa katas.</p>
+            </div>
+            <div className="img">
+              <img src={tonfa} alt="" />
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
