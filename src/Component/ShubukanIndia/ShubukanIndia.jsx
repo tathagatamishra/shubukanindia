@@ -2,7 +2,7 @@ import React from "react";
 import "./ShubukanIndia.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { logoFacebook } from "ionicons/icons";
+import { logoFacebook, logoInstagram } from "ionicons/icons";
 import logo from "../../assets/shubukan.png";
 
 export default function ShubukanIndia() {
@@ -14,7 +14,7 @@ export default function ShubukanIndia() {
           Shubukanindia is approved dojo from Okinawa Shubukan and only sole
           dojo of Shubukan Okinawa school in India. Sensei Sabyasachi visited
           Okinawa for training in 2023. India Shubukan started its journey with
-          the help of big hearted human Semsei Jan Gyuris who is head of Czech
+          the help of big hearted human Sensei Jan Gyuris who is head of Czech
           Shubukan School. He is a direct student of Shubukan School founder
           Sensei Uema Joki. Sensei Sabyasachi started his training first in
           Shubukan under Jan Gyuris Sensei. Now he is studying karate kobudo
@@ -49,16 +49,40 @@ export default function ShubukanIndia() {
       </section>
 
       <div className="link">
-          <IonIcon icon={logoFacebook} className="label" />
-          <NavLink
-            to="https://www.facebook.com/ShorinRyuShubukanIndia"
-            className="opt"
-            target="_blank"
-            rel="facebook link"
-          >
-            ShorinRyuShubukanIndia
-          </NavLink>
-        </div>
+        <IonIcon icon={logoFacebook} className="label" />
+        <NavLink
+          to="https://www.facebook.com/ShorinRyuShubukanIndia"
+          className="opt"
+          target="_blank"
+          rel="facebook link"
+        >
+          ShorinRyu Shubukan India
+        </NavLink>
+      </div>
+      
+      <div className="link">
+        <IonIcon icon={logoFacebook} className="label" />
+        <NavLink
+          to="https://www.facebook.com/shubukanindia"
+          className="opt"
+          target="_blank"
+          rel="facebook link"
+        >
+          Shubukan India
+        </NavLink>
+      </div>
+
+      <div className="link">
+        <IonIcon icon={logoInstagram} className="label" />
+        <NavLink
+          to="https://www.instagram.com/shubukanindia/"
+          className="opt"
+          target="_blank"
+          rel="instagram link"
+        >
+          Shubukan India
+        </NavLink>
+      </div>
     </div>
   );
 }
