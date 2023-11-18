@@ -132,7 +132,7 @@ export default function Home({ setShowNav }) {
           <div className="offering">
             <p>Shorin Ryu Karate</p>
             <div></div>
-            <p>Okinawan Kobu Jutsu</p>
+            <p>Okinawan Kobujutsu</p>
           </div>
           
           <p>
@@ -201,7 +201,16 @@ export default function Home({ setShowNav }) {
       <section className="blog">
         <div className="blogLine"></div>
         {/* <h1>Never Fade Away</h1> */}
-        <p>
+        <div className="define">
+          <div>
+            <p>Body</p>
+            <div></div>
+            <p>Mind</p>
+            <div></div>
+            <p>Spirit</p>
+          </div>
+        </div>
+        <p className="story1">
           Karate as a martial art is about self-defense. Overcoming your own
           weaknesses, never bending in any circumstance, it is about developing
           an unshakable spirit. In karate what is important is to cultivate the
@@ -230,7 +239,7 @@ export default function Home({ setShowNav }) {
           </div>
           <div className="rightBar"></div>
         </div> */}
-        <p>
+        <p className="story2">
           Empty-handed and carrying no weapon, dominating an adversary with body
           and soul only, karate, a martial art of self-defense. To master the
           way, a long and arduous journey awaits.
