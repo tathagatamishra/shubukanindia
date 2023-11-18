@@ -2,6 +2,8 @@ import React from "react";
 import "./LineageAndDojoKun.scss";
 import { IonIcon } from "@ionic/react";
 import { chevronDownSharp } from "ionicons/icons";
+import pattern from '../../assets/pattern.jpg'
+import kun from '../../assets/dojokun.png'
 
 export default function LineageAndDojoKun() {
   return (
@@ -40,7 +42,13 @@ export default function LineageAndDojoKun() {
         </div>
       </section>
 
+      <section className="pattern">
+        <img src={pattern} alt="" />
+      </section>
+
       <section className="DojoKun-Hero">
+        <img src={kun} alt="" />
+
         <h1>DojoKun</h1>
         <h2>道場訓</h2>
 

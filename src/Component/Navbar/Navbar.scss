@@ -181,7 +181,7 @@
 
         & .menuBox {
             position: fixed;
-            height: 100vh;
+            height: 100svh;
             width: 32rem;
             top: 0;
             right: 0;
@@ -278,7 +278,7 @@
             backdrop-filter: blur(8px);
             overflow: hidden;
             position: fixed;
-            height: 100vh;
+            height: 100svh;
             width: 100vw;
             left: 0;
             top: 0;

@@ -29,7 +29,7 @@ export default function ShubukanIndia() {
       </section>
 
       <section className="Content">
-        <h1>Explication The of Emblem</h1>
+        <h1>Explication Of The Emblem</h1>
         <p>
           <img src={logo} alt="" />
           {/* <div className="img"></div> */}

@@ -4,6 +4,7 @@
     // border: 1px solid red;
     height: 100%;
     width: 80%;
+    max-width: 1000px;
     padding-top: 10rem;
     display: flex;
     flex-direction: column;
@@ -193,6 +194,24 @@
         }
     }
 
+    & .pattern {
+        width: 100%;
+        height: fit-content;
+        margin: 6rem 0;
+
+        & img {
+            object-fit: cover;
+            height: 30px;
+            width: 100%;
+            filter: sepia(300%) grayscale(10%);
+            opacity: .1;
+        }
+
+        @media screen and (max-width: 900px) {
+            margin: 2rem 0;
+        }
+    }
+
     & .DojoKun-Hero {
         // border: 1px solid rgb(0, 94, 255);
         width: 100%;
@@ -205,8 +224,12 @@
         justify-content: flex-start;
         align-items: flex-start;
 
+        & img {
+            width: 100%;
+        }
+
         & h1 {
-            margin: 1.5rem 0;
+            margin: 4rem 0 0 0;
             color: #2a2727;
             font-size: 3.5rem;
             letter-spacing: 0.2rem;
@@ -258,7 +281,6 @@
             margin-bottom: 5rem;
 
             & h1 {
-                margin: 1.5rem 0 2rem;
                 color: #2a2727;
                 font-size: 3rem;
                 letter-spacing: 0.2rem;
@@ -273,7 +295,6 @@
             margin-bottom: 1rem;
 
             & h1 {
-                margin: 1.5rem 0 2rem;
                 color: #2a2727;
                 font-size: 2.8rem;
                 letter-spacing: 0.2rem;

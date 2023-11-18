@@ -3,15 +3,18 @@ import { NavLink } from "react-router-dom";
 import "./Home.scss";
 
 import birdImg from "../../assets/bird.png";
+import drogon from "../../assets/dragon.png";
+import drogon2 from "../../assets/dragon2.png";
 import treeImg from "../../assets/tree.png";
 import img1 from "../../assets/uemaImg1.svg";
 import img2 from "../../assets/uemaImg2.svg";
 import img3 from "../../assets/chibana.jpg";
 import img4 from "../../assets/mag2.jpg";
 import img5 from "../../assets/uema.jpg";
-import img6 from "../../assets/jokiUema.svg";
-import img7 from "../../assets/takeshi.jpg";
-import img8 from "../../assets/yasuhiro.jpg";
+import img6 from "../../images/img (9).jpg";
+import img7 from "../../images/img (6).jpg";
+import img8 from "../../images/img (4).jpg";
+import img9 from "../../assets/trans.png";
 let unsplash1 =
   "https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
 let unsplash2 =
@@ -109,7 +112,7 @@ export default function Home({ setShowNav }) {
 
       <section className="intro">
         <div className="define">
-          <h1>The Way</h1>
+          {/* <h1>The Way</h1> */}
           <div>
             <p>Discipline</p>
             <div></div>
@@ -118,8 +121,20 @@ export default function Home({ setShowNav }) {
             <p>Technique</p>
           </div>
         </div>
+
+        <div className="drogon">
+          <img src={drogon} alt="" />
+        </div>
+
         <div className="description">
-          <h1>SHORIN RYU SHUBUKAN</h1>
+          <h1>THE SHUBUKAN WAY</h1>
+
+          <div className="offering">
+            <p>Shorin Ryu Karate</p>
+            <div></div>
+            <p>Okinawan Kobu Jutsu</p>
+          </div>
+          
           <p>
             Okinawan Karate is simply designed for self-defense and it is the
             bearer of Okinawan tradition, culture and history. Shorin ryu of
@@ -128,7 +143,11 @@ export default function Home({ setShowNav }) {
             pure path of karate. We shubukan members are strong family, always
             trying to educate ourselves through the journey of Okinawan karate.
           </p>
-          <div></div>
+          <div className="underline"></div>
+        </div>
+
+        <div className="drogon2">
+          <img src={drogon2} alt="" />
         </div>
       </section>
 
@@ -142,14 +161,20 @@ export default function Home({ setShowNav }) {
       )}
 
       <section className="gallery">
-        <h1 className="galleryTop">
+        <div className="galleryTop">
           <NavLink to="/Gallery" className="opt">
-            <p>GALLERY</p>
+            <h4>GALLERY</h4>
           </NavLink>
-        </h1>
+        </div>
         <div>
+          <div className="image">
+            {/* <img src={img9} alt="blank" /> */}
+          </div>
           <div className="image" onClick={() => imgPop(img3)}>
             <img src={img3} alt="chosin chibana" />
+          </div>
+          <div className="image" onClick={() => imgPop(img5)}>
+            <img src={img5} alt="image" />
           </div>
           <div className="image" onClick={() => imgPop(img2)}>
             <img src={img2} alt="image" />
@@ -162,12 +187,6 @@ export default function Home({ setShowNav }) {
           </div>
           <div className="image" onClick={() => imgPop(img1)}>
             <img src={img1} alt="image" />
-          </div>
-          <div className="image" onClick={() => imgPop(unsplash1)}>
-            <img src={unsplash1} alt="image" />
-          </div>
-          <div className="image" onClick={() => imgPop(img5)}>
-            <img src={img5} alt="image" />
           </div>
           <div className="image" onClick={() => imgPop(img7)}>
             <img src={img7} alt="image" />
