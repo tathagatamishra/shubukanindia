@@ -12,6 +12,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    overflow: hidden;
+    overflow-y: hidden;
 
     // background-image: linear-gradient(white, white, transparent);
     box-shadow: inset 0px 260px 40px -150px white;
