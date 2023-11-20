@@ -11,7 +11,7 @@
     // box-sizing: border-box;
     // position: relative;
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 450px) {
         width: 90%;
     }
 
@@ -253,6 +253,50 @@
                 }
             }
         }
+        @media screen and (max-width: 600px) {
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 3rem;
+                letter-spacing: 0.2rem;
+                text-shadow:
+                    0 0 10px rgb(231, 221, 211),
+                    0 0 20px rgb(231, 221, 211),
+                    0 0 30px rgb(231, 221, 211),
+                    0 0 40px rgb(231, 221, 211),
+                    0 0 50px rgb(231, 221, 211);
+            }
+
+            & p {
+                font-size: 1.2rem;
+                text-shadow:
+                    0 0 5px rgb(231, 221, 211),
+                    0 0 10px rgb(231, 221, 211),
+                    0 0 20px rgb(231, 221, 211),
+                    0 0 30px rgb(231, 221, 211),
+                    0 0 30px rgb(231, 221, 211);
+            }
+
+            & .bird {
+                height: 200px;
+                width: 200px;
+                transform: scaleX(-1) translate(25%, 180%);
+
+                animation-name: fly;
+                animation-duration: 5s;
+                animation-timing-function: ease-in-out;
+
+                @keyframes fly {
+                    from {
+                        transform: scaleX(-1) translate(55%, 250%);
+                    }
+
+                    to {
+                        transform: scaleX(-1) translate(25%, 200%);
+                    }
+                }
+            }
+        }
 
         @media screen and (max-width: 400px) {
             height: 30rem;
@@ -319,7 +363,7 @@
             // background-size: 250px 250px;
             filter: sepia(20%) opacity(80%);
             transform: translateY(-25%);
-            transition: 200ms;
+            transition: 300ms;
             // transition: 300ms;
             // animation-name: fly;
             // animation-duration: 5s;
@@ -684,7 +728,87 @@
             }
         }
 
-        @media screen and (max-width: 551px) {
+        @media screen and (max-width: 600px) {
+            & .drogon {
+                & img {
+                    width: 100%;
+                    user-select: none;
+                }
+
+                // height: 250px;
+                width: 200px;
+                // top: 11%;
+                right: 0%;
+                position: absolute;
+                transform: translateY(-18%);
+            }
+
+            & .drogon2 {
+                & img {
+                    width: 100%;
+                    user-select: none;
+                }
+
+                // height: 250px;
+                width: 200px;
+                // top: 11%;
+                left: 0%;
+                position: absolute;
+                transform: translateY(140%);
+            }
+
+            & .define {
+
+                & div {
+                    width: 100%;
+                    // border: 1px solid;
+                    justify-content: flex-start;
+
+                    & p {
+                        width: fit-content;
+                        // padding: 0 1.5rem;
+                        font-size: 1.2rem;
+                    }
+
+                    & div {
+                        width: 1.5px;
+                        margin: 0 1.2rem;
+                    }
+                }
+            }
+
+            & .description {
+                & h1 {
+                    margin: .5rem 0 .2rem 0;
+                    font-size: 2.4rem;
+                    line-height: 3rem;
+                    text-align: left;
+                }
+
+                & .offering {
+                    width: 100%;
+                    // border: 1px solid;
+                    justify-content: flex-start;
+
+                    & p {
+                        width: fit-content;
+                        // padding: 0 1.5rem;
+                        font-size: 1.2rem;
+                    }
+
+                    & div {
+                        margin: 0 1rem;
+                    }
+                }
+
+                & p {
+                    font-size: 1.4rem;
+                    line-height: 1.7rem;
+                }
+            }
+        }
+
+        @media screen and (max-width: 550px) {
             & .drogon {
                 & img {
                     width: 100%;
@@ -711,6 +835,26 @@
                 left: 0%;
                 position: absolute;
                 transform: translateY(155%);
+            }
+
+            & .define {
+
+                & div {
+                    width: 100%;
+                    // border: 1px solid;
+                    justify-content: flex-start;
+
+                    & p {
+                        width: fit-content;
+                        // padding: 0 1.5rem;
+                        font-size: 1.2rem;
+                    }
+
+                    & div {
+                        width: 1.5px;
+                        margin: 0 1rem;
+                    }
+                }
             }
 
             & .description {
@@ -723,9 +867,13 @@
 
                 & .offering {
                     & p {
-                        width: 160px;
+                        width: fit-content;
                         // padding: 0 1.5rem;
-                        font-size: 1rem;
+                        // font-size: 1rem;
+                    }
+
+                    & div {
+                        margin: 0 1rem;
                     }
                 }
 
@@ -736,71 +884,85 @@
             }
         }
 
-        @media screen and (max-width: 520px) {
-            & .drogon {
-                & img {
-                    width: 100%;
-                    user-select: none;
-                }
+        // @media screen and (max-width: 480px) {
+        //     & .drogon {
+        //         & img {
+        //             width: 100%;
+        //             user-select: none;
+        //         }
 
-                // height: 250px;
-                width: 180px;
-                // top: 11%;
-                right: 0%;
-                position: absolute;
-                transform: translateY(-18%);
-            }
+        //         // height: 250px;
+        //         width: 200px;
+        //         // top: 11%;
+        //         right: 0%;
+        //         position: absolute;
+        //         // transform: translateY(-18%) rotateZ(-10deg);
+        //     }
 
-            & .drogon2 {
-                & img {
-                    width: 100%;
-                    user-select: none;
-                }
+        //     & .drogon2 {
+        //         & img {
+        //             width: 100%;
+        //             user-select: none;
+        //         }
 
-                // height: 250px;
-                width: 180px;
-                // top: 11%;
-                left: 0%;
-                position: absolute;
-                transform: translateY(155%);
-            }
+        //         // height: 250px;
+        //         width: 200px;
+        //         // top: 11%;
+        //         left: 0%;
+        //         position: absolute;
+        //         transform: translateY(155%);
+        //     }
 
-            & .define {
-                & div {
-                    & div {
-                        height: 2.8rem;
-                    }
+        //     & .define {
 
-                    & p {
-                        font-size: 1rem;
-                        width: 90px;
-                    }
-                }
-            }
+        //         & div {
+        //             width: 100%;
+        //             // border: 1px solid;
+        //             justify-content: flex-start;
 
-            & .description {
-                & h1 {
-                    margin: .5rem 0 .2rem 0;
-                    font-size: 2.4rem;
-                    line-height: 3rem;
-                }
+        //             & p {
+        //                 width: fit-content;
+        //                 // padding: 0 1.5rem;
+        //                 font-size: 1.1rem;
+        //             }
 
-                & .offering {
-                    & p {
-                        width: 160px;
-                        // padding: 0 1.5rem;
-                        font-size: 1rem;
-                    }
-                }
+        //             & div {
+        //                 height: 40px;
+        //                 margin: 0 .6rem;
+        //             }
+        //         }
+        //     }
 
-                & p {
-                    font-size: 1.3rem;
-                    line-height: 1.7rem;
-                }
-            }
-        }
+        //     & .description {
+        //         & h1 {
+        //             margin: .5rem 0 .2rem 0;
+        //             font-size: 2.4rem;
+        //             line-height: 3rem;
+        //             text-align: left;
+        //         }
 
-        @media screen and (max-width: 440px) {
+        //         & .offering {
+        //             & p {
+        //                 width: fit-content;
+        //                 // padding: 0 1.5rem;
+        //                 // font-size: 1rem;
+        //             }
+
+        //             & div {
+        //                 margin: 0 .6rem;
+        //             }
+        //         }
+
+        //         & p {
+        //             font-size: 1.4rem;
+        //             line-height: 1.7rem;
+        //         }
+        //     }
+        // }
+
+
+
+        @media screen and (max-width: 480px) {
             & .drogon {
                 & img {
                     width: 100%;
@@ -830,16 +992,21 @@
             }
 
             & .define {
-                margin-bottom: .5rem;
 
                 & div {
-                    & div {
-                        height: 2.8rem;
-                    }
+                    width: 100%;
+                    // border: 1px solid;
+                    justify-content: flex-start;
 
                     & p {
-                        font-size: 1rem;
-                        width: 90px;
+                        width: fit-content;
+                        // padding: 0 1.5rem;
+                        font-size: 1.1rem;
+                    }
+
+                    & div {
+                        height: 40px;
+                        margin: 0 .6rem;
                     }
                 }
             }
@@ -849,15 +1016,13 @@
                     margin: .5rem 0 .2rem 0;
                     font-size: 2.4rem;
                     line-height: 3rem;
-                    word-spacing: 5px;
-                    letter-spacing: 2px;
+                    text-align: left;
+                    letter-spacing: 1px;
                 }
 
                 & .offering {
                     & p {
-                        width: 150px;
-                        // padding: 0 1.5rem;
-                        font-size: 1rem;
+                        font-size: 1.1rem;
                     }
                 }
 
@@ -867,7 +1032,7 @@
             }
         }
 
-        @media screen and (max-width: 360px) {
+        @media screen and (max-width: 410px) {
             & .drogon {
                 & img {
                     width: 100%;
@@ -875,7 +1040,7 @@
                 }
 
                 // height: 250px;
-                width: 150px;
+                width: 160px;
                 // top: 11%;
                 right: 0%;
                 position: absolute;
@@ -889,23 +1054,99 @@
                 }
 
                 // height: 250px;
+                width: 160px;
+                // top: 11%;
+                left: 0%;
+                position: absolute;
+                transform: translateY(180%);
+            }
+
+            // & .define {
+            //     margin-bottom: .5rem;
+
+            //     & div {
+            //         & div {
+            //             height: 2.8rem;
+            //         }
+
+            //         & p {
+            //             font-size: 1rem;
+            //             width: 90px;
+            //         }
+            //     }
+            // }
+
+            & .description {
+                & h1 {
+                    margin: .5rem 0 .2rem 0;
+                    font-size: 2.3rem;
+                    line-height: 3rem;
+                    word-spacing: 1px;
+                    letter-spacing: 1px;
+                }
+
+                & .offering {
+                    // border: 1px solid;
+                    & p {
+                        // width: 150px;
+                        // padding: 0;
+                        // font-size: 1.1rem;
+                        margin: 0;
+                    }
+                    & div {
+                        margin: 0 8px;
+                        height: 100%;
+                    }
+                }
+
+                & p {
+                    line-height: 1.7rem;
+                }
+            }
+        }
+
+        @media screen and (max-width: 370px) {
+            & .drogon {
+                & img {
+                    width: 100%;
+                    user-select: none;
+                }
+
+                // height: 250px;
+                width: 150px;
+                // top: 11%;
+                right: -5%;
+                position: absolute;
+                transform: translateY(-18%) rotateZ(-15deg);
+            }
+
+            & .drogon2 {
+                & img {
+                    width: 100%;
+                    user-select: none;
+                }
+
+                // height: 250px;
                 width: 150px;
                 // top: 11%;
                 left: 0%;
                 position: absolute;
-                transform: translateY(184%);
+                transform: translateY(194%);
             }
 
             & .define {
+                // border: 1px solid;
+                margin-top: 50px;
 
                 & div {
                     & div {
-                        height: 2.8rem;
+                        height: 2rem;
                     }
 
                     & p {
                         font-size: 1rem;
                         width: 90px;
+                        margin: 0;
                     }
                 }
             }
@@ -923,6 +1164,7 @@
                     width: 100%;
 
                     & p {
+                        margin: 0;
                         width: 100%;
                         // padding: 0 1.5rem;
                         font-size: 1.2rem;
