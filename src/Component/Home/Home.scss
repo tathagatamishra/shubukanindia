@@ -253,6 +253,7 @@
                 }
             }
         }
+
         @media screen and (max-width: 600px) {
             & h1 {
                 margin: 1.5rem 0 2rem;
@@ -729,6 +730,7 @@
         }
 
         @media screen and (max-width: 600px) {
+            border: 1px solid red;
             & .drogon {
                 & img {
                     width: 100%;
@@ -758,10 +760,10 @@
             }
 
             & .define {
+                
 
                 & div {
                     width: 100%;
-                    // border: 1px solid;
                     justify-content: flex-start;
 
                     & p {
@@ -809,6 +811,7 @@
         }
 
         @media screen and (max-width: 550px) {
+            border: 1px solid rgb(106, 255, 0);
             & .drogon {
                 & img {
                     width: 100%;
@@ -963,6 +966,7 @@
 
 
         @media screen and (max-width: 480px) {
+            border: 1px solid rgb(0, 81, 255);
             & .drogon {
                 & img {
                     width: 100%;
@@ -1033,6 +1037,7 @@
         }
 
         @media screen and (max-width: 410px) {
+            border: 1px solid rgb(251, 0, 255);
             & .drogon {
                 & img {
                     width: 100%;
@@ -1061,21 +1066,6 @@
                 transform: translateY(180%);
             }
 
-            // & .define {
-            //     margin-bottom: .5rem;
-
-            //     & div {
-            //         & div {
-            //             height: 2.8rem;
-            //         }
-
-            //         & p {
-            //             font-size: 1rem;
-            //             width: 90px;
-            //         }
-            //     }
-            // }
-
             & .description {
                 & h1 {
                     margin: .5rem 0 .2rem 0;
@@ -1086,6 +1076,7 @@
                 }
 
                 & .offering {
+
                     // border: 1px solid;
                     & p {
                         // width: 150px;
@@ -1093,6 +1084,7 @@
                         // font-size: 1.1rem;
                         margin: 0;
                     }
+
                     & div {
                         margin: 0 8px;
                         height: 100%;
@@ -1106,6 +1098,7 @@
         }
 
         @media screen and (max-width: 370px) {
+            border: 1px solid rgb(255, 183, 0);
             & .drogon {
                 & img {
                     width: 100%;
@@ -1341,7 +1334,7 @@
             height: 2px;
             margin: 0 0 3.5rem;
             font-size: 28px;
-            margin-top: 250px;
+            // margin-top: 250px;
 
             // font-family: 'Amarante', cursive;
             // font-family: 'Andika', sans-serif;
@@ -1356,7 +1349,7 @@
             // border-bottom: solid 2px ;
             color: rgba(125, 103, 97, 0.808);
             background: linear-gradient(-90deg, transparent 0%, rgba(88, 78, 78, 0.514) 100%);
-
+            transition: 300ms;
             // transform: translate(10px, 10px);
 
             &::selection {
@@ -1420,6 +1413,12 @@
                 & img {
                     transform: scale(1.1);
                 }
+            }
+        }
+
+        @media screen and (max-width: 1500px) {
+            & .galleryTop {
+                margin-top: 250px;
             }
         }
 
