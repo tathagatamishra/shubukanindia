@@ -14,7 +14,7 @@
         padding-top: 5rem;
     }
 
-    & .Kata-Hero {
+    & .Karate-Hero {
         width: 100%;
         height: fit-content;
         margin-bottom: 8rem;
@@ -259,10 +259,11 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: end;
-                    padding: 10px;
+                    padding: 0 0 0 60px;
 
                     & img {
-                        height: 100%;
+                        object-fit: contain;
+                        width: 100%;
                     }
                 }
             }
@@ -283,12 +284,14 @@
                     height: 100%;
                     width: 50%;
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    align-items: center;
                     padding: 0 0 0 100px;
 
                     & img {
-                        width: 100%;
+                        object-fit: contain;
+                        height: 90%;
                     }
                 }
             }
@@ -350,19 +353,19 @@
                         flex-direction: row;
                         justify-content: center;
                         padding: 0;
-
                     }
                 }
 
                 & .tonfa {
                     flex-direction: column;
+                    align-items: center;
 
                     & .text {
                         width: 100%;
                     }
 
                     & .img {
-                        width: 100%;
+                        height: 100%;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;

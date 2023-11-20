@@ -1,15 +1,15 @@
 import React from "react";
 import "./KarateAndKobudo.scss";
 
-import bo from "../../assets/staff.png";
-import kama from "../../assets/kama.png";
-import sai from "../../assets/sai.png";
-import tonfa from "../../assets/tonfa.png";
+import bo from "../../assets/Frame 19.png";
+import kama from "../../assets/Frame 13.png";
+import sai from "../../assets/Frame 12.png";
+import tonfa from "../../assets/Frame 14.png";
 
 export default function KarateAndKobudo() {
   return (
     <div className="KarateAndKobudo">
-      <section className="Kata-Hero">
+      <section className="Karate-Hero">
         <h1>Karate</h1>
         {/* <p>Discovering the Way of Words</p> */}
         <p>

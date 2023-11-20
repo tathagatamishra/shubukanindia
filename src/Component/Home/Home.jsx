@@ -127,6 +127,7 @@ export default function Home({ setShowNav }) {
         </div>
 
         <div className="description">
+          
           <h1>THE SHUBUKAN WAY</h1>
 
           <div className="offering">
