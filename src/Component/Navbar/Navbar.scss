@@ -149,14 +149,17 @@
                     font-size: 1.2rem;
                     line-height: 20px;
                 }
+
                 & .lines {
                     width: 100px;
                     height: 3px;
                 }
+
                 &:active {
                     & P {
                         font-size: 1rem;
                     }
+
                     & .lines {
                         // background: red;
                         width: 150px !important;
@@ -164,6 +167,7 @@
                 }
             }
         }
+
         @media screen and (min-width: 720px) {
 
             & .menuStart {
@@ -173,6 +177,7 @@
                         width: 150px !important;
                     }
                 }
+
                 &:active {
                     & p {
                         font-size: 1.2rem;
@@ -277,8 +282,13 @@
 
         & .menuBG {
             background: rgba(34, 34, 34, 0.384);
-            background: repeating-radial-gradient(100000px 10000px at 103000px 54000px,#000 0 .0001%,#9a9696a0 0 0.002%);
-            backdrop-filter: blur(8px);
+
+            background-color: #e5e5f7;
+            opacity: 0.9;
+            background-image: radial-gradient(#f77744 0.2px, #f7eee5 0.2px);
+            background-size: 4px 4px;
+            // backdrop-filter: blur(8px);
+
             overflow: hidden;
             position: fixed;
             height: 100vh;
@@ -292,11 +302,11 @@
 
             @keyframes BGBlur {
                 from {
-                    backdrop-filter: blur(0px);
+                    opacity: 0;
                 }
 
                 to {
-                    backdrop-filter: blur(8px);
+                    opacity: 0.9;
                 }
             }
         }
