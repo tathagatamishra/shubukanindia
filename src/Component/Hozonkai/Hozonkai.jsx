@@ -22,10 +22,6 @@ export default function Hozonkai() {
           Kobudo Hozonkai accept members for Okinawa Karate Kobudo enthusiast.
         </p>
 
-        <div className="location">
-          <IonIcon icon={locationOutline} className="label" />
-          <p>2-24-1 Shuritoriboricho, Naha City, Okinawa Prefecture 903-0805</p>
-        </div>
         <div className="link">
           <IonIcon icon={globeOutline} className="label" />
           <NavLink

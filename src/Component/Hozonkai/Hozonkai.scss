@@ -79,47 +79,6 @@
             }
         }
 
-        & .location {
-            width: 100%;
-            height: 40px;
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 40px;
-            // border: 1px solid red;
-
-            & .label {
-                line-height: 50px;
-                text-align: center;
-                font-weight: 700;
-                font-size: 1.5rem;
-
-                height: 40px;
-                color: #764f4f;
-                // border: 1px solid red;
-            }
-            & p {
-                // font-size: 1.5rem;
-                text-align: left;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
-    
-                &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
-                }
-            }
-        }
-
         & .link {
             width: 100%;
             height: 40px;

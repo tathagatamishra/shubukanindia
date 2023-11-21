@@ -21,7 +21,7 @@ export default function History() {
           culture.
         </p>
 
-        <img src={img1} alt="" />
+        {/* <img src={img1} alt="" /> */}
 
         <p>
           Today, karate is a martial art known and respected worldwide as an

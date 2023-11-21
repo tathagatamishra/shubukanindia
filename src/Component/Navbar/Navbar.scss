@@ -276,7 +276,8 @@
         }
 
         & .menuBG {
-            background: rgba(255, 255, 255, 0.317);
+            background: rgba(34, 34, 34, 0.384);
+            background: repeating-radial-gradient(100000px 10000px at 103000px 54000px,#000 0 .0001%,#9a9696a0 0 0.002%);
             backdrop-filter: blur(8px);
             overflow: hidden;
             position: fixed;
