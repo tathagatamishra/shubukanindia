@@ -14,11 +14,6 @@ import img5 from "../../assets/uema.jpg";
 import img6 from "../../images/img (9).jpg";
 import img7 from "../../images/img (6).jpg";
 import img8 from "../../images/img (4).jpg";
-import img9 from "../../assets/trans.png";
-let unsplash1 =
-  "https://images.unsplash.com/photo-1460411794035-42aac080490a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFic3RyYWN0JTIwJTIwc2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-let unsplash2 =
-  "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWJzdHJhY3QlMjAlMjBza3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 
 export default function Home({ setShowNav }) {
   const [slider, setSlider] = useState(null);

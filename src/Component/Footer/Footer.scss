@@ -158,7 +158,7 @@
         // border: solid red 1px;
 
         text-decoration: none;
-        
+
         & p {
             text-decoration: none;
             font-size: 1.2rem;
@@ -176,7 +176,7 @@
             // font-family: 'Philosopher', sans-serif;
             // font-family: 'Pompiere', cursive;
             font-family: 'Tenali Ramakrishna', sans-serif;
-            
+
             user-select: none;
         }
 
@@ -211,15 +211,15 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            
+
             width: 10rem;
             margin-left: 4rem;
             transition: 200ms;
             text-decoration: none;
-           
+
             & .nav {
                 text-decoration: none;
-                
+
                 & p {
                     text-decoration: none;
                 }
@@ -247,6 +247,7 @@
                 margin-left: 40px;
             }
         }
+
         @media screen and (max-width: 760px) {
             & .footOptions1 {
                 width: 130px;
@@ -271,29 +272,30 @@
                 width: 10rem;
                 margin-right: .5rem;
                 text-align: left;
-                
+
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
             }
-            
+
             & .footOptions2 {
                 margin: 0 1rem;
                 text-align: center;
             }
-            
+
             & .footOptions3 {
                 width: 10rem;
                 margin-left: .5rem;
                 text-align: right;
-                
+
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-end;
             }
         }
+
         @media screen and (max-width: 400px) {
 
             & .footOptions1 {
@@ -311,10 +313,11 @@
                 margin-left: 2px;
             }
         }
+
         @media screen and (max-width: 370px) {
             height: 8rem;
             margin: 60px 0 60px 0;
-    
+
             & p {
                 font-size: 1rem;
             }
@@ -337,75 +340,52 @@
     }
 
     & .footLogo {
-        height: fit-content;
+        height: 12rem;
         width: 80%;
         margin-bottom: 2rem;
 
         display: flex;
         flex-direction: row;
         justify-content: center;
+        gap: 2rem;
 
-        // border: solid blue;
+        transition: 300ms;
 
-        & .logoImg {
-            width: fit-content;
-            margin: 0 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-
-            & img {
-                height: 12rem;
-                // width: 100px;
-                // border-radius: 8px;
-                filter: sepia(10%) grayscale(10%);
-                user-select: none;
-                display: block;
-                background-size: cover;
-                transition: 200ms;
-            }
+        & img {
+            height: 100%;
+            filter: sepia(10%) grayscale(10%);
+            user-select: none;
+            display: block;
+            background-size: cover;
+            transition: 200ms;
         }
 
         @media screen and (max-width: 800px) {
-            & .logoImg {
-                margin: 0 1rem;
-                & img {
-                    height: 10rem;
-                }
-            }
+            height: 10rem;
         }
+
         @media screen and (max-width: 700px) {
-            & .logoImg {
-                margin: 0 10px;
-                & img {
-                    height: 9rem;
-                }
-            }
+            height: 9rem;
+            gap: 1rem;
         }
+
+        @media screen and (max-width: 600px) {
+            height: 8rem;
+            gap: .8rem;
+        }
+
         @media screen and (max-width: 500px) {
-            & .logoImg {
-                margin: 0 5px;
-                & img {
-                    height: 8rem;
-                }
-            }
+            height: 7rem;
+            gap: .5rem;
         }
 
         @media screen and (max-width: 400px) {
-            & .logoImg {
-                margin: 0 2px;
-                & img {
-                    height: 6.5rem;
-                }
-            }
+            height: 6.5rem;
+            gap: .2rem;
         }
-        @media screen and (max-width: 320px) {
-            & .logoImg {
-                & img {
-                    height: 5rem;
-                }
-            }
+
+        @media screen and (max-width: 360px) {
+            height: 5rem;
         }
     }
 
@@ -437,15 +417,19 @@
     @media screen and (max-width: 810px) {
         box-shadow: inset 0px -650px 80px -200px #ffffff;
     }
+
     @media screen and (max-width: 500px) {
         box-shadow: inset 0px -600px 80px -200px #ffffff;
     }
+
     @media screen and (max-width: 400px) {
         box-shadow: inset 0px -560px 80px -200px #ffffff;
     }
+
     @media screen and (max-width: 370px) {
         box-shadow: inset 0px -520px 80px -200px #ffffff;
     }
+
     @media screen and (max-width: 320px) {
         box-shadow: inset 0px -480px 80px -200px #ffffff;
     }

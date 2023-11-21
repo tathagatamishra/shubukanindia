@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 import "./Footer.scss";
 
 import logo1 from "../../assets/shubukanIndia.png";
-import logo2 from "../../assets/Shorin-ryu.png";
-import logo3 from "../../assets/ShubukanKanji.png";
-import logo4 from "../../assets/ShuriKarateKobudoHozonkai.png";
+import logo2 from "../../assets/shorinryu.svg";
+import logo3 from "../../assets/shubukan.svg";
+import logo4 from "../../assets/kobudo.svg";
+import logo5 from "../../assets/ShuriKarateKobudoHozonkai.png";
 
 export default function Footer() {
   function news(event) {
@@ -27,7 +28,7 @@ export default function Footer() {
 
       <div className="footContent">
         <div className="footOptions1">
-          <p>Shubukan India</p>
+          <p>Contributors</p>
           <p>Membership</p>
           <p>Service</p>
         </div>
@@ -50,18 +51,11 @@ export default function Footer() {
       <div className="footSocial"></div>
 
       <div className="footLogo">
-        <div className="logoImg">
           <img src={logo1} alt="" />
-        </div>
-        <div className="logoImg">
           <img src={logo2} alt="" />
-        </div>
-        <div className="logoImg">
           <img src={logo3} alt="" />
-        </div>
-        <div className="logoImg">
           <img src={logo4} alt="" />
-        </div>
+          <img src={logo5} alt="" />
       </div>
 
       <div className="footLine"></div>

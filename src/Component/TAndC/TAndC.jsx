@@ -8,6 +8,8 @@ export default function TAndC() {
       <section className="Hero">
           <h1>Terms & Conditions</h1>
           <p>All rights of this logo reserved with Sensei Sabyasachi and Shubukan India. Any use of this logo will be legally punishable.</p>
+          <br />
+          <p>Membership of Shubukan India abide by rules and regulation. Please contact us for more details.</p>
       </section>
     </div>
   )
