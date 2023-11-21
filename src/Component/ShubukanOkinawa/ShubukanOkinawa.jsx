@@ -32,7 +32,7 @@ export default function ShubukanOkinawa() {
           <div className="parent">
             <img src={img3} alt="" />
             <p>
-              Sensei Uema Joki <br /> (10th Dan) <br /> (DOB- 13 June1920 DOD- 20 July 2011)
+              Sensei Uema Joki <br /> (10th Dan) <br /> ( DOB- 13 June 1920 <br /> DOD- 20 July 2011 )
             </p>
           </div>
           <div className="child">

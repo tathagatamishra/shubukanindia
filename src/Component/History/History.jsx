@@ -1,6 +1,6 @@
 import React from "react";
 import "./History.scss";
-import img1 from '../../assets/blog1.jpg'
+import img1 from '../../assets/suri_gate.jpg'
 
 export default function History() {
   return (
@@ -8,7 +8,7 @@ export default function History() {
       <section className="Hero">
         <h1>History</h1>
         {/* <p>Discovering the Way of Words</p> */}
-
+        <img className="hero-img" src={img1} alt="" />
         <p>
           The birth place of karate is Okinawa. Prior to 1879 karate was
           practiced by upper class families in Okinawa formerly known as Ryukyu

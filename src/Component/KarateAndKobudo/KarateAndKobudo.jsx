@@ -1,12 +1,12 @@
 import React from "react";
 import "./KarateAndKobudo.scss";
 
-import bo from "../../assets/Frame 19.png";
-import kama from "../../assets/Frame 13.png";
-import sai from "../../assets/Frame 12.png";
-import tonfa from "../../assets/Frame 14.png";
-import eku from "../../assets/Frame 14.png";
-import nunchaku from "../../assets/Frame 16.png";
+import bo from "../../assets/Frame 19.svg";
+import kama from "../../assets/Frame 13.svg";
+import sai from "../../assets/Frame 12.svg";
+import tonfa from "../../assets/Frame 14.svg";
+import eku from "../../assets/Frame 14.svg";
+import nunchaku from "../../assets/Frame 16.svg";
 
 export default function KarateAndKobudo() {
   return (
