@@ -5,7 +5,7 @@ import bo from "../../assets/Frame 19.svg";
 import kama from "../../assets/Frame 13.svg";
 import sai from "../../assets/Frame 12.svg";
 import tonfa from "../../assets/Frame 14.svg";
-import eku from "../../assets/Frame 14.svg";
+import eku from "../../assets/eku.svg";
 import nunchaku from "../../assets/Frame 16.svg";
 
 export default function KarateAndKobudo() {
@@ -104,7 +104,7 @@ export default function KarateAndKobudo() {
               <p>It is fisherman's tool used for rowing. In Okinawan kobudo it used as a excellent weapon.</p>
             </div>
             <div className="img">
-              {/* <img src={tonfa} alt="" /> */}
+              <img src={eku} alt="" />
             </div>
           </div>
 
@@ -114,7 +114,7 @@ export default function KarateAndKobudo() {
               <p>It is a wooden weapon. Very important weapon of Okinawa kobudo.</p>
             </div>
             <div className="img">
-              {/* <img src={tonfa} alt="" /> */}
+              <img src={nunchaku} alt="" />
             </div>
           </div>
         </div>

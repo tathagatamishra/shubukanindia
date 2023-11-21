@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Home.scss";
 
-import birdImg from "../../assets/bird.png";
+import birdImg from "../../assets/bird.svg";
 import drogon from "../../assets/dragon.png";
 import drogon2 from "../../assets/dragon2.png";
-import treeImg from "../../assets/tree.png";
+import treeImg from "../../assets/tree.svg";
 import img1 from "../../assets/uemaImg1.svg";
 import img2 from "../../assets/uemaImg2.svg";
 import img3 from "../../assets/chibana.jpg";
