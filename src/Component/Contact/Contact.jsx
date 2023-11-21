@@ -6,10 +6,19 @@ import {
   logoInstagram,
   mailOutline,
   callOutline,
+  logoWhatsapp
 } from "ionicons/icons";
 import "./Contact.scss";
 
 export default function Contact() {
+  const emailAddress = 'shorinryushubukanindia@gmail.com';
+  const emailSubject = 'Hello';
+  const emailBody = 'I wanted to reach out to you...';
+  const emailLink = `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
+
+  
+
+
   return (
     <div className="Contact">
       <section className="Hero">
@@ -19,9 +28,9 @@ export default function Contact() {
 
       <section className="content">
         <div className="link">
-          <IonIcon icon={callOutline} className="label" />
+          <IonIcon icon={logoWhatsapp} className="label" />
           <NavLink
-            // to="+91 9851852499"
+            to={`https://wa.me/${+919851852499}`}
             className="opt"
             target="_blank"
             rel="phone number"
@@ -32,14 +41,14 @@ export default function Contact() {
 
         <div className="link">
           <IonIcon icon={mailOutline} className="label" />
-          <NavLink
-            // to="shorinryushubukanindia@gmail.com"
+          <a
+            href={emailLink}
             className="opt"
             target="_blank"
             rel="gmail"
           >
             shorinryushubukanindia@gmail.com
-          </NavLink>
+          </a>
         </div>
 
         <div className="link">
