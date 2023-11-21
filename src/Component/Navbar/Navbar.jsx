@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import oldPaper from "../../assets/old-paper.png";
+import oldPaper from "../../assets/old-paper.svg";
 import shubukanLogo from '../../assets/shubukan.png'
 import shubukanText from '../../assets/logo.png'
 // import oldPaper from '../../../public/oldPaper.svg'

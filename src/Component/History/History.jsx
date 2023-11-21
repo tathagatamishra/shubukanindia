@@ -1,6 +1,6 @@
 import React from "react";
 import "./History.scss";
-import img1 from '../../assets/suri_gate.jpg'
+import img1 from '../../assets/suri_gate.svg'
 
 export default function History() {
   return (
