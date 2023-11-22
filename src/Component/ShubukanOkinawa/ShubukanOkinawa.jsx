@@ -5,9 +5,9 @@ import { IonIcon } from "@ionic/react";
 import { logoFacebook } from "ionicons/icons";
 
 import img1 from "../../assets/shubukanDojo.jpg";
-import img2 from "../../assets/Frame 1.png";
+import img4 from "../../assets/Frame 1.png";
 import img3 from "../../assets/Frame 2.png";
-import img4 from "../../assets/Frame 3.png";
+import img2 from "../../assets/Frame 3.png";
 
 export default function ShubukanOkinawa() {
   return (
