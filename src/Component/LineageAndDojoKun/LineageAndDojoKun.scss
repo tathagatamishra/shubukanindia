@@ -69,125 +69,146 @@
         & .family-tree {
             width: 100%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border: 1px solid;
 
             margin-top: 80px;
 
-            & .name {
-                margin: 18px 0 0 0;
-                font-size: 1.8rem;
-                text-align: justify;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
+            & .tree-box {
+                & .box {
+                    width: 250px;
+                    height: 130px;
+                    border: 1px solid;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
 
-                &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
-                }
-            }
+                    & .name {
+                        margin: 18px 0 0 0;
+                        font-size: 1.8rem;
+                        text-align: justify;
+                        // font-family: 'Amarante', cursive;
+                        // font-family: 'Andika', sans-serif;
+                        // font-family: 'Bellefair', serif;
+                        // font-family: 'Capriola', sans-serif;
+                        // font-family: 'Flamenco', cursive;
+                        // font-family: 'Fredericka the Great', cursive;
+                        font-family: 'GFS Neohellenic', sans-serif;
+                        // font-family: 'Pompiere', cursive;
+                        // font-family: 'Tenali Ramakrishna', sans-serif;
 
-            & p {
-                margin-bottom: 18px;
-                font-size: 1.7rem;
-                text-align: justify;
-                font-family: 'Amarante', cursive;
-                font-family: 'Andika', sans-serif;
-                font-family: 'Bellefair', serif;
-                font-family: 'Capriola', sans-serif;
-                font-family: 'Flamenco', cursive;
-                font-family: 'Fredericka the Great', cursive;
-                font-family: 'GFS Neohellenic', sans-serif;
-                font-family: 'Pompiere', cursive;
-                font-family: 'Tenali Ramakrishna', sans-serif;
-                // font-family: 'Faster One';
-                // font-family: 'Finlandica';
-                // font-family: 'Foldit';
-                // font-family: 'Gemunu Libre';
-                // font-family: 'Geo';
-                // font-family: 'Lekton';
-                // font-family: 'Lexend Peta';
-                // font-family: 'Lexend Tera';
-                // font-family: 'Martian Mono';
-                // font-family: 'MuseoModerno';
-                // font-family: 'Orbit';
-                // font-family: 'Rubik Dirt';
-                // font-family: 'Shippori Antique';
-                // font-family: 'Tourney';
-                // font-family: 'Train One';
-                // font-family: 'Tulpen One';
-                // font-family: 'swap';
+                        &::selection {
+                            color: $---selection-color;
+                            background: $---selection-bg;
+                        }
+                    }
 
-                &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
-                }
-            }
+                    & .date {
+                        margin-bottom: 18px;
+                        font-size: 1.7rem;
+                        text-align: justify;
+                        font-family: 'Amarante', cursive;
+                        font-family: 'Andika', sans-serif;
+                        font-family: 'Bellefair', serif;
+                        font-family: 'Capriola', sans-serif;
+                        font-family: 'Flamenco', cursive;
+                        font-family: 'Fredericka the Great', cursive;
+                        font-family: 'GFS Neohellenic', sans-serif;
+                        font-family: 'Pompiere', cursive;
+                        font-family: 'Tenali Ramakrishna', sans-serif;
+                        // font-family: 'Faster One';
+                        // font-family: 'Finlandica';
+                        // font-family: 'Foldit';
+                        // font-family: 'Gemunu Libre';
+                        // font-family: 'Geo';
+                        // font-family: 'Lekton';
+                        // font-family: 'Lexend Peta';
+                        // font-family: 'Lexend Tera';
+                        // font-family: 'Martian Mono';
+                        // font-family: 'MuseoModerno';
+                        // font-family: 'Orbit';
+                        // font-family: 'Rubik Dirt';
+                        // font-family: 'Shippori Antique';
+                        // font-family: 'Tourney';
+                        // font-family: 'Train One';
+                        // font-family: 'Tulpen One';
+                        // font-family: 'swap';
 
-            & div {
-                height: 50px;
-                width: 2px;
-                background: #000000;
+                        &::selection {
+                            color: $---selection-color;
+                            background: $---selection-bg;
+                        }
+                    }
 
-                display: flex;
-                flex-direction: column;
-                justify-content: end;
+                    & .arrow {
+                        height: 50px;
+                        width: 2px;
+                        background: #000000;
 
-                & .label {
-                    line-height: 50px;
-                    text-align: center;
-                    font-weight: 700;
-                    font-size: 1.5rem;
-                    // position: absolute;
-                    transform: translate(-11px, 10px);
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: end;
 
-                    color: #000000;
+                        & .label {
+                            line-height: 50px;
+                            text-align: center;
+                            font-weight: 700;
+                            font-size: 1.5rem;
+                            // position: absolute;
+                            transform: translate(-11px, 10px);
+
+                            color: #000000;
+                        }
+                    }
                 }
             }
 
             @media screen and (max-width: 650px) {
-                & .name {
-                    font-size: 1.6rem;
-                }
+                & .tree-box {
+                    & .box {
+                        & .name {
+                            font-size: 1.6rem;
+                        }
 
-                & p {
-                    font-size: 1.5rem;
-                }
+                        & .date {
+                            font-size: 1.5rem;
+                        }
 
-                & div {
-                    height: 40px;
-                    width: 2.4px;
+                        & .arrow {
+                            height: 40px;
+                            width: 2.4px;
 
-                    & .label {
-                        transform: translate(-10.6px, 10px);
+                            & .label {
+                                transform: translate(-10.6px, 10px);
+                            }
+                        }
                     }
                 }
             }
 
             @media screen and (max-width: 400px) {
-                & .name {
-                    font-size: 1.5rem;
-                }
+                & .tree-box {
+                    & .box {
+                        & .name {
+                            font-size: 1.5rem;
+                        }
 
-                & p {
-                    font-size: 1.3rem;
-                    margin-bottom: 10px;
-                }
+                        & .date {
+                            font-size: 1.3rem;
+                            margin-bottom: 10px;
+                        }
 
-                & div {
-                    height: 30px;
-                    width: 2.4px;
+                        & .arrow {
+                            height: 30px;
+                            width: 2.4px;
 
-                    & .label {
-                        transform: translate(-10.6px, 10px);
+                            & .label {
+                                transform: translate(-10.6px, 10px);
+                            }
+                        }
                     }
                 }
             }

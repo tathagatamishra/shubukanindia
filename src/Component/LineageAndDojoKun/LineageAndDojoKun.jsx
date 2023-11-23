@@ -2,8 +2,8 @@ import React from "react";
 import "./LineageAndDojoKun.scss";
 import { IonIcon } from "@ionic/react";
 import { chevronDownSharp } from "ionicons/icons";
-import pattern from '../../assets/pattern.jpg'
-import kun from '../../assets/dojokun.png'
+import pattern from "../../assets/pattern.jpg";
+import kun from "../../assets/dojokun.png";
 
 export default function LineageAndDojoKun() {
   return (
@@ -13,32 +13,114 @@ export default function LineageAndDojoKun() {
         <p>Discovering the Way of Words</p>
 
         <div className="family-tree">
-          <p className="name">Tuken iekata morinori</p>
-          <p>1624 - 1709</p>
-          <div><IonIcon icon={chevronDownSharp} className="label" /></div>
+          <div className="tree-box">
+            <div className="box">
+              <p className="name">Tuken iekata morinori</p>
+              <p className="date">1624 - 1709</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
 
-          <p className="name">TodiSakugawa</p>
-          <p>1762 - 1843</p>
-          <div><IonIcon icon={chevronDownSharp} className="label" /></div>
+            <div className="box">
+              <p className="name">Todi Sakugawa</p>
+              <p className="date">1762 - 1843</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
 
-          <p className="name">MatsumuraSokon</p>
-          <p>1809 - 1899</p>
-          <div><IonIcon icon={chevronDownSharp} className="label" /></div>
+            <div className="box">
+              <p className="name">Matsumura Sokon</p>
+              <p className="date">1809 - 1899</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
 
-          <p className="name">ItosuAnko</p>
-          <p>1831 - 1915</p>
-          <div><IonIcon icon={chevronDownSharp} className="label" /></div>
+            <div className="box">
+              <p className="name">Itosu Anko</p>
+              <p className="date">1831 - 1915</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
 
-          <p className="name">Chibana Choshin</p>
-          <p>1885 - 1969</p>
-          <div><IonIcon icon={chevronDownSharp} className="label" /></div>
+            <div className="box">
+              <p className="name">Chibana Choshin</p>
+              <p className="date">1885 - 1969</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
 
-          <p className="name">Uema Joki</p>
-          <p>1920 - 2011</p>
-          <div><IonIcon icon={chevronDownSharp} className="label" /></div>
+            <div className="box">
+              <p className="name">Uema Joki</p>
+              <p className="date">1920 - 2011</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
 
-          <p className="name">Uema Yasuhiro</p>
-          <p>1945 -</p>
+            <div className="box">
+              <p className="name">Uema Yasuhiro</p>
+              <p className="date">1945 -</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
+
+            <div className="box">
+              <p className="name">Uema Takeshi</p>
+              <p className="date">1975 -</p>
+              <div className="arrow">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
+            </div>
+
+            <div className="box">
+              <p className="name">Giri Sabyasachi</p>
+              <p className="date">1990 -</p>
+            </div>
+          </div>
+
+          <div className="tree-box">
+            <div className="box">
+              
+            </div>
+
+            <div className="box">
+              
+            </div>
+
+            <div className="box">
+             
+            </div>
+
+            <div className="box">
+              
+            </div>
+
+            <div className="box">
+              
+            </div>
+
+            <div className="box">
+
+            </div>
+
+            <div className="box">
+
+            </div>
+
+            <div className="box">
+
+            </div>
+
+            <div className="box">
+
+            </div>
+          </div>
         </div>
       </section>
 
