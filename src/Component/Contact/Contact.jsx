@@ -6,7 +6,8 @@ import {
   logoInstagram,
   mailOutline,
   callOutline,
-  logoWhatsapp
+  logoWhatsapp,
+  logoWordpress
 } from "ionicons/icons";
 import "./Contact.scss";
 
@@ -86,6 +87,17 @@ export default function Contact() {
             Shubukan India
           </NavLink>
         </div>
+
+        <div className="link">
+            <IonIcon icon={logoWordpress} className="label" />
+            <NavLink
+              to="https://kenshinsabya.wordpress.com/"
+              className="opt"
+              target="_blank"
+            >
+              kenshinsabya
+            </NavLink>
+          </div>
       </section>
     </div>
   );

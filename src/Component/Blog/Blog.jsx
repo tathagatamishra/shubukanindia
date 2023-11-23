@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Blog.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { globeOutline, searchOutline } from "ionicons/icons";
+import { logoWordpress, searchOutline } from "ionicons/icons";
 
 export default function Blog() {
   const [position, setPosition] = useState({
@@ -50,9 +50,11 @@ export default function Blog() {
           <p>Discovering the Way of Words</p>
         </section>
 
-        <section className="blogContent">
-          <div className="link">
-            <IonIcon icon={globeOutline} className="label" />
+        
+
+        <section className="content">
+        <div className="link">
+            <IonIcon icon={logoWordpress} className="label" />
             <NavLink
               to="https://kenshinsabya.wordpress.com/"
               className="opt"
@@ -61,13 +63,15 @@ export default function Blog() {
               kenshinsabya.wordpress.com
             </NavLink>
           </div>
-
+        </section>
+        
+        {/* <section className="blogContent">
           <iframe
             id="iFrameExample"
             title="iFrame Example"
             src="https://kenshinsabya.wordpress.com/"
           ></iframe>
-        </section>
+        </section> */}
       </div>
     </div>
   );
