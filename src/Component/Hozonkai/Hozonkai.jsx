@@ -2,7 +2,7 @@ import React from "react";
 import "./Hozonkai.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { globeOutline, locationOutline } from "ionicons/icons";
+import { globeOutline } from "ionicons/icons";
 
 import ShuriKarateKobudoHozonkai from "../../assets/ShuriKarateKobudoHozonkai.png";
 

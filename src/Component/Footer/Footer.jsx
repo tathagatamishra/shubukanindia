@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Footer.scss";
 
-import logo1 from "../../assets/shubukanIndia.png";
+import logo1 from "../../assets/ShubukanIndia-Logo.svg";
 import logo2 from "../../assets/shorinryu.svg";
 import logo3 from "../../assets/shubukan.svg";
 import logo4 from "../../assets/kobudo.svg";
-import logo5 from "../../assets/ShuriKarateKobudoHozonkai.png";
+import logo5 from "../../assets/Hozonkai-Logo.svg";
 
 export default function Footer() {
   function news(event) {

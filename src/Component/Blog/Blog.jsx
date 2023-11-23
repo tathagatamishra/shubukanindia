@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Blog.scss";
+import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { searchOutline } from "ionicons/icons";
+import { globeOutline, searchOutline } from "ionicons/icons";
 
 export default function Blog() {
   const [position, setPosition] = useState({
@@ -33,7 +34,7 @@ export default function Blog() {
 
   return (
     <div className="Blog">
-      <div id="searchBar" style={position}>
+      {/* <div id="searchBar" style={position}>
         <div className="search">
           <input type="text" />
           <button>
@@ -41,15 +42,31 @@ export default function Blog() {
           </button>
         </div>
         <div className="searchLine" style={searchPos}></div>
-      </div>
+      </div> */}
 
       <div className="blogPage">
         <section className="blogHero">
-          <h1>Harmony of Hikari</h1>
+          <h1>Blog</h1>
           <p>Discovering the Way of Words</p>
         </section>
 
         <section className="blogContent">
+          <div className="link">
+            <IonIcon icon={globeOutline} className="label" />
+            <NavLink
+              to="https://kenshinsabya.wordpress.com/"
+              className="opt"
+              target="_blank"
+            >
+              kenshinsabya.wordpress.com
+            </NavLink>
+          </div>
+
+          <iframe
+            id="iFrameExample"
+            title="iFrame Example"
+            src="https://kenshinsabya.wordpress.com/"
+          ></iframe>
         </section>
       </div>
     </div>
