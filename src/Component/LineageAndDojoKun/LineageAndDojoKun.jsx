@@ -1,7 +1,7 @@
 import React from "react";
 import "./LineageAndDojoKun.scss";
 import { IonIcon } from "@ionic/react";
-import { chevronDownSharp } from "ionicons/icons";
+import { chevronDownSharp, chevronBackSharp } from "ionicons/icons";
 import pattern from "../../assets/pattern.jpg";
 import kun from "../../assets/dojokun.png";
 
@@ -15,7 +15,7 @@ export default function LineageAndDojoKun() {
         <div className="family-tree">
           <div className="tree-box">
             <div className="box">
-              <p className="name">Tuken iekata morinori</p>
+              <p className="name">Tuken Iekata morinori</p>
               <p className="date">1624 - 1709</p>
               <div className="arrow">
                 <IonIcon icon={chevronDownSharp} className="label" />
@@ -84,42 +84,55 @@ export default function LineageAndDojoKun() {
             </div>
           </div>
 
+          <div className="line">
+              <IonIcon icon={chevronBackSharp} className="label" />
+          </div>
+
+          <div className="line2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+
           <div className="tree-box">
             <div className="box">
-              
+              <p className="name">Wan Huien</p>
+              <p className="date">1864 - </p>
             </div>
 
             <div className="box">
-              
+              <p className="name">Kayn Chotuku</p>
+              <p className="date">1870 - 1945</p>
             </div>
 
             <div className="box">
-             
+              <p className="name">Gusukuma Shimpan</p>
+              <p className="date">1890 - 1940</p>
             </div>
 
             <div className="box">
-              
+              <p className="name">Uejato Chuei</p>
+              <p className="date">1899 - 1945</p>
             </div>
 
             <div className="box">
-              
+              <p className="name">Shimabukuro Taro</p>
+              <p className="date">1905 - 1980</p>
             </div>
 
             <div className="box">
-
+              <p className="name">Uema Kama</p>
+              <p className="date">1624 - 1709</p>
             </div>
 
-            <div className="box">
+            <div className="box">7</div>
 
-            </div>
+            <div className="box">8</div>
 
-            <div className="box">
-
-            </div>
-
-            <div className="box">
-
-            </div>
+            <div className="box">9</div>
           </div>
         </div>
       </section>
