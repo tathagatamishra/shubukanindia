@@ -28,36 +28,36 @@ export default function LineageAndDojoKun() {
           <div className="top">
             <div className="top-main">
               <div className="main-box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Tuken Iekata Morinori</p>
+                <p className="date">( 1624 - 1709 )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
               </div>
               <div className="main-box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Sakugawa Todi</p>
+                <p className="date">( 1762 - 1843 )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
               </div>
               <div className="main-box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Matsumura Sokon</p>
+                <p className="date">( 1809 - 1899 )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
               </div>
               <div className="main-box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Itosu Yasutsune</p>
+                <p className="date">( 1831 - 1915 )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
               </div>
               <div className="main-box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Chibana Choshin</p>
+                <p className="date">( 1885 - 1969 )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
@@ -77,28 +77,28 @@ export default function LineageAndDojoKun() {
 
             <div className="top-2nd">
               <div className="box-2nd">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Uema Kama</p>
+                <p className="date">( 1855 - 1926 )</p>
               </div>
               <div className="box-2nd">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Wan Huien</p>
+                <p className="date">( 1864 - ? )</p>
               </div>
               <div className="box-2nd">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Kyab chotoky</p>
+                <p className="date">( 1870 - 1945 )</p>
               </div>
               <div className="box-2nd">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Gusukuma Shinpan</p>
+                <p className="date">( 1890 - 1954 )</p>
               </div>
               <div className="box-2nd">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Uezato Chuei</p>
+                <p className="date">( 1899 - 1945 )</p>
               </div>
               <div className="box-2nd">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Shimabukuro taro</p>
+                <p className="date">( 1905 - 1980 )</p>
               </div>
             </div>
 
@@ -108,8 +108,8 @@ export default function LineageAndDojoKun() {
                 <IonIcon icon={chevronBackSharp} className="label" />
                 </div>
                 <div className="box">
-                  <p className="name">name</p>
-                  <p className="date">date</p>
+                  <p className="name">Sesoku Hideharu</p>
+                  <p className="date">( 1648 - 1701 )</p>
                 </div>
               </div>
             </div>
@@ -118,13 +118,13 @@ export default function LineageAndDojoKun() {
           <div className="mid">
             <div className="mid-box">
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Uema Joki</p>
+                <p className="date">( 1920 - 2011 )</p>
                 <div className="line"></div>
               </div>
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Nakama Chozo</p>
+                <p className="date">( 1899 - 1982 )</p>
                 <div className="line"></div>
               </div>
             </div>
@@ -147,22 +147,22 @@ export default function LineageAndDojoKun() {
 
             <div className="bottom-box2">
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Uema Yasuhiro</p>
+                <p className="date">( 1945 - )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
               </div>
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Uema Takeshi</p>
+                <p className="date">( 1975 - )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>
               </div>
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Giri Sabyasachi</p>
+                <p className="date">( 1990 - )</p>
               </div>
             </div>
 

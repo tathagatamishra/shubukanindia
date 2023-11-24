@@ -75,8 +75,22 @@
             justify-content: flex-start;
             align-items: flex-start;
             // border: 1px solid blue;
-
             margin-top: 80px;
+
+            overflow-x: scroll;
+            padding-bottom: 50px;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                height: 15px;
+                background: white;
+              }
+            
+              &::-webkit-scrollbar-thumb {
+                background: black;
+                border-left: solid 10px tomato;
+                border-right: solid 10px tomato;
+              }
 
             & .top {
                 // border: 2px solid red;
