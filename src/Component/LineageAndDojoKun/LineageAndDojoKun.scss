@@ -66,167 +66,264 @@
             }
         }
 
+        // & .line {
+        //     // margin-top: 20px;
+        //     width: 50px;
+        //     height: 620px;
+        //     border-bottom: 2px solid;
+        //     display: flex;
+        //     flex-direction: column;
+        //     justify-content: flex-end;
+        //     align-items: flex-start;
+
+        //     & .label {
+        //         line-height: 50px;
+        //         text-align: center;
+        //         font-weight: 700;
+        //         font-size: 1.5rem;
+        //         // position: absolute;
+        //         transform: translate(-10px, 13px);
+
+        //         color: #000000;
+        //     }
+        // }
+
+
+
         & .family-tree {
             width: 100%;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            // border: 1px solid;
+            // border: 1px solid blue;
 
             margin-top: 80px;
 
-            & .line {
-                margin-top: 50px;
-                width: 50px;
-                height: 650px;
-                border-bottom: 2px solid;
+            & .top {
+                // border: 2px solid red;
+                width: 100%;
                 display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: flex-start;
+                flex-direction: row;
 
-                & .label {
-                    line-height: 50px;
-                    text-align: center;
-                    font-weight: 700;
-                    font-size: 1.5rem;
-                    // position: absolute;
-                    transform: translate(-10px, 13px);
-
-                    color: #000000;
-                }
-            }
-
-            & .line2 {
-                margin-top: 50px;
-                width: 50px;
-                height: 650px;
-                border-left: 2px solid;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                // gap: 2px;
-
-                & div {
-                    width: 100%;
-                    height: 2px;
-                    background: #000000;
-                }
-            }
-
-            & .tree-box {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-
-                & .box {
-                    width: fit-content;
-                    height: 130px;
-                    // border: 1px solid;
+                & .top-main {
+                    // border: 2px solid rgb(0, 174, 255);
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
 
-                    & .name {
-                        margin: 18px 0 0 0;
-                        font-size: 1.4rem;
-                        text-align: center;
-                        // font-family: 'Amarante', cursive;
-                        // font-family: 'Andika', sans-serif;
-                        // font-family: 'Bellefair', serif;
-                        // font-family: 'Capriola', sans-serif;
-                        // font-family: 'Flamenco', cursive;
-                        // font-family: 'Fredericka the Great', cursive;
-                        font-family: 'GFS Neohellenic', sans-serif;
-                        // font-family: 'Pompiere', cursive;
-                        // font-family: 'Tenali Ramakrishna', sans-serif;
-
-                        &::selection {
-                            color: $---selection-color;
-                            background: $---selection-bg;
-                        }
-                    }
-
-                    & .date {
-                        margin-bottom: 18px;
-                        font-size: 1.3rem;
-                        text-align: justify;
-                        font-family: 'Amarante', cursive;
-                        font-family: 'Andika', sans-serif;
-                        font-family: 'Bellefair', serif;
-                        font-family: 'Capriola', sans-serif;
-                        font-family: 'Flamenco', cursive;
-                        font-family: 'Fredericka the Great', cursive;
-                        font-family: 'GFS Neohellenic', sans-serif;
-                        font-family: 'Pompiere', cursive;
-                        font-family: 'Tenali Ramakrishna', sans-serif;
-                        // font-family: 'Faster One';
-                        // font-family: 'Finlandica';
-                        // font-family: 'Foldit';
-                        // font-family: 'Gemunu Libre';
-                        // font-family: 'Geo';
-                        // font-family: 'Lekton';
-                        // font-family: 'Lexend Peta';
-                        // font-family: 'Lexend Tera';
-                        // font-family: 'Martian Mono';
-                        // font-family: 'MuseoModerno';
-                        // font-family: 'Orbit';
-                        // font-family: 'Rubik Dirt';
-                        // font-family: 'Shippori Antique';
-                        // font-family: 'Tourney';
-                        // font-family: 'Train One';
-                        // font-family: 'Tulpen One';
-                        // font-family: 'swap';
-
-                        &::selection {
-                            color: $---selection-color;
-                            background: $---selection-bg;
-                        }
-                    }
-
-                    & .arrow {
-                        height: 50px;
-                        width: 2.34px;
-                        background: #000000;
-
+                    & .main-box {
+                        // border: 2px solid rgb(0, 0, 0);
+                        width: 190px;
+                        height: 137px;
                         display: flex;
                         flex-direction: column;
-                        justify-content: end;
+                        justify-content: space-around;
+                        align-items: center;
 
-                        & .label {
-                            line-height: 50px;
-                            text-align: center;
-                            font-weight: 700;
-                            font-size: 1.5rem;
-                            // position: absolute;
-                            transform: translate(-11px, 10px);
-
-                            color: #000000;
-                        }
-                    }
-                }
-            }
-
-            @media screen and (max-width: 650px) {
-
-            }
-
-            @media screen and (max-width: 500px) {
-                & .tree-box {
-                    & .box {
                         & .name {
-                            font-size: 1.2rem;
+                            width: 100%;
+                            font-size: 1.4rem;
+                            text-align: center;
+                            font-family: 'GFS Neohellenic', sans-serif;
+                            border: 2px solid red;
+
+                            &::selection {
+                                color: $---selection-color;
+                                background: $---selection-bg;
+                            }
                         }
+
                         & .date {
-                            font-size: 1rem;
+                            width: 100%;
+                            font-size: 1.3rem;
+                            text-align: center;
+                            font-family: 'Tenali Ramakrishna', sans-serif;
+                            border: 2px solid red;
+
+                            &::selection {
+                                color: $---selection-color;
+                                background: $---selection-bg;
+                            }
+                        }
+
+                        & .arrow {
+                            height: 50px;
+                            width: 2.34px;
+                            background: #000000;
+
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: end;
+
+                            & .label {
+                                text-align: center;
+                                font-size: 1.5rem;
+                                // position: absolute;
+                                transform: translate(-11px, 10px);
+
+                                color: #000000;
+                            }
+                        }
+                    }
+                }
+
+                & .top-line {
+                    // border: 2px solid rgb(0, 255, 51);
+                    padding-top: 50px;
+
+                    & .line-box {
+                        margin-left: 20px;
+                        height: 100px;
+                        width: 30px;
+                        border-top: 2px solid;
+                        border-left: 2px solid;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+
+                        & .line {
+                            transform: translateX(-116px);
+                            height: 2px;
+                            width: 116px;
+                            background: #000000;
+                        }
+                    }
+                }
+
+                & .top-2nd {
+                    // border: 2px solid rgb(0, 174, 255);
+
+                    & .box-2nd {
+                        // border: 2px solid rgb(0, 0, 0);
+                        height: 100px;
+                        width: 190px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        & .name {
+                            width: 100%;
+                            font-size: 1.4rem;
+                            text-align: center;
+                            font-family: 'GFS Neohellenic', sans-serif;
+                            border: 2px solid red;
+
+                            &::selection {
+                                color: $---selection-color;
+                                background: $---selection-bg;
+                            }
+                        }
+
+                        & .date {
+                            width: 100%;
+                            font-size: 1.3rem;
+                            text-align: center;
+                            font-family: 'Tenali Ramakrishna', sans-serif;
+                            border: 2px solid red;
+
+                            &::selection {
+                                color: $---selection-color;
+                                background: $---selection-bg;
+                            }
+                        }
+                    }
+                }
+
+                & .top-3rd {
+                    // border: 2px solid rgb(0, 174, 255);
+
+                    & .box-3rd {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        & .line {
+                            width: 20px;
+                            height: 2px;
+                            background: #000000;
+                        }
+                        & .box {
+                            // border: 2px solid rgb(0, 0, 0);
+                            height: 100px;
+                            width: 190px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+
+                            & .name {
+                                width: 100%;
+                                font-size: 1.4rem;
+                                text-align: center;
+                                font-family: 'GFS Neohellenic', sans-serif;
+                                border: 2px solid red;
+
+                                &::selection {
+                                    color: $---selection-color;
+                                    background: $---selection-bg;
+                                }
+                            }
+
+                            & .date {
+                                width: 100%;
+                                font-size: 1.3rem;
+                                text-align: center;
+                                font-family: 'Tenali Ramakrishna', sans-serif;
+                                border: 2px solid red;
+
+                                &::selection {
+                                    color: $---selection-color;
+                                    background: $---selection-bg;
+                                }
+                            }
                         }
                     }
                 }
             }
+
+            & .one-arrow {
+                border: 2px solid red;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                height: 100px;
+            }
+
+            & .mid {
+                border: 2px solid red;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+
+                & .mid-box {
+                    border: 2px solid rgb(21, 255, 0);
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    height: 150px;
+                }
+            }
+
+            & .bottom {
+                border: 2px solid red;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+
+                & .bottom-box {
+                    border: 2px solid rgb(0, 166, 255);
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    & .box {
+                        border: 2px solid red;
+                        width: 100%;
+                        height: 200px;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 500px) {}
         }
     }
 

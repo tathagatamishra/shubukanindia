@@ -12,127 +12,120 @@ export default function LineageAndDojoKun() {
         <h1>Lineage</h1>
         <p>Discovering the Way of Words</p>
 
+        {/* <div className="arrow">
+          <IonIcon icon={chevronDownSharp} className="label" />
+        </div> */}
+
+        {/* <div className="line">
+          <IonIcon icon={chevronBackSharp} className="label" />
+        </div> */}
+
         <div className="family-tree">
-          <div className="tree-box">
-            <div className="box">
-              <p className="name">Tuken Iekata morinori</p>
-              <p className="date">1624 - 1709</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
+          <div className="top">
+            
+            <div className="top-main">
+              <div className="main-box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="main-box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="main-box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="main-box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="main-box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
               </div>
             </div>
 
-            <div className="box">
-              <p className="name">Todi Sakugawa</p>
-              <p className="date">1762 - 1843</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
+            <div className="top-line">
+              <div className="line-box">1</div>
+              <div className="line-box">2</div>
+              <div className="line-box">3</div>
+              <div className="line-box">4</div>
+              <div className="line-box">5</div>
+              <div className="line-box">
+                <div className="line"></div>
               </div>
             </div>
 
-            <div className="box">
-              <p className="name">Matsumura Sokon</p>
-              <p className="date">1809 - 1899</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
+            <div className="top-2nd">
+              <div className="box-2nd">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="box-2nd">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="box-2nd">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="box-2nd">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="box-2nd">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="box-2nd">
+                <p className="name">name</p>
+                <p className="date">date</p>
               </div>
             </div>
 
-            <div className="box">
-              <p className="name">Itosu Anko</p>
-              <p className="date">1831 - 1915</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
+            <div className="top-3rd">
+              <div className="box-3rd">
+                <div className="line"></div>
+                <div className="box">
+                  <p className="name">name</p>
+                  <p className="date">date</p>
+                </div>
               </div>
-            </div>
-
-            <div className="box">
-              <p className="name">Chibana Choshin</p>
-              <p className="date">1885 - 1969</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
-              </div>
-            </div>
-
-            <div className="box">
-              <p className="name">Uema Joki</p>
-              <p className="date">1920 - 2011</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
-              </div>
-            </div>
-
-            <div className="box">
-              <p className="name">Uema Yasuhiro</p>
-              <p className="date">1945 -</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
-              </div>
-            </div>
-
-            <div className="box">
-              <p className="name">Uema Takeshi</p>
-              <p className="date">1975 -</p>
-              <div className="arrow">
-                <IonIcon icon={chevronDownSharp} className="label" />
-              </div>
-            </div>
-
-            <div className="box">
-              <p className="name">Giri Sabyasachi</p>
-              <p className="date">1990 -</p>
             </div>
           </div>
 
-          <div className="line">
-              <IonIcon icon={chevronBackSharp} className="label" />
+          <div className="mid">
+            <div className="mid-box"></div>
+            <div className="mid-box"></div>
+            <div className="mid-box"></div>
+            <div className="mid-box"></div>
           </div>
 
-          <div className="line2">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-
-          <div className="tree-box">
-            <div className="box">
-              <p className="name">Wan Huien</p>
-              <p className="date">1864 - </p>
+          <div className="bottom">
+            <div className="bottom-box"></div>
+            <div className="bottom-box">
+              <div className="box"></div>
+              <div className="box"></div>
+              <div className="box"></div>
             </div>
-
-            <div className="box">
-              <p className="name">Kayn Chotuku</p>
-              <p className="date">1870 - 1945</p>
-            </div>
-
-            <div className="box">
-              <p className="name">Gusukuma Shimpan</p>
-              <p className="date">1890 - 1940</p>
-            </div>
-
-            <div className="box">
-              <p className="name">Uejato Chuei</p>
-              <p className="date">1899 - 1945</p>
-            </div>
-
-            <div className="box">
-              <p className="name">Shimabukuro Taro</p>
-              <p className="date">1905 - 1980</p>
-            </div>
-
-            <div className="box">
-              <p className="name">Uema Kama</p>
-              <p className="date">1624 - 1709</p>
-            </div>
-
-            <div className="box">7</div>
-
-            <div className="box">8</div>
-
-            <div className="box">9</div>
+            <div className="bottom-box"></div>
+            <div className="bottom-box"></div>
           </div>
         </div>
       </section>
