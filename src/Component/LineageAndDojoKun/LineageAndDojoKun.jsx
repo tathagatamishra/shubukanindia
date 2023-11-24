@@ -1,7 +1,11 @@
 import React from "react";
 import "./LineageAndDojoKun.scss";
 import { IonIcon } from "@ionic/react";
-import { chevronDownSharp, chevronBackSharp } from "ionicons/icons";
+import {
+  chevronDownSharp,
+  chevronBackSharp,
+  chevronForwardSharp,
+} from "ionicons/icons";
 import pattern from "../../assets/pattern.jpg";
 import kun from "../../assets/dojokun.png";
 
@@ -22,7 +26,6 @@ export default function LineageAndDojoKun() {
 
         <div className="family-tree">
           <div className="top">
-            
             <div className="top-main">
               <div className="main-box">
                 <p className="name">name</p>
@@ -62,11 +65,11 @@ export default function LineageAndDojoKun() {
             </div>
 
             <div className="top-line">
-              <div className="line-box">1</div>
-              <div className="line-box">2</div>
-              <div className="line-box">3</div>
-              <div className="line-box">4</div>
-              <div className="line-box">5</div>
+              <div className="line-box"></div>
+              <div className="line-box"></div>
+              <div className="line-box"></div>
+              <div className="line-box"></div>
+              <div className="line-box"></div>
               <div className="line-box">
                 <div className="line"></div>
               </div>
@@ -101,7 +104,9 @@ export default function LineageAndDojoKun() {
 
             <div className="top-3rd">
               <div className="box-3rd">
-                <div className="line"></div>
+                <div className="line">
+                <IonIcon icon={chevronBackSharp} className="label" />
+                </div>
                 <div className="box">
                   <p className="name">name</p>
                   <p className="date">date</p>
@@ -111,21 +116,73 @@ export default function LineageAndDojoKun() {
           </div>
 
           <div className="mid">
-            <div className="mid-box"></div>
-            <div className="mid-box"></div>
-            <div className="mid-box"></div>
-            <div className="mid-box"></div>
+            <div className="mid-box">
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="line"></div>
+              </div>
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="line"></div>
+              </div>
+            </div>
+            <div className="mid-line">
+              <IonIcon icon={chevronDownSharp} className="label1" />
+              <IonIcon icon={chevronDownSharp} className="label2" />
+            </div>
           </div>
 
           <div className="bottom">
-            <div className="bottom-box"></div>
-            <div className="bottom-box">
-              <div className="box"></div>
-              <div className="box"></div>
-              <div className="box"></div>
+            <div className="bottom-box1">
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="line">
+                <IonIcon icon={chevronForwardSharp} className="label" />
+              </div>
             </div>
-            <div className="bottom-box"></div>
-            <div className="bottom-box"></div>
+
+            <div className="bottom-box2">
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+                <div className="arrow">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+            </div>
+
+            <div className="bottom-line">
+              <div className="line">
+                <IonIcon icon={chevronBackSharp} className="label" />
+              </div>
+              <div className="line-box"></div>
+            </div>
+
+            <div className="bottom-box3">
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
