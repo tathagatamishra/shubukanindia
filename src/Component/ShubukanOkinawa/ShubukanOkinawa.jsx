@@ -28,7 +28,7 @@ export default function ShubukanOkinawa() {
           <img src={img1} alt="" />
         </div>
 
-        <p>x
+        <p>
           In 1933, Master Choshin Chibana named Shorin Ryu. In 1948, they
           organized Okinawa Shorin Ryu Karate-do Association. They took over the
           Shuri-te stream. There are Dojo not only in Okinawa but also overseas.
