@@ -105,7 +105,7 @@ export default function LineageAndDojoKun() {
             <div className="top-3rd">
               <div className="box-3rd">
                 <div className="line">
-                <IonIcon icon={chevronBackSharp} className="label" />
+                  <IonIcon icon={chevronBackSharp} className="label" />
                 </div>
                 <div className="box">
                   <p className="name">Sesoku Hideharu</p>
@@ -120,17 +120,18 @@ export default function LineageAndDojoKun() {
               <div className="box">
                 <p className="name">Uema Joki</p>
                 <p className="date">( 1920 - 2011 )</p>
-                <div className="line"></div>
+                <div className="line1"></div>
               </div>
               <div className="box">
-                <p className="name">Nakama Chozo</p>
-                <p className="date">( 1899 - 1982 )</p>
-                <div className="line"></div>
+                <div className="inbox">
+                  <p className="name">Nakama Chozo</p>
+                  <p className="date">( 1899 - 1982 )</p>
+                </div>
+                <div className="line2"></div>
               </div>
             </div>
             <div className="mid-line">
-              <IonIcon icon={chevronDownSharp} className="label1" />
-              <IonIcon icon={chevronDownSharp} className="label2" />
+              <IonIcon icon={chevronDownSharp} className="label" />
             </div>
           </div>
 
@@ -140,6 +141,14 @@ export default function LineageAndDojoKun() {
                 <p className="name">name</p>
                 <p className="date">date</p>
               </div>
+              <div className="box">
+                <p className="name">name</p>
+                <p className="date">date</p>
+              </div>
+            </div>
+
+            <div className="bottom-line">
+              <div className="line-box"></div>
               <div className="line">
                 <IonIcon icon={chevronForwardSharp} className="label" />
               </div>
@@ -166,21 +175,13 @@ export default function LineageAndDojoKun() {
               </div>
             </div>
 
-            <div className="bottom-line">
-              <div className="line">
-                <IonIcon icon={chevronBackSharp} className="label" />
-              </div>
-              <div className="line-box"></div>
-            </div>
-
             <div className="bottom-box3">
               <div className="box">
                 <p className="name">name</p>
                 <p className="date">date</p>
               </div>
-              <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+              <div className="line">
+                <IonIcon icon={chevronBackSharp} className="label" />
               </div>
             </div>
           </div>
