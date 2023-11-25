@@ -3,6 +3,7 @@ import "./ShubukanOkinawa.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { logoFacebook } from "ionicons/icons";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import img1 from "../../assets/shubukanDojo.jpg";
 import img2 from "../../assets/Frame 3.png";
@@ -12,6 +13,14 @@ import img4 from "../../assets/Frame 1.png";
 export default function ShubukanOkinawa() {
   return (
     <div className="ShubukanOkinawa">
+      <Helmet>
+        <title>Shubukan Okinawa</title>
+        <meta
+          name="Shubukan Okinawa"
+          content="History of Shubukan Okinawa."
+        />
+      </Helmet>
+
       <section className="Hero">
         <h1>Shubukan Okinawa</h1>
 
@@ -22,12 +31,11 @@ export default function ShubukanOkinawa() {
         <p>
           In 1933, Master Choshin Chibana named Shorin Ryu. In 1948, they
           organized Okinawa Shorin Ryu Karate-do Association. They took over the
-          Shuri-te stream. There are Dojo not only in Okinawa but also
-          overseas. 
+          Shuri-te stream. There are Dojo not only in Okinawa but also overseas.
           <br />
           <br />
-          Shorin Ryu Shubukan was founded by Sensei Joki Uema. Now his
-          son Sensei Uema Yasuhiro is now chairman of Okinawa Shubukan.
+          Shorin Ryu Shubukan was founded by Sensei Joki Uema. Now his son
+          Sensei Uema Yasuhiro is now chairman of Okinawa Shubukan.
         </p>
 
         <div className="family">

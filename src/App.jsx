@@ -19,12 +19,11 @@ import Gallery from "./Component/Gallery/Gallery";
 import Blog from "./Component/Blog/Blog";
 import Contact from "./Component/Contact/Contact";
 import TAndC from "./Component/TAndC/TAndC";
-import flag from './assets/ryukyu-flag.png'
-
+import flag from "./assets/ryukyu-flag.png";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function App() {
-
-  const [showNav, setShowNav] = useState(true)
+  const [showNav, setShowNav] = useState(true);
 
   document.addEventListener("mousemove", (ev) => {
     const x = ev.clientX,
@@ -39,37 +38,51 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <div id="cursor">
-          <img src={flag} alt="" />
-        </div>
+    <HelmetProvider>
+      <div className="App" id="App">
+        <BrowserRouter>
+          <div id="cursor">
+            <img src={flag} alt="" />
+          </div>
 
-        {showNav && <Navbar showNav={showNav} />}
+          {showNav && <Navbar showNav={showNav} />}
 
-        <div className="webBody">
-          <Routes>
-            <Route path="/" element={<Home setShowNav={setShowNav} />} />
-            <Route path="/History" element={<History />} />
-            <Route path="/ShubukanIndia" element={<ShubukanIndia />} />
-            <Route path="/ShubukanOkinawa" element={<ShubukanOkinawa />} />
-            <Route path="/ShubukanWorld" element={<ShubukanWorld setShowNav={setShowNav} />} />
-            <Route path="/Hozonkai" element={<Hozonkai />} />
-            <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
-            <Route path="/KarateAndKobudo" element={<KarateAndKobudo />} />
-            <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} />
-            <Route path="/Membership" element={<Membership />} />
-            <Route path="/Services" element={<Services />} />
-            <Route path="/Gallery" element={<Gallery setShowNav={setShowNav} />} />
-            <Route path="/Blog" element={<Blog />} />
-            <Route path="/Contact" element={<Contact />} />
-            <Route path="/TAndC" element={<TAndC />} />
-          </Routes>
-        </div>
+          <div className="webBody">
+            <Routes>
+              <Route path="/" element={<Home setShowNav={setShowNav} />} />
+              <Route path="/History" element={<History />} />
+              <Route path="/ShubukanIndia" element={<ShubukanIndia />} />
+              <Route path="/ShubukanOkinawa" element={<ShubukanOkinawa />} />
+              <Route
+                path="/ShubukanWorld"
+                element={<ShubukanWorld setShowNav={setShowNav} />}
+              />
+              <Route path="/Hozonkai" element={<Hozonkai />} />
+              <Route
+                path="/LineageAndDojoKun"
+                element={<LineageAndDojoKun />}
+              />
+              <Route path="/KarateAndKobudo" element={<KarateAndKobudo />} />
+              <Route
+                path="/CalenderAndNotice"
+                element={<CalenderAndNotice />}
+              />
+              <Route path="/Membership" element={<Membership />} />
+              <Route path="/Services" element={<Services />} />
+              <Route
+                path="/Gallery"
+                element={<Gallery setShowNav={setShowNav} />}
+              />
+              <Route path="/Blog" element={<Blog />} />
+              <Route path="/Contact" element={<Contact />} />
+              <Route path="/TAndC" element={<TAndC />} />
+            </Routes>
+          </div>
 
-        <Footer />
-      </BrowserRouter>
-    </div>
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </HelmetProvider>
   );
 }
 
