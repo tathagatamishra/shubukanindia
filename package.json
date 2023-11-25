@@ -10,6 +10,14 @@
     "preview": "vite preview",
     "postbuild": "react-snap"
   },
+  "reactSnap": {
+    "port": 5173,
+    "inlineCss": true,
+    "include": [
+      "/",
+      "/ShubukanOkinawa"
+    ]
+  },
   "dependencies": {
     "@ionic/react": "^7.5.4",
     "axios": "^1.6.1",
