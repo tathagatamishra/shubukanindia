@@ -91,8 +91,8 @@
             padding-bottom: 50px;
 
             &::-webkit-scrollbar {
-                // width: 5px;
-                // height: 15px;
+                width: 5px;
+                height: 15px;
                 background: rgba(255, 255, 255, 0.562);
                 border-radius: 50px;
             }
@@ -486,7 +486,7 @@
                 & .mid-line {
                     // border: 2px solid #000000;
                     height: 40px;
-                    width: 600px;
+                    // width: 600px;
                     display: flex;
                     flex-direction: row;
                     // justify-content: flex-end;
