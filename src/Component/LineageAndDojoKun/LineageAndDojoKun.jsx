@@ -85,7 +85,7 @@ export default function LineageAndDojoKun() {
                 <p className="date">( 1864 - ? )</p>
               </div>
               <div className="box-2nd">
-                <p className="name">Kyab chotoky</p>
+                <p className="name">Kyan Chotoku</p>
                 <p className="date">( 1870 - 1945 )</p>
               </div>
               <div className="box-2nd">

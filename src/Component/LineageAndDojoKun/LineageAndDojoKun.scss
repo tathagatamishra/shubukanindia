@@ -10,9 +10,19 @@
     flex-direction: column;
     align-items: center;
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 750px) {
+        padding-top: 5rem;
+        width: 86%;
+    }
+
+    @media screen and (max-width: 700px) {
         padding-top: 5rem;
         width: 90%;
+    }
+
+    @media screen and (max-width: 660px) {
+        padding-top: 5rem;
+        width: 94%;
     }
 
     & .Lineage-Hero {
@@ -81,22 +91,23 @@
             padding-bottom: 50px;
 
             &::-webkit-scrollbar {
-                width: 5px;
-                height: 15px;
-                background: white;
+                // width: 5px;
+                // height: 15px;
+                background: rgba(255, 255, 255, 0.562);
+                border-radius: 50px;
             }
 
             &::-webkit-scrollbar-thumb {
                 background: black;
                 border-left: solid 10px tomato;
                 border-right: solid 10px tomato;
+                border-radius: 50px;
             }
 
             & p {
                 font-size: 1.3rem;
 
-                @media screen and (max-width: 500px) {
-
+                @media screen and (max-width: 630px) {
                     font-size: 1rem;
                 }
             }
@@ -114,17 +125,23 @@
 
                     & .main-box {
                         // border: 2px solid rgb(0, 0, 0);
-                        width: 160px;
+                        width: 166px;
                         height: 130px;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-around;
                         align-items: center;
 
+                        @media screen and (max-width: 630px) {
+                            width: 106px;
+                        }
+
                         & .name {
+                            line-height: 18px;
+                            // font-weight: 700;
                             width: 100%;
                             text-align: center;
-                            font-family: 'GFS Neohellenic', sans-serif;
+                            font-family: 'Tenali Ramakrishna', sans-serif;
                             // border: 2px solid red;
 
                             &::selection {
@@ -157,9 +174,7 @@
                             & .label {
                                 text-align: center;
                                 font-size: 1.5rem;
-                                // position: absolute;
                                 transform: translate(-11px, 10px);
-
                                 color: #000000;
                             }
                         }
@@ -181,10 +196,15 @@
                         justify-content: flex-end;
 
                         & .line {
-                            transform: translateX(-102px);
+                            transform: translateX(-104px);
                             height: 2px;
-                            width: 102px;
+                            width: 104px;
                             background: #000000;
+
+                            @media screen and (max-width: 630px) {
+                                transform: translateX(-75px);
+                                width: 75px;
+                            }
                         }
                     }
                 }
@@ -200,6 +220,10 @@
                         flex-direction: column;
                         justify-content: center;
                         gap: 7px;
+
+                        @media screen and (max-width: 630px) {
+                            width: 120px;
+                        }
 
                         & .name {
                             width: 100%;
@@ -235,7 +259,7 @@
                         flex-direction: row;
                         justify-content: center;
                         align-items: center;
-                        gap: 7px;
+                        // gap: 7px;
 
                         & .line {
                             width: 20px;
@@ -257,6 +281,8 @@
                             flex-direction: column;
                             justify-content: center;
                             gap: 7px;
+
+                            @media screen and (max-width: 630px) {width: 110px;}
 
                             & .name {
                                 width: 100%;
@@ -490,6 +516,7 @@
                             text-align: center;
                             font-size: 1.5rem;
                         }
+
                         & .label2 {
                             transform: translate(13px, 9px);
                             text-align: center;
@@ -505,6 +532,7 @@
                         flex-direction: row;
                         justify-content: flex-end;
                         align-items: flex-end;
+
                         & .label {
                             transform: translate(13px, 9px);
                             text-align: center;
@@ -726,7 +754,7 @@
                 }
             }
 
-            @media screen and (max-width: 500px) {}
+            @media screen and (max-width: 630px) {}
         }
     }
 
