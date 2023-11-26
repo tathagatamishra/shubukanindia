@@ -117,7 +117,7 @@ export default function LineageAndDojoKun() {
 
           <div className="mid">
             <div className="mid-box">
-              <div className="box">
+              <div className="box1">
                 <p className="name">Uema Joki</p>
                 <p className="date">( 1920 - 2011 )</p>
               </div>
@@ -136,16 +136,25 @@ export default function LineageAndDojoKun() {
                 </div>
               </div>
 
-              <div className="box">
+              <div className="box2">
                 <p className="name">Uema Joki</p>
                 <p className="date">( 1920 - 2011 )</p>
               </div>
             </div>
             <div className="mid-line">
-              <div className="line1"></div>
-              <div className="line2"></div>
-              <div className="line3"></div>
-              <div className="line4"></div>
+              <div className="line1">
+                <div className="lineY"></div>
+                <div className="line">
+                  <IonIcon icon={chevronDownSharp} className="label" />
+                </div>
+              </div>
+              <div className="line2">
+                <IonIcon icon={chevronDownSharp} className="label1" />
+                <IonIcon icon={chevronDownSharp} className="label2" />
+              </div>
+              <div className="line3">
+                <IonIcon icon={chevronDownSharp} className="label" />
+              </div>
             </div>
           </div>
 

@@ -299,17 +299,17 @@
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                border: 2px solid rgb(21, 255, 0);
+                // border: 2px solid rgb(21, 255, 0);
 
                 & .mid-box {
-                    border: 2px solid rgb(21, 255, 0);
+                    // border: 2px solid rgb(21, 255, 0);
                     width: fit-content;
                     display: flex;
                     flex-direction: row;
                     gap: 20px;
 
-                    & .box {
-                        border: 1px solid;
+                    & .box1 {
+                        // border: 1px solid;
                         // height: 120px;
                         width: 190px;
                         display: flex;
@@ -322,7 +322,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'GFS Neohellenic', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -334,7 +334,42 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'Tenali Ramakrishna', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
+
+                            &::selection {
+                                color: $---selection-color;
+                                background: $---selection-bg;
+                            }
+                        }
+                    }
+
+                    & .box2 {
+                        // border: 1px solid;
+                        // height: 120px;
+                        width: 110px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: center;
+                        gap: 10px;
+
+                        & .name {
+                            width: 100%;
+                            text-align: center;
+                            font-family: 'GFS Neohellenic', sans-serif;
+                            // border: 2px solid red;
+
+                            &::selection {
+                                color: $---selection-color;
+                                background: $---selection-bg;
+                            }
+                        }
+
+                        & .date {
+                            width: 100%;
+                            text-align: center;
+                            font-family: 'Tenali Ramakrishna', sans-serif;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -344,15 +379,16 @@
                     }
 
                     & .box-mid {
-                        border: 2px solid rgb(21, 255, 0);
+                        margin: 0 20px;
+                        // border: 2px solid rgb(21, 255, 0);
                         width: fit-content;
                         display: flex;
                         flex-direction: row;
 
                         & .box {
-                            border: 1px solid;
+                            // border: 1px solid;
                             // height: 120px;
-                            width: 150px;
+                            width: 130px;
                             display: flex;
                             flex-direction: column;
                             justify-content: flex-end;
@@ -363,7 +399,7 @@
                                 width: 100%;
                                 text-align: center;
                                 font-family: 'GFS Neohellenic', sans-serif;
-                                border: 2px solid red;
+                                // border: 2px solid red;
 
                                 &::selection {
                                     color: $---selection-color;
@@ -375,7 +411,7 @@
                                 width: 100%;
                                 text-align: center;
                                 font-family: 'Tenali Ramakrishna', sans-serif;
-                                border: 2px solid red;
+                                // border: 2px solid red;
 
                                 &::selection {
                                     color: $---selection-color;
@@ -400,35 +436,81 @@
                 }
 
                 & .mid-line {
-                    border: 2px solid #000000;
+                    // border: 2px solid #000000;
                     height: 40px;
+                    width: 600px;
                     display: flex;
                     flex-direction: row;
                     // justify-content: flex-end;
                     // align-items: flex-end;
 
                     & .line1 {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
                         width: 280px;
                         height: 40px;
-                        border: 2px solid rgb(255, 0, 255);
+                        // border: 2px solid rgb(255, 0, 255);
+                        padding-left: 100px;
+
+                        & .lineY {
+                            width: 2px;
+                            height: 20px;
+                            background: #000000;
+                        }
+
+                        & .line {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: flex-end;
+                            border-top: 2px solid;
+                            border-right: 2px solid;
+                            height: 20px;
+
+                            & .label {
+                                transform: translate(12px, 5px);
+                                text-align: center;
+                                font-size: 1.5rem;
+                            }
+                        }
                     }
 
                     & .line2 {
-                        width: 200px;
+                        margin-left: 50px;
+                        width: 165px;
                         height: 40px;
-                        border: 2px solid rgb(255, 0, 255);
+                        border-left: 2px solid #000000;
+                        border-right: 2px solid #000000;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: flex-end;
+
+                        & .label1 {
+                            transform: translate(-13px, 9px);
+                            text-align: center;
+                            font-size: 1.5rem;
+                        }
+                        & .label2 {
+                            transform: translate(13px, 9px);
+                            text-align: center;
+                            font-size: 1.5rem;
+                        }
                     }
 
                     & .line3 {
                         width: 100px;
                         height: 40px;
-                        border: 2px solid rgb(255, 0, 255);
-                    }
-
-                    & .line4 {
-                        width: 100px;
-                        height: 40px;
-                        border: 2px solid rgb(255, 0, 255);
+                        border-right: 2px solid #000000;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                        & .label {
+                            transform: translate(13px, 9px);
+                            text-align: center;
+                            font-size: 1.5rem;
+                        }
                     }
                 }
             }
@@ -442,7 +524,7 @@
 
                 & .bottom-box1 {
                     // border: 2px solid rgb(0, 166, 255);
-                    width: 150px;
+                    width: 140px;
                     height: fit-content;
                     display: flex;
                     flex-direction: column;
@@ -452,7 +534,7 @@
                     & .box {
                         // border: 1px solid;
                         height: 80px;
-                        width: 150px;
+                        width: 140px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -463,7 +545,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'GFS Neohellenic', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -475,7 +557,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'Tenali Ramakrishna', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -519,7 +601,7 @@
 
                 & .bottom-box2 {
                     // border: 2px solid rgb(0, 166, 255);
-                    width: 190px;
+                    width: 130px;
                     height: fit-content;
                     display: flex;
                     flex-direction: column;
@@ -529,7 +611,7 @@
                     & .box {
                         // border: 1px solid;
                         // height: 150px;
-                        width: 190px;
+                        width: 130px;
                         display: flex;
                         flex-direction: column;
                         justify-content: flex-start;
@@ -540,7 +622,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'GFS Neohellenic', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -552,7 +634,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'Tenali Ramakrishna', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -583,7 +665,7 @@
 
                 & .bottom-box3 {
                     // border: 2px solid rgb(0, 166, 255);
-                    width: 270px;
+                    width: 220px;
                     height: fit-content;
                     display: flex;
                     flex-direction: column;
@@ -594,7 +676,7 @@
                         // border: 1px solid;
                         // height: 150px;
                         margin-left: 70px;
-                        width: 190px;
+                        width: 140px;
                         display: flex;
                         flex-direction: column;
                         justify-content: flex-start;
@@ -605,7 +687,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'GFS Neohellenic', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -617,7 +699,7 @@
                             width: 100%;
                             text-align: center;
                             font-family: 'Tenali Ramakrishna', sans-serif;
-                            border: 2px solid red;
+                            // border: 2px solid red;
 
                             &::selection {
                                 color: $---selection-color;
@@ -629,7 +711,8 @@
                     & .line {
                         border-right: 2px solid #000000;
                         border-bottom: 2px solid #000000;
-                        height: 240px;
+                        height: 210px;
+                        width: 130px;
                         margin-right: 110px;
                         display: flex;
                         flex-direction: column;
