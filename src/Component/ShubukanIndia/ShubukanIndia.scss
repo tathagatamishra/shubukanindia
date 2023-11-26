@@ -99,6 +99,101 @@
         }
     }
 
+    & .social {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: fit-content;
+
+        & .links {
+            & .link {
+                height: 40px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
+                gap: 1rem;
+                // margin: 40px 0;
+                // border: 1px solid red;
+
+                & .label {
+                    line-height: 50px;
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: 1.5rem;
+
+                    color: #2a2727;
+                    // border: 1px solid red;
+                }
+
+                & .opt {
+                    // font-family: 'Amarante', cursive;
+                    // font-family: 'Andika', sans-serif;
+                    // font-family: 'Bellefair', serif;
+                    // font-family: 'Capriola', sans-serif;
+                    // font-family: 'Flamenco', cursive;
+                    // font-family: 'Fredericka the Great', cursive;
+                    // font-family: 'GFS Neohellenic', sans-serif;
+                    // font-family: 'Pompiere', cursive;
+                    font-family: 'Tenali Ramakrishna', sans-serif;
+
+                    line-height: 20px;
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: 1.2rem;
+                    margin-top: 3px;
+                    text-decoration: none;
+                    // line-height: 0;
+                    color: #2a2727;
+                }
+            }
+        }
+
+        & .images {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+
+            & img {
+                width: 200px;
+                transition: 300ms;
+                box-shadow: 8px 8px 0 rgba(22, 22, 22, 0.193);
+                border: 1px solid;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+
+            & .images {
+                & img {
+                    width: 150px;
+                }
+            }
+        }
+        @media screen and (max-width: 670px) {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            gap: 50px;
+
+            & .images {
+                & img {
+                    width: 150px;
+                }
+            }
+        }
+        @media screen and (max-width: 360px) {
+            & .images {
+                & img {
+                    width: 140px;
+                }
+            }
+        }
+    }
+
     & .Content {
         width: 100%;
         height: fit-content;
@@ -177,48 +272,6 @@
         }
     }
 
-    & .link {
-        height: 40px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        align-items: center;
-        gap: 1rem;
-        // margin: 40px 0;
-        // border: 1px solid red;
-
-        & .label {
-            line-height: 50px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-
-            color: #2a2727;
-            // border: 1px solid red;
-        }
-
-        & .opt {
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            font-family: 'Tenali Ramakrishna', sans-serif;
-
-            line-height: 20px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-top: 3px;
-            text-decoration: none;
-            // line-height: 0;
-            color: #2a2727;
-        }
-    }
 
     @media screen and (max-width: 600px) {
 

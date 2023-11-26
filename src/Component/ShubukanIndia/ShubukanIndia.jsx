@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { logoFacebook, logoInstagram } from "ionicons/icons";
 import logo from "../../assets/shubukan.png";
+import img1 from "../../assets/sg1.svg";
+import img2 from "../../assets/sg2.svg";
 
 export default function ShubukanIndia() {
   return (
@@ -28,6 +30,50 @@ export default function ShubukanIndia() {
         <p className="ex-text">Arigato Gozaimasu Minasan.</p>
       </section>
 
+      <section className="social">
+        <div className="links">
+          <div className="link">
+            <IonIcon icon={logoFacebook} className="label" />
+            <NavLink
+              to="https://www.facebook.com/ShorinRyuShubukanIndia"
+              className="opt"
+              target="_blank"
+              rel="facebook link"
+            >
+              ShorinRyu Shubukan India
+            </NavLink>
+          </div>
+
+          <div className="link">
+            <IonIcon icon={logoFacebook} className="label" />
+            <NavLink
+              to="https://www.facebook.com/shubukanindia"
+              className="opt"
+              target="_blank"
+              rel="facebook link"
+            >
+              Shubukan India
+            </NavLink>
+          </div>
+
+          <div className="link">
+            <IonIcon icon={logoInstagram} className="label" />
+            <NavLink
+              to="https://www.instagram.com/shubukanindia/"
+              className="opt"
+              target="_blank"
+              rel="instagram link"
+            >
+              Shubukan India
+            </NavLink>
+          </div>
+        </div>
+        <div className="images">
+          <img src={img1} alt="" />
+          <img src={img2} alt="" />
+        </div>
+      </section>
+
       <section className="Content">
         <h1>Explication Of The Emblem</h1>
         <p>
@@ -47,42 +93,6 @@ export default function ShubukanIndia() {
           education. Thus, the symbol of Shubukan India took birth.
         </p>
       </section>
-
-      <div className="link">
-        <IonIcon icon={logoFacebook} className="label" />
-        <NavLink
-          to="https://www.facebook.com/ShorinRyuShubukanIndia"
-          className="opt"
-          target="_blank"
-          rel="facebook link"
-        >
-          ShorinRyu Shubukan India
-        </NavLink>
-      </div>
-      
-      <div className="link">
-        <IonIcon icon={logoFacebook} className="label" />
-        <NavLink
-          to="https://www.facebook.com/shubukanindia"
-          className="opt"
-          target="_blank"
-          rel="facebook link"
-        >
-          Shubukan India
-        </NavLink>
-      </div>
-
-      <div className="link">
-        <IonIcon icon={logoInstagram} className="label" />
-        <NavLink
-          to="https://www.instagram.com/shubukanindia/"
-          className="opt"
-          target="_blank"
-          rel="instagram link"
-        >
-          Shubukan India
-        </NavLink>
-      </div>
     </div>
   );
 }

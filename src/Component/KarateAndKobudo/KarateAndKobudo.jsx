@@ -88,10 +88,12 @@ export default function KarateAndKobudo() {
             </div>
           </div>
 
-          <div className="tonfa">
+          <div className="sai">
             <div className="text">
               <h2>Tonfa</h2>
-              <p>It is a wooden weapon. Shubukan has many tonfa katas.</p>
+              <p>
+              It is a wooden weapon. Shubukan has many tonfa katas.
+              </p>
             </div>
             <div className="img">
               <img src={tonfa} alt="" />

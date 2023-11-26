@@ -289,13 +289,12 @@
                     width: 50%;
                     display: flex;
                     flex-direction: row;
-                    justify-content: flex-end;
-                    align-items: center;
-                    padding: 0 0 0 100px;
+                    justify-content: end;
+                    padding: 0 0 0 60px;
 
                     & img {
                         object-fit: contain;
-                        height: 90%;
+                        width: 100%;
                     }
                 }
             }
