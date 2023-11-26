@@ -120,30 +120,44 @@ export default function LineageAndDojoKun() {
               <div className="box">
                 <p className="name">Uema Joki</p>
                 <p className="date">( 1920 - 2011 )</p>
-                <div className="line1"></div>
               </div>
-              <div className="box">
-                <div className="inbox">
+
+              <div className="box-mid">
+                <div className="box">
                   <p className="name">Nakama Chozo</p>
                   <p className="date">( 1899 - 1982 )</p>
                 </div>
-                <div className="line2"></div>
+                <div className="lineX">
+                  <IonIcon icon={chevronForwardSharp} className="label" />
+                </div>
+                <div className="box">
+                  <p className="name">Nakaya Takao</p>
+                  <p className="date">( 1948 - )</p>
+                </div>
+              </div>
+
+              <div className="box">
+                <p className="name">Uema Joki</p>
+                <p className="date">( 1920 - 2011 )</p>
               </div>
             </div>
             <div className="mid-line">
-              <IonIcon icon={chevronDownSharp} className="label" />
+              <div className="line1"></div>
+              <div className="line2"></div>
+              <div className="line3"></div>
+              <div className="line4"></div>
             </div>
           </div>
 
           <div className="bottom">
             <div className="bottom-box1">
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">China Taikichi</p>
+                <p className="date">( 1924 - 2003 )</p>
               </div>
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Ishikawa Seitoku</p>
+                <p className="date">( 1925 - 2013 )</p>
               </div>
             </div>
 
@@ -177,8 +191,8 @@ export default function LineageAndDojoKun() {
 
             <div className="bottom-box3">
               <div className="box">
-                <p className="name">name</p>
-                <p className="date">date</p>
+                <p className="name">Gyuris Jan</p>
+                <p className="date">( 1965 - )</p>
               </div>
               <div className="line">
                 <IonIcon icon={chevronBackSharp} className="label" />
