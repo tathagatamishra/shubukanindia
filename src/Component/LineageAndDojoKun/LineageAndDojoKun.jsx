@@ -14,7 +14,7 @@ export default function LineageAndDojoKun() {
     <div className="LineageAndDojoKun">
       <section className="Lineage-Hero">
         <h1>Lineage</h1>
-        <p>Discovering the Way of Words</p>
+        {/* <p>Discovering the Way of Words</p> */}
 
         {/* <div className="arrow">
           <IonIcon icon={chevronDownSharp} className="label" />

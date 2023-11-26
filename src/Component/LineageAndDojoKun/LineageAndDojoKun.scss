@@ -106,7 +106,6 @@
                 width: 100%;
                 display: flex;
                 flex-direction: row;
-                gap: 10px;
 
                 & .top-main {
                     // border: 2px solid rgb(0, 174, 255);
@@ -115,8 +114,8 @@
 
                     & .main-box {
                         // border: 2px solid rgb(0, 0, 0);
-                        width: 190px;
-                        height: 137px;
+                        width: 160px;
+                        height: 130px;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-around;
@@ -147,7 +146,7 @@
                         }
 
                         & .arrow {
-                            height: 50px;
+                            height: 30px;
                             width: 2.34px;
                             background: #000000;
 
@@ -173,7 +172,7 @@
 
                     & .line-box {
                         margin-left: 20px;
-                        height: 100px;
+                        height: 96px;
                         width: 30px;
                         border-top: 2px solid;
                         border-left: 2px solid;
@@ -182,9 +181,9 @@
                         justify-content: flex-end;
 
                         & .line {
-                            transform: translateX(-126px);
+                            transform: translateX(-102px);
                             height: 2px;
-                            width: 126px;
+                            width: 102px;
                             background: #000000;
                         }
                     }
@@ -196,7 +195,7 @@
                     & .box-2nd {
                         // border: 2px solid rgb(0, 0, 0);
                         height: 100px;
-                        width: 190px;
+                        width: 160px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -253,7 +252,7 @@
                         & .box {
                             // border: 2px solid rgb(0, 0, 0);
                             height: 100px;
-                            width: 190px;
+                            width: 150px;
                             display: flex;
                             flex-direction: column;
                             justify-content: center;
@@ -675,7 +674,7 @@
                     & .box {
                         // border: 1px solid;
                         // height: 150px;
-                        margin-left: 60px;
+                        margin-left: 55px;
                         width: 140px;
                         display: flex;
                         flex-direction: column;
