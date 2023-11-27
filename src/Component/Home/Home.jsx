@@ -6,13 +6,13 @@ import birdImg from "../../assets/bird.svg";
 import drogon from "../../assets/dragon.png";
 import drogon2 from "../../assets/dragon2.png";
 import treeImg from "../../assets/tree.svg";
-import img1 from "../../assets/uemaImg1.svg";
+import img1 from "../../images/Uema family.svg";
 import img2 from "../../assets/uemaImg2.svg";
 import img3 from "../../assets/chibana.jpg";
 import img4 from "../../assets/mag2.jpg";
 import img5 from "../../assets/uema.jpg";
 import img6 from "../../images/img (9).jpg";
-import img7 from "../../images/img (6).jpg";
+import img7 from "../../images/Matsumura.svg";
 import img8 from "../../images/img (4).jpg";
 
 export default function Home({ setShowNav }) {
@@ -162,15 +162,17 @@ export default function Home({ setShowNav }) {
             <h4>GALLERY</h4>
           </NavLink>
         </div>
+          
         <div>
-          <div className="image">
-            {/* <img src={img9} alt="blank" /> */}
-          </div>
+
           <div className="image" onClick={() => imgPop(img3)}>
             <img src={img3} alt="chosin chibana" />
           </div>
           <div className="image" onClick={() => imgPop(img5)}>
             <img src={img5} alt="image" />
+          </div>
+          <div className="image" onClick={() => imgPop(img7)}>
+            <img src={img7} alt="image" />
           </div>
           <div className="image" onClick={() => imgPop(img2)}>
             <img src={img2} alt="image" />
@@ -178,25 +180,25 @@ export default function Home({ setShowNav }) {
           <div className="image" onClick={() => imgPop(img4)}>
             <img src={img4} alt="image" />
           </div>
-          <div className="image" onClick={() => imgPop(img8)}>
-            <img src={img8} alt="image" />
+          <div className="image" onClick={() => imgPop(img6)}>
+            <img src={img6} alt="image" />
           </div>
           <div className="image" onClick={() => imgPop(img1)}>
             <img src={img1} alt="image" />
           </div>
-          <div className="image" onClick={() => imgPop(img7)}>
-            <img src={img7} alt="image" />
-          </div>
-
-          <div className="image" onClick={() => imgPop(img6)}>
-            <img src={img6} alt="image" />
-          </div>
+          
         </div>
       </section>
 
       <section className="blog">
         <div className="blogLine"></div>
         {/* <h1>Never Fade Away</h1> */}
+
+        <div className="quotes">
+          <div className="box1"></div>
+          <div className="box2"></div>
+        </div>
+
         <div className="define">
           <div>
             <p>Body</p>
@@ -212,29 +214,7 @@ export default function Home({ setShowNav }) {
           an unshakable spirit. In karate what is important is to cultivate the
           strength to concentrate your spirit on one thing with heart and soul.
         </p>
-        {/* <h1>Blog</h1>
-        <div className="row1">
-          <div className="leftBar"></div>
-          <div className="items1" onMouseOver={() => setItem(".items1")}>
-            <div className="item1"></div>
-            <div className="item1"></div>
-            <div className="item1"></div>
-            <div className="item1"></div>
-            <div className="item1"></div>
-          </div>
-          <div className="rightBar"></div>
-        </div>
-        <div className="row2" onMouseOver={() => setItem(".items2")}>
-          <div className="leftBar"></div>
-          <div className="items2">
-            <div className="item2"></div>
-            <div className="item2"></div>
-            <div className="item2"></div>
-            <div className="item2"></div>
-            <div className="item2"></div>
-          </div>
-          <div className="rightBar"></div>
-        </div> */}
+
         <p className="story2">
           Empty-handed and carrying no weapon, dominating an adversary with body
           and soul only, karate, a martial art of self-defense. To master the

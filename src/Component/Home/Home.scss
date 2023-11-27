@@ -297,7 +297,7 @@
                     }
 
                     to {
-                        transform: scaleX(-1) translate(25%, 200%);
+                        transform: scaleX(-1) translate(25%, 180%);
                     }
                 }
             }
@@ -308,6 +308,16 @@
 
             & .bird {
                 transform: scaleX(-1) translate(25%, 150%);
+
+                @keyframes fly {
+                    from {
+                        transform: scaleX(-1) translate(55%, 250%);
+                    }
+
+                    to {
+                        transform: scaleX(-1) translate(25%, 150%);
+                    }
+                }
             }
         }
 
@@ -340,7 +350,7 @@
                     }
 
                     to {
-                        transform: scaleX(-1) translate(25%, 160%);
+                        transform: scaleX(-1) translate(25%, 140%);
                     }
                 }
             }
