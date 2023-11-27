@@ -1564,6 +1564,41 @@
             transition: 1000ms;
         }
 
+        & .quotes {
+            & .box1 {
+                & p {
+                    color: #4b423b;
+                    font-size: 1.5rem;
+                    font-family: 'Amarante', cursive;
+                    font-family: 'Andika', sans-serif;
+                    font-family: 'Bellefair', serif;
+
+
+                    &::selection {
+                        color: $---selection-color;
+                        background: $---selection-bg;
+                    }
+                }
+            }
+
+            & .box2 {
+                & p {
+                    color: #4b423b;
+                    font-size: 1.5rem;
+                    font-family: 'Amarante', cursive;
+                    font-family: 'Andika', sans-serif;
+                    font-family: 'Bellefair', serif;
+
+                    text-align: right;
+
+                    &::selection {
+                        color: $---selection-color;
+                        background: $---selection-bg;
+                    }
+                }
+            }
+        }
+
         & .define {
             display: flex;
             flex-direction: column;
@@ -1622,12 +1657,6 @@
             font-family: 'Amarante', cursive;
             font-family: 'Andika', sans-serif;
             font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
 
 
             &::selection {
@@ -1643,12 +1672,7 @@
             font-family: 'Amarante', cursive;
             font-family: 'Andika', sans-serif;
             font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
+
             text-align: right;
 
             &::selection {

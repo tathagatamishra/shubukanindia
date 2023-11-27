@@ -195,8 +195,12 @@ export default function Home({ setShowNav }) {
         {/* <h1>Never Fade Away</h1> */}
 
         <div className="quotes">
-          <div className="box1"></div>
-          <div className="box2"></div>
+          <div className="box1">
+            <p>When you block overall, imagine you are attacking. When someone punches you, you don't move to evade the punch, but rather to break the arm.</p>
+          </div>
+          <div className="box2">
+            <p>Our karate is not a sport but a budo. By budo, I mean to temper oneself. To never give up. This spirit can be reached only if one goes through hard training with all ane's might. Spiritual strength comes only through hard training. It is about tempering oneself. It is a way of forging oneself.</p>
+          </div>
         </div>
 
         <div className="define">
