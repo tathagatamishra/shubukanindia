@@ -223,7 +223,7 @@
             & .nav {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
 
                 padding-left: 2.5rem;
@@ -409,8 +409,8 @@
 
         & .menu {
             & .menuBox {
-                width: 120vw;
-                height: 113vh;
+                width: 110vw;
+                height: 105vh;
                 transform: translateX(0%);
             }
         }
