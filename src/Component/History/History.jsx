@@ -1,6 +1,9 @@
 import React from "react";
 import "./History.scss";
 import img1 from '../../assets/suri_gate.svg'
+import img2 from '../../assets/Karate_ShuriCastle.jpg'
+import map1 from '../../assets/map.jpg'
+import map2 from '../../assets/map2.jpg'
 
 export default function History() {
   return (
@@ -21,7 +24,10 @@ export default function History() {
           culture.
         </p>
 
-        {/* <img src={img1} alt="" /> */}
+        <div className="maps">
+          <img src={map1} alt="" />
+          <img src={map2} alt="" />
+        </div>
 
         <p>
           Today, karate is a martial art known and respected worldwide as an
@@ -33,6 +39,8 @@ export default function History() {
           took over the Shuri-te stream. There is a Dojo not only in Okinawa but
           also overseas. Shorin Ryu Shubukan was founded by Sensei Joki Uema.
         </p>
+
+        <img className="bottom-img" src={img2} alt="" />
       </section>
     </div>
   );
