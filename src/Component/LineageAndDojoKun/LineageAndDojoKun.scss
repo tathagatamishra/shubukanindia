@@ -28,7 +28,7 @@
     & .Lineage-Hero {
         width: 100%;
         height: fit-content;
-        margin-bottom: 6rem;
+        // margin-bottom: 4rem;
         padding-top: 3rem;
 
         display: flex;
@@ -79,6 +79,7 @@
 
 
         & .family-tree {
+            z-index: 5;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -93,18 +94,22 @@
             &::-webkit-scrollbar {
                 width: 5px;
                 height: 30px;
-                background: rgba(255, 255, 255, 0);
-                border-radius: 1.0px;
+                background: rgba(255, 0, 0, 0);
+                border-radius: 4px;
                 border: none;
-                border-top: 1px solid;
-                border-bottom: 1px solid;
+                border-top: 2px solid rgba(0, 0, 0, 0.3);
+                border-bottom: 2px solid rgba(0, 0, 0, 0.3);
             }
 
             &::-webkit-scrollbar-thumb {
-                background: rgb(71, 71, 71);
-                border-left: solid 10px rgb(255, 128, 106);
-                border-right: solid 10px rgb(255, 128, 106);
-                border-radius: 50px;
+                background: repeating-linear-gradient(45deg,
+                        #a5a29f8f,
+                        #a5a29f8f 10px,
+                        #74706e8d 10px,
+                        #74706e8d 20px);
+                border-left: solid 2px rgba(0, 0, 0, 0.3);
+                border-right: solid 2px rgba(0, 0, 0, 0.3);
+                border-radius: 4px;
             }
 
             & p {
@@ -562,6 +567,7 @@
 
                     @media screen and (max-width: 630px) {
                         width: 370px;
+
                         & .line1 {
                             padding-left: 40px;
                             width: 160PX;
@@ -834,9 +840,11 @@
     }
 
     & .pattern {
+        z-index: 0;
         width: 100%;
         height: fit-content;
-        margin: 6rem 0;
+        margin-bottom: 6rem;
+        transform: translateY(-30px);
 
         & img {
             object-fit: cover;
@@ -847,7 +855,7 @@
         }
 
         @media screen and (max-width: 900px) {
-            margin: 2rem 0;
+            margin-bottom: 2rem;
         }
     }
 
