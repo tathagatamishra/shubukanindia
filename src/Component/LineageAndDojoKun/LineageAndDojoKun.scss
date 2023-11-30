@@ -92,6 +92,7 @@
             padding-bottom: 50px;
 
             &::-webkit-scrollbar {
+                z-index: 5;
                 width: 5px;
                 height: 30px;
                 background: rgba(255, 0, 0, 0);
@@ -102,6 +103,7 @@
             }
 
             &::-webkit-scrollbar-thumb {
+                z-index: 10;
                 background: repeating-linear-gradient(45deg,
                         #a5a29f8f,
                         #a5a29f8f 10px,
