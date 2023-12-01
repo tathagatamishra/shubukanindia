@@ -109,9 +109,9 @@ export default function Navbar() {
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
-                <NavLink to="/CalenderAndNotice" className="opt" onClick={showMenu}>
+                {/* <NavLink to="/CalenderAndNotice" className="opt" onClick={showMenu}>
                   <p>CALENDER & NOTICE</p>
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/Membership" className="opt" onClick={showMenu}>
                   <p>MEMBERSHIP</p>
                 </NavLink>

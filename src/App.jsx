@@ -49,33 +49,21 @@ function App() {
 
           <div className="webBody">
             <Routes>
-              <Route path="/" element={<Home setShowNav={setShowNav} />} />
-              <Route path="/History" element={<History />} />
-              <Route path="/ShubukanIndia" element={<ShubukanIndia />} />
-              <Route path="/ShubukanOkinawa" element={<ShubukanOkinawa />} />
-              <Route
-                path="/ShubukanWorld"
-                element={<ShubukanWorld setShowNav={setShowNav} />}
-              />
-              <Route path="/Hozonkai" element={<Hozonkai />} />
-              <Route
-                path="/LineageAndDojoKun"
-                element={<LineageAndDojoKun />}
-              />
-              <Route path="/KarateAndKobudo" element={<KarateAndKobudo />} />
-              <Route
-                path="/CalenderAndNotice"
-                element={<CalenderAndNotice />}
-              />
-              <Route path="/Membership" element={<Membership />} />
-              <Route path="/Services" element={<Services />} />
-              <Route
-                path="/Gallery"
-                element={<Gallery setShowNav={setShowNav} />}
-              />
-              <Route path="/Blog" element={<Blog />} />
-              <Route path="/Contact" element={<Contact />} />
-              <Route path="/TAndC" element={<TAndC />} />
+              <Route path="/"                  element={<Home setShowNav={setShowNav} />} />
+              <Route path="/History"           element={<History />} />
+              <Route path="/ShubukanIndia"     element={<ShubukanIndia />} />
+              <Route path="/ShubukanOkinawa"   element={<ShubukanOkinawa />} />
+              <Route path="/ShubukanWorld" element={<ShubukanWorld setShowNav={setShowNav} />} />
+              <Route path="/Hozonkai"          element={<Hozonkai />} />
+              <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
+              <Route path="/KarateAndKobudo"   element={<KarateAndKobudo />} />
+              {/* <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} /> */}
+              <Route path="/Membership"        element={<Membership />} />
+              <Route path="/Services"          element={<Services />} />
+              <Route path="/Gallery"           element={<Gallery setShowNav={setShowNav} />} />
+              <Route path="/Blog"              element={<Blog />} />
+              <Route path="/Contact"           element={<Contact />} />
+              <Route path="/TAndC"             element={<TAndC />} />
             </Routes>
           </div>
 
