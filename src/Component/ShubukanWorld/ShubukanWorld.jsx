@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ShubukanWorld.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { globeOutline, logoFacebook, logoInstagram } from "ionicons/icons";
+import { globeOutline, logoFacebook, logoYoutube } from "ionicons/icons";
 
 import img_1 from "../../world_images/img (14).jpg";
 import img_2 from "../../world_images/img (13).jpg";
@@ -20,13 +20,13 @@ export default function ShubukanWorld({ setShowNav }) {
     img_1,
     img_5,
     img_2,
+    img_10,
     img_4,
     img_3,
     img_6,
     img_7,
     img_8,
     img_9,
-    img_10,
   ];
 
   const [popImg, setPopImg] = useState("");
@@ -90,7 +90,7 @@ export default function ShubukanWorld({ setShowNav }) {
               </div>
 
               <div className="link">
-                <IonIcon icon={logoInstagram} className="label" />
+                <IonIcon icon={logoYoutube} className="label" />
                 <NavLink
                   to="https://www.youtube.com/channel/UCdOqvpG3f3JIBb_unUlCgcg"
                   className="opt"
@@ -132,26 +132,95 @@ export default function ShubukanWorld({ setShowNav }) {
               <div className="link">
                 <IonIcon icon={logoFacebook} className="label" />
                 <NavLink
-                  to="https://www.facebook.com/"
+                  to="https://www.facebook.com/karateclublatour/"
                   className="opt"
                   target="_blank"
                   rel="facebook link"
                 >
-                  Facebook
+                  karateclublatour
+                </NavLink>
+              </div>
+              <div className="link">
+                <IonIcon icon={logoFacebook} className="label" />
+                <NavLink
+                  to="https://www.facebook.com/karateclubsaxon/"
+                  className="opt"
+                  target="_blank"
+                  rel="facebook link"
+                >
+                  karateclubsaxon
+                </NavLink>
+              </div>
+              <div className="link">
+                <IonIcon icon={logoFacebook} className="label" />
+                <NavLink
+                  to="https://www.facebook.com/karateclubconthey/"
+                  className="opt"
+                  target="_blank"
+                  rel="facebook link"
+                >
+                  karateclubconthey
                 </NavLink>
               </div>
 
+            </div>
+          </div>
+        </div>
+
+        {/* ------------------------------------------ */}
+
+        <div className="country">
+          <h2>Canada</h2>
+          <div className="line"></div>
+
+          <div className="profile">
+            <div className="image">
+              <img src={img_2} alt="" onClick={() => imgPop(img_2)} />
+              <p>Sensei Vaillancourt Chantal</p>
+            </div>
+
+            <div className="social">
+
               <div className="link">
-                <IonIcon icon={logoInstagram} className="label" />
+                <IonIcon icon={logoFacebook} className="label" />
                 <NavLink
-                  to="https://www.youtube.com/"
+                  to="https://www.facebook.com/KarateBoisbriand"
                   className="opt"
                   target="_blank"
-                  rel="instagram link"
+                  rel="facebook link"
                 >
-                  Youtube
+                  KarateBoisbriand
                 </NavLink>
               </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* ------------------------------------------ */}
+
+        <div className="country">
+          <h2>Spain</h2>
+          <div className="line"></div>
+
+          <div className="profile">
+            <div className="image">
+              <img src={img_8} alt="" onClick={() => imgPop(img_8)} />
+              <p>Sensei Toni Mulet</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ------------------------------------------ */}
+
+        <div className="country">
+          <h2>Germany</h2>
+          <div className="line"></div>
+
+          <div className="profile">
+            <div className="image">
+              <img src={img_7} alt="" onClick={() => imgPop(img_7)} />
+              <p>Sensei Roman Křapka</p>
             </div>
           </div>
         </div>
