@@ -10,46 +10,245 @@
     align-items: center;
     padding-top: 10rem;
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 700px) {
         width: 90%;
-        padding-top: 5rem;
+        padding-top: 8rem;
     }
 
-        & .Hero {
-            width: 100%;
-            height: fit-content;
-            margin-bottom: 8rem;
-            padding-top: 3rem;
+    @media screen and (max-width: 600px) {
+        width: 90%;
+        padding-top: 4rem;
+    }
 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+    & .Hero {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 8rem;
+        padding-top: 3rem;
 
-            & h1 {
-                margin: 1.5rem 0 2rem;
-                color: #2a2727;
-                font-size: 3.5rem;
-                letter-spacing: 0.2rem;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        & h1 {
+            margin: 1.5rem 0 2rem;
+            color: #2a2727;
+            font-size: 3.5rem;
+            letter-spacing: 0.2rem;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
                 color: $---selection-color;
                 background: $---selection-bg;
             }
+        }
+
+        & p {
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            padding-top: 0;
+            margin-bottom: 6rem;
+
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 3rem;
+                letter-spacing: 0.2rem;
             }
 
             & p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            padding-top: 3rem;
+            margin-bottom: 6rem;
+
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 2.8rem;
+                letter-spacing: 0.2rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 2.8rem;
+                letter-spacing: 0.2rem;
+            }
+        }
+    }
+
+    & .plans {
+
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 50px;
+        transition: 200ms;
+
+        & .plan-box {
+            transition: 200ms;
+            width: 300px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            // border: 1px solid red;
+
+            & .heading {
+                width: 100%;
+                text-align: center;
                 margin: 0;
                 font-size: 1.5rem;
+                font-family: 'Amarante', cursive;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+            }
+
+            & ul {
+                width: fit-content;
+                // border: 1px solid red;
+                // padding: 0;
+                width: fit-content;
+
+                & li {
+                    margin: 20px 0;
+
+                    & .title {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                        margin: 0;
+                        font-family: 'Tenali Ramakrishna', sans-serif;
+
+                        &::selection {
+                            color: $---selection-color;
+                            background: $---selection-bg;
+                        }
+                    }
+
+                    & .description {
+                        margin: 0;
+                        font-size: 1.3rem;
+                        font-family: 'GFS Neohellenic', sans-serif;
+
+                        &::selection {
+                            color: $---selection-color;
+                            background: $---selection-bg;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 1250px) {
+
+            & .plan-box {
+                width: 268px;
+            }
+        }
+
+        @media screen and (max-width: 750px) {
+            gap: 30px;
+        }
+
+        @media screen and (max-width: 708px) {
+            gap: 28px;
+
+            & .plan-box {
+                width: 265px;
+
+                & ul {
+                    & li {
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 620px) {
+            gap: 50px;
+
+            & .plan-box {
+                width: 80%;
+
+                & ul {
+                    & li {
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            & .plan-box {
+                width: 100%;
+            }
+        }
+    }
+
+    & .connect {
+        margin-bottom: 100px;
+
+        & .contactBtn {
+            margin: 100px 0 0 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            & button {
+                transition: 100ms;
+                user-select: none;
+                height: fit-content;
+                border: none;
+                border-top: 2px solid #2a2727;
+                border-bottom: 2px solid #2a2727;
+                border-radius: 5px;
+                background-color: transparent;
+                padding: 10px;
+                width: 300px;
+
+                color: rgb(102, 56, 38);
+                font-size: 1.4rem;
+                text-align: center;
                 font-family: 'Amarante', cursive;
                 // font-family: 'Andika', sans-serif;
                 // font-family: 'Bellefair', serif;
@@ -59,37 +258,27 @@
                 // font-family: 'GFS Neohellenic', sans-serif;
                 // font-family: 'Pompiere', cursive;
                 // font-family: 'Tenali Ramakrishna', sans-serif;
+                letter-spacing: 5px;
+                word-spacing: 5px;
 
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
-            }
-            }
-
-            @media screen and (max-width: 700px) {
-                & h1 {
-                    margin: 1.5rem 0 2rem;
+                &:active {
                     color: #2a2727;
-                    font-size: 3rem;
-                    letter-spacing: 0.2rem;
-                }
-
-                & p {
+                    border-top: 2px solid rgba(191, 76, 27, 0.5);
+                    border-bottom: 2px solid rgb(191, 76, 27, 0.5);
+                    border-radius: 15px;
                     font-size: 1.2rem;
-                }
-            }
-
-            @media screen and (max-width: 400px) {
-                & h1 {
-                    margin: 1.5rem 0 2rem;
-                    color: #2a2727;
-                    font-size: 2.8rem;
-                    letter-spacing: 0.2rem;
+                    letter-spacing: 1px;
+                    word-spacing: 1px;
                 }
 
-                & p {
-                    font-size: 1rem;
+                @media screen and (min-width: 600px) {
+                    transition: 200ms;
+
+                    &:hover {
+                        width: 350px;
+                    }
                 }
             }
         }
+    }
 }
