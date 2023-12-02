@@ -6,14 +6,13 @@ import birdImg from "../../assets/bird.svg";
 import drogon from "../../assets/dragon.png";
 import drogon2 from "../../assets/dragon2.png";
 import treeImg from "../../assets/tree.svg";
-import img1 from "../../images/Uema family.svg";
+import img1 from "../../images/chibana.jpg";
 import img2 from "../../assets/uemaImg2.svg";
 import img3 from "../../assets/chibana.jpg";
-import img4 from "../../assets/mag2.jpg";
-import img5 from "../../assets/uema.jpg";
+import img4 from "../../images/kaynChotuku.svg";
+import img5 from "../../images/oldGroup.jpg";
 import img6 from "../../images/img (9).jpg";
 import img7 from "../../images/Matsumura.svg";
-import img8 from "../../images/img (4).jpg";
 
 export default function Home({ setShowNav }) {
   const [slider, setSlider] = useState(null);
@@ -194,15 +193,6 @@ export default function Home({ setShowNav }) {
         <div className="blogLine"></div>
         {/* <h1>Never Fade Away</h1> */}
 
-        <div className="quotes">
-          <div className="box1">
-            <p>When you block overall, imagine you are attacking. When someone punches you, you don't move to evade the punch, but rather to break the arm.</p>
-          </div>
-          <div className="box2">
-            <p>Our karate is not a sport but a budo. By budo, I mean to temper oneself. To never give up. This spirit can be reached only if one goes through hard training with all ane's might. Spiritual strength comes only through hard training. It is about tempering oneself. It is a way of forging oneself.</p>
-          </div>
-        </div>
-
         <div className="define">
           <div>
             <p>Body</p>
@@ -212,6 +202,16 @@ export default function Home({ setShowNav }) {
             <p>Spirit</p>
           </div>
         </div>
+
+        <div className="quotes">
+          <div className="box1">
+            <p>When you block overall, imagine you are attacking. When someone punches you, you don't move to evade the punch, but rather to break the arm.</p>
+          </div>
+          <div className="box2">
+            <p>Our karate is not a sport but a budo. By budo, I mean to temper oneself. To never give up. This spirit can be reached only if one goes through hard training with all ane's might. Spiritual strength comes only through hard training. It is about tempering oneself. It is a way of forging oneself.</p>
+          </div>
+        </div>
+        
         <p className="story1">
           Karate as a martial art is about self-defense. Overcoming your own
           weaknesses, never bending in any circumstance, it is about developing
