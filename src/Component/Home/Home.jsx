@@ -27,6 +27,20 @@ export default function Home({ setShowNav }) {
   const [popImg, setPopImg] = useState("");
   const [imgClicked, setImgClicked] = useState(false);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const sliderElement = document.querySelector(item);
     setSlider(sliderElement);
@@ -107,18 +121,32 @@ export default function Home({ setShowNav }) {
           <img src={birdImg} alt="" />
         </div>
       </section>
+        {console.log(windowWidth)}
 
       <section className="intro">
-        <div className="define">
-          {/* <h1>The Way</h1> */}
-          <div>
-            <p>Discipline</p>
-            <div></div>
-            <p>Respect</p>
-            <div></div>
-            <p>Technique</p>
+        {windowWidth <= 400 ? (
+          <div className="define">
+            {/* <h1>The Way</h1> */}
+            <div>
+              <p>DISCIPLINE</p>
+              <div></div>
+              <p>RESPECT</p>
+              <div></div>
+              <p>TECHNIQUE</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="define">
+            {/* <h1>The Way</h1> */}
+            <div>
+              <p>Discipline</p>
+              <div></div>
+              <p>Respect</p>
+              <div></div>
+              <p>Technique</p>
+            </div>
+          </div>
+        )}
 
         <div className="drogon">
           <img src={drogon} alt="" />

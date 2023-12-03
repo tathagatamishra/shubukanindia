@@ -326,7 +326,7 @@
         }
 
         @media screen and (max-width: 400px) {
-            height: 30rem;
+            height: 25rem;
 
             & h1 {
                 margin: 1.5rem 0 2rem;
@@ -358,10 +358,6 @@
                     }
                 }
             }
-        }
-
-        @media screen and (max-width: 398px) {
-            height: 25rem;
         }
     }
 
@@ -1105,7 +1101,7 @@
             }
         }
 
-        @media screen and (max-width: 398px) {
+        @media screen and (max-width: 400px) {
             // border: 1px solid rgb(255, 183, 0);
 
             & .drogon {
