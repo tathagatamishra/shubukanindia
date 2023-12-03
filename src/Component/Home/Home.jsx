@@ -13,6 +13,10 @@ import img4 from "../../images/kaynChotuku.svg";
 import img5 from "../../images/oldGroup.jpg";
 import img6 from "../../images/img (9).jpg";
 import img7 from "../../images/Matsumura.svg";
+import quot1 from "../../assets/quot (1).jpg";
+import quot2 from "../../assets/quot (2).jpg";
+import sg1 from "../../assets/sg1.jpg";
+import sg2 from "../../assets/sg2.jpg";
 
 export default function Home({ setShowNav }) {
   const [slider, setSlider] = useState(null);
@@ -121,7 +125,6 @@ export default function Home({ setShowNav }) {
         </div>
 
         <div className="description">
-          
           <h1>THE SHUBUKAN WAY</h1>
 
           <div className="offering">
@@ -129,7 +132,7 @@ export default function Home({ setShowNav }) {
             <div></div>
             <p>Okinawan Kobujutsu</p>
           </div>
-          
+
           <p>
             Okinawan Karate is simply designed for self-defense and it is the
             bearer of Okinawan tradition, culture and history. Shorin ryu of
@@ -161,9 +164,8 @@ export default function Home({ setShowNav }) {
             <h4>GALLERY</h4>
           </NavLink>
         </div>
-          
-        <div>
 
+        <div>
           <div className="image" onClick={() => imgPop(img3)}>
             <img src={img3} alt="chosin chibana" />
           </div>
@@ -185,7 +187,6 @@ export default function Home({ setShowNav }) {
           <div className="image" onClick={() => imgPop(img1)}>
             <img src={img1} alt="image" />
           </div>
-          
         </div>
       </section>
 
@@ -205,19 +206,47 @@ export default function Home({ setShowNav }) {
 
         <div className="quotes">
           <div className="box1">
-            <p>When you block overall, imagine you are attacking. When someone punches you, you don't move to evade the punch, but rather to break the arm.</p>
+            <div className="quote">
+              <p>
+                When you block overall, imagine you are attacking. When someone
+                punches you, you don't move to evade the punch, but rather to
+                break the arm.
+              </p>
+              <p className="sensei">Takeshi Uema</p>
+              <p className="sensei">7th Dan Okinawa Shorin-Ryu</p>
+            </div>
+
+            <img src={quot1} alt="" />
           </div>
           <div className="box2">
-            <p>Our karate is not a sport but a budo. By budo, I mean to temper oneself. To never give up. This spirit can be reached only if one goes through hard training with all ane's might. Spiritual strength comes only through hard training. It is about tempering oneself. It is a way of forging oneself.</p>
+            <img src={quot2} alt="" />
+
+            <div className="quote">
+              <p>
+                Our karate is not a sport but a budo. It is about tempering
+                oneself. To never give up. This spirit can be reached only if
+                one goes through hard training with all one's might. Spiritual
+                strength comes only through hard training. It is a way of forging oneself.
+              </p>
+              <p className="sensei">Yasuhiro Uema</p>
+              <p className="sensei">10th Dan Okinawan Shorin-Ryu</p>
+            </div>
           </div>
         </div>
-        
+
+        <div className="blogLine"></div>
+
         <p className="story1">
           Karate as a martial art is about self-defense. Overcoming your own
           weaknesses, never bending in any circumstance, it is about developing
           an unshakable spirit. In karate what is important is to cultivate the
           strength to concentrate your spirit on one thing with heart and soul.
         </p>
+
+        <div className="img-div">
+          <img src={sg1} alt="" />
+          <img src={sg2} alt="" />
+        </div>
 
         <p className="story2">
           Empty-handed and carrying no weapon, dominating an adversary with body

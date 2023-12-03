@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { logoFacebook, logoInstagram } from "ionicons/icons";
 import logo from "../../assets/shubukan.png";
-import img1 from "../../assets/sg1.svg";
-import img2 from "../../assets/sg2.svg";
+import img1 from "../../images/sg2.jpg";
+import img2 from "../../images/sg.jpg";
 
 export default function ShubukanIndia() {
   return (

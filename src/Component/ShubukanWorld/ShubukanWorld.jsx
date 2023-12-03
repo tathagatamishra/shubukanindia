@@ -110,10 +110,16 @@ export default function ShubukanWorld({ setShowNav }) {
           <h2>Switzerland</h2>
           <div className="line"></div>
 
-          <div className="profile">
-            <div className="image">
-              <img src={img_3} alt="" onClick={() => imgPop(img_3)} />
-              <p>Sensei Roan Morand</p>
+          <div className="Switzerland">
+            <div className="img-div">
+              <div className="image">
+                <img src={img_3} alt="" onClick={() => imgPop(img_3)} />
+                <p>Sensei Roan Morand</p>
+              </div>
+              <div className="image">
+                <img src={img_4} alt="" onClick={() => imgPop(img_4)} />
+                <p>Sensei Laurent Batiste</p>
+              </div>
             </div>
 
             <div className="social">
@@ -162,7 +168,6 @@ export default function ShubukanWorld({ setShowNav }) {
                   karateclubconthey
                 </NavLink>
               </div>
-
             </div>
           </div>
         </div>
@@ -180,7 +185,6 @@ export default function ShubukanWorld({ setShowNav }) {
             </div>
 
             <div className="social">
-
               <div className="link">
                 <IonIcon icon={logoFacebook} className="label" />
                 <NavLink
@@ -192,7 +196,6 @@ export default function ShubukanWorld({ setShowNav }) {
                   KarateBoisbriand
                 </NavLink>
               </div>
-
             </div>
           </div>
         </div>
@@ -221,6 +224,32 @@ export default function ShubukanWorld({ setShowNav }) {
             <div className="image">
               <img src={img_7} alt="" onClick={() => imgPop(img_7)} />
               <p>Sensei Roman Křapka</p>
+            </div>
+
+            <div className="social">
+              <div className="link">
+                <IonIcon icon={globeOutline} className="label" />
+                <NavLink
+                  to="https://shubukan.de/"
+                  className="opt"
+                  target="_blank"
+                  rel="facebook link"
+                >
+                  shubukan.de
+                </NavLink>
+              </div>
+
+              <div className="link">
+                <IonIcon icon={logoFacebook} className="label" />
+                <NavLink
+                  to="https://www.facebook.com/shubukan.de"
+                  className="opt"
+                  target="_blank"
+                  rel="facebook link"
+                >
+                  Shubukan.de
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>

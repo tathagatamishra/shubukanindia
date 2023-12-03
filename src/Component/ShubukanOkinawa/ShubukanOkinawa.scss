@@ -10,9 +10,15 @@
     align-items: center;
     padding-top: 10rem;
 
+    @media screen and (max-width: 600px) {
+        padding-top: 8rem;
+    }
+    @media screen and (max-width: 500px) {
+        padding-top: 6rem;
+    }
     @media screen and (max-width: 400px) {
         width: 90%;
-        padding-top: 5rem;
+        padding-top: 6rem;
     }
 
     & .Hero {
@@ -78,6 +84,16 @@
                 color: $---selection-color;
                 background: $---selection-bg;
             }
+
+            @media screen and (max-width: 700px) {
+
+                font-size: 3rem;
+            }
+
+            @media screen and (max-width: 400px) {
+
+                font-size: 2.8rem;
+            }
         }
 
         & p {
@@ -96,6 +112,10 @@
             &::selection {
                 color: $---selection-color;
                 background: $---selection-bg;
+            }
+
+            @media screen and (max-width: 500px) {
+                    font-size: 1.3rem;
             }
         }
 
