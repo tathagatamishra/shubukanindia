@@ -211,6 +211,20 @@ export default function ShubukanWorld({ setShowNav }) {
               <img src={img_8} alt="" onClick={() => imgPop(img_8)} />
               <p>Sensei Toni Mulet</p>
             </div>
+
+            <div className="social">
+              <div className="link">
+                <IonIcon icon={globeOutline} className="label" />
+                <NavLink
+                  to="https://shubukanterrassa.org/"
+                  className="opt"
+                  target="_blank"
+                  rel="facebook link"
+                >
+                  shubukanterrassa.org
+                </NavLink>
+              </div>
+            </div>
           </div>
         </div>
 
