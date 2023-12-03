@@ -14,7 +14,7 @@ export default function Hozonkai() {
           <img src={ShuriKarateKobudoHozonkai} alt="" />
         </div>
 
-        <h1>Shuri Karate kobudo Hozonkai</h1>
+        <h1>Shuri Karate Kobudo Hozonkai</h1>
         <p>
           Shuri Karate Kobudo Hozonkai is preservation society for Shuri Karate
           and Kobudo. It is brain child of Takeshi Uema Sensei. Shuri Karate
