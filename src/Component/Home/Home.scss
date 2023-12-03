@@ -117,7 +117,7 @@
         }
 
         @media screen and (max-width: 400px) {
-            height: 36rem;
+            height: 22rem;
         }
 
         @media screen and (max-width: 370px) {
@@ -356,9 +356,6 @@
             }
         }
 
-        @media screen and (max-width: 370px) {
-            height: 22rem;
-        }
     }
 
     & .intro {
@@ -969,7 +966,6 @@
             }
         }
 
-
         @media screen and (max-width: 480px) {
             // border: 1px solid rgb(0, 81, 255);
 
@@ -1111,7 +1107,7 @@
                     user-select: none;
                 }
 
-                transform: translateY(-80%);
+                transform: translateY(-130%);
             }
 
             & .drogon2 {
@@ -1182,19 +1178,6 @@
         }
 
         @media screen and (max-width: 370px) {
-            // & .drogon {
-            //     & img {
-            //         width: 100%;
-            //         user-select: none;
-            //     }
-
-            //     // height: 250px;
-            //     width: 150px;
-            //     // top: 11%;
-            //     right: 0%;
-            //     position: absolute;
-            //     transform: translateY(-18%);
-            // }
 
             & .drogon2 {
                 & img {
@@ -1211,13 +1194,6 @@
             }
 
             & .description {
-                & h1 {
-                    margin: .5rem 0 .2rem 0;
-                    font-size: 2.2rem;
-                    line-height: 3rem;
-                    word-spacing: 2px;
-                    letter-spacing: 2px;
-                }
 
                 & .offering {
                     width: 100%;
