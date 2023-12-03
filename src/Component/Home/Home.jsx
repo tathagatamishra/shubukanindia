@@ -236,6 +236,12 @@ export default function Home({ setShowNav }) {
 
         <div className="blogLine"></div>
 
+        <p className='story1'>
+          Okinawan karate is for self-defence and self-development. Okinawan karate is not sport. It is education and for philosophical development.
+       
+       </p>
+       <p className="sensei">Sabyasachi Giri</p>
+
         <p className="story1">
           Karate as a martial art is about self-defense. Overcoming your own
           weaknesses, never bending in any circumstance, it is about developing
