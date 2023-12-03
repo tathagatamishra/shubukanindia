@@ -99,7 +99,7 @@ export default function Navbar() {
                   <p>SHUBUKAN WORLD</p>
                 </NavLink>
                 <NavLink to="/Hozonkai" className="opt" onClick={showMenu}>
-                  <p>SURI KARATE KOBUDO HOZONKAI</p>
+                  <p>SHURI KARATE KOBUDO HOZONKAI</p>
                 </NavLink>
 
                 <NavLink to="/LineageAndDojoKun" className="opt" onClick={showMenu}>
