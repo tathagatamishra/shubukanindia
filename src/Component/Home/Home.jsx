@@ -271,7 +271,7 @@ export default function Home({ setShowNav }) {
             karate is not sport. It is education and for philosophical
             development.
           </p>
-          <p className="sensei">Sabyasachi</p>
+          <p className="sensei">Sensei Sabyasachi</p>
         </div>
 
         <div className="img-div">
