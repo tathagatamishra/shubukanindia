@@ -15,6 +15,10 @@
         width: 90%;
     }
 
+    & img {
+        user-select: none;
+    }
+
     & .tree {
         z-index: 1;
 
@@ -1124,7 +1128,7 @@
                 // top: 11%;
                 left: 0%;
                 position: absolute;
-                transform: translateY(275%);
+                transform: translateY(270%);
             }
 
             & .define {
@@ -1148,6 +1152,7 @@
                         margin: 0;
                         word-break: break-all;
                         font-family: 'Amarante', cursive;
+
                         &:nth-child(3) {
                             // transform: translateY(-30px);
                         }
@@ -1480,10 +1485,11 @@
             transition: 1000ms;
         }
 
-        & .quotes {
+        & .quotes1 {
             display: flex;
             flex-direction: column;
             gap: 30px;
+            margin-bottom: 24px;
 
             & .box1 {
                 display: flex;
@@ -1718,6 +1724,33 @@
             }
         }
 
+        & .quotes2 {
+            & .story0 {
+                color: #4b423b;
+                font-size: 1.5rem;
+                font-family: 'Amarante', cursive;
+                font-family: 'Andika', sans-serif;
+                font-family: 'Bellefair', serif;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+            }
+
+            & .sensei {
+                color: #4b423b;
+                font-family: 'Bellefair', serif;
+                font-style: italic;
+                font-size: 1.3rem;
+                margin: 0;
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+            }
+        }
+
         & .img-div {
             width: 100%;
             display: flex;
@@ -1762,7 +1795,6 @@
             font-family: 'Amarante', cursive;
             font-family: 'Andika', sans-serif;
             font-family: 'Bellefair', serif;
-
 
             &::selection {
                 color: $---selection-color;

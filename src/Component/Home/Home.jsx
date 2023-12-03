@@ -204,7 +204,7 @@ export default function Home({ setShowNav }) {
           </div>
         </div>
 
-        <div className="quotes">
+        <div className="quotes1">
           <div className="box1">
             <div className="quote">
               <p>
@@ -212,7 +212,7 @@ export default function Home({ setShowNav }) {
                 punches you, you don't move to evade the punch, but rather to
                 break the arm.
               </p>
-              <p className="sensei">Takeshi Uema</p>
+              <p className="sensei">Sensei Takeshi Uema</p>
               <p className="sensei">7th Dan Okinawa Shorin-Ryu</p>
             </div>
 
@@ -226,9 +226,10 @@ export default function Home({ setShowNav }) {
                 Our karate is not a sport but a budo. It is about tempering
                 oneself. To never give up. This spirit can be reached only if
                 one goes through hard training with all one's might. Spiritual
-                strength comes only through hard training. It is a way of forging oneself.
+                strength comes only through hard training. It is a way of
+                forging oneself.
               </p>
-              <p className="sensei">Yasuhiro Uema</p>
+              <p className="sensei">Sensei Yasuhiro Uema</p>
               <p className="sensei">10th Dan Okinawan Shorin-Ryu</p>
             </div>
           </div>
@@ -236,11 +237,19 @@ export default function Home({ setShowNav }) {
 
         <div className="blogLine"></div>
 
-        <p className='story1'>
-          Okinawan karate is for self-defence and self-development. Okinawan karate is not sport. It is education and for philosophical development.
-       
-       </p>
-       <p className="sensei">Sabyasachi Giri</p>
+        <div className="quotes2">
+          <p className="story0">
+            Okinawan karate is for self-defence and self-development. Okinawan
+            karate is not sport. It is education and for philosophical
+            development.
+          </p>
+          <p className="sensei">Sabyasachi</p>
+        </div>
+
+        <div className="img-div">
+          <img src={sg1} alt="" />
+          <img src={sg2} alt="" />
+        </div>
 
         <p className="story1">
           Karate as a martial art is about self-defense. Overcoming your own
@@ -248,11 +257,6 @@ export default function Home({ setShowNav }) {
           an unshakable spirit. In karate what is important is to cultivate the
           strength to concentrate your spirit on one thing with heart and soul.
         </p>
-
-        <div className="img-div">
-          <img src={sg1} alt="" />
-          <img src={sg2} alt="" />
-        </div>
 
         <p className="story2">
           Empty-handed and carrying no weapon, dominating an adversary with body
