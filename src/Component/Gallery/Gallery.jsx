@@ -138,8 +138,8 @@ export default function Gallery({ setShowNav }) {
     img_42,
     img_43,
     img_44,
-    img_45,
-    img_46,
+    // img_45,
+    // img_46,
   ];
   const thumbArray = [
     thumb_1,
@@ -185,8 +185,8 @@ export default function Gallery({ setShowNav }) {
     thumb_42,
     thumb_43,
     thumb_44,
-    thumb_45,
-    thumb_46,
+    // thumb_45,
+    // thumb_46,
   ];
 
   const [popImg, setPopImg] = useState("");
@@ -221,8 +221,8 @@ export default function Gallery({ setShowNav }) {
       <section className="gallery-image">
         {/* <h1 className="galleryTop">Gallery</h1> */}
         <div>
-          {imgArray.map((image, index) => (
-            <div className="image" key={index} onClick={() => imgPop(image)}>
+          {thumbArray.map((image, index) => (
+            <div className="image" key={index} onClick={() => imgPop(imgArray[index])}>
               <img src={image} alt={`Image ${index + 1}`} />
             </div>
           ))}
