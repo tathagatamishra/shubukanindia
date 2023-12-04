@@ -13,7 +13,7 @@ import img_6 from "../../world_images/img (1).jpeg";
 import img_7 from "../../world_images/img (2).jpeg";
 import img_8 from "../../world_images/img (3).jpeg";
 import img_9 from "../../world_images/img (4).jpeg";
-import img_10 from "../../images/img (5).jpeg";
+import img_10 from "../../images/group (5).jpeg";
 
 export default function ShubukanWorld({ setShowNav }) {
   const imgArray = [
