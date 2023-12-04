@@ -1,6 +1,6 @@
 import React from "react";
 import "./History.scss";
-import img1 from '../../assets/suri_gate.svg'
+import img1 from '../../thumbnail/shureimon_gate.jpg'
 import img2 from '../../assets/Karate_ShuriCastle.jpg'
 import map1 from '../../assets/map.jpg'
 import map2 from '../../assets/map2.jpg'

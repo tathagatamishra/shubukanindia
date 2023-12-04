@@ -6,17 +6,27 @@ import birdImg from "../../assets/bird.svg";
 import drogon from "../../assets/dragon.png";
 import drogon2 from "../../assets/dragon2.png";
 import treeImg from "../../assets/tree.svg";
-import img1 from "../../images/chibana.jpg";
 import img2 from "../../assets/uemaImg2.svg";
 import img3 from "../../assets/chibana.jpg";
-import img4 from "../../images/kaynChotuku.png";
-import img5 from "../../images/oldGroup.jpg";
-import img6 from "../../images/joki_sai.jpg";
-import img7 from "../../images/Matsumura.png";
+
 import quot1 from "../../assets/quot (1).jpg";
 import quot2 from "../../assets/quot (2).jpg";
 import sg1 from "../../assets/sg1.jpg";
 import sg2 from "../../assets/sg2.jpg";
+
+import thumb_1 from "../../thumbnail/chibana.jpg";
+import thumb_21 from "../../thumbnail/joki_sai.jpg";
+import thumb_22 from "../../thumbnail/kaynChotuku.jpg";
+import thumb_24 from "../../thumbnail/Matsumura.jpg";
+import thumb_25 from "../../thumbnail/oldGroup.jpg";
+
+import img_1 from "../../images/chibana.jpg";
+import img_21 from "../../images/joki_sai.jpg";
+import img_22 from "../../images/kaynChotuku.png";
+import img_24 from "../../images/Matsumura.png";
+import img_25 from "../../images/oldGroup.jpg";
+
+
 
 export default function Home({ setShowNav }) {
   const [slider, setSlider] = useState(null);
@@ -197,23 +207,23 @@ export default function Home({ setShowNav }) {
           <div className="image" onClick={() => imgPop(img3)}>
             <img src={img3} alt="chosin chibana" />
           </div>
-          <div className="image" onClick={() => imgPop(img5)}>
-            <img src={img5} alt="image" />
+          <div className="image" onClick={() => imgPop(img_25)}>
+            <img src={thumb_25} alt="image" />
           </div>
-          <div className="image" onClick={() => imgPop(img7)}>
-            <img src={img7} alt="image" />
+          <div className="image" onClick={() => imgPop(img_24)}>
+            <img src={thumb_24} alt="image" />
           </div>
           <div className="image" onClick={() => imgPop(img2)}>
             <img src={img2} alt="image" />
           </div>
-          <div className="image" onClick={() => imgPop(img4)}>
-            <img src={img4} alt="image" />
+          <div className="image" onClick={() => imgPop(img_22)}>
+            <img src={thumb_22} alt="image" />
           </div>
-          <div className="image" onClick={() => imgPop(img6)}>
-            <img src={img6} alt="image" />
+          <div className="image" onClick={() => imgPop(img_21)}>
+            <img src={thumb_21} alt="image" />
           </div>
-          <div className="image" onClick={() => imgPop(img1)}>
-            <img src={img1} alt="image" />
+          <div className="image" onClick={() => imgPop(img_1)}>
+            <img src={thumb_1} alt="image" />
           </div>
         </div>
       </section>
