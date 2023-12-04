@@ -13,13 +13,7 @@ import img4 from "../../assets/Frame 1.png";
 export default function ShubukanOkinawa() {
   return (
     <div className="ShubukanOkinawa">
-      <Helmet>
-        <title>Shubukan Okinawa</title>
-        <meta
-          name="Shubukan Okinawa"
-          content="History of Shubukan Okinawa."
-        />
-      </Helmet>
+
 
       <section className="Hero">
         <h1>Shubukan Okinawa</h1>

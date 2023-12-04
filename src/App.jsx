@@ -20,7 +20,6 @@ import Blog from "./Component/Blog/Blog";
 import Contact from "./Component/Contact/Contact";
 import TAndC from "./Component/TAndC/TAndC";
 import flag from "./assets/ryukyu-flag.png";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function App() {
   const [showNav, setShowNav] = useState(true);
@@ -38,7 +37,6 @@ function App() {
   });
 
   return (
-    <HelmetProvider>
       <div className="App" id="App">
         <BrowserRouter>
           <div id="cursor">
@@ -70,7 +68,6 @@ function App() {
           <Footer />
         </BrowserRouter>
       </div>
-    </HelmetProvider>
   );
 }
 
