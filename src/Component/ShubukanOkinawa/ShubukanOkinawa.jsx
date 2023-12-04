@@ -3,7 +3,6 @@ import "./ShubukanOkinawa.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { logoFacebook } from "ionicons/icons";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import img1 from "../../assets/shubukanDojo.jpg";
 import img2 from "../../assets/Frame 3.png";
