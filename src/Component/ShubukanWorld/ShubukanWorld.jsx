@@ -272,7 +272,7 @@ export default function ShubukanWorld({ setShowNav }) {
       {imgClicked && (
         <div className="popUp">
           <div className="popBack" onClick={imgPop}></div>
-          <div className="imgPop">
+          <div className="imgPop" onClick={imgPop}>
             <img src={popImg} alt="image" />
           </div>
         </div>
