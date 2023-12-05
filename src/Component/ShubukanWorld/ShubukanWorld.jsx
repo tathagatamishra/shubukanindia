@@ -216,7 +216,7 @@ export default function ShubukanWorld({ setShowNav }) {
           <div className="profile">
             <div className="image">
               <img src={img_8} alt="" onClick={() => imgPop(img_8)} />
-              <p>Sensei Toni Mulet</p>
+              <p>Sensei Antonio Caselles Mulet</p>
             </div>
 
             <div className="social">

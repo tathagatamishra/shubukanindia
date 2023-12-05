@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Services.scss";
 import { NavLink } from "react-router-dom";
 
 export default function Services() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   return (
     <div className="Services">
       <section className="Hero">

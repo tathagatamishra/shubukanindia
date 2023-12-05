@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import oldPaper from "../../assets/old-paper.svg";
-import shubukanLogo from '../../assets/shubukan.png'
-import shubukanText from '../../assets/logo.png'
+import shubukanLogo from "../../assets/shubukan.png";
+import shubukanText from "../../assets/logo.png";
 // import oldPaper from '../../../public/oldPaper.svg'
 
 import "./Navbar.scss";
@@ -10,19 +10,19 @@ import "./Navbar.scss";
 export default function Navbar() {
   const [position, setPosition] = useState({ top: "0rem" });
   const [lastScrollTop, setLastScrollTop] = useState(Infinity);
-  
+
   const [isMenu, setIsMenu] = useState(false);
   const [menuStyle, setMenuStyle] = useState({});
 
   // This Variable will store the top position
-  
+
   window.addEventListener("scroll", function () {
     //on every scroll this function will be called
-    
+
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     //This line will get the location on scroll
 
-    if ((scrollTop > lastScrollTop)) {
+    if (scrollTop > lastScrollTop) {
       //if it will be greater than the previous
       setPosition({ top: "-10rem" });
       //set the value to the negative of height of navbar
@@ -63,17 +63,23 @@ export default function Navbar() {
 
   return (
     <div id="Navbar" style={position}>
-      <NavLink to="/" className="logo">
+      <NavLink
+        to="/"
+        className="logo"
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      >
         {/* <Spline scene="https://prod.spline.design/IRCi38KJr6aI3aIN/scene.splinecode" /> */}
         <img className="logo1" src={shubukanLogo} />
         <img className="logo2" src={shubukanText} />
       </NavLink>
 
       <section className="menu">
-        <div className="menuStart" style={menuStyle}  onClick={lineFunc}>
-          <div className="lines" ></div>
+        <div className="menuStart" style={menuStyle} onClick={lineFunc}>
+          <div className="lines"></div>
           <p>MENU</p>
-          <div className="lines" ></div>
+          <div className="lines"></div>
         </div>
 
         {isMenu && (
@@ -92,7 +98,11 @@ export default function Navbar() {
                 <NavLink to="/ShubukanIndia" className="opt" onClick={showMenu}>
                   <p>SHUBUKAN INDIA</p>
                 </NavLink>
-                <NavLink to="/ShubukanOkinawa" className="opt" onClick={showMenu}>
+                <NavLink
+                  to="/ShubukanOkinawa"
+                  className="opt"
+                  onClick={showMenu}
+                >
                   <p>SHUBUKAN OKINAWA</p>
                 </NavLink>
                 <NavLink to="/ShubukanWorld" className="opt" onClick={showMenu}>
@@ -102,10 +112,18 @@ export default function Navbar() {
                   <p>SHURI KARATE KOBUDO HOZONKAI</p>
                 </NavLink>
 
-                <NavLink to="/LineageAndDojoKun" className="opt" onClick={showMenu}>
+                <NavLink
+                  to="/LineageAndDojoKun"
+                  className="opt"
+                  onClick={showMenu}
+                >
                   <p>LINEAGE & DOJO KUN</p>
                 </NavLink>
-                <NavLink to="/KarateAndKobudo" className="opt" onClick={showMenu}>
+                <NavLink
+                  to="/KarateAndKobudo"
+                  className="opt"
+                  onClick={showMenu}
+                >
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
