@@ -192,6 +192,12 @@ export default function Gallery({ setShowNav }) {
   const [popImg, setPopImg] = useState("");
   const [imgClicked, setImgClicked] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   function imgPop(srcValue) {
     if (imgClicked == true) {
       setPopImg("");
@@ -203,6 +209,7 @@ export default function Gallery({ setShowNav }) {
       setImgClicked(true);
     }
   }
+
   return (
     <div className="Gallery">
       <section className="Hero">

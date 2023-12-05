@@ -2,6 +2,13 @@ import React from 'react'
 import './CalenderAndNotice.scss'
 
 export default function CalenderAndNotice() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className='CalenderAndNotice'>
      

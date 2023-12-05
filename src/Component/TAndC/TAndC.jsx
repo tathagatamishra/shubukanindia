@@ -2,6 +2,13 @@ import React from 'react'
 import './TAndC.scss'
 
 export default function TAndC() {
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   return (
     <div className='TAndC'>
      

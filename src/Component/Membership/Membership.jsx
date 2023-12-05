@@ -3,6 +3,13 @@ import { NavLink } from "react-router-dom";
 import "./Membership.scss";
 
 export default function Membership() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className="Membership">
       <section className="Hero">

@@ -10,6 +10,13 @@ import pattern from "../../assets/pattern.jpg";
 import kun from "../../assets/dojokun.png";
 
 export default function LineageAndDojoKun() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className="LineageAndDojoKun">
       <section className="Lineage-Hero">

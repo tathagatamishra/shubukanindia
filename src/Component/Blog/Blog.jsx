@@ -32,6 +32,12 @@ export default function Blog() {
     setLastScrollTop(scrollTop);
   });
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   return (
     <div className="Blog">
       {/* <div id="searchBar" style={position}>

@@ -16,9 +16,12 @@ export default function Contact() {
   const emailSubject = 'Hello';
   const emailBody = 'I wanted to reach out to you...';
   const emailLink = `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
-
   
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <div className="Contact">

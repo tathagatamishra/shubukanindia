@@ -9,6 +9,13 @@ import eku from "../../assets/eku.svg";
 import nunchaku from "../../assets/Frame 16.svg";
 
 export default function KarateAndKobudo() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   return (
     <div className="KarateAndKobudo">
       <section className="Karate-Hero">

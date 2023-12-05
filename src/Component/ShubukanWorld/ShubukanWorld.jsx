@@ -32,6 +32,12 @@ export default function ShubukanWorld({ setShowNav }) {
   const [popImg, setPopImg] = useState("");
   const [imgClicked, setImgClicked] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   function imgPop(srcValue) {
     if (imgClicked == true) {
       setPopImg("");
@@ -43,6 +49,7 @@ export default function ShubukanWorld({ setShowNav }) {
       setImgClicked(true);
     }
   }
+  
   return (
     <div className="ShubukanWorld">
       <section className="Hero">

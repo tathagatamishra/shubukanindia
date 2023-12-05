@@ -55,7 +55,7 @@ function App() {
               <Route path="/Hozonkai"          element={<Hozonkai />} />
               <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
               <Route path="/KarateAndKobudo"   element={<KarateAndKobudo />} />
-              {/* <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} /> */}
+              <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} />
               <Route path="/Membership"        element={<Membership />} />
               <Route path="/Services"          element={<Services />} />
               <Route path="/Gallery"           element={<Gallery setShowNav={setShowNav} />} />

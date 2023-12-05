@@ -6,6 +6,13 @@ import map1 from '../../assets/map.jpg'
 import map2 from '../../assets/map2.jpg'
 
 export default function History() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className="History">
       <section className="Hero">

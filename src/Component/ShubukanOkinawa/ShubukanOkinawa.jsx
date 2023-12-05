@@ -10,9 +10,15 @@ import img3 from "../../assets/Frame 2.png";
 import img4 from "../../assets/Frame 1.png";
 
 export default function ShubukanOkinawa() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className="ShubukanOkinawa">
-
 
       <section className="Hero">
         <h1>Shubukan Okinawa</h1>

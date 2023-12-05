@@ -26,8 +26,6 @@ import img_22 from "../../images/kaynChotuku.png";
 import img_24 from "../../images/Matsumura.png";
 import img_25 from "../../images/oldGroup.jpg";
 
-
-
 export default function Home({ setShowNav }) {
   const [slider, setSlider] = useState(null);
   const [isDown, setIsDown] = useState(false);
@@ -38,6 +36,12 @@ export default function Home({ setShowNav }) {
   const [imgClicked, setImgClicked] = useState(false);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -131,7 +135,7 @@ export default function Home({ setShowNav }) {
           <img src={birdImg} alt="" />
         </div>
       </section>
-        {console.log(windowWidth)}
+      {console.log(windowWidth)}
 
       <section className="intro">
         {windowWidth <= 400 ? (
@@ -190,7 +194,7 @@ export default function Home({ setShowNav }) {
       {imgClicked && (
         <div className="popUp">
           <div className="popBack" onClick={imgPop}></div>
-          <div className="imgPop"  onClick={imgPop}>
+          <div className="imgPop" onClick={imgPop}>
             <img src={popImg} alt="image" />
           </div>
         </div>

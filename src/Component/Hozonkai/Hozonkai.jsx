@@ -7,6 +7,13 @@ import { globeOutline } from "ionicons/icons";
 import ShuriKarateKobudoHozonkai from "../../assets/ShuriKarateKobudoHozonkai.png";
 
 export default function Hozonkai() {
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className="Hozonkai">
       <section className="Hero">

@@ -8,6 +8,13 @@ import img1 from "../../thumbnail/sabyasachi2.jpg";
 import img2 from "../../thumbnail/sabyasachi1.jpg";
 
 export default function ShubukanIndia() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  
   return (
     <div className="ShubukanIndia">
       <section className="Hero">
