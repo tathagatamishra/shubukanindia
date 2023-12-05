@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./History.scss";
 import img1 from '../../thumbnail/shureimon_gate.jpg'
 import img2 from '../../assets/Karate_ShuriCastle.jpg'

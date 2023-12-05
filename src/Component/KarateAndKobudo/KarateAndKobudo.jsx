@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./KarateAndKobudo.scss";
 
 import bo from "../../assets/Frame 19.svg";

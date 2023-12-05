@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./Hozonkai.scss";
 import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";

@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./LineageAndDojoKun.scss";
 import { IonIcon } from "@ionic/react";
 import {
