@@ -141,6 +141,17 @@ export default function ShubukanWorld({ setShowNav }) {
                   kcconthey.ch
                 </NavLink>
               </div>
+              <div className="link">
+                <IonIcon icon={globeOutline} className="label" />
+                <NavLink
+                  to="https://www.karate-okinawa.ch/"
+                  className="opt"
+                  target="_blank"
+                  rel="facebook link"
+                >
+                  karate-okinawa.ch
+                </NavLink>
+              </div>
 
               <div className="link">
                 <IonIcon icon={logoFacebook} className="label" />
