@@ -28,7 +28,7 @@ export default function Footer() {
 
       <div className="footContent">
         <div className="footOptions1">
-          <NavLink to="/" className="opt">
+          <NavLink to="/Contributor" className="opt">
             <p>Contributors</p>
           </NavLink>
           <NavLink to="/Membership" className="opt">
@@ -45,7 +45,7 @@ export default function Footer() {
           <NavLink to="/Blog" className="opt">
             <p>Blog</p>
           </NavLink>
-          <NavLink to="/" className="opt">
+          <NavLink to="/Download" className="opt">
             <p>Downloads</p>
           </NavLink>
           <NavLink to="/CalenderAndNotice" className="opt">
@@ -59,7 +59,7 @@ export default function Footer() {
           <NavLink to="/TAndC" className="opt">
             <p>Terms & Conditions</p>
           </NavLink>
-          <NavLink to="/" className="opt">
+          <NavLink to="/HAndF" className="opt">
             <p>Help and FAQ</p>
           </NavLink>
           <NavLink to="/Contact" className="opt">

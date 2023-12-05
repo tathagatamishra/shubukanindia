@@ -20,6 +20,9 @@ import Blog from "./Component/Blog/Blog";
 import Contact from "./Component/Contact/Contact";
 import TAndC from "./Component/TAndC/TAndC";
 import flag from "./assets/ryukyu-flag.png";
+import Contributor from "./Component/Contributor/Contributor";
+import HAndF from "./Component/HAndF/HAndF";
+import Download from "./Component/Download/Download";
 
 function App() {
   const [showNav, setShowNav] = useState(true);
@@ -62,6 +65,9 @@ function App() {
               <Route path="/Blog"              element={<Blog />} />
               <Route path="/Contact"           element={<Contact />} />
               <Route path="/TAndC"             element={<TAndC />} />
+              <Route path="/Contributor"       element={<Contributor />} />
+              <Route path="/HAndF"             element={<HAndF />} />
+              <Route path="/Download"          element={<Download />} />
             </Routes>
           </div>
 
