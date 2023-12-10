@@ -27,18 +27,13 @@
         box-sizing: border-box;
         width: 100%;
         height: 100%;
-        margin-bottom: 8rem;
+        // margin-bottom: 8rem;
         padding-top: 3rem;
 
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-
-        & .hero-img {
-            width: 100%;
-            margin: 40px 0;
-        }
 
         & h1 {
             margin: 1.5rem 0 2rem;
@@ -60,6 +55,81 @@
                 background: $---selection-bg;
             }
         }
+
+        & .hero-content {
+            & .hero-img {
+                width: 100%;
+                margin: 40px 0 0 0;
+            }
+
+            & p {
+                margin: 0;
+                font-size: 20px;
+                width: 100%;
+                text-align: right;
+                font-style: italic;
+
+                font-family: 'Amarante', cursive;
+                font-family: 'Andika', sans-serif;
+                font-family: 'Bellefair', serif;
+                // font-family: 'Capriola', sans-serif;
+                // font-family: 'Flamenco', cursive;
+                // font-family: 'Forum', cursive;
+                // font-family: 'Fredericka the Great', cursive;
+                // font-family: 'GFS Neohellenic', sans-serif;
+                // font-family: 'Philosopher', sans-serif;
+                // font-family: 'Pompiere', cursive;
+                // font-family: 'Tenali Ramakrishna', sans-serif;
+                // font-family: 'Faster One';
+                // font-family: 'Finlandica';
+                // font-family: 'Foldit';
+                // font-family: 'Gemunu Libre';
+                // font-family: 'Geo';
+                // font-family: 'Lekton';
+                // font-family: 'Lexend Peta';
+                // font-family: 'Lexend Tera';
+                // font-family: 'Martian Mono';
+                // font-family: 'MuseoModerno';
+                // font-family: 'Orbit';
+                // font-family: 'Rubik Dirt';
+                // font-family: 'Shippori Antique';
+                // font-family: 'Tourney';
+                // font-family: 'Train One';
+                // font-family: 'Tulpen One';
+                // font-family: 'swap';
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            & .hero-content {
+                & p {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 2.8rem;
+                letter-spacing: 0.2rem;
+            }
+        }
+    }
+
+    & .content {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 8rem;
+        padding-top: 3rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
 
         & p {
             font-size: 1.5rem;
@@ -110,26 +180,23 @@
         }
 
         @media screen and (max-width: 500px) {
+            padding-top: 1.5rem;
+
             & .maps {
-    
+
                 & img {
                     // height: 100%;
                     width: 45%;
                 }
             }
+
             & p {
                 font-size: 1.3rem;
             }
         }
-
+        
         @media screen and (max-width: 400px) {
-
-            & h1 {
-                margin: 1.5rem 0 2rem;
-                color: #2a2727;
-                font-size: 2.8rem;
-                letter-spacing: 0.2rem;
-            }
+            padding-top: 1rem;
         }
     }
 }

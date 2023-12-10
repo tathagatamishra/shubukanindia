@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 import "./History.scss";
-import img1 from '../../thumbnail/shureimon_gate.jpg'
-import img2 from '../../assets/Karate_ShuriCastle.jpg'
-import map1 from '../../assets/map.jpg'
-import map2 from '../../assets/map2.jpg'
+import img1 from "../../thumbnail/shureimon_gate.jpg";
+import img2 from "../../assets/Karate_ShuriCastle.jpg";
+import map1 from "../../assets/map.jpg";
+import map2 from "../../assets/map2.jpg";
+import ImageModal from "../UIComponent/image";
 
 export default function History() {
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
-  
+
   return (
     <div className="History">
       <section className="Hero">
         <h1>History</h1>
         {/* <p>Discovering the Way of Words</p> */}
-        <img className="hero-img" src={img1} alt="" />
+        <div className="hero-content">
+          <img className="hero-img" src={img1} alt="" />
+          <p>Shureimon gate</p>
+        </div>
+      </section>
+
+      <section className="content">
         <p>
           The birth place of karate is Okinawa. Prior to 1879 karate was
           practiced by upper class families in Okinawa formerly known as Ryukyu
@@ -49,6 +55,8 @@ export default function History() {
 
         <img className="bottom-img" src={img2} alt="" />
       </section>
+
+      <ImageModal />
     </div>
   );
 }
