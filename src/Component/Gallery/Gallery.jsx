@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Gallery.scss";
 
+import Lightbox from "react-18-image-lightbox";
+import "react-18-image-lightbox/style.css";
+
 import img_1 from "../../images/chibana.jpg";
 import img_4 from "../../images/contai_group.jpeg";
 import img_3 from "../../images/family1.jpeg";
@@ -227,6 +230,8 @@ export default function Gallery({ setShowNav }) {
 
   const [popImg, setPopImg] = useState("");
   const [imgClicked, setImgClicked] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo({
@@ -252,24 +257,36 @@ export default function Gallery({ setShowNav }) {
         <h1>Gallery</h1>
         <p>Beyond the realms</p>
       </section>
-      {imgClicked && (
+
+      {/* {imgClicked && (
         <div className="popUp">
           <div className="popBack" onClick={imgPop}></div>
           <div className="imgPop" onClick={imgPop}>
             <img src={popImg} alt="image" />
           </div>
         </div>
+      )} */}
+
+      {isOpen && (
+        <Lightbox
+          mainSrc={imgArray[photoIndex]}
+          nextSrc={imgArray[(photoIndex + 1) % imgArray.length]}
+          prevSrc={imgArray[(photoIndex + imgArray.length - 1) % imgArray.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() =>
+            setPhotoIndex((photoIndex + imgArray.length - 1) % imgArray.length)
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((photoIndex + 1) % imgArray.length)
+          }
+        />
       )}
 
       <section className="gallery-image">
         {/* <h1 className="galleryTop">Gallery</h1> */}
         <div>
           {thumbArray.map((image, index) => (
-            <div
-              className="image"
-              key={index}
-              onClick={() => imgPop(imgArray[index])}
-            >
+            <div className="image" key={index} onClick={() => setIsOpen(true)}>
               <img src={image} alt={`Image ${index + 1}`} />
             </div>
           ))}
