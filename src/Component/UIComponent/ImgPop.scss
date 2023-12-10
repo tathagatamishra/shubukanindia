@@ -1,0 +1,250 @@
+@import '../../assets/variables';
+
+.Modal {
+    z-index: 10;
+    position: absolute;
+    // background: rgb(255, 0, 0);
+    // height: 100vh;
+    // width: 100vw;
+
+    & .modal-bg {
+        position: fixed;
+        background: rgba(231, 221, 211, 0.836);
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        right: 0;
+
+        backdrop-filter: blur(3px);
+        animation-name: popUpBGBlur;
+        animation-duration: .4s;
+        animation-timing-function: ease-in-out;
+
+        @keyframes popUpBGBlur {
+            from {
+                backdrop-filter: blur(0px);
+            }
+
+            to {
+                backdrop-filter: blur(3px);
+            }
+        }
+    }
+
+    & .img-holder {
+        position: fixed;
+
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 80vw;
+        height: 80vh;
+        // border: 1px solid red;
+        margin-bottom: 1rem;
+        padding: 20px;
+
+        display: block;
+        overflow: hidden;
+        background: rgb(237, 230, 223);
+        box-shadow: 0 0 20px #cfbbad;
+        border-radius: 8px;
+        transition: 300ms;
+        // border-top: solid 1.5px transparent;
+        // border-left: solid 1.5px transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        @media screen and (max-width: 400px) {
+            width: 90vw;
+            height: 90vh;
+        }
+
+        & img {
+            object-fit: contain;
+            width: 100%;
+            height: 50%;
+
+            border-radius: 8px;
+            filter: sepia(10%) grayscale(10%);
+
+            // border: 1px solid red;
+            display: block;
+            background-size: cover;
+            transition: transform 0.4s;
+
+            user-select: none;
+
+            animation-name: popImg;
+            animation-duration: .2s;
+            animation-timing-function: ease-in-out;
+
+            @keyframes popImg {
+                from {
+                    transform: scale(0%);
+                }
+
+                to {
+                    transform: scale(100%);
+                }
+            }
+        }
+
+        & .comment {
+            width: 100%;
+            text-align: right;
+            font-style: italic;
+
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Forum', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+            // font-family: 'Faster One';
+            // font-family: 'Finlandica';
+            // font-family: 'Foldit';
+            // font-family: 'Gemunu Libre';
+            // font-family: 'Geo';
+            // font-family: 'Lekton';
+            // font-family: 'Lexend Peta';
+            // font-family: 'Lexend Tera';
+            // font-family: 'Martian Mono';
+            // font-family: 'MuseoModerno';
+            // font-family: 'Orbit';
+            // font-family: 'Rubik Dirt';
+            // font-family: 'Shippori Antique';
+            // font-family: 'Tourney';
+            // font-family: 'Train One';
+            // font-family: 'Tulpen One';
+            // font-family: 'swap';
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+        }
+
+        & .title {
+            width: 100%;
+            letter-spacing: 2px;
+
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Forum', cursive;
+            font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+            // font-family: 'Faster One';
+            // font-family: 'Finlandica';
+            // font-family: 'Foldit';
+            // font-family: 'Gemunu Libre';
+            // font-family: 'Geo';
+            // font-family: 'Lekton';
+            // font-family: 'Lexend Peta';
+            // font-family: 'Lexend Tera';
+            // font-family: 'Martian Mono';
+            // font-family: 'MuseoModerno';
+            // font-family: 'Orbit';
+            // font-family: 'Rubik Dirt';
+            // font-family: 'Shippori Antique';
+            // font-family: 'Tourney';
+            // font-family: 'Train One';
+            // font-family: 'Tulpen One';
+            // font-family: 'swap';
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+        }
+
+        & .description {
+            height: 100%;
+            width: 100%;
+            font-size: 1.3rem;
+
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Forum', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+            // font-family: 'Faster One';
+            // font-family: 'Finlandica';
+            // font-family: 'Foldit';
+            // font-family: 'Gemunu Libre';
+            // font-family: 'Geo';
+            // font-family: 'Lekton';
+            // font-family: 'Lexend Peta';
+            // font-family: 'Lexend Tera';
+            // font-family: 'Martian Mono';
+            // font-family: 'MuseoModerno';
+            // font-family: 'Orbit';
+            // font-family: 'Rubik Dirt';
+            // font-family: 'Shippori Antique';
+            // font-family: 'Tourney';
+            // font-family: 'Train One';
+            // font-family: 'Tulpen One';
+            // font-family: 'swap';
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
+
+        & .crossBtn {
+            width: 40px;
+            height: 40px;
+            // border: 1px solid red;
+            border-radius: 50px;
+            transition: 200ms;
+
+            & .label {
+                width: 40px;
+                height: 40px;
+
+            }
+
+            &:hover {
+                transform: scale(110%);
+            }
+
+            &:active {
+                transform: scale(90%);
+            }
+        }
+    }
+}

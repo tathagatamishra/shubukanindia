@@ -4,9 +4,15 @@ import img1 from "../../thumbnail/shureimon_gate.jpg";
 import img2 from "../../assets/Karate_ShuriCastle.jpg";
 import map1 from "../../assets/map.jpg";
 import map2 from "../../assets/map2.jpg";
-import ImageModal from "../UIComponent/Image";
+import ImgPop from "../UIComponent/ImgPop";
 
-export default function History() {
+export default function History({ setShowNav }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState("");
+  const [comment, setComment] = useState("");
+  const [heading, setHeading] = useState("");
+  const [content, setContent] = useState("");
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -19,7 +25,19 @@ export default function History() {
         <h1>History</h1>
         {/* <p>Discovering the Way of Words</p> */}
         <div className="hero-content">
-          <img className="hero-img" src={img1} alt="" />
+          <img
+            className="hero-img"
+            src={img1}
+            onClick={() => {
+              setShowNav(false);
+              setIsOpen(true);
+              setImage(img1);
+              setComment("Image taken by Sensei Sabyasachi Giri")
+              setHeading("Shureimon Gate");
+              setContent("Shureimon is a gate in the Shuri neighborhood of Naha, the capital of Okinawa Prefecture, Japan. It is the second of Shuri Castle's main gates.")
+            }}
+            alt=""
+          />
           <p>Shureimon gate</p>
         </div>
       </section>
@@ -56,7 +74,14 @@ export default function History() {
         <img className="bottom-img" src={img2} alt="" />
       </section>
 
-      <ImageModal />
+      <ImgPop
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        image={image}
+        comment={comment}
+        heading={heading}
+        content={content}
+      />
     </div>
   );
 }
