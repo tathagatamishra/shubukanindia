@@ -286,7 +286,7 @@ export default function Gallery({ setShowNav }) {
         {/* <h1 className="galleryTop">Gallery</h1> */}
         <div>
           {thumbArray.map((image, index) => (
-            <div className="image" key={index} onClick={() => setIsOpen(true)}>
+            <div className="image" key={index} onClick={() =>{ setIsOpen(true); setPhotoIndex(index)}}>
               <img src={image} alt={`Image ${index + 1}`} />
             </div>
           ))}
