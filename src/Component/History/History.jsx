@@ -32,9 +32,11 @@ export default function History({ setShowNav }) {
               setShowNav(false);
               setIsOpen(true);
               setImage(img1);
-              setComment("Image taken by Sensei Sabyasachi Giri")
+              setComment("Image taken by Sensei Sabyasachi Giri");
               setHeading("Shureimon Gate");
-              setContent("Shureimon is a gate in the Shuri neighborhood of Naha, the capital of Okinawa Prefecture, Japan. It is the second of Shuri Castle's main gates.")
+              setContent(
+                "Shureimon is a gate in the Shuri neighborhood of Naha, the capital of Okinawa Prefecture, Japan. It is the second of Shuri Castle's main gates."
+              );
             }}
             alt=""
           />
@@ -75,6 +77,7 @@ export default function History({ setShowNav }) {
       </section>
 
       <ImgPop
+        setShowNav={setShowNav}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
         image={image}

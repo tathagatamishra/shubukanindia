@@ -26,7 +26,7 @@ export default function ImgPop(props) {
               <IonIcon
                 icon={close}
                 className="label"
-                onClick={() => props.setIsOpen(false)}
+                onClick={() => {props.setIsOpen(false); props.setShowNav(true)}}
               />
             </div>
           </div>
