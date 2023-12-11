@@ -119,6 +119,7 @@ import thumb_55 from "../../thumbnail/cafe.jpeg";
 export default function Gallery({ setShowNav }) {
   const imgArray = [
     img_1,
+    img_21,
     img_4,
     img_3,
     img_5,
@@ -129,20 +130,19 @@ export default function Gallery({ setShowNav }) {
     img_10,
     img_11,
     img_12,
-    img_13,
+    img_24,
+    img_25,
     img_14,
+    img_13,
     img_15,
     img_16,
     img_17,
     img_18,
-    img_19,
     img_20,
-    img_21,
-    img_22,
     // img_23,
-    img_24,
-    img_25,
     img_26,
+    img_22,
+    img_19,
     img_27,
     img_28,
     img_29,
@@ -175,6 +175,7 @@ export default function Gallery({ setShowNav }) {
   ];
   const thumbArray = [
     thumb_1,
+    thumb_21,
     thumb_4,
     thumb_3,
     thumb_5,
@@ -185,20 +186,19 @@ export default function Gallery({ setShowNav }) {
     thumb_10,
     thumb_11,
     thumb_12,
-    thumb_13,
+    thumb_24,
+    thumb_25,
     thumb_14,
+    thumb_13,
     thumb_15,
     thumb_16,
     thumb_17,
     thumb_18,
-    thumb_19,
     thumb_20,
-    thumb_21,
-    thumb_22,
     // thumb_23,
-    thumb_24,
-    thumb_25,
     thumb_26,
+    thumb_22,
+    thumb_19,
     thumb_27,
     thumb_28,
     thumb_29,
@@ -299,6 +299,7 @@ export default function Gallery({ setShowNav }) {
               }}
             >
               <LazyLoadImage
+                className="img"
                 alt={`Image ${index + 1}`}
                 effect="blur"
                 wrapperProps={{

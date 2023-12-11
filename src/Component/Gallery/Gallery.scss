@@ -227,8 +227,9 @@
             transition: 300ms;
             border-top: solid 1.5px transparent;
             border-left: solid 1.5px transparent;
+            transition: 300ms;
 
-            & img {
+            & .img {
                 height: auto;
                 width: 100%;
                 border-radius: 8px;
@@ -236,7 +237,7 @@
 
                 display: block;
                 background-size: cover;
-                transition: transform 0.4s;
+                transition: 300ms;
 
                 user-select: none;
             }
@@ -247,7 +248,7 @@
                 border-top: solid 1.5px #403D3C;
                 border-left: solid 1.5px #403D3C;
 
-                & img {
+                & .img {
                     transform: scale(1.1);
                 }
             }
