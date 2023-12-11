@@ -3,6 +3,8 @@ import "./Gallery.scss";
 
 import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import img_1 from "../../images/chibana.jpg";
 import img_4 from "../../images/contai_group.jpeg";
@@ -271,7 +273,9 @@ export default function Gallery({ setShowNav }) {
         <Lightbox
           mainSrc={imgArray[photoIndex]}
           nextSrc={imgArray[(photoIndex + 1) % imgArray.length]}
-          prevSrc={imgArray[(photoIndex + imgArray.length - 1) % imgArray.length]}
+          prevSrc={
+            imgArray[(photoIndex + imgArray.length - 1) % imgArray.length]
+          }
           onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
             setPhotoIndex((photoIndex + imgArray.length - 1) % imgArray.length)
@@ -286,8 +290,25 @@ export default function Gallery({ setShowNav }) {
         {/* <h1 className="galleryTop">Gallery</h1> */}
         <div>
           {thumbArray.map((image, index) => (
-            <div className="image" key={index} onClick={() =>{ setIsOpen(true); setPhotoIndex(index)}}>
-              <img src={image} alt={`Image ${index + 1}`} />
+            <div
+              className="image"
+              key={index}
+              onClick={() => {
+                setIsOpen(true);
+                setPhotoIndex(index);
+              }}
+            >
+              <LazyLoadImage
+                alt={`Image ${index + 1}`}
+                effect="blur"
+                wrapperProps={{
+                  // If you need to, you can tweak the effect transition using the wrapper style.
+                  style: { transitionDelay: "1s" },
+                }}
+                src={image}
+              />
+
+              {/* <img src={image} alt={`Image ${index + 1}`} /> */}
             </div>
           ))}
         </div>
