@@ -77,19 +77,19 @@
 
             user-select: none;
 
-            animation-name: popImg;
-            animation-duration: .2s;
-            animation-timing-function: ease-in-out;
+            // animation-name: popImg;
+            // animation-duration: .2s;
+            // animation-timing-function: ease-in-out;
 
-            @keyframes popImg {
-                from {
-                    transform: scale(0%);
-                }
+            // @keyframes popImg {
+            //     from {
+            //         transform: scale(0%);
+            //     }
 
-                to {
-                    transform: scale(100%);
-                }
-            }
+            //     to {
+            //         transform: scale(100%);
+            //     }
+            // }
         }
 
         & .comment {
