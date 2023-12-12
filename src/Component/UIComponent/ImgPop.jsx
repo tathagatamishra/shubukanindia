@@ -2,6 +2,8 @@ import React from "react";
 import "./ImgPop.scss";
 import { IonIcon } from "@ionic/react";
 import { close } from "ionicons/icons";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function ImgPop(props) {
   return (
@@ -14,7 +16,17 @@ export default function ImgPop(props) {
           ></div>
 
           <div className="img-holder">
-            <img src={props.image} alt="" />
+            <div className="img-box">
+              <LazyLoadImage
+                className="img"
+                alt={props.image}
+                effect="blur"
+                wrapperProps={{
+                  style: { transitionDelay: "0s" },
+                }}
+                src={props.image}
+              />
+            </div>
 
             <p className="comment">{props.comment}</p>
 
@@ -26,7 +38,10 @@ export default function ImgPop(props) {
               <IonIcon
                 icon={close}
                 className="label"
-                onClick={() => {props.setIsOpen(false); props.setShowNav(true)}}
+                onClick={() => {
+                  props.setIsOpen(false);
+                  props.setShowNav(true);
+                }}
               />
             </div>
           </div>

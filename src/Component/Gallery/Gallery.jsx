@@ -304,7 +304,7 @@ export default function Gallery({ setShowNav }) {
                 effect="blur"
                 wrapperProps={{
                   // If you need to, you can tweak the effect transition using the wrapper style.
-                  style: { transitionDelay: "1s" },
+                  style: { transitionDelay: "0s" },
                 }}
                 src={image}
               />

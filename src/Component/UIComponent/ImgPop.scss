@@ -62,34 +62,39 @@
             height: 90vh;
         }
 
-        & img {
-            object-fit: contain;
+        & .img-box {
             width: 100%;
             height: 50%;
-
-            border-radius: 8px;
-            filter: sepia(10%) grayscale(10%);
-
             // border: 1px solid red;
-            display: block;
-            background-size: cover;
-            transition: transform 0.4s;
 
-            user-select: none;
+            & .img {
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
 
-            // animation-name: popImg;
-            // animation-duration: .2s;
-            // animation-timing-function: ease-in-out;
+                border-radius: 8px;
+                filter: sepia(0%) grayscale(0%);
 
-            // @keyframes popImg {
-            //     from {
-            //         transform: scale(0%);
-            //     }
+                display: block;
+                background-size: cover;
+                transition: transform 0.4s;
 
-            //     to {
-            //         transform: scale(100%);
-            //     }
-            // }
+                user-select: none;
+
+                // animation-name: popImg;
+                // animation-duration: .2s;
+                // animation-timing-function: ease-in-out;
+
+                // @keyframes popImg {
+                //     from {
+                //         transform: scale(0%);
+                //     }
+
+                //     to {
+                //         transform: scale(100%);
+                //     }
+                // }
+            }
         }
 
         & .comment {

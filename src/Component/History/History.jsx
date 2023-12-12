@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import "./History.scss";
-import img1 from "../../thumbnail/shureimon_gate.jpg";
-import img2 from "../../assets/Karate_ShuriCastle.jpg";
-import map1 from "../../assets/map.jpg";
-import map2 from "../../assets/map2.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import ImgPop from "../UIComponent/ImgPop";
+
+import thumb1 from "../../web_images/thumbnail/shureimon_gate.jpg";
+
+import img1 from "../../web_images/shuri_gate.jpg";
+import img2 from "../../assets/Karate_ShuriCastle.jpg";
+import img3 from "../../assets/map.jpg";
+import img4 from "../../assets/map2.jpg";
 
 export default function History({ setShowNav }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +30,14 @@ export default function History({ setShowNav }) {
         <h1>History</h1>
         {/* <p>Discovering the Way of Words</p> */}
         <div className="hero-content">
-          <img
+          <LazyLoadImage
             className="hero-img"
-            src={img1}
+            alt="Shureimon gate"
+            effect="blur"
+            wrapperProps={{
+              style: { transitionDelay: "0s" },
+            }}
+            src={thumb1}
             onClick={() => {
               setShowNav(false);
               setIsOpen(true);
@@ -38,7 +48,6 @@ export default function History({ setShowNav }) {
                 "Shureimon is a gate in the Shuri neighborhood of Naha, the capital of Okinawa Prefecture, Japan. It is the second of Shuri Castle's main gates."
               );
             }}
-            alt=""
           />
           <p>Shureimon gate</p>
         </div>
@@ -58,8 +67,34 @@ export default function History({ setShowNav }) {
         </p>
 
         <div className="maps">
-          <img src={map1} alt="" />
-          <img src={map2} alt="" />
+          <img
+            src={img3}
+            onClick={() => {
+              setShowNav(false);
+              setIsOpen(true);
+              setImage(img3);
+              setComment("Image taken from okinawankarate.org");
+              setHeading("The Map of Okinawa");
+              setContent(
+                "Okinawa, the principal island in the Ryukyu archipelago, lies at a strategic crossroads in the East China Sea. Spanning approximately 70 miles in length and 6 miles in width, it served as a vital trade center connecting Japan, China, and Southeast Asia. Its historical significance is rooted in its role as a major port facilitating trade routes and cultural exchange."
+              );
+            }}
+            alt=""
+          />
+          <img
+            src={img4}
+            onClick={() => {
+              setShowNav(false);
+              setIsOpen(true);
+              setImage(img4);
+              setComment("Image taken from okinawankarate.org");
+              setHeading("The Map of Okinawa");
+              setContent(
+                "During the nineteenth century, the three main styles of the Okinawa martial art, te, were known as Shuri-te, Naha-te and Tomari-te for the towns in which they developed. Shuri, Naha and Tomari are only few miles apart, and therefore the major styles of te are really quite similar."
+              );
+            }}
+            alt=""
+          />
         </div>
 
         <p>
@@ -73,7 +108,21 @@ export default function History({ setShowNav }) {
           also overseas. Shorin Ryu Shubukan was founded by Sensei Joki Uema.
         </p>
 
-        <img className="bottom-img" src={img2} alt="" />
+        <img
+          className="bottom-img"
+          src={img2}
+          onClick={() => {
+            setShowNav(false);
+            setIsOpen(true);
+            setImage(img2);
+            setComment("Image taken from wikipedia.org");
+            setHeading("Karate at Shuri Castle");
+            setContent(
+              "Karate training in front of Shuri Castle, Naha (Okinawa)."
+            );
+          }}
+          alt=""
+        />
       </section>
 
       <ImgPop
