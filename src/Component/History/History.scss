@@ -150,6 +150,20 @@
             }
         }
 
+        & .comment {
+            margin: 10px 0;
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            font-style: italic;
+
+            font-family: 'Bellefair', serif;
+
+            @media screen and (max-width: 700px) {
+                font-size: 18px;
+            }
+        }
+
         & .maps {
             margin: 10px 0;
             // border: 1px solid;
@@ -167,7 +181,7 @@
 
         & .bottom-img {
             width: 100%;
-            margin: 40px 0;
+            margin: 40px 0 10px 0;
         }
 
         @media screen and (max-width: 700px) {
@@ -194,7 +208,7 @@
                 font-size: 1.3rem;
             }
         }
-        
+
         @media screen and (max-width: 400px) {
             padding-top: 1rem;
         }

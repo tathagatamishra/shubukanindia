@@ -96,6 +96,7 @@ export default function History({ setShowNav }) {
             alt=""
           />
         </div>
+        <p className="comment">Map of Ryukyu Islands</p>
 
         <p>
           Today, karate is a martial art known and respected worldwide as an
@@ -123,6 +124,7 @@ export default function History({ setShowNav }) {
           }}
           alt=""
         />
+        <p className="comment">Karate training in front of Shuri Castle</p>
       </section>
 
       <ImgPop
