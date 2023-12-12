@@ -54,7 +54,7 @@
         // border-left: solid 1.5px transparent;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: center;
 
         @media screen and (max-width: 400px) {
@@ -162,7 +162,9 @@
         }
 
         & .crossBtn {
+            position: absolute;
             bottom: 0;
+            margin: 15px;
             // transform: translateY(40px);
             width: 40px;
             height: 40px;
@@ -170,7 +172,7 @@
             background: #cfbbad;
             border-radius: 50px;
             transition: 200ms;
-            box-shadow: 0 0 8px #cfbbad;
+            box-shadow: 0 2px 8px #2726253f;
 
             & .label {
                 width: 40px;
