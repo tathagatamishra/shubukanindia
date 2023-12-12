@@ -12,7 +12,10 @@ export default function ImgPop(props) {
         <div className="Modal">
           <div
             className="modal-bg"
-            onClick={() => props.setIsOpen(false)}
+            onClick={() => {
+              props.setIsOpen(false);
+              props.setShowNav(true);
+            }}
           ></div>
 
           <div className="img-holder">
@@ -28,11 +31,13 @@ export default function ImgPop(props) {
               />
             </div>
 
-            <p className="comment">{props.comment}</p>
+            <div className="content-box">
+              <p className="comment">{props.comment}</p>
 
-            <h1 className="title">{props.heading}</h1>
+              <h1 className="title">{props.heading}</h1>
 
-            <p className="description">{props.content}</p>
+              <p className="description">{props.content}</p>
+            </div>
 
             <div className="crossBtn">
               <IonIcon

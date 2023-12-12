@@ -54,7 +54,7 @@
         // border-left: solid 1.5px transparent;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: flex-end;
         align-items: center;
 
         @media screen and (max-width: 400px) {
@@ -64,8 +64,9 @@
 
         & .img-box {
             width: 100%;
-            height: 50%;
+            max-height: 50%;
             // border: 1px solid red;
+            user-select: none;
 
             & .img {
                 object-fit: contain;
@@ -97,145 +98,79 @@
             }
         }
 
-        & .comment {
+        & .content-box {
             width: 100%;
-            text-align: right;
-            font-style: italic;
+            height: 50%;
+            // border: 1px solid red;
 
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Forum', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Philosopher', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
-            // font-family: 'Faster One';
-            // font-family: 'Finlandica';
-            // font-family: 'Foldit';
-            // font-family: 'Gemunu Libre';
-            // font-family: 'Geo';
-            // font-family: 'Lekton';
-            // font-family: 'Lexend Peta';
-            // font-family: 'Lexend Tera';
-            // font-family: 'Martian Mono';
-            // font-family: 'MuseoModerno';
-            // font-family: 'Orbit';
-            // font-family: 'Rubik Dirt';
-            // font-family: 'Shippori Antique';
-            // font-family: 'Tourney';
-            // font-family: 'Train One';
-            // font-family: 'Tulpen One';
-            // font-family: 'swap';
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-        }
+            & .comment {
+                width: 100%;
+                text-align: right;
+                font-style: italic;
+                font-family: 'Bellefair', serif;
 
-        & .title {
-            width: 100%;
-            letter-spacing: 2px;
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
 
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Forum', cursive;
-            font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Philosopher', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
-            // font-family: 'Faster One';
-            // font-family: 'Finlandica';
-            // font-family: 'Foldit';
-            // font-family: 'Gemunu Libre';
-            // font-family: 'Geo';
-            // font-family: 'Lekton';
-            // font-family: 'Lexend Peta';
-            // font-family: 'Lexend Tera';
-            // font-family: 'Martian Mono';
-            // font-family: 'MuseoModerno';
-            // font-family: 'Orbit';
-            // font-family: 'Rubik Dirt';
-            // font-family: 'Shippori Antique';
-            // font-family: 'Tourney';
-            // font-family: 'Train One';
-            // font-family: 'Tulpen One';
-            // font-family: 'swap';
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-        }
+                @media screen and (max-height: 600px) {
+                    margin: 5px 0;
+                }
+                @media screen and (max-width: 400px) {
+                    
+                }
+            }
 
-        & .description {
-            height: 100%;
-            width: 100%;
-            font-size: 1.3rem;
+            & .title {
+                width: 100%;
+                letter-spacing: 2px;
+                font-family: 'Fredericka the Great', cursive;
 
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Forum', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Philosopher', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
-            // font-family: 'Faster One';
-            // font-family: 'Finlandica';
-            // font-family: 'Foldit';
-            // font-family: 'Gemunu Libre';
-            // font-family: 'Geo';
-            // font-family: 'Lekton';
-            // font-family: 'Lexend Peta';
-            // font-family: 'Lexend Tera';
-            // font-family: 'Martian Mono';
-            // font-family: 'MuseoModerno';
-            // font-family: 'Orbit';
-            // font-family: 'Rubik Dirt';
-            // font-family: 'Shippori Antique';
-            // font-family: 'Tourney';
-            // font-family: 'Train One';
-            // font-family: 'Tulpen One';
-            // font-family: 'swap';
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
 
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                @media screen and (max-height: 600px) {
+                    margin: 5px 0;
+                    font-size: 28px;
+                }
+                @media screen and (max-width: 700px) {
+                    font-size: 28px;
+                }
+            }
+
+            & .description {
+                height: 100%;
+                width: 100%;
+                font-size: 1.3rem;
+                font-family: 'GFS Neohellenic', sans-serif;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+
+                @media screen and (max-height: 600px) {
+                    font-size: 1.2rem;
+                }
+                @media screen and (max-width: 700px) {
+                    font-size: 1.2rem;
+                }
             }
         }
 
         & .crossBtn {
+            bottom: 0;
+            // transform: translateY(40px);
             width: 40px;
             height: 40px;
             // border: 1px solid red;
+            background: #cfbbad;
             border-radius: 50px;
             transition: 200ms;
+            box-shadow: 0 0 8px #cfbbad;
 
             & .label {
                 width: 40px;
@@ -248,7 +183,7 @@
             }
 
             &:active {
-                transform: scale(90%);
+                transform: scale(80%);
             }
         }
     }
