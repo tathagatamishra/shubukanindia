@@ -125,6 +125,23 @@ export default function History({ setShowNav }) {
           alt=""
         />
         <p className="comment">Karate training in front of Shuri Castle</p>
+
+        <div className="sketchfab-embed-wrapper">
+          <iframe
+            title="Shuri Castle / Shurijō, Naha - Okinawa .WIP"
+            frameborder="0"
+            allowfullscreen
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share
+            src="https://sketchfab.com/models/45f901e4d6fa4192a6f329e35f2dc5b8/embed?camera=0&preload=1&transparent=1"
+          ></iframe>
+        </div>
+        <p className="comment">Digital reconstruction of Shurijo Castle</p>
       </section>
 
       <ImgPop

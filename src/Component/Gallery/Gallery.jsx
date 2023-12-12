@@ -287,7 +287,7 @@ export default function Gallery({ setShowNav }) {
       )}
 
       <section className="gallery-image">
-        {/* <h1 className="galleryTop">Gallery</h1> */}
+
         <div>
           {thumbArray.map((image, index) => (
             <div
@@ -309,7 +309,6 @@ export default function Gallery({ setShowNav }) {
                 src={image}
               />
 
-              {/* <img src={image} alt={`Image ${index + 1}`} /> */}
             </div>
           ))}
         </div>
