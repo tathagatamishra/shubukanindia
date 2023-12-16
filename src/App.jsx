@@ -24,7 +24,14 @@ import Contributor from "./Component/Contributor/Contributor";
 import HAndF from "./Component/HAndF/HAndF";
 import Download from "./Component/Download/Download";
 
+import ReactGA from 'react-ga';
+
 function App() {
+
+  const TRACKING_ID = "G-561PS7T79G";
+  ReactGA.initialize(TRACKING_ID);
+
+
   const [showNav, setShowNav] = useState(true);
 
   document.addEventListener("mousemove", (ev) => {
@@ -38,6 +45,10 @@ function App() {
       y,
     });
   });
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
       <div className="App" id="App">
