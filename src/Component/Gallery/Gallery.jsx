@@ -116,7 +116,15 @@ import thumb_53 from "../../thumbnail/group (13).jpeg";
 import thumb_54 from "../../thumbnail/group (12).jpeg";
 import thumb_55 from "../../thumbnail/cafe.jpeg";
 
+import ReactGA from 'react-ga4';
+
 export default function Gallery({ setShowNav }) {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
+  
   const imgArray = [
     img_1,
     img_21,

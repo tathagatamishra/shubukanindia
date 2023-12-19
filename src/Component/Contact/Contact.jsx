@@ -11,7 +11,15 @@ import {
 } from "ionicons/icons";
 import "./Contact.scss";
 
+import ReactGA from 'react-ga4';
+
 export default function Contact() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
+  
   const emailAddress = 'shorinryushubukanindia@gmail.com';
   const emailSubject = 'Hello';
   const emailBody = 'I wanted to reach out to you...';

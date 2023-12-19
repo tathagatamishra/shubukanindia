@@ -9,8 +9,15 @@ import {
 import pattern from "../../assets/pattern.jpg";
 import kun from "../../assets/dojokun.png";
 
+import ReactGA from 'react-ga4';
+
 export default function LineageAndDojoKun() {
 
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
+  
   useEffect(() => {
     window.scrollTo({
       top: 0,

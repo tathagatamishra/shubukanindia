@@ -11,7 +11,15 @@ import img2 from "../../assets/Karate_ShuriCastle.jpg";
 import img3 from "../../assets/map.jpg";
 import img4 from "../../assets/map2.jpg";
 
+import ReactGA from 'react-ga4';
+
 export default function History({ setShowNav }) {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
+  
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState("");
   const [comment, setComment] = useState("");

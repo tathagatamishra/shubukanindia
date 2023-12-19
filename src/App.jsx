@@ -24,13 +24,17 @@ import Contributor from "./Component/Contributor/Contributor";
 import HAndF from "./Component/HAndF/HAndF";
 import Download from "./Component/Download/Download";
 
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 function App() {
 
   const TRACKING_ID = "G-561PS7T79G";
   ReactGA.initialize(TRACKING_ID);
 
+  // useEffect(() => {
+  //   ReactGA.pageview(window.location.pathname);
+  // }, []);
+  
 
   const [showNav, setShowNav] = useState(true);
 
@@ -46,9 +50,6 @@ function App() {
     });
   });
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
 
   return (
       <div className="App" id="App">

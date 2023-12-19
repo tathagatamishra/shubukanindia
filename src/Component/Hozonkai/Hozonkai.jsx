@@ -6,7 +6,13 @@ import { globeOutline } from "ionicons/icons";
 
 import ShuriKarateKobudoHozonkai from "../../assets/ShuriKarateKobudoHozonkai.png";
 
+import ReactGA from 'react-ga4';
+
 export default function Hozonkai() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
   
   useEffect(() => {
     window.scrollTo({

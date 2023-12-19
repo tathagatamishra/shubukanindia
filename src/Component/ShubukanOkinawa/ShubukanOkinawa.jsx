@@ -9,7 +9,13 @@ import img2 from "../../assets/Frame 3.png";
 import img3 from "../../assets/Frame 2.png";
 import img4 from "../../assets/Frame 1.png";
 
+import ReactGA from 'react-ga4';
+
 export default function ShubukanOkinawa() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   useEffect(() => {
     window.scrollTo({

@@ -26,7 +26,15 @@ import img_22 from "../../images/kaynChotuku.png";
 import img_24 from "../../images/Matsumura.png";
 import img_25 from "../../images/oldGroup.jpg";
 
+import ReactGA from 'react-ga4';
+
 export default function Home({ setShowNav }) {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
+  
   const [slider, setSlider] = useState(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(null);
