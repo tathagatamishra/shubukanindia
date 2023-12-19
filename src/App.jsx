@@ -28,7 +28,7 @@ import ReactGA from 'react-ga4';
 
 function App() {
 
-  const TRACKING_ID = "G-561PS7T79G";
+  const TRACKING_ID = "G-RXSEE0D376";
   ReactGA.initialize(TRACKING_ID);
 
   // useEffect(() => {
