@@ -24,7 +24,7 @@ import Contributor from "./Component/Contributor/Contributor";
 import HAndF from "./Component/HAndF/HAndF";
 import Download from "./Component/Download/Download";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 function App() {
 

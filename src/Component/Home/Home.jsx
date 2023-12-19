@@ -26,7 +26,7 @@ import img_22 from "../../images/kaynChotuku.png";
 import img_24 from "../../images/Matsumura.png";
 import img_25 from "../../images/oldGroup.jpg";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 export default function Home({ setShowNav }) {
 

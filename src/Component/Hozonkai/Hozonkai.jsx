@@ -6,7 +6,7 @@ import { globeOutline } from "ionicons/icons";
 
 import ShuriKarateKobudoHozonkai from "../../assets/ShuriKarateKobudoHozonkai.png";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 export default function Hozonkai() {
 

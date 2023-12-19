@@ -7,7 +7,7 @@ import logo from "../../assets/shubukan.png";
 import img1 from "../../thumbnail/sabyasachi2.jpg";
 import img2 from "../../thumbnail/sabyasachi1.jpg";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 export default function ShubukanIndia() {
 

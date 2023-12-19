@@ -11,7 +11,7 @@ import {
 } from "ionicons/icons";
 import "./Contact.scss";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 export default function Contact() {
 

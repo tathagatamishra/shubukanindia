@@ -116,7 +116,7 @@ import thumb_53 from "../../thumbnail/group (13).jpeg";
 import thumb_54 from "../../thumbnail/group (12).jpeg";
 import thumb_55 from "../../thumbnail/cafe.jpeg";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 export default function Gallery({ setShowNav }) {
 

@@ -8,7 +8,7 @@ import tonfa from "../../assets/Frame 14.svg";
 import eku from "../../assets/eku.svg";
 import nunchaku from "../../assets/Frame 16.svg";
 
-import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga';
 
 export default function KarateAndKobudo() {
 
