@@ -12,7 +12,9 @@ import ReactGA from 'react-ga';
 
 export default function KarateAndKobudo() {
 
- 
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
 
   useEffect(() => {

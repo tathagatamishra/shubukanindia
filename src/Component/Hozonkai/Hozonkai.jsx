@@ -10,7 +10,9 @@ import ReactGA from 'react-ga';
 
 export default function Hozonkai() {
 
- 
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
   
   useEffect(() => {
     window.scrollTo({

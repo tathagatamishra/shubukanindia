@@ -10,11 +10,12 @@ import pattern from "../../assets/pattern.jpg";
 import kun from "../../assets/dojokun.png";
 
 import ReactGA from 'react-ga';
-import withTracker from "../../WithTracker";
 
-function LineageAndDojoKun() {
+export default function LineageAndDojoKun() {
 
- 
+  useEffect(() => {
+    ReactGA.pageview("LineageAndDojoKun");
+  }, []);
 
   
   useEffect(() => {
@@ -280,5 +281,3 @@ function LineageAndDojoKun() {
     </div>
   );
 }
-
-export default withTracker(LineageAndDojoKun)
