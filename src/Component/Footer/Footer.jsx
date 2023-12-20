@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Footer.scss";
 
-import logo1 from "../../assets/ShubukanIndia-Logo.svg";
+import logo1 from "../../assets/shubukan.png";
 import logo2 from "../../assets/shorinryu.svg";
 import logo3 from "../../assets/shubukan.svg";
 import logo4 from "../../assets/kobudo.svg";
