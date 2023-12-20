@@ -11,9 +11,7 @@ import ReactGA from 'react-ga';
 
 export default function ShubukanIndia() {
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+ 
 
   useEffect(() => {
     window.scrollTo({

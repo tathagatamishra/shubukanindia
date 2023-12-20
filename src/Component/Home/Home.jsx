@@ -30,9 +30,7 @@ import ReactGA from 'react-ga';
 
 export default function Home({ setShowNav }) {
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+ 
 
   
   const [slider, setSlider] = useState(null);

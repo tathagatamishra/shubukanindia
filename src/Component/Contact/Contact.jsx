@@ -15,9 +15,7 @@ import ReactGA from 'react-ga';
 
 export default function Contact() {
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+ 
 
   
   const emailAddress = 'shorinryushubukanindia@gmail.com';

@@ -15,9 +15,7 @@ import ReactGA from 'react-ga';
 
 export default function History({ setShowNav }) {
 
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+ 
 
   
   const [isOpen, setIsOpen] = useState(false);

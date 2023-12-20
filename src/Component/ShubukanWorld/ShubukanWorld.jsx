@@ -19,9 +19,7 @@ import ReactGA from 'react-ga';
 
 export default function ShubukanWorld({ setShowNav }) {
   
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+ 
   
   const imgArray = [
     img_1,
