@@ -92,57 +92,45 @@ export default function Navbar() {
             >
               {/* <img src="oldpaper.png" alt="" /> */}
               <nav className="nav">
-                <NavLink to="/History" className="opt" onClick={showMenu}>
+                <NavLink to="/history" className="opt" onClick={showMenu}>
                   <p>HISTORY</p>
                 </NavLink>
-                <NavLink to="/ShubukanIndia" className="opt" onClick={showMenu}>
+                <NavLink to="/shubukan-india" className="opt" onClick={showMenu}>
                   <p>SHUBUKAN INDIA</p>
                 </NavLink>
-                <NavLink
-                  to="/ShubukanOkinawa"
-                  className="opt"
-                  onClick={showMenu}
-                >
+                <NavLink to="/shubukan-okinawa" className="opt" onClick={showMenu} >
                   <p>SHUBUKAN OKINAWA</p>
                 </NavLink>
-                <NavLink to="/ShubukanWorld" className="opt" onClick={showMenu}>
+                <NavLink to="/shubukan-world" className="opt" onClick={showMenu}>
                   <p>SHUBUKAN WORLD</p>
                 </NavLink>
-                <NavLink to="/Hozonkai" className="opt" onClick={showMenu}>
+                <NavLink to="/shuri-karate-kobudo-hozonkai" className="opt" onClick={showMenu}>
                   <p>SHURI KARATE KOBUDO HOZONKAI</p>
                 </NavLink>
 
-                <NavLink
-                  to="/LineageAndDojoKun"
-                  className="opt"
-                  onClick={showMenu}
-                >
+                <NavLink to="/lineage-and-dojokun" className="opt" onClick={showMenu} >
                   <p>LINEAGE & DOJO KUN</p>
                 </NavLink>
-                <NavLink
-                  to="/KarateAndKobudo"
-                  className="opt"
-                  onClick={showMenu}
-                >
+                <NavLink to="/karate-and-kobudo" className="opt" onClick={showMenu} >
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
                 {/* <NavLink to="/CalenderAndNotice" className="opt" onClick={showMenu}>
                   <p>CALENDER & NOTICE</p>
                 </NavLink> */}
-                <NavLink to="/Membership" className="opt" onClick={showMenu}>
+                <NavLink to="/membership" className="opt" onClick={showMenu}>
                   <p>MEMBERSHIP</p>
                 </NavLink>
-                <NavLink to="/Services" className="opt" onClick={showMenu}>
+                <NavLink to="/services" className="opt" onClick={showMenu}>
                   <p>SERVICES</p>
                 </NavLink>
-                <NavLink to="/Gallery" className="opt" onClick={showMenu}>
+                <NavLink to="/gallery" className="opt" onClick={showMenu}>
                   <p>GALLERY</p>
                 </NavLink>
-                <NavLink to="/Blog" className="opt" onClick={showMenu}>
+                <NavLink to="/blog" className="opt" onClick={showMenu}>
                   <p>BLOG</p>
                 </NavLink>
-                <NavLink to="/Contact" className="opt" onClick={showMenu}>
+                <NavLink to="/contact" className="opt" onClick={showMenu}>
                   <p>CONTACT</p>
                 </NavLink>
               </nav>

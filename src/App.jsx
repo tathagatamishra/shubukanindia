@@ -62,24 +62,24 @@ function App() {
 
           <div className="webBody">
             <Routes>
-              <Route path="/Hozonkai"          element={<Hozonkai />} />
-              <Route path="/KarateAndKobudo"   element={<KarateAndKobudo />} />
-              <Route path="/LineageAndDojoKun" element={<LineageAndDojoKun />} />
-              <Route path="/CalenderAndNotice" element={<CalenderAndNotice />} />
-              <Route path="/ShubukanOkinawa" element={<ShubukanOkinawa />} />
-              <Route path="/ShubukanIndia"   element={<ShubukanIndia />} />
-              <Route path="/ShubukanWorld" element={<ShubukanWorld setShowNav={setShowNav} />} />
+              <Route path="/shuri-karate-kobudo-hozonkai" element={<Hozonkai />} />
+              <Route path="/karate-and-kobudo"   element={<KarateAndKobudo />} />
+              <Route path="/lineage-and-dojokun" element={<LineageAndDojoKun />} />
+              <Route path="/calender-and-notice" element={<CalenderAndNotice />} />
+              <Route path="/shubukan-okinawa" element={<ShubukanOkinawa />} />
+              <Route path="/shubukan-india"   element={<ShubukanIndia />} />
+              <Route path="/shubukan-world"   element={<ShubukanWorld setShowNav={setShowNav} />} />
               <Route path="/"            element={<Home setShowNav={setShowNav} />} />
-              <Route path="/History"     element={<History setShowNav={setShowNav} />} />
-              <Route path="/Membership"  element={<Membership />} />
-              <Route path="/Services"    element={<Services />} />
-              <Route path="/Gallery"     element={<Gallery setShowNav={setShowNav} />} />
-              <Route path="/Blog"        element={<Blog />} />
-              <Route path="/Contact"     element={<Contact />} />
-              <Route path="/TAndC"       element={<TAndC />} />
-              <Route path="/Contributor" element={<Contributor />} />
-              <Route path="/HAndF"       element={<HAndF />} />
-              <Route path="/Download"    element={<Download />} />
+              <Route path="/history"     element={<History setShowNav={setShowNav} />} />
+              <Route path="/membership"  element={<Membership />} />
+              <Route path="/services"    element={<Services />} />
+              <Route path="/gallery"     element={<Gallery setShowNav={setShowNav} />} />
+              <Route path="/blog"        element={<Blog />} />
+              <Route path="/contact"     element={<Contact />} />
+              <Route path="/term-and-condition" element={<TAndC />} />
+              <Route path="/contributor"        element={<Contributor />} />
+              <Route path="/help-and-faqs"      element={<HAndF />} />
+              <Route path="/download"           element={<Download />} />
             </Routes>
           </div>
 

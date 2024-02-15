@@ -147,7 +147,7 @@ export default function Services() {
 
       <section className="connect">
         <div className="contactBtn">
-          <NavLink to="/Contact">
+          <NavLink to="/contact">
             {/* <button>Tell us what's in your mind</button> */}
             <button>State your urge</button>
           </NavLink>

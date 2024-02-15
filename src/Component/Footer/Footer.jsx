@@ -28,13 +28,13 @@ export default function Footer() {
 
       <div className="footContent">
         <div className="footOptions1">
-          <NavLink to="/Contributor" className="opt">
+          <NavLink to="/contributor" className="opt">
             <p>Contributors</p>
           </NavLink>
-          <NavLink to="/Membership" className="opt">
+          <NavLink to="/membership" className="opt">
             <p>Membership</p>
           </NavLink>
-          <NavLink to="/Services" className="opt">
+          <NavLink to="/services" className="opt">
             <p>Service</p>
           </NavLink>
         </div>
@@ -42,13 +42,13 @@ export default function Footer() {
         <div className="midLine"></div>
 
         <div className="footOptions2">
-          <NavLink to="/Blog" className="opt">
+          <NavLink to="/blog" className="opt">
             <p>Blog</p>
           </NavLink>
-          <NavLink to="/Download" className="opt">
+          <NavLink to="/download" className="opt">
             <p>Downloads</p>
           </NavLink>
-          <NavLink to="/CalenderAndNotice" className="opt">
+          <NavLink to="/calender-and-notice" className="opt">
             <p>Calender & Notice</p>
           </NavLink>
         </div>
@@ -56,13 +56,13 @@ export default function Footer() {
         <div className="midLine"></div>
         
         <div className="footOptions3">
-          <NavLink to="/TAndC" className="opt">
+          <NavLink to="/term-and-condition" className="opt">
             <p>Terms & Conditions</p>
           </NavLink>
-          <NavLink to="/HAndF" className="opt">
+          <NavLink to="/help-and-faqs" className="opt">
             <p>Help and FAQ</p>
           </NavLink>
-          <NavLink to="/Contact" className="opt">
+          <NavLink to="/contact" className="opt">
             <p>Contact Us</p>
           </NavLink>
         </div>

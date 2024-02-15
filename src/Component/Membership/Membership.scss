@@ -47,6 +47,27 @@
             }
         }
 
+        & h2 {
+            margin: 1.5rem 0 2rem;
+            color: #2a2727;
+            // font-size: 3.5rem;
+            letter-spacing: 0.2rem;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
+
         & p {
             font-size: 1.5rem;
             text-align: justify;
@@ -66,8 +87,19 @@
             }
         }
 
+        & .division {
+            width: 100%;
+            height: 20px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background: radial-gradient(circle at bottom, #e0d1ce, #e0d1ce 10%, transparent 10%, transparent 20%, #e0d1ce 20%, #e0d1ce 30%, transparent 30%, transparent 40%, #e0d1ce 40%, #e0d1ce 50%, transparent 50%, transparent 60%, #e0d1ce 60%, #e0d1ce 70%, transparent 70%, transparent 80%, #e0d1ce 80%, #e0d1ce 90%, transparent 90%);
+            background-size: 2em 2em;
+            background-color: transparent;
+            opacity: 1
+        }
+
         & .contactBtn {
-            margin: 100px 0 0 0;
+            margin: 15px 0 25px;
             width: 100%;
             height: 60px;
             display: flex;
@@ -84,8 +116,8 @@
                 border-bottom: 2px solid #2a2727;
                 border-radius: 5px;
                 background-color: transparent;
-                padding: 10px;
-                width: 300px;
+                padding: 10px 20px;
+                width: fit-content;
 
                 color: rgb(102, 56, 38);
                 font-size: 1.4rem;

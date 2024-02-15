@@ -210,7 +210,7 @@ export default function Home({ setShowNav }) {
 
       <section className="gallery">
         <div className="galleryTop">
-          <NavLink to="/Gallery" className="opt">
+          <NavLink to="/gallery" className="opt">
             <h4>GALLERY</h4>
           </NavLink>
         </div>

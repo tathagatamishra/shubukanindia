@@ -28,16 +28,16 @@ export default function Membership() {
           contact us for more details.
         </p>
 
-        <br />
-
-        <h1>Member List</h1>
-
-
         <div className="contactBtn">
-        <NavLink to="/Contact">
-          <button>Get in touch</button>
+          <NavLink to="/contact">
+            <button>contact us</button>
           </NavLink>
         </div>
+
+        <div className="division"></div>
+
+        <h2>Our Active Participants</h2>
+
       </section>
     </div>
   );
