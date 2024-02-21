@@ -10,15 +10,19 @@
     align-items: center;
     padding-top: 10rem;
 
+    @media screen and (max-width: 800px) {
+        // width: 90%;
+        padding-top: 5rem;
+    }
+
     @media screen and (max-width: 400px) {
         width: 90%;
-        padding-top: 5rem;
     }
 
     & .Hero {
         width: 100%;
         height: fit-content;
-        margin-bottom: 8rem;
+        margin-bottom: 2rem;
         padding-top: 3rem;
 
         display: flex;
@@ -30,27 +34,6 @@
             margin: 1.5rem 0 2rem;
             color: #2a2727;
             font-size: 3.5rem;
-            letter-spacing: 0.2rem;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
-
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
-            }
-        }
-
-        & h2 {
-            margin: 1.5rem 0 2rem;
-            color: #2a2727;
-            // font-size: 3.5rem;
             letter-spacing: 0.2rem;
             // font-family: 'Amarante', cursive;
             // font-family: 'Andika', sans-serif;
@@ -87,15 +70,23 @@
             }
         }
 
-        & .division {
-            width: 100%;
-            height: 20px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            background: radial-gradient(circle at bottom, #e0d1ce, #e0d1ce 10%, transparent 10%, transparent 20%, #e0d1ce 20%, #e0d1ce 30%, transparent 30%, transparent 40%, #e0d1ce 40%, #e0d1ce 50%, transparent 50%, transparent 60%, #e0d1ce 60%, #e0d1ce 70%, transparent 70%, transparent 80%, #e0d1ce 80%, #e0d1ce 90%, transparent 90%);
-            background-size: 2em 2em;
-            background-color: transparent;
-            opacity: 1
+        & .alert {
+            font-size: 1.3rem;
+            text-align: justify;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
         }
 
         & .contactBtn {
@@ -154,22 +145,196 @@
                 letter-spacing: 0.2rem;
             }
 
-            // & p {
-            //     font-size: 1.2rem;
-            // }
+            & p {
+                font-size: 1.4rem;
+            }
         }
 
         @media screen and (max-width: 400px) {
+
+            padding-top: 2rem;
+
             & h1 {
-                margin: 1.5rem 0 2rem;
+                margin: 1.5rem 0 1.5rem;
                 color: #2a2727;
-                font-size: 2.8rem;
+                font-size: 2.5rem;
                 letter-spacing: 0.2rem;
             }
 
-            // & p {
-            //     font-size: 1rem;
-            // }
+            & .alert {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    & .division {
+        width: 100%;
+        height: 20px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        background: radial-gradient(circle at bottom, #e0d1ce, #e0d1ce 10%, transparent 10%, transparent 20%, #e0d1ce 20%, #e0d1ce 30%, transparent 30%, transparent 40%, #e0d1ce 40%, #e0d1ce 50%, transparent 50%, transparent 60%, #e0d1ce 60%, #e0d1ce 70%, transparent 70%, transparent 80%, #e0d1ce 80%, #e0d1ce 90%, transparent 90%);
+        background-size: 2em 2em;
+        background-color: transparent;
+        opacity: 1
+    }
+
+    & .Dojo {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 8rem;
+        padding-top: 3rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        @media screen and (max-width: 700px) {
+            padding-top: 2.5rem;
+        }
+
+        @media screen and (max-width: 400px) {
+            padding-top: 1rem;
+        }
+
+        & .dojoNav {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 3.5rem;
+                letter-spacing: 0.2rem;
+                // font-family: 'Amarante', cursive;
+                // font-family: 'Andika', sans-serif;
+                // font-family: 'Bellefair', serif;
+                // font-family: 'Capriola', sans-serif;
+                // font-family: 'Flamenco', cursive;
+                font-family: 'Fredericka the Great', cursive;
+                // font-family: 'GFS Neohellenic', sans-serif;
+                // font-family: 'Pompiere', cursive;
+                // font-family: 'Tenali Ramakrishna', sans-serif;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+            }
+
+            & .search {
+                font-size: 40px;
+                cursor: pointer;
+            }
+
+            @media screen and (max-width: 700px) {
+                & h1 {
+                    margin: 1.5rem 0 2rem;
+                    color: #2a2727;
+                    font-size: 3rem;
+                    letter-spacing: 0.2rem;
+                }
+            }
+
+            @media screen and (max-width: 400px) {
+                & h1 {
+                    margin: 1.5rem 0 1.5rem;
+                    color: #2a2727;
+                    font-size: 2.5rem;
+                    letter-spacing: 0.2rem;
+                }
+            }
+
+            @media screen and (max-width: 340px) {
+                & h1 {
+                    margin: 1.5rem 0 1.5rem;
+                    font-size: 2.3rem;
+                    letter-spacing: 0.2rem;
+                }
+
+                & .search {
+                    font-size: 32px;
+                }
+            }
+            @media screen and (max-width: 320px) {
+                & h1 {
+                    margin: 1.5rem 0 1.5rem;
+                    font-size: 2.3rem;
+                    letter-spacing: 0.1rem;
+                }
+
+                & .search {
+                    font-size: 30px;
+                }
+            }
+        }
+
+        & .dojoList {
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            & .dojoBox {
+                display: flex;
+                flex-direction: column;
+
+                & h2 {
+                    margin: 0 0 2rem;
+                    font-size: 1.5rem;
+                    font-family: 'Amarante', cursive;
+                    // font-family: 'Andika', sans-serif;
+                    // font-family: 'Bellefair', serif;
+                    // font-family: 'Capriola', sans-serif;
+                    // font-family: 'Flamenco', cursive;
+                    // font-family: 'Fredericka the Great', cursive;
+                    // font-family: 'GFS Neohellenic', sans-serif;
+                    // font-family: 'Pompiere', cursive;
+                    // font-family: 'Tenali Ramakrishna', sans-serif;
+
+                    &::selection {
+                        color: $---selection-color;
+                        background: $---selection-bg;
+                    }
+                }
+
+                & p {
+                    font-size: 1.5rem;
+                    text-align: justify;
+                    // font-family: 'Amarante', cursive;
+                    // font-family: 'Andika', sans-serif;
+                    // font-family: 'Bellefair', serif;
+                    // font-family: 'Capriola', sans-serif;
+                    // font-family: 'Flamenco', cursive;
+                    // font-family: 'Fredericka the Great', cursive;
+                    font-family: 'GFS Neohellenic', sans-serif;
+                    // font-family: 'Pompiere', cursive;
+                    // font-family: 'Tenali Ramakrishna', sans-serif;
+
+                    &::selection {
+                        color: $---selection-color;
+                        background: $---selection-bg;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 400px) {
+                margin-top: 50px;
+                gap: 20px;
+
+                & .dojoBox {
+                    & h2 {
+                        font-size: 1.2rem;
+                    }
+
+                    & p {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
         }
     }
 }

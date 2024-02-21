@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Membership.scss";
+import { IoSearch } from "react-icons/io5";
 
 export default function Membership() {
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
-  
+
   return (
     <div className="Membership">
       <section className="Hero">
@@ -23,8 +23,8 @@ export default function Membership() {
           to join Shubukan India.
         </p>
 
-        <p>
-          Membership of Shubukan India abide by rules and regulation. Please
+        <p className="alert">
+          ** Membership of Shubukan India abide by rules and regulation. Please
           contact us for more details.
         </p>
 
@@ -33,11 +33,25 @@ export default function Membership() {
             <button>contact us</button>
           </NavLink>
         </div>
+      </section>
 
-        <div className="division"></div>
+      <div className="division"></div>
 
-        <h2>Our Active Participants</h2>
+      <section className="Dojo">
+        <div className="dojoNav">
+          <h1>Dojo Index</h1>
+          <IoSearch className="search" />
+        </div>
 
+        <div className="dojoList">
+          <div className="dojoBox">
+            <h2>Uema Dojo India</h2>
+          </div>
+          <div className="dojoBox">
+            <h2>Roy Martial Arts Academy</h2>
+          </div>
+          <div className="dojoBox"></div>
+        </div>
       </section>
     </div>
   );
