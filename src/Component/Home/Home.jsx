@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import "./Home.scss";
 
 import birdImg from "../../assets/bird.svg";
-import drogon from "../../assets/dragon.png";
-import drogon2 from "../../assets/dragon2.png";
+import drogon from "../../assets/dragonx.png";
+import drogon2 from "../../assets/dragony.png";
 import treeImg from "../../assets/tree.svg";
 import img2 from "../../assets/uemaImg2.svg";
 import img3 from "../../assets/chibana.jpg";
