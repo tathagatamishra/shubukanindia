@@ -276,7 +276,7 @@
             margin-top: 70px;
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            // gap: 40px;
 
             & .dojoBox {
                 display: flex;
@@ -302,6 +302,7 @@
                 }
 
                 & p {
+                    margin: 10px;
                     font-size: 1.5rem;
                     text-align: justify;
                     // font-family: 'Amarante', cursive;
@@ -319,11 +320,21 @@
                         background: $---selection-bg;
                     }
                 }
+
+                & .line {
+
+                    margin: 3rem 0;
+                    height: 2px;
+                    width: 80%;
+                    background: radial-gradient(circle, #905043 0%, transparent 100%);
+                    opacity: .5;
+                    transition: 1000ms;
+                }
             }
 
             @media screen and (max-width: 400px) {
                 margin-top: 50px;
-                gap: 20px;
+                // gap: 20px;
 
                 & .dojoBox {
                     & h2 {

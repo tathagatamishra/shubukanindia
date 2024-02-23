@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Membership.scss";
 import { IoSearch } from "react-icons/io5";
 
@@ -9,6 +9,66 @@ export default function Membership() {
       top: 0,
     });
   }, []);
+
+  const navigate = useNavigate();
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    setTimeout(() => {
+      navigate("/contact");
+    }, 800);
+  };
+
+  const dojoArr = [
+    {
+      dojoName: "Shorin Ryu Shubukan Uema dojo India",
+      dojoType: "Hombu Dojo",
+      instructor: "Sabyasachi Giri",
+      image: "",
+      contact: [
+        ["Phone", "9851852499"],
+        ["Email", "shorinryushubukanindia@gmail.com"],
+      ],
+      brunch: [
+        {
+          mainLocation: "",
+          brunchAddress: [
+            "Dakshin Kumarpur, Contai, Purba Medinipur, West Bengal, India, 721401",
+          ],
+        },
+      ],
+    },
+    {
+      dojoName: "Roy Martial Arts Academy",
+      instructor: "Nanak Roy",
+      image: "",
+      contact: [["Phone", "7001564694"]],
+      brunch: [
+        {
+          mainLocation: "Dakshin Dinajpur",
+          brunchAddress: [
+            "Belbari, Gangarampur, Dakshin Dinajpur, West Bengal, 733124",
+          ],
+        },
+      ],
+    },
+    {
+      dojoName: "Shoshin Martial Arts Academy",
+      instructor: "Shaswata Sagar",
+      image: "",
+      contact: [
+        ["Phone", "9037358074"],
+        ["Email", "s.sagar111987@gmail.com"],
+      ],
+      brunch: [
+        {
+          mainLocation: "",
+          brunchAddress: [],
+        },
+      ],
+    },
+  ];
 
   return (
     <div className="Membership">
@@ -29,9 +89,11 @@ export default function Membership() {
         </p>
 
         <div className="contactBtn">
-          <NavLink to="/contact">
-            <button>contact us</button>
-          </NavLink>
+          {/* <NavLink to="/contact"> */}
+          <button onClick={handleClick} disabled={clicked}>
+            contact us
+          </button>
+          {/* </NavLink> */}
         </div>
       </section>
 
@@ -44,13 +106,36 @@ export default function Membership() {
         </div>
 
         <div className="dojoList">
-          <div className="dojoBox">
-            <h2>Uema Dojo India</h2>
-          </div>
-          <div className="dojoBox">
-            <h2>Roy Martial Arts Academy</h2>
-          </div>
-          <div className="dojoBox"></div>
+          {dojoArr.map((dojo, index) => (
+            <div key={index} className="dojoBox">
+              <h2>{dojo.dojoName}</h2>
+              <p>Instructor: {dojo.instructor}</p>
+              <p>Dojo Type: {dojo.dojoType}</p>
+              <img src={dojo.image} alt="Dojo" />
+              <h3>Contact:</h3>
+              <ul>
+                {dojo.contact.map((contact, index) => (
+                  <li key={index}>
+                    {contact[0]}: {contact[1]}
+                  </li>
+                ))}
+              </ul>
+              <h3>Branch:</h3>
+              <ul>
+                {dojo.brunch.map((branch, index) => (
+                  <li key={index}>
+                    <p>Main Location: {branch.mainLocation}</p>
+                    <ul>
+                      {branch.brunchAddress.map((address, index) => (
+                        <li key={index}>{address}</li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+              <div className="line"></div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
