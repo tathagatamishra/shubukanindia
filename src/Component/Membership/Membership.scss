@@ -295,6 +295,18 @@
                         color: $---selection-color;
                         background: $---selection-bg;
                     }
+
+                    @media screen and (max-width: 510px) {
+                        font-size: 1.4rem;
+                    }
+
+                    @media screen and (max-width: 500px) {
+                        font-size: 1.3rem;
+                    }
+
+                    @media screen and (max-width: 430px) {
+                        font-size: 1.2rem;
+                    }
                 }
 
                 & .dojoType {
@@ -313,6 +325,21 @@
                         color: $---selection-color;
                         background: $---selection-bg;
                     }
+
+                    @media screen and (max-width: 510px) {
+                        margin: 0 0 .5rem;
+                        font-size: 1.2rem;
+                    }
+
+                    @media screen and (max-width: 500px) {
+                        margin: 0 0 .5rem;
+                        font-size: 1.1rem;
+                    }
+
+                    @media screen and (max-width: 430px) {
+                        margin: 0 0 .5rem;
+                        font-size: 1.0rem;
+                    }
                 }
 
                 & .dojoDetail {
@@ -320,6 +347,10 @@
                     display: flex;
                     flex-direction: row;
                     gap: 20px;
+
+                    @media screen and (max-width: 500px) {
+                        gap: 10px;
+                    }
 
                     & .imageBox {
                         // border: 1px solid rgb(0, 255, 0);
@@ -335,15 +366,22 @@
                         @media screen and (max-width: 700px) {
                             & img {
                                 border-radius: 5px;
-                                height: 160px;
-                                width: 160px;
+                                height: 170px;
+                                width: 150px;
                             }
                         }
 
-                        @media screen and (max-width: 400px) {
+                        @media screen and (max-width: 500px) {
                             & img {
-                                height: 110px;
-                                width: 110px;
+                                height: 150px;
+                                width: 130px;
+                            }
+                        }
+
+                        @media screen and (max-width: 430px) {
+                            & img {
+                                height: 150px;
+                                width: 120px;
                             }
                         }
                     }
@@ -402,6 +440,34 @@
                                     font-size: 1.3rem;
                                 }
                             }
+
+                            @media screen and (max-width: 510px) {
+                                flex-direction: column;
+
+                                & .instA {
+                                    margin: 0 10px;
+                                    font-size: 1.1rem;
+                                }
+
+                                & .instB {
+                                    margin: 0 10px;
+                                    font-size: 1.3rem;
+                                }
+                            }
+
+                            @media screen and (max-width: 430px) {
+                                flex-direction: column;
+
+                                & .instA {
+                                    margin: 0 10px;
+                                    font-size: 1.0rem;
+                                }
+
+                                & .instB {
+                                    margin: 0 10px;
+                                    font-size: 1.2rem;
+                                }
+                            }
                         }
 
                         & .contact {
@@ -446,6 +512,34 @@
                                     font-size: 1.1rem;
                                 }
                             }
+
+                            @media screen and (max-width: 510px) {
+                                flex-direction: column;
+
+                                & .contA {
+                                    margin: 0 10px;
+                                    font-size: 1.1rem;
+                                }
+
+                                & .contB {
+                                    margin: 0 10px;
+                                    font-size: 1.1rem;
+                                }
+                            }
+
+                            @media screen and (max-width: 430px) {
+                                flex-direction: column;
+
+                                & .contA {
+                                    margin: 0 10px;
+                                    font-size: 1.0rem;
+                                }
+
+                                & .contB {
+                                    margin: 0 10px;
+                                    font-size: 1.0rem;
+                                }
+                            }
                         }
                     }
                 }
@@ -480,13 +574,54 @@
                             }
                         }
                     }
+
+                    @media screen and (max-width: 700px) {
+                        & .mainLocation {
+                            margin: 10px;
+                            font-size: 1.2rem;
+                        }
+
+                        & .locationList {
+                            & .location {
+                                margin: 10px;
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+
+                    @media screen and (max-width: 510px) {
+                        & .mainLocation {
+                            margin: 8px;
+                            font-size: 1.2rem;
+                        }
+
+                        & .locationList {
+                            & .location {
+                                margin: 8px;
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+
+                    @media screen and (max-width: 430px) {
+                        & .mainLocation {
+                            margin: 5px;
+                            font-size: 1.1rem;
+                        }
+
+                        & .locationList {
+                            & .location {
+                                margin: 5px;
+                                font-size: 1.1rem;
+                            }
+                        }
+                    }
                 }
 
                 & .line {
-
                     margin: 3rem 0;
                     height: 2px;
-                    width: 80%;
+                    width: 100%;
                     background: radial-gradient(circle, #905043 0%, transparent 100%);
                     opacity: .5;
                     transition: 1000ms;
@@ -496,16 +631,6 @@
             @media screen and (max-width: 400px) {
                 margin-top: 50px;
                 // gap: 20px;
-
-                & .dojoBox {
-                    & h2 {
-                        font-size: 1.2rem;
-                    }
-
-                    & p {
-                        font-size: 1.4rem;
-                    }
-                }
             }
         }
     }
