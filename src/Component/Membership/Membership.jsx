@@ -23,7 +23,7 @@ export default function Membership() {
   const dojoArr = [
     {
       dojoName: "Shorin Ryu Shubukan Uema dojo India",
-      dojoType: "Hombu Dojo",
+      dojoType: "Honbu Dojo",
       instructor: "Sabyasachi Giri",
       image: "",
       contact: [
@@ -40,15 +40,53 @@ export default function Membership() {
       ],
     },
     {
+      dojoName: "Fudoshin Martial Arts Academy",
+      instructor: "Dipak Maity",
+      image: "",
+      contact: [["Phone", "7478327686"]],
+      brunch: [
+        {
+          mainLocation: "",
+          brunchAddress: [
+            "Egra, Purba Medinipur West Bengal",
+          ],
+        },
+      ],
+    },
+    {
       dojoName: "Roy Martial Arts Academy",
       instructor: "Nanak Roy",
       image: "",
-      contact: [["Phone", "7001564694"]],
+      contact: [["Phone", "7001564694"], ['Address', 'Belbari, Dakshin Dinajpur, West Bengal, 733124']],
       brunch: [
         {
           mainLocation: "Dakshin Dinajpur",
           brunchAddress: [
-            "Belbari, Gangarampur, Dakshin Dinajpur, West Bengal, 733124",
+            "Nayabazar High School Moydan",
+            "Gangarampur Football Club"
+          ],
+        },
+      ],
+    },
+    {
+      dojoName: "Karate Self Defense Academy",
+      instructor: "Raj Chatterjee",
+      image: "",
+      contact: [["Phone", "9734301071"]],
+      brunch: [
+        {
+          mainLocation: "Paschim Medinipur",
+          brunchAddress: [
+            "Bengai Netaji Club Ground",
+            "Goghat Debangan Nursery School Ground",
+            "Patulsara Primary School Ground",
+            "Badanganj Swastik Club Ground",
+          ],
+        },
+        {
+          mainLocation: "Hooghly",
+          brunchAddress: [
+            "Ramjibanpur Babulal High School Ground",
           ],
         },
       ],
@@ -63,8 +101,8 @@ export default function Membership() {
       ],
       brunch: [
         {
-          mainLocation: "",
-          brunchAddress: [],
+          mainLocation: "Kerala",
+          brunchAddress: ['Kadakampally Lane, Anayara, Thiruvananthapuram, Kerala'],
         },
       ],
     },
