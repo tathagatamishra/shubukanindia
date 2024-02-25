@@ -279,7 +279,6 @@
             display: flex;
             flex-direction: column;
             // gap: 40px;
-            word-break: break-word;
 
             & .dojoBox {
                 display: flex;
@@ -301,7 +300,13 @@
                 & .dojoType {
                     margin: 0 0 1rem;
                     font-size: 1.3rem;
-                    font-family: 'Amarante', cursive;
+                    font-weight: bold;
+
+                    // font-family: 'Amarante', cursive;
+                    font-family: 'Forum', cursive;
+                    // font-family: 'Philosopher', sans-serif;
+                    // font-family: 'Tenali Ramakrishna', sans-serif;
+
                     // border: 2px solid red;
 
                     &::selection {
@@ -311,7 +316,7 @@
                 }
 
                 & .dojoDetail {
-                    margin-top: 20px;
+                    margin: 20px 0;
                     display: flex;
                     flex-direction: row;
                     gap: 20px;
@@ -324,45 +329,56 @@
                             width: 200px;
                             border-radius: 10px;
                             object-fit: cover;
+                            user-select: none;
                         }
 
-                        @media screen and (max-width: 700px) {& img {
-                            height: 160px;
-                            width: 160px;
-                        }}
-                        @media screen and (max-width: 400px) {& img {
-                            height: 110px;
-                            width: 110px;
-                        }}
+                        @media screen and (max-width: 700px) {
+                            & img {
+                                border-radius: 5px;
+                                height: 160px;
+                                width: 160px;
+                            }
+                        }
+
+                        @media screen and (max-width: 400px) {
+                            & img {
+                                height: 110px;
+                                width: 110px;
+                            }
+                        }
                     }
 
                     & .details {
                         display: flex;
                         flex-direction: column;
                         // border: 1px solid rgb(0, 157, 255);
-                        
+
+                        // font-family: 'Amarante', cursive;
+                        font-family: 'Forum', cursive;
+                        // font-family: 'Philosopher', sans-serif;
+                        // font-family: 'Tenali Ramakrishna', sans-serif;
+
                         & .instructor {
                             display: flex;
                             flex-direction: row;
-                            
+
                             & .instA {
                                 margin: 10px;
-                                font-size: 1.5rem;
-                                font-family: 'GFS Neohellenic', sans-serif;
+                                font-size: 1.3rem;
+                                font-weight: bold;
                                 // border: 1px solid black;
-                                
+
                                 &::selection {
                                     color: $---selection-color;
                                     background: $---selection-bg;
                                 }
                             }
-                            
+
                             & .instB {
                                 margin: 10px;
-                                font-size: 1.5rem;
-                                font-family: 'GFS Neohellenic', sans-serif;
+                                font-size: 1.3rem;
                                 // border: 1px solid black;
-                                
+
                                 &::selection {
                                     color: $---selection-color;
                                     background: $---selection-bg;
@@ -373,23 +389,24 @@
                         & .contact {
                             display: flex;
                             flex-direction: row;
-                            
+
                             & .contA {
                                 margin: 10px;
-                                font-size: 1.5rem;
-                                font-family: 'GFS Neohellenic', sans-serif;
+                                font-size: 1.3rem;
+                                font-weight: bold;
                                 // border: 1px solid black;
-                                
+
                                 &::selection {
                                     color: $---selection-color;
                                     background: $---selection-bg;
                                 }
                             }
-                            
+
                             & .contB {
                                 margin: 10px;
-                                font-size: 1.5rem;
-                                font-family: 'GFS Neohellenic', sans-serif;
+                                font-size: 1.3rem;
+                                word-break: break-word;
+
                                 // border: 1px solid black;
 
                                 &::selection {
@@ -402,13 +419,27 @@
                 }
 
                 & .brunch {
-                    & .mainLocation {}
+                    // font-family: 'Amarante', cursive;
+                    font-family: 'Forum', cursive;
+                    // font-family: 'Philosopher', sans-serif;
+                    // font-family: 'Tenali Ramakrishna', sans-serif;
+
+                    & .mainLocation {
+                        margin: 10px;
+                        font-size: 1.3rem;
+                        font-weight: bold;
+                        // border: 1px solid black;
+
+                        &::selection {
+                            color: $---selection-color;
+                            background: $---selection-bg;
+                        }
+                    }
 
                     & .locationList {
                         & .location {
                             margin: 10px;
-                            font-size: 1.5rem;
-                            font-family: 'GFS Neohellenic', sans-serif;
+                            font-size: 1.3rem;
                             // border: 1px solid black;
 
                             &::selection {
