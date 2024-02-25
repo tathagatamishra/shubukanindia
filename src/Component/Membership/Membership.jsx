@@ -53,7 +53,7 @@ export default function Membership() {
       brunch: [
         {
           mainLocation: "Purba Medinipur",
-          brunchAddress: ["Egra, Purba Medinipur West Bengal"],
+          brunchAddress: ["Egra Sarada Shashi Bhusan College, Egra, Purba Medinipur West Bengal"],
         },
       ],
     },

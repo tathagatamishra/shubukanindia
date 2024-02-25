@@ -358,6 +358,10 @@
                         // font-family: 'Philosopher', sans-serif;
                         // font-family: 'Tenali Ramakrishna', sans-serif;
 
+                        @media screen and (max-width: 700px) {
+                            gap: 10px;
+                        }
+
                         & .instructor {
                             display: flex;
                             flex-direction: row;
@@ -382,6 +386,20 @@
                                 &::selection {
                                     color: $---selection-color;
                                     background: $---selection-bg;
+                                }
+                            }
+
+                            @media screen and (max-width: 700px) {
+                                flex-direction: column;
+
+                                & .instA {
+                                    margin: 0 10px;
+                                    font-size: 1.1rem;
+                                }
+
+                                & .instB {
+                                    margin: 0 10px;
+                                    font-size: 1.3rem;
                                 }
                             }
                         }
@@ -412,6 +430,20 @@
                                 &::selection {
                                     color: $---selection-color;
                                     background: $---selection-bg;
+                                }
+                            }
+
+                            @media screen and (max-width: 700px) {
+                                flex-direction: column;
+
+                                & .contA {
+                                    margin: 0 10px;
+                                    font-size: 1.1rem;
+                                }
+
+                                & .contB {
+                                    margin: 0 10px;
+                                    font-size: 1.1rem;
                                 }
                             }
                         }
