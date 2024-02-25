@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Membership.scss";
 import { IoSearch } from "react-icons/io5";
-import dipak_maity from "../../dojo_instructors/dipak_maity.jpeg"
-import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg"
-import nanak_roy from "../../dojo_instructors/nanak_roy.jpg"
-import raj_chatterjee from "../../dojo_instructors/raj_chatterjee.jpg"
-import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg"
+import { IoClose } from "react-icons/io5";
 
+import dipak_maity from "../../dojo_instructors/dipak_maity.jpeg";
+import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
+import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
+import raj_chatterjee from "../../dojo_instructors/raj_chatterjee.jpg";
+import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg";
 
 export default function Membership() {
-  // useEffect(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //   });
-  // }, []);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   const navigate = useNavigate();
   const [clicked, setClicked] = useState(false);
@@ -25,6 +26,9 @@ export default function Membership() {
       navigate("/contact");
     }, 800);
   };
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredDojos, setFilteredDojos] = useState([]);
 
   const dojoArr = [
     {
@@ -53,7 +57,9 @@ export default function Membership() {
       brunch: [
         {
           mainLocation: "Purba Medinipur",
-          brunchAddress: ["Egra Sarada Shashi Bhusan College, Egra, Purba Medinipur West Bengal"],
+          brunchAddress: [
+            "Egra Sarada Shashi Bhusan College, Egra, Purba Medinipur West Bengal",
+          ],
         },
       ],
     },
@@ -115,6 +121,109 @@ export default function Membership() {
     },
   ];
 
+  // Filter dojos based on search term
+  const handleSearch = () => {
+    const filtered = dojoArr.filter((dojo) => {
+      // Check if any branch location matches the search term
+      const branchMatch = dojo.brunch.some(
+        (branch) =>
+          branch.mainLocation
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          branch.brunchAddress.some((address) =>
+            address.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+
+      // Check if any contact detail matches the search term
+      const contactMatch = dojo.contact.some(
+        (contact) => contact[1].toLowerCase().includes(searchTerm.toLowerCase()) // Assuming contact[1] contains the contact detail value
+      );
+
+      // Check if instructor, dojo name, branch location, branch address, or contact detail matches the search term
+      return (
+        dojo.instructor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        dojo.dojoName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        branchMatch ||
+        contactMatch
+      );
+    });
+    setFilteredDojos(filtered);
+  };
+
+  // Handle input change in the search bar
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Handle keypress event to trigger search on Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const dojoNavStyle = {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    float: "right",
+  };
+  const searchContainerStyle = {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  };
+
+  const [searchStyle, setSearchStyle] = useState({});
+  const [navStyle, setNavStyle] = useState({});
+  const [containerStyle, setContainerStyle] = useState({});
+  const [inputStyle, setInputStyle] = useState({
+    width: "60px",
+    transition: "300ms",
+  });
+  const [crossStyle, setCrossStyle] = useState({});
+  const [isInput, setIsInput] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isInput) {
+      setNavStyle(dojoNavStyle);
+      setContainerStyle(searchContainerStyle);
+      setSearchStyle({ position: "absolute" });
+      setInputStyle({ width: "100%", transition: "300ms" });
+      if (windowWidth < 340) {
+        setCrossStyle({ transform: "translateY(-60px)", opacity: "1" });
+      } else if (windowWidth < 430) {
+        setCrossStyle({ transform: "translateY(-70px)", opacity: "1" });
+      } else if (windowWidth < 500) {
+        setCrossStyle({ transform: "translateY(-80px)", opacity: "1" });
+      } else {
+        setCrossStyle({ transform: "translateY(-85px)", opacity: "1" });
+      }
+    } else {
+      setNavStyle({});
+      setContainerStyle({});
+      setSearchStyle({});
+      setInputStyle({});
+      setSearchTerm("");
+    }
+  }, [isInput, windowWidth]);
+
   return (
     <div className="Membership">
       <section className="Hero">
@@ -145,68 +254,95 @@ export default function Membership() {
       <div className="division"></div>
 
       <section className="Dojo">
-        <div className="dojoNav">
+        <div className="dojoNav" style={navStyle}>
           <h1>Dojo Index</h1>
-          <IoSearch className="search" />
+
+          <div className="searchContainer" style={containerStyle}>
+            {isInput && (
+              <input
+                style={inputStyle}
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+              />
+            )}
+            {isInput && (
+              <IoClose
+                className="cross"
+                onClick={() => setIsInput(false)}
+                style={crossStyle}
+              />
+            )}
+            <IoSearch
+              className="search"
+              style={searchStyle}
+              onClick={() => {
+                handleSearch();
+                setIsInput(true);
+              }}
+            />
+          </div>
         </div>
 
         <div className="dojoList">
-          {dojoArr.map((dojo, index) => (
-            <div key={index} className="dojoBox">
-              {dojo.dojoName && <h2 className="dojoName">{dojo.dojoName}</h2>}
-              {dojo.dojoType && <p className="dojoType">{dojo.dojoType}</p>}
+          {(filteredDojos.length ? filteredDojos : dojoArr).map(
+            (dojo, index) => (
+              <div key={index} className="dojoBox">
+                {dojo.dojoName && <h2 className="dojoName">{dojo.dojoName}</h2>}
+                {dojo.dojoType && <p className="dojoType">{dojo.dojoType}</p>}
 
-              {(dojo.image || dojo.contact || dojo.instructor) && (
-                <div className="dojoDetail">
-                  <div className="imageBox">
-                    {dojo.image && <img src={dojo.image} alt="Dojo" />}
-                  </div>
+                {(dojo.image || dojo.contact || dojo.instructor) && (
+                  <div className="dojoDetail">
+                    <div className="imageBox">
+                      {dojo.image && <img src={dojo.image} alt="Dojo" />}
+                    </div>
 
-                  <div className="details">
-                    {dojo.instructor && (
-                      <div className="instructor">
-                        <p className="instA">Instructor: {""}</p>
-                        <p className="instB">{dojo.instructor}</p>
-                      </div>
-                    )}
-
-                    {dojo.contact.length != 0 &&
-                      dojo.contact.map((contact, index) => (
-                        <div className="contact">
-                          <p className="contA" key={index}>
-                            {contact[0]}: {""}
-                          </p>
-                          <p className="contB" key={index}>
-                            {contact[1]}
-                          </p>
+                    <div className="details">
+                      {dojo.instructor && (
+                        <div className="instructor">
+                          <p className="instA">Instructor: {""}</p>
+                          <p className="instB">{dojo.instructor}</p>
                         </div>
-                      ))}
-                  </div>
-                </div>
-              )}
+                      )}
 
-              {dojo.brunch.length != 0 &&
-                dojo.brunch.map((branch, index) => (
-                  <div key={index} className="brunch">
-                    {branch.mainLocation && (
-                      <p className="mainLocation">{branch.mainLocation}</p>
-                    )}
-
-                    {branch.brunchAddress.length != 0 && (
-                      <ul className="locationList">
-                        {branch.brunchAddress.map((address, index) => (
-                          <li key={index} className="location">
-                            {address}
-                          </li>
+                      {dojo.contact.length != 0 &&
+                        dojo.contact.map((contact, index) => (
+                          <div key={index} className="contact">
+                            <p className="contA">
+                              {contact[0]}: {""}
+                            </p>
+                            <p className="contB">{contact[1]}</p>
+                          </div>
                         ))}
-                      </ul>
-                    )}
+                    </div>
                   </div>
-                ))}
+                )}
 
-              <div className="line"></div>
-            </div>
-          ))}
+                {dojo.brunch.length != 0 &&
+                  dojo.brunch.map((branch, index) => (
+                    <div key={index} className="brunch">
+                      {branch.mainLocation && (
+                        <p className="mainLocation">{branch.mainLocation}</p>
+                      )}
+
+                      {branch.brunchAddress.length != 0 && (
+                        <ul className="locationList">
+                          {branch.brunchAddress.map((address, index) => (
+                            <li key={index} className="location">
+                              {address}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+
+                <div className="line"></div>
+              </div>
+            )
+          )}
         </div>
       </section>
     </div>

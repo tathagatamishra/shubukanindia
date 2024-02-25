@@ -203,8 +203,10 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+            // border: 1px solid red;
 
             & h1 {
+                width: 100%;
                 margin: 1.5rem 0 2rem;
                 color: #2a2727;
                 font-size: 3.5rem;
@@ -225,9 +227,94 @@
                 }
             }
 
-            & .search {
-                font-size: 40px;
-                cursor: pointer;
+            & .searchContainer {
+                // border: 1px solid red;
+                display: flex;
+                position: relative;
+
+                & input {
+                    height: 50px;
+                    padding: 12px 60px 12px 20px;
+                    box-sizing: border-box;
+                    border: 2px solid #ccb5a7;
+                    border-radius: 50px;
+                    background-color: #e0d1c786;
+                    resize: none;
+                    z-index: 2;
+                    font-size: 1.3rem;
+                    color: #2a2727;
+                    font-family: 'Forum', cursive;
+
+                    &::selection {
+                        color: $---selection-color;
+                        background: $---selection-bg;
+                    }
+
+                    animation-name: inputSlide;
+                    animation-duration: .5s;
+                    animation-timing-function: ease-in-out;
+
+                    @keyframes inputSlide {
+                        from {
+                            width: 60px;
+                        }
+
+                        to {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                & .search {
+                    margin-right: 10px;
+                    z-index: 3;
+                    font-size: 40px;
+                    cursor: pointer;
+                    transition: 300ms;
+                    color: $---accent4;
+
+                    &:hover {
+                        scale: 110%;
+                    }
+
+                    &:active {
+                        scale: 95%;
+                    }
+                }
+
+                & .cross {
+                    margin-right: 10px;
+                    z-index: 1;
+                    font-size: 40px;
+                    cursor: pointer;
+                    position: absolute;
+                    transition: 300ms;
+                    color: $---accent4;
+
+                    &:hover {
+                        scale: 104%;
+                    }
+
+                    &:active {
+                        scale: 96%;
+                    }
+
+                    animation-name: crossSlide;
+                    animation-duration: .5s;
+                    animation-timing-function: ease-in-out;
+
+                    @keyframes crossSlide {
+                        from {
+                            opacity: 0;
+                            transform: translateY(0px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(-85px) rotate(360deg);
+                        }
+                    }
+                }
             }
 
             @media screen and (max-width: 700px) {
@@ -237,14 +324,77 @@
                     font-size: 3rem;
                     letter-spacing: 0.2rem;
                 }
+                & .searchContainer {
+                    & input {
+                        height: 45px;
+                        padding: 12px 50px 12px 20px;
+                        font-size: 1.2rem;
+                    }
+    
+                    & .search {
+                        font-size: 35px;
+                    }
+    
+                    & .cross {
+                        font-size: 35px;
+                    }
+                }
             }
 
-            @media screen and (max-width: 400px) {
+            @media screen and (max-width: 500px) {
+                & .cross {
+                    animation-name: crossSlide;
+                    animation-duration: .5s;
+                    animation-timing-function: ease-in-out;
+                    @keyframes crossSlide {
+                        from {
+                            opacity: 0;
+                            transform: translateY(0px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(-80px) rotate(360deg);
+                        }
+                    }
+                }
+            }
+
+            @media screen and (max-width: 430px) {
                 & h1 {
                     margin: 1.5rem 0 1.5rem;
                     color: #2a2727;
                     font-size: 2.5rem;
                     letter-spacing: 0.2rem;
+                }
+                & .searchContainer {
+                    & input {
+                        height: 45px;
+                        padding: 12px 50px 12px 20px;
+                        font-size: 1.1rem;
+                    }
+    
+                    & .search {
+                        font-size: 32px;
+                    }
+    
+                    & .cross {
+                        font-size: 32px;
+                        animation-name: crossSlide;
+                        animation-duration: .5s;
+                        animation-timing-function: ease-in-out;
+                        @keyframes crossSlide {
+                            from {
+                                opacity: 0;
+                                transform: translateY(0px);
+                            }
+    
+                            to {
+                                opacity: 1;
+                                transform: translateY(-70px) rotate(360deg);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -255,8 +405,33 @@
                     letter-spacing: 0.2rem;
                 }
 
-                & .search {
-                    font-size: 32px;
+                & .searchContainer {
+                    & input {
+                        height: 40px;
+                        padding: 12px 50px 12px 20px;
+                        font-size: 1.1rem;
+                    }
+    
+                    & .search {
+                        font-size: 32px;
+                    }
+    
+                    & .cross {
+                        animation-name: crossSlide;
+                        animation-duration: .5s;
+                        animation-timing-function: ease-in-out;
+                        @keyframes crossSlide {
+                            from {
+                                opacity: 0;
+                                transform: translateY(0px);
+                            }
+    
+                            to {
+                                opacity: 1;
+                                transform: translateY(-60px) rotate(360deg);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -279,6 +454,7 @@
             display: flex;
             flex-direction: column;
             // gap: 40px;
+            transition: 300ms;
 
             & .dojoBox {
                 display: flex;
@@ -356,6 +532,7 @@
                         // border: 1px solid rgb(0, 255, 0);
 
                         & img {
+                            filter: sepia(30%) grayscale(30%);
                             height: 200px;
                             width: 200px;
                             border-radius: 10px;
@@ -625,6 +802,10 @@
                     background: radial-gradient(circle, #905043 0%, transparent 100%);
                     opacity: .5;
                     transition: 1000ms;
+
+                    @media screen and (max-width: 430px) {
+                        margin: 2rem 0;
+                    }
                 }
             }
 
