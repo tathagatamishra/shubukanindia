@@ -9,6 +9,7 @@ import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
 import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
 import raj_chatterjee from "../../dojo_instructors/raj_chatterjee.jpg";
 import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg";
+import img2 from "../../thumbnail/sabyasachi1.jpg";
 
 export default function Membership() {
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function Membership() {
       dojoName: "Shorin Ryu Shubukan Uema dojo India",
       dojoType: "Honbu Dojo",
       instructor: "Sabyasachi Giri",
-      image: sabyasachi_giri,
+      image: img2,
       contact: [
         ["Phone", "9851852499"],
         ["Email", "shorinryushubukanindia@gmail.com"],
