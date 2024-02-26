@@ -9,6 +9,7 @@ import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
 import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
 import raj_chatterjee from "../../dojo_instructors/raj_chatterjee2.jpg";
 import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg";
+import img2 from "../../thumbnail/sabyasachi1.jpg";
 
 export default function Membership() {
   useEffect(() => {
@@ -34,8 +35,8 @@ export default function Membership() {
     {
       dojoName: "Shorin Ryu Shubukan Uema dojo India",
       dojoType: "Honbu Dojo",
-      instructor: "Sabyasachi Giri",
-      image: sabyasachi_giri,
+      instructor: "Sensei Sabyasachi Giri",
+      image: img2,
       contact: [
         ["Phone", "9851852499"],
         ["Email", "shorinryushubukanindia@gmail.com"],
@@ -88,7 +89,7 @@ export default function Membership() {
       contact: [["Phone", "9734301071"]],
       brunch: [
         {
-          mainLocation: "Paschim Medinipur",
+          mainLocation: "Hooghly",
           brunchAddress: [
             "Bengai Netaji Club Ground",
             "Goghat Debangan Nursery School Ground",
@@ -97,7 +98,7 @@ export default function Membership() {
           ],
         },
         {
-          mainLocation: "Hooghly",
+          mainLocation: "Paschim Medinipur",
           brunchAddress: ["Ramjibanpur Babulal High School Ground"],
         },
       ],
