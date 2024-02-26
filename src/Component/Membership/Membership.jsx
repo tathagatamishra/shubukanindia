@@ -165,18 +165,16 @@ export default function Membership() {
   };
 
   const dojoNavStyle = {
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
     float: "right",
-    transition: "300ms"
+    transition: "300ms",
   };
   const searchContainerStyle = {
     width: "100%",
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    transition: "300ms"
+    transition: "300ms",
+    transform: 'translateY(70px)'
   };
 
   const [searchStyle, setSearchStyle] = useState({});
@@ -186,6 +184,7 @@ export default function Membership() {
     width: "60px",
     transition: "300ms",
   });
+  const [dojoListStyle, setDojoListStyle] = useState({});
   const [crossStyle, setCrossStyle] = useState({});
   const [isInput, setIsInput] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
@@ -209,14 +208,15 @@ export default function Membership() {
       setContainerStyle(searchContainerStyle);
       setSearchStyle({ position: "absolute" });
       setInputStyle({ width: "100%", transition: "300ms" });
+      setDojoListStyle({marginTop: '80px'})
       if (windowWidth < 340) {
-        setCrossStyle({ transform: "translateY(-60px)", opacity: "1" });
+        setCrossStyle({ transform: "translateY(-66px)", opacity: "1" });
       } else if (windowWidth < 430) {
         setCrossStyle({ transform: "translateY(-70px)", opacity: "1" });
       } else if (windowWidth < 500) {
-        setCrossStyle({ transform: "translateY(-80px)", opacity: "1" });
+        setCrossStyle({ transform: "translateY(-72px)", opacity: "1" });
       } else {
-        setCrossStyle({ transform: "translateY(-85px)", opacity: "1" });
+        setCrossStyle({ transform: "translateY(-72px)", opacity: "1" });
       }
     } else {
       setNavStyle({});
@@ -224,6 +224,7 @@ export default function Membership() {
       setSearchStyle({});
       setInputStyle({});
       setSearchTerm("");
+      setDojoListStyle({})
     }
   }, [isInput, windowWidth]);
 
@@ -289,7 +290,7 @@ export default function Membership() {
           </div>
         </div>
 
-        <div className="dojoList">
+        <div className="dojoList" style={dojoListStyle}>
           {(filteredDojos.length ? filteredDojos : dojoArr).map(
             (dojo, index) => (
               <div key={index} className="dojoBox">

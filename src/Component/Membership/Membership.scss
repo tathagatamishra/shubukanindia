@@ -200,9 +200,10 @@
         & .dojoNav {
             width: 100%;
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            position: relative;
             // border: 1px solid red;
 
             & h1 {
@@ -211,26 +212,23 @@
                 color: #2a2727;
                 font-size: 3.5rem;
                 letter-spacing: 0.2rem;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
                 font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
+                // border: 1px solid red;
 
                 &::selection {
                     color: $---selection-color;
                     background: $---selection-bg;
                 }
+
+                @media screen and (max-width: 700px) {}
             }
 
             & .searchContainer {
-                // border: 1px solid red;
                 display: flex;
-                position: relative;
+                flex-direction: row;
+                justify-content: flex-end;
+                width: 100%;
+                position: absolute;
 
                 & input {
                     height: 50px;
@@ -311,7 +309,7 @@
 
                         to {
                             opacity: 1;
-                            transform: translateY(-85px) rotate(360deg);
+                            transform: translateY(-70px) rotate(360deg);
                         }
                     }
                 }
@@ -324,17 +322,18 @@
                     font-size: 3rem;
                     letter-spacing: 0.2rem;
                 }
+
                 & .searchContainer {
                     & input {
                         height: 45px;
                         padding: 12px 50px 12px 20px;
                         font-size: 1.2rem;
                     }
-    
+
                     & .search {
                         font-size: 35px;
                     }
-    
+
                     & .cross {
                         font-size: 35px;
                     }
@@ -346,6 +345,7 @@
                     animation-name: crossSlide;
                     animation-duration: .5s;
                     animation-timing-function: ease-in-out;
+
                     @keyframes crossSlide {
                         from {
                             opacity: 0;
@@ -354,7 +354,7 @@
 
                         to {
                             opacity: 1;
-                            transform: translateY(-80px) rotate(360deg);
+                            transform: translateY(-72px) rotate(360deg);
                         }
                     }
                 }
@@ -367,28 +367,30 @@
                     font-size: 2.5rem;
                     letter-spacing: 0.2rem;
                 }
+
                 & .searchContainer {
                     & input {
                         height: 45px;
                         padding: 12px 50px 12px 20px;
                         font-size: 1.1rem;
                     }
-    
+
                     & .search {
                         font-size: 32px;
                     }
-    
+
                     & .cross {
                         font-size: 32px;
                         animation-name: crossSlide;
                         animation-duration: .5s;
                         animation-timing-function: ease-in-out;
+
                         @keyframes crossSlide {
                             from {
                                 opacity: 0;
                                 transform: translateY(0px);
                             }
-    
+
                             to {
                                 opacity: 1;
                                 transform: translateY(-70px) rotate(360deg);
@@ -411,24 +413,25 @@
                         padding: 12px 50px 12px 20px;
                         font-size: 1.1rem;
                     }
-    
+
                     & .search {
                         font-size: 32px;
                     }
-    
+
                     & .cross {
                         animation-name: crossSlide;
                         animation-duration: .5s;
                         animation-timing-function: ease-in-out;
+
                         @keyframes crossSlide {
                             from {
                                 opacity: 0;
                                 transform: translateY(0px);
                             }
-    
+
                             to {
                                 opacity: 1;
-                                transform: translateY(-60px) rotate(360deg);
+                                transform: translateY(-66px) rotate(360deg);
                             }
                         }
                     }
