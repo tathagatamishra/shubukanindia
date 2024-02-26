@@ -169,12 +169,14 @@ export default function Membership() {
     justifyContent: "flex-start",
     alignItems: "flex-start",
     float: "right",
+    transition: "300ms"
   };
   const searchContainerStyle = {
     width: "100%",
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
+    transition: "300ms"
   };
 
   const [searchStyle, setSearchStyle] = useState({});
