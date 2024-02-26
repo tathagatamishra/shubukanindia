@@ -88,7 +88,7 @@ export default function Membership() {
       contact: [["Phone", "9734301071"]],
       brunch: [
         {
-          mainLocation: "Paschim Medinipur",
+          mainLocation: "Hooghly",
           brunchAddress: [
             "Bengai Netaji Club Ground",
             "Goghat Debangan Nursery School Ground",
@@ -97,7 +97,7 @@ export default function Membership() {
           ],
         },
         {
-          mainLocation: "Hooghly",
+          mainLocation: "Paschim Medinipur",
           brunchAddress: ["Ramjibanpur Babulal High School Ground"],
         },
       ],
