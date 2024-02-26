@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import dipak_maity from "../../dojo_instructors/dipak_maity.jpeg";
 import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
 import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
-import raj_chatterjee from "../../dojo_instructors/raj_chatterjee.jpg";
+import raj_chatterjee from "../../dojo_instructors/raj_chatterjee2.jpg";
 import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg";
 
 export default function Membership() {
