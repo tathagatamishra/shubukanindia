@@ -51,7 +51,7 @@ export default function Membership() {
     },
     {
       dojoName: "Fudoshin Martial Arts Academy",
-      instructor: "Dipak Maity",
+      instructor: "Dipak Kumar Maity",
       image: dipak_maity,
       contact: [["Phone", "7478327686"]],
       brunch: [
