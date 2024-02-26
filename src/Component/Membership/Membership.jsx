@@ -181,7 +181,7 @@ export default function Membership() {
   const [navStyle, setNavStyle] = useState({});
   const [containerStyle, setContainerStyle] = useState({});
   const [inputStyle, setInputStyle] = useState({
-    width: "60px",
+    width: "100%",
     transition: "300ms",
   });
   const [dojoListStyle, setDojoListStyle] = useState({});

@@ -233,7 +233,7 @@
 
                 & input {
                     height: 50px;
-                    padding: 12px 60px 12px 20px;
+                    
                     box-sizing: border-box;
                     border: 2px solid #ccb5a7;
                     border-radius: 50px;
@@ -255,11 +255,15 @@
 
                     @keyframes inputSlide {
                         from {
-                            width: 60px;
+                            opacity: 0;
+                            width: 0px;
+                            padding: 0;
                         }
 
                         to {
+                            opacity: 1;
                             width: 100%;
+                            padding: 12px 60px 12px 20px;
                         }
                     }
                 }
