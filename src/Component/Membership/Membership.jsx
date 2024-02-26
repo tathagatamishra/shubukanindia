@@ -154,6 +154,7 @@ export default function Membership() {
   // Handle input change in the search bar
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
+    handleSearch()
   };
 
   // Handle keypress event to trigger search on Enter key press
