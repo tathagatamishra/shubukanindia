@@ -5,6 +5,7 @@ import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { CiGrid42, CiGrid2H } from "react-icons/ci";
 
 import img_1 from "../../images/chibana.jpg";
 import img_4 from "../../images/contai_group.jpeg";
@@ -116,128 +117,112 @@ import thumb_53 from "../../thumbnail/group (13).jpeg";
 import thumb_54 from "../../thumbnail/group (12).jpeg";
 import thumb_55 from "../../thumbnail/cafe.jpeg";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
+import ImageUploader from "../UIComponent/ImageUploader";
 
 export default function Gallery({ setShowNav }) {
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
 
-  
   const imgArray = [
-    img_1,
-    img_21,
-    img_4,
-    img_3,
-    img_5,
-    img_6,
-    img_7,
-    img_8,
-    img_9,
-    img_10,
-    img_11,
-    img_12,
-    img_24,
-    img_25,
-    img_14,
-    img_13,
-    img_15,
-    img_16,
-    img_17,
-    img_18,
-    img_20,
-    // img_23,
-    img_26,
-    img_22,
-    img_19,
-    img_27,
-    img_28,
-    img_29,
-    img_30,
-    img_31,
-    img_32,
-    img_33,
-    img_34,
-    img_35,
-    // img_36,
-    img_37,
-    // img_38,
-    // img_39,
-    // img_40,
-    // img_41,
-    // img_42,
-    // img_43,
-    // img_44,
-    img_45,
-    img_46,
-    img_47,
-    img_48,
-    img_49,
-    img_50,
-    img_51,
-    img_52,
-    img_53,
-    img_54,
-    img_55,
+    {imgItem: img_1},
+    {imgItem: img_21},
+    {imgItem: img_4},
+    {imgItem: img_3},
+    {imgItem: img_5},
+    {imgItem: img_6},
+    {imgItem: img_7},
+    {imgItem: img_8},
+    {imgItem: img_9},
+    {imgItem: img_10},
+    {imgItem: img_11},
+    {imgItem: img_12},
+    {imgItem: img_24},
+    {imgItem: img_25},
+    {imgItem: img_14},
+    {imgItem: img_13},
+    {imgItem: img_15},
+    {imgItem: img_16},
+    {imgItem: img_17},
+    {imgItem: img_18},
+    {imgItem: img_20},
+    {imgItem: img_26},
+    {imgItem: img_22},
+    {imgItem: img_19},
+    {imgItem: img_27},
+    {imgItem: img_28},
+    {imgItem: img_29},
+    {imgItem: img_30},
+    {imgItem: img_31},
+    {imgItem: img_32},
+    {imgItem: img_33},
+    {imgItem: img_34},
+    {imgItem: img_35},
+    {imgItem: img_37},
+    {imgItem: img_45},
+    {imgItem: img_46},
+    {imgItem: img_47},
+    {imgItem: img_48},
+    {imgItem: img_49},
+    {imgItem: img_50},
+    {imgItem: img_51},
+    {imgItem: img_52},
+    {imgItem: img_53},
+    {imgItem: img_54},
+    {imgItem: img_55},
   ];
   const thumbArray = [
-    thumb_1,
-    thumb_21,
-    thumb_4,
-    thumb_3,
-    thumb_5,
-    thumb_6,
-    thumb_7,
-    thumb_8,
-    thumb_9,
-    thumb_10,
-    thumb_11,
-    thumb_12,
-    thumb_24,
-    thumb_25,
-    thumb_14,
-    thumb_13,
-    thumb_15,
-    thumb_16,
-    thumb_17,
-    thumb_18,
-    thumb_20,
-    // thumb_23,
-    thumb_26,
-    thumb_22,
-    thumb_19,
-    thumb_27,
-    thumb_28,
-    thumb_29,
-    thumb_30,
-    thumb_31,
-    thumb_32,
-    thumb_33,
-    thumb_34,
-    thumb_35,
-    // thumb_36,
-    thumb_37,
-    // thumb_38,
-    // thumb_39,
-    // thumb_40,
-    // thumb_41,
-    // thumb_42,
-    // thumb_43,
-    // thumb_44,
-    thumb_45,
-    thumb_46,
-    thumb_47,
-    thumb_48,
-    thumb_49,
-    thumb_50,
-    thumb_51,
-    thumb_52,
-    thumb_53,
-    thumb_54,
-    thumb_55,
+    {imgItem: thumb_1, tags: ['sensei']},
+    {imgItem: thumb_21, tags: ['sensei']},
+    {imgItem: thumb_4, tags: ['group']},
+    {imgItem: thumb_3, tags: ['group']},
+    {imgItem: thumb_5, tags: ['group']},
+    {imgItem: thumb_6, tags: ['group']},
+    {imgItem: thumb_7, tags: ['group']},
+    {imgItem: thumb_8, tags: ['group']},
+    {imgItem: thumb_9, tags: ['group']},
+    {imgItem: thumb_10, tags: ['group']},
+    {imgItem: thumb_11, tags: ['group']},
+    {imgItem: thumb_12, tags: ['group']},
+    {imgItem: thumb_24, tags: ['group']},
+    {imgItem: thumb_25, tags: ['group']},
+    {imgItem: thumb_14, tags: ['group']},
+    {imgItem: thumb_13, tags: ['']},
+    {imgItem: thumb_15, tags: ['']},
+    {imgItem: thumb_16, tags: ['']},
+    {imgItem: thumb_17, tags: ['']},
+    {imgItem: thumb_18, tags: ['']},
+    {imgItem: thumb_20, tags: ['']},
+    {imgItem: thumb_26, tags: ['']},
+    {imgItem: thumb_22, tags: ['']},
+    {imgItem: thumb_19, tags: ['']},
+    {imgItem: thumb_27, tags: ['']},
+    {imgItem: thumb_28, tags: ['']},
+    {imgItem: thumb_29, tags: ['']},
+    {imgItem: thumb_30, tags: ['']},
+    {imgItem: thumb_31, tags: ['']},
+    {imgItem: thumb_32, tags: ['']},
+    {imgItem: thumb_33, tags: ['']},
+    {imgItem: thumb_34, tags: ['']},
+    {imgItem: thumb_35, tags: ['']},
+    {imgItem: thumb_37, tags: ['']},
+    {imgItem: thumb_45, tags: ['']},
+    {imgItem: thumb_46, tags: ['']},
+    {imgItem: thumb_47, tags: ['']},
+    {imgItem: thumb_48, tags: ['']},
+    {imgItem: thumb_49, tags: ['']},
+    {imgItem: thumb_50, tags: ['']},
+    {imgItem: thumb_51, tags: ['']},
+    {imgItem: thumb_52, tags: ['']},
+    {imgItem: thumb_53, tags: ['']},
+    {imgItem: thumb_54, tags: ['']},
+    {imgItem: thumb_55, tags: ['']},
   ];
 
+  const tagsArray = ["sensei", "group", "training", "japan", "selfie"];
+
+  const [isAlign, setIsAlign] = useState(true);
   const [popImg, setPopImg] = useState("");
   const [imgClicked, setImgClicked] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -266,6 +251,7 @@ export default function Gallery({ setShowNav }) {
       <section className="Hero">
         <h1>Gallery</h1>
         <p>Beyond the realms</p>
+        {/* <ImageUploader /> */}
       </section>
 
       {/* {imgClicked && (
@@ -279,7 +265,7 @@ export default function Gallery({ setShowNav }) {
 
       {isOpen && (
         <Lightbox
-          mainSrc={imgArray[photoIndex]}
+          mainSrc={imgArray[photoIndex].imgItem}
           nextSrc={imgArray[(photoIndex + 1) % imgArray.length]}
           prevSrc={
             imgArray[(photoIndex + imgArray.length - 1) % imgArray.length]
@@ -294,33 +280,78 @@ export default function Gallery({ setShowNav }) {
         />
       )}
 
-      <section className="gallery-image">
-
-        <div>
-          {thumbArray.map((image, index) => (
-            <div
-              className="image"
-              key={index}
-              onClick={() => {
-                setIsOpen(true);
-                setPhotoIndex(index);
-              }}
-            >
-              <LazyLoadImage
-                className="img"
-                alt={`Image ${index + 1}`}
-                effect="blur"
-                wrapperProps={{
-                  // If you need to, you can tweak the effect transition using the wrapper style.
-                  style: { transitionDelay: "0s" },
-                }}
-                src={image}
-              />
-
+      <section className="align-option">
+        <div className="options">
+          {isAlign ? (
+            <div className="align" onClick={() => setIsAlign(false)}>
+              <CiGrid42 />
             </div>
-          ))}
+          ) : (
+            <div className="align" onClick={() => setIsAlign(true)}>
+              <CiGrid2H />
+            </div>
+          )}
         </div>
       </section>
+
+      {isAlign ? (
+        <section className="align-image">
+          <div>
+            {thumbArray.map((image, index) => (
+              <div
+                className="image"
+                key={index}
+                onClick={() => {
+                  setIsOpen(true);
+                  setPhotoIndex(index);
+                }}
+              >
+                <LazyLoadImage
+                  className="img"
+                  alt={`Image ${index + 1}`}
+                  effect="blur"
+                  wrapperProps={{
+                    // If you need to, you can tweak the effect transition using the wrapper style.
+                    style: { transitionDelay: "0s" },
+                  }}
+                  src={image.imgItem}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section className="notAlign-image">
+          {tagsArray.map((tag, i) => (
+            <div className="rowBox" key={i}>
+              <h1>{tag}</h1>
+              {thumbArray
+                .filter((num) => num.tags.include == "group")
+                .map((image, index) => (
+                  <div
+                    className="image"
+                    key={index}
+                    onClick={() => {
+                      setIsOpen(true);
+                      setPhotoIndex(index);
+                    }}
+                  >
+                    <LazyLoadImage
+                      className="img"
+                      alt={`Image ${index + 1}`}
+                      effect="blur"
+                      wrapperProps={{
+                        // If you need to, you can tweak the effect transition using the wrapper style.
+                        style: { transitionDelay: "0s" },
+                      }}
+                      src={image.imgItem}
+                    />
+                  </div>
+                ))}
+            </div>
+          ))}
+        </section>
+      )}
 
       <div className="line"></div>
     </div>
