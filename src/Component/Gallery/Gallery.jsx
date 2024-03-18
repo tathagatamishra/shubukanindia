@@ -126,98 +126,98 @@ export default function Gallery({ setShowNav }) {
   }, []);
 
   const imgArray = [
-    {imgItem: img_1},
-    {imgItem: img_21},
-    {imgItem: img_4},
-    {imgItem: img_3},
-    {imgItem: img_5},
-    {imgItem: img_6},
-    {imgItem: img_7},
-    {imgItem: img_8},
-    {imgItem: img_9},
-    {imgItem: img_10},
-    {imgItem: img_11},
-    {imgItem: img_12},
-    {imgItem: img_24},
-    {imgItem: img_25},
-    {imgItem: img_14},
-    {imgItem: img_13},
-    {imgItem: img_15},
-    {imgItem: img_16},
-    {imgItem: img_17},
-    {imgItem: img_18},
-    {imgItem: img_20},
-    {imgItem: img_26},
-    {imgItem: img_22},
-    {imgItem: img_19},
-    {imgItem: img_27},
-    {imgItem: img_28},
-    {imgItem: img_29},
-    {imgItem: img_30},
-    {imgItem: img_31},
-    {imgItem: img_32},
-    {imgItem: img_33},
-    {imgItem: img_34},
-    {imgItem: img_35},
-    {imgItem: img_37},
-    {imgItem: img_45},
-    {imgItem: img_46},
-    {imgItem: img_47},
-    {imgItem: img_48},
-    {imgItem: img_49},
-    {imgItem: img_50},
-    {imgItem: img_51},
-    {imgItem: img_52},
-    {imgItem: img_53},
-    {imgItem: img_54},
-    {imgItem: img_55},
+    { imgItem: img_1 },
+    { imgItem: img_21 },
+    { imgItem: img_4 },
+    { imgItem: img_3 },
+    { imgItem: img_5 },
+    { imgItem: img_6 },
+    { imgItem: img_7 },
+    { imgItem: img_8 },
+    { imgItem: img_9 },
+    { imgItem: img_10 },
+    { imgItem: img_11 },
+    { imgItem: img_12 },
+    { imgItem: img_24 },
+    { imgItem: img_25 },
+    { imgItem: img_14 },
+    { imgItem: img_13 },
+    { imgItem: img_15 },
+    { imgItem: img_16 },
+    { imgItem: img_17 },
+    { imgItem: img_18 },
+    { imgItem: img_20 },
+    { imgItem: img_26 },
+    { imgItem: img_22 },
+    { imgItem: img_19 },
+    { imgItem: img_27 },
+    { imgItem: img_28 },
+    { imgItem: img_29 },
+    { imgItem: img_30 },
+    { imgItem: img_31 },
+    { imgItem: img_32 },
+    { imgItem: img_33 },
+    { imgItem: img_34 },
+    { imgItem: img_35 },
+    { imgItem: img_37 },
+    { imgItem: img_45 },
+    { imgItem: img_46 },
+    { imgItem: img_47 },
+    { imgItem: img_48 },
+    { imgItem: img_49 },
+    { imgItem: img_50 },
+    { imgItem: img_51 },
+    { imgItem: img_52 },
+    { imgItem: img_53 },
+    { imgItem: img_54 },
+    { imgItem: img_55 },
   ];
   const thumbArray = [
-    {imgItem: thumb_1, tags: ['sensei']},
-    {imgItem: thumb_21, tags: ['sensei']},
-    {imgItem: thumb_4, tags: ['group']},
-    {imgItem: thumb_3, tags: ['group']},
-    {imgItem: thumb_5, tags: ['group']},
-    {imgItem: thumb_6, tags: ['group']},
-    {imgItem: thumb_7, tags: ['group']},
-    {imgItem: thumb_8, tags: ['group']},
-    {imgItem: thumb_9, tags: ['group']},
-    {imgItem: thumb_10, tags: ['group']},
-    {imgItem: thumb_11, tags: ['group']},
-    {imgItem: thumb_12, tags: ['group']},
-    {imgItem: thumb_24, tags: ['group']},
-    {imgItem: thumb_25, tags: ['group']},
-    {imgItem: thumb_14, tags: ['group']},
-    {imgItem: thumb_13, tags: ['']},
-    {imgItem: thumb_15, tags: ['']},
-    {imgItem: thumb_16, tags: ['']},
-    {imgItem: thumb_17, tags: ['']},
-    {imgItem: thumb_18, tags: ['']},
-    {imgItem: thumb_20, tags: ['']},
-    {imgItem: thumb_26, tags: ['']},
-    {imgItem: thumb_22, tags: ['']},
-    {imgItem: thumb_19, tags: ['']},
-    {imgItem: thumb_27, tags: ['']},
-    {imgItem: thumb_28, tags: ['']},
-    {imgItem: thumb_29, tags: ['']},
-    {imgItem: thumb_30, tags: ['']},
-    {imgItem: thumb_31, tags: ['']},
-    {imgItem: thumb_32, tags: ['']},
-    {imgItem: thumb_33, tags: ['']},
-    {imgItem: thumb_34, tags: ['']},
-    {imgItem: thumb_35, tags: ['']},
-    {imgItem: thumb_37, tags: ['']},
-    {imgItem: thumb_45, tags: ['']},
-    {imgItem: thumb_46, tags: ['']},
-    {imgItem: thumb_47, tags: ['']},
-    {imgItem: thumb_48, tags: ['']},
-    {imgItem: thumb_49, tags: ['']},
-    {imgItem: thumb_50, tags: ['']},
-    {imgItem: thumb_51, tags: ['']},
-    {imgItem: thumb_52, tags: ['']},
-    {imgItem: thumb_53, tags: ['']},
-    {imgItem: thumb_54, tags: ['']},
-    {imgItem: thumb_55, tags: ['']},
+    { imgItem: thumb_1, tags: ["sensei"] },
+    { imgItem: thumb_21, tags: ["sensei"] },
+    { imgItem: thumb_4, tags: ["group"] },
+    { imgItem: thumb_3, tags: ["group"] },
+    { imgItem: thumb_5, tags: ["group"] },
+    { imgItem: thumb_6, tags: ["group"] },
+    { imgItem: thumb_7, tags: ["group"] },
+    { imgItem: thumb_8, tags: ["group"] },
+    { imgItem: thumb_9, tags: ["group"] },
+    { imgItem: thumb_10, tags: ["group"] },
+    { imgItem: thumb_11, tags: ["group"] },
+    { imgItem: thumb_12, tags: ["group"] },
+    { imgItem: thumb_24, tags: ["sensei"] },
+    { imgItem: thumb_25, tags: ["group"] },
+    { imgItem: thumb_14, tags: ["group"] },
+    { imgItem: thumb_13, tags: ["group"] },
+    { imgItem: thumb_15, tags: ["group"] },
+    { imgItem: thumb_16, tags: ["selfie"] },
+    { imgItem: thumb_17, tags: ["selfie"] },
+    { imgItem: thumb_18, tags: ["training"] },
+    { imgItem: thumb_20, tags: ["sensei"] },
+    { imgItem: thumb_26, tags: ["selfie"] },
+    { imgItem: thumb_22, tags: ["sensei"] },
+    { imgItem: thumb_19, tags: ["sensei"] },
+    { imgItem: thumb_27, tags: ["selfie"] },
+    { imgItem: thumb_28, tags: ["selfie"] },
+    { imgItem: thumb_29, tags: ["selfie"] },
+    { imgItem: thumb_30, tags: ["selfie"] },
+    { imgItem: thumb_31, tags: ["selfie"] },
+    { imgItem: thumb_32, tags: ["selfie"] },
+    { imgItem: thumb_33, tags: ["japan"] },
+    { imgItem: thumb_34, tags: ["selfie"] },
+    { imgItem: thumb_35, tags: ["selfie"] },
+    { imgItem: thumb_37, tags: ["training"] },
+    { imgItem: thumb_45, tags: ["training"] },
+    { imgItem: thumb_46, tags: ["training"] },
+    { imgItem: thumb_47, tags: ["training"] },
+    { imgItem: thumb_48, tags: ["training"] },
+    { imgItem: thumb_49, tags: ["selfie"] },
+    { imgItem: thumb_50, tags: ["group"] },
+    { imgItem: thumb_51, tags: ["group"] },
+    { imgItem: thumb_52, tags: ["group"] },
+    { imgItem: thumb_53, tags: ["group"] },
+    { imgItem: thumb_54, tags: ["group"] },
+    { imgItem: thumb_55, tags: ["selfie"] },
   ];
 
   const tagsArray = ["sensei", "group", "training", "japan", "selfie"];
@@ -263,7 +263,7 @@ export default function Gallery({ setShowNav }) {
         </div>
       )} */}
 
-      {isOpen && (
+      {isOpen && isAlign && (
         <Lightbox
           mainSrc={imgArray[photoIndex].imgItem}
           nextSrc={imgArray[(photoIndex + 1) % imgArray.length]}
@@ -325,29 +325,25 @@ export default function Gallery({ setShowNav }) {
           {tagsArray.map((tag, i) => (
             <div className="rowBox" key={i}>
               <h1>{tag}</h1>
-              {thumbArray
-                .filter((num) => num.tags.include == "group")
-                .map((image, index) => (
-                  <div
-                    className="image"
-                    key={index}
-                    onClick={() => {
-                      setIsOpen(true);
-                      setPhotoIndex(index);
-                    }}
-                  >
-                    <LazyLoadImage
-                      className="img"
-                      alt={`Image ${index + 1}`}
-                      effect="blur"
-                      wrapperProps={{
-                        // If you need to, you can tweak the effect transition using the wrapper style.
-                        style: { transitionDelay: "0s" },
-                      }}
-                      src={image.imgItem}
-                    />
-                  </div>
-                ))}
+              <div className="row">
+                {thumbArray
+                  .filter((item) => item.tags.includes(tag))
+                  .map((image, index) => (
+                    <div className="column" key={index}>
+                      <div className="image">
+                        <LazyLoadImage
+                          className="img"
+                          alt={`Image ${index + 1}`}
+                          effect="blur"
+                          wrapperProps={{
+                            style: { transitionDelay: "0s" },
+                          }}
+                          src={image.imgItem}
+                        />
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           ))}
         </section>
