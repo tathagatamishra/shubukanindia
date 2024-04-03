@@ -6,6 +6,10 @@ import "react-18-image-lightbox/style.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { CiGrid42, CiGrid2H } from "react-icons/ci";
+import { HiMiniUserGroup } from "react-icons/hi2";
+import { GiDragonSpiral, GiPunch } from "react-icons/gi";
+import { TbCameraSelfie } from "react-icons/tb";
+import { FaToriiGate } from "react-icons/fa";
 
 import img_1 from "../../images/chibana.jpg";
 import img_4 from "../../images/contai_group.jpeg";
@@ -61,6 +65,11 @@ import img_52 from "../../images/group (14).jpeg";
 import img_53 from "../../images/group (13).jpeg";
 import img_54 from "../../images/group (12).jpeg";
 import img_55 from "../../images/cafe.jpeg";
+import img_56 from "../../images/shuri_castel (2).jpg";
+import img_57 from "../../images/shuri_castel (3).jpg";
+import img_58 from "../../images/tori_gate.jpg";
+import img_59 from "../../images/okinawa.jpg";
+import img_60 from "../../images/okinawa (2).jpg";
 
 import thumb_1 from "../../thumbnail/chibana.jpg";
 import thumb_4 from "../../thumbnail/contai_group.jpeg";
@@ -116,6 +125,11 @@ import thumb_52 from "../../thumbnail/group (14).jpeg";
 import thumb_53 from "../../thumbnail/group (13).jpeg";
 import thumb_54 from "../../thumbnail/group (12).jpeg";
 import thumb_55 from "../../thumbnail/cafe.jpeg";
+import thumb_56 from "../../thumbnail/shuri_castel (2).jpg";
+import thumb_57 from "../../thumbnail/shuri_castel (3).jpg";
+import thumb_58 from "../../thumbnail/tori_gate.jpg";
+import thumb_59 from "../../thumbnail/okinawa.jpg";
+import thumb_60 from "../../thumbnail/okinawa (2).jpg";
 
 import ReactGA from "react-ga";
 import ImageUploader from "../UIComponent/ImageUploader";
@@ -171,6 +185,11 @@ export default function Gallery({ setShowNav }) {
     { imgItem: img_53 },
     { imgItem: img_54 },
     { imgItem: img_55 },
+    { imgItem: img_56 },
+    { imgItem: img_57 },
+    { imgItem: img_58 },
+    { imgItem: img_59 },
+    { imgItem: img_60 },
   ];
   const thumbArray = [
     { imgItem: thumb_1, tags: ["sensei"] },
@@ -203,7 +222,7 @@ export default function Gallery({ setShowNav }) {
     { imgItem: thumb_30, tags: ["selfie"] },
     { imgItem: thumb_31, tags: ["selfie"] },
     { imgItem: thumb_32, tags: ["selfie"] },
-    { imgItem: thumb_33, tags: ["japan"] },
+    { imgItem: thumb_33, tags: ["okinawa"] },
     { imgItem: thumb_34, tags: ["selfie"] },
     { imgItem: thumb_35, tags: ["selfie"] },
     { imgItem: thumb_37, tags: ["training"] },
@@ -218,9 +237,30 @@ export default function Gallery({ setShowNav }) {
     { imgItem: thumb_53, tags: ["group"] },
     { imgItem: thumb_54, tags: ["group"] },
     { imgItem: thumb_55, tags: ["selfie"] },
+    { imgItem: thumb_56, tags: ["okinawa"] },
+    { imgItem: thumb_57, tags: ["okinawa"] },
+    { imgItem: thumb_58, tags: ["okinawa"] },
+    { imgItem: thumb_59, tags: ["okinawa"] },
+    { imgItem: thumb_60, tags: ["okinawa"] },
   ];
 
-  const tagsArray = ["sensei", "group", "training", "japan", "selfie"];
+  const tagsArray = ["sensei", "group", "training", "okinawa", "selfie"];
+  const tagIcons = [
+    <GiDragonSpiral className="icon" />,
+    <HiMiniUserGroup className="icon" />,
+    <GiPunch className="icon" />,
+    <FaToriiGate className="icon" />,
+    <TbCameraSelfie className="icon" />,
+  ];
+
+  const [selectedTag, setSelectedTag] = useState("");
+  const [filteredArr, setFilteredArr] = useState([]);
+
+  useEffect(() => {
+    setFilteredArr(
+      thumbArray.filter((item) => item.tags.includes(selectedTag))
+    );
+  }, [selectedTag]);
 
   const [isAlign, setIsAlign] = useState(true);
   const [popImg, setPopImg] = useState("");
@@ -280,6 +320,27 @@ export default function Gallery({ setShowNav }) {
         />
       )}
 
+      {isOpen && !isAlign && filteredArr.length !== 0 && (
+        <Lightbox
+          mainSrc={filteredArr[photoIndex].imgItem}
+          nextSrc={filteredArr[(photoIndex + 1) % filteredArr.length]}
+          prevSrc={
+            filteredArr[
+              (photoIndex + filteredArr.length - 1) % filteredArr.length
+            ]
+          }
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() =>
+            setPhotoIndex(
+              (photoIndex + filteredArr.length - 1) % filteredArr.length
+            )
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((photoIndex + 1) % filteredArr.length)
+          }
+        />
+      )}
+
       <section className="align-option">
         <div className="options">
           {isAlign ? (
@@ -323,14 +384,21 @@ export default function Gallery({ setShowNav }) {
       ) : (
         <section className="notAlign-image">
           {tagsArray.map((tag, i) => (
-            <div className="rowBox" key={i}>
-              <h1>{tag}</h1>
+            <div className="align-image" key={i}>
+              <h1>{tagIcons[i]}</h1>
               <div className="row">
                 {thumbArray
                   .filter((item) => item.tags.includes(tag))
                   .map((image, index) => (
                     <div className="column" key={index}>
-                      <div className="image">
+                      <div
+                        className="image"
+                        onClick={() => {
+                          setSelectedTag(tag);
+                          setIsOpen(true);
+                          setPhotoIndex(index);
+                        }}
+                      >
                         <LazyLoadImage
                           className="img"
                           alt={`Image ${index + 1}`}
