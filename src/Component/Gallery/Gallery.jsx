@@ -345,11 +345,11 @@ export default function Gallery({ setShowNav }) {
         <div className="options">
           {isAlign ? (
             <div className="align" onClick={() => setIsAlign(false)}>
-              <CiGrid42 />
+              <CiGrid2H />
             </div>
           ) : (
             <div className="align" onClick={() => setIsAlign(true)}>
-              <CiGrid2H />
+              <CiGrid42 />
             </div>
           )}
         </div>
