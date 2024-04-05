@@ -20,6 +20,7 @@
     "react-lazy-load-image-component": "^1.6.0",
     "react-router-dom": "^6.20.0",
     "sass": "^1.69.5",
+    "use-sound": "^4.0.1",
     "yet-another-react-lightbox": "^3.15.6"
   },
   "devDependencies": {

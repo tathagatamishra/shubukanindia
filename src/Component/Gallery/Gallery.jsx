@@ -133,6 +133,9 @@ import thumb_60 from "../../thumbnail/okinawa (2).jpg";
 
 import ReactGA from "react-ga";
 import ImageUploader from "../UIComponent/ImageUploader";
+import useSound from "use-sound";
+import audio from "../../Music/ui-click.mp3";
+import audio2 from "../../Music/light-switch.mp3";
 
 export default function Gallery({ setShowNav }) {
   useEffect(() => {
@@ -286,6 +289,8 @@ export default function Gallery({ setShowNav }) {
     }
   }
 
+  const [play] = useSound(audio);
+
   return (
     <div className="Gallery">
       <section className="Hero">
@@ -344,11 +349,23 @@ export default function Gallery({ setShowNav }) {
       <section className="align-option">
         <div className="options">
           {isAlign ? (
-            <div className="align" onClick={() => setIsAlign(false)}>
+            <div
+              className="align"
+              onClick={() => {
+                setIsAlign(false);
+                play();
+              }}
+            >
               <CiGrid42 />
             </div>
           ) : (
-            <div className="align" onClick={() => setIsAlign(true)}>
+            <div
+              className="align"
+              onClick={() => {
+                setIsAlign(true);
+                play();
+              }}
+            >
               <CiGrid2H />
             </div>
           )}

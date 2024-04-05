@@ -4,6 +4,9 @@ import oldPaper from "../../assets/old-paper.svg";
 import shubukanLogo from "../../assets/shubukan.png";
 import shubukanText from "../../assets/logo.png";
 // import oldPaper from '../../../public/oldPaper.svg'
+import useSound from "use-sound";
+import audio from "../../Music/ui-click.mp3";
+import audio2 from "../../Music/light-switch.mp3";
 
 import "./Navbar.scss";
 
@@ -47,7 +50,10 @@ export default function Navbar() {
     }
   }
 
+  const [play] = useSound(audio)
+  const [play2] = useSound(audio2, { volume: 0.01 })
   function lineFunc() {
+    play()
     if (isMenu == true) {
       setIsMenu(false);
       setMenuStyle({});
@@ -92,45 +98,45 @@ export default function Navbar() {
             >
               {/* <img src="oldpaper.png" alt="" /> */}
               <nav className="nav">
-                <NavLink to="/history" className="opt" onClick={showMenu}>
+                <NavLink to="/history" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>HISTORY</p>
                 </NavLink>
-                <NavLink to="/shubukan-india" className="opt" onClick={showMenu}>
+                <NavLink to="/shubukan-india" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>SHUBUKAN INDIA</p>
                 </NavLink>
-                <NavLink to="/shubukan-okinawa" className="opt" onClick={showMenu} >
+                <NavLink to="/shubukan-okinawa" className="opt" onMouseEnter={play2} onClick={showMenu} >
                   <p>SHUBUKAN OKINAWA</p>
                 </NavLink>
-                <NavLink to="/shubukan-world" className="opt" onClick={showMenu}>
+                <NavLink to="/shubukan-world" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>SHUBUKAN WORLD</p>
                 </NavLink>
-                <NavLink to="/shuri-karate-kobudo-hozonkai" className="opt" onClick={showMenu}>
+                <NavLink to="/shuri-karate-kobudo-hozonkai" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>SHURI KARATE KOBUDO HOZONKAI</p>
                 </NavLink>
 
-                <NavLink to="/lineage-and-dojokun" className="opt" onClick={showMenu} >
+                <NavLink to="/lineage-and-dojokun" className="opt" onMouseEnter={play2} onClick={showMenu} >
                   <p>LINEAGE & DOJO KUN</p>
                 </NavLink>
-                <NavLink to="/karate-and-kobudo" className="opt" onClick={showMenu} >
+                <NavLink to="/karate-and-kobudo" className="opt" onMouseEnter={play2} onClick={showMenu} >
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
-                {/* <NavLink to="/CalenderAndNotice" className="opt" onClick={showMenu}>
+                {/* <NavLink to="/CalenderAndNotice" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>CALENDER & NOTICE</p>
                 </NavLink> */}
-                <NavLink to="/membership" className="opt" onClick={showMenu}>
+                <NavLink to="/membership" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>MEMBERSHIP</p>
                 </NavLink>
-                <NavLink to="/services" className="opt" onClick={showMenu}>
+                <NavLink to="/services" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>SERVICES</p>
                 </NavLink>
-                <NavLink to="/gallery" className="opt" onClick={showMenu}>
+                <NavLink to="/gallery" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>GALLERY</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onClick={showMenu}>
+                <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>BLOG</p>
                 </NavLink>
-                <NavLink to="/contact" className="opt" onClick={showMenu}>
+                <NavLink to="/contact" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>CONTACT</p>
                 </NavLink>
               </nav>
