@@ -7,8 +7,8 @@ export default function Banner() {
       <div className="track">
         <div className="content">
           &nbsp;To check your marksheet, Obtain your unique code from your
-          instructor. Go to <a href="/notice">www.shubukanindia.org/notice</a>. Enter the code to view your marksheet. || Go to <a href="/notice">www.shubukanindia.org/notice</a>. To check your marksheet, Obtain your unique code from your
-          instructor. Go to <a href="/notice">www.shubukanindia.org/notice</a>. Enter the code to view your marksheet. || Go to <a href="/notice">www.shubukanindia.org/notice</a>.
+          instructor. Go to <a href="/notice">www.shubukanindia.org/notice</a>. Enter the code to view your marksheet. |🔴| Go to <a href="/notice">www.shubukanindia.org/notice</a>. To check your marksheet, Obtain your unique code from your
+          instructor. Go to <a href="/notice">www.shubukanindia.org/notice</a>. Enter the code to view your marksheet. |🔴| Go to <a href="/notice">www.shubukanindia.org/notice</a>.
         </div>
       </div>
     </div>
