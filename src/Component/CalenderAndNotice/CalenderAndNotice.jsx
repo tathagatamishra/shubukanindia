@@ -48,7 +48,7 @@ export default function CalenderAndNotice() {
           released. To check your marksheet, Obtain your unique code from your
           instructor.
         </p>
-        <p>Enter the code below to view your marksheet</p>
+        <p>Enter the code below to view your marksheet, to download scroll down and click the download button</p>
 
         <input
           type="text"

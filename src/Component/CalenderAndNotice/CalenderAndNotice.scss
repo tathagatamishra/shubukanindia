@@ -220,8 +220,11 @@
             resize: none;
             z-index: 2;
             font-size: 1.3rem;
+            font-weight: 600;
             color: #2a2727;
             font-family: 'Forum', cursive;
+            text-align: center;
+            letter-spacing: 2px;
 
             &::selection {
                 color: $---selection-color;
