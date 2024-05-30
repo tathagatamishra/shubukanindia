@@ -9,7 +9,12 @@
     overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 0 20px white;
+    
+    @media (min-width: 768px) {
+        border-radius: 10px;
+    }
 }
+
 
 canvas.react-pdf__Page__canvas {
     width: 100% !important;
