@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CalenderAndNotice.scss";
 import pdfURL_raj from "../../Documents/Marksheet raj.pdf";
-import pdfURL_nanak from "../../Documents/Marksheet raj.pdf";
+import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";
 import PdfViewer from "../UIComponent/PdfViewer";
 
 export default function CalenderAndNotice() {
