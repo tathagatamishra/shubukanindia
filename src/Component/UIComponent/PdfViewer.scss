@@ -10,7 +10,7 @@
     margin-bottom: 20px;
     box-shadow: 0 0 20px white;
     
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
         border-radius: 10px;
     }
 }
