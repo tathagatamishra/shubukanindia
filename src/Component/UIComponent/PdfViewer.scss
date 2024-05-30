@@ -1,0 +1,13 @@
+.PDiv {
+    width: 100%;
+}
+
+canvas.react-pdf__Page__canvas {
+    margin-bottom: 20px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.react-pdf__message.react-pdf__message--no-data {
+    display: none;
+}
