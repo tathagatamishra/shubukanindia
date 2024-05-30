@@ -48,7 +48,7 @@ export default function Footer() {
           <NavLink to="/download" className="opt">
             <p>Downloads</p>
           </NavLink>
-          <NavLink to="/calender-and-notice" className="opt">
+          <NavLink to="/notice" className="opt">
             <p>Calender & Notice</p>
           </NavLink>
         </div>

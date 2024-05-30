@@ -16,7 +16,7 @@ export default function CalenderAndNotice() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setUniqueCode(value);
+    setUniqueCode(value.toLowerCase());
   };
 
   useEffect(() => {

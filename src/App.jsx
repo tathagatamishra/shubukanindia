@@ -25,6 +25,7 @@ import HAndF from "./Component/HAndF/HAndF";
 import Download from "./Component/Download/Download";
 
 import ReactGA from 'react-ga';
+import Banner from "./Component/UIComponent/Banner";
 
 function App() {
 
@@ -65,7 +66,7 @@ function App() {
               <Route path="/shuri-karate-kobudo-hozonkai" element={<Hozonkai />} />
               <Route path="/karate-and-kobudo"   element={<KarateAndKobudo />} />
               <Route path="/lineage-and-dojokun" element={<LineageAndDojoKun />} />
-              <Route path="/calender-and-notice" element={<CalenderAndNotice />} />
+              <Route path="/notice" element={<CalenderAndNotice />} />
               <Route path="/shubukan-okinawa" element={<ShubukanOkinawa />} />
               <Route path="/shubukan-india"   element={<ShubukanIndia />} />
               <Route path="/shubukan-world"   element={<ShubukanWorld setShowNav={setShowNav} />} />
@@ -84,6 +85,8 @@ function App() {
           </div>
 
           <Footer />
+
+          <Banner />
         </BrowserRouter>
       </div>
   );
