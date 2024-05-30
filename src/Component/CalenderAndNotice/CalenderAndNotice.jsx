@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CalenderAndNotice.scss";
-import pdfURL from "../../Documents/Marksheet raj.pdf";
+import pdfURL_raj from "../../Documents/Marksheet raj.pdf";
+import pdfURL_nanak from "../../Documents/Marksheet raj.pdf";
 import PdfViewer from "../UIComponent/PdfViewer";
 
 export default function CalenderAndNotice() {
@@ -11,7 +12,6 @@ export default function CalenderAndNotice() {
   }, []);
 
   const [uniqueCode, setUniqueCode] = useState("");
-  const [showDiv, setShowDiv] = useState(false);
   const [URL, setURL] = useState("");
 
   const handleChange = (e) => {
@@ -21,11 +21,12 @@ export default function CalenderAndNotice() {
 
   useEffect(() => {
     if (uniqueCode === "karateraj@2024") {
-      setShowDiv(true);
-      setURL(pdfURL);
-    } else {
-      setShowDiv(false);
-    }
+      setURL(pdfURL_raj);
+    } 
+    if (uniqueCode === "karatenanak@2024") {
+      setURL(pdfURL_nanak);
+    } 
+    
   }, [uniqueCode]);
 
   return (
