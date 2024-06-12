@@ -123,7 +123,7 @@ export default function Membership() {
     },
     {
       dojoName: "Bauria Martial Arts Academy",
-      instructor: "Prasanta Dolui",
+      instructor: "Prasanta Dalui",
       image: prasanta_dolui,
       contact: [
         ["Phone", "9007065973"],
