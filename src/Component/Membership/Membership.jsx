@@ -9,6 +9,7 @@ import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
 import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
 import raj_chatterjee from "../../dojo_instructors/Raj Chatterjee.jpeg";
 import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg";
+import prasanta_dolui from "../../dojo_instructors/prasanta_dolui.jpg";
 import img2 from "../../thumbnail/sabyasachi1.jpg";
 
 export default function Membership() {
@@ -116,6 +117,23 @@ export default function Membership() {
           mainLocation: "Kerala",
           brunchAddress: [
             "Kadakampally Lane, Anayara, Thiruvananthapuram, Kerala",
+          ],
+        },
+      ],
+    },
+    {
+      dojoName: "Bauria Martial Arts Academy",
+      instructor: "Prasanta Dolui",
+      image: prasanta_dolui,
+      contact: [
+        ["Phone", "9007065973"],
+        ["Address", "Bauria chaukashi 2 no colony, Howrah"],
+      ],
+      brunch: [
+        {
+          mainLocation: "Howrah",
+          brunchAddress: [
+            "West Burikhali, Bauria, Howrah, West Bengal, 711310",
           ],
         },
       ],
