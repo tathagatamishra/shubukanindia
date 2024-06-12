@@ -122,7 +122,7 @@ export default function Membership() {
       ],
     },
     {
-      dojoName: "Bauria Martial Arts Academy",
+      dojoName: "Prasen Karate Academy",
       instructor: "Prasanta Dalui",
       image: prasanta_dolui,
       contact: [
