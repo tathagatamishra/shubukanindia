@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import "./PdfViewer.scss";
-import {
-  isIOS,
-  isAndroid,
-  isDesktop,
-  isChrome,
-  isFirefox,
-  isSafari,
-} from "react-device-detect";
+import { isDesktop } from "react-device-detect";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
