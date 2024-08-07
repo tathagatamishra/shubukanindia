@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CalenderAndNotice.scss";
 import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";
+import pdfURL_prasanta from "../../Documents/Prasen Academy Marksheet.pdf";
 import PdfViewer from "../UIComponent/PdfViewer";
 
 export default function CalenderAndNotice() {
@@ -21,6 +22,9 @@ export default function CalenderAndNotice() {
   useEffect(() => {
     if (uniqueCode === "karatenanak@2024") {
       setURL(pdfURL_nanak);
+    } 
+    if (uniqueCode === "karateprasanta@2024") {
+      setURL(pdfURL_prasanta);
     } 
     
   }, [uniqueCode]);
