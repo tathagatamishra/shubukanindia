@@ -26,6 +26,7 @@ import Download from "./Component/Download/Download";
 
 import ReactGA from 'react-ga';
 import Banner from "./Component/UIComponent/Banner";
+import Form from "./Component/Form/Form";
 
 function App() {
 
@@ -63,30 +64,31 @@ function App() {
 
           <div className="webBody">
             <Routes>
-              <Route path="/shuri-karate-kobudo-hozonkai" element={<Hozonkai />} />
-              <Route path="/karate-and-kobudo"   element={<KarateAndKobudo />} />
-              <Route path="/lineage-and-dojokun" element={<LineageAndDojoKun />} />
-              <Route path="/notice" element={<CalenderAndNotice />} />
-              <Route path="/shubukan-okinawa" element={<ShubukanOkinawa />} />
-              <Route path="/shubukan-india"   element={<ShubukanIndia />} />
-              <Route path="/shubukan-world"   element={<ShubukanWorld setShowNav={setShowNav} />} />
-              <Route path="/"            element={<Home setShowNav={setShowNav} />} />
-              <Route path="/history"     element={<History setShowNav={setShowNav} />} />
               <Route path="/membership"  element={<Membership />} />
+              <Route path="/download"    element={<Download />} />
               <Route path="/services"    element={<Services />} />
               <Route path="/gallery"     element={<Gallery setShowNav={setShowNav} />} />
-              <Route path="/blog"        element={<Blog />} />
               <Route path="/contact"     element={<Contact />} />
+              <Route path="/history"     element={<History setShowNav={setShowNav} />} />
+              <Route path="/notice"      element={<CalenderAndNotice />} />
+              <Route path="/blog"        element={<Blog />} />
+              <Route path="/form"        element={<Form />} />
+              <Route path="/"            element={<Home setShowNav={setShowNav} />} />
+              <Route path="/shuri-karate-kobudo-hozonkai" element={<Hozonkai />} />
+              <Route path="/lineage-and-dojokun" element={<LineageAndDojoKun />} />
               <Route path="/term-and-condition" element={<TAndC />} />
-              <Route path="/contributor"        element={<Contributor />} />
+              <Route path="/karate-and-kobudo"  element={<KarateAndKobudo />} />
+              <Route path="/shubukan-okinawa"   element={<ShubukanOkinawa />} />
+              <Route path="/shubukan-india"     element={<ShubukanIndia />} />
               <Route path="/help-and-faqs"      element={<HAndF />} />
-              <Route path="/download"           element={<Download />} />
+              <Route path="/contributor"        element={<Contributor />} />
+              <Route path="/shubukan-world"     element={<ShubukanWorld setShowNav={setShowNav} />} />
             </Routes>
           </div>
 
           <Footer />
 
-          <Banner />
+          {/* <Banner /> */}
         </BrowserRouter>
       </div>
   );
