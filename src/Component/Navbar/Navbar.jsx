@@ -121,8 +121,8 @@ export default function Navbar() {
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
-                <NavLink to="/CalenderAndNotice" className="opt" onMouseEnter={play2} onClick={showMenu}>
-                  <p>CALENDER & NOTICE</p>
+                <NavLink to="/marksheet" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                  <p>MARKSHEET</p>
                 </NavLink>
                 <NavLink to="/registration" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>REGISTRATION</p>
