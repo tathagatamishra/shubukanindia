@@ -121,21 +121,24 @@ export default function Navbar() {
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
-                {/* <NavLink to="/CalenderAndNotice" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink to="/CalenderAndNotice" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>CALENDER & NOTICE</p>
-                </NavLink> */}
+                </NavLink>
+                <NavLink to="/registration" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                  <p>REGISTRATION</p>
+                </NavLink>
                 <NavLink to="/membership" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>MEMBERSHIP</p>
                 </NavLink>
-                <NavLink to="/services" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                {/* <NavLink to="/services" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>SERVICES</p>
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/gallery" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>GALLERY</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                {/* <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>BLOG</p>
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/contact" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>CONTACT</p>
                 </NavLink>
