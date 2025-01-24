@@ -72,7 +72,7 @@ function App() {
               <Route path="/gallery"     element={<Gallery setShowNav={setShowNav} />} />
               <Route path="/contact"     element={<Contact />} />
               <Route path="/history"     element={<History setShowNav={setShowNav} />} />
-              <Route path="/notice"      element={<CalenderAndNotice />} />
+              <Route path="/marksheet"      element={<CalenderAndNotice />} />
               <Route path="/admin"       element={<Admin setShowNav={setShowNav} setShowFoot={setShowFoot} />} />
               <Route path="/blog"        element={<Blog />} />
               <Route path="/"            element={<Home setShowNav={setShowNav} />} />

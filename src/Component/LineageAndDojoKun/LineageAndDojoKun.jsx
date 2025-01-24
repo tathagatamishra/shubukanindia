@@ -194,7 +194,7 @@ export default function LineageAndDojoKun() {
             <div className="bottom-box2">
               <div className="box">
                 <p className="name">Uema Yasuhiro</p>
-                <p className="date">( 1945 - )</p>
+                <p className="date">( 1945 - 2025 )</p>
                 <div className="arrow">
                   <IonIcon icon={chevronDownSharp} className="label" />
                 </div>

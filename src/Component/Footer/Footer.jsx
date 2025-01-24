@@ -45,15 +45,15 @@ export default function Footer() {
           <NavLink to="/blog" className="opt">
             <p>Blog</p>
           </NavLink>
+          <NavLink to="/marksheet" className="opt">
+            <p>Marksheet</p>
+          </NavLink>
           <NavLink to="/registration" className="opt">
             <p>Registration</p>
           </NavLink>
           {/* <NavLink to="/download" className="opt">
             <p>Downloads</p>
           </NavLink> */}
-          <NavLink to="/notice" className="opt">
-            <p>Calender & Notice</p>
-          </NavLink>
         </div>
 
         <div className="midLine"></div>
