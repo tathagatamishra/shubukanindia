@@ -6,3 +6,4 @@ import "./main.scss";
 const renderer = ReactDOM.createRoot(document.getElementById("root"));
 
 renderer.render(<App />);
+
