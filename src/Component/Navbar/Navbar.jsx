@@ -127,9 +127,12 @@ export default function Navbar() {
                 <NavLink to="/membership" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>MEMBERSHIP</p>
                 </NavLink>
-                <NavLink to="/services" className="opt" onMouseEnter={play2} onClick={showMenu}>
-                  <p>SERVICES</p>
+                <NavLink to="/registration" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                  <p>REGISTRATION</p>
                 </NavLink>
+                {/* <NavLink to="/services" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                  <p>SERVICES</p>
+                </NavLink> */}
                 <NavLink to="/gallery" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>GALLERY</p>
                 </NavLink>
