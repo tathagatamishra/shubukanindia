@@ -107,6 +107,7 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
 
   return (
     <canvas
+    className="AnimCanvas"
       ref={canvasRef}
       onClick={() => {
         onCanvasClick();
