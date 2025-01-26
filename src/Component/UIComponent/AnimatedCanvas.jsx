@@ -46,46 +46,52 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
   const playAnimationForward = () => {
     const context = contextRef.current;
     const images = imagesRef.current;
-
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.drawImage(
-      images[currentFrameRef.current - 1],
-      0,
-      0,
-      context.canvas.width,
-      context.canvas.height
-    );
-
-    currentFrameRef.current++;
-
-    if (currentFrameRef.current >= 31) {
-      cancelAnimationFrame(animationFrameIdRef.current);
-      return;
+    const frameDelay = 1;
+    // Adjust this value to control animation speed
+    
+    if (currentFrameRef.current % frameDelay === 0) {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      context.drawImage(
+        images[Math.floor((currentFrameRef.current - 1) / frameDelay)],
+        0,
+        0,
+        context.canvas.width,
+        context.canvas.height
+      );
+  
+      if (Math.floor((currentFrameRef.current - 1) / frameDelay) >= 30) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        return;
+      }
     }
-
+  
+    currentFrameRef.current++;
     animationFrameIdRef.current = requestAnimationFrame(playAnimationForward);
   };
-
+  
   const playAnimationReverse = () => {
     const context = contextRef.current;
     const images = imagesRef.current;
-
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.drawImage(
-      images[currentFrameRef.current - 1],
-      0,
-      0,
-      context.canvas.width,
-      context.canvas.height
-    );
-
-    currentFrameRef.current--;
-
-    if (currentFrameRef.current <= 1) {
-      cancelAnimationFrame(animationFrameIdRef.current);
-      return;
+    const frameDelay = 1;
+    // Adjust this value to control animation speed
+    
+    if (currentFrameRef.current % frameDelay === 0) {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      context.drawImage(
+        images[Math.floor((currentFrameRef.current - 1) / frameDelay)],
+        0,
+        0,
+        context.canvas.width,
+        context.canvas.height
+      );
+  
+      if (Math.floor((currentFrameRef.current - 1) / frameDelay) <= 1) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        return;
+      }
     }
-
+  
+    currentFrameRef.current--;
     animationFrameIdRef.current = requestAnimationFrame(playAnimationReverse);
   };
 
@@ -104,6 +110,23 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
     currentFrameRef.current = 30;
     playAnimationReverse();
   };
+
+  useEffect(() => {
+    handleMouseOver();
+    setTimeout(() => {
+      handleMouseLeave();
+    }, 3000);
+  }, []);
+
+  // every 30 seconds the animation will play again
+  setInterval(() => {
+    handleMouseOver();
+    setTimeout(() => {
+      handleMouseLeave();
+      
+    }, 3000);
+
+  }, 30000);
 
   return (
     <canvas
