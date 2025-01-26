@@ -34,6 +34,7 @@
 
 
     & .content {
+        width: 100%;
         padding: 0 10px 0 20px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -51,17 +52,48 @@
         }
 
         & p {
-            font-size: 22px;
+            font-size: 18px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             text-align: center;
+            // font-family: 'Finlandica';
+            font-family: 'Lekton';
+            // font-family: 'Martian Mono';
+            // font-family: 'Orbit';
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'GFS Neohellenic', sans-serif;
+        }
+
+
+        & a {
+            // font-family: 'Finlandica';
+            font-family: 'Lekton';
+            // font-family: 'Martian Mono';
+            // font-family: 'Orbit';
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            font-weight: 600;
+            color: rgb(255, 50, 50);
+            text-decoration: none;
         }
     }
 
     & h1 {
         font-size: 30px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        // font-family: 'Finlandica';
+        // font-family: 'Lekton';
+        // font-family: 'Martian Mono';
+        // font-family: 'Orbit';
+        // font-family: 'Andika', sans-serif;
+        // font-family: 'Bellefair', serif;
+        // font-family: 'Capriola', sans-serif;
+        font-family: 'GFS Neohellenic', sans-serif;
         font-weight: bold;
         text-align: center;
+        margin: 5px;
     }
 
     & button {
@@ -78,11 +110,17 @@
         height: 50px;
         width: 50px;
         border-radius: 100px;
-        color: red;
-        font-size: 20px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         cursor: pointer;
         transition: 200ms;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .label {
+            width: 30px;
+            height: 30px;
+            color: red;
+        }
 
         &:hover {
             scale: 1.1;

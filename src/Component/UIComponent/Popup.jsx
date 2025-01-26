@@ -1,15 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Popup.scss";
+import { IonIcon } from "@ionic/react";
+import { close } from "ionicons/icons";
 
-const Popup = ({ isOpen, onClose, notices }) => {
+const Popup = ({ isOpen, onClose, notices, ...props }) => {
   if (!isOpen) return null;
 
   return (
     <>
       <div className="popup-container">
-        <button onClick={onClose}>X</button>
+        <button onClick={onClose}>
+          <IonIcon
+            icon={close}
+            className="label"
+            onClick={() => {
+              props.setIsOpen(false);
+              props.setShowNav(true);
+            }}
+          />
+        </button>
+
         <h1>Notice</h1>
+        
         <div className="content">
           {notices.map((notice, index) => (
             <React.Fragment key={index}>
