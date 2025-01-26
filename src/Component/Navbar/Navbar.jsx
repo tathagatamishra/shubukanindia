@@ -50,10 +50,10 @@ export default function Navbar() {
     }
   }
 
-  const [play] = useSound(audio)
-  const [play2] = useSound(audio2, { volume: 0.01 })
+  const [play] = useSound(audio);
+  const [play2] = useSound(audio2, { volume: 0.01 });
   function lineFunc() {
-    play()
+    play();
     if (isMenu == true) {
       setIsMenu(false);
       setMenuStyle({});
@@ -81,6 +81,18 @@ export default function Navbar() {
         <img className="logo2" src={shubukanText} />
       </NavLink>
 
+      <div id="cloud-circle"></div>
+      <svg width="0" height="0">
+        <filter id="filter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency=".01"
+            numOctaves="10"
+          />
+          <feDisplacementMap in="SourceGraphic" scale="60" />
+        </filter>
+      </svg>
+
       <section className="menu">
         <div className="menuStart" style={menuStyle} onClick={lineFunc}>
           <div className="lines"></div>
@@ -98,48 +110,108 @@ export default function Navbar() {
             >
               {/* <img src="oldpaper.png" alt="" /> */}
               <nav className="nav">
-                <NavLink to="/history" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/history"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>HISTORY</p>
                 </NavLink>
-                <NavLink to="/shubukan-india" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/shubukan-india"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>SHUBUKAN INDIA</p>
                 </NavLink>
-                <NavLink to="/shubukan-okinawa" className="opt" onMouseEnter={play2} onClick={showMenu} >
+                <NavLink
+                  to="/shubukan-okinawa"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>SHUBUKAN OKINAWA</p>
                 </NavLink>
-                <NavLink to="/shubukan-world" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/shubukan-world"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>SHUBUKAN WORLD</p>
                 </NavLink>
-                <NavLink to="/shuri-karate-kobudo-hozonkai" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/shuri-karate-kobudo-hozonkai"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>SHURI KARATE KOBUDO HOZONKAI</p>
                 </NavLink>
 
-                <NavLink to="/lineage-and-dojokun" className="opt" onMouseEnter={play2} onClick={showMenu} >
+                <NavLink
+                  to="/lineage-and-dojokun"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>LINEAGE & DOJO KUN</p>
                 </NavLink>
-                <NavLink to="/karate-and-kobudo" className="opt" onMouseEnter={play2} onClick={showMenu} >
+                <NavLink
+                  to="/karate-and-kobudo"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
-                <NavLink to="/marksheet" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/marksheet"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>MARKSHEET</p>
                 </NavLink>
-                <NavLink to="/registration" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/registration"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>REGISTRATION</p>
                 </NavLink>
-                <NavLink to="/membership" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/membership"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>MEMBERSHIP</p>
                 </NavLink>
                 {/* <NavLink to="/services" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>SERVICES</p>
                 </NavLink> */}
-                <NavLink to="/gallery" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/gallery"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>GALLERY</p>
                 </NavLink>
                 {/* <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>BLOG</p>
                 </NavLink> */}
-                <NavLink to="/contact" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/contact"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>CONTACT</p>
                 </NavLink>
               </nav>

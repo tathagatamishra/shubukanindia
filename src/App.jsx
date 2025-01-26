@@ -76,7 +76,7 @@ function App() {
         {showNav && <Navbar showNav={showNav} />}
 
         <AnimatedCanvas onCanvasClick={openPopup} />
-        <Popup isOpen={isPopupOpen} onClose={closePopup} notices={notices} />
+        <Popup isOpen={isPopupOpen} onClose={closePopup} notices={notices} title="NOTICE" />
 
         <div className="webBody">
           <Routes>

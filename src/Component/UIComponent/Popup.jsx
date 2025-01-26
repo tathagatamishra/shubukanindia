@@ -4,7 +4,7 @@ import "./Popup.scss";
 import { IonIcon } from "@ionic/react";
 import { close } from "ionicons/icons";
 
-const Popup = ({ isOpen, onClose, notices, ...props }) => {
+const Popup = ({ isOpen, onClose, title, notices, ...props }) => {
   if (!isOpen) return null;
 
   return (
@@ -21,7 +21,7 @@ const Popup = ({ isOpen, onClose, notices, ...props }) => {
           />
         </button>
 
-        <h1>Notice</h1>
+        <h1>{title}</h1>
         
         <div className="content">
           {notices.map((notice, index) => (
