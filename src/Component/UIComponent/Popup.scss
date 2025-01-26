@@ -1,71 +1,4 @@
-@import './assets/variables';
-
-.App {
-  min-height: 100vh;
-  box-sizing: border-box;
-  // position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  & .webBody {
-    height: fit-content;
-    min-height: calc(100vh - 610px);
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-
-    // border: 1px red solid;
-
-    background-image: url("https://www.tilingtextures.com/wp-content/uploads/2018/11/0068-1-768x768.jpg");
-    background-size: 250px 250px;
-  }
-
-  & #cursor {
-    position: fixed;
-    top: 0;
-    left: .1%;
-    background-color: transparent;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    pointer-events: none;
-    user-select: none;
-    backdrop-filter: saturate(1000%) invert(100%) hue-rotate(140deg);
-    z-index: 100;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    & img {
-      opacity: .8;
-      width: 40px;
-      height: 40px;
-
-      animation: rotation 50s infinite linear;
-
-    }
-
-    @keyframes rotation {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media screen and (max-width: 810px) {
-      display: none;
-    }
-  }
-
-  & .popup {
+.popup {
     z-index: 200;
     max-width: 400px;
     width: 80%;
@@ -85,6 +18,46 @@
     display: none;
     flex-direction: column;
     align-items: center;
+
+}
+
+.popup-container {
+    z-index: 50;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    padding: 20px 0 30px 0;
+    width: 80%;
+    height: 80%;
+    max-width: 400px;
+    max-height: 480px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 1px 2px 10px rgba(50, 33, 25, 0.354);
+    border-right: 1px solid rgba(144, 112, 92, 0.42);
+    border-bottom: 1px solid rgba(144, 112, 92, 0.42);
+    background: rgb(215, 200, 181);
+
+
+    & .content {
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            background: linear-gradient(rgba(2,0,36,0) 0%, rgba(144,80,67,0.7027027027027026) 20%, rgba(144,80,67,1) 50%, rgba(144,80,67,0.6972972972972973) 80%, rgba(0,212,255,0) 100%);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(rgba(2,0,36,0) 0%, rgba(1,0,10,0.7) 40%, rgba(1,0,6,1) 50%, rgba(0,0,0,0.7027027027027026) 80%, rgba(0,212,255,0) 100%);
+            // border-top: solid 10px tomato;
+            // border-bottom: solid 10px tomato;
+        }
+    }
 
     & h1 {
         font-size: 30px;
@@ -127,5 +100,4 @@
             scale: 0.9;
         }
     }
-}
 }

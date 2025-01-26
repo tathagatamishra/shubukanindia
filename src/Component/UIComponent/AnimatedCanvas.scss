@@ -1,0 +1,13 @@
+canvas {
+    z-index: 100;
+    // background-color: black;
+    position: fixed;
+    bottom: 10%;
+    right: -1%;
+    width: 150px;
+    height: auto;
+
+    @media screen and (max-width: 700px) {
+        width: 100px;
+    }
+}
