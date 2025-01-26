@@ -168,14 +168,14 @@ export default function Navbar() {
                   <p>KARATE & KOBUDO</p>
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                   to="/marksheet"
                   className="opt"
                   onMouseEnter={play2}
                   onClick={showMenu}
                 >
                   <p>MARKSHEET</p>
-                </NavLink>
+                </NavLink> */}
                 <NavLink
                   to="/registration"
                   className="opt"
@@ -203,9 +203,9 @@ export default function Navbar() {
                 >
                   <p>GALLERY</p>
                 </NavLink>
-                {/* <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
                   <p>BLOG</p>
-                </NavLink> */}
+                </NavLink>
                 <NavLink
                   to="/contact"
                   className="opt"
