@@ -8,7 +8,7 @@ const Popup = ({ isOpen, onClose, title, notices, ...props }) => {
   if (!isOpen) return null;
 
   return (
-    <>
+    <div className="popup-main">
       <div className="popup-container">
         <button onClick={onClose}>
           <IonIcon
@@ -34,7 +34,7 @@ const Popup = ({ isOpen, onClose, title, notices, ...props }) => {
       </div>
 
       <div className="overlay" onClick={onClose}></div>
-    </>
+    </div>
   );
 };
 

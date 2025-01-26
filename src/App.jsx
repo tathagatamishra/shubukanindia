@@ -55,11 +55,11 @@ function App() {
     <p>
       The Registration is Open. Fill the form with necessary details. To check
       your email for your registration confirmation. Register to Shubukan India.
-      Go to <a href="/registration">www.shubukanindia.org/registration</a>.
+      Click here for <a href="/registration">Registration</a>.
     </p>,
     <p>
       To check your marksheet, Obtain your unique code from your instructor.
-      Enter the code to view your marksheet. Go to <a href="/notice">www.shubukanindia.org/notice</a>.
+      Enter the code to view your marksheet. Click here for <a href="/notice">Marksheet</a>.
     </p>,
   ];
 
