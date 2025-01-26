@@ -16,7 +16,9 @@
     overflow-y: hidden;
 
     // background-image: linear-gradient(white, white, transparent);
-    box-shadow: inset 0px 260px 40px -150px white;
+    // box-shadow: inset 0px 260px 40px -150px white;
+    // X-axis, Y-axis, Blur-radius, Spread-radius, Color
+    box-shadow: inset 0px 260px 40px -150px rgba(255, 255, 255, 0.5);
     transition: all 1s ease-in-out 0s;
     // transition: 1s;
     animation-name: navSlide;
@@ -31,6 +33,19 @@
         to {
             top: 0rem;
         }
+    }
+
+    & #cloud-circle {
+        z-index: -1;
+        width: 200%;
+        height: 200%;
+        border-radius: 0%;
+        filter: url(#filter);
+        // X-axis, Y-axis, Blur-radius, Spread-radius, Color
+        box-shadow: 400px 400px 46px 63px #ffffff;
+        position: absolute;
+        top: -676px;
+        left: -775px;
     }
 
     // border-bottom: solid red 1px;
@@ -336,8 +351,6 @@
             }
         }
     }
-
-
 
     @media screen and (max-width: 700px) {
         height: 8rem;

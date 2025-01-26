@@ -1,5 +1,5 @@
 canvas {
-    z-index: 100;
+    z-index: 40;
     // background-color: black;
     position: fixed;
     bottom: 10%;
@@ -8,6 +8,6 @@ canvas {
     height: auto;
 
     @media screen and (max-width: 700px) {
-        width: 100px;
+        width: 120px;
     }
 }
