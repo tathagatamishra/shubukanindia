@@ -26,6 +26,18 @@ export default function Footer() {
         <div className="underLine"></div>
       </div> */}
 
+      <div id="cloud-circle"></div>
+      <svg width="0" height="0">
+        <filter id="filter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency=".01"
+            numOctaves="10"
+          />
+          <feDisplacementMap in="SourceGraphic" scale="100" />
+        </filter>
+      </svg>
+
       <div className="footContent">
         <div className="footOptions1">
           <NavLink to="/contributor" className="opt">
