@@ -9,21 +9,19 @@ import {
 import pattern from "../../assets/pattern.jpg";
 import kun from "../../assets/dojokun.png";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function LineageAndDojoKun() {
-
   useEffect(() => {
     ReactGA.pageview("LineageAndDojoKun");
   }, []);
 
-  
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
-  
+
   return (
     <div className="LineageAndDojoKun">
       <section className="Lineage-Hero">
@@ -173,6 +171,12 @@ export default function LineageAndDojoKun() {
           </div>
 
           <div className="bottom">
+            <div className="bottom-frontline">
+              <div className="bottom-underline">
+                <IonIcon icon={chevronForwardSharp} className="label" />
+              </div>
+            </div>
+
             <div className="bottom-box1">
               <div className="box">
                 <p className="name">China Taikichi</p>
