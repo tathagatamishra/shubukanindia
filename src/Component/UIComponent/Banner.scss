@@ -18,6 +18,11 @@
     background: $---accent3;
     box-shadow: 0 0 5px $---accent1;
 
+    &::selection {
+        color: $---selection-color;
+        background: $---selection-bg;
+    }
+
     & .track {
         color: white;
         position: absolute;
@@ -34,10 +39,20 @@
         // font-family: 'Capriola', sans-serif;
         // font-family: 'GFS Neohellenic', sans-serif;
 
-        & a{
+        & .content::selection {
+            color: $---selection-color;
+            background: $---selection-bg;
+        }
+
+        & a {
             font-weight: 600;
             color: rgb(255, 50, 50);
             text-decoration: none;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
         }
     }
 

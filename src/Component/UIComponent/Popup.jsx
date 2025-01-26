@@ -8,7 +8,7 @@ const Popup = ({ isOpen, onClose, title, notices, ...props }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="popup-main">
+    <div className="popup">
       <div className="popup-container">
         <button onClick={onClose}>
           <IonIcon
@@ -32,6 +32,15 @@ const Popup = ({ isOpen, onClose, title, notices, ...props }) => {
           ))}
         </div>
       </div>
+
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="0" width="0">
+          <defs>
+              <filter id="wobble">
+                  <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="4" />
+                  <feDisplacementMap in="SourceGraphic" scale="6" />
+              </filter>
+          </defs>
+      </svg>
 
       <div className="overlay" onClick={onClose}></div>
     </div>

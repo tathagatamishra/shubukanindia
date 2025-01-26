@@ -12,7 +12,7 @@ import ShubukanWorld from "./Component/ShubukanWorld/ShubukanWorld";
 import Hozonkai from "./Component/Hozonkai/Hozonkai";
 import LineageAndDojoKun from "./Component/LineageAndDojoKun/LineageAndDojoKun";
 import KarateAndKobudo from "./Component/KarateAndKobudo/KarateAndKobudo";
-import CalenderAndNotice from "./Component/CalenderAndNotice/CalenderAndNotice";
+import Marksheet from "./Component/Marksheet/Marksheet";
 import Membership from "./Component/Membership/Membership";
 import Services from "./Component/Services/Services";
 import Gallery from "./Component/Gallery/Gallery";
@@ -59,7 +59,7 @@ function App() {
     </p>,
     <p>
       To check your marksheet, Obtain your unique code from your instructor.
-      Enter the code to view your marksheet. Click here for <a href="/notice">Marksheet</a>.
+      Enter the code to view your marksheet. Click here for <a href="/marksheet">Marksheet</a>.
     </p>,
   ];
 
@@ -92,7 +92,7 @@ function App() {
               path="/history"
               element={<History setShowNav={setShowNav} />}
             />
-            <Route path="/marksheet" element={<CalenderAndNotice />} />
+            <Route path="/marksheet" element={<Marksheet />} />
             <Route
               path="/admin"
               element={
