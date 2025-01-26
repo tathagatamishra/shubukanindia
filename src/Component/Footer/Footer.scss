@@ -2,6 +2,7 @@
 
 .Footer {
     z-index: 1;
+    position: relative;
     height: fit-content;
     bottom: 0;
     width: 100%;
@@ -12,9 +13,24 @@
     align-items: center;
 
     background-image: url("https://www.tilingtextures.com/wp-content/uploads/2018/11/0068-1-768x768.jpg");
-    box-shadow: inset 0px -680px 80px -200px #ffffff;
+    // box-shadow: inset 0px -680px 80px -200px #ffffff; // original
+    box-shadow: inset 0px -650px 80px -200px #ffffff;
     background-size: 250px 250px;
     // border: solid 1px blueviolet;
+
+    & #cloud-circle {
+        z-index: -1;
+        width: 200vw;
+        height: 200px;
+        border-radius: 0%;
+        filter: url(#filter);
+        // X-axis, Y-axis, Blur-radius, Spread-radius, Color
+        box-shadow: 400px 400px 100px 50px #ffffff;
+        position: absolute;
+        top: -30%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+    }
 
     & .footSub {
         z-index: 1;
@@ -416,19 +432,23 @@
     }
 
     @media screen and (max-width: 810px) {
-        box-shadow: inset 0px -650px 80px -200px #ffffff;
-    }
-
-    @media screen and (max-width: 500px) {
         box-shadow: inset 0px -600px 80px -200px #ffffff;
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 600px) {
         box-shadow: inset 0px -560px 80px -200px #ffffff;
+
+        & #cloud-circle {
+            left: -40%;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        box-shadow: inset 0px -520px 80px -200px #ffffff;
     }
 
     @media screen and (max-width: 370px) {
-        box-shadow: inset 0px -520px 80px -200px #ffffff;
+        box-shadow: inset 0px -500px 80px -200px #ffffff;
     }
 
     @media screen and (max-width: 320px) {
