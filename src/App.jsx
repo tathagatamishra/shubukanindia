@@ -24,23 +24,20 @@ import Contributor from "./Component/Contributor/Contributor";
 import HAndF from "./Component/HAndF/HAndF";
 import Download from "./Component/Download/Download";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 import Banner from "./Component/UIComponent/Banner";
 import Registration from "./Component/Registration/Registration";
 import Admin from "./Component/Admin/Admin";
+import AnimatedCanvas from "./Component/UIComponent/AnimatedCanvas";
+import Popup from "./Component/UIComponent/Popup";
 
 function App() {
-
   const TRACKING_ID = "G-RXSEE0D376";
   ReactGA.initialize(TRACKING_ID);
 
-  // useEffect(() => {
-  //   ReactGA.pageview(window.location.pathname);
-  // }, []);
-  
-
   const [showNav, setShowNav] = useState(true);
   const [showFoot, setShowFoot] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   document.addEventListener("mousemove", (ev) => {
     const x = ev.clientX,
@@ -54,15 +51,26 @@ function App() {
     });
   });
 
+  const notices = [
+    "Hey! I'm a notice. I'm here to tell you something important. So, please pay attention to me.",
+    "Hey! I'm a notice. I'm here to tell you something important. So, please pay attention to me.",
+    "Hey! I'm a notice. I'm here to tell you something important. So, please pay attention to me.",
+  ];
+
+  const openPopup = () => setIsPopupOpen(true);
+  const closePopup = () => setIsPopupOpen(false);
 
   return (
-      <div className="App" id="App">
-        <BrowserRouter>
-          <div id="cursor">
-            <img src={flag} alt="" />
-          </div>
+    <div className="App" id="App">
+      <BrowserRouter>
+        <div id="cursor">
+          <img src={flag} alt="" />
+        </div>
 
-          {showNav && <Navbar showNav={showNav} />}
+        {showNav && <Navbar showNav={showNav} />}
+
+        <AnimatedCanvas onCanvasClick={openPopup} />
+        <Popup isOpen={true} onClose={closePopup} notices={notices} />
 
           <div className="webBody">
             <Routes>
