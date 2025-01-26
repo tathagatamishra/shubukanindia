@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "./CalenderAndNotice.scss";
+import "./Marksheet.scss";
 import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";
 import pdfURL_prasanta from "../../Documents/Prasen Academy Marksheet.pdf";
 import pdfURL_smaa from "../../Documents/SMAA Marksheet.pdf";
 import PdfViewer from "../UIComponent/PdfViewer";
 
-export default function CalenderAndNotice() {
+export default function Marksheet() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -34,13 +34,13 @@ setURL(pdfURL_smaa);
   }, [uniqueCode]);
 
   return (
-    <div className="CalenderAndNotice">
+    <div className="Marksheet">
       {/* <section className="Calender-Hero">
           <h1>Calender</h1>
           <p>Discovering the Way of Words</p>
       </section> */}
 
-      <section className="Notice-Hero">
+      <section className="Marksheet-Hero">
         <h1>Marksheet</h1>
         {/* <p>Discovering the Way of Words</p> */}
         <div className="underline"></div>

@@ -1,4 +1,6 @@
-.popup-main {
+@import '../../assets/variables';
+
+.popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -46,7 +48,7 @@
         // top: 50%;
         // left: 50%;
         // transform: translate(-50%, -50%);
-        border-radius: 20px;
+        // border-radius: 20px;
         padding: 20px 0 30px 0;
         width: 80%;
         height: fit-content;
@@ -55,10 +57,39 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        box-shadow: 1px 2px 10px rgba(50, 33, 25, 0.354);
-        border-right: 1px solid rgba(144, 112, 92, 0.42);
-        border-bottom: 1px solid rgba(144, 112, 92, 0.42);
-        background: rgb(215, 200, 181);
+        // box-shadow: 1px 2px 10px rgba(50, 33, 25, 0.354);
+        // border-right: 1px solid rgba(144, 112, 92, 0.42);
+        // border-bottom: 1px solid rgba(144, 112, 92, 0.42);
+        // background: rgb(215, 200, 181);
+
+        // position: relative;
+        // max-width: 70em;
+        // margin: 1em auto;
+        // padding: 1.5em;
+        // font-size: 1.2em;
+
+        &::selection {
+            color: $---selection-color;
+            background: $---selection-bg;
+        }
+
+        &::before {
+            position: absolute;
+            content: '';
+            inset: 0;
+            background: #fed;
+            // border-radius: 20px;
+            border-radius: 20px 4px 30px 8px;
+            filter: url(#wobble);
+            transform: rotate(-1deg);
+            z-index: -1;
+            // box-shadow: 5px 5px 5px #0009;
+            border-top: 1px solid rgba(255, 255, 255, 0.42);
+            border-left: 1px solid rgba(255, 255, 255, 0.42);
+            box-shadow: 1.5px 2px 10px rgba(24, 10, 3, 0.696);
+            background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+            background-size: 100px;
+        }
 
         animation-name: PopupPop;
         animation-duration: .4s;
@@ -73,6 +104,27 @@
 
             to {
                 scale: 1;
+            }
+        }
+
+        & h1 {
+            font-size: 30px;
+            // font-family: 'Finlandica';
+            // font-family: 'Lekton';
+            // font-family: 'Martian Mono';
+            // font-family: 'Orbit';
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            font-family: 'GFS Neohellenic', sans-serif;
+            font-weight: bold;
+            text-align: center;
+            margin: 5px;
+            color: #322622;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 
@@ -107,6 +159,11 @@
                 // font-family: 'Bellefair', serif;
                 // font-family: 'Capriola', sans-serif;
                 // font-family: 'GFS Neohellenic', sans-serif;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
             }
 
 
@@ -122,23 +179,12 @@
                 font-weight: 600;
                 color: rgb(255, 50, 50);
                 text-decoration: none;
-            }
-        }
 
-        & h1 {
-            font-size: 30px;
-            // font-family: 'Finlandica';
-            // font-family: 'Lekton';
-            // font-family: 'Martian Mono';
-            // font-family: 'Orbit';
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            font-family: 'GFS Neohellenic', sans-serif;
-            font-weight: bold;
-            text-align: center;
-            margin: 5px;
-            color: #322622;
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+            }
         }
 
         & button {
@@ -163,7 +209,7 @@
             animation-name: BtnPop;
             animation-duration: 1s;
             // animation-timing-function: ease-in-out;
-            animation-timing-function: cubic-bezier(0.92,-0.04, 0.12, 1.63);
+            animation-timing-function: cubic-bezier(0.92, -0.04, 0.12, 1.63);
 
             @keyframes BtnPop {
                 from {
