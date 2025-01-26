@@ -55,11 +55,13 @@ function App() {
     <p>
       The Registration is Open. Fill the form with necessary details. To check
       your email for your registration confirmation. Register to Shubukan India.
+      <br />
       Click here for <a href="/registration">Registration</a>.
     </p>,
     <p>
       To check your marksheet, Obtain your unique code from your instructor.
-      Enter the code to view your marksheet. Click here for <a href="/marksheet">Marksheet</a>.
+      Enter the code to view your marksheet. <br />
+      Click here for <a href="/marksheet">Marksheet</a>.
     </p>,
   ];
 
@@ -76,7 +78,12 @@ function App() {
         {showNav && <Navbar showNav={showNav} />}
 
         <AnimatedCanvas onCanvasClick={openPopup} />
-        <Popup isOpen={isPopupOpen} onClose={closePopup} notices={notices} title="NOTICE" />
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={closePopup}
+          notices={notices}
+          title="NOTICE"
+        />
 
         <div className="webBody">
           <Routes>
