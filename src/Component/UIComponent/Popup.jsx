@@ -26,7 +26,7 @@ const Popup = ({ isOpen, onClose, title, notices, ...props }) => {
         <div className="content">
           {notices.map((notice, index) => (
             <React.Fragment key={index}>
-              <hr />
+              <div className="notice-line"></div>
               <p>{notice}</p>
             </React.Fragment>
           ))}
