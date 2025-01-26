@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import './AnimatedCanvas.scss';
+import React, { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./AnimatedCanvas.scss";
 
 const AnimatedCanvas = ({ onCanvasClick }) => {
   const canvasRef = useRef(null);
@@ -11,7 +11,7 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     contextRef.current = context;
 
     canvas.width = 1920;
@@ -27,7 +27,13 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
 
     // Draw first image when loaded
     imagesRef.current[0].onload = () => {
-      context.drawImage(imagesRef.current[0], 0, 0, canvas.width, canvas.height);
+      context.drawImage(
+        imagesRef.current[0],
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
     };
 
     return () => {
@@ -40,9 +46,15 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
   const playAnimationForward = () => {
     const context = contextRef.current;
     const images = imagesRef.current;
-    
+
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.drawImage(images[currentFrameRef.current - 1], 0, 0, context.canvas.width, context.canvas.height);
+    context.drawImage(
+      images[currentFrameRef.current - 1],
+      0,
+      0,
+      context.canvas.width,
+      context.canvas.height
+    );
 
     currentFrameRef.current++;
 
@@ -57,9 +69,15 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
   const playAnimationReverse = () => {
     const context = contextRef.current;
     const images = imagesRef.current;
-    
+
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.drawImage(images[currentFrameRef.current - 1], 0, 0, context.canvas.width, context.canvas.height);
+    context.drawImage(
+      images[currentFrameRef.current - 1],
+      0,
+      0,
+      context.canvas.width,
+      context.canvas.height
+    );
 
     currentFrameRef.current--;
 
@@ -90,7 +108,9 @@ const AnimatedCanvas = ({ onCanvasClick }) => {
   return (
     <canvas
       ref={canvasRef}
-      onClick={onCanvasClick}
+      onClick={() => {
+        onCanvasClick();
+      }}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     />

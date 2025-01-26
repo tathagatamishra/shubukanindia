@@ -52,9 +52,15 @@ function App() {
   });
 
   const notices = [
-    "Hey! I'm a notice. I'm here to tell you something important. So, please pay attention to me.",
-    "Hey! I'm a notice. I'm here to tell you something important. So, please pay attention to me.",
-    "Hey! I'm a notice. I'm here to tell you something important. So, please pay attention to me.",
+    <p>
+      The Registration is Open. Fill the form with necessary details. To check
+      your email for your registration confirmation. Register to Shubukan India.
+      Go to <a href="/registration">www.shubukanindia.org/registration</a>.
+    </p>,
+    <p>
+      To check your marksheet, Obtain your unique code from your instructor.
+      Enter the code to view your marksheet. Go to <a href="/notice">www.shubukanindia.org/notice</a>.
+    </p>,
   ];
 
   const openPopup = () => setIsPopupOpen(true);
@@ -70,40 +76,60 @@ function App() {
         {showNav && <Navbar showNav={showNav} />}
 
         <AnimatedCanvas onCanvasClick={openPopup} />
-        <Popup isOpen={true} onClose={closePopup} notices={notices} />
+        <Popup isOpen={isPopupOpen} onClose={closePopup} notices={notices} />
 
-          <div className="webBody">
-            <Routes>
-              <Route path="/membership"  element={<Membership />} />
-              <Route path="/download"    element={<Download />} />
-              <Route path="/services"    element={<Services />} />
-              <Route path="/gallery"     element={<Gallery setShowNav={setShowNav} />} />
-              <Route path="/contact"     element={<Contact />} />
-              <Route path="/history"     element={<History setShowNav={setShowNav} />} />
-              <Route path="/marksheet"      element={<CalenderAndNotice />} />
-              <Route path="/admin"       element={<Admin setShowNav={setShowNav} setShowFoot={setShowFoot} />} />
-              <Route path="/blog"        element={<Blog />} />
-              <Route path="/"            element={<Home setShowNav={setShowNav} />} />
+        <div className="webBody">
+          <Routes>
+            <Route path="/membership" element={<Membership />} />
+            <Route path="/download" element={<Download />} />
+            <Route path="/services" element={<Services />} />
+            <Route
+              path="/gallery"
+              element={<Gallery setShowNav={setShowNav} />}
+            />
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/history"
+              element={<History setShowNav={setShowNav} />}
+            />
+            <Route path="/marksheet" element={<CalenderAndNotice />} />
+            <Route
+              path="/admin"
+              element={
+                <Admin setShowNav={setShowNav} setShowFoot={setShowFoot} />
+              }
+            />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/" element={<Home setShowNav={setShowNav} />} />
 
-              <Route path="/shuri-karate-kobudo-hozonkai" element={<Hozonkai />} />
-              
-              <Route path="/lineage-and-dojokun" element={<LineageAndDojoKun />} />
-              <Route path="/term-and-condition" element={<TAndC />} />
-              <Route path="/karate-and-kobudo"  element={<KarateAndKobudo />} />
-              <Route path="/shubukan-okinawa"   element={<ShubukanOkinawa />} />
-              <Route path="/shubukan-india"     element={<ShubukanIndia />} />
-              <Route path="/help-and-faqs"      element={<HAndF />} />
-              <Route path="/registration"       element={<Registration />} />
-              <Route path="/contributor"        element={<Contributor />} />
-              <Route path="/shubukan-world"     element={<ShubukanWorld setShowNav={setShowNav} />} />
-            </Routes>
-          </div>
+            <Route
+              path="/shuri-karate-kobudo-hozonkai"
+              element={<Hozonkai />}
+            />
 
-          {showFoot && <Footer />}
+            <Route
+              path="/lineage-and-dojokun"
+              element={<LineageAndDojoKun />}
+            />
+            <Route path="/term-and-condition" element={<TAndC />} />
+            <Route path="/karate-and-kobudo" element={<KarateAndKobudo />} />
+            <Route path="/shubukan-okinawa" element={<ShubukanOkinawa />} />
+            <Route path="/shubukan-india" element={<ShubukanIndia />} />
+            <Route path="/help-and-faqs" element={<HAndF />} />
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/contributor" element={<Contributor />} />
+            <Route
+              path="/shubukan-world"
+              element={<ShubukanWorld setShowNav={setShowNav} />}
+            />
+          </Routes>
+        </div>
 
-          <Banner />
-        </BrowserRouter>
-      </div>
+        {showFoot && <Footer />}
+
+        <Banner />
+      </BrowserRouter>
+    </div>
   );
 }
 
