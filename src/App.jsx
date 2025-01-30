@@ -30,6 +30,7 @@ import Registration from "./Component/Registration/Registration";
 import Admin from "./Component/Admin/Admin";
 import AnimatedCanvas from "./Component/UIComponent/AnimatedCanvas";
 import Popup from "./Component/UIComponent/Popup";
+import AdminAuth from "./Component/Admin/Auth/AdminAuth";
 
 function App() {
   const TRACKING_ID = "G-RXSEE0D376";
@@ -77,13 +78,17 @@ function App() {
 
         {showNav && <Navbar showNav={showNav} />}
 
-        <AnimatedCanvas onCanvasClick={openPopup} />
-        <Popup
-          isOpen={isPopupOpen}
-          onClose={closePopup}
-          notices={notices}
-          title="NOTICE"
-        />
+        {!window.location.href.includes("/admin") && (
+          <AnimatedCanvas onCanvasClick={openPopup} />
+        )}
+        {!window.location.href.includes("/admin") && (
+          <Popup
+            isOpen={isPopupOpen}
+            onClose={closePopup}
+            notices={notices}
+            title="NOTICE"
+          />
+        )}
 
         <div className="webBody">
           <Routes>
@@ -100,12 +105,7 @@ function App() {
               element={<History setShowNav={setShowNav} />}
             />
             <Route path="/marksheet" element={<Marksheet />} />
-            <Route
-              path="/admin"
-              element={
-                <Admin setShowNav={setShowNav} setShowFoot={setShowFoot} />
-              }
-            />
+
             <Route path="/blog" element={<Blog />} />
             <Route path="/" element={<Home setShowNav={setShowNav} />} />
 
@@ -129,12 +129,28 @@ function App() {
               path="/shubukan-world"
               element={<ShubukanWorld setShowNav={setShowNav} />}
             />
+
+            {/* Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <Admin setShowNav={setShowNav} setShowFoot={setShowFoot} />
+              }
+            />
+            <Route
+              path="/admin/auth"
+              element={
+                <AdminAuth setShowNav={setShowNav} setShowFoot={setShowFoot} />
+              }
+            />
           </Routes>
         </div>
 
         {showFoot && <Footer />}
 
-        <Banner />
+        {/* if path contains /admin, dont show banner */}
+
+        {!window.location.href.includes("/admin") && <Banner />}
       </BrowserRouter>
     </div>
   );
