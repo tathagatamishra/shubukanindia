@@ -1,8 +1,15 @@
-@import '../../../assets/variables';
+@import '../../../styles/_variables';
+@import '../../../styles/_Fonts.scss';
 
 *::selection {
     color: $---selection-color;
     background: $---selection-bg;
+}
+
+* {
+    // font-family: $font-autterademoxrng5;
+    font-family: $font-quikersyzxwl;
+    // font-family: $font-shinypaintzpwez;
 }
 
 .AdminAuth {
@@ -15,8 +22,7 @@
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 500px) {
-    }
+    @media screen and (max-width: 500px) {}
 
     & .popup-container {
         z-index: 1;
@@ -31,7 +37,6 @@
         justify-content: center;
         align-items: center;
         font-size: 14px;
-        font-family: 'Amarante', cursive;
 
         &::before {
             position: absolute;
@@ -66,8 +71,14 @@
         }
 
         & .input-div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
             & input {
-                margin-top: 20px;
+                margin-top: 10px;
                 max-width: 100%;
                 width: 250px;
                 height: 40px;
@@ -78,15 +89,31 @@
                 resize: none;
                 z-index: 2;
                 font-size: 1.3rem;
-                font-weight: 600;
+                // font-weight: 600;
                 color: #2a2727;
-                font-family: 'Forum', cursive;
                 text-align: center;
                 letter-spacing: 2px;
+                // font-family: 'Andika', sans-serif;
+                // font-family: 'MuseoModerno';
+
             }
 
-            & .line {
-                width: 100%;
+            & .password {
+                font-size: 30px;
+
+            }
+
+            & .line1 {
+                width: 0%;
+                height: 2px;
+                margin: 0 0 10px 0;
+                opacity: .5;
+                background: radial-gradient(circle, #905043 0%, transparent 100%);
+                transition: 1000ms;
+            }
+
+            & .line2 {
+                width: 0%;
                 height: 2px;
                 margin: 0 0 10px 0;
                 opacity: .5;
@@ -96,4 +123,3 @@
         }
     }
 }
-
