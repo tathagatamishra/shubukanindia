@@ -37,11 +37,10 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
   return (
     <div className="AdminAuth">
       <form className="popup-container" autoComplete="off">
-        <p>Admin Auth</p>
         <div className="input-div">
           <input
             type="text"
-            autocomplete="false"
+            autoComplete="false"
             className="username"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
@@ -52,7 +51,7 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
         <div className="input-div">
           <input
             type="password"
-            autocomplete="false"
+            autoComplete="false"
             className="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

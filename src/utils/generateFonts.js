@@ -26,7 +26,7 @@ function generateFontScss() {
       
       scssContent += `@font-face {
   font-family: '${fontFamily}';
-  src: url('/Font/${file}') format('${fontExtension === 'ttf' ? 'truetype' : 'opentype'}');
+  src: url('/Fonts/${file}') format('${fontExtension === 'ttf' ? 'truetype' : 'opentype'}');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

@@ -1,9 +1,15 @@
 @import '../../../styles/_variables';
-@import '../../../styles/_Fonts';
+@import '../../../styles/_Fonts.scss';
 
 *::selection {
     color: $---selection-color;
     background: $---selection-bg;
+}
+
+* {
+    // font-family: $font-autterademoxrng5;
+    font-family: $font-quikersyzxwl;
+    // font-family: $font-shinypaintzpwez;
 }
 
 .AdminAuth {
@@ -21,7 +27,7 @@
     & .popup-container {
         z-index: 1;
         position: fixed;
-        padding: 20px 20px 30px 20px;
+        padding: 30px 20px 50px 20px;
         width: 80%;
         height: fit-content;
         max-width: 400px;
@@ -64,10 +70,6 @@
             }
         }
 
-        & p {
-            font-size: 24px;
-        }
-
         & .input-div {
             width: 100%;
             display: flex;
@@ -93,7 +95,6 @@
                 letter-spacing: 2px;
                 // font-family: 'Andika', sans-serif;
                 // font-family: 'MuseoModerno';
-                font-family: 'font-autterademoxrng5';
 
             }
 
@@ -103,7 +104,7 @@
             }
 
             & .line1 {
-                width: 100%;
+                width: 0%;
                 height: 2px;
                 margin: 0 0 10px 0;
                 opacity: .5;
@@ -112,7 +113,7 @@
             }
 
             & .line2 {
-                width: 100%;
+                width: 0%;
                 height: 2px;
                 margin: 0 0 10px 0;
                 opacity: .5;
