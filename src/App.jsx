@@ -86,7 +86,7 @@ function App() {
         {!window.location.href.includes("/admin") && (
           <Popup
             isOpen={isPopupOpen}
-            onClose={closePopup}
+            onBtnClick={closePopup}
             notices={notices}
             title="NOTICE"
           />
