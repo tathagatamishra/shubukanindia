@@ -56,17 +56,17 @@
         animation-name: PopupPop;
         animation-duration: .4s;
         animation-timing-function: cubic-bezier(0.53, -0.2, 0.12, 1.63);
-        
+
         @keyframes PopupPop {
             from {
                 scale: 0;
             }
-            
+
             to {
                 scale: 1;
             }
         }
-        
+
         & .input-div {
             transition: 300ms;
             width: 100%;
@@ -80,20 +80,24 @@
                 margin-top: 10px;
                 max-width: 100%;
                 width: 250px;
-                height: 40px;
-                padding: 20px;
+                height: 52px;
+                // padding: 20px;
                 box-sizing: border-box;
                 border: none;
                 background-color: transparent;
                 resize: none;
                 z-index: 2;
-                font-size: 28px;
+                font-size: 36px;
                 // font-weight: 600;
                 color: #2a2727;
                 text-align: center;
                 letter-spacing: 2px;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'MuseoModerno';
+                font-family: $font-quikersyzxwl;
+
+                @media screen and (max-width: 500px) {
+                    height: 40px;
+                    font-size: 28px;
+                }
             }
 
             & .line1 {

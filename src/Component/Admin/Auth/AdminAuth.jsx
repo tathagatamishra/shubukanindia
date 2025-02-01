@@ -87,6 +87,8 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
           />
           <div className="line2"></div>
         </div>
+
+        {/* <button type="submit">Login</button> */}
       </form>
 
       <svg
