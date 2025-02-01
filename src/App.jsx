@@ -76,7 +76,9 @@ function App() {
           <img src={flag} alt="" />
         </div>
 
-        {showNav && <Navbar showNav={showNav} />}
+        {showNav && !window.location.href.includes("/admin") && (
+          <Navbar showNav={showNav} />
+        )}
 
         {!window.location.href.includes("/admin") && (
           <AnimatedCanvas onCanvasClick={openPopup} />
@@ -146,7 +148,7 @@ function App() {
           </Routes>
         </div>
 
-        {showFoot && <Footer />}
+        {showFoot && !window.location.href.includes("/admin") && <Footer />}
 
         {/* if path contains /admin, dont show banner */}
 

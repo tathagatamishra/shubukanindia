@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AdminAuth.scss";
-import { use } from "react";
+import axios from "axios";
+import { shubukan_api } from "../../../config";
 
 export default function AdminAuth({ setShowNav, setShowFoot }) {
   useEffect(() => {
@@ -33,6 +34,34 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
       document.querySelector(".line2").style.width = "100%";
     });
   });
+
+  // adminLogin
+  useEffect(() => {
+    axios
+      .post(
+        `${shubukan_api}/admin/auth`,
+        {
+          id: userName,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.isAdmin === true) {
+          localStorage.setItem("isAdmin", true);
+          window.location.href = "/admin";
+        } else {
+          console.log(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [userName, password]);
 
   return (
     <div className="AdminAuth">
