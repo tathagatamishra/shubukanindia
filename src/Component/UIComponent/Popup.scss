@@ -51,9 +51,9 @@
         // border-radius: 20px;
         padding: 20px 0 30px 0;
         width: 80%;
-        height: fit-content;
+        // height: fit-content;
         max-width: 400px;
-        max-height: 60%;
+        height: 60%;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -101,11 +101,11 @@
 
         @keyframes PopupPop {
             from {
-                scale: 0;
+                height: 20%;
             }
 
             to {
-                scale: 1;
+                height: 60%;
             }
         }
 

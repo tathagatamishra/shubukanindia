@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./AdminAuth.scss";
 import axios from "axios";
 import { shubukan_api } from "../../../config";
+import { IonIcon } from "@ionic/react";
+import { close } from "ionicons/icons";
 
 export default function AdminAuth({ setShowNav, setShowFoot }) {
   useEffect(() => {
@@ -36,7 +38,9 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
   });
 
   // adminLogin
-  useEffect(() => {
+  const adminLogin = (e) => {
+    e.preventDefault();
+
     axios
       .post(
         `${shubukan_api}/admin/auth`,
@@ -61,7 +65,7 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
       .catch((err) => {
         console.log(err);
       });
-  }, [userName, password]);
+  };
 
   return (
     <div className="AdminAuth">
@@ -88,7 +92,11 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
           <div className="line2"></div>
         </div>
 
-        {/* <button type="submit">Login</button> */}
+        {userName && password && (
+          <button type="submit" onClick={(e) => adminLogin(e)}>
+            LOGIN
+          </button>
+        )}
       </form>
 
       <svg
