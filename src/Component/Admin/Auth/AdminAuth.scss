@@ -6,13 +6,10 @@
     background: $---selection-bg;
 }
 
-* {
+.AdminAuth {
     // font-family: $font-autterademoxrng5;
     font-family: $font-quikersyzxwl;
     // font-family: $font-shinypaintzpwez;
-}
-
-.AdminAuth {
     height: fit-content;
     min-height: 100vh;
     width: 80%;
@@ -36,6 +33,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        // gap: 6px;
         font-size: 14px;
 
         &::before {
@@ -57,25 +55,26 @@
 
         animation-name: PopupPop;
         animation-duration: .4s;
-        transition: 300ms;
         animation-timing-function: cubic-bezier(0.53, -0.2, 0.12, 1.63);
-
+        
         @keyframes PopupPop {
             from {
                 scale: 0;
             }
-
+            
             to {
                 scale: 1;
             }
         }
-
+        
         & .input-div {
+            transition: 300ms;
             width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 6px;
 
             & input {
                 margin-top: 10px;
@@ -88,19 +87,13 @@
                 background-color: transparent;
                 resize: none;
                 z-index: 2;
-                font-size: 1.3rem;
+                font-size: 28px;
                 // font-weight: 600;
                 color: #2a2727;
                 text-align: center;
                 letter-spacing: 2px;
                 // font-family: 'Andika', sans-serif;
                 // font-family: 'MuseoModerno';
-
-            }
-
-            & .password {
-                font-size: 30px;
-
             }
 
             & .line1 {
