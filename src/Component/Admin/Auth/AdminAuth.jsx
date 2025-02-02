@@ -5,12 +5,7 @@ import { shubukan_api } from "../../../config";
 import { IonIcon } from "@ionic/react";
 import { close } from "ionicons/icons";
 
-export default function AdminAuth({ setShowNav, setShowFoot }) {
-  useEffect(() => {
-    setShowNav(false);
-    setShowFoot(false);
-  }, []);
-
+export default function AdminAuth() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -55,8 +50,8 @@ export default function AdminAuth({ setShowNav, setShowFoot }) {
         }
       )
       .then((res) => {
-        if (res.data.isAdmin === true) {
-          localStorage.setItem("isAdmin", true);
+        if (res.data.success === true) {
+          localStorage.setItem("adminToken", res.data.token);
           window.location.href = "/admin";
         } else {
           console.log(res.data.message);

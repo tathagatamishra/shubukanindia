@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import "./Admin.scss";
 
-export default function Admin({ setShowNav, setShowFoot }) {
-  const navigate = useNavigate();
+export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
 
+  // authenticating admin
   useEffect(() => {
-    setShowNav(false);
-    setShowFoot(false);
-  }, []);
-
-  useEffect(() => {
-    const adminStatus = localStorage.getItem("isAdmin");
-    if (adminStatus === "true") {
-      setIsAdmin(true);
-    } else {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
       setIsAdmin(false);
-      navigate("/admin/auth");
+      window.location.href = "/admin/auth";
+    } else {
+      const decodeToken = jwtDecode(token);
+      console.log(decodeToken);
+      
+      if (decodeToken.exp * 1000 < Date.now()) {
+        setIsAdmin(false);
+        window.location.href = "/admin/auth";
+      } else {
+        setIsAdmin(true);
+      }
     }
-  }, [navigate]);
+  }, []);
 
   return isAdmin ? (
     <div className="AdminDashboard">
@@ -43,7 +46,7 @@ export default function Admin({ setShowNav, setShowFoot }) {
           </filter>
         </defs>
       </svg>
-      
+
       <div className="dashBoard"></div>
     </div>
   ) : null;
