@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
 import "./Admin.scss";
+import { shubukan_api } from "../../config";
+import axios from "axios";
 
 export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const checkAdmin = (token) => {
+    axios
+      .get(`${shubukan_api}/admin/auth`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.success === true) {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+          window.location.href = "/admin/auth";
+          return;
+        }
+      })
+      .catch((err) => {
+        setIsAdmin(false);
+        window.location.href = "/admin/auth";
+        return;
+      });
+  };
+
   // authenticating admin
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
-    if (!token) {
-      setIsAdmin(false);
-      window.location.href = "/admin/auth";
-    } else {
-      const decodeToken = jwtDecode(token);
-      console.log(decodeToken);
-      
-      if (decodeToken.exp * 1000 < Date.now()) {
-        setIsAdmin(false);
-        window.location.href = "/admin/auth";
-      } else {
-        setIsAdmin(true);
-      }
+    if (token) {
+      checkAdmin(token);
     }
   }, []);
 
