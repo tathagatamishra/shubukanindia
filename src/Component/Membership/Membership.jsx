@@ -8,8 +8,9 @@ import dipak_maity from "../../dojo_instructors/dipak_maity.jpeg";
 import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
 import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
 import raj_chatterjee from "../../dojo_instructors/Raj Chatterjee.jpeg";
-import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpg";
+import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpeg";
 import prasanta_dolui from "../../dojo_instructors/prasanta_dolui.jpg";
+import basundhara_bag from "../../dojo_instructors/basundhara_bag.jpg";
 import img2 from "../../thumbnail/sabyasachi1.jpg";
 
 export default function Membership() {
@@ -36,11 +37,13 @@ export default function Membership() {
     {
       dojoName: "Shorin Ryu Shubukan Uema dojo India",
       dojoType: "Honbu Dojo",
-      instructor: "Sensei Sabyasachi Giri",
-      image: img2,
+      instructor: ["Sensei Sabyasachi Giri"],
+      image: [img2],
       contact: [
-        ["Phone", "9851852499"],
-        ["Email", "shorinryushubukanindia@gmail.com"],
+        [
+          ["Phone", "9851852499"],
+          ["Email", "shorinryushubukanindia@gmail.com"],
+        ],
       ],
       brunch: [
         {
@@ -53,9 +56,9 @@ export default function Membership() {
     },
     {
       dojoName: "Fudoshin Martial Arts Academy",
-      instructor: "Dipak Kumar Maity",
-      image: dipak_maity,
-      contact: [["Phone", "7478327686"]],
+      instructor: ["Dipak Kumar Maity", "Basundhara Bag"],
+      image: [dipak_maity, basundhara_bag],
+      contact: [[["Phone", "7478327686"]]],
       brunch: [
         {
           mainLocation: "Purba Medinipur",
@@ -67,11 +70,13 @@ export default function Membership() {
     },
     {
       dojoName: "Roy Martial Arts Academy",
-      instructor: "Nanak Roy",
-      image: nanak_roy,
+      instructor: ["Nanak Roy"],
+      image: [nanak_roy],
       contact: [
-        ["Phone", "7001564694"],
-        ["Address", "Belbari, Dakshin Dinajpur, West Bengal, 733124"],
+        [
+          ["Phone", "7001564694"],
+          ["Address", "Belbari, Dakshin Dinajpur, West Bengal, 733124"],
+        ],
       ],
       brunch: [
         {
@@ -85,11 +90,13 @@ export default function Membership() {
     },
     {
       dojoName: "Shoshin Martial Arts Academy",
-      instructor: "Shaswata Sagar",
-      image: shaswata_sagar,
+      instructor: ["Shaswata Sagar"],
+      image: [shaswata_sagar],
       contact: [
-        ["Phone", "9037358074"],
-        ["Email", "s.sagar111987@gmail.com"],
+        [
+          ["Phone", "9037358074"],
+          ["Email", "s.sagar111987@gmail.com"],
+        ],
       ],
       brunch: [
         {
@@ -102,11 +109,13 @@ export default function Membership() {
     },
     {
       dojoName: "Prasen Karate Academy",
-      instructor: "Prasanta Dalui",
-      image: prasanta_dolui,
+      instructor: ["Prasanta Dalui"],
+      image: [prasanta_dolui],
       contact: [
-        ["Phone", "9007065973"],
-        ["Address", "Bauria chaukashi 2 no colony, Howrah"],
+        [
+          ["Phone", "9007065973"],
+          ["Address", "Bauria chaukashi 2 no colony, Howrah"],
+        ],
       ],
       brunch: [
         {
@@ -119,9 +128,9 @@ export default function Membership() {
     },
     {
       dojoName: "Karate Self Defense Academy",
-      instructor: "Raj Chatterjee",
-      image: raj_chatterjee,
-      contact: [["Phone", "9734301071"]],
+      instructor: ["Raj Chatterjee"],
+      image: [raj_chatterjee],
+      contact: [[["Phone", "9734301071"]]],
       brunch: [
         {
           mainLocation: "Hooghly",
@@ -141,6 +150,7 @@ export default function Membership() {
   ];
 
   // Filter dojos based on search term
+  // *******  Filter is not array based, it need to changed
   const handleSearch = () => {
     const filtered = dojoArr.filter((dojo) => {
       // Check if any branch location matches the search term
@@ -173,7 +183,7 @@ export default function Membership() {
   // Handle input change in the search bar
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
-    handleSearch()
+    handleSearch();
   };
 
   // Handle keypress event to trigger search on Enter key press
@@ -193,7 +203,7 @@ export default function Membership() {
     justifyContent: "flex-end",
     alignItems: "center",
     transition: "300ms",
-    transform: 'translateY(70px)'
+    transform: "translateY(70px)",
   };
 
   const [searchStyle, setSearchStyle] = useState({});
@@ -227,7 +237,7 @@ export default function Membership() {
       setContainerStyle(searchContainerStyle);
       setSearchStyle({ position: "absolute" });
       setInputStyle({ width: "100%", transition: "300ms" });
-      setDojoListStyle({marginTop: '80px'})
+      setDojoListStyle({ marginTop: "80px" });
       if (windowWidth < 340) {
         setCrossStyle({ transform: "translateY(-66px)", opacity: "1" });
       } else if (windowWidth < 430) {
@@ -243,7 +253,7 @@ export default function Membership() {
       setSearchStyle({});
       setInputStyle({});
       setSearchTerm("");
-      setDojoListStyle({})
+      setDojoListStyle({});
     }
   }, [isInput, windowWidth]);
 
@@ -316,32 +326,34 @@ export default function Membership() {
                 {dojo.dojoName && <h2 className="dojoName">{dojo.dojoName}</h2>}
                 {dojo.dojoType && <p className="dojoType">{dojo.dojoType}</p>}
 
-                {(dojo.image || dojo.contact || dojo.instructor) && (
-                  <div className="dojoDetail">
-                    <div className="imageBox">
-                      {dojo.image && <img src={dojo.image} alt="Dojo" />}
-                    </div>
+                {(dojo.image || dojo.contact || dojo.instructor.length !== 0) &&
+                  dojo.instructor.map((instructor, index) => (
+                    <div className="dojoDetail" key={index}>
+                      <div className="imageBox">
+                        {dojo.image && (
+                          <img src={dojo.image[index]} alt="Dojo" />
+                        )}
+                      </div>
 
-                    <div className="details">
-                      {dojo.instructor && (
-                        <div className="instructor">
-                          <p className="instA">Instructor: {""}</p>
-                          <p className="instB">{dojo.instructor}</p>
-                        </div>
-                      )}
-
-                      {dojo.contact.length != 0 &&
-                        dojo.contact.map((contact, index) => (
-                          <div key={index} className="contact">
-                            <p className="contA">
-                              {contact[0]}: {""}
-                            </p>
-                            <p className="contB">{contact[1]}</p>
+                      <div className="details">
+                        {dojo.instructor.length != 0 && (
+                          <div className="instructor">
+                            <p className="instA">Instructor: {""}</p>
+                            <p className="instB">{instructor}</p>
                           </div>
-                        ))}
+                        )}
+
+                        {dojo.contact.length != 0 &&
+                          dojo.contact[index] != undefined &&
+                          dojo.contact[index].map((contact, i) => (
+                            <div key={i} className="contact">
+                              <p className="contA">{contact[0]}:</p>
+                              <p className="contB">{contact[1]}</p>
+                            </div>
+                          ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  ))}
 
                 {dojo.brunch.length != 0 &&
                   dojo.brunch.map((branch, index) => (

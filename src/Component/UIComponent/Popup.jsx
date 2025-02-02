@@ -49,10 +49,4 @@ const Popup = ({ isOpen, onBtnClick, title, notices }) => {
   );
 };
 
-Popup.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  notices: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
 export default Popup;
