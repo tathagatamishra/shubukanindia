@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AdminAuth.scss";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import { shubukan_api } from "../../../config";
 import { IonIcon } from "@ionic/react";
 import { close } from "ionicons/icons";
