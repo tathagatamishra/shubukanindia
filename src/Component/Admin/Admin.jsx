@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Admin.scss";
 import { shubukan_api } from "../../config";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
