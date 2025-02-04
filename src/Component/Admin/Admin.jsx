@@ -38,6 +38,9 @@ export default function Admin() {
     const token = localStorage.getItem("adminToken");
     if (token) {
       checkAdmin(token);
+    } else {
+      setIsAdmin(false);
+      window.location.href = "/admin/auth";
     }
   }, []);
 
