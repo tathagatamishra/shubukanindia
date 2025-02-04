@@ -106,7 +106,7 @@ export default function Navbar() {
             {/* menu is forced to be hidden but it's css is not be hidden, so when it appears, it appears with transition, but when it get killed, it killed immediately, so there is no end transition */}
             <div
               className="menuBox"
-              style={{ backgroundImage: `url(${oldPaper})` }}
+              // style={{ backgroundImage: `url(${oldPaper})` }}
             >
               {/* <img src="oldpaper.png" alt="" /> */}
               <nav className="nav">
@@ -203,7 +203,12 @@ export default function Navbar() {
                 >
                   <p>GALLERY</p>
                 </NavLink>
-                <NavLink to="/blog" className="opt" onMouseEnter={play2} onClick={showMenu}>
+                <NavLink
+                  to="/blog"
+                  className="opt"
+                  onMouseEnter={play2}
+                  onClick={showMenu}
+                >
                   <p>BLOG</p>
                 </NavLink>
                 <NavLink
@@ -216,6 +221,25 @@ export default function Navbar() {
                 </NavLink>
               </nav>
             </div>
+
+            
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              height="0"
+              width="0"
+            >
+              <defs>
+                <filter id="wobble">
+                  <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency=".06"
+                    numOctaves="4"
+                  />
+                  <feDisplacementMap in="SourceGraphic" scale="6" />
+                </filter>
+              </defs>
+            </svg>
           </>
         )}
       </section>
