@@ -46,26 +46,38 @@ export default function Membership() {
         ],
       ],
       brunch: [
-        {
-          mainLocation: "West Bengal",
-          brunchAddress: [
-            "Dakshin Kumarpur, Contai, Purba Medinipur, West Bengal, India, 721401",
-          ],
-        },
+        [
+          {
+            mainLocation: "West Bengal",
+            brunchAddress: [
+              "Dakshin Kumarpur, Contai, Purba Medinipur, West Bengal, India, 721401",
+            ],
+          },
+        ],
       ],
     },
     {
       dojoName: "Fudoshin Martial Arts Academy",
       instructor: ["Dipak Kumar Maity", "Basundhara Bag"],
       image: [dipak_maity, basundhara_bag],
-      contact: [[["Phone", "7478327686"]]],
+      contact: [[["Phone", "7478327686"]], [["Phone", "8537952108"]]],
       brunch: [
-        {
-          mainLocation: "Purba Medinipur",
-          brunchAddress: [
-            "Egra Sarada Shashi Bhusan College, Egra, Purba Medinipur West Bengal",
-          ],
-        },
+        [
+          {
+            mainLocation: "Purba Medinipur",
+            brunchAddress: [
+              "Egra Sarada Shashi Bhusan College, Egra, Purba Medinipur West Bengal",
+            ],
+          },
+        ],
+        [
+          {
+            mainLocation: "Purba Medinipur",
+            brunchAddress: [
+              "Kharui Kotbarh, Kharuigarh, Patashpur, 721429",
+            ],
+          },
+        ],
       ],
     },
     {
@@ -79,13 +91,15 @@ export default function Membership() {
         ],
       ],
       brunch: [
-        {
-          mainLocation: "Dakshin Dinajpur",
-          brunchAddress: [
-            "Nayabazar High School Moydan",
-            "Gangarampur Football Club",
-          ],
-        },
+        [
+          {
+            mainLocation: "Dakshin Dinajpur",
+            brunchAddress: [
+              "Nayabazar High School Moydan",
+              "Gangarampur Football Club",
+            ],
+          },
+        ],
       ],
     },
     {
@@ -99,12 +113,14 @@ export default function Membership() {
         ],
       ],
       brunch: [
-        {
-          mainLocation: "Kerala",
-          brunchAddress: [
-            "Kadakampally Lane, Anayara, Thiruvananthapuram, Kerala",
-          ],
-        },
+        [
+          {
+            mainLocation: "Kerala",
+            brunchAddress: [
+              "Kadakampally Lane, Anayara, Thiruvananthapuram, Kerala",
+            ],
+          },
+        ],
       ],
     },
     {
@@ -118,12 +134,14 @@ export default function Membership() {
         ],
       ],
       brunch: [
-        {
-          mainLocation: "Howrah",
-          brunchAddress: [
-            "West Burikhali, Bauria, Howrah, West Bengal, 711310",
-          ],
-        },
+        [
+          {
+            mainLocation: "Howrah",
+            brunchAddress: [
+              "West Burikhali, Bauria, Howrah, West Bengal, 711310",
+            ],
+          },
+        ],
       ],
     },
     {
@@ -132,19 +150,21 @@ export default function Membership() {
       image: [raj_chatterjee],
       contact: [[["Phone", "9734301071"]]],
       brunch: [
-        {
-          mainLocation: "Hooghly",
-          brunchAddress: [
-            "Bengai Netaji Club Ground",
-            "Goghat Debangan Nursery School Ground",
-            "Patulsara Primary School Ground",
-            "Badanganj Swastik Club Ground",
-          ],
-        },
-        {
-          mainLocation: "Paschim Medinipur",
-          brunchAddress: ["Ramjibanpur Babulal High School Ground"],
-        },
+        [
+          {
+            mainLocation: "Hooghly",
+            brunchAddress: [
+              "Bengai Netaji Club Ground",
+              "Goghat Debangan Nursery School Ground",
+              "Patulsara Primary School Ground",
+              "Badanganj Swastik Club Ground",
+            ],
+          },
+          {
+            mainLocation: "Paschim Medinipur",
+            brunchAddress: ["Ramjibanpur Babulal High School Ground"],
+          },
+        ],
       ],
     },
   ];
@@ -329,48 +349,52 @@ export default function Membership() {
                 {(dojo.image || dojo.contact || dojo.instructor.length !== 0) &&
                   dojo.instructor.map((instructor, index) => (
                     <div className="dojoDetail" key={index}>
-                      <div className="imageBox">
-                        {dojo.image && (
-                          <img src={dojo.image[index]} alt="Dojo" />
-                        )}
-                      </div>
+                      <div className="dojoDiv">
+                        <div className="imageBox">
+                          {dojo.image && (
+                            <img src={dojo.image[index]} alt="Dojo" />
+                          )}
+                        </div>
 
-                      <div className="details">
-                        {dojo.instructor.length != 0 && (
-                          <div className="instructor">
-                            <p className="instA">Instructor: {""}</p>
-                            <p className="instB">{instructor}</p>
-                          </div>
-                        )}
-
-                        {dojo.contact.length != 0 &&
-                          dojo.contact[index] != undefined &&
-                          dojo.contact[index].map((contact, i) => (
-                            <div key={i} className="contact">
-                              <p className="contA">{contact[0]}:</p>
-                              <p className="contB">{contact[1]}</p>
+                        <div className="details">
+                          {dojo.instructor.length != 0 && (
+                            <div className="instructor">
+                              <p className="instA">Instructor: {""}</p>
+                              <p className="instB">{instructor}</p>
                             </div>
-                          ))}
+                          )}
+
+                          {dojo.contact.length != 0 &&
+                            dojo.contact[index] != undefined &&
+                            dojo.contact[index].map((contact, i) => (
+                              <div key={i} className="contact">
+                                <p className="contA">{contact[0]}:</p>
+                                <p className="contB">{contact[1]}</p>
+                              </div>
+                            ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
 
-                {dojo.brunch.length != 0 &&
-                  dojo.brunch.map((branch, index) => (
-                    <div key={index} className="brunch">
-                      {branch.mainLocation && (
-                        <p className="mainLocation">{branch.mainLocation}</p>
-                      )}
+                      {dojo.brunch.length != 0 &&
+                        dojo.brunch[index].map((branch, index) => (
+                          <div key={index} className="brunch">
+                            {branch.mainLocation && (
+                              <p className="mainLocation">
+                                {branch.mainLocation}
+                              </p>
+                            )}
 
-                      {branch.brunchAddress.length != 0 && (
-                        <ul className="locationList">
-                          {branch.brunchAddress.map((address, index) => (
-                            <li key={index} className="location">
-                              {address}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                            {branch.brunchAddress.length != 0 && (
+                              <ul className="locationList">
+                                {branch.brunchAddress.map((address, index) => (
+                                  <li key={index} className="location">
+                                    {address}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        ))}
                     </div>
                   ))}
 
