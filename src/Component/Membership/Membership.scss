@@ -183,16 +183,16 @@
         height: fit-content;
         margin-bottom: 8rem;
         padding-top: 3rem;
-        
+
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        
+
         @media screen and (max-width: 700px) {
             padding-top: 2.5rem;
         }
-        
+
         @media screen and (max-width: 400px) {
             margin-bottom: 6rem;
             padding-top: 1rem;
@@ -529,228 +529,225 @@
                 & .dojoDetail {
                     margin: 20px 0;
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
                     gap: 20px;
 
                     @media screen and (max-width: 500px) {
                         gap: 10px;
                     }
 
-                    & .imageBox {
-                        // border: 1px solid rgb(0, 255, 0);
-
-                        & img {
-                            filter: sepia(30%) grayscale(30%);
-                            height: 200px;
-                            width: 200px;
-                            border-radius: 10px;
-                            object-fit: cover;
-                            user-select: none;
-                        }
-
-                        @media screen and (max-width: 700px) {
-                            & img {
-                                border-radius: 5px;
-                                height: 170px;
-                                width: 150px;
-                            }
-                        }
+                    & .dojoDiv {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 20px;
 
                         @media screen and (max-width: 500px) {
+                            gap: 10px;
+                        }
+
+                        & .imageBox {
+                            // border: 1px solid rgb(0, 255, 0);
+
                             & img {
-                                height: 150px;
-                                width: 130px;
+                                filter: sepia(30%) grayscale(30%);
+                                height: 200px;
+                                width: 200px;
+                                border-radius: 10px;
+                                object-fit: cover;
+                                user-select: none;
+                            }
+
+                            @media screen and (max-width: 700px) {
+                                & img {
+                                    border-radius: 5px;
+                                    height: 170px;
+                                    width: 150px;
+                                }
+                            }
+
+                            @media screen and (max-width: 500px) {
+                                & img {
+                                    height: 150px;
+                                    width: 130px;
+                                }
+                            }
+
+                            @media screen and (max-width: 430px) {
+                                & img {
+                                    height: 150px;
+                                    width: 120px;
+                                }
                             }
                         }
 
-                        @media screen and (max-width: 430px) {
-                            & img {
-                                height: 150px;
-                                width: 120px;
+                        & .details {
+                            display: flex;
+                            flex-direction: column;
+                            // border: 1px solid rgb(0, 157, 255);
+
+                            // font-family: 'Amarante', cursive;
+                            font-family: 'Forum', cursive;
+                            // font-family: 'Philosopher', sans-serif;
+                            // font-family: 'Tenali Ramakrishna', sans-serif;
+
+                            @media screen and (max-width: 700px) {
+                                gap: 10px;
+                            }
+
+                            & .instructor {
+                                display: flex;
+                                flex-direction: row;
+
+                                & .instA {
+                                    margin: 10px;
+                                    font-size: 1.3rem;
+                                    font-weight: bold;
+                                    // border: 1px solid black;
+
+                                    &::selection {
+                                        color: $---selection-color;
+                                        background: $---selection-bg;
+                                    }
+                                }
+
+                                & .instB {
+                                    margin: 10px;
+                                    font-size: 1.3rem;
+                                    // border: 1px solid black;
+
+                                    &::selection {
+                                        color: $---selection-color;
+                                        background: $---selection-bg;
+                                    }
+                                }
+
+                                @media screen and (max-width: 700px) {
+                                    flex-direction: column;
+
+                                    & .instA {
+                                        margin: 0 10px;
+                                        font-size: 1.1rem;
+                                    }
+
+                                    & .instB {
+                                        margin: 0 10px;
+                                        font-size: 1.3rem;
+                                    }
+                                }
+
+                                @media screen and (max-width: 510px) {
+                                    flex-direction: column;
+
+                                    & .instA {
+                                        margin: 0 10px;
+                                        font-size: 1.1rem;
+                                    }
+
+                                    & .instB {
+                                        margin: 0 10px;
+                                        font-size: 1.3rem;
+                                    }
+                                }
+
+                                @media screen and (max-width: 430px) {
+                                    flex-direction: column;
+
+                                    & .instA {
+                                        margin: 0 10px;
+                                        font-size: 1.0rem;
+                                    }
+
+                                    & .instB {
+                                        margin: 0 10px;
+                                        font-size: 1.2rem;
+                                    }
+                                }
+                            }
+
+                            & .contact {
+                                display: flex;
+                                flex-direction: row;
+
+                                & .contA {
+                                    margin: 10px;
+                                    font-size: 1.3rem;
+                                    font-weight: bold;
+                                    // border: 1px solid black;
+
+                                    &::selection {
+                                        color: $---selection-color;
+                                        background: $---selection-bg;
+                                    }
+                                }
+
+                                & .contB {
+                                    margin: 10px;
+                                    font-size: 1.3rem;
+                                    word-break: break-word;
+
+                                    // border: 1px solid black;
+
+                                    &::selection {
+                                        color: $---selection-color;
+                                        background: $---selection-bg;
+                                    }
+                                }
+
+                                @media screen and (max-width: 700px) {
+                                    flex-direction: column;
+
+                                    & .contA {
+                                        margin: 0 10px;
+                                        font-size: 1.1rem;
+                                    }
+
+                                    & .contB {
+                                        margin: 0 10px;
+                                        font-size: 1.1rem;
+                                    }
+                                }
+
+                                @media screen and (max-width: 510px) {
+                                    flex-direction: column;
+
+                                    & .contA {
+                                        margin: 0 10px;
+                                        font-size: 1.1rem;
+                                    }
+
+                                    & .contB {
+                                        margin: 0 10px;
+                                        font-size: 1.1rem;
+                                    }
+                                }
+
+                                @media screen and (max-width: 430px) {
+                                    flex-direction: column;
+
+                                    & .contA {
+                                        margin: 0 10px;
+                                        font-size: 1.0rem;
+                                    }
+
+                                    & .contB {
+                                        margin: 0 10px;
+                                        font-size: 1.0rem;
+                                    }
+                                }
                             }
                         }
                     }
 
-                    & .details {
-                        display: flex;
-                        flex-direction: column;
-                        // border: 1px solid rgb(0, 157, 255);
-
+                    & .brunch {
                         // font-family: 'Amarante', cursive;
                         font-family: 'Forum', cursive;
                         // font-family: 'Philosopher', sans-serif;
                         // font-family: 'Tenali Ramakrishna', sans-serif;
 
-                        @media screen and (max-width: 700px) {
-                            gap: 10px;
-                        }
-
-                        & .instructor {
-                            display: flex;
-                            flex-direction: row;
-
-                            & .instA {
-                                margin: 10px;
-                                font-size: 1.3rem;
-                                font-weight: bold;
-                                // border: 1px solid black;
-
-                                &::selection {
-                                    color: $---selection-color;
-                                    background: $---selection-bg;
-                                }
-                            }
-
-                            & .instB {
-                                margin: 10px;
-                                font-size: 1.3rem;
-                                // border: 1px solid black;
-
-                                &::selection {
-                                    color: $---selection-color;
-                                    background: $---selection-bg;
-                                }
-                            }
-
-                            @media screen and (max-width: 700px) {
-                                flex-direction: column;
-
-                                & .instA {
-                                    margin: 0 10px;
-                                    font-size: 1.1rem;
-                                }
-
-                                & .instB {
-                                    margin: 0 10px;
-                                    font-size: 1.3rem;
-                                }
-                            }
-
-                            @media screen and (max-width: 510px) {
-                                flex-direction: column;
-
-                                & .instA {
-                                    margin: 0 10px;
-                                    font-size: 1.1rem;
-                                }
-
-                                & .instB {
-                                    margin: 0 10px;
-                                    font-size: 1.3rem;
-                                }
-                            }
-
-                            @media screen and (max-width: 430px) {
-                                flex-direction: column;
-
-                                & .instA {
-                                    margin: 0 10px;
-                                    font-size: 1.0rem;
-                                }
-
-                                & .instB {
-                                    margin: 0 10px;
-                                    font-size: 1.2rem;
-                                }
-                            }
-                        }
-
-                        & .contact {
-                            display: flex;
-                            flex-direction: row;
-
-                            & .contA {
-                                margin: 10px;
-                                font-size: 1.3rem;
-                                font-weight: bold;
-                                // border: 1px solid black;
-
-                                &::selection {
-                                    color: $---selection-color;
-                                    background: $---selection-bg;
-                                }
-                            }
-
-                            & .contB {
-                                margin: 10px;
-                                font-size: 1.3rem;
-                                word-break: break-word;
-
-                                // border: 1px solid black;
-
-                                &::selection {
-                                    color: $---selection-color;
-                                    background: $---selection-bg;
-                                }
-                            }
-
-                            @media screen and (max-width: 700px) {
-                                flex-direction: column;
-
-                                & .contA {
-                                    margin: 0 10px;
-                                    font-size: 1.1rem;
-                                }
-
-                                & .contB {
-                                    margin: 0 10px;
-                                    font-size: 1.1rem;
-                                }
-                            }
-
-                            @media screen and (max-width: 510px) {
-                                flex-direction: column;
-
-                                & .contA {
-                                    margin: 0 10px;
-                                    font-size: 1.1rem;
-                                }
-
-                                & .contB {
-                                    margin: 0 10px;
-                                    font-size: 1.1rem;
-                                }
-                            }
-
-                            @media screen and (max-width: 430px) {
-                                flex-direction: column;
-
-                                & .contA {
-                                    margin: 0 10px;
-                                    font-size: 1.0rem;
-                                }
-
-                                & .contB {
-                                    margin: 0 10px;
-                                    font-size: 1.0rem;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                & .brunch {
-                    // font-family: 'Amarante', cursive;
-                    font-family: 'Forum', cursive;
-                    // font-family: 'Philosopher', sans-serif;
-                    // font-family: 'Tenali Ramakrishna', sans-serif;
-
-                    & .mainLocation {
-                        margin: 10px;
-                        font-size: 1.3rem;
-                        font-weight: bold;
-                        // border: 1px solid black;
-
-                        &::selection {
-                            color: $---selection-color;
-                            background: $---selection-bg;
-                        }
-                    }
-
-                    & .locationList {
-                        & .location {
+                        & .mainLocation {
                             margin: 10px;
                             font-size: 1.3rem;
+                            font-weight: bold;
                             // border: 1px solid black;
 
                             &::selection {
@@ -758,46 +755,59 @@
                                 background: $---selection-bg;
                             }
                         }
-                    }
-
-                    @media screen and (max-width: 700px) {
-                        & .mainLocation {
-                            margin: 10px;
-                            font-size: 1.2rem;
-                        }
 
                         & .locationList {
                             & .location {
                                 margin: 10px;
-                                font-size: 1.2rem;
+                                font-size: 1.3rem;
+                                // border: 1px solid black;
+
+                                &::selection {
+                                    color: $---selection-color;
+                                    background: $---selection-bg;
+                                }
                             }
                         }
-                    }
 
-                    @media screen and (max-width: 510px) {
-                        & .mainLocation {
-                            margin: 8px;
-                            font-size: 1.2rem;
+                        @media screen and (max-width: 700px) {
+                            & .mainLocation {
+                                margin: 10px;
+                                font-size: 1.2rem;
+                            }
+
+                            & .locationList {
+                                & .location {
+                                    margin: 10px;
+                                    font-size: 1.2rem;
+                                }
+                            }
                         }
 
-                        & .locationList {
-                            & .location {
+                        @media screen and (max-width: 510px) {
+                            & .mainLocation {
                                 margin: 8px;
                                 font-size: 1.2rem;
                             }
-                        }
-                    }
 
-                    @media screen and (max-width: 430px) {
-                        & .mainLocation {
-                            margin: 5px;
-                            font-size: 1.1rem;
+                            & .locationList {
+                                & .location {
+                                    margin: 8px;
+                                    font-size: 1.2rem;
+                                }
+                            }
                         }
 
-                        & .locationList {
-                            & .location {
+                        @media screen and (max-width: 430px) {
+                            & .mainLocation {
                                 margin: 5px;
                                 font-size: 1.1rem;
+                            }
+
+                            & .locationList {
+                                & .location {
+                                    margin: 5px;
+                                    font-size: 1.1rem;
+                                }
                             }
                         }
                     }
