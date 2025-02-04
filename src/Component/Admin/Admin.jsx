@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./Admin.scss";
 import { shubukan_api } from "../../config";
 import axios from "axios";
-axios.defaults.withCredentials = true;
 
 export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const checkAdmin = (token) => {
     axios
-      .get(`${shubukan_api}/admin/auth`, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `${shubukan_api}/admin/validate`,
+        { token: token },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         if (res.data.success === true) {
           setIsAdmin(true);

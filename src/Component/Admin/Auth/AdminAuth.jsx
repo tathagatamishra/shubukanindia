@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AdminAuth.scss";
 import axios from "axios";
-axios.defaults.withCredentials = true;
 import { shubukan_api } from "../../../config";
 import { IonIcon } from "@ionic/react";
 import { close } from "ionicons/icons";
@@ -39,7 +38,7 @@ export default function AdminAuth() {
 
     axios
       .post(
-        `${shubukan_api}/admin/auth`,
+        `http://localhost:1234/admin/auth`,
         {
           id: userName,
           password: password,
