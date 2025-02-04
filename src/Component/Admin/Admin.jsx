@@ -67,7 +67,11 @@ export default function Admin() {
         </defs>
       </svg>
 
-      <div className="dashBoard"></div>
+      <div className="dashBoard">
+        
+      </div>
     </div>
-  ) : null;
+  ) : (
+    <div className="AdminDashboard"></div>
+  );
 }
