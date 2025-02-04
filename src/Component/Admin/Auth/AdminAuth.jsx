@@ -62,9 +62,19 @@ export default function AdminAuth() {
       });
   };
 
+  const [text, settext] = useState('');
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:1234/debug`).then((res) => {
+        settext(res.data.data);
+      })
+  }, []);
+
   return (
     <div className="AdminAuth">
       <form className="popup-container" autoComplete="off">
+        <h1>{text}</h1>
         <div className="input-div">
           <input
             type="text"
