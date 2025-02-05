@@ -29,7 +29,7 @@
     left: 0%;
     padding: 8px 16px;
     margin-left: -5px;
-    z-index: 1;
+    z-index: 4;
     position: fixed;
 
     &::before {
@@ -76,20 +76,68 @@
   }
 
   & .dashBoard {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
+    padding-top: 80px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 26px;
 
-    background-color: silver;
-    background-image:
-      radial-gradient(circle at 100% 150%, silver 24%, white 24%, white 28%, silver 28%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
-      radial-gradient(circle at 0 150%, silver 24%, white 24%, white 28%, silver 28%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
-      radial-gradient(circle at 50% 100%, white 10%, silver 10%, silver 23%, white 23%, white 30%, silver 30%, silver 43%, white 43%, white 50%, silver 50%, silver 63%, white 63%, white 71%, transparent 71%, transparent),
-      radial-gradient(circle at 100% 50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent),
-      radial-gradient(circle at 0 50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent);
-    background-size: 100px 50px;
+    & .editBoard {
+      width: 100%;
+      height: fit-content;
+      padding: 5px 8px 20px 8px;
+      z-index: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.5s ease-out allow-discrete;
+
+      &::before {
+        position: absolute;
+        content: '';
+        inset: 0;
+        background: #fed;
+        border-radius: 5px;
+        filter: url(#wobble);
+        // transform: rotate(-1deg);
+        z-index: -1;
+        border-top: 1px solid rgba(255, 255, 255, 0.42);
+        border-left: 1px solid rgba(255, 255, 255, 0.42);
+        border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+        border-right: 1px solid rgba(119, 90, 90, 0.4);
+        box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+        background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+        background-size: 100px;
+        transition: 300ms;
+      }
+
+
+      & .boardHeading {
+        margin: 0;
+        padding: 0;
+        letter-spacing: 1px;
+        font-size: 20px;
+      }
+      
+      & .boardInput {
+        display: flex;
+        flex-direction: column;
+
+        & label {
+          letter-spacing: 1px;
+          text-transform: capitalize;
+        }
+        & input {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+
+      & .boardPreview {}
+    }
   }
 }
