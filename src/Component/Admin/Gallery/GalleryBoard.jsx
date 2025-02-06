@@ -8,7 +8,7 @@ export default function GalleryBoard() {
       <input type="text" id="header" />
 
       <label htmlFor="subtitle">subtitle</label>
-      <textarea name="" id="subtitle"></textarea>
+      <input type="text" id="subtitle" />
 
       <label htmlFor="image">image</label>
       <input type="text" id="image" />

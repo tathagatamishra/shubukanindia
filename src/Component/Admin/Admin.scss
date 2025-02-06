@@ -25,19 +25,21 @@
   & .header {
     width: 105px;
     height: fit-content;
-    top: 20px;
-    left: 0%;
-    padding: 8px 16px;
-    margin-left: -5px;
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px 16px;
+    margin-top: -5px;
     z-index: 4;
     position: fixed;
+    cursor: pointer;
 
     &::before {
       position: absolute;
       content: '';
       inset: 0;
       background: #fed;
-      border-radius: 0 10px 10px 0;
+      border-radius: 0 0 30px 30px;
       filter: url(#wobble);
       // transform: rotate(-1deg);
       z-index: -1;
@@ -55,7 +57,7 @@
       text-align: center;
       width: 100%;
       font-size: 26px;
-      // letter-spacing: 1px;
+      letter-spacing: 2px;
       margin: 0%;
       padding: 0%;
     }
@@ -66,11 +68,11 @@
 
     @keyframes DashSlide {
       from {
-        margin-left: -105px;
+        margin-top: -105px;
       }
 
       to {
-        margin-left: -5px;
+        margin-top: -5px;
       }
     }
   }
@@ -93,7 +95,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
       transition: all 0.5s ease-out allow-discrete;
 
       &::before {
@@ -121,11 +123,21 @@
         padding: 0;
         letter-spacing: 1px;
         font-size: 20px;
+        cursor: pointer;
       }
 
       & .boardInput {
         display: flex;
         flex-direction: column;
+
+        & .line {
+          width: 100%;
+          height: 2px;
+          margin: 0 0 10px 0;
+          opacity: .5;
+          background: radial-gradient(circle, #905043 0%, transparent 100%);
+          transition: 1000ms;
+        }
 
         & label {
           letter-spacing: 1px;
@@ -152,13 +164,13 @@
           transition: 0.3s;
           background: #ffffff68;
           overflow: hidden;
-          
+
           &:focus {
             overflow-y: visible;
             background: #faf3ed;
             border: 1px solid $---accent1;
           }
-          
+
           &:hover {
             overflow-y: visible;
             background: #faf3ed;
@@ -170,7 +182,7 @@
             height: 5px;
             background: transparent;
           }
-        
+
           &::-webkit-scrollbar-thumb {
             border-radius: 0 50px 0 0;
             background: $---accent4;

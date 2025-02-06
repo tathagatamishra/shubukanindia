@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./Admin.scss";
-import { shubukan_api } from "../../config";
-import axios from "axios";
 import GalleryBoard from "./Gallery/GalleryBoard";
-import MarksheetBoard from './Marksheet/MarksheetBoard'
-import NoticeBoard from './Notice/NoticeBoard'
+import MarksheetBoard from "./Marksheet/MarksheetBoard";
+import NoticeBoard from "./Notice/NoticeBoard";
+import DojoBoard from "./Dojo/DojoBoard";
+import axios from "axios";
+import { shubukan_api } from "../../config";
 
 export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [token, setToken] = useState("");
+  const [allDojo, setAllDojo] = useState([]);
 
+  // ---------------------------------------------
+  // authenticating admin
   const checkAdmin = (token) => {
     axios
       .post(
@@ -23,6 +28,7 @@ export default function Admin() {
       .then((res) => {
         if (res.data.success === true) {
           setIsAdmin(true);
+          return;
         } else {
           setIsAdmin(false);
           window.location.href = "/admin/auth";
@@ -47,17 +53,59 @@ export default function Admin() {
     }
   }, []);
 
+  // ---------------------------------------------
+
+  // Dojo
+  const createDojo = async (dojoData) => {
+    await axios.post(`${shubukan_api}/dojo`, dojoData).then((res) => {
+      if (res.data.success === true) {
+        console.log("dojo created");
+      } else {
+        console.log("dojo not created");
+      }
+    });
+  };
+
+  const getDojo = async () => {
+    const res = await axios.get(`${shubukan_api}/dojo`);
+    return res.data;
+  };
+
+  const updateDojo = async () => {};
+
+  const deleteDojo = async () => {};
+
+  useEffect(() => {
+    const fetchDojo = async () => {
+      const data = await getDojo();
+      setAllDojo(data);
+    };
+    fetchDojo();
+  }, []);
+
+  const [selectedBoard, setSelectedBoard] = useState(null);
   const editBoard = [
     { boardName: "Gallery", component: <GalleryBoard /> },
     { boardName: "Marksheet", component: <MarksheetBoard /> },
-    { boardName: "Notice", component: <NoticeBoard/> },
+    { boardName: "Notice", component: <NoticeBoard /> },
+    {
+      boardName: "Dojo",
+      component: (
+        <DojoBoard
+          token={token}
+          allDojo={allDojo}
+          onCreateDojo={createDojo}
+          onUpdateDojo={updateDojo}
+          onDeleteDojo={deleteDojo}
+        />
+      ),
+    },
   ];
-  const [selectedBoard, setSelectedBoard] = useState(null);
 
   return isAdmin ? (
     <div className="AdminDashboard">
       <div className="header">
-        <p>Dashboard</p>
+        <p>Logout</p>
       </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
