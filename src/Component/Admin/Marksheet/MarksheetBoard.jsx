@@ -8,7 +8,7 @@ export default function MarksheetBoard() {
       <input type="text" id="header" />
 
       <label htmlFor="subtitle">subtitle</label>
-      <textarea name="" id="subtitle"></textarea>
+      <input type="text" id="subtitle" />
 
       <label htmlFor="description">description</label>
       <textarea name="" id="description"></textarea>
