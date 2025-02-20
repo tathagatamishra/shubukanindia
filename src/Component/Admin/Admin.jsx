@@ -53,6 +53,12 @@ export default function Admin() {
     }
   }, []);
 
+  // logout
+  const logout = () => {
+    localStorage.removeItem("adminToken");
+    window.location.href = "/admin/auth";
+  };
+
   // ---------------------------------------------
 
   // Dojo
@@ -104,7 +110,7 @@ export default function Admin() {
 
   return isAdmin ? (
     <div className="AdminDashboard">
-      <div className="header">
+      <div className="header" onClick={() => logout()}>
         <p>Logout</p>
       </div>
       <svg
