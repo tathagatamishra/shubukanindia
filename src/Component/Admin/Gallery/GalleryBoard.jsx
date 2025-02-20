@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './GalleryBoard.scss'
 
-export default function GalleryBoard() {
+export default function GalleryBoard(props) {
+const [galleryData, setGalleryData] = useState({
+  
+});
   return (
     <>
-      <label htmlFor="header">header</label>
-      <input type="text" id="header" />
-
-      <label htmlFor="subtitle">subtitle</label>
-      <input type="text" id="subtitle" />
-
       <label htmlFor="image">image</label>
       <input type="text" id="image" />
 
@@ -19,11 +16,16 @@ export default function GalleryBoard() {
       <label htmlFor="description">description</label>
       <textarea name="" id="description"></textarea>
 
+      <label htmlFor="category">category</label>
+      <textarea name="" id="category"></textarea>
+
       <label htmlFor="type">type</label>
       <input type="text" id="type" />
 
       <label htmlFor="time">time</label>
       <input type="text" id="time" />
+
+      <button>Submit</button>
     </>
   );
 }
