@@ -1,0 +1,102 @@
+.gallery-board {
+    & .form-section {
+        & .form-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    & .gallery-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        & .gallery-item {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+
+            & img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    & .align-image {
+        column-count: 8;
+        --webkit-column-count: 8;
+        --moz-column-count: 8;
+
+        @media screen and (max-width: 1080px) {
+            column-count: 6;
+            --webkit-column-count: 6;
+            --moz-column-count: 6;
+        }
+
+        @media screen and (max-width: 720px) {
+            column-count: 3;
+            --webkit-column-count: 3;
+            --moz-column-count: 3;
+        }
+
+        @media screen and (max-width: 400px) {
+            column-count: 2;
+            --webkit-column-count: 2;
+            --moz-column-count: 2;
+        }
+
+        & .image {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: 300ms;
+            margin: 0 0 10px 0;
+            background: #ffffff68;
+            border-radius: 8px;
+
+            & img {
+                height: auto;
+                width: 100%;
+                object-fit: contain;
+                border-radius: 8px 8px 0 0;
+                display: block;
+                transition: 300ms;
+
+                user-select: none;
+            }
+
+        }
+
+        & .image-info {
+            padding: 6px;
+
+            & .info-label {
+                border-bottom: 1px solid white;
+                font-size: 12px;
+                color: #403D3C;
+                padding-bottom: 2px;
+                margin: 0;
+                font-family: 'Geo';
+            }
+
+            & .info-text {
+                margin: 0 0 10px 0;
+                font-size: 12px;
+                color: #403D3C;
+
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+        }
+    }
+}

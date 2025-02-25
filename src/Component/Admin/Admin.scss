@@ -10,6 +10,10 @@
   // font-family: $font-autterademoxrng5;
   // font-family: $font-shinypaintzpwez;
   font-family: $font-quikersyzxwl;
+  font-family: 'Forum', cursive;
+  font-family: 'GFS Neohellenic', sans-serif;
+  // font-family: 'Tenali Ramakrishna', sans-serif;
+
   height: 100%;
   min-height: 100vh;
   width: 100vw;
@@ -56,7 +60,7 @@
     & p {
       text-align: center;
       width: 100%;
-      font-size: 26px;
+      font-size: 22px;
       letter-spacing: 2px;
       margin: 0%;
       padding: 0%;
@@ -97,12 +101,12 @@
       flex-direction: column;
       gap: 20px;
       transition: all 0.5s ease-out allow-discrete;
-
+      
       &::before {
+        background: #fed;
         position: absolute;
         content: '';
         inset: 0;
-        background: #fed;
         border-radius: 5px;
         filter: url(#wobble);
         // transform: rotate(-1deg);
@@ -113,6 +117,7 @@
         border-right: 1px solid rgba(119, 90, 90, 0.4);
         box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
         background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+        // filter: opacity(0.1);
         background-size: 100px;
         transition: 300ms;
       }
@@ -129,6 +134,7 @@
       & .boardInput {
         display: flex;
         flex-direction: column;
+        font-family: 'GFS Neohellenic', sans-serif;
 
         & .line {
           width: 100%;
@@ -142,18 +148,20 @@
         & label {
           letter-spacing: 1px;
           text-transform: capitalize;
+          margin-bottom: 10px;
         }
 
         & input,
         textarea {
           width: 100%;
-          margin-bottom: 10px;
+          margin: 4px 0 10px 0;
           resize: vertical;
           font-size: 18px;
           letter-spacing: 1px;
           font-family: $font-autterademoxrng5;
           font-family: $font-quikersyzxwl;
           font-family: $font-shinypaintzpwez;
+          font-family: 'GFS Neohellenic', sans-serif;
 
           min-height: 24px;
           padding: 4px 5px 5px 5px;
@@ -189,6 +197,69 @@
             border-top: solid 5px $---accent1;
             border-bottom: solid 5px $---accent1;
             cursor: default;
+          }
+        }
+
+        & input[type=file] {
+          // font-size: 16px;
+          // padding: 10px;
+          // border: 2px solid #007bff;
+          // border-radius: 5px;
+
+          &::file-selector-button {
+            font-family: 'GFS Neohellenic', sans-serif;
+            background-color: #faf3ed;
+            // color: white;
+            padding: 2px 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 8px 0 0;
+          }
+
+          &::file-selector-button:hover {
+            background-color: #d2b7a0;
+          }
+
+          &:hover {
+            &::file-selector-button {
+              background-color: #d2b7a0;
+            }
+          }
+        }
+
+        & button {
+          border: none;
+          border: 1px solid rgba(123, 35, 35, 0.445);
+          background: white;
+          height: 30px;
+          width: fit-content;
+          padding: 4px 20px;
+          margin: 4px 0 20px 0;
+          align-self: flex-end;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $---accent1;
+          font-size: 18px;
+          letter-spacing: 1px;
+          transition: 200ms;
+
+          cursor: pointer;
+          font-family: 'GFS Neohellenic', sans-serif;
+
+          &:hover {
+            scale: 1.1;
+          }
+
+          &:active {
+            scale: 0.9;
+            background: #e6dcd4;
+          }
+          
+          &:focus {
+            border: 1px solid $---accent1;
           }
         }
       }
