@@ -36,9 +36,9 @@ export default function AdminAuth() {
   const adminLogin = (e) => {
     e.preventDefault();
 
-    axios
+    shubukan_api
       .post(
-        `${shubukan_api}/admin/auth`,
+        `/admin/auth`,
         {
           id: userName,
           password: password,

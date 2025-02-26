@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./GalleryBoard.scss";
 import { shubukan_api } from "../../../config.js";
-
-// axios config
-const api = axios.create({
-  baseURL: shubukan_api,
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin2Line } from "react-icons/ri";
 
 export default function GalleryBoard() {
   const [galleries, setGalleries] = useState([]);
@@ -22,31 +14,25 @@ export default function GalleryBoard() {
     tags: "",
   });
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [filterParams, setFilterParams] = useState({
-    category: "",
-    tags: "",
-    year: "",
-    sort: "year-desc",
-    page: 1,
-  });
+  const [imgIndex, setImgIndex] = useState(null);
+  const [showDeleteBox, setShowDeleteBox] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    setShowDeleteBox(false);
+  }, [imgIndex]);
 
   useEffect(() => {
     fetchGalleries();
-  }, [filterParams]);
+  }, []);
 
+  // get api call
   const fetchGalleries = async () => {
     try {
-      // const params = {
-      //   ...filterParams,
-      //   tags: filterParams.tags
-      //     .split(",")
-      //     .filter((tag) => tag.trim())
-      //     .join(","),
-      // };
-
-      const { data } = await api.get("/gallery");
+      const { data } = await shubukan_api.get("/gallery");
       setGalleries(data.items);
     } catch (error) {
       console.error("Full error:", error);
@@ -67,10 +53,19 @@ export default function GalleryBoard() {
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setSelectedImage(e.target.files[0]);
+      const file = e.target.files[0];
+      setSelectedImage(file);
+
+      // Create image preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
+  // create new gallery image
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -94,7 +89,8 @@ export default function GalleryBoard() {
         }
       });
 
-      await api.post("/gallery", formDataToSend, {
+      // post api call
+      await shubukan_api.post("/gallery", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -108,9 +104,10 @@ export default function GalleryBoard() {
         tags: "",
       });
       setSelectedImage(null);
+      setImagePreview(null);
       fetchGalleries();
     } catch (error) {
-      console.error("Submit error:", error); // Add this for debugging
+      console.error("Submit error:", error);
       setError(
         "Failed to create gallery item: " +
           (error.response?.data?.message || error.message)
@@ -120,10 +117,37 @@ export default function GalleryBoard() {
     }
   };
 
+  // put api
+
+  // delete api
+  const handleDelete = async (id) => {
+    try {
+      setDeleting(true);
+
+      const token = localStorage.getItem("adminToken");
+
+      await shubukan_api.delete(`/gallery/perma/${id}`, {
+        data: { token: token },
+      });
+
+      setShowDeleteBox(false);
+      setImgIndex(null);
+      fetchGalleries();
+      setDeleting(false);
+    } catch (error) {
+      setDeleting(false);
+      console.error("Delete error:", error);
+      setError(
+        "Failed to delete gallery item: " +
+          (error.response?.data?.message || error.message)
+      );
+    }
+  };
+
   return (
     <div className="gallery-board">
       <div className="form-section">
-        <p>Add New Gallery Item</p>
+        <p className="form-title">Add New Gallery Item</p>
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit}>
@@ -136,6 +160,10 @@ export default function GalleryBoard() {
               onChange={handleImageChange}
               required
             />
+
+            {imagePreview && (
+              <img src={imagePreview} alt="Preview" className="image-preview" />
+            )}
           </div>
 
           <div className="form-group">
@@ -204,26 +232,85 @@ export default function GalleryBoard() {
       <div className="line"></div>
 
       <div className="align-image">
-        {galleries.map((gallery) => (
-          <div key={gallery._id} className="image">
+        {galleries.map((gallery, index) => (
+          <div
+            key={gallery._id}
+            className="image"
+            onClick={() => {
+              setImgIndex(index);
+            }}
+          >
             <img src={gallery.image} alt={gallery.title} />
 
-            <div className="image-info">
-              <p className="info-label">Title</p>
-              <p className="info-text">{gallery.title}</p>
+            {imgIndex === index &&
+              (showDeleteBox ? (
+                <div className="image-info">
+                  <p
+                    className="info-label"
+                    style={{ borderBottom: "none", marginBottom: "10px" }}
+                  >
+                    Do you really want to delete?
+                  </p>
 
-              <p className="info-label">Description</p>
-              <p className="info-text">{gallery.description}</p>
+                  <div className="btns">
+                    <button
+                      className="red"
+                      onClick={() => handleDelete(gallery._id)}
+                    >
+                      Yes
+                    </button>
 
-              <p className="info-label">Year</p>
-              <p className="info-text">{gallery.year}</p>
+                    <button
+                      className="green"
+                      onClick={() => {
+                        setShowDeleteBox(false);
+                      }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="image-info">
+                  <p className="info-label">Title</p>
+                  <p className="info-text">{gallery.title}</p>
 
-              <p className="info-label">Category</p>
-              <p className="info-text">{gallery.category}</p>
+                  <p className="info-label">Description</p>
+                  <p className="info-text">{gallery.description}</p>
 
-              <p className="info-label">Tags</p>
-              <p className="info-text">{gallery.tags.join(", ")}</p>
-            </div>
+                  <p className="info-label">Year</p>
+                  <p className="info-text">{gallery.year}</p>
+
+                  <p className="info-label">Category</p>
+                  <p className="info-text">{gallery.category}</p>
+
+                  <p className="info-label">Tags</p>
+                  <p className="info-text">{gallery.tags.join(", ")}</p>
+
+                  <div className="btns">
+                    <button className="green">
+                      <FiEdit />
+                    </button>
+
+                    <button
+                      className="red"
+                      onClick={() => {
+                        setShowDeleteBox(true);
+                      }}
+                    >
+                      <RiDeleteBin2Line />
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+            {deleting && imgIndex === index && (
+              <div className="loading">
+                <br />
+                <br />
+                <br /> Deleting...
+              </div>
+            )}
           </div>
         ))}
       </div>
