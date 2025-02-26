@@ -15,9 +15,9 @@ export default function Admin() {
   // ---------------------------------------------
   // authenticating admin
   const checkAdmin = (token) => {
-    axios
+    shubukan_api
       .post(
-        `${shubukan_api}/admin/validate`,
+        `/admin/validate`,
         { token: token },
         {
           headers: {
@@ -63,7 +63,7 @@ export default function Admin() {
 
   // Dojo
   const createDojo = async (dojoData) => {
-    await axios.post(`${shubukan_api}/dojo`, dojoData).then((res) => {
+    await shubukan_api.post(`/dojo`, dojoData).then((res) => {
       if (res.data.success === true) {
         console.log("dojo created");
       } else {
@@ -73,7 +73,7 @@ export default function Admin() {
   };
 
   const getDojo = async () => {
-    const res = await axios.get(`${shubukan_api}/dojo`);
+    const res = await shubukan_api.get(`/dojo`);
     return res.data;
   };
 
