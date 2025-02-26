@@ -3,6 +3,9 @@ import "./GalleryBoard.scss";
 import { shubukan_api } from "../../../config.js";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin2Line } from "react-icons/ri";
+import { IoWarningOutline } from "react-icons/io5";
+
+import axios from "axios";
 
 export default function GalleryBoard() {
   const [galleries, setGalleries] = useState([]);
@@ -16,6 +19,7 @@ export default function GalleryBoard() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState("");
   const [imgIndex, setImgIndex] = useState(null);
   const [showDeleteBox, setShowDeleteBox] = useState(false);
@@ -65,37 +69,68 @@ export default function GalleryBoard() {
     }
   };
 
-  // create new gallery image
+  // Direct upload to Cloudinary then save metadata to your backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setUploadProgress(0);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("image", selectedImage);
+      if (!selectedImage) {
+        setError("Please select an image");
+        setLoading(false);
+        return;
+      }
 
-      Object.keys(formData).forEach((key) => {
-        if (key === "tags") {
-          formDataToSend.append(
-            key,
-            formData[key]
-              .split(",")
-              .map((tag) => tag.trim())
-              .join(",")
-          );
-        } else {
-          formDataToSend.append(key, formData[key]);
+      const token = localStorage.getItem("adminToken");
+      console.log(token);
+
+      // Step 1: Get upload signature from backend
+      const { data: signatureData } = await shubukan_api.post(
+        "/gallery/signature",
+        { token: token }
+      );
+
+      // Step 2: Prepare data for Cloudinary
+      const cloudinaryData = new FormData();
+      cloudinaryData.append("file", selectedImage);
+      cloudinaryData.append("api_key", signatureData.apiKey);
+      cloudinaryData.append("timestamp", signatureData.timestamp);
+      cloudinaryData.append("signature", signatureData.signature);
+      cloudinaryData.append("folder", "Shubukan/Gallery");
+
+      // Step 3: Upload directly to Cloudinary with progress tracking
+      const cloudinaryResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/image/upload`,
+        cloudinaryData,
+        {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percentCompleted);
+          },
         }
-      });
+      );
 
-      // post api call
-      await shubukan_api.post("/gallery", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // Step 4: Send image URL and metadata to your backend
+      const galleryData = {
+        image: cloudinaryResponse.data.secure_url,
+        title: formData.title,
+        description: formData.description,
+        year: formData.year,
+        category: formData.category,
+        tags: formData.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .join(","),
+      };
 
+      // Create a new endpoint in your backend to handle pre-uploaded images
+      await shubukan_api.post("/gallery", galleryData);
+
+      // Reset form and states
       setFormData({
         title: "",
         description: "",
@@ -105,6 +140,7 @@ export default function GalleryBoard() {
       });
       setSelectedImage(null);
       setImagePreview(null);
+      setUploadProgress(0);
       fetchGalleries();
     } catch (error) {
       console.error("Submit error:", error);
@@ -116,8 +152,6 @@ export default function GalleryBoard() {
       setLoading(false);
     }
   };
-
-  // put api
 
   // delete api
   const handleDelete = async (id) => {
@@ -148,7 +182,6 @@ export default function GalleryBoard() {
     <div className="gallery-board">
       <div className="form-section">
         <p className="form-title">Add New Gallery Item</p>
-        {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -211,7 +244,7 @@ export default function GalleryBoard() {
 
           <div className="form-group">
             <label htmlFor="tags">Tags (comma-separated)</label>
-            <input
+            <textarea
               type="text"
               id="tags"
               value={formData.tags}
@@ -221,9 +254,42 @@ export default function GalleryBoard() {
             />
           </div>
 
-          <div className="form-group">
-            <button type="submit" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
+          <div
+            className="form-group"
+            style={
+              error
+                ? { justifyContent: "space-between" }
+                : { justifyContent: "flex-end" }
+            }
+          >
+            {error && (
+              <p className="error-message">
+                <IoWarningOutline />
+                {error}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              style={
+                loading && uploadProgress > 0
+                  ? { padding: "0", width: "100%" }
+                  : {}
+              }
+            >
+              {loading && uploadProgress > 0 ? (
+                <div className="progress-bar">
+                  <p>Uploading: {uploadProgress}%</p>
+
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         </form>

@@ -94,6 +94,7 @@
 
     & .editBoard {
       width: 100%;
+      max-width: 1080px;
       height: fit-content;
       padding: 5px 8px 20px 8px;
       z-index: 1;
@@ -249,9 +250,8 @@
           letter-spacing: 1px;
           transition: 200ms;
           user-select: none;
-
+          font-family: 'Geo';
           cursor: pointer;
-          font-family: 'GFS Neohellenic', sans-serif;
 
           &:hover {
             scale: 1.1;

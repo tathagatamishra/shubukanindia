@@ -18,27 +18,92 @@
                 border-radius: 8px;
                 border: 1px solid $---accent6;
                 background: #ffffff68;
+
+                max-width: 100%;
+                max-height: 200px;
+                object-fit: contain;
+            }
+
+            & .upload-progress {
+                margin-top: 10px;
+                width: 100%;
+
+                & .progress-bar {
+                    height: 20px;
+                    width: 100%;
+                    background-color: #f0f0f0;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin-bottom: 5px;
+
+                    & .progress-fill {
+                        height: 100%;
+                        background-color: #4CAF50;
+                        transition: width 0.3s ease;
+                    }
+                }
+
+                & p {
+                    margin: 0;
+                    font-size: 14px;
+                    color: green;
+                    font-family: 'Geo';
+
+                }
             }
         }
-    }
 
-    & .gallery-section {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        & .gallery-item {
+        & .form-group:last-child {
             width: 100%;
             display: flex;
-            flex-direction: column;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 20px;
 
-            & img {
-                width: 100px;
-                height: 100px;
-                object-fit: cover;
+            & .error-message {
+                margin: 4px 0 20px 0;
+                font-family: 'Geo';
+                color: $---accent1;
+                font-size: 16px;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 10px;
+                line-break: anywhere;
+
+                & svg {
+                    min-height: 20px;
+                    min-width: 20px;
+                }
+            }
+
+            & button {
+                align-self: flex-start;
+                overflow: hidden;
+                position: relative;
+
+                & .progress-bar {
+                    height: 100%;
+                    width: 100%;
+
+                    & .progress-fill {
+                        height: 100%;
+                        background-color: #4CAF50;
+                        transition: width 0.3s ease;
+                    }
+                }
+
+                & p {
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    margin: 0;
+                    font-size: 14px;
+                    color: black;
+                    font-family: 'Geo';
+                }
             }
         }
     }
