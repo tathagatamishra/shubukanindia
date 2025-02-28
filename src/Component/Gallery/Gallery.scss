@@ -1,4 +1,5 @@
 @import '../../styles/_variables';
+@import '../../styles/_Fonts';
 
 .Gallery {
     // border: 1px solid red;
@@ -35,7 +36,7 @@
         justify-content: flex-start;
         align-items: flex-start;
 
-        & h1 {
+        & .heading {
             margin: 1.5rem 0 2rem;
             color: #2a2727;
             font-size: 3.5rem;
@@ -49,6 +50,30 @@
             // font-family: 'GFS Neohellenic', sans-serif;
             // font-family: 'Pompiere', cursive;
             // font-family: 'Tenali Ramakrishna', sans-serif;
+
+            // font-family: $font-meekerenregularlg6vw;
+            // font-family: $font-brisketlgjdd;
+            // font-family: $font-brotherlandsignaturebold;
+            // font-family: $font-brushstrokesq6b5;
+            // font-family: $font-cfbrooshydemoregular-1jpg2;
+            // font-family: $font-distropiax;
+            // font-family: $font-ghiyastrokes-1kv4;
+            // font-family: $font-ghiyastrokesbezl;
+            // font-family: $font-grustybrushespersonaluseregularpgo8o;
+            // font-family: $font-hostgardpersonaluse;
+            // font-family: $font-louisfelligrilight;
+            // font-family: $font-magicbrushgoz2p;
+            // font-family: $font-meekerenregular-9ylj2;
+            // font-family: $font-meekerenregularlg6vw;
+            // font-family: $font-mostlybrightpersonalusewywoz;
+            // font-family: $font-motterdam;
+            // font-family: $font-oachimdemoregular-5176x;
+            // font-family: $font-qillseyeinsteineapw9;
+            // font-family: $font-rainlyregularovl7o;
+            // font-family: $font-tonybhageslgzaw;
+            // font-family: $font-autterademoxrng5;
+            // font-family: $font-quikersyzxwl;
+            // font-family: $font-shinypaintzpwez;
 
             &::selection {
                 color: $---selection-color;

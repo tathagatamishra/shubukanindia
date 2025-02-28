@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Gallery.scss";
-
+import { shubukan_api } from "../../config";
 import Lightbox from "react-18-image-lightbox";
 import "react-18-image-lightbox/style.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -291,10 +291,35 @@ export default function Gallery({ setShowNav }) {
 
   const [play] = useSound(audio);
 
+
+    const [galleries, setGalleries] = useState([]);
+    useEffect(() => {
+      fetchGalleries();
+    }, []);
+  
+    // get api call
+    const fetchGalleries = async () => {
+      try {
+        const { data } = await shubukan_api.get("/gallery");
+        setGalleries(data.items);
+      } catch (error) {
+        console.error("Full error:", error);
+        setError(
+          "Failed to fetch galleries: " +
+            (error.response?.data?.message || error.message)
+        );
+      }
+    };
+
+    useEffect(() => {
+      console.log(galleries);
+      
+    }, [galleries]);
+
   return (
     <div className="Gallery">
       <section className="Hero">
-        <h1>Gallery</h1>
+        <p className="heading">Gallery</p>
         <p>Beyond the realms</p>
         {/* <ImageUploader /> */}
       </section>
@@ -310,17 +335,17 @@ export default function Gallery({ setShowNav }) {
 
       {isOpen && isAlign && (
         <Lightbox
-          mainSrc={imgArray[photoIndex].imgItem}
-          nextSrc={imgArray[(photoIndex + 1) % imgArray.length]}
+          mainSrc={galleries[photoIndex].image}
+          nextSrc={galleries[(photoIndex + 1) % galleries.length]}
           prevSrc={
-            imgArray[(photoIndex + imgArray.length - 1) % imgArray.length]
+            galleries[(photoIndex + galleries.length - 1) % galleries.length]
           }
           onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
-            setPhotoIndex((photoIndex + imgArray.length - 1) % imgArray.length)
+            setPhotoIndex((photoIndex + galleries.length - 1) % galleries.length)
           }
           onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % imgArray.length)
+            setPhotoIndex((photoIndex + 1) % galleries.length)
           }
         />
       )}
@@ -375,7 +400,7 @@ export default function Gallery({ setShowNav }) {
       {isAlign ? (
         <section className="align-image">
           <div>
-            {thumbArray.map((image, index) => (
+            {galleries.map((image, index) => (
               <div
                 className="image"
                 key={index}
@@ -386,13 +411,13 @@ export default function Gallery({ setShowNav }) {
               >
                 <LazyLoadImage
                   className="img"
-                  alt={`Image ${index + 1}`}
+                  alt={`${image.tags.map((tag) => `${tag}`)}`}
                   effect="blur"
                   wrapperProps={{
                     // If you need to, you can tweak the effect transition using the wrapper style.
                     style: { transitionDelay: "0s" },
                   }}
-                  src={image.imgItem}
+                  src={image.image}
                 />
               </div>
             ))}

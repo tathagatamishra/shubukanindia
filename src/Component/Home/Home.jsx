@@ -132,7 +132,7 @@ export default function Home({ setShowNav }) {
       </div>
 
       <section className="hero">
-        <h1>Shubukan Uema Dojo India</h1>
+        <p className="heading">Shubukan Uema Dojo India</p>
         <p>
           {/* <i>&nbsp;</i> Beneath the instinct to fight
         </p>
