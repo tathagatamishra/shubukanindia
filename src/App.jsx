@@ -31,6 +31,7 @@ import Admin from "./Component/Admin/Admin";
 import AnimatedCanvas from "./Component/UIComponent/AnimatedCanvas";
 import Popup from "./Component/UIComponent/Popup";
 import AdminAuth from "./Component/Admin/Auth/AdminAuth";
+import MouseTrail from "./Component/UIComponent/MouseTrail";
 
 function App() {
   const TRACKING_ID = "G-RXSEE0D376";
@@ -72,9 +73,11 @@ function App() {
   return (
     <div className="App" id="App">
       <BrowserRouter>
-        <div id="cursor">
+        {/* <div id="cursor">
           <img src={flag} alt="" />
-        </div>
+        </div> */}
+
+        <MouseTrail />
 
         {showNav && !window.location.href.includes("/admin") && (
           <Navbar showNav={showNav} />

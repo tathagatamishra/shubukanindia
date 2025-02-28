@@ -26,15 +26,13 @@ import img_22 from "../../images/kaynChotuku.png";
 import img_24 from "../../images/Matsumura.png";
 import img_25 from "../../images/oldGroup.jpg";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function Home({ setShowNav }) {
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
 
-  
   const [slider, setSlider] = useState(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(null);
@@ -132,7 +130,40 @@ export default function Home({ setShowNav }) {
       </div>
 
       <section className="hero">
-        <p className="heading">Shubukan Uema Dojo India</p>
+        <div className="heading-div">
+          <div className="heading-box">
+            <p className="heading">S</p>
+            <p className="heading">h</p>
+            <p className="heading">u</p>
+            <p className="heading">b</p>
+            <p className="heading">u</p>
+            <p className="heading">k</p>
+            <p className="heading">a</p>
+            <p className="heading">n</p>
+            <p className="heading">&nbsp;</p>
+          </div>
+          <div className="heading-box">
+            <p className="heading">U</p>
+            <p className="heading">e</p>
+            <p className="heading">m</p>
+            <p className="heading">a</p>
+            <p className="heading">&nbsp;</p>
+          </div>
+          <div className="heading-box">
+            <p className="heading">D</p>
+            <p className="heading">o</p>
+            <p className="heading">j</p>
+            <p className="heading">o</p>
+            <p className="heading">&nbsp;</p>
+          </div>
+          <div className="heading-box">
+            <p className="heading">I</p>
+            <p className="heading">n</p>
+            <p className="heading">d</p>
+            <p className="heading">i</p>
+            <p className="heading">a</p>
+          </div>
+        </div>
         <p>
           {/* <i>&nbsp;</i> Beneath the instinct to fight
         </p>
