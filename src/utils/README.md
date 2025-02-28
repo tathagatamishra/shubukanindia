@@ -1,4 +1,8 @@
-- Run `node generateFonts.js` to generate `_Fonts.scss` 
+`DO NOT INCLUDE () IN FILE NAME`
+
+## Generate Font
+
+- Run `node generateFonts.mjs` to generate `_Fonts.scss` 
 
 &nbsp;
 
@@ -6,9 +10,13 @@
 
 my-project/ 
 ├── public/
-│   └── Font/
-│       ├── my-font-1.ttf
-│       └── my-font-2.otf
+│   └── Fonts/
+│       ├── ttf/
+│       │   ├── my-font-1.ttf
+│       │   └── my-font-2.ttf
+│       └── otf/
+│           ├── my-font-3.otf
+│           └── my-font-4.otf
 ├── src/
 │   ├── utils/
 │   │   └── generateFonts.js
@@ -17,3 +25,13 @@ my-project/
 └── package.json
 
 ```
+
+---
+
+## Rename File
+
+- Run `node renameFiles.mjs /path/to/your/folder suffixToAdd`
+- `node renameFiles.mjs ./my_folder important`
+- `node renameFiles.mjs "C:\Users\johni\Desktop\Shubukan Web\shubukanindia\public\Fonts\otf" otf`
+
+---
