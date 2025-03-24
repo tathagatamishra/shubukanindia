@@ -3,6 +3,9 @@ import "./Marksheet.scss";
 import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";
 import pdfURL_prasanta from "../../Documents/Prasen Academy Marksheet.pdf";
 import pdfURL_smaa from "../../Documents/SMAA Marksheet.pdf";
+import pdfURL_fmaa from "../../Documents/Fudoshin Martial Arts Academy Marksheet.pdf";
+import pdfURL_udi from "../../Documents/Uema Dojo India Marksheet.pdf"
+
 import PdfViewer from "../UIComponent/PdfViewer";
 
 export default function Marksheet() {
@@ -21,16 +24,21 @@ export default function Marksheet() {
   };
 
   useEffect(() => {
-    if (uniqueCode === "karatenanak@2024") {
+    if (uniqueCode === "rmaa@2024") {
       setURL(pdfURL_nanak);
-    } 
-    if (uniqueCode === "karateprasanta@2024") {
+    }
+    if (uniqueCode === "pka@2024") {
       setURL(pdfURL_prasanta);
-    } 
-if (uniqueCode === "smaa@2025") {
-setURL(pdfURL_smaa);
-}
-    
+    }
+    if (uniqueCode === "smaa@2025") {
+      setURL(pdfURL_smaa);
+    }
+    if (uniqueCode === "fmaa@2025") {
+      setURL(pdfURL_fmaa);
+    }
+    if (uniqueCode === "udi@2025") {
+      setURL(pdfURL_udi);
+    }
   }, [uniqueCode]);
 
   return (
@@ -53,7 +61,10 @@ setURL(pdfURL_smaa);
           released. To check your marksheet, Obtain your unique code from your
           instructor.
         </p>
-        <p>Enter the code below to view your marksheet, to download scroll down and click the download button</p>
+        <p>
+          Enter the code below to view your marksheet, to download scroll down
+          and click the download button
+        </p>
 
         <input
           type="text"

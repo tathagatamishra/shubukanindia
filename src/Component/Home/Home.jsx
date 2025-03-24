@@ -132,7 +132,7 @@ export default function Home({ setShowNav }) {
       <section className="hero">
         <div className="heading-div">
           <div className="heading-box">
-            <p className="heading">S</p>
+            <p className="heading" id="S">S</p>
             <p className="heading">h</p>
             <p className="heading">u</p>
             <p className="heading">b</p>
@@ -143,21 +143,21 @@ export default function Home({ setShowNav }) {
             <p className="heading">&nbsp;</p>
           </div>
           <div className="heading-box">
-            <p className="heading">U</p>
+            <p className="heading" id="U">U</p>
             <p className="heading">e</p>
             <p className="heading">m</p>
             <p className="heading">a</p>
             <p className="heading">&nbsp;</p>
           </div>
           <div className="heading-box">
-            <p className="heading">D</p>
+            <p className="heading" id="D">D</p>
             <p className="heading">o</p>
             <p className="heading">j</p>
             <p className="heading">o</p>
             <p className="heading">&nbsp;</p>
           </div>
           <div className="heading-box">
-            <p className="heading">I</p>
+            <p className="heading" id="I">I</p>
             <p className="heading">n</p>
             <p className="heading">d</p>
             <p className="heading">i</p>
