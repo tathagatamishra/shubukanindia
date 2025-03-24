@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { isDesktop, isMobile } from "react-device-detect";
 
 const MouseTrail = () => {
   const canvasRef = useRef(null);
@@ -7,6 +8,7 @@ const MouseTrail = () => {
   const positionRef = useRef({ x: 0, y: 0 });
   const prevPositionRef = useRef({ x: 0, y: 0 });
   const circlesRef = useRef([]);
+  const headSize = isMobile ? 18 : 10;
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -89,7 +91,7 @@ const MouseTrail = () => {
       for (let i = 0; i < circlesRef.current.length; i++) {
         const circle = circlesRef.current[i];
         const alpha = 0.2;
-        const size = Math.max(1, i / 8);
+        const size = Math.max(1, i / headSize);
         
         ctx.fillStyle = `rgba(42, 39, 39, ${alpha})`;
         ctx.beginPath();
