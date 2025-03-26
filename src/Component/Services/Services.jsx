@@ -3,7 +3,6 @@ import "./Services.scss";
 import { NavLink } from "react-router-dom";
 
 export default function Services() {
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -13,7 +12,7 @@ export default function Services() {
   return (
     <div className="Services">
       <section className="Hero">
-        <h1>Services</h1>
+        <p className="heading">Services</p>
         <p>Emerge with us to find truth</p>
       </section>
 
@@ -36,11 +35,15 @@ export default function Services() {
             </li>
             <li>
               <p className="title">Cultural Insight:</p>
-              <p className="description">Explore the history, etiquette, and cultural significance.</p>
+              <p className="description">
+                Explore the history, etiquette, and cultural significance.
+              </p>
             </li>
             <li>
               <p className="title">Mind-Body Connection:</p>
-              <p className="description">Focus on meditation, breathing, and mental conditioning.</p>
+              <p className="description">
+                Focus on meditation, breathing, and mental conditioning.
+              </p>
             </li>
           </ul>
         </div>
@@ -55,7 +58,9 @@ export default function Services() {
             </li>
             <li>
               <p className="title">Deep Understanding:</p>
-              <p className="description">Explore advanced techniques, philosophy, and history.</p>
+              <p className="description">
+                Explore advanced techniques, philosophy, and history.
+              </p>
             </li>
             <li>
               <p className="title">Interactive Q&A:</p>
@@ -66,7 +71,9 @@ export default function Services() {
             </li>
             <li>
               <p className="title">Skill Workshops:</p>
-              <p className="description">Hands-on sessions for refining specific techniques.</p>
+              <p className="description">
+                Hands-on sessions for refining specific techniques.
+              </p>
             </li>
           </ul>
         </div>
@@ -81,15 +88,21 @@ export default function Services() {
             </li>
             <li>
               <p className="title">Empowerment:</p>
-              <p className="description">Gain confidence and awareness for personal safety.</p>
+              <p className="description">
+                Gain confidence and awareness for personal safety.
+              </p>
             </li>
             <li>
               <p className="title">Adaptive Techniques:</p>
-              <p className="description">Suitable for all ages and physical abilities.</p>
+              <p className="description">
+                Suitable for all ages and physical abilities.
+              </p>
             </li>
             <li>
               <p className="title">Scenario-based Training:</p>
-              <p className="description">Simulations for effective response under pressure.</p>
+              <p className="description">
+                Simulations for effective response under pressure.
+              </p>
             </li>
           </ul>
         </div>
@@ -98,7 +111,9 @@ export default function Services() {
           <ul>
             <li>
               <p className="title">Traditional Mastery:</p>
-              <p className="description">Expert guidance in mastering Okinawan traditional weapons.</p>
+              <p className="description">
+                Expert guidance in mastering Okinawan traditional weapons.
+              </p>
             </li>
             <li>
               <p className="title">Practical Application:</p>
@@ -126,7 +141,9 @@ export default function Services() {
           <ul>
             <li>
               <p className="title">Flexibility:</p>
-              <p className="description">Learn from anywhere, anytime with our online platform.</p>
+              <p className="description">
+                Learn from anywhere, anytime with our online platform.
+              </p>
             </li>
             <li>
               <p className="title">Personalized Guidance:</p>

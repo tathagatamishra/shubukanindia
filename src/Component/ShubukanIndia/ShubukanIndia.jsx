@@ -24,7 +24,7 @@ export default function ShubukanIndia() {
   return (
     <div className="ShubukanIndia">
       <section className="Hero">
-        <h1>Shubukan India</h1>
+        <p className="heading">Shubukan India</p>
         <p>
           Shubukanindia is approved dojo from Okinawa Shubukan and only sole
           dojo of Shubukan Okinawa school in India. Sensei Sabyasachi visited

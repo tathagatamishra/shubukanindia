@@ -40,44 +40,13 @@ export default function Blog() {
 
   return (
     <div className="Blog">
-      {/* <div id="searchBar" style={position}>
-        <div className="search">
-          <input type="text" />
-          <button>
-            <IonIcon icon={searchOutline} />
-          </button>
-        </div>
-        <div className="searchLine" style={searchPos}></div>
-      </div> */}
-
       <div className="blogPage">
         <section className="blogHero">
-          <h1>Blog</h1>
-          <p>Discovering the Way of Words</p>
+          <p className="heading">Blog</p>
+          <p>The blog is under construction...</p>
         </section>
 
-        
-
-        <section className="content">
-        <div className="link">
-            <IonIcon icon={logoWordpress} className="label" />
-            <NavLink
-              to="https://kenshinsabya.wordpress.com/"
-              className="opt"
-              target="_blank"
-            >
-              kenshinsabya.wordpress.com
-            </NavLink>
-          </div>
-        </section>
-        
-        {/* <section className="blogContent">
-          <iframe
-            id="iFrameExample"
-            title="iFrame Example"
-            src="https://kenshinsabya.wordpress.com/"
-          ></iframe>
-        </section> */}
+        <section className="blogContent"></section>
       </div>
     </div>
   );

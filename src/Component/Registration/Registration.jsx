@@ -35,16 +35,13 @@ export default function Registration() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        `${shubukan_api}/registration`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${shubukan_api}/registration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
@@ -68,7 +65,10 @@ export default function Registration() {
           otherMartialArtsExperience: "",
         });
       } else {
-        showToast(data.message || "Fill all the required fields and try again.", "error");
+        showToast(
+          data.message || "Fill all the required fields and try again.",
+          "error"
+        );
         // || "Fill all the required fields and try again.",
       }
     } catch (error) {
@@ -91,7 +91,7 @@ export default function Registration() {
       )}
 
       <section className="Registration-Hero">
-        <h1>Registration</h1>
+        <p className="heading">Registration</p>
         <p>Registration for Karate and Kobudo classes</p>
         <div className="underline"></div>
       </section>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import './TAndC.scss'
+import "./TAndC.scss";
 
 export default function TAndC() {
-  
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -10,14 +9,19 @@ export default function TAndC() {
   }, []);
 
   return (
-    <div className='TAndC'>
-     
+    <div className="TAndC">
       <section className="Hero">
-          <h1>Terms & Conditions</h1>
-          <p>All rights of this logo reserved with Sensei Sabyasachi and Shubukan India. Any use of this logo will be legally punishable.</p>
-          <br />
-          <p>Membership of Shubukan India abide by rules and regulation. Please contact us for more details.</p>
+        <p className="heading">Terms & Conditions</p>
+        <p>
+          All rights of this logo reserved with Sensei Sabyasachi and Shubukan
+          India. Any use of this logo will be legally punishable.
+        </p>
+        <br />
+        <p>
+          Membership of Shubukan India abide by rules and regulation. Please
+          contact us for more details.
+        </p>
       </section>
     </div>
-  )
+  );
 }

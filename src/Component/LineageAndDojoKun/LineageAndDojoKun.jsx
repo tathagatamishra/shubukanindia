@@ -25,7 +25,7 @@ export default function LineageAndDojoKun() {
   return (
     <div className="LineageAndDojoKun">
       <section className="Lineage-Hero">
-        <h1>Lineage</h1>
+        <p className="heading">Lineage</p>
         {/* <p>Discovering the Way of Words</p> */}
 
         {/* <div className="arrow">
@@ -236,7 +236,7 @@ export default function LineageAndDojoKun() {
       <section className="DojoKun-Hero">
         <img src={kun} alt="" />
 
-        <h1>DojoKun</h1>
+        <p className="heading">DojoKun</p>
         <h2>道場訓</h2>
 
         <ul>

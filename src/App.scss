@@ -9,6 +9,7 @@
   flex-direction: column;
 
   & .webBody {
+    z-index: 2;
     height: fit-content;
     min-height: calc(100vh - 610px);
     display: flex;
