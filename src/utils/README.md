@@ -30,6 +30,9 @@ my-project/
 
 ## Rename File
 
+Used to rename new fonts. This will add _ttf or _otf to the fonts.
+
+- Go to `cd src/utils/`
 - Run `node renameFiles.mjs /path/to/your/folder suffixToAdd`
 - `node renameFiles.mjs ./my_folder important`
 - `node renameFiles.mjs "C:\Users\johni\Desktop\Shubukan Web\shubukanindia\public\Fonts\otf" otf`

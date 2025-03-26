@@ -149,59 +149,50 @@
         & .heading-div {
             display: flex;
             flex-wrap: wrap;
-            margin: 2rem 0;
+            margin: 2rem 0 0 0;
         }
 
         & .heading-box {
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
         }
 
-        #S{}
-        #U{}
-        #D{}
-        #I{}
+        #S {
+            font-size: 6.5rem;
+        }
+
+        #U,
+        #D,
+        #I {
+            font-size: 4.5rem;
+        }
+
+        // #D {
+        //     font-size: 4.5rem;
+        // }
+
+        // #I {
+        //     font-size: 4.5rem;
+        // }
 
         & .heading {
             color: #2a2727;
             letter-spacing: 0.2rem;
-            transform: rotate(-4deg);
             text-shadow: none;
             text-shadow:
-            0 0 6px rgb(231, 221, 211),
-            0 0 6px rgb(231, 221, 211),
-            0 0 6px rgb(231, 221, 211),
-            0 0 6px rgb(231, 221, 211),
-            0 0 6px rgb(231, 221, 211);
-            //// font-family: $font-brushstrokesq6b5;
-            //// font-size: 4rem;
-            //// font-family: $font-btctrial;
-            //// font-size: 4rem;
-            //// font-family: $font-hoganbrush;
-            //// font-size: 5rem;
-            //// font-family: $font-quikersyzxwl;
-            //// font-size: 6rem;
+                0 0 6px rgb(231, 221, 211),
+                0 0 6px rgb(231, 221, 211),
+                0 0 6px rgb(231, 221, 211),
+                0 0 6px rgb(231, 221, 211),
+                0 0 6px rgb(231, 221, 211);
 
-            font-family: $font-rainlyregularovl7o;
-            font-size: 5rem;
-            margin: 1.6rem 0 1.8rem;
-            line-height: 6rem;
-
-            font-family: $font-drybrush;
-            font-size: 5rem;
-            margin: 1.6rem 0 2rem;
-            line-height: 6rem;
-            line-height: 2rem;
-
-            font-family: $font-mgs4brush;
-            margin: 1.6rem 0;
-            font-size: 7rem;
-            padding: 0;
-
-            // font-family: 'Fredericka the Great', cursive;
-            // margin: 1.5rem 0 2rem;
-            // font-weight: 600;
-            // font-size: 4rem;
+            // ///////////////////////////////
+            font-family: $font-amanojakuzrqe3;
+            transform: rotate(-4deg);
+            line-height: 8rem;
+            font-size: 4rem;
+            // text-transform: capitalize;
 
             &::selection {
                 color: $---selection-color;
@@ -264,20 +255,45 @@
             }
         }
 
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: 800px) {
+            & .heading-div {
+                margin: 1rem 0 1rem 0;
+            }
+
+            #S {
+                font-size: 6rem;
+            }
+
+            #U,
+            #D,
+            #I {
+                font-size: 4rem;
+            }
+
             & .heading {
-                margin: 0 0 2rem;
-                color: #2a2727;
+                font-size: 3.6rem;
+                line-height: 7rem;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            & .heading-div {
+                // margin: 1rem 0 0 0;
+            }
+
+            #S {
+                font-size: 5rem;
+            }
+
+            #U,
+            #D,
+            #I {
+                font-size: 3.6rem;
+            }
+
+            & .heading {
                 font-size: 3rem;
-                letter-spacing: 0.2rem;
-                line-height: 3rem;
-                
-                // text-shadow:
-                //     0 0 10px rgb(231, 221, 211),
-                //     0 0 20px rgb(231, 221, 211),
-                //     0 0 30px rgb(231, 221, 211),
-                //     0 0 40px rgb(231, 221, 211),
-                //     0 0 50px rgb(231, 221, 211);
+                line-height: 6rem;
             }
 
             & p {
@@ -312,21 +328,25 @@
         }
 
         @media screen and (max-width: 600px) {
+            // height: 34rem;
+
             & .heading-div {
-                margin: 0 0 1rem;
+                margin: 0 0 1rem 0;
+            }
+
+            #S {
+                font-size: 4.6rem;
+            }
+
+            #U,
+            #D,
+            #I {
+                font-size: 3rem;
             }
 
             & .heading {
-                margin: 0 0 2rem;
-                color: #2a2727;
-                font-size: 3rem;
-                letter-spacing: 0.2rem;
-                // text-shadow:
-                //     0 0 10px rgb(231, 221, 211),
-                //     0 0 20px rgb(231, 221, 211),
-                //     0 0 30px rgb(231, 221, 211),
-                //     0 0 40px rgb(231, 221, 211),
-                //     0 0 50px rgb(231, 221, 211);
+                font-size: 2.6rem;
+                line-height: 5rem;
             }
 
             & p {
@@ -361,18 +381,25 @@
         }
 
         @media screen and (max-width: 480px) {
-            height: 34rem;
+            height: 32rem;
 
             & .heading-div {
-                margin: 0 0 1rem;
+                margin: 0 0 1rem 0;
+            }
+
+            #S {
+                font-size: 4rem;
+            }
+
+            #U,
+            #D,
+            #I {
+                font-size: 2.6rem;
             }
 
             & .heading {
-                margin: 0 0 1.5rem;
-                color: #2a2727;
-                font-size: 3rem;
-                letter-spacing: 0.2rem;
-                line-height: 3rem;
+                font-size: 2.2rem;
+                line-height: 4.4rem;
             }
 
             & .bird {
@@ -393,12 +420,23 @@
         @media screen and (max-width: 400px) {
             height: 25rem;
 
+            & .heading-div {
+                margin: 0 0 0.5rem 0;
+            }
+
+            #S {
+                font-size: 3.6rem;
+            }
+
+            #U,
+            #D,
+            #I {
+                font-size: 2.4rem;
+            }
+
             & .heading {
-                margin: 0 0 .5rem;
-                color: #2a2727;
                 font-size: 2rem;
-                letter-spacing: 0.2rem;
-                line-height: 3rem;
+                line-height: 4.4rem;
             }
 
             & p {
@@ -426,13 +464,24 @@
             }
         }
 
-        @media screen and (max-width: 315px) {
+        @media screen and (max-width: 355px) {
+            & .heading-div {
+                margin: 0 0 0.5rem 0;
+            }
+
+            #S {
+                font-size: 3.6rem;
+            }
+
+            #U,
+            #D,
+            #I {
+                font-size: 2.4rem;
+            }
+
             & .heading {
-                margin: 0 0;
-                color: #2a2727;
-                font-size: 2rem;
-                letter-spacing: 0.2rem;
-                line-height: 3rem;
+                font-size: 1.8rem;
+                line-height: 3.4rem;
             }
         }
     }
