@@ -8,14 +8,12 @@ import tonfa from "../../assets/Frame 14.svg";
 import eku from "../../assets/eku.svg";
 import nunchaku from "../../assets/Frame 16.svg";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function KarateAndKobudo() {
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
-
 
   useEffect(() => {
     window.scrollTo({
@@ -26,7 +24,7 @@ export default function KarateAndKobudo() {
   return (
     <div className="KarateAndKobudo">
       <section className="Karate-Hero">
-        <h1>Karate</h1>
+        <p className="heading">Karate</p>
         <h2>空手</h2>
         <p>
           Karate means Empty hand. Karate makes its practitioner physically and
@@ -56,7 +54,7 @@ export default function KarateAndKobudo() {
             passai katas, Kushanku Katas and Rohai, Wanshu etc.
           </p>
         </div>
-        
+
         <div className="element">
           <h2>Kumite</h2>
           <p>
@@ -69,7 +67,7 @@ export default function KarateAndKobudo() {
       </section>
 
       <section className="Kobudo-Hero">
-        <h1>Kobudo</h1>
+        <p className="heading">Kobudo</p>
         {/* <p>Discovering the Way of Words</p> */}
         <p>
           Shubukan has many kobudo katas also. We shubukani studies these kata

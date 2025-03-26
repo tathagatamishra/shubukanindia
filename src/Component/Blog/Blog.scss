@@ -1,125 +1,29 @@
 @import '../../styles/_variables';
+@import '../../styles/_Fonts';
 
 .Blog {
     height: fit-content;
     width: 80%;
-    // border: solid 1px black;
+    // outline: solid 1px black;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 10rem;
 
-    @media screen and (max-width: 400px) {
-        width: 90%;
+    @media screen and (max-width: 700px) {
         padding-top: 8rem;
     }
-
-    & #searchBar {
-        z-index: 15;
-
-        height: 5rem;
-        width: 100%;
-        padding: 0 0 1px 0;
-
-        position: fixed;
-        top: 6rem;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        // border: 1px solid blue;
-
-        // border: solid red 1px; 
-        // box-shadow: inset 0px 230px 30px -150px white;
-        // transition: all .1s ease-in-out 0s;
-        // transition: 100ms;
-
-        & .search {
-            width: fit-content;
-            padding: 1px 10px 1px 20px;
-            // height: fit-content;
-            // padding: .5rem;
-
-            // border-bottom: 1px solid rgb(179, 179, 179);
-            // border-radius: 50px;
-            // background: rgb(236, 231, 226);
-            // box-shadow: 
-            // 0 0 5px rgb(231, 221, 211),
-            // 0 0 10px rgb(231, 221, 211),
-            // 0 0 20px rgb(231, 221, 211),
-            // 0 0 30px rgb(231, 221, 211),
-            // 0 0 40px rgb(231, 221, 211),
-            // 0 0 50px rgb(231, 221, 211);
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-
-            & input {
-                height: 26px;
-                width: 350px;
-                padding: 0 1rem 0 0;
-                border: none;
-                letter-spacing: 1px;
-                background: none;
-
-                color: #605a5a;
-                font-size: 1.5rem;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                font-family: 'Tenali Ramakrishna', sans-serif;
-
-                &:focus {
-                    outline: none;
-                }
-
-                &::selection {
-                    color: #ffffff;
-                    background: #858E78;
-                }
-            }
-
-            & button {
-                height: 30px;
-                width: 30px;
-                margin: 0;
-                padding: 0;
-
-                font-size: 1.5rem;
-                background: none;
-                border: none;
-                border-radius: 50px;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-        }
-
-        & .searchLine {
-            z-index: 25;
-            height: 2px;
-            width: 350px;
-            background: radial-gradient(#403D3C 0%, transparent 80%);
-            transition: all .3s ease-in-out 0s;
-        }
+    @media screen and (max-width: 400px) {
+        width: 90%;
+        padding-top: 7rem;
     }
 
     & .blogPage {
-        // border: solid 1px blue;
+        // outline: solid 2px blue;
         width: 100%;
 
         & .blogHero {
+            // outline: solid 3px red;
             width: 100%;
             height: fit-content;
             margin-bottom: 2rem;
@@ -129,20 +33,13 @@
             justify-content: flex-start;
             align-items: flex-start;
 
-            & h1 {
+            & .heading {
                 margin: 1.5rem 0 2rem;
                 color: #2a2727;
-                font-size: 3.5rem;
                 letter-spacing: 0.2rem;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
+                font-size: 6rem;
+
+                font-family: $font-rainlyregularovl7o;
 
                 &::selection {
                     color: $---selection-color;
@@ -154,14 +51,6 @@
                 margin: 0;
                 font-size: 1.5rem;
                 font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
 
                 &::selection {
                     color: $---selection-color;
@@ -170,11 +59,9 @@
             }
 
             @media screen and (max-width: 700px) {
-                & h1 {
-                    margin: 1.5rem 0 2rem;
-                    color: #2a2727;
-                    font-size: 3rem;
-                    letter-spacing: 0.2rem;
+                & .heading {
+                    margin: 0rem 0 2rem;
+                    font-size: 5rem;
                 }
 
                 & p {
@@ -184,11 +71,10 @@
 
             @media screen and (max-width: 400px) {
                 margin-bottom: 0;
-                & h1 {
-                    margin: 1.5rem 0 2rem;
-                    color: #2a2727;
-                    font-size: 2.8rem;
-                    letter-spacing: 0.2rem;
+
+                & .heading {
+                    margin: 0rem 0 1rem;
+                    font-size: 3.6rem;
                 }
 
                 & p {
@@ -198,6 +84,8 @@
         }
 
         & .blogContent {
+            // outline: solid 3px green;
+
             width: 100%;
             height: fit-content;
             margin-bottom: 8rem;
@@ -208,182 +96,6 @@
             justify-content: flex-start;
             align-items: center;
 
-            & iframe {
-                filter: sepia(30%) grayscale(30%);
-                border: none;
-                width: 100%;
-                height: 100vh;
-                margin: 15px 0;
-                border-radius: 10px;
-            }
-
-            & .link {
-                width: 100%;
-                height: 40px;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                gap: 1rem;
-                margin-top: 40px;
-                // border: 1px solid red;
-    
-                & .label {
-                    line-height: 50px;
-                    text-align: center;
-                    font-weight: 700;
-                    font-size: 1.5rem;
-    
-                    color: rgb(44, 104, 193);
-                    height: 30px;
-                    // border: 1px solid red;
-                }
-    
-                & .opt {
-                    // font-family: 'Amarante', cursive;
-                    // font-family: 'Andika', sans-serif;
-                    // font-family: 'Bellefair', serif;
-                    // font-family: 'Capriola', sans-serif;
-                    // font-family: 'Flamenco', cursive;
-                    // font-family: 'Fredericka the Great', cursive;
-                    // font-family: 'GFS Neohellenic', sans-serif;
-                    // font-family: 'Pompiere', cursive;
-                    font-family: 'Tenali Ramakrishna', sans-serif;
-    
-                    line-height: 20px;
-                    text-align: left;
-                    font-weight: 500;
-                    font-size: 1.5rem;
-                    margin-top: 3px;
-                    text-decoration: none;
-                    // line-height: 0;
-                    color: rgb(58, 122, 218);
-    
-                    &::selection {
-                        color: $---selection-color;
-                        background: $---selection-bg;
-                    }
-                }
-            }
-        }
-
-        & .content {
-            width: 100%;
-            height: fit-content;
-            margin-bottom: 8rem;
-            margin-top: 5rem;
-            padding-top: 3rem;
-    
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-    
-            & .link {
-                height: 80px;
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                justify-content: start;
-                align-items: center;
-                gap: 1rem;
-                margin: 20px 0;
-                // border: 1px solid red;
-    
-                & .label {
-                    box-sizing: border-box;
-                    position: relative;
-                    height: 70px;
-                    width: 70px;
-                    // line-height: 50px;
-                    // text-align: center;
-                    // font-weight: 700;
-                    // font-size: 3rem;
-    
-                    color: #2a2727;
-                    // border: 1px solid red;
-                }
-    
-                & .opt {
-                    // font-family: 'Amarante', cursive;
-                    // font-family: 'Andika', sans-serif;
-                    // font-family: 'Bellefair', serif;
-                    // font-family: 'Capriola', sans-serif;
-                    // font-family: 'Flamenco', cursive;
-                    // font-family: 'Fredericka the Great', cursive;
-                    // font-family: 'GFS Neohellenic', sans-serif;
-                    // font-family: 'Pompiere', cursive;
-                    font-family: 'Tenali Ramakrishna', sans-serif;
-    
-                    line-height: 25px;
-                    text-align: left;
-                    font-weight: 700;
-                    font-size: 2rem;
-                    margin-top: 3px;
-                    text-decoration: none;
-                    // line-height: 0;
-                    color: #2a2727;
-                    line-break: anywhere;
-    
-                    &::selection {
-                        color: $---selection-color;
-                        background: $---selection-bg;
-                    }
-                }
-    
-            }
-    
-            @media screen and (max-width: 700px) {
-                margin-top: 0;
-    
-                & .link {
-                    margin: 0;
-    
-                    & .label {
-                        height: 50px;
-                        width: 50px;
-                        // font-size: 1rem;
-                    }
-    
-                    & .opt {
-                        font-size: 1.8rem;
-                    }
-                }
-            }
-            @media screen and (max-width: 600px) {
-                margin-top: 0;
-    
-                & .link {
-                    margin: 0;
-    
-                    & .label {
-                        height: 35px;
-                        width: 35px;
-                        // font-size: 1rem;
-                    }
-    
-                    & .opt {
-                        font-size: 1.3rem;
-                    }
-                }
-            }
-            @media screen and (max-width: 400px) {
-                // margin-top: 2rem;
-    
-                & .link {
-                    margin: 0;
-    
-                    & .label {
-                        height: 35px;
-                        width: 35px;
-                        // font-size: 1rem;
-                    }
-    
-                    & .opt {
-                        font-size: 1.3rem;
-                    }
-                }
-            }
         }
     }
 }

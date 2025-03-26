@@ -15,14 +15,13 @@ import img_8 from "../../world_images/img (3).jpeg";
 import img_9 from "../../world_images/img (4).jpeg";
 import img_10 from "../../images/group (5).jpeg";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function ShubukanWorld({ setShowNav }) {
-  
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
-  
+
   const imgArray = [
     img_1,
     img_5,
@@ -56,11 +55,11 @@ export default function ShubukanWorld({ setShowNav }) {
       setImgClicked(true);
     }
   }
-  
+
   return (
     <div className="ShubukanWorld">
       <section className="Hero">
-        <h1>Shubukan World</h1>
+        <p className="heading">Shubukan World</p>
         <p>
           Shubukan is now spreading its spirit in many country. Shubukan has
           branches in Czech, Switzerland, Canada, Germany, Spain and in India.

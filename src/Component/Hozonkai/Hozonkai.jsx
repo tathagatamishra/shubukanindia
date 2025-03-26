@@ -6,20 +6,19 @@ import { globeOutline } from "ionicons/icons";
 
 import ShuriKarateKobudoHozonkai from "../../assets/ShuriKarateKobudoHozonkai.png";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function Hozonkai() {
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
-  
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
-  
+
   return (
     <div className="Hozonkai">
       <section className="Hero">
@@ -27,7 +26,7 @@ export default function Hozonkai() {
           <img src={ShuriKarateKobudoHozonkai} alt="" />
         </div>
 
-        <h1>Shuri Karate Kobudo Hozonkai</h1>
+        <p className="heading">Shuri Karate Kobudo Hozonkai</p>
         <p>
           Shuri Karate Kobudo Hozonkai is preservation society for Shuri Karate
           and Kobudo. It is brain child of Takeshi Uema Sensei. Shuri Karate

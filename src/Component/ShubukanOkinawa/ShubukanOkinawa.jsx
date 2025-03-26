@@ -9,10 +9,9 @@ import img2 from "../../assets/Frame 3.png";
 import img3 from "../../assets/Frame 2.png";
 import img4 from "../../assets/Frame 1.png";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function ShubukanOkinawa() {
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
@@ -22,12 +21,11 @@ export default function ShubukanOkinawa() {
       top: 0,
     });
   }, []);
-  
+
   return (
     <div className="ShubukanOkinawa">
-
       <section className="Hero">
-        <h1>Shubukan Okinawa</h1>
+        <p className="heading">Shubukan Okinawa</p>
 
         <div className="img-div">
           <img src={img1} alt="" />
@@ -48,8 +46,7 @@ export default function ShubukanOkinawa() {
             <img src={img2} alt="" />
             <p>
               Sensei Uema Yasuhiro <br /> (10th Dan) <br /> ( DOB- 15 August
-              1945{" "}
-              <br /> DOD- 2 January 2025 )
+              1945 <br /> DOD- 2 January 2025 )
             </p>
           </div>
           <div className="parent">

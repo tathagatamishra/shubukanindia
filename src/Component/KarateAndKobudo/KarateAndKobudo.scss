@@ -1,4 +1,5 @@
 @import '../../styles/_variables';
+@import '../../styles/_Fonts';
 
 .KarateAndKobudo {
     height: fit-content;
@@ -10,14 +11,16 @@
     padding-top: 10rem;
 
     @media screen and (max-width: 500px) {
-        & p{
+        & p {
             font-size: 22px !important;
         }
     }
+
     @media screen and (max-width: 400px) {
         width: 90%;
         padding-top: 5rem;
-        & p{
+
+        & p {
             font-size: 20px !important;
         }
     }
@@ -33,24 +36,17 @@
         justify-content: flex-start;
         align-items: flex-start;
 
-        & h1 {
-            margin: 1.5rem 0 0;
+        & .heading {
+            margin: 1.5rem 0 2rem;
             color: #2a2727;
-            font-size: 3.5rem;
             letter-spacing: 0.2rem;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
+            font-size: 6rem;
+
+            font-family: $font-rainlyregularovl7o;
 
             &::selection {
-                color: #403D3C;
-                background: #BFB2AA;
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 
@@ -164,24 +160,17 @@
         justify-content: flex-start;
         align-items: flex-start;
 
-        & h1 {
+        & .heading {
             margin: 1.5rem 0 2rem;
             color: #2a2727;
-            font-size: 3.5rem;
             letter-spacing: 0.2rem;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
+            font-size: 6rem;
+
+            font-family: $font-rainlyregularovl7o;
 
             &::selection {
-                color: #403D3C;
-                background: #BFB2AA;
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
 

@@ -7,24 +7,24 @@ import {
   mailOutline,
   callOutline,
   logoWhatsapp,
-  logoWordpress
+  logoWordpress,
 } from "ionicons/icons";
 import "./Contact.scss";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function Contact() {
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
   }, []);
 
-  
-  const emailAddress = 'shorinryushubukanindia@gmail.com';
-  const emailSubject = 'Hello';
-  const emailBody = 'I wanted to reach out to you...';
-  const emailLink = `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
-  
+  const emailAddress = "shorinryushubukanindia@gmail.com";
+  const emailSubject = "Hello";
+  const emailBody = "I wanted to reach out to you...";
+  const emailLink = `mailto:${emailAddress}?subject=${encodeURIComponent(
+    emailSubject
+  )}&body=${encodeURIComponent(emailBody)}`;
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -34,7 +34,7 @@ export default function Contact() {
   return (
     <div className="Contact">
       <section className="Hero">
-        <h1>Contact</h1>
+        <p className="heading">Contact</p>
         <p>Discover More About Us</p>
       </section>
 
@@ -53,12 +53,7 @@ export default function Contact() {
 
         <div className="link">
           <IonIcon icon={mailOutline} className="label" />
-          <a
-            href={emailLink}
-            className="opt"
-            target="_blank"
-            rel="gmail"
-          >
+          <a href={emailLink} className="opt" target="_blank" rel="gmail">
             shorinryushubukanindia@gmail.com
           </a>
         </div>
@@ -100,15 +95,15 @@ export default function Contact() {
         </div>
 
         <div className="link">
-            <IonIcon icon={logoWordpress} className="label" />
-            <NavLink
-              to="https://kenshinsabya.wordpress.com/"
-              className="opt"
-              target="_blank"
-            >
-              kenshinsabya
-            </NavLink>
-          </div>
+          <IonIcon icon={logoWordpress} className="label" />
+          <NavLink
+            to="https://kenshinsabya.wordpress.com/"
+            className="opt"
+            target="_blank"
+          >
+            kenshinsabya
+          </NavLink>
+        </div>
       </section>
     </div>
   );

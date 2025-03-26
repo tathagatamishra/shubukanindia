@@ -1,4 +1,4 @@
-@import '../../styles/_variables';
+@import '../../styles/_variables';@import '../../styles/_Fonts';
 
 .Services {
     // border: 1px solid red;
@@ -31,20 +31,13 @@
         justify-content: flex-start;
         align-items: flex-start;
 
-        & h1 {
+        & .heading {
             margin: 1.5rem 0 2rem;
             color: #2a2727;
-            font-size: 3.5rem;
             letter-spacing: 0.2rem;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
+            font-size: 6rem;
+
+            font-family: $font-rainlyregularovl7o;
 
             &::selection {
                 color: $---selection-color;

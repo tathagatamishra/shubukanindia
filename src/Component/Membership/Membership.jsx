@@ -73,9 +73,7 @@ export default function Membership() {
         [
           {
             mainLocation: "Purba Medinipur",
-            brunchAddress: [
-              "Kharui Kotbarh, Kharuigarh, Patashpur, 721429",
-            ],
+            brunchAddress: ["Kharui Kotbarh, Kharuigarh, Patashpur, 721429"],
           },
         ],
       ],
@@ -280,7 +278,7 @@ export default function Membership() {
   return (
     <div className="Membership">
       <section className="Hero">
-        <h1>Membership</h1>
+        <p className="heading">Membership</p>
         <p>
           Shubukan India accepts membership in its certain conditions and terms.
           We practice Shorin Ryu and Okinawan Kobudo. We focus on practical self

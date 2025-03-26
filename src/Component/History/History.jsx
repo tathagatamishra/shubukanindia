@@ -11,15 +11,13 @@ import img2 from "../../assets/Karate_ShuriCastle.jpg";
 import img3 from "../../assets/map.jpg";
 import img4 from "../../assets/map2.jpg";
 
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 export default function History({ setShowNav }) {
-
   useEffect(() => {
-    ReactGA.pageview('History');
+    ReactGA.pageview("History");
   }, []);
 
-  
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState("");
   const [comment, setComment] = useState("");
@@ -35,7 +33,7 @@ export default function History({ setShowNav }) {
   return (
     <div className="History">
       <section className="Hero">
-        <h1>History</h1>
+        <p className="heading">History</p>
         {/* <p>Discovering the Way of Words</p> */}
         <div className="hero-content">
           <LazyLoadImage
