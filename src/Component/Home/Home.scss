@@ -179,6 +179,7 @@
         & .heading {
             color: #2a2727;
             letter-spacing: 0.2rem;
+            word-spacing: 0.2rem;
             text-shadow: none;
             text-shadow:
                 0 0 6px rgb(231, 221, 211),
@@ -294,6 +295,7 @@
             & .heading {
                 font-size: 3rem;
                 line-height: 6rem;
+                letter-spacing: 0rem;
             }
 
             & p {
