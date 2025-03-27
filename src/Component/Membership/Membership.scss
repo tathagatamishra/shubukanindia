@@ -1,4 +1,5 @@
-@import '../../styles/_variables';@import '../../styles/_Fonts';
+@import '../../styles/_variables';
+@import '../../styles/_Fonts';
 
 .Membership {
     // border: 1px solid red;
@@ -47,15 +48,7 @@
         & p {
             font-size: 1.5rem;
             text-align: justify;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
             font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
                 color: $---selection-color;
@@ -66,15 +59,7 @@
         & .alert {
             font-size: 1.3rem;
             text-align: justify;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
             font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
                 color: $---selection-color;
@@ -107,14 +92,6 @@
                 font-size: 1.4rem;
                 text-align: center;
                 font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
                 letter-spacing: 5px;
                 word-spacing: 5px;
 
@@ -131,10 +108,10 @@
         }
 
         @media screen and (max-width: 700px) {
-            & h1 {
+            & .heading {
                 margin: 1.5rem 0 2rem;
                 color: #2a2727;
-                font-size: 3rem;
+                font-size: 5rem;
                 letter-spacing: 0.2rem;
             }
 
@@ -143,19 +120,31 @@
             }
         }
 
+        @media screen and (max-width: 600px) {
+            & .heading {
+                font-size: 4rem;
+            }
+        }
+
         @media screen and (max-width: 400px) {
 
             padding-top: 2rem;
 
-            & h1 {
+            & .heading {
                 margin: 1.5rem 0 1.5rem;
                 color: #2a2727;
-                font-size: 2.5rem;
+                font-size: 3.4rem;
                 letter-spacing: 0.2rem;
             }
 
             & .alert {
                 font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 300px) {
+            & .heading {
+                font-size: 2.8rem;
             }
         }
     }
@@ -204,7 +193,7 @@
                 width: 100%;
                 margin: 1.5rem 0 2rem;
                 color: #2a2727;
-                font-size: 3.5rem;
+                font-size: 5rem;
                 letter-spacing: 0.2rem;
                 font-family: $font-rainlyregularovl7o;
                 // border: 1px solid red;
@@ -213,8 +202,6 @@
                     color: $---selection-color;
                     background: $---selection-bg;
                 }
-
-                @media screen and (max-width: 700px) {}
             }
 
             & .searchContainer {
@@ -314,10 +301,10 @@
             }
 
             @media screen and (max-width: 700px) {
-                & h1 {
+                & .heading {
                     margin: 1.5rem 0 2rem;
                     color: #2a2727;
-                    font-size: 3rem;
+                    font-size: 4rem;
                     letter-spacing: 0.2rem;
                 }
 
@@ -339,6 +326,13 @@
             }
 
             @media screen and (max-width: 500px) {
+                & .heading {
+                    margin: 1.5rem 0 2rem;
+                    color: #2a2727;
+                    font-size: 3rem;
+                    letter-spacing: 0.2rem;
+                }
+
                 & .cross {
                     animation-name: crossSlide;
                     animation-duration: .5s;
@@ -359,10 +353,10 @@
             }
 
             @media screen and (max-width: 430px) {
-                & h1 {
+                & .heading {
                     margin: 1.5rem 0 1.5rem;
                     color: #2a2727;
-                    font-size: 2.5rem;
+                    font-size: 3rem;
                     letter-spacing: 0.2rem;
                 }
 
@@ -399,9 +393,9 @@
             }
 
             @media screen and (max-width: 340px) {
-                & h1 {
+                & .heading {
                     margin: 1.5rem 0 1.5rem;
-                    font-size: 2.3rem;
+                    font-size: 3rem;
                     letter-spacing: 0.2rem;
                 }
 
@@ -437,7 +431,7 @@
             }
 
             @media screen and (max-width: 320px) {
-                & h1 {
+                & .heading {
                     margin: 1.5rem 0 1.5rem;
                     font-size: 2.3rem;
                     letter-spacing: 0.1rem;
@@ -451,7 +445,7 @@
 
         & .dojoList {
             width: 100%;
-            margin-top: 70px;
+            margin-top: 50px;
             display: flex;
             flex-direction: column;
             // gap: 40px;
@@ -820,8 +814,18 @@
                 }
             }
 
+            @media screen and (max-width: 500px) {
+                margin-top: 40px;
+                // gap: 20px;
+            }
+
             @media screen and (max-width: 400px) {
-                margin-top: 50px;
+                margin-top: 30px;
+                // gap: 20px;
+            }
+
+            @media screen and (max-width: 320px) {
+                margin-top: 20px;
                 // gap: 20px;
             }
         }
