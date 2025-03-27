@@ -116,6 +116,7 @@ export default function Membership() {
             mainLocation: "Kerala",
             brunchAddress: [
               "Kadakampally Lane, Anayara, Thiruvananthapuram, Kerala",
+              "Caterpillar Kinder Garten Dojo. Near Eve's cafe, Pump house junction, Anayara"
             ],
           },
         ],
@@ -306,7 +307,7 @@ export default function Membership() {
 
       <section className="Dojo">
         <div className="dojoNav" style={navStyle}>
-          <h1>Dojo Index</h1>
+          <p className="heading">Dojo Index</p>
 
           <div className="searchContainer" style={containerStyle}>
             {isInput && (
