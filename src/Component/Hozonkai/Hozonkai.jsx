@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./Hozonkai.scss";
-import { NavLink } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { globeOutline } from "ionicons/icons";
 
@@ -34,15 +33,26 @@ export default function Hozonkai() {
           Kobudo Hozonkai accept members for Okinawa Karate Kobudo enthusiast.
         </p>
 
-        <div className="link">
-          <IonIcon icon={globeOutline} className="label" />
-          <NavLink
-            to="https://www.big-advance.site/s/172/2105/business"
-            className="opt"
-            target="_blank"
-          >
-            https://www.big-advance.site/s/172/2105/business
-          </NavLink>
+        <div className="links">
+          <div className="link">
+            <IonIcon icon={globeOutline} className="icon" />
+            <a
+              href="https://www.shubukan50.com"
+              target="_blank"
+            >
+              www.shubukan50.com
+            </a>
+          </div>
+
+          <div className="link">
+            <IonIcon icon={globeOutline} className="icon" />
+            <a
+              href="https://www.big-advance.site/s/172/2105"
+              target="_blank"
+            >
+              www.big-advance.site/s/172/2105
+            </a>
+          </div>
         </div>
       </section>
     </div>
