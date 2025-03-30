@@ -1,18 +1,25 @@
-@import '../../styles/_variables';@import '../../styles/_Fonts';
+@import '../../styles/_variables';
+@import '../../styles/_Fonts';
 
 .Registration {
     // border: 1px solid red;
+    padding-top: 8rem;
+    max-width: 1000px;
     height: fit-content;
-    padding-top: 10rem;
-    padding-bottom: 4rem;
-    width: 85%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
+
+    @media screen and (max-width:1000px) {
+        padding-top: 7rem;
+    }
 
     @media screen and (max-width: 800px) {
         padding-top: 5rem;
+    }
+
+    @media screen and (max-width: 431px) {
         width: 90%;
     }
 
@@ -45,14 +52,6 @@
             margin: 0;
             font-size: 1.5rem;
             font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
                 color: $---selection-color;
@@ -69,12 +68,23 @@
             transition: 1000ms;
         }
 
+        @media screen and (max-width: 1000px) {
+            & .heading {
+                font-size: 5.5rem;
+                margin: 1.5rem 0 1rem;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            & .heading {
+                font-size: 5.2rem;
+            }
+        }
+
         @media screen and (max-width: 700px) {
-            & h1 {
-                margin: 1.5rem 0 2rem;
-                color: #2a2727;
-                font-size: 2.5rem;
-                letter-spacing: 0.2rem;
+            & .heading {
+                font-size: 5rem;
+                margin: 1rem 0 0.5rem;
             }
 
             & p {
@@ -86,20 +96,26 @@
             }
         }
 
-        @media screen and (max-width: 400px) {
-            & h1 {
-                margin: .5rem 0 1rem;
-                color: #2a2727;
-                font-size: 32px;
-                letter-spacing: 0.2rem;
+        @media screen and (max-width: 500px) {
+            & .heading {
+                font-size: 4rem;
+                margin: 0rem 0 0rem;
             }
+        }
 
+        @media screen and (max-width: 400px) {
             & p {
                 font-size: 1rem;
             }
 
             & .underline {
                 margin-top: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            & .heading {
+                font-size: 3.2rem;
             }
         }
     }
@@ -488,5 +504,5 @@
             }
         }
     }
- 
+
 }
