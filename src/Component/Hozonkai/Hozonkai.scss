@@ -85,12 +85,13 @@
                 align-items: center;
 
                 & .icon {
-                    font-size: 2rem;
-                    color: #125ba4;
+                    min-width: 2rem;
+                    font-size: 1.8rem;
+                    color: #005085;
                 }
-
+                
                 & a {
-                    color: #125ba4;
+                    color: #005085;
                     text-decoration: none;
                     font-size: 2.2rem;
                     font-family: $font-mufanpfsowkgx;
@@ -98,6 +99,17 @@
                     &::selection {
                         color: $---selection-color;
                         background: $---selection-bg;
+                    }
+                }
+
+                &:hover {
+                    
+                    & .icon {
+                        color: #1d69b5;
+                    }
+                    & a {
+                        color: #1d69b5;
+                        // border-bottom: 2px dashed #1d69b5;
                     }
                 }
             }
@@ -122,6 +134,7 @@
                     gap: 1rem;
 
                     & .icon {
+                        min-width: 1.5rem;
                         font-size: 1.5rem;
                     }
 
@@ -160,9 +173,10 @@
                 margin-top: 2rem;
 
                 & .link {
-                    gap: 1rem;
+                    gap: .5rem;
 
                     & .icon {
+                        min-width: 1.2rem;
                         font-size: 1.2rem;
                     }
 
@@ -195,9 +209,10 @@
                 margin-top: 2rem;
 
                 & .link {
-                    gap: 1rem;
+                    gap: 0.5rem;
 
                     & .icon {
+                        min-width: 1rem;
                         font-size: 1rem;
                     }
 

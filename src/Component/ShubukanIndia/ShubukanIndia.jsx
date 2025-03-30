@@ -88,7 +88,7 @@ export default function ShubukanIndia() {
       </section>
 
       <section className="Content">
-        <h1>Explication Of The Emblem</h1>
+        <p className="heading">Explication Of The Emblem</p>
         <p>
           <img src={logo} alt="" />
           {/* <div className="img"></div> */}
