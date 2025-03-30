@@ -262,7 +262,7 @@ export default function LineageAndDojoKun() {
           </li>
         </ul>
 
-        <h1>Three pledges</h1>
+        <p className="heading">Three pledges</p>
         <h2>三誓</h2>
 
         <ul>
