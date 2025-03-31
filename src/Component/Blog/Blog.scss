@@ -2,8 +2,7 @@
 @import '../../styles/_Fonts';
 
 .Blog {
-    color: black !important;
-    color-scheme: light dark;
+    
     // border: 1px solid red;
     padding-top: 8rem;
     max-width: 1000px;
@@ -290,6 +289,7 @@
     }
 
     ul {
+color-scheme: light dark;
         display: grid;
         container-type: inline-size;
         grid-template-columns: 10fr 1fr 1fr 1fr 1fr 1fr 1fr;
