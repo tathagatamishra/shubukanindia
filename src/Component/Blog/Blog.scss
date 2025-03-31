@@ -324,14 +324,6 @@
         --font-width-max: 1500;
     }
 
-    html {
-        color-scheme: light dark;
-    }
-
-    [data-theme='light'] {
-        color-scheme: light only;
-    }
-
     [data-theme='dark'] {
         color-scheme: dark only;
     }
