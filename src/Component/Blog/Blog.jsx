@@ -41,14 +41,18 @@ export default function Blog() {
   return (
     <div className="Blog">
       <div className="blogPage">
-        <section className="blogHero">
+        {/* <section className="blogHero">
           <p className="heading">Blog</p>
           <p>The blog is under construction...</p>
-        </section>
+        </section> */}
 
-        <section className="blogContent">
-          
+        <section className="blogNav">
+          <div className="opt">Top Stories</div>
+          <div className="opt">Latest</div>
+          <div className="opt">Shubukan</div>
         </section>
+        <section className="blogContent"></section>
+        <section className="blogFooter"></section>
       </div>
     </div>
   );
