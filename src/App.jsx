@@ -35,7 +35,7 @@ import MouseTrail from "./Component/UIComponent/MouseTrail";
 import { isDesktop } from "react-device-detect";
 
 function App() {
-  const TRACKING_ID = "G-RXSEE0D376";
+  const TRACKING_ID = "G-B83KDH8E1C";
   ReactGA.initialize(TRACKING_ID);
 
   const [showNav, setShowNav] = useState(true);
