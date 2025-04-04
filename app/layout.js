@@ -5,6 +5,7 @@ import { isDesktop } from "react-device-detect";
 import MouseTrail from "@/components/UIComponent/MouseTrail";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import Banner from "@/components/UIComponent/Banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -91,6 +92,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <div className="webBody">{children}</div>
           <Footer />
+          <Banner />
         </div>
       </body>
     </html>
