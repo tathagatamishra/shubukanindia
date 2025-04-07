@@ -6,6 +6,13 @@ import MouseTrail from "@/components/UIComponent/MouseTrail";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/UIComponent/Banner";
+import localFont from 'next/font/local'
+
+const Amanojaku = localFont({
+  src: '../public/Fonts/otf/Amanojaku-zrqe3_otf.otf',
+  variable: '--font-amanojaku',
+  display: 'swap',
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -83,7 +90,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <GoogleAnalytics />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${Amanojaku.variable} ${geistMono.variable} antialiased`}
       >
         {isDesktop && <MouseTrail />}
         <div className="App" id="App">
