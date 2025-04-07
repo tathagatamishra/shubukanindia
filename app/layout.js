@@ -9,7 +9,7 @@ import Banner from "@/components/UIComponent/Banner";
 import localFont from 'next/font/local'
 
 const Amanojaku = localFont({
-  src: '../public/Fonts/otf/Amanojaku-zrqe3_otf.otf',
+  src: '../Fonts/otf/Amanojaku-zrqe3_otf.otf',
   variable: '--font-amanojaku',
   display: 'swap',
 })
