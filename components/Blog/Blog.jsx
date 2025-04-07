@@ -18,7 +18,7 @@ export default function Blog() {
   const [searchPos, setSearchPos] = useState({ marginBottom: "0" });
   const [lastScrollTop, setLastScrollTop] = useState(Infinity);
 
-  if (window !== undefined) {
+  if (typeof window !== undefined) {
     window.addEventListener("scroll", function () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -40,7 +40,7 @@ export default function Blog() {
   }
 
   useEffect(() => {
-    if (window !== undefined) {
+    if (typeof window !== undefined) {
       window.scrollTo({
         top: 0,
       });

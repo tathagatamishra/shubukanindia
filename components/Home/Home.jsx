@@ -23,7 +23,7 @@ export default function Home({ setShowNav }) {
   const [windowWidth, setWindowWidth] = useState(null);
 
   useEffect(() => {
-    if(window !== undefined) {
+    if(typeof window !== undefined) {
       setWindowWidth(window.innerWidth);
     }
   }, []);
