@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
+
+
+* {
+  outline: none;
+  box-sizing: border-box;
+  cursor: url(https://cur.cursors-4u.net/cursors/cur-11/cur1054.cur), auto !important;
+  cursor: none !important;
+}
+
+html,
+body {
+  margin: 0px;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: rgb(231, 221, 211);
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: black;
+  border-top: solid 10px tomato;
+  border-bottom: solid 10px tomato;
+}
+
+.webBody {
+  z-index: 2;
+  height: fit-content;
+  min-height: calc(100vh - 610px);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  background-image: url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg");
+  background-size: 250px 250px;
+}
