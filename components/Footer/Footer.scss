@@ -1,0 +1,457 @@
+@import '../../styles/variables';
+
+.Footer {
+    z-index: 1;
+    position: relative;
+    height: fit-content;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    background-image: url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg");
+    // box-shadow: inset 0px -680px 80px -200px #ffffff; // original
+    box-shadow: inset 0px -650px 80px -200px #ffffff;
+    background-size: 250px 250px;
+    // border: solid 1px blueviolet;
+
+    & #cloud-circle {
+        z-index: -1;
+        width: 200vw;
+        height: 200px;
+        border-radius: 0%;
+        filter: url(#filter);
+        // X-axis, Y-axis, Blur-radius, Spread-radius, Color
+        box-shadow: 400px 400px 100px 50px #ffffff;
+        position: absolute;
+        top: -30%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+    }
+
+    & .footSub {
+        z-index: 1;
+        width: 50%;
+
+        padding: 1rem;
+        margin: 10rem 0 2rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // height: 50%;
+        // margin-top: 8rem;
+        border: solid 1px rgb(57, 229, 45);
+        transition: 200ms;
+
+        & h1 {
+            margin: 0;
+            // border: solid yellow;
+            text-align: center;
+            color: #686060;
+            font-size: 1.7rem;
+            line-height: 2.5rem;
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            font-family: 'Forum', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+            // transform: translateY(40%);
+            user-select: none;
+            transition: 200ms;
+        }
+
+        & form {
+            width: fit-content;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            & input {
+                width: 18rem;
+                height: 3.2rem;
+                padding: 0 0 0;
+                background: transparent;
+                border: none;
+                // border: solid;
+
+                color: #605a5a;
+                font-size: 1.5rem;
+                // font-family: 'Amarante', cursive;
+                // font-family: 'Andika', sans-serif;
+                // font-family: 'Bellefair', serif;
+                // font-family: 'Capriola', sans-serif;
+                // font-family: 'Flamenco', cursive;
+                // font-family: 'Fredericka the Great', cursive;
+                // font-family: 'GFS Neohellenic', sans-serif;
+                // font-family: 'Pompiere', cursive;
+                font-family: 'Tenali Ramakrishna', sans-serif;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &::selection {
+                    color: #ffffff;
+                    background: #858E78;
+                }
+            }
+
+            & button {
+                // border-radius: 50px;
+                height: 2rem;
+                width: 4rem;
+                font-size: 2rem;
+                padding: 0 0 4px 0;
+                line-height: 0;
+                // transform: rotate(-10deg);
+                color: #565250;
+                background: #bcb3b3;
+                background: linear-gradient(to left, #bcb3b3 0%, transparent 100%);
+                border: 3px solid #777270;
+                border: none;
+                transition: 200ms;
+                user-select: none;
+
+                &:hover {
+                    // border: 3px solid #D9C8A9;
+                    padding: 0 0 4px 2.8rem;
+                    transform: translateX(-30%);
+                }
+
+                &:active {
+                    // border: 3px solid #777270;
+                    padding: 0 0 4px 2rem;
+                    transform: translateX(0%);
+                }
+            }
+        }
+
+        & .underLine {
+            // border-bottom: solid 2px #5f443f;
+            background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 20%, transparent 100%);
+            width: 10rem;
+            height: 2px;
+            // transform: translate(0%);
+            transition: 200ms;
+        }
+
+        &:hover {
+            transition: 200ms;
+
+            & h1 {
+                text-shadow: 0 0 10px #b8aa8fa7;
+            }
+
+            & .underLine {
+                width: 20rem;
+                // transform: translate(-20%);
+                background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 0%, transparent 100%);
+            }
+        }
+    }
+
+    & .footContent {
+        width: 80%;
+        height: 10rem;
+        margin: 60px 0 80px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        // border: solid red 1px;
+
+        text-decoration: none;
+
+        & p {
+            text-decoration: none;
+            font-size: 1.2rem;
+            line-height: 20px;
+            margin: 7px 0;
+
+            // font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Forum', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Philosopher', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            font-family: 'Tenali Ramakrishna', sans-serif;
+
+            user-select: none;
+        }
+
+        & a:-webkit-any-link {
+            color: black;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        & .footOptions1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+
+            width: 10rem;
+            margin-right: 4rem;
+            transition: 200ms;
+        }
+
+        & .footOptions2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 4rem;
+            transition: 200ms;
+        }
+
+        & .footOptions3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+
+            width: 10rem;
+            margin-left: 4rem;
+            transition: 200ms;
+            text-decoration: none;
+
+            & .nav {
+                text-decoration: none;
+
+                & p {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        & .midLine {
+            height: 100%;
+            width: 1px;
+            background: linear-gradient(#403D3C, transparent);
+        }
+
+        @media screen and (max-width: 880px) {
+            & .footOptions1 {
+                width: 10rem;
+                margin-right: 40px;
+            }
+
+            & .footOptions2 {
+                margin: 0 40px;
+            }
+
+            & .footOptions3 {
+                width: 10rem;
+                margin-left: 40px;
+            }
+        }
+
+        @media screen and (max-width: 760px) {
+            & .footOptions1 {
+                width: 130px;
+                margin-right: 30px;
+            }
+
+            & .footOptions2 {
+                margin: 0 30px;
+            }
+
+            & .footOptions3 {
+                width: 130px;
+                margin-left: 30px;
+            }
+        }
+
+        @media screen and (max-width: 635px) {
+            width: 90%;
+            height: 10rem;
+
+            & .footOptions1 {
+                width: 10rem;
+                margin-right: .5rem;
+                text-align: left;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            & .footOptions2 {
+                margin: 0 1rem;
+                text-align: center;
+            }
+
+            & .footOptions3 {
+                width: 10rem;
+                margin-left: .5rem;
+                text-align: right;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+
+            & .footOptions1 {
+                width: 7rem;
+                margin-right: 2px;
+            }
+
+            & .footOptions2 {
+                margin: 0 2px;
+                width: 7rem;
+            }
+
+            & .footOptions3 {
+                width: 7rem;
+                margin-left: 2px;
+            }
+        }
+
+        @media screen and (max-width: 370px) {
+            height: 8rem;
+            margin: 60px 0 60px 0;
+
+            & p {
+                font-size: 1rem;
+            }
+
+            & .footOptions1 {
+                width: 6rem;
+                margin-right: 2px;
+            }
+
+            & .footOptions2 {
+                margin: 0 2px;
+                width: 7rem;
+            }
+
+            & .footOptions3 {
+                width: 6rem;
+                margin-left: 2px;
+            }
+        }
+    }
+
+    & .footLogo {
+        height: 12rem;
+        width: 80%;
+        margin-bottom: 2rem;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+
+        transition: 300ms;
+
+        & img {
+            height: 100%;
+            filter: sepia(10%) grayscale(10%);
+            user-select: none;
+            display: block;
+            background-size: cover;
+            transition: 200ms;
+        }
+
+        @media screen and (max-width: 800px) {
+            height: 10rem;
+        }
+
+        @media screen and (max-width: 700px) {
+            height: 9rem;
+            gap: 1rem;
+        }
+
+        @media screen and (max-width: 600px) {
+            height: 8rem;
+            gap: .8rem;
+        }
+
+        @media screen and (max-width: 500px) {
+            height: 7rem;
+            gap: .5rem;
+        }
+
+        @media screen and (max-width: 400px) {
+            height: 6.5rem;
+            gap: .2rem;
+        }
+
+        @media screen and (max-width: 360px) {
+            height: 5rem;
+        }
+    }
+
+    & .footLine {
+        height: 1px;
+        width: 100%;
+        margin: 1rem 0;
+        background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 20%, transparent 100%);
+    }
+
+    & .footExtra {
+        width: 100%;
+        // padding: 0 1rem;
+        // border: solid red 1px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 25px;
+
+        & p {
+            margin: 0 1rem 1rem;
+            font-size: .8rem;
+            font-family: Arial, Helvetica, sans-serif;
+
+            user-select: none;
+        }
+    }
+
+    @media screen and (max-width: 810px) {
+        box-shadow: inset 0px -600px 80px -200px #ffffff;
+    }
+
+    @media screen and (max-width: 600px) {
+        box-shadow: inset 0px -560px 80px -200px #ffffff;
+
+        & #cloud-circle {
+            left: -40%;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        box-shadow: inset 0px -520px 80px -200px #ffffff;
+    }
+
+    @media screen and (max-width: 370px) {
+        box-shadow: inset 0px -500px 80px -200px #ffffff;
+    }
+
+    @media screen and (max-width: 320px) {
+        box-shadow: inset 0px -480px 80px -200px #ffffff;
+    }
+}

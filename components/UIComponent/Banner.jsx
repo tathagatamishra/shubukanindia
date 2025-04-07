@@ -1,0 +1,45 @@
+"use strict";
+import React from "react";
+import "./Banner.scss";
+
+export default function Banner({
+  bannerText1,
+  bannerText2,
+  bannerText3,
+  bannerText4,
+  linkUrl,
+  linkText,
+}) {
+  // Default values if props aren't provided
+  const text1 = bannerText1 || "The Registration is Open";
+  const text2 = bannerText2 || "Fill the form with necessary details.";
+  const text3 = bannerText3 || "To check your email for your registration confirmation.";
+  const text4 = bannerText4 || "Register to Shubukan India.";
+
+  // const text1 = bannerText1 || "To check your marksheet, Obtain your unique code from your instructor.";
+  // const text2 = bannerText2 || "Enter the code to view your marksheet.";
+  // const text3 = bannerText3 || "To check your marksheet, Obtain your unique code from your instructor.";
+  // const text4 = bannerText4 || "Enter the code to view your marksheet.";
+
+  const url = linkUrl || "/notice";
+  const urlText = linkText || "www.shubukanindia.org/notice";
+
+  // Create the full message with link included
+  const fullMessage = (
+    <>
+      <a href={url}>{urlText}</a>. |🔴| {text1} Go to{" "}
+      <a href={url}>{urlText}</a>. |🔴| {text2} Go to{" "}
+      <a href={url}>{urlText}</a>. |🔴| {text3} Go to{" "}
+      <a href={url}>{urlText}</a>. |🔴| {text4} Go to{" "}
+    </>
+  );
+
+  
+  return (
+    <div className="banner">
+      <div className="track">
+        <div className="content">{fullMessage}</div>
+      </div>
+    </div>
+  );
+}
