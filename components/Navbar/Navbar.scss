@@ -1,5 +1,7 @@
 @import '../../styles/variables.scss';
 @import '../../styles/Fonts.scss';
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
 #Navbar {
     z-index: 50;
@@ -63,12 +65,30 @@
         transition: 300ms;
 
         & .heading {
-            margin: 1.5rem 0 2rem;
+            // margin: 1.5rem 0 2rem;
+            // letter-spacing: 0.2rem;
             color: #2a2727;
-            letter-spacing: 0.2rem;
-            font-size: 4rem;
-
+            font-size: 5rem;
             font-family: $font-rainlyregularovl7o;
+
+            filter: opacity(100%);
+            transform: translateX(10%);
+
+            animation-name: headingSlide;
+            animation-duration: 500ms;
+            animation-timing-function: ease-in-out;
+
+            @keyframes headingSlide {
+                from {
+                    filter: opacity(0%);
+                    transform: translateX(-10%);
+                }
+
+                to {
+                    filter: opacity(100%);
+                    transform: translateX(10%);
+                }
+            }
 
             &::selection {
                 color: $---selection-color;
@@ -88,6 +108,25 @@
             margin-left: .5rem;
             user-select: none;
             transition: 300ms;
+            
+            filter: opacity(100%);
+            transform: translateX(10%);
+
+            animation-name: headingSlide;
+            animation-duration: 500ms;
+            animation-timing-function: ease-in-out;
+
+            @keyframes headingSlide {
+                from {
+                    filter: opacity(0%);
+                    transform: translateX(-10%);
+                }
+
+                to {
+                    filter: opacity(100%);
+                    transform: translateX(10%);
+                }
+            }
         }
 
         & .logo2 {
@@ -96,6 +135,25 @@
             margin-left: .5rem;
             user-select: none;
             transition: 300ms;
+            
+            filter: opacity(100%);
+            transform: translateX(10%);
+
+            animation-name: headingSlide;
+            animation-duration: 500ms;
+            animation-timing-function: ease-in-out;
+
+            @keyframes headingSlide {
+                from {
+                    filter: opacity(0%);
+                    transform: translateX(-10%);
+                }
+
+                to {
+                    filter: opacity(100%);
+                    transform: translateX(10%);
+                }
+            }
         }
     }
 
@@ -297,7 +355,7 @@
                 & .opt {
                     height: 4rem;
                     // border: solid;
-                    color: rgb(36, 35, 35);
+                    color: #242323;
                     text-decoration: none;
 
                     display: flex;

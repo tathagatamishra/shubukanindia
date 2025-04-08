@@ -1,6 +1,6 @@
 import Blog from "@/components/Blog/Blog";
 
-export default function blog() {
+export default function page() {
   return (
     <Blog />
   );

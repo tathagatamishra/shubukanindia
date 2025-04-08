@@ -1,0 +1,200 @@
+@import '../../styles/variables';
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
+
+.Modal {
+    z-index: 10;
+    position: absolute;
+    // background: rgb(255, 0, 0);
+    // height: 100vh;
+    // width: 100vw;
+
+    & .modal-bg {
+        position: fixed;
+        background: rgba(231, 221, 211, 0.836);
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        right: 0;
+
+        backdrop-filter: blur(3px);
+        animation-name: popUpBGBlur;
+        animation-duration: .4s;
+        animation-timing-function: ease-in-out;
+
+        @keyframes popUpBGBlur {
+            from {
+                backdrop-filter: blur(0px);
+            }
+
+            to {
+                backdrop-filter: blur(3px);
+            }
+        }
+    }
+
+    & .img-holder {
+        position: fixed;
+
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 80vw;
+        height: 80vh;
+        // border: 1px solid red;
+        margin-bottom: 1rem;
+        padding: 20px;
+
+        display: block;
+        overflow: hidden;
+        background: rgb(237, 230, 223);
+        box-shadow: 0 0 20px #cfbbad;
+        border-radius: 8px;
+        transition: 300ms;
+        // border-top: solid 1.5px transparent;
+        // border-left: solid 1.5px transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        @media screen and (max-width: 400px) {
+            width: 90vw;
+            height: 90vh;
+        }
+
+        & .img-box {
+            width: 100%;
+            max-height: 50%;
+            // border: 1px solid red;
+            user-select: none;
+
+            & .img {
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
+
+                border-radius: 8px;
+                filter: sepia(0%) grayscale(0%);
+
+                display: block;
+                background-size: cover;
+                transition: transform 0.4s;
+
+                user-select: none;
+
+                // animation-name: popImg;
+                // animation-duration: .2s;
+                // animation-timing-function: ease-in-out;
+
+                // @keyframes popImg {
+                //     from {
+                //         transform: scale(0%);
+                //     }
+
+                //     to {
+                //         transform: scale(100%);
+                //     }
+                // }
+            }
+        }
+
+        & .content-box {
+            width: 100%;
+            height: 50%;
+            // border: 1px solid red;
+
+            & .comment {
+                width: 100%;
+                text-align: right;
+                font-style: italic;
+                font-family: 'Bellefair', serif;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+
+                @media screen and (max-height: 600px) {
+                    margin: 5px 0;
+                }
+                @media screen and (max-width: 400px) {
+                    
+                }
+            }
+
+            & .title {
+                width: 100%;
+                letter-spacing: 2px;
+                font-family: 'Fredericka the Great', cursive;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+
+                @media screen and (max-height: 600px) {
+                    font-size: 28px;
+                }
+                @media screen and (max-width: 700px) {
+                    font-size: 28px;
+                }
+                @media screen and (max-width: 400px) {
+                    font-size: 22px;
+                }
+            }
+
+            & .description {
+                height: 100%;
+                width: 100%;
+                font-size: 1.3rem;
+                font-family: 'GFS Neohellenic', sans-serif;
+
+                &::selection {
+                    color: $---selection-color;
+                    background: $---selection-bg;
+                }
+
+                @media screen and (max-height: 600px) {
+                    margin: 5px 0;
+                    font-size: 1.2rem;
+                }
+                @media screen and (max-width: 700px) {
+                    font-size: 1.2rem;
+                }
+                @media screen and (max-width: 400px) {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
+        & .crossBtn {
+            position: absolute;
+            bottom: 0;
+            margin: 15px;
+            // transform: translateY(40px);
+            width: 40px;
+            height: 40px;
+            // border: 1px solid red;
+            background: #cfbbad;
+            border-radius: 50px;
+            transition: 200ms;
+            box-shadow: 0 2px 8px #2726253f;
+
+            & .label {
+                width: 40px;
+                height: 40px;
+                color: #625851;
+            }
+
+            &:hover {
+                transform: scale(110%);
+            }
+
+            &:active {
+                transform: scale(80%);
+            }
+        }
+    }
+}

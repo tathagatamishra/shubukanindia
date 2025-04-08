@@ -369,10 +369,11 @@
 
         & img {
             height: 100%;
+            width: auto;
             filter: sepia(10%) grayscale(10%);
             user-select: none;
             display: block;
-            background-size: cover;
+            background-size: contain;
             transition: 200ms;
         }
 

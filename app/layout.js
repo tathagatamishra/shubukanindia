@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 import { isDesktop } from "react-device-detect";
+import { NavProvider } from "@/components/Context/NavContext";
 import MouseTrail from "@/components/UIComponent/MouseTrail";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -79,19 +80,22 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const showNav = false;
   return (
     <html lang="en">
       <GoogleAnalytics />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {isDesktop && <MouseTrail />}
-        <div className="App" id="App">
-          <Navbar />
-          <div className="webBody">{children}</div>
-          <Footer />
-          <Banner />
-        </div>
+        <NavProvider>
+          {isDesktop && <MouseTrail />}
+          <div className="App" id="App">
+            <Navbar />
+            <div className="webBody">{children}</div>
+            <Footer />
+            <Banner />
+          </div>
+        </NavProvider>
       </body>
     </html>
   );
