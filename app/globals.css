@@ -49,3 +49,28 @@ body::-webkit-scrollbar-thumb {
   background-image: url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg");
   background-size: 250px 250px;
 }
+
+.notFound {
+  filter: opacity(1);
+  transform: scale(1);
+  animation-name: notFound;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes notFound {
+  0% {
+    filter: opacity(0);
+    transform: scale(.8);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    filter: opacity(1);
+    transform: scale(1);
+  }
+
+}
