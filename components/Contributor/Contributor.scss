@@ -1,0 +1,105 @@
+@import '../../styles/_variables';
+@import '../../styles/_Fonts';
+
+.Contributor {
+    // border: 1px solid red;
+    height: fit-content;
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10rem;
+
+    @media screen and (max-width: 700px) {
+        width: 90%;
+        padding-top: 8rem;
+    }
+
+    @media screen and (max-width: 600px) {
+        width: 90%;
+        padding-top: 4rem;
+    }
+
+    & .Hero {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 8rem;
+        padding-top: 3rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        & .heading {
+            margin: 1.5rem 0 2rem;
+            color: #2a2727;
+            letter-spacing: 0.2rem;
+            font-size: 6rem;
+
+            font-family: $font-rainlyregularovl7o;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
+
+        & p {
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: 'Amarante', cursive;
+            // font-family: 'Andika', sans-serif;
+            // font-family: 'Bellefair', serif;
+            // font-family: 'Capriola', sans-serif;
+            // font-family: 'Flamenco', cursive;
+            // font-family: 'Fredericka the Great', cursive;
+            // font-family: 'GFS Neohellenic', sans-serif;
+            // font-family: 'Pompiere', cursive;
+            // font-family: 'Tenali Ramakrishna', sans-serif;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            padding-top: 0;
+            margin-bottom: 6rem;
+
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 3rem;
+                letter-spacing: 0.2rem;
+            }
+
+            & p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            padding-top: 3rem;
+            margin-bottom: 6rem;
+
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 2.8rem;
+                letter-spacing: 0.2rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            & h1 {
+                margin: 1.5rem 0 2rem;
+                color: #2a2727;
+                font-size: 2.8rem;
+                letter-spacing: 0.2rem;
+            }
+        }
+    }
+}

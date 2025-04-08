@@ -41,7 +41,7 @@ export default function Footer() {
 
       <div className="footContent">
         <div className="footOptions1">
-          <div onClick={() => navigate("/contributor")} className="opt">
+          <div onClick={() => navigate("/contributors")} className="opt">
             <p>Contributors</p>
           </div>
           <div onClick={() => navigate("/membership")} className="opt">

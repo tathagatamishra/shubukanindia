@@ -1,0 +1,282 @@
+@import '../../../styles/_variables';
+@import '../../../styles/_Fonts.scss';
+
+
+.gallery-board {
+    & .form-section {
+        & .form-title {
+            font-family: 'Geo';
+        }
+
+        & .form-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            & .image-preview {
+                margin-bottom: 10px;
+                border-radius: 8px;
+                border: 1px solid $---accent6;
+                background: #ffffff68;
+
+                max-width: 100%;
+                max-height: 200px;
+                object-fit: contain;
+            }
+
+            & .upload-progress {
+                margin-top: 10px;
+                width: 100%;
+
+                & .progress-bar {
+                    height: 20px;
+                    width: 100%;
+                    background-color: #f0f0f0;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin-bottom: 5px;
+
+                    & .progress-fill {
+                        height: 100%;
+                        background-color: #4CAF50;
+                        transition: width 0.3s ease;
+                    }
+                }
+
+                & p {
+                    margin: 0;
+                    font-size: 14px;
+                    color: green;
+                    font-family: 'Geo';
+
+                }
+            }
+        }
+
+        & .form-group:last-child {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 20px;
+
+            & .error-message {
+                margin: 4px 0 20px 0;
+                font-family: 'Geo';
+                color: $---accent1;
+                font-size: 16px;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 10px;
+                line-break: anywhere;
+
+                & svg {
+                    min-height: 20px;
+                    min-width: 20px;
+                }
+            }
+
+            & button {
+                align-self: flex-start;
+                overflow: hidden;
+                position: relative;
+
+                & .progress-bar {
+                    height: 100%;
+                    width: 100%;
+
+                    & .progress-fill {
+                        height: 100%;
+                        background-color: #4CAF50;
+                        transition: width 0.3s ease;
+                    }
+                }
+
+                & p {
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    margin: 0;
+                    font-size: 14px;
+                    color: black;
+                    font-family: 'Geo';
+                }
+            }
+        }
+    }
+
+    // .align-image
+    // └── .image
+    //     │── img
+    //     │── .loading
+    //     └── .image-info
+    //         │── .info-box
+    //         │   │── .info-label
+    //         │   └── .info-text
+    //         └── .btns
+    //             │── .edit
+    //             └── .delete
+
+    & .align-image {
+        margin-top: 20px;
+        column-count: 8;
+        --webkit-column-count: 8;
+        --moz-column-count: 8;
+        column-gap: 6px;
+
+        @media screen and (max-width: 1080px) {
+            column-count: 6;
+            --webkit-column-count: 6;
+            --moz-column-count: 6;
+            column-gap: 6px;
+        }
+
+        @media screen and (max-width: 720px) {
+            column-count: 4;
+            --webkit-column-count: 4;
+            --moz-column-count: 4;
+            column-gap: 6px;
+        }
+
+        @media screen and (max-width: 400px) {
+            column-count: 3;
+            --webkit-column-count: 3;
+            --moz-column-count: 3;
+            column-gap: 6px;
+        }
+
+        & .image {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: 300ms;
+            margin: 0 0 6px 0;
+            background: #ffffff68;
+            border-radius: 8px;
+            position: relative;
+
+            & img {
+                height: auto;
+                width: 100%;
+                object-fit: contain;
+                border-radius: 8px 8px 0 0;
+                display: block;
+                transition: 300ms;
+
+                user-select: none;
+            }
+
+            & .image-info {
+                padding: 6px;
+
+                & .info-label {
+                    border-bottom: 1px solid white;
+                    font-size: 12px;
+                    color: #403D3C;
+                    padding-bottom: 2px;
+                    margin: 0;
+                    font-family: 'Geo';
+                }
+
+                & .info-text {
+                    margin: 0 0 10px 0;
+                    font-size: 12px;
+                    color: #403D3C;
+
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
+                }
+
+                & .btns {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+
+                    & button {
+                        height: 24px;
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-family: 'Geo';
+                        font-size: 12px;
+
+                        & svg {
+                            height: 14px;
+                            width: 14px;
+                        }
+                    }
+
+                    & .green {
+                        background: rgb(233, 255, 233);
+                        color: green;
+
+                        & svg {
+                            color: green;
+                        }
+                    }
+
+                    & .red {
+                        background: rgb(255, 228, 228);
+                        color: red;
+
+                        & svg {
+                            color: red;
+                        }
+                    }
+                }
+            }
+
+            & .loading {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #ffffff50;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                backdrop-filter: blur(2px);
+                font-family: 'Geo';
+                color: $---accent1;
+                line-height: 20px;
+            }
+
+            @keyframes spinner {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            & .loading::before {
+                content: "";
+                box-sizing: border-box;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 24px;
+                height: 24px;
+                margin-top: -12px;
+                margin-left: -12px;
+                border-radius: 50%;
+                border-top: 2px solid red;
+                border-right: 2px solid transparent;
+                animation: spinner 600ms linear infinite;
+            }
+        }
+    }
+}
