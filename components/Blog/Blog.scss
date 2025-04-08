@@ -1,12 +1,12 @@
-@import '../../styles/_variables';
-@import '../../styles/_Fonts';
+@import '../../styles/variables';
+@import '../../styles/Fonts';
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
 
 .Blog {
     // border: 1px solid red;
-    padding-top: 8rem;
+    padding-top: 10rem;
     max-width: 1000px;
     height: fit-content;
     width: 80%;
@@ -14,12 +14,16 @@
     flex-direction: column;
     align-items: center;
 
-    @media screen and (max-width:1000px) {
-        padding-top: 7rem;
+    @media screen and (max-width: 800px) {
+        padding-top: 9rem;
     }
 
-    @media screen and (max-width: 800px) {
-        padding-top: 5rem;
+    @media screen and (max-width:700px) {
+        padding-top: 8rem;
+    }
+
+    @media screen and (max-width:550px) {
+        padding-top: 7rem;
     }
 
     @media screen and (max-width: 431px) {
@@ -96,8 +100,6 @@
 
             width: 100%;
             height: fit-content;
-            // margin-bottom: 8rem;
-            padding-top: 2rem;
 
             display: flex;
             flex-direction: row;
