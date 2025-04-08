@@ -1,4 +1,5 @@
-@import '../../styles/_variables';
+@import '../../styles/variables.scss';
+@import '../../styles/Fonts.scss';
 
 #Navbar {
     z-index: 50;
@@ -60,6 +61,20 @@
         align-items: center;
 
         transition: 300ms;
+
+        & .heading {
+            margin: 1.5rem 0 2rem;
+            color: #2a2727;
+            letter-spacing: 0.2rem;
+            font-size: 4rem;
+
+            font-family: $font-rainlyregularovl7o;
+
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
+        }
 
         & canvas {
             height: 5rem !important;

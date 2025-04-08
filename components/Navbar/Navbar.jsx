@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import useSound from "use-sound";
 import Image from "next/image";
 import "./Navbar.scss";
@@ -11,11 +11,48 @@ export default function Navbar() {
     router.push(page);
   };
 
+  const pathname = usePathname();
   const [position, setPosition] = useState({ top: "0rem" });
   const [lastScrollTop, setLastScrollTop] = useState(Infinity);
 
   const [isMenu, setIsMenu] = useState(false);
   const [menuStyle, setMenuStyle] = useState({});
+
+  // Add state to track which logo is currently visible
+  const [showFirstLogo, setShowFirstLogo] = useState(true);
+  const [currentPage, setCurrentPage] = useState("");
+  
+  useEffect(() => {
+    // Clean up the pathname to handle potential trailing slashes
+    const path = pathname.endsWith('/') && pathname !== '/' ? 
+      pathname.slice(0, -1) : pathname;
+    
+    // Create a mapping of paths to page titles
+    const pathToTitle = {
+      '/': '',
+      '/history': 'History',
+      '/shubukan-india': 'Shubukan India',
+      '/shubukan-okinawa': 'Shubukan Okinawa',
+      '/shubukan-world': 'Shubukan World',
+      '/shuri-karate-kobudo-hozonkai': 'Shuri Karate Kobudo Hozonkai',
+      '/lineage-and-dojokun': 'Lineage and Dojo Kun',
+      '/karate-and-kobudo': 'Karate and Kobudo',
+      '/registration': 'Registration',
+      '/membership': 'Membership',
+      '/gallery': 'Gallery',
+      '/blog': 'Blog',
+      '/about': 'About',
+      '/contact': 'Contact'
+    };
+    
+    // Set the current page based on the exact path match
+    setCurrentPage(pathToTitle[path] || '');
+    
+  }, [pathname]);
+
+  useEffect(() => {
+    console.log("Current Path:", currentPage);
+  }, [currentPage]);
 
   // Handle scroll events with useEffect to avoid direct window event listeners
   useEffect(() => {
@@ -33,7 +70,23 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollTop]); // Add lastScrollTop as dependency
+  }, [lastScrollTop]);
+
+  // Set up logo animation interval only when currentPage is not empty
+  useEffect(() => {
+    // Only set up the animation interval if we're not on the home page
+    if (currentPage !== '') {
+      const intervalId = setInterval(() => {
+        setShowFirstLogo((prev) => !prev);
+      }, 3000);
+
+      // Cleanup interval on component unmount or when currentPage changes
+      return () => clearInterval(intervalId);
+    } else {
+      // When on home page, always show the logo (no animation)
+      setShowFirstLogo(true);
+    }
+  }, [currentPage]);
 
   function showMenu() {
     setIsMenu((prevIsMenu) => !prevIsMenu);
@@ -75,9 +128,27 @@ export default function Navbar() {
         }}
         className="logo"
       >
-        {/* Use Next.js Image component for better optimization or keep as regular img */}
-        <Image className="logo1" src="/assets/shubukan.png" alt="Shubukan Logo" height={720} width={720} />
-        <Image className="logo2" src="/assets/logo.png" alt="Shubukan Text" height={720} width={720} />
+        {/* Always show logo on home page, otherwise animate between logo and page title */}
+        {currentPage === '' || showFirstLogo ? (
+          <>
+            <Image
+              className="logo1"
+              src="/assets/shubukan.png"
+              alt="Shubukan Logo"
+              height={720}
+              width={720}
+            />
+            <Image
+              className="logo2"
+              src="/assets/logo.png"
+              alt="Shubukan Text"
+              height={720}
+              width={720}
+            />
+          </>
+        ) : (
+          <p className="heading">{currentPage}</p>
+        )}
       </div>
 
       <div id="cloud-circle"></div>
