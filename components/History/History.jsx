@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import "./History.scss";
-import { useNav } from "../Context/NavContext";
+// import { useNav } from "../Context/NavContext";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ImgPop from "../UIComponent/ImgPop";
 
 export default function History() {
-  const { showNav, setShowNav } = useNav();
+  // const { showNav, setShowNav } = useNav();
+  const [showNav, setShowNav] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState("");
   const [comment, setComment] = useState("");
