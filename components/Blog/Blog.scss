@@ -5,8 +5,9 @@
 
 
 .Blog {
-    // border: 1px solid red;
+    border: 1px solid red;
     padding-top: 10rem;
+    padding-bottom: 10px;
     max-width: 1000px;
     height: fit-content;
     width: 80%;
@@ -128,14 +129,43 @@
         }
 
         & .blogContent {
-            // outline: solid 3px rgb(0, 217, 0);
-
+            outline: solid 3px rgb(0, 217, 0);
             width: 100%;
-            height: fit-content;
+            height: 100%;
+            padding-top: 10px;
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            flex-direction: row;
+            // justify-content: center;
+            // align-items: center;
+            gap: 26px;
+
+            & .container {
+                width: 50%;
+                height: 200px;
+                padding: 10px 15px;
+                z-index: 1;
+                position: relative;
+                
+                &::before {
+                  background: #fed;
+                  position: absolute;
+                  content: '';
+                  inset: 0;
+                  border-radius: 5px;
+                  filter: url(#wobble);
+                  // transform: rotate(-1deg);
+                  z-index: -1;
+                  border-top: 1px solid rgba(255, 255, 255, 0.42);
+                  border-left: 1px solid rgba(255, 255, 255, 0.42);
+                  border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+                  border-right: 1px solid rgba(119, 90, 90, 0.4);
+                  box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                  background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+                  // filter: opacity(0.1);
+                  background-size: 100px;
+                  transition: 300ms;
+                }
+            }
 
         }
 

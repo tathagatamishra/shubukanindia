@@ -1,9 +1,8 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import "./AdminAuth.scss";
 import axios from "axios";
 import { shubukan_api } from "../../../config";
-import { IonIcon } from "@ionic/react";
-import { close } from "ionicons/icons";
 
 export default function AdminAuth() {
   const [userName, setUserName] = useState("");
@@ -112,7 +111,7 @@ export default function AdminAuth() {
         </defs>
       </svg>
 
-      <div className="overlay"></div>
+      {/* <div className="overlay"></div> */}
     </div>
   );
 }
