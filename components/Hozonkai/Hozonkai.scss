@@ -1,5 +1,7 @@
-@import '../../styles/_variables';
-@import '../../styles/_Fonts';
+@import '../../styles/variables';
+@import '../../styles/Fonts';
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
 .Hozonkai {
     // border: 1px solid red;
@@ -89,12 +91,13 @@
                     font-size: 1.8rem;
                     color: #005085;
                 }
-                
+
                 & a {
                     color: #005085;
                     text-decoration: none;
                     font-size: 2.2rem;
                     font-family: $font-mufanpfsowkgx;
+                    font-family: 'Tenali Ramakrishna', sans-serif;
 
                     &::selection {
                         color: $---selection-color;
@@ -103,10 +106,11 @@
                 }
 
                 &:hover {
-                    
+
                     & .icon {
                         color: #1d69b5;
                     }
+
                     & a {
                         color: #1d69b5;
                         // border-bottom: 2px dashed #1d69b5;

@@ -1,3 +1,5 @@
+import Hozonkai from "@/components/Hozonkai/Hozonkai";
+
 export const metadata = {
   title: "Shuri Karate Kobudo Hozonkai | Shubukan India",
   description: "Understand the significance of Shuri Karate Kobudo Hozonkai, a preservation society for traditional martial arts from Okinawa.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Hozonkai />
   )
 }
