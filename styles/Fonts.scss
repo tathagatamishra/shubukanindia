@@ -14,5 +14,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'MufanpfsOwKgx';
+    src: url('/Fonts/otf/Mufanpfs-owKgx_otf.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 $font-amanojakuzrqe3: 'AmanojakuZrqe3', sans-serif;
 $font-rainlyregularovl7o: 'RainlyRegularOVl7O', sans-serif;
+$font-mufanpfsowkgx: 'MufanpfsOwKgx', sans-serif;

@@ -1,17 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import "./Hozonkai.scss";
-import { IonIcon } from "@ionic/react";
-import { globeOutline } from "ionicons/icons";
 
-import ShuriKarateKobudoHozonkai from "../../assets/ShuriKarateKobudoHozonkai.png";
-
-import ReactGA from "react-ga";
+import { SlGlobe } from "react-icons/sl";
 
 export default function Hozonkai() {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
 
   useEffect(() => {
     window.scrollTo({
@@ -23,7 +16,7 @@ export default function Hozonkai() {
     <div className="Hozonkai">
       <section className="Hero">
         <div className="img-div">
-          <img src={ShuriKarateKobudoHozonkai} alt="" />
+          <img src="/assets/ShuriKarateKobudoHozonkai.png" alt="" />
         </div>
 
         <p className="heading">Shuri Karate Kobudo Hozonkai</p>
@@ -36,7 +29,7 @@ export default function Hozonkai() {
 
         <div className="links">
           <div className="link">
-            <IonIcon icon={globeOutline} className="icon" />
+            <SlGlobe className="icon" />
             <a
               href="https://www.shubukan50.com"
               target="_blank"
@@ -46,7 +39,7 @@ export default function Hozonkai() {
           </div>
 
           <div className="link">
-            <IonIcon icon={globeOutline} className="icon" />
+            <SlGlobe className="icon" />
             <a
               href="https://www.big-advance.site/s/172/2105"
               target="_blank"
