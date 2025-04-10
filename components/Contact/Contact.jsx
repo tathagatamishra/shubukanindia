@@ -1,22 +1,21 @@
+"use client";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { IonIcon } from "@ionic/react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
-  logoFacebook,
-  logoInstagram,
-  mailOutline,
-  callOutline,
-  logoWhatsapp,
-  logoWordpress,
-} from "ionicons/icons";
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+  FaWordpress,
+  FaEnvelope,
+} from "react-icons/fa";
 import "./Contact.scss";
 
-import ReactGA from "react-ga";
-
 export default function Contact() {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+  const router = useRouter();
+  const navigate = (page) => {
+    router.push(page);
+  };
 
   const emailAddress = "shorinryushubukanindia@gmail.com";
   const emailSubject = "Hello";
@@ -39,70 +38,63 @@ export default function Contact() {
       </section>
 
       <section className="content">
-        <div className="link">
-          <IonIcon icon={logoWhatsapp} className="label" />
-          <NavLink
-            to={`https://wa.me/${+919851852499}`}
-            className="opt"
-            target="_blank"
-            rel="phone number"
-          >
+        <div
+          className="link"
+          onClick={() => navigate(`https://wa.me/${+919851852499}`)}
+        >
+          <FaWhatsapp className="label" />
+          <div className="opt" target="_blank" rel="phone number">
             +91 9851852499
-          </NavLink>
+          </div>
         </div>
 
         <div className="link">
-          <IonIcon icon={mailOutline} className="label" />
+          <FaEnvelope className="label" />
           <a href={emailLink} className="opt" target="_blank" rel="gmail">
             shorinryushubukanindia@gmail.com
           </a>
         </div>
 
-        <div className="link">
-          <IonIcon icon={logoFacebook} className="label" />
-          <NavLink
-            to="https://www.facebook.com/ShorinRyuShubukanIndia"
-            className="opt"
-            target="_blank"
-            rel="facebook link"
-          >
+        <div
+          className="link"
+          onClick={() =>
+            navigate("https://www.facebook.com/ShorinRyuShubukanIndia")
+          }
+        >
+          <FaFacebook className="label" />
+          <div className="opt" target="_blank" rel="facebook link">
             ShorinRyu Shubukan India
-          </NavLink>
+          </div>
         </div>
 
-        <div className="link">
-          <IonIcon icon={logoFacebook} className="label" />
-          <NavLink
-            to="https://www.facebook.com/shubukanindia"
-            className="opt"
-            target="_blank"
-            rel="facebook link"
-          >
+        <div
+          className="link"
+          onClick={() => navigate("https://www.facebook.com/shubukanindia")}
+        >
+          <FaFacebook className="label" />
+          <div className="opt" target="_blank" rel="facebook link">
             Shubukan India
-          </NavLink>
+          </div>
         </div>
 
-        <div className="link">
-          <IonIcon icon={logoInstagram} className="label" />
-          <NavLink
-            to="https://www.instagram.com/shubukanindia/"
-            className="opt"
-            target="_blank"
-            rel="instagram link"
-          >
+        <div
+          className="link"
+          onClick={() => navigate("https://www.instagram.com/shubukanindia/")}
+        >
+          <FaInstagram className="label" />
+          <div className="opt" target="_blank" rel="instagram link">
             Shubukan India
-          </NavLink>
+          </div>
         </div>
 
-        <div className="link">
-          <IonIcon icon={logoWordpress} className="label" />
-          <NavLink
-            to="https://kenshinsabya.wordpress.com/"
-            className="opt"
-            target="_blank"
-          >
+        <div
+          className="link"
+          onClick={() => navigate("https://kenshinsabya.wordpress.com/")}
+        >
+          <FaWordpress className="label" />
+          <div className="opt" target="_blank">
             kenshinsabya
-          </NavLink>
+          </div>
         </div>
       </section>
     </div>

@@ -17,17 +17,19 @@
     box-shadow: inset 0px -650px 80px -200px #ffffff;
     background-size: 250px 250px;
     // border: solid 1px blueviolet;
-
+    
     & #cloud-circle {
+        // border: solid 1px blueviolet;
         z-index: -1;
         width: 200vw;
         height: 200px;
         border-radius: 0%;
         filter: url(#filter);
         // X-axis, Y-axis, Blur-radius, Spread-radius, Color
-        box-shadow: 400px 400px 100px 50px #ffffff;
+        box-shadow: 400px -200px 100px 50px #ffffff;
+        background: white;
         position: absolute;
-        top: -30%;
+        bottom: 0%;
         left: 0%;
         transform: translate(-50%, -50%);
     }
@@ -440,7 +442,7 @@
         box-shadow: inset 0px -560px 80px -200px #ffffff;
 
         & #cloud-circle {
-            left: -40%;
+            box-shadow: 100px -100px 100px 50px #ffffff;
         }
     }
 

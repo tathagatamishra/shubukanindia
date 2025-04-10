@@ -1,4 +1,4 @@
-import React from 'react'
+import Contact from '@/components/Contact/Contact';
 
 export const metadata = {
   title: "Contact Us | Shubukan India",
@@ -10,6 +10,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Contact />
   )
 }

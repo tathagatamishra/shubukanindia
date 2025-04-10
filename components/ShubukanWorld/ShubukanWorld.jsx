@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import "./ShubukanWorld.scss";
 import { NavLink } from "react-router-dom";

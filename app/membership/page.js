@@ -1,3 +1,5 @@
+import Membership from "@/components/Membership/Membership";
+
 export const metadata = {
   title: "Membership | Shubukan India",
   description: "Become a member of Shubukan India. Discover our programs, benefits, and how to enroll in traditional karate classes.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Membership />
   )
 }

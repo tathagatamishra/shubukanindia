@@ -1,20 +1,19 @@
+"use client";
 import { useEffect, useState } from "react";
 import "./LineageAndDojoKun.scss";
-import { IonIcon } from "@ionic/react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
-  chevronDownSharp,
-  chevronBackSharp,
-  chevronForwardSharp,
-} from "ionicons/icons";
-import pattern from "../../assets/pattern.jpg";
-import kun from "../../assets/dojokun.png";
-
-import ReactGA from "react-ga";
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoIosArrowForward,
+} from "react-icons/io";
 
 export default function LineageAndDojoKun() {
-  useEffect(() => {
-    ReactGA.pageview("LineageAndDojoKun");
-  }, []);
+  const router = useRouter();
+  const navigate = (page) => {
+    router.push(page);
+  };
 
   useEffect(() => {
     window.scrollTo({
@@ -26,15 +25,6 @@ export default function LineageAndDojoKun() {
     <div className="LineageAndDojoKun">
       <section className="Lineage-Hero">
         <p className="heading">Lineage</p>
-        {/* <p>Discovering the Way of Words</p> */}
-
-        {/* <div className="arrow">
-          <IonIcon icon={chevronDownSharp} className="label" />
-        </div> */}
-
-        {/* <div className="line">
-          <IonIcon icon={chevronBackSharp} className="label" />
-        </div> */}
 
         <div className="family-tree">
           <div className="top">
@@ -43,35 +33,35 @@ export default function LineageAndDojoKun() {
                 <p className="name">Tuken Iekata Morinori</p>
                 <p className="date">( 1624 - 1709 )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="main-box">
                 <p className="name">Sakugawa Todi</p>
                 <p className="date">( 1762 - 1843 )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="main-box">
                 <p className="name">Matsumura Sokon</p>
                 <p className="date">( 1809 - 1899 )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="main-box">
                 <p className="name">Itosu Yasutsune</p>
                 <p className="date">( 1831 - 1915 )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="main-box">
                 <p className="name">Chibana Choshin</p>
                 <p className="date">( 1885 - 1969 )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
             </div>
@@ -117,7 +107,7 @@ export default function LineageAndDojoKun() {
             <div className="top-3rd">
               <div className="box-3rd">
                 <div className="line">
-                  <IonIcon icon={chevronBackSharp} className="label" />
+                  <IoIosArrowBack className="label" />
                 </div>
                 <div className="box">
                   <p className="name">Sesoku Hideharu</p>
@@ -140,7 +130,7 @@ export default function LineageAndDojoKun() {
                   <p className="date">( 1899 - 1982 )</p>
                 </div>
                 <div className="lineX">
-                  <IonIcon icon={chevronForwardSharp} className="label" />
+                  <IoIosArrowForward className="label" />
                 </div>
                 <div className="box">
                   <p className="name">Nakaya Takao</p>
@@ -157,15 +147,15 @@ export default function LineageAndDojoKun() {
               <div className="line1">
                 <div className="lineY"></div>
                 <div className="line">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="line2">
-                <IonIcon icon={chevronDownSharp} className="label1" />
-                <IonIcon icon={chevronDownSharp} className="label2" />
+                <IoIosArrowDown className="label1" />
+                <IoIosArrowDown className="label2" />
               </div>
               <div className="line3">
-                <IonIcon icon={chevronDownSharp} className="label" />
+                <IoIosArrowDown className="label" />
               </div>
             </div>
           </div>
@@ -173,7 +163,7 @@ export default function LineageAndDojoKun() {
           <div className="bottom">
             <div className="bottom-frontline">
               <div className="bottom-underline">
-                <IonIcon icon={chevronForwardSharp} className="label" />
+                <IoIosArrowForward className="label" />
               </div>
             </div>
 
@@ -191,7 +181,7 @@ export default function LineageAndDojoKun() {
             <div className="bottom-line">
               <div className="line-box"></div>
               <div className="line">
-                <IonIcon icon={chevronForwardSharp} className="label" />
+                <IoIosArrowForward className="label" />
               </div>
             </div>
 
@@ -200,14 +190,14 @@ export default function LineageAndDojoKun() {
                 <p className="name">Uema Yasuhiro</p>
                 <p className="date">( 1945 - 2025 )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="box">
                 <p className="name">Uema Takeshi</p>
                 <p className="date">( 1975 - )</p>
                 <div className="arrow">
-                  <IonIcon icon={chevronDownSharp} className="label" />
+                  <IoIosArrowDown className="label" />
                 </div>
               </div>
               <div className="box">
@@ -222,7 +212,7 @@ export default function LineageAndDojoKun() {
                 <p className="date">( 1965 - )</p>
               </div>
               <div className="line">
-                <IonIcon icon={chevronBackSharp} className="label" />
+                <IoIosArrowBack className="label" />
               </div>
             </div>
           </div>
@@ -230,11 +220,11 @@ export default function LineageAndDojoKun() {
       </section>
 
       <section className="pattern">
-        <img src={pattern} alt="" />
+        <img src="/assets/pattern.jpg" alt="" />
       </section>
 
       <section className="DojoKun-Hero">
-        <img src={kun} alt="" />
+        <img src="/assets/dojokun.png" alt="" />
 
         <p className="heading">DojoKun</p>
         <h2>道場訓</h2>

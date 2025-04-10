@@ -25,7 +25,9 @@ export default function Blog() {
           <div className="opt">Latest</div>
           <div className="opt">Shubukan</div>
         </section>
+
         <section className="blogContent"></section>
+        
         <section className="blogFooter"></section>
       </div>
     </div>

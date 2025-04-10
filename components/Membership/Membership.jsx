@@ -1,17 +1,11 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import "./Membership.scss";
 import { IoSearch } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 
-import dipak_maity from "../../dojo_instructors/dipak_maity.jpeg";
-import sabyasachi_giri from "../../dojo_instructors/sabyasachi_giri.jpg";
-import nanak_roy from "../../dojo_instructors/nanak_roy.jpg";
-import raj_chatterjee from "../../dojo_instructors/Raj Chatterjee.jpeg";
-import shaswata_sagar from "../../dojo_instructors/shaswata_sagar.jpeg";
-import prasanta_dolui from "../../dojo_instructors/prasanta_dolui.jpg";
-import basundhara_bag from "../../dojo_instructors/basundhara_bag.jpg";
-import img2 from "../../thumbnail/sabyasachi1.jpg";
 
 export default function Membership() {
   useEffect(() => {
@@ -20,7 +14,11 @@ export default function Membership() {
     });
   }, []);
 
-  const navigate = useNavigate();
+  const router = useRouter();
+  const navigate = (page) => {
+    router.push(page);
+  };
+
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -38,7 +36,7 @@ export default function Membership() {
       dojoName: "Shorin Ryu Shubukan Uema dojo India",
       dojoType: "Honbu Dojo",
       instructor: ["Sensei Sabyasachi Giri"],
-      image: [img2],
+      image: ["/thumbnail/sabyasachi1.jpg"],
       contact: [
         [
           ["Phone", "9851852499"],
@@ -59,7 +57,7 @@ export default function Membership() {
     {
       dojoName: "Fudoshin Martial Arts Academy",
       instructor: ["Dipak Kumar Maity", "Basundhara Bag"],
-      image: [dipak_maity, basundhara_bag],
+      image: ["/dojo_instructors/dipak_maity.jpeg", "/dojo_instructors/basundhara_bag.jpg"],
       contact: [[["Phone", "7478327686"]], [["Phone", "8537952108"]]],
       brunch: [
         [
@@ -81,7 +79,7 @@ export default function Membership() {
     {
       dojoName: "Roy Martial Arts Academy",
       instructor: ["Nanak Roy"],
-      image: [nanak_roy],
+      image: ["/dojo_instructors/nanak_roy.jpg"],
       contact: [
         [
           ["Phone", "7001564694"],
@@ -103,7 +101,7 @@ export default function Membership() {
     {
       dojoName: "Shoshin Martial Arts Academy",
       instructor: ["Shaswata Sagar"],
-      image: [shaswata_sagar],
+      image: ["/dojo_instructors/shaswata_sagar.jpeg"],
       contact: [
         [
           ["Phone", "9037358074"],
@@ -125,7 +123,7 @@ export default function Membership() {
     {
       dojoName: "Prasen Karate Academy",
       instructor: ["Prasanta Dalui"],
-      image: [prasanta_dolui],
+      image: ["/dojo_instructors/prasanta_dolui.jpg"],
       contact: [
         [
           ["Phone", "9007065973"],
@@ -146,7 +144,7 @@ export default function Membership() {
     {
       dojoName: "Karate Self Defense Academy",
       instructor: ["Raj Chatterjee"],
-      image: [raj_chatterjee],
+      image: ["/dojo_instructors/Raj Chatterjee.jpeg"],
       contact: [[["Phone", "9734301071"]]],
       brunch: [
         [
@@ -171,26 +169,28 @@ export default function Membership() {
   // Filter dojos based on search term
   // *******  Filter is not array based, it need to changed
   const handleSearch = () => {
+    setIsInput(true);
+    
     const filtered = dojoArr.filter((dojo) => {
       // Check if any branch location matches the search term
       const branchMatch = dojo.brunch.some(
         (branch) =>
-          branch.mainLocation
+          branch[0].mainLocation
             .toLowerCase()
             .includes(searchTerm.toLowerCase()) ||
-          branch.brunchAddress.some((address) =>
+          branch[0].brunchAddress.some((address) =>
             address.toLowerCase().includes(searchTerm.toLowerCase())
           )
       );
 
       // Check if any contact detail matches the search term
       const contactMatch = dojo.contact.some(
-        (contact) => contact[1].toLowerCase().includes(searchTerm.toLowerCase()) // Assuming contact[1] contains the contact detail value
+        (contact) => contact[0][1].toLowerCase().includes(searchTerm.toLowerCase()) // Assuming contact[1] contains the contact detail value
       );
 
       // Check if instructor, dojo name, branch location, branch address, or contact detail matches the search term
       return (
-        dojo.instructor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        dojo.instructor[0].toLowerCase().includes(searchTerm.toLowerCase()) ||
         dojo.dojoName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         branchMatch ||
         contactMatch
@@ -332,7 +332,7 @@ export default function Membership() {
               style={searchStyle}
               onClick={() => {
                 handleSearch();
-                setIsInput(true);
+                
               }}
             />
           </div>
