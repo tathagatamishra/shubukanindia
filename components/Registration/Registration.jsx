@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import "./Registration.scss";
 import Toast from "../UIComponent/Toast";

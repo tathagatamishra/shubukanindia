@@ -1,3 +1,5 @@
+import LineageAndDojoKun from "@/components/LineageAndDojoKun/LineageAndDojoKun";
+
 export const metadata = {
   title: "Lineage & Dojo Kun | Shubukan India",
   description: "Understand the lineage of our masters and the guiding principles (Dojo Kun) that define our dojo’s philosophy.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <LineageAndDojoKun />
   )
 }

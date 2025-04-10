@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import "./Marksheet.scss";
 import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";

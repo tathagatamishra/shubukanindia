@@ -1,5 +1,5 @@
-@import '../../styles/_variables';
-@import '../../styles/_Fonts';
+@import '../../styles/variables';
+@import '../../styles/Fonts';
 
 .LineageAndDojoKun {
     // border: 1px solid red;
@@ -104,6 +104,10 @@
 
             overflow-x: scroll;
             padding-bottom: 50px;
+
+            @media screen and (max-width: 500px) {
+                margin-top: 40px;
+            }
 
             &::-webkit-scrollbar {
                 z-index: 5;
@@ -1006,13 +1010,14 @@
                 margin: 10px 0;
             }
         }
-        
+
         @media screen and (max-width: 400px) {
             margin-bottom: 1rem;
+
             & h2 {
                 margin: 5px 0;
             }
-            
+
             & li {
                 margin: 10px 0;
             }
