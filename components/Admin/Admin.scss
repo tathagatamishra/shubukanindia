@@ -1,5 +1,5 @@
-@import '../../styles/_variables';
-@import '../../styles/_Fonts.scss';
+@import '../../styles/variables';
+@import '../../styles/Fonts.scss';
 
 *::selection {
   color: $---selection-color;
@@ -9,7 +9,7 @@
 .AdminDashboard {
   // font-family: $font-autterademoxrng5;
   // font-family: $font-shinypaintzpwez;
-  font-family: $font-quikersyzxwl;
+  // font-family: $font-quikersyzxwl;
   font-family: 'Forum', cursive;
   font-family: 'GFS Neohellenic', sans-serif;
   // font-family: 'Tenali Ramakrishna', sans-serif;
@@ -162,9 +162,9 @@
           resize: vertical;
           font-size: 18px;
           letter-spacing: 1px;
-          font-family: $font-autterademoxrng5;
-          font-family: $font-quikersyzxwl;
-          font-family: $font-shinypaintzpwez;
+          // font-family: $font-autterademoxrng5;
+          // font-family: $font-quikersyzxwl;
+          // font-family: $font-shinypaintzpwez;
           font-family: 'GFS Neohellenic', sans-serif;
 
           min-height: 24px;

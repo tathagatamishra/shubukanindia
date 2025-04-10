@@ -1,5 +1,5 @@
-@import '../../../styles/_variables';
-@import '../../../styles/_Fonts.scss';
+@import '../../../styles/variables';
+@import '../../../styles/Fonts.scss';
 
 *::selection {
     color: $---selection-color;
@@ -8,7 +8,7 @@
 
 .AdminAuth {
     // font-family: $font-autterademoxrng5;
-    font-family: $font-quikersyzxwl;
+    // font-family: $font-quikersyzxwl;
     // font-family: $font-shinypaintzpwez;
     height: fit-content;
     min-height: 100vh;
@@ -101,7 +101,7 @@
                 color: #2a2727;
                 text-align: center;
                 letter-spacing: 2px;
-                font-family: $font-quikersyzxwl;
+                // font-family: $font-quikersyzxwl;
 
                 @media screen and (max-width: 500px) {
                     height: 40px;
@@ -147,7 +147,7 @@
             justify-content: center;
             align-items: center;
             color: $---accent1;
-            font-family: $font-quikersyzxwl;
+            // font-family: $font-quikersyzxwl;
             font-size: 18px;
             letter-spacing: 4px;
             user-select: none;
