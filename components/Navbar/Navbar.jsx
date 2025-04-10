@@ -179,7 +179,7 @@ export default function Navbar() {
             />
           </>
         ) : (
-          <p className="heading ml-[20px]">{currentPage}</p>
+          <p className="heading">{currentPage}</p>
         )}
       </div>
 
