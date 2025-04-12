@@ -68,9 +68,6 @@ export default function Navbar() {
     setCurrentPage(pathToTitle[path] || "");
   }, [pathname]);
 
-  useEffect(() => {
-    console.log("Current Path:", currentPage);
-  }, [currentPage]);
 
   // Handle scroll events with useEffect to avoid direct window event listeners
   useEffect(() => {
@@ -112,13 +109,6 @@ export default function Navbar() {
     }
   }, [currentPage, animDelay]); // Include animDelay in dependencies so it recreates the timer when delay changes
 
-  useEffect(() => {
-    console.log("delay:", animDelay);
-  }, [animDelay]);
-
-  useEffect(() => {
-    console.log("delay:", animDelay);
-  }, [animDelay]);
 
   function showMenu() {
     setIsMenu((prevIsMenu) => !prevIsMenu);
@@ -179,7 +169,7 @@ export default function Navbar() {
             />
           </>
         ) : (
-          <p className="heading">{currentPage}</p>
+          <p className="heading sm:h-fit h-[70px] sm:text-[60px] text-[40px]">{currentPage}</p>
         )}
       </div>
 

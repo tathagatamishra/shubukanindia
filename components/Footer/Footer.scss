@@ -457,6 +457,9 @@
 
     @media screen and (max-width: 370px) {
         box-shadow: inset 0px -500px 80px -200px #ffffff;
+        & #cloud-circle {
+            box-shadow: 100px -40px 100px 50px #ffffff;
+        }
     }
 
     @media screen and (max-width: 320px) {
