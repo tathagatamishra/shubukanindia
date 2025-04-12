@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import "./Blog.scss";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import SwiperSlider from "../UIComponent/SwiperSlider";
+import { Pagination, Autoplay } from "swiper/modules";
 
 export default function Blog() {
   const router = useRouter();
@@ -16,7 +18,42 @@ export default function Blog() {
     });
   }, []);
 
-  const topStories = ["1", "2"];
+  const topStories = ["1", "2", "3", "4", "5"];
+
+  const swiperProps = {
+    pagination: { dynamicBullets: true },
+    className: "mySwiper",
+    spaceBetween: 20,
+    loop: true,
+    breakpoints: {
+      512: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      720: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+    },
+  };
+
+  const [topStoryArr, setTopStoryArr] = useState([]);
+  useEffect(() => {
+    setTopStoryArr(
+      topStories.map((story, index) => (
+        <div
+          key={index}
+          className="container p-[10px] sm:p-[20px]"
+          // onClick={() => navigate(`/blog/${story}`)}
+        >
+          <div className="blogCardContent">
+            <h2>Blog Title {story}</h2>
+            <p>Blog Description {story}</p>
+          </div>
+        </div>
+      ))
+    );
+  }, []);
 
   return (
     <div className="Blog">
@@ -28,27 +65,7 @@ export default function Blog() {
         </section>
 
         <section className="blogContent">
-          {topStories.map((story, index) => (
-            <div
-              key={index}
-              className="container"
-              onClick={() => navigate(`/blog/${story}`)}
-            >
-              {/* <div className="blogCardImage">
-                <Image
-                  src={"https://66.media.tumblr.com/8b69cdde47aa952e4176b4200052abf4/tumblr_o51p7mFFF21qho82wo1_1280.jpg"}
-                  alt="Blog Image"
-                  fill
-                  className="object-cover"
-                />
-              </div> */}
-              <div className="blogCardContent">
-                <h2>Blog Title {story}</h2>
-                <p>Blog Description {story}</p>
-              </div>
-            </div>
-          ))}
-
+          <SwiperSlider slides={topStoryArr} modules={[Pagination]} swiperProps={swiperProps} />
         </section>
 
         <section className="blogFooter"></section>
