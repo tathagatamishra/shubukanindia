@@ -4,7 +4,8 @@ import "./Blog.scss";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import SwiperSlider from "../UIComponent/SwiperSlider";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Keyboard, Navigation, Autoplay } from "swiper/modules";
+import { isDesktop, isMobile } from "react-device-detect";
 
 export default function Blog() {
   const router = useRouter();
@@ -18,13 +19,56 @@ export default function Blog() {
     });
   }, []);
 
-  const topStories = ["1", "2", "3", "4", "5"];
+  //  top stories swiper section
+  // start ---------------------
+  const topStories = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+  ];
+
+  const [topStoryArr, setTopStoryArr] = useState([]);
+
+  const isDynamicBullets =
+    isMobile ||
+    topStories.length > 20 ||
+    (typeof window !== "undefined" && window.innerWidth < 500);
 
   const swiperProps = {
-    pagination: { dynamicBullets: true },
-    className: "mySwiper",
+    modules: [Keyboard, Pagination, Navigation, Autoplay],
+    keyboard: {
+      enabled: true,
+    },
+    navigation: true,
+    pagination: { dynamicBullets: isDynamicBullets, clickable: true },
+    className: "topStorySwiper",
     spaceBetween: 20,
+    style: { height: "100%" },
     loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    onSlideChange: (swiper) => {
+      console.log("Slide index changed to: ", swiper.activeIndex);
+    },
     breakpoints: {
       512: {
         slidesPerView: 1,
@@ -37,35 +81,77 @@ export default function Blog() {
     },
   };
 
-  const [topStoryArr, setTopStoryArr] = useState([]);
   useEffect(() => {
     setTopStoryArr(
       topStories.map((story, index) => (
         <div
           key={index}
-          className="container p-[10px] sm:p-[20px]"
+          className="container sm:h-[calc(100%-40px)] h-[calc(100%-30px)] p-[10px] sm:p-[20px] flex flex-col sm:gap-[20px] gap-[10px]"
           // onClick={() => navigate(`/blog/${story}`)}
         >
-          <div className="blogCardContent">
-            <h2>Blog Title {story}</h2>
+          <h2 className="font-[700] text-[24px]">Blog Title {story}</h2>
+          <div className="w-full h-full p-[10px] border-1 bg-[burlywood]">
             <p>Blog Description {story}</p>
           </div>
         </div>
       ))
     );
   }, []);
+  // end ---------------------
+
+  // zigzag section
+  // start --------
+  const zigzagStories = ["1", "2", "3"];
+  const [zigzagArr, setZigzagArr] = useState([]);
+
+  useEffect(() => {
+    setZigzagArr(
+      zigzagStories.map((story, index) => (
+        <div
+          key={index}
+          className={`zigzagCard flex gap-[20px] ${
+            index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+          }`}
+        >
+          <div className="zigzagCardContent flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
+            <h2
+              className={`font-[700] text-[24px] ${
+                index % 2 === 0 ? "flex-left" : "text-right"
+              }`}
+            >
+              Blog Title {story}
+            </h2>
+
+            <div
+              className={`flex gap-[20px] ${
+                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+              }`}
+            >
+              <div className="zigzagImage min-h-[100px] h-[100px] min-w-[100px] w-[100px] border-1 bg-[burlywood]"></div>
+              <p>Blog Description {story}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    );
+  }, []);
+  // end --------
 
   return (
     <div className="Blog">
-      <div className="blogPage">
-        <section className="blogNav">
+      <div className="blogPage flex flex-col gap-[20px]">
+        <section className="topStorySection sm:h-[340px] h-[300px]">
+          <SwiperSlider slides={topStoryArr} swiperProps={swiperProps} />
+        </section>
+
+        <section className="blogNav pb-[10px]">
           <div className="opt">Top Stories</div>
           <div className="opt">Latest</div>
           <div className="opt">Shubukan</div>
         </section>
 
-        <section className="blogContent">
-          <SwiperSlider slides={topStoryArr} modules={[Pagination]} swiperProps={swiperProps} />
+        <section className="zigzagSection flex flex-col gap-[30px]">
+          {...zigzagArr}
         </section>
 
         <section className="blogFooter"></section>
