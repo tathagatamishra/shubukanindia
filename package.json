@@ -20,11 +20,13 @@
     "react-lazy-load-image-component": "^1.6.3",
     "react-pdf": "^9.2.1",
     "sass": "^1.86.2",
+    "swiper": "^11.2.6",
     "use-sound": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4"
