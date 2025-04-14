@@ -15,7 +15,7 @@ export default function Footer() {
   }
 
   return (
-    <div className="Footer">
+    <div className="Footer relative pt-[50px]">
       {/* <div className="footSub">
         <h1>Subscribe to our newsletter</h1>
 
@@ -26,6 +26,20 @@ export default function Footer() {
 
         <div className="underLine"></div>
       </div> */}
+      <Image
+        className="w-[350px] absolute top-[-120px] left-0"
+        src="/hill-l.png"
+        width={100}
+        height={100}
+        alt=""
+      />
+      <Image
+        className="w-[350px] absolute top-[-195px] right-0 scale-x-[-1]"
+        src="/hill-r.png"
+        width={100}
+        height={100}
+        alt=""
+      />
 
       <div id="cloud-circle"></div>
       <svg width="0" height="0">
@@ -87,17 +101,47 @@ export default function Footer() {
       <div className="footSocial"></div>
 
       <div className="footLogo">
-        <Image height={720} width={720} src="/assets/shubukanIndia.png" alt="" />
-        <Image height={720} width={720} src="/assets/shorinryu.svg" alt="" />
-        <Image height={720} width={720} src="/assets/shubukan.svg" alt="" />
-        <Image height={720} width={720} src="/assets/kobudo.svg" alt="" />
-        <Image height={720} width={720} src="/assets/Hozonkai-Logo.svg" alt="" />
+        <Image
+          height={1080}
+          width={1080}
+          src="/assets/shubukanIndia-white.png"
+          alt=""
+          className="z-1 invert-[10%] grayscale-[50%] sepia-[50%]"
+        />
+        <Image
+          height={1080}
+          width={1080}
+          src="/assets/shorinryu.svg"
+          alt=""
+          className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
+        />
+        <Image
+          height={1080}
+          width={1080}
+          src="/assets/shubukan.svg"
+          alt=""
+          className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
+        />
+        <Image
+          height={1080}
+          width={1080}
+          src="/assets/kobudo.svg"
+          alt=""
+          className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
+        />
+        <Image
+          height={1080}
+          width={1080}
+          src="/assets/Hozonkai-white.png"
+          alt=""
+          className="z-1 invert-[10%] grayscale-[50%] sepia-[50%]"
+        />
       </div>
 
       <div className="footLine"></div>
 
       <div className="footExtra">
-        <p>© 2023 Shubukan India</p>
+        <p className="">© 2023 Shubukan India</p>
       </div>
     </div>
   );

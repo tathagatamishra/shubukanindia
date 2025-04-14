@@ -44,17 +44,17 @@
         & .frame {
             height: 200px;
             width: 200px;
-            border: 4px solid transparent;
-            border-image: url('/as.png') 40 stretch;
+            border: 40px solid transparent;
+            border-image: url('https://img.freepik.com/free-vector/aged-paper-texture-background-design_60389-81.jpg?t=st=1744569341~exp=1744572941~hmac=a6feeba2f7ced1ae4f238369810caab55d1b5343787486423bc82c86aba445b9&w=1380') 40 stretch;
             padding: 2rem;
         }
 
         & .custom-border-image {
-            border-image: url('/as.png') 40 stretch;
+            border-image: url('https://img.freepik.com/free-vector/aged-paper-texture-background-design_60389-81.jpg?t=st=1744569341~exp=1744572941~hmac=a6feeba2f7ced1ae4f238369810caab55d1b5343787486423bc82c86aba445b9&w=1380') 40 stretch;
         }
 
         & .paper-bg {
-            background-image: url('/as.png');
+            background-image: url('https://img.freepik.com/free-vector/aged-paper-texture-background-design_60389-81.jpg?t=st=1744569341~exp=1744572941~hmac=a6feeba2f7ced1ae4f238369810caab55d1b5343787486423bc82c86aba445b9&w=1380');
             background-repeat: repeat;
             background-size: cover;
         }

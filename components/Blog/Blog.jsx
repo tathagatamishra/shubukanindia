@@ -4,7 +4,7 @@ import "./Blog.scss";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import SwiperSlider from "../UIComponent/SwiperSlider";
-import { Pagination, Keyboard, Navigation, Autoplay } from "swiper/modules";
+import { Pagination, Keyboard, Navigation, Zoom, Autoplay } from "swiper/modules";
 import { isDesktop, isMobile } from "react-device-detect";
 
 export default function Blog() {
@@ -52,16 +52,18 @@ export default function Blog() {
     (typeof window !== "undefined" && window.innerWidth < 500);
 
   const swiperProps = {
-    modules: [Keyboard, Pagination, Navigation, Autoplay],
+    modules: [Zoom, Keyboard, Pagination, Navigation, Autoplay],
     keyboard: {
       enabled: true,
     },
     navigation: true,
+    centeredSlides: true,
     pagination: { dynamicBullets: isDynamicBullets, clickable: true },
     className: "topStorySwiper",
     spaceBetween: 20,
     style: { height: "100%" },
     loop: true,
+    lazy: "true",
     autoplay: {
       delay: 3000,
       disableOnInteraction: false,
@@ -69,16 +71,20 @@ export default function Blog() {
     onSlideChange: (swiper) => {
       console.log("Slide index changed to: ", swiper.activeIndex);
     },
-    breakpoints: {
-      512: {
-        slidesPerView: 1,
-        spaceBetween: 10,
-      },
-      720: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-    },
+    slidesPerView:
+      isMobile || (typeof window !== "undefined" && window.innerWidth < 500)
+        ? 1
+        : "auto",
+    // breakpoints: {
+    //   512: {
+    //     slidesPerView: 2,
+    //     spaceBetween: 10,
+    //   },
+    //   720: {
+    //     slidesPerView: 2,
+    //     spaceBetween: 20,
+    //   },
+    // },
   };
 
   useEffect(() => {
@@ -86,7 +92,7 @@ export default function Blog() {
       topStories.map((story, index) => (
         <div
           key={index}
-          className="container sm:h-[calc(100%-40px)] h-[calc(100%-30px)] p-[10px] sm:p-[20px] flex flex-col sm:gap-[20px] gap-[10px]"
+          className="container w-full sm:h-[calc(100%-40px)] h-[calc(100%-30px)] p-[10px] sm:p-[20px] flex flex-col sm:gap-[20px] gap-[10px]"
           // onClick={() => navigate(`/blog/${story}`)}
         >
           <h2 className="font-[700] text-[24px]">Blog Title {story}</h2>
@@ -113,7 +119,7 @@ export default function Blog() {
             index % 2 === 0 ? "flex-row" : "flex-row-reverse"
           }`}
         >
-          <div className="zigzagCardContent flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
+          <div className="zigzagCardContent sm:w-fit w-full max-w-full  flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
             <h2
               className={`font-[700] text-[24px] ${
                 index % 2 === 0 ? "flex-left" : "text-right"
@@ -140,7 +146,7 @@ export default function Blog() {
   return (
     <div className="Blog">
       <div className="blogPage flex flex-col gap-[20px]">
-        <section className="topStorySection sm:h-[340px] h-[300px]">
+        <section className="topStorySection w-full sm:h-[340px] h-[300px]">
           <SwiperSlider slides={topStoryArr} swiperProps={swiperProps} />
         </section>
 
@@ -152,6 +158,10 @@ export default function Blog() {
 
         <section className="zigzagSection flex flex-col gap-[30px]">
           {...zigzagArr}
+        </section>
+
+        <section>
+
         </section>
 
         <section className="blogFooter"></section>

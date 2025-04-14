@@ -6,15 +6,14 @@
     height: fit-content;
     bottom: 0;
     width: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
 
     background-image: url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg");
-    // box-shadow: inset 0px -680px 80px -200px #ffffff; // original
-    box-shadow: inset 0px -650px 80px -200px #ffffff;
+    // box-shadow: inset 0px -680px 80px -200px $---accent7; // original
+    // box-shadow: inset 0px -650px 80px -200px $---accent7;
     background-size: 250px 250px;
     // border: solid 1px blueviolet;
     
@@ -22,16 +21,16 @@
         // border: solid 1px blueviolet;
         z-index: -1;
         width: 200vw;
-        height: 200px;
+        height: 50%;
         border-radius: 0%;
         filter: url(#filter);
         // X-axis, Y-axis, Blur-radius, Spread-radius, Color
-        box-shadow: 400px -200px 100px 50px #ffffff;
-        background: white;
+        box-shadow: -100px -200px 100px 50px $---accent7;
+        background: $---accent7;
         position: absolute;
-        bottom: 0%;
-        left: 0%;
-        transform: translate(-50%, -50%);
+        bottom: 0px;
+        left: 0px;
+        // transform: translate(-50%, -50%);
     }
 
     & .footSub {
@@ -58,87 +57,9 @@
             color: #686060;
             font-size: 1.7rem;
             line-height: 2.5rem;
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
             font-family: 'Forum', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Philosopher', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
-            // transform: translateY(40%);
             user-select: none;
             transition: 200ms;
-        }
-
-        & form {
-            width: fit-content;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-
-            & input {
-                width: 18rem;
-                height: 3.2rem;
-                padding: 0 0 0;
-                background: transparent;
-                border: none;
-                // border: solid;
-
-                color: #605a5a;
-                font-size: 1.5rem;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                font-family: 'Tenali Ramakrishna', sans-serif;
-
-                &:focus {
-                    outline: none;
-                }
-
-                &::selection {
-                    color: #ffffff;
-                    background: #858E78;
-                }
-            }
-
-            & button {
-                // border-radius: 50px;
-                height: 2rem;
-                width: 4rem;
-                font-size: 2rem;
-                padding: 0 0 4px 0;
-                line-height: 0;
-                // transform: rotate(-10deg);
-                color: #565250;
-                background: #bcb3b3;
-                background: linear-gradient(to left, #bcb3b3 0%, transparent 100%);
-                border: 3px solid #777270;
-                border: none;
-                transition: 200ms;
-                user-select: none;
-
-                &:hover {
-                    // border: 3px solid #D9C8A9;
-                    padding: 0 0 4px 2.8rem;
-                    transform: translateX(-30%);
-                }
-
-                &:active {
-                    // border: 3px solid #777270;
-                    padding: 0 0 4px 2rem;
-                    transform: translateX(0%);
-                }
-            }
         }
 
         & .underLine {
@@ -182,24 +103,14 @@
             font-size: 1.2rem;
             line-height: 20px;
             margin: 7px 0;
-
-            // font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Forum', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Philosopher', sans-serif;
-            // font-family: 'Pompiere', cursive;
+            color: $---accent9;
             font-family: 'Tenali Ramakrishna', sans-serif;
 
             user-select: none;
         }
 
         & a:-webkit-any-link {
-            color: black;
+            color: $---accent9;
             cursor: pointer;
             text-decoration: none;
         }
@@ -247,7 +158,7 @@
         & .midLine {
             height: 100%;
             width: 1px;
-            background: linear-gradient(#403D3C, transparent);
+            background: linear-gradient($---accent9, transparent);
         }
 
         @media screen and (max-width: 880px) {
@@ -372,7 +283,8 @@
         & img {
             height: 100%;
             width: auto;
-            filter: sepia(10%) grayscale(10%);
+            // filter: sepia(10%) grayscale(10%);
+            // filter: invert(100%);
             user-select: none;
             display: block;
             background-size: contain;
@@ -412,7 +324,7 @@
         height: 1px;
         width: 100%;
         margin: 1rem 0;
-        background: radial-gradient(circle, rgba(64, 61, 60, 0.5) 20%, transparent 100%);
+        background: radial-gradient(circle, $---accent9 20%, transparent 100%);
     }
 
     & .footExtra {
@@ -429,40 +341,40 @@
             margin: 0 1rem 1rem;
             font-size: .8rem;
             font-family: Arial, Helvetica, sans-serif;
-
+            color: $---accent9;
             user-select: none;
         }
     }
 
-    @media screen and (max-width: 810px) {
-        box-shadow: inset 0px -600px 80px -200px #ffffff;
-    }
-    @media screen and (max-width: 700px) {
-        & #cloud-circle {
-            box-shadow: 400px -115px 100px 50px #ffffff;
-        }
-    }
+    // @media screen and (max-width: 810px) {
+    //     box-shadow: inset 0px -600px 80px -200px $---accent7;
+    // }
+    // @media screen and (max-width: 700px) {
+    //     & #cloud-circle {
+    //         box-shadow: 400px -115px 100px 50px $---accent7;
+    //     }
+    // }
 
-    @media screen and (max-width: 600px) {
-        box-shadow: inset 0px -560px 80px -200px #ffffff;
+    // @media screen and (max-width: 600px) {
+    //     box-shadow: inset 0px -560px 80px -200px $---accent7;
 
-        & #cloud-circle {
-            box-shadow: 100px -100px 100px 50px #ffffff;
-        }
-    }
+    //     & #cloud-circle {
+    //         box-shadow: 100px -100px 100px 50px $---accent7;
+    //     }
+    // }
 
-    @media screen and (max-width: 400px) {
-        box-shadow: inset 0px -520px 80px -200px #ffffff;
-    }
+    // @media screen and (max-width: 400px) {
+    //     box-shadow: inset 0px -520px 80px -200px $---accent7;
+    // }
 
-    @media screen and (max-width: 370px) {
-        box-shadow: inset 0px -500px 80px -200px #ffffff;
-        & #cloud-circle {
-            box-shadow: 100px -40px 100px 50px #ffffff;
-        }
-    }
+    // @media screen and (max-width: 370px) {
+    //     box-shadow: inset 0px -500px 80px -200px $---accent7;
+    //     & #cloud-circle {
+    //         box-shadow: 100px -40px 100px 50px $---accent7;
+    //     }
+    // }
 
-    @media screen and (max-width: 320px) {
-        box-shadow: inset 0px -480px 80px -200px #ffffff;
-    }
+    // @media screen and (max-width: 320px) {
+    //     box-shadow: inset 0px -480px 80px -200px $---accent7;
+    // }
 }
