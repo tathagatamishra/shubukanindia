@@ -145,7 +145,7 @@ export default function Blog() {
 
   return (
     <div className="Blog">
-      <div className="blogPage flex flex-col gap-[20px]">
+      <div className="blogPage flex flex-col gap-[20px] overflow-hidden">
         <section className="topStorySection w-full sm:h-[340px] h-[300px]">
           <SwiperSlider slides={topStoryArr} swiperProps={swiperProps} />
         </section>
