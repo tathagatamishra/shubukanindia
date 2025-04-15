@@ -27,15 +27,15 @@ export default function Footer() {
         <div className="underLine"></div>
       </div> */}
       <Image
-        className="w-[350px] absolute top-[-120px] left-0"
-        src="/hill-l.png"
+        className="footHillLeft z-[0] h-auto absolute left-0"
+        src="/footer-hill-l.png"
         width={100}
         height={100}
         alt=""
       />
       <Image
-        className="w-[350px] absolute top-[-195px] right-0 scale-x-[-1]"
-        src="/hill-r.png"
+        className="footHillRight z-[0] h-auto absolute right-0 scale-x-[-1]"
+        src="/footer-hill-r.png"
         width={100}
         height={100}
         alt=""
@@ -53,7 +53,7 @@ export default function Footer() {
         </filter>
       </svg>
 
-      <div className="footContent">
+      <div className="footContent z-[1]">
         <div className="footOptions1">
           <div onClick={() => navigate("/contributors")} className="opt">
             <p>Contributors</p>
@@ -106,7 +106,7 @@ export default function Footer() {
           width={1080}
           src="/assets/shubukanIndia-white.png"
           alt=""
-          className="z-1 invert-[10%] grayscale-[50%] sepia-[50%]"
+          className="z-1 invert-[10%] grayscale-[40%] sepia-[40%]"
         />
         <Image
           height={1080}
@@ -134,7 +134,7 @@ export default function Footer() {
           width={1080}
           src="/assets/Hozonkai-white.png"
           alt=""
-          className="z-1 invert-[10%] grayscale-[50%] sepia-[50%]"
+          className="z-1 invert-[10%] grayscale-[40%] sepia-[40%]"
         />
       </div>
 
