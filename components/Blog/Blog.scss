@@ -3,11 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
-
 .Blog {
+    // & * {
+    //     outline: 1px solid rgba(0, 0, 0, 0.308);
+    // }
+
     // border: 1px solid red;
     padding-top: 10rem;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     max-width: 1000px;
     height: fit-content;
     width: 80%;
@@ -149,16 +152,17 @@
                     filter: url(#wobble);
                     // transform: rotate(-1deg);
                     z-index: -1;
-                    border-top: 1px solid rgba(255, 255, 255, 0.42);
-                    border-left: 1px solid rgba(255, 255, 255, 0.42);
-                    border-bottom: 1px solid rgba(119, 90, 90, 0.4);
-                    border-right: 1px solid rgba(119, 90, 90, 0.4);
-                    box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                    // border-top: 1px solid #A64B37;
+                    // border-left: 1px solid #A64B37;
+                    // border-bottom: 1px solid #403D3C;
+                    // border-right: 1px solid #403D3C;
+                    box-shadow: 1px 2px 4px rgba(192, 83, 29, 0.116);
                     // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
                     // filter: opacity(0.1);
-                    background-image: url("https://img.freepik.com/free-vector/aged-paper-texture-background-design_60389-141.jpg?t=st=1744568518~exp=1744572118~hmac=fa8641b63f678ff38fae64bc50dc3c06a14c48776b73ed55f44252bc7560468e&w=1380");
-                    background-size: 100px;
+                    // background-image: url("https://img.freepik.com/free-vector/aged-paper-texture-background-design_60389-141.jpg?t=st=1744568518~exp=1744572118~hmac=fa8641b63f678ff38fae64bc50dc3c06a14c48776b73ed55f44252bc7560468e&w=1380");
+                    background-size: 300px;
                     transition: 300ms;
+                    // border: 1px solid #A64B37;
                 }
             }
 
@@ -181,7 +185,7 @@
 
                 & .swiper-slide {
                     width: 80%;
-                  }
+                }
             }
         }
 
@@ -190,6 +194,7 @@
                 & .zigzagCardContent {
                     z-index: 1;
                     position: relative;
+                    transition: 300ms;
 
                     &::before {
                         background: #fed;
@@ -215,19 +220,175 @@
             }
         }
 
+        & .imageBlock {
+            & img {
+                width: 130px;
+                height: 130px;
+                object-fit: cover;
+                z-index: 1;
+                position: relative;
+
+                &::before {
+                    background: #fed;
+                    position: absolute;
+                    content: '';
+                    inset: 0;
+                    border-radius: 5px;
+                    filter: url(#wobble);
+                    // transform: rotate(-1deg);
+                    z-index: -1;
+                    border-top: 1px solid rgba(255, 255, 255, 0.42);
+                    border-left: 1px solid rgba(255, 255, 255, 0.42);
+                    border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+                    border-right: 1px solid rgba(119, 90, 90, 0.4);
+                    // box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+                    // backdrop-filter: opacity(50%);
+                    // filter: opacity(0.5);
+                    background-size: 100px;
+                    transition: 300ms;
+                }
+            }
+
+            @media screen and (max-width: 760px) {
+                & img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+
+            @media screen and (max-width: 560px) {
+                & img {
+                    width: 90px;
+                    height: 90px;
+                }
+            }
+
+            @media screen and (max-width: 327px) {
+                & img {
+                    width: 85px;
+                    height: 85px;
+                }
+            }
+        }
+
+        & .bigCardSection {
+            z-index: 1;
+            position: relative;
+            transition: 300ms;
+            height: 300px;
+            min-height: fit-content;
+
+            &::before {
+                background: #fed;
+                position: absolute;
+                content: '';
+                inset: 0;
+                border-radius: 5px;
+                filter: url(#wobble);
+                // transform: rotate(-1deg);
+                z-index: -1;
+                border-top: 1px solid rgba(255, 255, 255, 0.42);
+                border-left: 1px solid rgba(255, 255, 255, 0.42);
+                border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+                border-right: 1px solid rgba(119, 90, 90, 0.4);
+                box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+                // backdrop-filter: opacity(50%);
+                // filter: opacity(0.5);
+                background-size: 100px;
+                transition: 300ms;
+            }
+
+            @media screen and (max-width: 1080px) {
+                height: 280px;
+            }
+        }
+
+        & .verticalCardSection {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            & .vertCard {
+                z-index: 1;
+                position: relative;
+                transition: 300ms;
+                height: 500px;
+                width: 100%;
+
+                &::before {
+                    background: #fed;
+                    position: absolute;
+                    content: '';
+                    inset: 0;
+                    border-radius: 5px;
+                    filter: url(#wobble);
+                    // transform: rotate(-1deg);
+                    z-index: -1;
+                    border-top: 1px solid rgba(255, 255, 255, 0.42);
+                    border-left: 1px solid rgba(255, 255, 255, 0.42);
+                    border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+                    border-right: 1px solid rgba(119, 90, 90, 0.4);
+                    box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+                    // backdrop-filter: opacity(50%);
+                    // filter: opacity(0.5);
+                    background-size: 100px;
+                    transition: 300ms;
+                }
+            }
+
+            @media screen and (max-width: 1080px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @media screen and (max-width: 860px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media screen and (max-width: 480px) {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 20px;
+
+                & .vertCard {
+                    height: 280px;
+                }
+            }
+        }
+
         & .blogFooter {
-            // outline: solid 3px rgb(0, 132, 255);
+            & .bigCardDiv {
+                z-index: 1;
+                position: relative;
+                transition: 300ms;
+                height: 300px;
+                min-height: fit-content;
 
-            width: 100%;
-            height: fit-content;
-            // margin-bottom: 8rem;
-            // padding-top: 3rem;
+                &::before {
+                    background: #fed;
+                    position: absolute;
+                    content: '';
+                    inset: 0;
+                    border-radius: 5px;
+                    filter: url(#wobble);
+                    // transform: rotate(-1deg);
+                    z-index: -1;
+                    border-top: 1px solid rgba(255, 255, 255, 0.42);
+                    border-left: 1px solid rgba(255, 255, 255, 0.42);
+                    border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+                    border-right: 1px solid rgba(119, 90, 90, 0.4);
+                    box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+                    // backdrop-filter: opacity(50%);
+                    // filter: opacity(0.5);
+                    background-size: 100px;
+                    transition: 300ms;
+                }
 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-
+                @media screen and (max-width: 1080px) {
+                    height: 280px;
+                }
+            }
         }
     }
 }
