@@ -4,7 +4,13 @@ import "./Blog.scss";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import SwiperSlider from "../UIComponent/SwiperSlider";
-import { Pagination, Keyboard, Navigation, Zoom, Autoplay } from "swiper/modules";
+import {
+  Pagination,
+  Keyboard,
+  Navigation,
+  Zoom,
+  Autoplay,
+} from "swiper/modules";
 import { isDesktop, isMobile } from "react-device-detect";
 
 export default function Blog() {
@@ -119,7 +125,7 @@ export default function Blog() {
             index % 2 === 0 ? "flex-row" : "flex-row-reverse"
           }`}
         >
-          <div className="zigzagCardContent sm:w-fit w-full max-w-full  flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
+          <div className="zigzagCardContent lg:w-[70%] sm:w-[80%] w-full max-w-full flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
             <h2
               className={`font-[700] text-[24px] ${
                 index % 2 === 0 ? "flex-left" : "text-right"
@@ -143,14 +149,48 @@ export default function Blog() {
   }, []);
   // end --------
 
+  // image block section
+  // start --------
+  const images = ["1", "2", "3", "4", "5", "6"];
+  // end --------
+
+  const vertData = ["1", "2", "3", "4"];
+  const [vertArray, setVertArray] = useState([]);
+  useEffect(() => {
+    setVertArray(
+      vertData.map((vert, index) => (
+        <div
+          key={index}
+          className="vertCard flex flex-col gap-[20px] sm:p-[20px] p-[10px]"
+        >
+          <div></div>
+          <h2 className="font-[700] text-[24px]">Blog Title {vert}</h2>
+          <p>Blog Description {vert}</p>
+        </div>
+      ))
+    );
+  }, []);
+
+  const footerData = ["1", "2", "3", "4"];
+  const [footerArray, setFooterArray] = useState([]);
+  useEffect(() => {
+    setFooterArray(
+      footerData.map((vert, index) => (
+        <div key={index} className="bigCardDiv w-full p-[10px]">
+          <h2 className={`font-[700] text-[24px]`}>Blog Title</h2>
+        </div>
+      ))
+    );
+  }, []);
+
   return (
     <div className="Blog">
-      <div className="blogPage flex flex-col gap-[20px] overflow-hidden">
+      <div className="blogPage flex flex-col gap-[30px] overflow-hidden">
         <section className="topStorySection w-full sm:h-[340px] h-[300px]">
           <SwiperSlider slides={topStoryArr} swiperProps={swiperProps} />
         </section>
 
-        <section className="blogNav pb-[10px]">
+        <section className="blogNav">
           <div className="opt">Top Stories</div>
           <div className="opt">Latest</div>
           <div className="opt">Shubukan</div>
@@ -160,11 +200,30 @@ export default function Blog() {
           {...zigzagArr}
         </section>
 
-        <section>
-
+        <section className="imageBlock w-full flex justify-center">
+          <div className="w-full flex flex-wrap justify-center md:gap-[30px] sm:gap-[20px] gap-[10px]">
+            {images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`img-${index}`}
+                className="rounded-[5px] object-cover"
+              />
+            ))}
+          </div>
         </section>
 
-        <section className="blogFooter"></section>
+        <section className="bigCardSection w-full p-[10px]">
+          <h2 className={`font-[700] text-[24px]`}>Blog Title</h2>
+        </section>
+
+        <section className="verticalCardSection w-full sm:gap-[20px] gap-[10px]">
+          {vertArray}
+        </section>
+
+        <section className="blogFooter flex flex-col gap-[20px]">
+          {footerArray}
+        </section>
       </div>
 
       <svg
