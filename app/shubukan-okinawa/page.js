@@ -1,3 +1,5 @@
+import ShubukanOkinawa from "@/components/ShubukanOkinawa/ShubukanOkinawa";
+
 export const metadata = {
   title: "Shubukan Okinawa | Shubukan India",
   description: "Learn about Shubukan Okinawa, our root organization in Japan, and its mission to preserve traditional martial arts.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>shubukanokinawa</div>
+    <ShubukanOkinawa />
   )
 }

@@ -1,3 +1,5 @@
+import ShubukanWorld from "@/components/ShubukanWorld/ShubukanWorld";
+
 export const metadata = {
   title: "Shubukan Worldwide | Shubukan India",
   description: "Explore the global presence of Shubukan dojos and our international community of martial artists.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>shubukanworld</div>
+    <ShubukanWorld />
   )
 }
