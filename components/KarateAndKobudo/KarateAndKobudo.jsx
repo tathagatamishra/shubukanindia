@@ -2,19 +2,7 @@
 import { useEffect, useState } from "react";
 import "./KarateAndKobudo.scss";
 
-import bo from "../../assets/Frame 19.svg";
-import kama from "../../assets/Frame 13.svg";
-import sai from "../../assets/Frame 12.svg";
-import tonfa from "../../assets/Frame 14.svg";
-import eku from "../../assets/eku.svg";
-import nunchaku from "../../assets/Frame 16.svg";
-
-import ReactGA from "react-ga";
-
 export default function KarateAndKobudo() {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
 
   useEffect(() => {
     window.scrollTo({
@@ -83,7 +71,7 @@ export default function KarateAndKobudo() {
               <p>Long stick. There are lot of Bo katas in shubukan.</p>
             </div>
             <div className="img">
-              <img src={bo} alt="" />
+              <img src="./assets/Frame 19.svg" alt="" />
             </div>
           </div>
 
@@ -93,7 +81,7 @@ export default function KarateAndKobudo() {
               <p>It is sickle. Previously it was used in farming.</p>
             </div>
             <div className="img">
-              <img src={kama} alt="" />
+              <img src="./assets/Frame 13.svg" alt="" />
             </div>
           </div>
 
@@ -106,7 +94,7 @@ export default function KarateAndKobudo() {
               </p>
             </div>
             <div className="img">
-              <img src={sai} alt="" />
+              <img src="./assets/Frame 12.svg" alt="" />
             </div>
           </div>
 
@@ -116,7 +104,7 @@ export default function KarateAndKobudo() {
               <p>It is a wooden weapon. Shubukan has many tonfa katas.</p>
             </div>
             <div className="img">
-              <img src={tonfa} alt="" />
+              <img src="./assets/Frame 14.svg" alt="" />
             </div>
           </div>
 
@@ -129,7 +117,7 @@ export default function KarateAndKobudo() {
               </p>
             </div>
             <div className="img">
-              <img src={eku} alt="" />
+              <img src="./assets/eku.svg" alt="" />
             </div>
           </div>
 
@@ -141,7 +129,7 @@ export default function KarateAndKobudo() {
               </p>
             </div>
             <div className="img">
-              <img src={nunchaku} alt="" />
+              <img src="./assets/Frame 16.svg" alt="" />
             </div>
           </div>
         </div>

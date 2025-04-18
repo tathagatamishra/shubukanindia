@@ -1,21 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import "./ShubukanOkinawa.scss";
-import { NavLink } from "react-router-dom";
-import { IonIcon } from "@ionic/react";
-import { logoFacebook } from "ionicons/icons";
-
-import img1 from "../../assets/shubukanDojo.jpg";
-import img2 from "../../assets/Frame 3.png";
-import img3 from "../../assets/Frame 2.png";
-import img4 from "../../assets/Frame 1.png";
-
-import ReactGA from "react-ga";
+import { FaFacebook } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function ShubukanOkinawa() {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+  const router = useRouter();
+  const navigate = (page) => {
+    router.push(page);
+  };
 
   useEffect(() => {
     window.scrollTo({
@@ -29,7 +22,7 @@ export default function ShubukanOkinawa() {
         <p className="heading">Shubukan Okinawa</p>
 
         <div className="img-div">
-          <img src={img1} alt="" />
+          <img src="./assets/shubukanDojo.jpg" alt="" />
         </div>
 
         <p>
@@ -44,21 +37,21 @@ export default function ShubukanOkinawa() {
 
         <div className="family">
           <div className="child">
-            <img src={img2} alt="" />
+            <img src="./assets/Frame 3.png" alt="" />
             <p>
               Sensei Uema Yasuhiro <br /> (10th Dan) <br /> ( DOB- 15 August
               1945 <br /> DOD- 2 January 2025 )
             </p>
           </div>
           <div className="parent">
-            <img src={img3} alt="" />
+            <img src="./assets/Frame 2.png" alt="" />
             <p>
               Sensei Uema Joki <br /> (10th Dan) <br /> ( DOB- 13 June 1920{" "}
               <br /> DOD- 20 July 2011 )
             </p>
           </div>
           <div className="child">
-            <img src={img4} alt="" />
+            <img src="./assets/Frame 1.png" alt="" />
             <p>
               Sensei Uema Takeshi <br /> (7th Dan) <br /> ( DOB- 11 February
               1975 )
@@ -67,15 +60,15 @@ export default function ShubukanOkinawa() {
         </div>
 
         <div className="link">
-          <IonIcon icon={logoFacebook} className="label" />
-          <NavLink
-            to="https://www.facebook.com/shubukan"
+          <FaFacebook className="label" />
+          <div
+            onClick={() => navigate("https://www.facebook.com/shubukan")}
             className="opt"
             target="_blank"
             rel="facebook link"
           >
             https://www.facebook.com/shubukan
-          </NavLink>
+          </div>
         </div>
       </section>
     </div>
