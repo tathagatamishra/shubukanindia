@@ -79,7 +79,7 @@ export default function Contact() {
 
         <div
           className="link"
-          onClick={() => navigate("https://www.instagram.com/shubukanindia/")}
+          onClick={() => navigate("https://www.instagram.com/indiashubukan?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
         >
           <FaInstagram className="label" />
           <div className="opt" target="_blank" rel="instagram link">
