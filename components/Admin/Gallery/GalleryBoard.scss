@@ -27,16 +27,21 @@
             & .upload-progress {
                 margin-top: 10px;
                 width: 100%;
-
+                
                 & .progress-bar {
-                    height: 20px;
+                    position: relative;
+                    height: fit-content;
                     width: 100%;
+                    padding: 0px 20px;
                     background-color: #f0f0f0;
                     border-radius: 4px;
                     overflow: hidden;
                     margin-bottom: 5px;
 
                     & .progress-fill {
+                        top: 0px;
+                        left: 0px;
+                        position: absolute;
                         height: 100%;
                         background-color: #4CAF50;
                         transition: width 0.3s ease;

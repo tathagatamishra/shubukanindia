@@ -1,3 +1,5 @@
+import HAndF from "@/components/HAndF/HAndF";
+
 export const metadata = {
   title: "Help & FAQs | Shubukan India",
   description: "Get answers to common questions about training, registration, equipment, and other dojo-related inquiries.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <HAndF />
   )
 }

@@ -7,6 +7,7 @@ import NoticeBoard from "./Notice/NoticeBoard";
 import DojoBoard from "./Dojo/DojoBoard";
 import axios from "axios";
 import { shubukan_api } from "../../config";
+import RegBoard from "./Registration/RegBoard";
 
 export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -95,6 +96,7 @@ export default function Admin() {
     { boardName: "Gallery", component: <GalleryBoard /> },
     { boardName: "Marksheet", component: <MarksheetBoard /> },
     { boardName: "Notice", component: <NoticeBoard /> },
+    { boardName: "Registration", component: <RegBoard /> },
     {
       boardName: "Dojo",
       component: (

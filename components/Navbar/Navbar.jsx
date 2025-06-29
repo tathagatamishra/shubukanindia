@@ -23,6 +23,8 @@ export default function Navbar() {
   const [animDelay, setAnimDelay] = useState(3000);
   const [currentPage, setCurrentPage] = useState("");
 
+  const isAdminPage = pathname.startsWith("/admin");
+
   useEffect(() => {
     // Clean up the pathname to handle potential trailing slashes
     const path =
@@ -68,7 +70,6 @@ export default function Navbar() {
     setCurrentPage(pathToTitle[path] || "");
   }, [pathname]);
 
-
   // Handle scroll events with useEffect to avoid direct window event listeners
   useEffect(() => {
     const handleScroll = () => {
@@ -109,7 +110,6 @@ export default function Navbar() {
     }
   }, [currentPage, animDelay]); // Include animDelay in dependencies so it recreates the timer when delay changes
 
-
   function showMenu() {
     setIsMenu((prevIsMenu) => !prevIsMenu);
     setMenuStyle(() =>
@@ -124,8 +124,10 @@ export default function Navbar() {
   }
 
   // Use the correct path for audio files in the public directory
-  const [play] = useSound("/audio/ui-click.mp3");
-  const [play2] = useSound("/audio/light-switch.mp3", { volume: 0.01 });
+  const [play] = useSound("");
+  const [play2] = useSound("", { volume: 0.01 });
+  // const [play] = useSound("/audio/ui-click.mp3");
+  // const [play2] = useSound("/audio/light-switch.mp3", { volume: 0.01 });
 
   function lineFunc() {
     play();
@@ -141,7 +143,7 @@ export default function Navbar() {
     );
   }
 
-  return (
+  return !isAdminPage ? (
     <div id="Navbar" style={position}>
       <div
         onClick={() => {
@@ -157,19 +159,25 @@ export default function Navbar() {
               className="logo1"
               src="/assets/shubukan.png"
               alt="Shubukan Logo"
-              height={720}
-              width={720}
+              height={1920}
+              width={1920}
+              quality={100}
+              sizes="(min-width: 1180px) 80px, 64px"
             />
             <Image
               className="logo2"
               src="/assets/logo.png"
               alt="Shubukan Text"
-              height={720}
-              width={720}
+              height={1920}
+              width={1920}
+              quality={100}
+              sizes="(min-width: 1180px) 142px, 85px"
             />
           </>
         ) : (
-          <p className="heading sm:h-fit h-[70px] sm:text-[60px] text-[40px]">{currentPage}</p>
+          <p className="heading sm:h-fit h-[70px] sm:text-[60px] text-[40px]">
+            {currentPage}
+          </p>
         )}
       </div>
 
@@ -474,5 +482,5 @@ export default function Navbar() {
         )}
       </section>
     </div>
-  );
+  ) : null;
 }

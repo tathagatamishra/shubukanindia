@@ -1,3 +1,5 @@
+import Services from "@/components/Services/Services";
+
 export const metadata = {
   title: "Services | Shubukan India",
   description: "Explore the martial arts training programs offered at Shubukan India — from kids to advanced full-contact karate classes.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Services />
   )
 }

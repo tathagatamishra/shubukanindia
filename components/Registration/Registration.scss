@@ -1,5 +1,5 @@
 @import '../../styles/variables';
-@import '../../styles/_Fonts';
+@import '../../styles/Fonts';
 
 .Registration {
     // border: 1px solid red;
@@ -197,7 +197,6 @@
                         border-color: #905043 !important;
                         background-color: #efe9e5d4 !important;
                     }
-
                 }
             }
 
@@ -350,6 +349,7 @@
                 user-select: none;
                 -webkit-user-select: none;
                 touch-action: manipulation;
+                background: #f0f0f0;
             }
 
             .button-54:active {

@@ -100,13 +100,37 @@
                 // font-weight: 600;
                 color: #2a2727;
                 text-align: center;
-                letter-spacing: 2px;
-                // font-family: $font-quikersyzxwl;
+                letter-spacing: 6px;
+                z-index: 2;
+                font-size: 1.3rem;
+                font-weight: 600;
+                color: #2a2727;
+                font-family: 'Lekton';
 
                 @media screen and (max-width: 500px) {
                     height: 40px;
                     font-size: 28px;
                 }
+            }
+
+            & .password {
+                font-family: $font-quikersyzxwl;
+            }
+
+            & input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            textarea:-webkit-autofill,
+            textarea:-webkit-autofill:hover,
+            textarea:-webkit-autofill:focus,
+            select:-webkit-autofill,
+            select:-webkit-autofill:hover,
+            select:-webkit-autofill:focus {
+                border-color: #905043;
+                // -webkit-text-fill-color: green;
+                -webkit-box-shadow: 0 0 0px 1000px #efe9e537 inset;
+                // transition: background-color 5000s ease-in-out 0s;
+                // background-color: rgba(224, 209, 199, 0.5254901961) !important;
             }
 
             & .line1 {
