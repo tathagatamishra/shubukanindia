@@ -36,17 +36,9 @@ export default function Registration() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${shubukan_api}/registration`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const data = shubukan_api.post(`/registration`, formData);
 
-      const data = await response.json();
-
-      if (response.status === 409) {
+      if (data.status === 409) {
         // Duplicate registration
         showToast("This registration already exists in our system.", "error");
       } else if (data.success) {

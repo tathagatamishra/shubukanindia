@@ -107,7 +107,7 @@ export default function Home({ setShowNav }) {
   return (
     <div className="Home">
       <div className="tree">
-        <Image src="/assets/tree.svg" alt="" height={720} width={720} />
+        <Image src="/assets/tree.svg" alt="" height={1920} width={1920} />
       </div>
       {/* <div className="line">
         <div className="lineColor"></div>
@@ -155,7 +155,7 @@ export default function Home({ setShowNav }) {
           Pure soul is the preserver of true karate<i>&nbsp;</i>
         </p>
         <div className="bird">
-          <Image src="/assets/bird.svg" alt="" height={720} width={720} />
+          <Image src="/assets/bird.svg" alt="" height={1920} width={1920} />
         </div>
       </section>
       {console.log(windowWidth)}
@@ -186,7 +186,7 @@ export default function Home({ setShowNav }) {
         )}
 
         <div className="drogon">
-          <Image src="/assets/dragonx.png" alt="" height={720} width={720} />
+          <Image src="/assets/dragonx.png" alt="" height={1920} width={1920} />
         </div>
 
         <div className="description">
@@ -210,7 +210,7 @@ export default function Home({ setShowNav }) {
         </div>
 
         <div className="drogon2">
-          <Image src="/assets/dragony.png" alt="" height={720} width={720} />
+          <Image src="/assets/dragony.png" alt="" height={1920} width={1920} />
         </div>
       </section>
 
@@ -218,7 +218,7 @@ export default function Home({ setShowNav }) {
         <div className="popUp">
           <div className="popBack" onClick={imgPop}></div>
           <div className="imgPop" onClick={imgPop}>
-            <Image src={popImg} alt="image" height={720} width={720} />
+            <Image src={popImg} alt="image" height={1920} width={1920} />
           </div>
         </div>
       )}
@@ -232,25 +232,25 @@ export default function Home({ setShowNav }) {
 
         <div>
           <div className="image" onClick={() => imgPop("/assets/chibana.jpg")}>
-            <Image src="/assets/chibana.jpg" alt="chosin chibana" height={720} width={720} />
+            <Image src="/assets/chibana.jpg" alt="chosin chibana" height={1920} width={1920} />
           </div>
           <div className="image" onClick={() => imgPop("/thumbnail/oldGroup.jpg")}>
-            <Image src="/thumbnail/oldGroup.jpg" alt="image" height={720} width={720} />
+            <Image src="/thumbnail/oldGroup.jpg" alt="image" height={1920} width={1920} />
           </div>
           <div className="image" onClick={() => imgPop("/thumbnail/Matsumura.jpg")}>
-            <Image src="/thumbnail/Matsumura.jpg" alt="image" height={720} width={720} />
+            <Image src="/thumbnail/Matsumura.jpg" alt="image" height={1920} width={1920} />
           </div>
           <div className="image" onClick={() => imgPop("/assets/uemaImg2.svg")}>
-            <Image src="/assets/uemaImg2.svg" alt="image" height={720} width={720} />
+            <Image src="/assets/uemaImg2.svg" alt="image" height={1920} width={1920} />
           </div>
           <div className="image" onClick={() => imgPop("/thumbnail/kaynChotuku.jpg")}>
-            <Image src="/thumbnail/kaynChotuku.jpg" alt="image" height={720} width={720} />
+            <Image src="/thumbnail/kaynChotuku.jpg" alt="image" height={1920} width={1920} />
           </div>
           <div className="image" onClick={() => imgPop("/thumbnail/joki_sai.jpg")}>
-            <Image src="/thumbnail/joki_sai.jpg" alt="image" height={720} width={720} />
+            <Image src="/thumbnail/joki_sai.jpg" alt="image" height={1920} width={1920} />
           </div>
           <div className="image" onClick={() => imgPop("/thumbnail/chibana.jpg")}>
-            <Image src="/thumbnail/chibana.jpg" alt="image" height={720} width={720} />
+            <Image src="/thumbnail/chibana.jpg" alt="image" height={1920} width={1920} />
           </div>
         </div>
       </section>
@@ -281,10 +281,10 @@ export default function Home({ setShowNav }) {
               <p className="sensei">7th Dan Okinawa Shorin-Ryu</p>
             </div>
 
-            <Image src="/assets/quot (1).jpg" alt="" height={720} width={720} />
+            <Image src="/assets/quot (1).jpg" alt="" height={1920} width={1920} />
           </div>
           <div className="box2">
-            <Image src="/assets/quot (2).jpg" alt="" height={720} width={720} />
+            <Image src="/assets/quot (2).jpg" alt="" height={1920} width={1920} />
 
             <div className="quote">
               <p>
@@ -312,8 +312,8 @@ export default function Home({ setShowNav }) {
         </div>
 
         <div className="img-div">
-          <Image src="/assets/sg1.jpg" alt="" height={720} width={720} />
-          <Image src="/assets/sg2.jpg" alt="" height={720} width={720} />
+          <Image src="/assets/sg1.jpg" alt="" height={1920} width={1920} />
+          <Image src="/assets/sg2.jpg" alt="" height={1920} width={1920} />
         </div>
 
         <p className="story1">

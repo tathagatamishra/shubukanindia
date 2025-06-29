@@ -1,3 +1,5 @@
+import Registration from "@/components/Registration/Registration";
+
 export const metadata = {
   title: "Registration | Shubukan India",
   description: "Register now to join Shubukan India and begin your journey in Okinawan Karate and Kobudo.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Registration />
   )
 }

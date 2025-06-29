@@ -1,88 +1,118 @@
-@import '../../styles/variables';@import '../../styles/_Fonts';
+@import '../../styles/variables';
+@import '../../styles/Fonts';
 
 .TAndC {
     // border: 1px solid red;
+    padding-top: 8rem;
+    max-width: 1000px;
     height: fit-content;
     width: 80%;
-    max-width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 10rem;
 
-    @media screen and (max-width: 400px) {
-        width: 90%;
+    @media screen and (max-width:1000px) {
+        padding-top: 7rem;
+    }
+
+    @media screen and (max-width: 800px) {
         padding-top: 5rem;
     }
 
-        & .Hero {
-            width: 100%;
-            height: fit-content;
-            margin-bottom: 8rem;
-            padding-top: 3rem;
+    @media screen and (max-width: 431px) {
+        width: 90%;
+    }
 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+    & .Hero {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 4rem;
+        padding-top: 2rem;
 
-            & .heading {
-                margin: 1.5rem 0 2rem;
-                color: #2a2727;
-                letter-spacing: 0.2rem;
-                font-size: 6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
 
-                font-family: $font-rainlyregularovl7o;
-
-                &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
-                }
-            }
-
-            & p {
-                margin: 0;
-                font-size: 1.5rem;
-                font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                // font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
+        & .heading {
+            margin: 1.5rem 0 4rem;
+            color: #2a2727;
+            letter-spacing: 0.2rem;
+            font-size: 6rem;
+            text-align: left;
+            font-family: $font-rainlyregularovl7o;
+            line-height: 80px;
 
             &::selection {
                 color: $---selection-color;
                 background: $---selection-bg;
             }
-            }
+        }
 
-            @media screen and (max-width: 700px) {
-                & h1 {
-                    margin: 1.5rem 0 2rem;
-                    color: #2a2727;
-                    font-size: 3rem;
-                    letter-spacing: 0.2rem;
-                }
+        & p {
+            font-size: 1.5rem;
+            text-align: justify;
 
-                & p {
-                    font-size: 1.2rem;
-                }
-            }
+            font-family: 'GFS Neohellenic', sans-serif;
 
-            @media screen and (max-width: 400px) {
-                & h1 {
-                    margin: 1.5rem 0 2rem;
-                    color: #2a2727;
-                    font-size: 2.8rem;
-                    letter-spacing: 0.2rem;
-                }
-
-                & p {
-                    font-size: 1rem;
-                }
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
             }
         }
+
+        @media screen and (max-width: 1000px) {
+            & .heading {
+                font-size: 5.5rem;
+                margin: 1.5rem 0 4rem;
+                letter-spacing: 0rem;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            & .heading {
+                font-size: 5.2rem;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            & .heading {
+                font-size: 5rem;
+                margin: 1rem 0 2rem;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            & .heading {
+                font-size: 4.5rem;
+                margin: 1rem 0 2rem;
+                line-height: 60px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            & .heading {
+                font-size: 3.6rem;
+                margin: 0rem 0 2rem;
+            }
+
+            & p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {}
+
+        @media screen and (max-width: 360px) {
+            & .heading {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media screen and (max-width: 310px) {
+            & .heading {
+                font-size: 3rem;
+            }
+        }
+    }
 }

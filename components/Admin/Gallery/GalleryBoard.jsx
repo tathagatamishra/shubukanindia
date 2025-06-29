@@ -36,8 +36,8 @@ export default function GalleryBoard() {
   // get api call
   const fetchGalleries = async () => {
     try {
-      const { data } = await shubukan_api.get("/gallery");
-      setGalleries(data.items);
+      const response = await shubukan_api.get("/gallery");
+      setGalleries(response.data.images);
     } catch (error) {
       console.error("Full error:", error);
       setError(
@@ -269,16 +269,8 @@ export default function GalleryBoard() {
               </p>
             )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              style={
-                loading && uploadProgress > 0
-                  ? { padding: "0", width: "100%" }
-                  : {}
-              }
-            >
-              {loading && uploadProgress > 0 ? (
+            {loading && uploadProgress > 0 ? (
+              <div className="upload-progress">
                 <div className="progress-bar">
                   <p>Uploading: {uploadProgress}%</p>
 
@@ -287,10 +279,12 @@ export default function GalleryBoard() {
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
-              ) : (
-                "Submit"
-              )}
-            </button>
+              </div>
+            ) : (
+              <button type="submit" disabled={loading}>
+                Submit
+              </button>
+            )}
           </div>
         </form>
       </div>

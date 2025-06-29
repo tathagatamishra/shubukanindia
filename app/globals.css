@@ -57,6 +57,19 @@ body::-webkit-scrollbar-thumb {
   background-size: 250px 250px; */
 }
 
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border-color: #905043;
+  -webkit-box-shadow: 0 0 0px 1000px #efe9e5d4 inset;
+} */
+
 .notFound {
   filter: opacity(1);
   transform: scale(1);

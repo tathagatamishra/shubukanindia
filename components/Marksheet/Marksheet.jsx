@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import "./Marksheet.scss";
-import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";
-import pdfURL_prasanta from "../../Documents/Prasen Academy Marksheet.pdf";
-import pdfURL_smaa from "../../Documents/SMAA Marksheet.pdf";
-import pdfURL_fmaa from "../../Documents/Fudoshin Martial Arts Academy Marksheet.pdf";
-import pdfURL_udi from "../../Documents/Uema Dojo India Marksheet.pdf";
+// import pdfURL_nanak from "../../Documents/Marksheet nanak.pdf";
+// import pdfURL_prasanta from "../../Documents/Prasen Academy Marksheet.pdf";
+// import pdfURL_smaa from "../../Documents/SMAA Marksheet.pdf";
+// import pdfURL_fmaa from "../../Documents/Fudoshin Martial Arts Academy Marksheet.pdf";
+// import pdfURL_udi from "../../Documents/Uema Dojo India Marksheet.pdf";
 
 import PdfViewer from "../UIComponent/PdfViewer";
 

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import "./Footer.scss";
 import Image from "next/image";
 
@@ -10,11 +10,10 @@ export default function Footer() {
     router.push(page);
   };
 
-  function news(event) {
-    event.preventDefault();
-  }
-
-  return (
+  const pathname = usePathname();
+  const isAdminPage = pathname.startsWith("/admin");
+  
+  return !isAdminPage ? (
     <div className="Footer relative pt-[50px]">
       {/* <div className="footSub">
         <h1>Subscribe to our newsletter</h1>
@@ -29,15 +28,21 @@ export default function Footer() {
       <Image
         className="footHillLeft z-[0] h-auto absolute left-0"
         src="/footer-hill-l.png"
-        width={100}
-        height={100}
+        width={1920}
+        height={1920}
+        quality={100}
+        priority={true}
+        sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
         alt=""
       />
       <Image
         className="footHillRight z-[0] h-auto absolute right-0 scale-x-[-1]"
         src="/footer-hill-r.png"
-        width={100}
-        height={100}
+        width={1920}
+        height={1920}
+        quality={100}
+        priority={true}
+        sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
         alt=""
       />
 
@@ -102,36 +107,48 @@ export default function Footer() {
 
       <div className="footLogo">
         <Image
-          height={1080}
-          width={1080}
+          height={1920}
+          width={1920}
+          quality={100}
+          priority={true}
+          sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
           src="/assets/shubukanIndia-white.png"
           alt=""
           className="z-1 invert-[10%] grayscale-[40%] sepia-[40%]"
         />
         <Image
-          height={1080}
-          width={1080}
+          height={1920}
+          width={1920}
+          quality={100}
+          priority={true}
           src="/assets/shorinryu.svg"
           alt=""
           className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
         />
         <Image
-          height={1080}
-          width={1080}
+          height={1920}
+          width={1920}
+          quality={100}
+          priority={true}
           src="/assets/shubukan.svg"
           alt=""
           className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
         />
         <Image
-          height={1080}
-          width={1080}
+          height={1920}
+          width={1920}
+          quality={100}
+          priority={true}
           src="/assets/kobudo.svg"
           alt=""
           className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
         />
         <Image
-          height={1080}
-          width={1080}
+          height={1920}
+          width={1920}
+          quality={100}
+          priority={true}
+          sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
           src="/assets/Hozonkai-white.png"
           alt=""
           className="z-1 invert-[10%] grayscale-[40%] sepia-[40%]"
@@ -144,5 +161,5 @@ export default function Footer() {
         <p className="">© 2023 Shubukan India</p>
       </div>
     </div>
-  );
+  ) : null;
 }

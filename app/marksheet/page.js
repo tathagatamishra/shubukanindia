@@ -1,3 +1,5 @@
+import Marksheet from "@/components/Marksheet/Marksheet";
+
 export const metadata = {
   title: "Marksheet | Shubukan India",
   description: "View or verify belt examination results and progress records for students of Shubukan India.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Marksheet />
   )
 }

@@ -1,3 +1,5 @@
+import TAndC from "@/components/TAndC/TAndC";
+
 export const metadata = {
   title: "Terms and Conditions | Shubukan India",
   description: "Review the terms and conditions for using Shubukan India's website, services, and dojo participation.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <TAndC />
   )
 }

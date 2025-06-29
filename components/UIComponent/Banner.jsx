@@ -1,6 +1,7 @@
-"use strict";
+"use client";
 import React from "react";
 import "./Banner.scss";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Banner({
   bannerText1,
@@ -10,10 +11,14 @@ export default function Banner({
   linkUrl,
   linkText,
 }) {
+  const pathname = usePathname();
+  const isAdminPage = pathname.startsWith("/admin");
+
   // Default values if props aren't provided
   const text1 = bannerText1 || "The Registration is Open";
   const text2 = bannerText2 || "Fill the form with necessary details.";
-  const text3 = bannerText3 || "To check your email for your registration confirmation.";
+  const text3 =
+    bannerText3 || "To check your email for your registration confirmation.";
   const text4 = bannerText4 || "Register to Shubukan India.";
 
   // const text1 = bannerText1 || "To check your marksheet, Obtain your unique code from your instructor.";
@@ -34,12 +39,11 @@ export default function Banner({
     </>
   );
 
-  
-  return (
+  return !isAdminPage ? (
     <div className="banner">
       <div className="track">
         <div className="content">{fullMessage}</div>
       </div>
     </div>
-  );
+  ) : null;
 }

@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import "./Services.scss";
-import { NavLink } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export default function Services() {
+  const router = useRouter();
+  const navigate = (page) => {
+    router.push(page);
+  };
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -165,10 +169,14 @@ export default function Services() {
 
       <section className="connect">
         <div className="contactBtn">
-          <NavLink to="/contact">
+          <div to="/contact"
+          onClick={() =>
+            navigate("/contact")
+          }
+          >
             {/* <button>Tell us what's in your mind</button> */}
             <button>State your urge</button>
-          </NavLink>
+          </div>
         </div>
       </section>
     </div>
