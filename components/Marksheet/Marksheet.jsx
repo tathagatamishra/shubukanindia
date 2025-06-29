@@ -7,15 +7,14 @@ import "./Marksheet.scss";
 // import pdfURL_fmaa from "../../Documents/Fudoshin Martial Arts Academy Marksheet.pdf";
 // import pdfURL_udi from "../../Documents/Uema Dojo India Marksheet.pdf";
 
-import PdfViewer from "../UIComponent/PdfViewer";
+// import PdfViewer from "../UIComponent/PdfViewer";
 
 export default function Marksheet() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
-  }, []);
-
+  }, []);""
   const [uniqueCode, setUniqueCode] = useState("");
   const [URL, setURL] = useState("");
 
@@ -26,19 +25,19 @@ export default function Marksheet() {
 
   useEffect(() => {
     if (uniqueCode === "rmaa@2024") {
-      setURL(pdfURL_nanak);
+      setURL("");
     }
     if (uniqueCode === "pka@2024") {
-      setURL(pdfURL_prasanta);
+      setURL("");
     }
     if (uniqueCode === "smaa@2025") {
-      setURL(pdfURL_smaa);
+      setURL("");
     }
     if (uniqueCode === "fmaa@2025") {
-      setURL(pdfURL_fmaa);
+      setURL("");
     }
     if (uniqueCode === "udi@2025") {
-      setURL(pdfURL_udi);
+      setURL("");
     }
   }, [uniqueCode]);
 
@@ -75,7 +74,7 @@ export default function Marksheet() {
         />
       </section>
 
-      <PdfViewer pdfUrl={URL} />
+      {/* <PdfViewer pdfUrl={URL} /> */}
     </div>
   );
 }
