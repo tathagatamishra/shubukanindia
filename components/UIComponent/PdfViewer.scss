@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+
+.PDiv {
+    width: 100%;
+}
+
+.react-pdf__Page {
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px white;
+    
+    @media (max-width: 768px) {
+        border-radius: 10px;
+    }
+}
+
+
+canvas.react-pdf__Page__canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.react-pdf__message.react-pdf__message--no-data {
+    display: none;
+}
+
+.BtnDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button-54 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border: 2px solid #7b4033;
+    padding: 0.25em 0.5em;
+    box-shadow: 2px 2px 0px $---accent3;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-54:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+}
+
+@media (min-width: 768px) {
+    .button-54 {
+        padding: 0.25em 0.75em;
+    }
+}

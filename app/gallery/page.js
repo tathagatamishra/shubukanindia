@@ -12,7 +12,7 @@ export const metadata = {
 
 
 async function getGallery(params) {
-  const response = await axios.get("http://localhost:1234/gallery")
+  const response = await shubukan_api.get("/gallery")
   return response.data
 }
 
