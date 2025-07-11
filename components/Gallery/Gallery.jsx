@@ -4,17 +4,17 @@ import "./Gallery.scss";
 import Image from "next/image";
 import { shubukan_api } from "@/config";
 
-export default function Gallery() {
-  const [imageArray, setImageArray] = useState();
+export default function Gallery({imageArray}) {
+  // const [imageArray, setImageArray] = useState();
 
-  useEffect(() => {
-    async function getGallery() {
-      const response = await shubukan_api.get("/gallery");
-      setImageArray(response.data);
-    }
+  // useEffect(() => {
+  //   async function getGallery() {
+  //     const response = await shubukan_api.get("/gallery");
+  //     setImageArray(response.data);
+  //   }
 
-    getGallery();
-  }, []);
+  //   getGallery();
+  // }, []);
 
   return (
     <div className="Gallery">

@@ -1,5 +1,6 @@
 import Gallery from "@/components/Gallery/Gallery";
 import { shubukan_api } from "@/config";
+import { shuffleArray } from "@/utils/shuffle";
 
 export const metadata = {
   title: "Gallery | Shubukan India",
@@ -17,6 +18,7 @@ async function getGallery(params) {
 
 export default async function page() {
   const imageArray = await getGallery();
+  shuffleArray(imageArray);
 
-  return <Gallery />;
+  return <Gallery imageArray={imageArray} />;
 }
