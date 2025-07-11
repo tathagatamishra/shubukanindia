@@ -7,6 +7,7 @@ import MouseTrail from "@/components/UIComponent/MouseTrail";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/UIComponent/Banner";
+import { displayConsoleLogo } from "@/utils/console-logo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -80,7 +81,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // Only run in production and client-side
+  if (typeof window !== "undefined" && process.env.NODE_ENV === "production") {
+    displayConsoleLogo();
+  }
+
   const showNav = false;
+
   return (
     <html lang="en">
       <GoogleAnalytics />
