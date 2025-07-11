@@ -3,18 +3,24 @@ import React, { useEffect, useState } from "react";
 import "./Gallery.scss";
 import Image from "next/image";
 import { shubukan_api } from "@/config";
+import { shuffleArray } from "@/utils/shuffle";
 
-export default function Gallery({imageArray}) {
-  // const [imageArray, setImageArray] = useState();
+export default function Gallery() {
+  const [imageArray, setImageArray] = useState();
 
-  // useEffect(() => {
-  //   async function getGallery() {
-  //     const response = await shubukan_api.get("/gallery");
-  //     setImageArray(response.data);
-  //   }
+  useEffect(() => {
+    async function getGallery() {
+      const response = await shubukan_api.get("/gallery");
 
-  //   getGallery();
-  // }, []);
+      // const responseArray = response.data
+      shuffleArray(response.data);
+      // console.log(response.data);
+      
+      setImageArray(response.data);
+    }
+
+    getGallery();
+  }, []);
 
   return (
     <div className="Gallery">

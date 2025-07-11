@@ -20,5 +20,5 @@ export default async function page() {
   const imageArray = await getGallery();
   shuffleArray(imageArray);
 
-  return <Gallery imageArray={imageArray} />;
+  return <Gallery />;
 }
