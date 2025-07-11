@@ -4,6 +4,7 @@ import "./Gallery.scss";
 import Image from "next/image";
 
 export default function Gallery({imageArray}) {
+
   return (
     <div className="Gallery">
       <section className="Hero">
