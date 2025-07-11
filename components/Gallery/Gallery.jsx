@@ -2,8 +2,19 @@
 import React, { useEffect, useState } from "react";
 import "./Gallery.scss";
 import Image from "next/image";
+import { shubukan_api } from "@/config";
 
-export default function Gallery({imageArray}) {
+export default function Gallery() {
+  const [imageArray, setImageArray] = useState();
+
+  useEffect(() => {
+    async function getGallery() {
+      const response = await shubukan_api.get("/gallery");
+      setImageArray(response.data);
+    }
+
+    getGallery();
+  }, []);
 
   return (
     <div className="Gallery">
@@ -14,14 +25,18 @@ export default function Gallery({imageArray}) {
 
       <section className="align-image">
         <div>
-          {imageArray.images.map((image, index) => (
-            <div
-              className="image"
-              key={index}
-            >
-              <Image src={image.image} alt={image.title} width={1920} height={1920} priority={false} />
-            </div>
-          ))}
+          {imageArray &&
+            imageArray.images.map((image, index) => (
+              <div className="image" key={index}>
+                <Image
+                  src={image.image}
+                  alt={image.title}
+                  width={1920}
+                  height={1920}
+                  priority={false}
+                />
+              </div>
+            ))}
         </div>
       </section>
 
