@@ -13,12 +13,12 @@ export const metadata = {
 
 async function getGallery(params) {
   const response = await shubukan_api.get("/gallery");
+  shuffleArray(response.data);
   return response.data;
 }
 
 export default async function page() {
   const imageArray = await getGallery();
-  shuffleArray(imageArray);
 
-  return <Gallery />;
+  return <Gallery imageArray={imageArray} />;
 }

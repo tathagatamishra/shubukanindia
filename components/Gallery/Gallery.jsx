@@ -5,22 +5,18 @@ import Image from "next/image";
 import { shubukan_api } from "@/config";
 import { shuffleArray } from "@/utils/shuffle";
 
-export default function Gallery() {
-  const [imageArray, setImageArray] = useState();
+export default function Gallery({ imageArray }) {
+  // const [imageArray, setImageArray] = useState();
 
-  useEffect(() => {
-    async function getGallery() {
-      const response = await shubukan_api.get("/gallery");
+  // useEffect(() => {
+  //   async function getGallery() {
+  //     const response = await shubukan_api.get("/gallery");
+  //     shuffleArray(response.data);
+  //     setImageArray(response.data);
+  //   }
 
-      // const responseArray = response.data
-      shuffleArray(response.data);
-      // console.log(response.data);
-      
-      setImageArray(response.data);
-    }
-
-    getGallery();
-  }, []);
+  //   getGallery();
+  // }, []);
 
   return (
     <div className="Gallery">
@@ -31,7 +27,7 @@ export default function Gallery() {
 
       <section className="align-image">
         <div>
-          {imageArray &&
+          {imageArray.length !== 0 &&
             imageArray.images.map((image, index) => (
               <div className="image" key={index}>
                 <Image
@@ -40,45 +36,12 @@ export default function Gallery() {
                   width={1920}
                   height={1920}
                   priority={false}
+                  placeholder="blur"
                 />
               </div>
             ))}
         </div>
       </section>
-
-      {/* <section className="notAlign-image">
-        {tagsArray.map((tag, i) => (
-          <div className="align-image" key={i}>
-            <h1>{tagIcons[i]}</h1>
-            <div className="row">
-              {thumbArray
-                .filter((item) => item.tags.includes(tag))
-                .map((image, index) => (
-                  <div className="column" key={index}>
-                    <div
-                      className="image"
-                      onClick={() => {
-                        setSelectedTag(tag);
-                        setIsOpen(true);
-                        setPhotoIndex(index);
-                      }}
-                    >
-                      <LazyLoadImage
-                        className="img"
-                        alt={`Image ${index + 1}`}
-                        effect="blur"
-                        wrapperProps={{
-                          style: { transitionDelay: "0s" },
-                        }}
-                        src={image.imgItem}
-                      />
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        ))}
-      </section> */}
 
       <div className="line"></div>
     </div>
