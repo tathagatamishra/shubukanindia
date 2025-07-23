@@ -1,5 +1,6 @@
+"use strict"
 import React from "react";
-import "./Contributor.scss";
+// import "./Contributor.scss";
 
 export default function Contributor() {
   return (

@@ -1,6 +1,5 @@
 import Gallery from "@/components/Gallery/Gallery";
 import { shubukan_api } from "@/config";
-import { shuffleArray } from "@/utils/shuffle";
 
 export const metadata = {
   title: "Gallery | Shubukan India",
@@ -11,14 +10,31 @@ export const metadata = {
   },
 };
 
-async function getGallery(params) {
-  const response = await shubukan_api.get("/gallery");
-  shuffleArray(response.data);
-  return response.data;
+
+function shuffleArray(array) {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
+async function getGalleryImages() {
+  try {
+    const response = await shubukan_api.get("/gallery")
+    
+    const images = response.data.images
+    
+    return shuffleArray(images)
+  } catch (error) {
+    console.error('Error fetching gallery images:', error)
+    return []
+  }
 }
 
 export default async function page() {
-  const imageArray = await getGallery();
+  const randomizedImages = await getGalleryImages()
 
-  return <Gallery imageArray={imageArray} />;
+  return <Gallery images={randomizedImages} />;
 }
