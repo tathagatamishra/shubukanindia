@@ -1,3 +1,5 @@
+import Contributor from "@/components/Contributor/Contributor";
+
 export const metadata = {
   title: "Contributors | Shubukan India",
   description: "Meet the dedicated team and supporters who help maintain and grow the Shubukan India community and website.",
@@ -9,6 +11,6 @@ export const metadata = {
 
 export default function page() {
   return (
-    <div>page</div>
+    <Contributor />
   )
 }

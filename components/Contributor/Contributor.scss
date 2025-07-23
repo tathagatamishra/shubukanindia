@@ -1,5 +1,5 @@
 @import '../../styles/variables';
-@import '../../styles/_Fonts';
+@import '../../styles/Fonts';
 
 .Contributor {
     // border: 1px solid red;
@@ -50,14 +50,6 @@
             margin: 0;
             font-size: 1.5rem;
             font-family: 'Amarante', cursive;
-            // font-family: 'Andika', sans-serif;
-            // font-family: 'Bellefair', serif;
-            // font-family: 'Capriola', sans-serif;
-            // font-family: 'Flamenco', cursive;
-            // font-family: 'Fredericka the Great', cursive;
-            // font-family: 'GFS Neohellenic', sans-serif;
-            // font-family: 'Pompiere', cursive;
-            // font-family: 'Tenali Ramakrishna', sans-serif;
 
             &::selection {
                 color: $---selection-color;

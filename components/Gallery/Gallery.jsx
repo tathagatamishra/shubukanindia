@@ -5,7 +5,7 @@ import Image from "next/image";
 import { shubukan_api } from "@/config";
 import { shuffleArray } from "@/utils/shuffle";
 
-export default function Gallery({ imageArray }) {
+export default function Gallery({ images }) {
   // const [imageArray, setImageArray] = useState();
 
   // useEffect(() => {
@@ -27,8 +27,8 @@ export default function Gallery({ imageArray }) {
 
       <section className="align-image">
         <div>
-          {imageArray.length !== 0 &&
-            imageArray.images.map((image, index) => (
+          {images.length !== 0 &&
+            images.map((image, index) => (
               <div className="image" key={index}>
                 <Image
                   src={image.image}
@@ -36,7 +36,6 @@ export default function Gallery({ imageArray }) {
                   width={1920}
                   height={1920}
                   priority={false}
-                  placeholder="blur"
                 />
               </div>
             ))}

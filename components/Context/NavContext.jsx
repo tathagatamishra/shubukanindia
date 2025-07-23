@@ -1,3 +1,6 @@
+// Currently not in use
+// Was used in layout.js
+
 "use client";
 import { createContext, useContext, useState } from "react";
 

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
 
@@ -40,6 +39,13 @@ body::-webkit-scrollbar-thumb {
   background: black;
   border-top: solid 10px tomato;
   border-bottom: solid 10px tomato;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .webBody {
