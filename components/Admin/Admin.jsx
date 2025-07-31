@@ -136,7 +136,13 @@ export default function Admin() {
 
       <div className="dashBoard">
         {editBoard.map((board, i) => (
-          <div className="editBoard" key={i}>
+          <div
+            className="editBoard"
+            key={i}
+            onClick={() => {
+              setSelectedBoard(board.boardName);
+            }}
+          >
             <p
               className="boardHeading"
               onClick={() => {

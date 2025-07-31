@@ -4,6 +4,7 @@ import { shubukan_api } from "../../../config.js";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { IoWarningOutline } from "react-icons/io5";
+import { FiSave, FiX } from "react-icons/fi";
 
 import axios from "axios";
 
@@ -25,8 +26,24 @@ export default function GalleryBoard() {
   const [showDeleteBox, setShowDeleteBox] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
+  // Edit mode states
+  const [editMode, setEditMode] = useState(false);
+  const [editData, setEditData] = useState({
+    title: "",
+    description: "",
+    year: "",
+    category: "",
+    tags: "",
+  });
+  const [editImage, setEditImage] = useState(null);
+  const [editImagePreview, setEditImagePreview] = useState(null);
+  const [updating, setUpdating] = useState(false);
+
   useEffect(() => {
     setShowDeleteBox(false);
+    setEditMode(false);
+    setEditImage(null);
+    setEditImagePreview(null);
   }, [imgIndex]);
 
   useEffect(() => {
@@ -55,6 +72,14 @@ export default function GalleryBoard() {
     }));
   };
 
+  const handleEditInputChange = (e) => {
+    const { id, value } = e.target;
+    setEditData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -66,6 +91,128 @@ export default function GalleryBoard() {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleEditImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setEditImage(file);
+
+      // Create image preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const startEdit = (gallery) => {
+    setEditData({
+      title: gallery.title,
+      description: gallery.description,
+      year: gallery.year,
+      category: gallery.category,
+      tags: gallery.tags.join(", "),
+    });
+    setEditMode(true);
+    setEditImage(null);
+    setEditImagePreview(null);
+  };
+
+  const cancelEdit = () => {
+    setEditMode(false);
+    setEditData({
+      title: "",
+      description: "",
+      year: "",
+      category: "",
+      tags: "",
+    });
+    setEditImage(null);
+    setEditImagePreview(null);
+  };
+
+  const handleUpdate = async (galleryId) => {
+    setUpdating(true);
+    setError("");
+
+    try {
+      const token = localStorage.getItem("adminToken");
+
+      let imageUrl = null;
+
+      // If new image is selected, upload it to Cloudinary first
+      if (editImage) {
+        // Step 1: Get upload signature from backend
+        const { data: signatureData } = await shubukan_api.post(
+          "/gallery/signature",
+          { token: token }
+        );
+
+        // Step 2: Prepare data for Cloudinary
+        const cloudinaryData = new FormData();
+        cloudinaryData.append("file", editImage);
+        cloudinaryData.append("api_key", signatureData.apiKey);
+        cloudinaryData.append("timestamp", signatureData.timestamp);
+        cloudinaryData.append("signature", signatureData.signature);
+        cloudinaryData.append("folder", "Shubukan/Gallery");
+
+        // Step 3: Upload directly to Cloudinary
+        const cloudinaryResponse = await axios.post(
+          `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/image/upload`,
+          cloudinaryData
+        );
+
+        imageUrl = cloudinaryResponse.data.secure_url;
+      }
+
+      // Prepare update data
+      const updateData = {
+        token: token,
+        title: editData.title,
+        description: editData.description,
+        year: editData.year,
+        category: editData.category,
+        tags: editData.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .join(","),
+      };
+
+      // Add image URL if new image was uploaded
+      if (imageUrl) {
+        updateData.image = imageUrl;
+      }
+
+      console.log(updateData);
+
+      // Update gallery item
+      await shubukan_api.put(`/gallery/${galleryId}`, updateData);
+      
+      handleDelete(galleryId);
+
+      // Reset states and refresh galleries
+      setEditMode(false);
+      setEditData({
+        title: "",
+        description: "",
+        year: "",
+        category: "",
+        tags: "",
+      });
+      setEditImage(null);
+      setEditImagePreview(null);
+      fetchGalleries();
+    } catch (error) {
+      console.error("Update error:", error);
+      setError(
+        "Failed to update gallery item: " +
+          (error.response?.data?.message || error.message)
+      );
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -116,6 +263,7 @@ export default function GalleryBoard() {
 
       // Step 4: Send image URL and metadata to your backend
       const galleryData = {
+        // image url from cloudinary
         image: cloudinaryResponse.data.secure_url,
         title: formData.title,
         description: formData.description,
@@ -297,10 +445,16 @@ export default function GalleryBoard() {
             key={gallery._id}
             className="image"
             onClick={() => {
-              setImgIndex(index);
+              if (!editMode) {
+                setImgIndex(index);
+              }
             }}
           >
-            <img src={gallery.image} alt={gallery.title} />
+            <img
+              src={gallery.image}
+              alt={gallery.title}
+              className={`${imgIndex === index ? "w-[100px]" : "w-full"}`}
+            />
 
             {imgIndex === index &&
               (showDeleteBox ? (
@@ -330,6 +484,113 @@ export default function GalleryBoard() {
                     </button>
                   </div>
                 </div>
+              ) : editMode ? (
+                <div className="image-info edit-mode">
+                  {/* Image Upload Section */}
+                  <div className="edit-image-section">
+                    <label htmlFor="edit-image" className="info-label">
+                      Update Image (Optional)
+                    </label>
+                    <input
+                      type="file"
+                      id="edit-image"
+                      accept="image/*"
+                      onChange={handleEditImageChange}
+                      className="edit-image-input"
+                    />
+                    {editImagePreview && (
+                      <img
+                        src={editImagePreview}
+                        alt="Edit Preview"
+                        className="edit-image-preview"
+                      />
+                    )}
+                  </div>
+
+                  <div className="edit-field">
+                    <label htmlFor="edit-title" className="info-label">
+                      Title
+                    </label>
+                    <input
+                      type="text"
+                      id="title"
+                      value={editData.title}
+                      onChange={handleEditInputChange}
+                      className="edit-input"
+                    />
+                  </div>
+
+                  <div className="edit-field">
+                    <label htmlFor="edit-description" className="info-label">
+                      Description
+                    </label>
+                    <textarea
+                      id="description"
+                      value={editData.description}
+                      onChange={handleEditInputChange}
+                      className="edit-textarea"
+                    />
+                  </div>
+
+                  <div className="edit-field">
+                    <label htmlFor="edit-year" className="info-label">
+                      Year
+                    </label>
+                    <input
+                      type="text"
+                      id="year"
+                      value={editData.year}
+                      onChange={handleEditInputChange}
+                      className="edit-input"
+                    />
+                  </div>
+
+                  <div className="edit-field">
+                    <label htmlFor="edit-category" className="info-label">
+                      Category
+                    </label>
+                    <input
+                      type="text"
+                      id="category"
+                      value={editData.category}
+                      onChange={handleEditInputChange}
+                      className="edit-input"
+                    />
+                  </div>
+
+                  <div className="edit-field">
+                    <label htmlFor="edit-tags" className="info-label">
+                      Tags
+                    </label>
+                    <textarea
+                      id="tags"
+                      value={editData.tags}
+                      onChange={handleEditInputChange}
+                      className="edit-textarea"
+                      placeholder="tag1, tag2, tag3"
+                    />
+                  </div>
+
+                  <div className="btns">
+                    <button
+                      className="green"
+                      onClick={() => handleUpdate(gallery._id)}
+                      disabled={updating}
+                    >
+                      <FiSave />
+                      {updating ? "Saving..." : "Save"}
+                    </button>
+
+                    <button
+                      className="red"
+                      onClick={cancelEdit}
+                      disabled={updating}
+                    >
+                      <FiX />
+                      Cancel
+                    </button>
+                  </div>
+                </div>
               ) : (
                 <div className="image-info">
                   <p className="info-label">Title</p>
@@ -348,7 +609,10 @@ export default function GalleryBoard() {
                   <p className="info-text">{gallery.tags.join(", ")}</p>
 
                   <div className="btns">
-                    <button className="green">
+                    <button
+                      className="green"
+                      onClick={() => startEdit(gallery)}
+                    >
                       <FiEdit />
                     </button>
 
@@ -364,11 +628,11 @@ export default function GalleryBoard() {
                 </div>
               ))}
 
-            {deleting && imgIndex === index && (
+            {(deleting || updating) && imgIndex === index && (
               <div className="loading">
                 <br />
                 <br />
-                <br /> Deleting...
+                <br /> {deleting ? "Deleting..." : "Updating..."}
               </div>
             )}
           </div>

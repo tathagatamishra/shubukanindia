@@ -162,7 +162,7 @@ export default function Navbar() {
               height={1920}
               width={1920}
               quality={100}
-              sizes="(min-width: 1180px) 80px, 64px"
+              // sizes="(min-width: 1180px) 80px, 64px"
             />
             <Image
               className="logo2"
@@ -171,7 +171,7 @@ export default function Navbar() {
               height={1920}
               width={1920}
               quality={100}
-              sizes="(min-width: 1180px) 142px, 85px"
+              // sizes="(min-width: 1180px) 142px, 85px"
             />
           </>
         ) : (

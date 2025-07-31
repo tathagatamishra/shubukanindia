@@ -10,22 +10,10 @@ export const metadata = {
   },
 };
 
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
 async function getGalleryImages() {
   try {
     const response = await shubukan_api.get("/gallery", { cache: "no-store" });
-
-    const images = response.data.images;
-
-    return shuffleArray(images);
+    return response.data.images;
   } catch (error) {
     console.error("Error fetching gallery images:", error);
     return [];
@@ -33,7 +21,7 @@ async function getGalleryImages() {
 }
 
 export default async function page() {
-  const randomizedImages = await getGalleryImages();
+  const images = await getGalleryImages();
 
-  return <Gallery images={randomizedImages} />;
+  return <Gallery images={images} />;
 }

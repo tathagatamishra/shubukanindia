@@ -2,22 +2,21 @@
 import React, { useEffect, useState } from "react";
 import "./Gallery.scss";
 import Image from "next/image";
-import { shubukan_api } from "@/config";
-import { shuffleArray } from "@/utils/shuffle";
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+const customLoader = ({ src }) => {
+  return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJareAIcFCRfOFqLSBpBoRyrp5BWauRSW22G4LSivIc6opA-6-WTfBio1y5T6h4JZu8Ws&usqp=CAU"; // assumes src is already a full URL
+};
 
 export default function Gallery({ images }) {
-  // const [imageArray, setImageArray] = useState();
-
-  // useEffect(() => {
-  //   async function getGallery() {
-  //     const response = await shubukan_api.get("/gallery");
-  //     shuffleArray(response.data);
-  //     setImageArray(response.data);
-  //   }
-
-  //   getGallery();
-  // }, []);
-
   return (
     <div className="Gallery">
       <section className="Hero">
@@ -31,6 +30,8 @@ export default function Gallery({ images }) {
             images.map((image, index) => (
               <div className="image" key={index}>
                 <Image
+                  placeholder="blur"
+                  blurDataURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJareAIcFCRfOFqLSBpBoRyrp5BWauRSW22G4LSivIc6opA-6-WTfBio1y5T6h4JZu8Ws&usqp=CAU"
                   src={image.image}
                   alt={image.title}
                   width={1920}
