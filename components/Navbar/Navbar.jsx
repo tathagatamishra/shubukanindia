@@ -25,46 +25,74 @@ export default function Navbar() {
 
   const isAdminPage = pathname.startsWith("/admin");
 
+  const pageList = [
+    { path: "/history", label: "HISTORY" },
+    { path: "/shubukan-india", label: "SHUBUKAN INDIA" },
+    { path: "/shubukan-okinawa", label: "SHUBUKAN OKINAWA" },
+    { path: "/shubukan-world", label: "SHUBUKAN WORLD" },
+    {
+      path: "/shuri-karate-kobudo-hozonkai",
+      label: "SHURI KARATE KOBUDO HOZONKAI",
+    },
+    { path: "/lineage-and-dojokun", label: "LINEAGE & DOJO KUN" },
+    { path: "/karate-and-kobudo", label: "KARATE & KOBUDO" },
+    { path: "/registration", label: "REGISTRATION" },
+    { path: "/membership", label: "MEMBERSHIP" },
+    { path: "/gallery", label: "GALLERY" },
+    { path: "/blog", label: "BLOG" },
+    { path: "/contact", label: "CONTACT" },
+  ];
+
+  // ******************************
+  // ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+  // ******************************
+  // This whole thing is was made to show page tile on navbar in the place of logo
+  // Thats why in pathToTitle object there is "/blog": "Blog",
+  // If I keep the value empty then the title wont be shown at the place of logo
+  // ******************************
+  // ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+  // ******************************
+
+  // Create a mapping of paths to page titles
+  const pathToTitle = {
+    "/": "",
+    "/history": "",
+    "/shubukan-india": "",
+    "/shubukan-okinawa": "",
+    "/shubukan-world": "",
+    "/shuri-karate-kobudo-hozonkai": "",
+    "/lineage-and-dojokun": "",
+    "/karate-and-kobudo": "",
+    "/registration": "",
+    "/membership": "",
+    "/gallery": "",
+    "/blog": "",
+    "/about": "",
+    "/contact": "",
+  };
+  // const pathToTitle = {
+  //   '/': '',
+  //   '/history': 'History',
+  //   '/shubukan-india': 'Shubukan India',
+  //   '/shubukan-okinawa': 'Shubukan Okinawa',
+  //   '/shubukan-world': 'Shubukan World',
+  //   '/shuri-karate-kobudo-hozonkai': 'Shuri Karate Kobudo Hozonkai',
+  //   '/lineage-and-dojokun': 'Lineage and Dojo Kun',
+  //   '/karate-and-kobudo': 'Karate and Kobudo',
+  //   '/registration': 'Registration',
+  //   '/membership': 'Membership',
+  //   '/gallery': 'Gallery',
+  //   '/blog': 'Blog',
+  //   '/about': 'About',
+  //   '/contact': 'Contact'
+  // };
+
   useEffect(() => {
     // Clean up the pathname to handle potential trailing slashes
     const path =
       pathname.endsWith("/") && pathname !== "/"
         ? pathname.slice(0, -1)
         : pathname;
-
-    // Create a mapping of paths to page titles
-    const pathToTitle = {
-      "/": "",
-      "/history": "",
-      "/shubukan-india": "",
-      "/shubukan-okinawa": "",
-      "/shubukan-world": "",
-      "/shuri-karate-kobudo-hozonkai": "",
-      "/lineage-and-dojokun": "",
-      "/karate-and-kobudo": "",
-      "/registration": "",
-      "/membership": "",
-      "/gallery": "",
-      "/blog": "Blog",
-      "/about": "",
-      "/contact": "",
-    };
-    // const pathToTitle = {
-    //   '/': '',
-    //   '/history': 'History',
-    //   '/shubukan-india': 'Shubukan India',
-    //   '/shubukan-okinawa': 'Shubukan Okinawa',
-    //   '/shubukan-world': 'Shubukan World',
-    //   '/shuri-karate-kobudo-hozonkai': 'Shuri Karate Kobudo Hozonkai',
-    //   '/lineage-and-dojokun': 'Lineage and Dojo Kun',
-    //   '/karate-and-kobudo': 'Karate and Kobudo',
-    //   '/registration': 'Registration',
-    //   '/membership': 'Membership',
-    //   '/gallery': 'Gallery',
-    //   '/blog': 'Blog',
-    //   '/about': 'About',
-    //   '/contact': 'Contact'
-    // };
 
     // Set the current page based on the exact path match
     setCurrentPage(pathToTitle[path] || "");
@@ -162,7 +190,7 @@ export default function Navbar() {
               height={1920}
               width={1920}
               quality={100}
-              sizes="(min-width: 1180px) 80px, 64px"
+              // sizes="(min-width: 1180px) 80px, 64px"
             />
             <Image
               className="logo2"
@@ -171,7 +199,7 @@ export default function Navbar() {
               height={1920}
               width={1920}
               quality={100}
-              sizes="(min-width: 1180px) 142px, 85px"
+              // sizes="(min-width: 1180px) 142px, 85px"
             />
           </>
         ) : (
@@ -205,259 +233,28 @@ export default function Navbar() {
             <div className="menuBG" onClick={showMenu}></div>
             <div className="menuBox">
               <nav className="nav">
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/history");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/history"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/history"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>HISTORY</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/shubukan-india");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/shubukan-india"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/shubukan-india"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>SHUBUKAN INDIA</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/shubukan-okinawa");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/shubukan-okinawa"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/shubukan-okinawa"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>SHUBUKAN OKINAWA</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/shubukan-world");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/shubukan-world"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/shubukan-world"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>SHUBUKAN WORLD</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/shuri-karate-kobudo-hozonkai");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/shuri-karate-kobudo-hozonkai"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/shuri-karate-kobudo-hozonkai"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>SHURI KARATE KOBUDO HOZONKAI</p>
-                </div>
-
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/lineage-and-dojokun");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/lineage-and-dojokun"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/lineage-and-dojokun"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>LINEAGE & DOJO KUN</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/karate-and-kobudo");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/karate-and-kobudo"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/karate-and-kobudo"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>KARATE & KOBUDO</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/registration");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/registration"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/registration"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>REGISTRATION</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/membership");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/membership"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/membership"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>MEMBERSHIP</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/gallery");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/gallery"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/gallery"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>GALLERY</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/blog");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/blog"
-                        ? "!text-[#DE3614]"
-                        : "!text-[#242323]"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/blog" ? "!text-[#DE3614]" : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>BLOG</p>
-                </div>
-                <div
-                  onClick={() => {
-                    showMenu();
-                    navigate("/contact");
-                  }}
-                  style={{
-                    textShadow: `${
-                      pathname === "/contact"
-                        ? "0 0 15px #DE3614 !important"
-                        : "0 0 15px rgb(163, 150, 140)"
-                    }`,
-                  }}
-                  className={`opt ${
-                    pathname === "/contact"
-                      ? "!text-[#DE3614]"
-                      : "!text-[#242323]"
-                  }`}
-                  onMouseEnter={play2}
-                >
-                  <p>CONTACT</p>
-                </div>
+                {pageList.map(({ path, label }) => (
+                  <div
+                    key={path}
+                    onClick={() => {
+                      showMenu();
+                      navigate(path);
+                    }}
+                    style={{
+                      textShadow: `${
+                        pathname === path
+                          ? "0 0 15px #DE3614 !important"
+                          : "0 0 15px rgb(163, 150, 140)"
+                      }`,
+                    }}
+                    className={`opt ${
+                      pathname === path ? "!text-[#DE3614]" : "!text-[#242323]"
+                    }`}
+                    onMouseEnter={play2}
+                  >
+                    <p>{label}</p>
+                  </div>
+                ))}
               </nav>
             </div>
 
