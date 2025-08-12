@@ -101,6 +101,25 @@ export default function RootLayout({ children }) {
           <Footer />
           <Banner />
         </div>
+
+        <svg
+          className="wobble"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          height="0"
+          width="0"
+        >
+          <defs>
+            <filter id="wobble">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="1"
+                numOctaves="3"
+              />
+              <feDisplacementMap in="SourceGraphic" scale="100" />
+            </filter>
+          </defs>
+        </svg>
       </body>
     </html>
   );

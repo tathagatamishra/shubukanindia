@@ -30,7 +30,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   height: 5px;
   background: white;
 }
@@ -46,6 +46,35 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* .App::before {
+  z-index: 0;
+  position: absolute;
+  content: '';
+  inset: 0;
+  width: 200%;
+  height: 400px;
+  left: -100px;
+  top: -80px;
+  background: linear-gradient(0deg, transparent 5%, rgb(208, 131, 68) 100%);
+  background: firebrick;
+  filter: url(#wobble);
+} */
+
+@media screen and (max-width: 800px) {
+  .App::before {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .App::before {
+    height: 250px;
+  }
+}
+
+.wobble {
+  position: absolute;
 }
 
 .webBody {

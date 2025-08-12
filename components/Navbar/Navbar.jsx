@@ -230,7 +230,26 @@ export default function Navbar() {
 
         {isMenu && (
           <>
-            <div className="menuBG" onClick={showMenu}></div>
+            {/* <div className="menuBG"></div> */}
+            <div className="menuBG2"></div>
+            <div className="menuBG3" onClick={showMenu}></div>
+            <svg>
+              <filter id="grainy-noise">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.8"
+                  numOctaves="3"
+                  stitchTiles="stitch"
+                />
+                <feColorMatrix type="saturate" values="0" />
+                <feBlend
+                  in="SourceGraphic"
+                  in2="BackgroundImage"
+                  mode="multiply"
+                />
+              </filter>
+            </svg>
+
             <div className="menuBox">
               <nav className="nav">
                 {pageList.map(({ path, label }) => (
