@@ -39,6 +39,10 @@
         }
     }
 
+    & svg {
+        position: absolute;
+    }
+
     & #cloud-circle {
         z-index: -1;
         width: 200%;
@@ -55,6 +59,7 @@
     // border-bottom: solid red 1px;
 
     & .logo {
+        width: fit-content;
         height: 5rem;
         margin: 1rem 0 0 1rem;
 
@@ -108,6 +113,7 @@
         & .logo1 {
             height: 5rem;
             width: auto;
+            object-fit: contain;
             margin-left: .5rem;
             user-select: none;
             transition: 300ms;
@@ -135,6 +141,7 @@
         & .logo2 {
             height: 5rem;
             width: auto;
+            object-fit: contain;
             margin-left: .5rem;
             user-select: none;
             transition: 300ms;
@@ -162,7 +169,6 @@
 
     & .menu {
         // border: solid;
-
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -171,7 +177,7 @@
         transition: 200ms;
 
         & .menuStart {
-            z-index: 1;
+            z-index: 4;
             width: 8rem;
             // height: 1.6rem !important;
             margin: 1.5rem 0;
@@ -277,7 +283,7 @@
         }
 
         & .menuBox {
-            z-index: 0;
+            z-index: 3;
             position: fixed;
             height: 100vh;
             width: 540px;
@@ -285,7 +291,6 @@
             right: 0;
             // border: solid;
             overflow: hidden;
-
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
 
@@ -295,18 +300,25 @@
             align-items: flex-end;
             transition: 300ms;
 
+            background-image: url('/assets/menu-bg2.png');
+            background-repeat: repeat-y;
+            background-size: 100%;
+            background-position: 100% 340%;
+
+            filter: drop-shadow(1px 1px 2px rgba(28, 8, 0, 1)) drop-shadow(0 0 5px #70411ac1);
+
             animation-name: menuSlide;
             animation-duration: .2s;
             animation-timing-function: ease-in-out;
 
             @keyframes menuSlide {
                 from {
-                    filter: opacity(0%);
+                    // filter: opacity(0%);
                     transform: translateX(80%);
                 }
 
                 to {
-                    filter: opacity(60%);
+                    // filter: opacity(60%);
                     transform: translateX(0%);
                 }
             }
@@ -315,19 +327,9 @@
                 position: absolute;
                 content: '';
                 inset: 0;
-                // background: #fed;
-                // border-radius: 20px 0 0 20px;
-                // filter: url(#wobble);
-                // z-index: -1;
-                // border-top: 1px solid rgba(255, 255, 255, 0.42);
-                // border-left: 1px solid rgba(255, 255, 255, 0.42);
-                // box-shadow: 1.5px 2px 10px rgba(24, 10, 3, 0.696);
-                background-image: url('/assets/menu-bg.png');
-                background-repeat: repeat-y;
-                background-size: 100%;
-
-                filter: drop-shadow(1px 1px 2px rgba(28, 8, 0, 1)) drop-shadow(0 0 8px #a64b37c1);
-
+                background: #fed;
+                background: linear-gradient(90deg, transparent, #fed);
+                filter: url(#wobble);
                 transition: 300ms;
             }
 
@@ -344,6 +346,7 @@
                 // border: solid 1px;
                 width: 100%;
                 height: 100%;
+                max-height: 980px;
 
                 & .opt {
                     height: 100%;
@@ -421,6 +424,9 @@
 
             @media screen and (max-width: 420px) {
                 width: 320px;
+                filter: drop-shadow(1px 1px 2px rgba(28, 8, 0, 1)) drop-shadow(0 0 4px #70411ac1);
+
+                &::before {}
 
                 & .nav {
                     & .opt {
@@ -439,17 +445,11 @@
 
             @media screen and (max-width: 324px) {
                 width: 100%;
+                background-repeat: repeat;
+                background-size: 105%;
+                background-position: 110% 0%;
 
-                &::before {
-                    position: absolute;
-                    content: '';
-                    inset: 0;
-                    background-image: url('/assets/old-paper.png');
-                    background-repeat: repeat;
-                    background-size: 105%;
-                    background-position: 110% 0%;
-                    transition: 300ms;
-                }
+                &::before {}
 
                 & .nav {
                     align-items: center;
@@ -511,18 +511,43 @@
             // }
         }
 
-        & .menuBG {
-            // background: rgba(34, 34, 34, 0.384);
+        & .menuBG3 {
+            z-index: 2;
 
-            // background-color: #e5e5f7;
-            // opacity: 0.9;
-            // background-image: radial-gradient(#f77744 0.6px, #f7eee5 0.2px);
-            // background-size: 4px 4px;
+            background-color: rgba(255, 255, 255, 0);
+            opacity: .7;
 
+            overflow: hidden;
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+
+            animation-name: BGBlur;
+            animation-duration: .3s;
+            animation-timing-function: cubic-bezier(0.12, 0.08, 0.31, 0.97);
+
+            @keyframes BGBlur {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: .7;
+                }
+            }
+        }
+
+        & .menuBG2 {
+            z-index: 1;
 
             background-color: #f1e5d9;
-            opacity: 0.92;
-            background: radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent) 10px 10px, linear-gradient(#ebac93 0.8px, transparent 0.8px) 0 -0.4px, linear-gradient(90deg, #ebac93 0.8px, #f1e5d9 0.8px) -0.4px 0;
+            opacity: 0.7;
+            background: radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent) 10px 10px, linear-gradient(#ff8d60 0.8px, transparent 0.8px) 0 -0.4px, linear-gradient(90deg, #ff8d60 0.8px, #f1e5d9 0.8px) -0.4px 0;
             background-size: 20px 20px, 20px 20px, 10px 10px, 10px 10px;
 
             overflow: hidden;
@@ -533,8 +558,8 @@
             top: 0;
 
             animation-name: BGBlur;
-            animation-duration: .4s;
-            animation-timing-function: ease-in-out;
+            animation-duration: .3s;
+            animation-timing-function: cubic-bezier(0.12, 0.08, 0.31, 0.97);
 
             @keyframes BGBlur {
                 from {
@@ -542,7 +567,38 @@
                 }
 
                 to {
-                    opacity: 0.9;
+                    opacity: 0.7;
+                }
+            }
+        }
+
+        & .menuBG {
+            z-index: 0;
+
+            background-color: #f1e5d938;
+            opacity: .4;
+
+            overflow: hidden;
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            left: 0;
+            top: 0;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            animation-name: BGBlur;
+            animation-duration: .3s;
+            animation-timing-function: cubic-bezier(0.12, 0.08, 0.31, 0.97);
+            filter: url(#grainy-noise);
+            // filter: saturate(.5) contrast(1);
+
+            @keyframes BGBlur {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: .4;
                 }
             }
         }
