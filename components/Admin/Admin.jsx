@@ -20,10 +20,10 @@ export default function Admin() {
     shubukan_api
       .post(
         `/admin/validate`,
-        { token: token },
+        {},
         {
           headers: {
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       )

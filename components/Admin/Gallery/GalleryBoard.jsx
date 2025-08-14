@@ -148,7 +148,12 @@ export default function GalleryBoard() {
         // Step 1: Get upload signature from backend
         const { data: signatureData } = await shubukan_api.post(
           "/gallery/signature",
-          { token: token }
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         // Step 2: Prepare data for Cloudinary
@@ -189,9 +194,13 @@ export default function GalleryBoard() {
       console.log(updateData);
 
       // Update gallery item
-      await shubukan_api.put(`/gallery/${galleryId}`, updateData);
-      
-      handleDelete(galleryId);
+      await shubukan_api.put(`/gallery/${galleryId}`, updateData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // handleDelete(galleryId);
 
       // Reset states and refresh galleries
       setEditMode(false);
@@ -231,12 +240,16 @@ export default function GalleryBoard() {
       }
 
       const token = localStorage.getItem("adminToken");
-      console.log(token);
 
       // Step 1: Get upload signature from backend
       const { data: signatureData } = await shubukan_api.post(
         "/gallery/signature",
-        { token: token }
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       // Step 2: Prepare data for Cloudinary
@@ -276,7 +289,11 @@ export default function GalleryBoard() {
       };
 
       // Create a new endpoint in your backend to handle pre-uploaded images
-      await shubukan_api.post("/gallery", galleryData);
+      await shubukan_api.post("/gallery", galleryData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       // Reset form and states
       setFormData({
@@ -309,7 +326,9 @@ export default function GalleryBoard() {
       const token = localStorage.getItem("adminToken");
 
       await shubukan_api.delete(`/gallery/perma/${id}`, {
-        data: { token: token },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       setShowDeleteBox(false);

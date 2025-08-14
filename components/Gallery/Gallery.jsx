@@ -1,22 +1,52 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import "./Gallery.scss";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
+import axios from "axios";
+import { shubukan_api } from "@/config";
+import "./Gallery.scss";
+import { placeholderColors } from "@/utils/random-colors";
 
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
+export default function Gallery({ initialImages = [] }) {
+  const [images, setImages] = useState(initialImages);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadedImages, setLoadedImages] = useState(new Set());
 
-const customLoader = ({ src }) => {
-  return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJareAIcFCRfOFqLSBpBoRyrp5BWauRSW22G4LSivIc6opA-6-WTfBio1y5T6h4JZu8Ws&usqp=CAU"; // assumes src is already a full URL
-};
+  const observerRef = useRef();
 
-export default function Gallery({ images }) {
+  // Fetch images from backend
+  const fetchImages = useCallback(async () => {
+    if (loading || !hasMore) return;
+    setLoading(true);
+    try {
+      const res = await shubukan_api.get(`/gallery?page=${page}&limit=1`);
+      setImages((prev) => [...prev, ...res.data.images]);
+      setHasMore(page < res.data.totalPages);
+      setPage((prev) => prev + 1);
+    } catch (err) {
+      console.error("Error fetching images:", err);
+    }
+    setLoading(false);
+  }, [page, loading, hasMore]);
+
+  // Observe last element for infinite scroll
+  useEffect(() => {
+    if (observerRef.current) observerRef.current.disconnect();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchImages();
+        }
+      },
+      { threshold: 1.0 }
+    );
+    if (document.querySelector("#infinite-loader")) {
+      observer.observe(document.querySelector("#infinite-loader"));
+    }
+    observerRef.current = observer;
+  }, [fetchImages]);
+
   return (
     <div className="Gallery">
       <section className="Hero">
@@ -26,24 +56,53 @@ export default function Gallery({ images }) {
 
       <section className="align-image">
         <div>
-          {images.length !== 0 &&
-            images.map((image, index) => (
-              <div className="image" key={index}>
+          {images.map((image, index) => {
+            const isLoaded = loadedImages.has(image._id || index);
+            return (
+              <div
+                key={image._id || index}
+                className="image"
+                style={{
+                  backgroundColor: isLoaded
+                    ? "transparent"
+                    : placeholderColors[index % placeholderColors.length],
+                  aspectRatio: `${image.width} / ${image.height}`,
+                }}
+              >
                 <Image
-                  placeholder="blur"
-                  blurDataURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJareAIcFCRfOFqLSBpBoRyrp5BWauRSW22G4LSivIc6opA-6-WTfBio1y5T6h4JZu8Ws&usqp=CAU"
                   src={image.image}
                   alt={image.title}
-                  width={1920}
-                  height={1920}
-                  priority={false}
+                  width={image.width}
+                  height={image.height}
+                  className="object-cover transition-opacity duration-500"
+                  onLoad={() => {
+                    setLoadedImages((prev) => {
+                      const newSet = new Set(prev);
+                      newSet.add(image._id || index);
+                      return newSet;
+                    });
+                  }}
+                  style={{
+                    opacity: isLoaded ? 1 : 0,
+                    transition: "opacity 0.5s ease",
+                  }}
                 />
               </div>
-            ))}
+            );
+          })}
         </div>
       </section>
 
-      <div className="line"></div>
+      {loading && <div className="text-center py-4">Loading...</div>}
+
+      {hasMore && (
+        <div
+          id="infinite-loader"
+          className="h-10 flex justify-center items-center"
+        >
+          <span className="loader"></span>
+        </div>
+      )}
     </div>
   );
 }
