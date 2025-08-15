@@ -127,6 +127,7 @@ const MouseTrail = () => {
         pointerEvents: "none",
         zIndex: 90,
       }}
+      className="hidden sm:flex"
     />
   );
 };

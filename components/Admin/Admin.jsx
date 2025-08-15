@@ -8,6 +8,8 @@ import DojoBoard from "./Dojo/DojoBoard";
 import axios from "axios";
 import { shubukan_api } from "../../config";
 import RegBoard from "./Registration/RegBoard";
+import { IoIosArrowBack } from "react-icons/io";
+import { TbLogout2 } from "react-icons/tb";
 
 export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -92,35 +94,23 @@ export default function Admin() {
   }, []);
 
   const [selectedBoard, setSelectedBoard] = useState(null);
+  const [selectedComponent, setSelectedComponent] = useState(null);
   const editBoard = [
     { boardName: "Gallery", component: <GalleryBoard /> },
     { boardName: "Marksheet", component: <MarksheetBoard /> },
     { boardName: "Notice", component: <NoticeBoard /> },
     { boardName: "Registration", component: <RegBoard /> },
-    {
-      boardName: "Dojo",
-      component: (
-        <DojoBoard
-          token={token}
-          allDojo={allDojo}
-          onCreateDojo={createDojo}
-          onUpdateDojo={updateDojo}
-          onDeleteDojo={deleteDojo}
-        />
-      ),
-    },
+    { boardName: "Dojo", component: <DojoBoard /> },
   ];
 
   return isAdmin ? (
     <div className="AdminDashboard">
-      <div className="header" onClick={() => logout()}>
-        <p>Logout</p>
-      </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
         height="0"
         width="0"
+        className="wobble"
       >
         <defs>
           <filter id="wobble">
@@ -134,36 +124,47 @@ export default function Admin() {
         </defs>
       </svg>
 
-      <div className="dashBoard">
-        {editBoard.map((board, i) => (
-          <div
-            className="editBoard"
-            key={i}
-            onClick={() => {
-              setSelectedBoard(board.boardName);
-            }}
-          >
-            <p
-              className="boardHeading"
+      <div className="header">
+        <button
+          className="w-[26px] h-[26px] sm:w-fit sm:h-fit"
+          onClick={() => {
+            setSelectedBoard("Admin");
+            setSelectedComponent(null);
+          }}
+        >
+          <IoIosArrowBack />
+          <p className="hidden sm:flex">GO BACK</p>
+        </button>
+
+        <p>{selectedBoard}</p>
+        
+        <button
+          className="w-[26px] h-[26px] sm:w-fit sm:h-fit"
+          onClick={() => logout()}
+        >
+          <TbLogout2 />
+          <p className="hidden sm:flex">LOGOUT</p>
+        </button>
+      </div>
+
+      {selectedComponent ? (
+        <>{selectedComponent}</>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          {editBoard.map((board, index) => (
+            <div
+              key={index}
+              className="editBoard"
               onClick={() => {
-                setSelectedBoard(
-                  selectedBoard === board.boardName ? null : board.boardName
-                );
+                setSelectedBoard(board.boardName);
+                setSelectedComponent(board.component);
               }}
             >
-              {board.boardName}
-            </p>
-
-            {selectedBoard === board.boardName ? (
-              <div className="boardInput">{board.component}</div>
-            ) : (
-              <div className="boardPreview">
-                <p></p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              <p className="boardHeading">{board.boardName}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   ) : (
     <div className="AdminDashboard"></div>
