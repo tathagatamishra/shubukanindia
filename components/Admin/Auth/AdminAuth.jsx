@@ -86,11 +86,9 @@ export default function AdminAuth() {
           <div className="line2"></div>
         </div>
 
-        {userName && password && (
-          <button type="submit" onClick={(e) => adminLogin(e)}>
-            LOGIN
-          </button>
-        )}
+        <button type="submit" onClick={(e) => adminLogin(e)}>
+          LOGIN
+        </button>
       </form>
 
       <svg

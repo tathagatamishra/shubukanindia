@@ -5,6 +5,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { IoWarningOutline } from "react-icons/io5";
 import { FiSave, FiX } from "react-icons/fi";
+import { RxCross2 } from "react-icons/rx";
 
 import axios from "axios";
 
@@ -18,10 +19,14 @@ export default function GalleryBoard() {
     tags: "",
   });
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const [imgOverlay, setImgOverlay] = useState(false);
+
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState("");
+  const [imgOfIndex, setImgOfIndex] = useState(null);
   const [imgIndex, setImgIndex] = useState(null);
   const [showDeleteBox, setShowDeleteBox] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -346,7 +351,270 @@ export default function GalleryBoard() {
   };
 
   return (
-    <div className="gallery-board">
+    <div className={`gallery-board ${imgOverlay && "!overflow-y-hidden"}`}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        height="0"
+        width="0"
+        className="wobble"
+      >
+        <defs>
+          <filter id="wobble">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency=".06"
+              numOctaves="4"
+            />
+            <feDisplacementMap in="SourceGraphic" scale="6" />
+          </filter>
+        </defs>
+      </svg>
+
+      <div className="align-image">
+        {galleries.map((gallery, index) => (
+          <div
+            key={gallery._id}
+            className="image"
+            onClick={() => {
+              setImgOverlay(true);
+              setImgIndex(index);
+              setImgOfIndex(gallery);
+              // if (!editMode) {
+              //   setImgIndex(index);
+              // }
+            }}
+          >
+            <img
+              src={gallery.image}
+              alt={gallery.title}
+              // className={`${imgIndex === index ? "w-[100px]" : "w-full"}`}
+            />
+          </div>
+        ))}
+      </div>
+
+      {imgOverlay && (
+        <div className="imgOverlay">
+          <div className="imgPopup">
+            {/* {showDeleteBox ? (
+              <div className="image-info">
+                <p
+                  className="info-label"
+                  style={{ borderBottom: "none", marginBottom: "10px" }}
+                >
+                  Do you really want to delete?
+                </p>
+
+                <div className="btns">
+                  <button
+                    className="red"
+                    onClick={() => handleDelete(gallery._id)}
+                  >
+                    Yes
+                  </button>
+
+                  <button
+                    className="green"
+                    onClick={() => {
+                      setShowDeleteBox(false);
+                    }}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+            ) : editMode ? (
+              <div className="image-info edit-mode">
+                <div className="edit-image-section">
+                  <label htmlFor="edit-image" className="info-label">
+                    Update Image (Optional)
+                  </label>
+                  <input
+                    type="file"
+                    id="edit-image"
+                    accept="image/*"
+                    onChange={handleEditImageChange}
+                    className="edit-image-input"
+                  />
+                  {editImagePreview && (
+                    <img
+                      src={editImagePreview}
+                      alt="Edit Preview"
+                      className="edit-image-preview"
+                    />
+                  )}
+                </div>
+
+                <div className="edit-field">
+                  <label htmlFor="edit-title" className="info-label">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    id="title"
+                    value={editData.title}
+                    onChange={handleEditInputChange}
+                    className="edit-input"
+                  />
+                </div>
+
+                <div className="edit-field">
+                  <label htmlFor="edit-description" className="info-label">
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    value={editData.description}
+                    onChange={handleEditInputChange}
+                    className="edit-textarea"
+                  />
+                </div>
+
+                <div className="edit-field">
+                  <label htmlFor="edit-year" className="info-label">
+                    Year
+                  </label>
+                  <input
+                    type="text"
+                    id="year"
+                    value={editData.year}
+                    onChange={handleEditInputChange}
+                    className="edit-input"
+                  />
+                </div>
+
+                <div className="edit-field">
+                  <label htmlFor="edit-category" className="info-label">
+                    Category
+                  </label>
+                  <input
+                    type="text"
+                    id="category"
+                    value={editData.category}
+                    onChange={handleEditInputChange}
+                    className="edit-input"
+                  />
+                </div>
+
+                <div className="edit-field">
+                  <label htmlFor="edit-tags" className="info-label">
+                    Tags
+                  </label>
+                  <textarea
+                    id="tags"
+                    value={editData.tags}
+                    onChange={handleEditInputChange}
+                    className="edit-textarea"
+                    placeholder="tag1, tag2, tag3"
+                  />
+                </div>
+
+                <div className="btns">
+                  <button
+                    className="green"
+                    onClick={() => handleUpdate(gallery._id)}
+                    disabled={updating}
+                  >
+                    <FiSave />
+                    {updating ? "Saving..." : "Save"}
+                  </button>
+
+                  <button
+                    className="red"
+                    onClick={cancelEdit}
+                    disabled={updating}
+                  >
+                    <FiX />
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="image-info">
+                <p className="info-label">Title</p>
+                <p className="info-text">{imgOfIndex.title}</p>
+
+                <p className="info-label">Description</p>
+                <p className="info-text">{imgOfIndex.description}</p>
+
+                <p className="info-label">Year</p>
+                <p className="info-text">{imgOfIndex.year}</p>
+
+                <p className="info-label">Category</p>
+                <p className="info-text">{imgOfIndex.category}</p>
+
+                <p className="info-label">Tags</p>
+                <p className="info-text">{imgOfIndex.tags.join(", ")}</p>
+
+                <div className="btns">
+                  <button
+                    className="green"
+                    onClick={() => startEdit(imgOfIndex)}
+                  >
+                    <FiEdit />
+                  </button>
+
+                  <button
+                    className="red"
+                    onClick={() => {
+                      setShowDeleteBox(true);
+                    }}
+                  >
+                    <RiDeleteBin2Line />
+                  </button>
+                </div>
+              </div>
+            )} */}
+
+            {(deleting || updating) && (
+              <div className="loading">
+                <br />
+                <br />
+                <br /> {deleting ? "Deleting..." : "Updating..."}
+              </div>
+            )}
+
+            <div className="image-info">
+              <p className="info-label">Image</p>
+              <img src={imgOfIndex.image} />
+
+              <p className="info-label">Title</p>
+              <p className="info-text">{imgOfIndex.title}</p>
+
+              <p className="info-label">Description</p>
+              <p className="info-text">{imgOfIndex.description}</p>
+
+              <p className="info-label">Year</p>
+              <p className="info-text">{imgOfIndex.year}</p>
+
+              <p className="info-label">Category</p>
+              <p className="info-text">{imgOfIndex.category}</p>
+
+              <p className="info-label">Tags</p>
+              <p className="info-text">{imgOfIndex.tags.join(", ")}</p>
+            </div>
+
+            <div className="button-div">
+              <button>
+                <RiDeleteBin2Line />
+                <p>Delete</p>
+              </button>
+
+              <button>
+                <FiEdit />
+                <p>Edit</p>
+              </button>
+              
+              <button onClick={() => setImgOverlay(false)}>
+                <RxCross2 />
+                <p>Close</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="form-section">
         <p className="form-title">Add New Gallery Item</p>
 
@@ -454,208 +722,6 @@ export default function GalleryBoard() {
             )}
           </div>
         </form>
-      </div>
-
-      <div className="line"></div>
-
-      <div className="align-image">
-        {galleries.map((gallery, index) => (
-          <div
-            key={gallery._id}
-            className="image"
-            onClick={() => {
-              if (!editMode) {
-                setImgIndex(index);
-              }
-            }}
-          >
-            <img
-              src={gallery.image}
-              alt={gallery.title}
-              className={`${imgIndex === index ? "w-[100px]" : "w-full"}`}
-            />
-
-            {imgIndex === index &&
-              (showDeleteBox ? (
-                <div className="image-info">
-                  <p
-                    className="info-label"
-                    style={{ borderBottom: "none", marginBottom: "10px" }}
-                  >
-                    Do you really want to delete?
-                  </p>
-
-                  <div className="btns">
-                    <button
-                      className="red"
-                      onClick={() => handleDelete(gallery._id)}
-                    >
-                      Yes
-                    </button>
-
-                    <button
-                      className="green"
-                      onClick={() => {
-                        setShowDeleteBox(false);
-                      }}
-                    >
-                      No
-                    </button>
-                  </div>
-                </div>
-              ) : editMode ? (
-                <div className="image-info edit-mode">
-                  {/* Image Upload Section */}
-                  <div className="edit-image-section">
-                    <label htmlFor="edit-image" className="info-label">
-                      Update Image (Optional)
-                    </label>
-                    <input
-                      type="file"
-                      id="edit-image"
-                      accept="image/*"
-                      onChange={handleEditImageChange}
-                      className="edit-image-input"
-                    />
-                    {editImagePreview && (
-                      <img
-                        src={editImagePreview}
-                        alt="Edit Preview"
-                        className="edit-image-preview"
-                      />
-                    )}
-                  </div>
-
-                  <div className="edit-field">
-                    <label htmlFor="edit-title" className="info-label">
-                      Title
-                    </label>
-                    <input
-                      type="text"
-                      id="title"
-                      value={editData.title}
-                      onChange={handleEditInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-
-                  <div className="edit-field">
-                    <label htmlFor="edit-description" className="info-label">
-                      Description
-                    </label>
-                    <textarea
-                      id="description"
-                      value={editData.description}
-                      onChange={handleEditInputChange}
-                      className="edit-textarea"
-                    />
-                  </div>
-
-                  <div className="edit-field">
-                    <label htmlFor="edit-year" className="info-label">
-                      Year
-                    </label>
-                    <input
-                      type="text"
-                      id="year"
-                      value={editData.year}
-                      onChange={handleEditInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-
-                  <div className="edit-field">
-                    <label htmlFor="edit-category" className="info-label">
-                      Category
-                    </label>
-                    <input
-                      type="text"
-                      id="category"
-                      value={editData.category}
-                      onChange={handleEditInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-
-                  <div className="edit-field">
-                    <label htmlFor="edit-tags" className="info-label">
-                      Tags
-                    </label>
-                    <textarea
-                      id="tags"
-                      value={editData.tags}
-                      onChange={handleEditInputChange}
-                      className="edit-textarea"
-                      placeholder="tag1, tag2, tag3"
-                    />
-                  </div>
-
-                  <div className="btns">
-                    <button
-                      className="green"
-                      onClick={() => handleUpdate(gallery._id)}
-                      disabled={updating}
-                    >
-                      <FiSave />
-                      {updating ? "Saving..." : "Save"}
-                    </button>
-
-                    <button
-                      className="red"
-                      onClick={cancelEdit}
-                      disabled={updating}
-                    >
-                      <FiX />
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="image-info">
-                  <p className="info-label">Title</p>
-                  <p className="info-text">{gallery.title}</p>
-
-                  <p className="info-label">Description</p>
-                  <p className="info-text">{gallery.description}</p>
-
-                  <p className="info-label">Year</p>
-                  <p className="info-text">{gallery.year}</p>
-
-                  <p className="info-label">Category</p>
-                  <p className="info-text">{gallery.category}</p>
-
-                  <p className="info-label">Tags</p>
-                  <p className="info-text">{gallery.tags.join(", ")}</p>
-
-                  <div className="btns">
-                    <button
-                      className="green"
-                      onClick={() => startEdit(gallery)}
-                    >
-                      <FiEdit />
-                    </button>
-
-                    <button
-                      className="red"
-                      onClick={() => {
-                        setShowDeleteBox(true);
-                      }}
-                    >
-                      <RiDeleteBin2Line />
-                    </button>
-                  </div>
-                </div>
-              ))}
-
-            {(deleting || updating) && imgIndex === index && (
-              <div className="loading">
-                <br />
-                <br />
-                <br /> {deleting ? "Deleting..." : "Updating..."}
-              </div>
-            )}
-          </div>
-        ))}
       </div>
     </div>
   );
