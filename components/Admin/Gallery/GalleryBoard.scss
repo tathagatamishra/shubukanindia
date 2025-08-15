@@ -178,46 +178,46 @@
 
                 user-select: none;
             }
+        }
+    }
 
-            & .loading {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #ffffff50;
-                height: 100%;
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                backdrop-filter: blur(2px);
-                font-family: 'Geo';
-                color: $---accent1;
-                line-height: 20px;
-            }
+    & .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff50;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(2px);
+        font-family: 'Geo';
+        color: $---accent1;
+        line-height: 20px;
 
-            @keyframes spinner {
-                to {
-                    transform: rotate(360deg);
-                }
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
             }
+        }
 
-            & .loading::before {
-                content: "";
-                box-sizing: border-box;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 24px;
-                height: 24px;
-                margin-top: -12px;
-                margin-left: -12px;
-                border-radius: 50%;
-                border-top: 2px solid red;
-                border-right: 2px solid transparent;
-                animation: spinner 600ms linear infinite;
-            }
+        &::before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            margin-top: -12px;
+            margin-left: -12px;
+            border-radius: 50%;
+            border-top: 2px solid red;
+            border-right: 2px solid transparent;
+            animation: spinner 600ms linear infinite;
         }
     }
 
@@ -248,8 +248,6 @@
             width: 1000px;
             max-width: 100%;
             padding: 10px 10px;
-
-            border-radius: 8px;
             border-radius: 8px;
 
             position: relative;
@@ -284,7 +282,7 @@
                 width: 100%;
                 height: 100%;
                 // max-height: calc(100% - 48px);
-                overflow-y: scroll;
+                overflow-y: auto;
 
                 display: flex;
                 flex-direction: column;
@@ -301,12 +299,12 @@
                     border-bottom: solid 10px tomato;
                 }
 
-                & img {
+                & .info-img {
                     height: 30%;
                     margin: 0 0 10px 0;
                     width: 100%;
                     object-fit: contain;
-                    background: rgba(255, 238, 221, 0.5);
+                    background: #ffffff68;
                     border-radius: 8px;
                     border-top: 1px solid white;
                 }
@@ -326,7 +324,7 @@
                     padding: 10px;
                     font-size: 18px;
                     color: #403D3C;
-                    background: rgba(255, 238, 221, 0.5);
+                    background: #ffffff68;
                     border-radius: 8px;
                     border-top: 1px solid white;
 
@@ -337,136 +335,6 @@
                     // text-overflow: ellipsis;
                     // max-width: 100%;
                 }
-
-                // Edit mode styles
-                &.edit-mode {
-                    max-height: 400px;
-                    overflow-y: auto;
-
-                    & .edit-image-section {
-
-                        & .edit-image-input {
-                            font-size: 10px;
-                            padding: 4px;
-                            border: 1px solid #ddd;
-                            border-radius: 4px;
-                            margin-top: 4px;
-                            margin-bottom: 4px !important;
-                            width: 100%;
-                            font-family: 'Geo';
-                        }
-
-                        & .edit-image-preview {
-                            max-width: 100%;
-                            max-height: 80px;
-                            object-fit: contain;
-                            border-radius: 4px;
-                            border: 1px solid $---accent6;
-                            margin-top: 6px;
-                        }
-                    }
-
-                    & .edit-field {
-
-                        & .edit-input {
-                            width: 100%;
-                            padding: 4px 6px;
-                            border: 1px solid #ddd;
-                            border-radius: 4px;
-                            font-size: 11px;
-                            font-family: 'Geo';
-                            margin-top: 2px;
-                            margin-bottom: 2px !important;
-                            background: white;
-
-
-                            &:focus {
-                                outline: none;
-                                border-color: #4CAF50;
-                            }
-                        }
-
-                        & .edit-textarea {
-                            width: 100%;
-                            min-height: 40px;
-                            padding: 4px 6px;
-                            border: 1px solid #ddd;
-                            border-radius: 4px;
-                            font-size: 11px;
-                            font-family: 'Geo';
-                            margin-top: 2px;
-                            margin-bottom: -4px !important;
-                            background: white;
-                            resize: vertical;
-
-                            &:focus {
-                                outline: none;
-                                border-color: #4CAF50;
-                            }
-                        }
-                    }
-                }
-
-                & .btns {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-
-                    & button {
-                        height: 24px;
-                        width: 100%;
-                        margin: 0;
-                        padding: 0;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-family: 'Geo';
-                        font-size: 12px;
-                        gap: 4px;
-                        border: none;
-                        border-radius: 4px;
-                        cursor: pointer;
-                        transition: all 0.2s ease;
-
-                        &:disabled {
-                            opacity: 0.6;
-                            cursor: not-allowed;
-                        }
-
-                        & svg {
-                            height: 14px;
-                            width: 14px;
-                        }
-                    }
-
-                    & .green {
-                        background: rgb(233, 255, 233);
-                        color: green;
-
-                        &:hover:not(:disabled) {
-                            background: rgb(200, 255, 200);
-                        }
-
-                        & svg {
-                            color: green;
-                        }
-                    }
-
-                    & .red {
-                        background: rgb(255, 228, 228);
-                        color: red;
-
-                        &:hover:not(:disabled) {
-                            background: rgb(255, 200, 200);
-                        }
-
-                        & svg {
-                            color: red;
-                        }
-                    }
-                }
             }
 
             & .button-div {
@@ -475,36 +343,117 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+            }
 
-                & button {
+            & .del-popup {
+                z-index: 10;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100vw;
+                height: 100vh;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                background: #00000020;
+                backdrop-filter: blur(6px);
+
+                @media screen and (max-width: 480px) {
+                    padding: 10px;
+                }
+
+                & .del-modal {
                     height: fit-content;
-                    width: fit-content;
-                    padding: 4px 6px;
-                    border: 1px solid;
-                    border-radius: 10px;
+                    max-height: 100%;
+                    width: 80%;
+                    max-width: 800px;
+                    padding: 10px 10px;
+                    border-radius: 8px;
+
+                    position: relative;
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
+                    flex-direction: column;
+                    justify-content: center;
                     align-items: center;
-                    gap: 10px;
+                    gap: 20px;
+                    padding: 20px 20px;
 
-                    font-family: 'Geo';
-                    font-size: 22px;
-                    letter-spacing: 2px;
-                    transition: 200ms;
-
-                    &:hover {
-                        scale: 106%;
+                    &::before {
+                        background: #fed;
+                        position: absolute;
+                        content: '';
+                        inset: 0;
+                        border-radius: 5px;
+                        filter: url(#wobble);
+                        // transform: rotate(-1deg);
+                        z-index: -1;
+                        border-top: 1px solid rgba(255, 255, 255, 0.42);
+                        border-left: 1px solid rgba(255, 255, 255, 0.42);
+                        border-bottom: 1px solid rgba(119, 90, 90, 0.4);
+                        border-right: 1px solid rgba(119, 90, 90, 0.4);
+                        box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
+                        background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
+                        // filter: opacity(0.1);
+                        background-size: 100px;
+                        transition: 300ms;
                     }
 
-                    &:active {
-                        scale: 98%;
+                    & .warning {
+                        font-size: 60px;
+                        color: #ffd000;
+                        text-shadow: 1px 1px 1px black;
+                        -webkit-filter: drop-shadow(0 0 3px #000);
+                        filter: drop-shadow(0 0 3px #000);
+
+                        @media screen and (max-width: 480px) {
+                            font-size: 40px;
+                        }
                     }
 
-                    @media screen and (max-width: 480px) {
-                        font-size: 16px;
+                    & .info-label {
+                        text-align: center;
+                        font-size: 22px;
+                        color: #403D3C;
+                        padding-bottom: 2px;
+                        margin: 0;
+                        font-family: 'Geo';
                     }
                 }
+            }
+
+            // Edit mode styles
+            & .edit-mode {
+                width: 100%;
+                height: 100%;
+                // max-height: calc(100% - 48px);
+                overflow-y: auto;
+
+                display: flex;
+                flex-direction: column;
+
+                & .info-label {
+                    font-size: 18px;
+                    color: #403D3C;
+                    padding-bottom: 2px;
+                    margin: 0;
+                    font-family: 'Geo';
+                }
+
+                & .edit-image-preview {
+                    height: 30%;
+                    margin: 0 0 10px 0;
+                    width: 100%;
+                    object-fit: contain;
+                    background: #ffffff68;
+                    border-radius: 8px;
+                    border: 1px solid $---accent6 !important;
+                }
+
+                // input styles are in Admin.scss
             }
         }
     }
