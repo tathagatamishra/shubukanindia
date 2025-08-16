@@ -1517,6 +1517,14 @@
     font-style: normal;
     font-display: swap;
   }
+
+  @font-face {
+    font-family: 'Geo2';
+    src: url('/otf/Geo-vjz7.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
   
   @font-face {
     font-family: 'GrandParadisoRegular';
@@ -2190,6 +2198,7 @@
   $font-gardensans: 'GardenSans', sans-serif;
   $font-gebrush: 'Gebrush', sans-serif;
   $font-geishta: 'Geishta', sans-serif;
+  $font-geo: 'Geo2', sans-serif;
   $font-generalissimofreeforpersonaluseonly: 'GeneralissimoFREEFORPERSONALUSEONLY', sans-serif;
   $font-germanikapersonaluseregularwdev: 'GermanikaPersonalUseRegularWdev', sans-serif;
   $font-ghiyastrokes-1kv4: 'GhiyaStrokes-1Kv4', sans-serif;

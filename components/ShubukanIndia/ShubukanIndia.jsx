@@ -77,15 +77,15 @@ export default function ShubukanIndia() {
           </div>
         </div>
         <div className="images">
-          <img src="/thumbnail/sabyasachi2.jpg" alt="" />
-          <img src="/thumbnail/sabyasachi1.jpg" alt="" />
+          <img src="/dojo_instructors/sabyasachi2.jpg" alt="" />
+          <img src="/dojo_instructors/sabyasachi1.jpg" alt="" />
         </div>
       </section>
 
       <section className="Content">
         <p className="heading">Explication Of The Emblem</p>
         <p>
-          <img src="/assets/shubukan.png" alt="" />
+          <img src="https://res.cloudinary.com/daspiwjet/image/upload/v1755369663/shubukan_kjeaou.png" alt="" />
           {/* <div className="img"></div> */}
           Shubukan India lead by Sensei Sabyasachi Giri . Shubukan India logo is
           brain child of sensei Sabyasachi. There is a very nice idea behind
