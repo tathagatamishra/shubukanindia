@@ -7,6 +7,7 @@ import { IoWarningOutline } from "react-icons/io5";
 import { FiSave, FiX } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosWarning } from "react-icons/io";
+import { FiPlus } from "react-icons/fi";
 
 import axios from "axios";
 
@@ -31,7 +32,7 @@ export default function GalleryBoard() {
   const [imgIndex, setImgIndex] = useState(null);
   const [showDeleteBox, setShowDeleteBox] = useState(false);
   const [deleting, setDeleting] = useState(false);
-
+  const [openAddImage, setOpenAddImage] = useState(false);
   // Edit mode states
   const [editMode, setEditMode] = useState(false);
   const [editData, setEditData] = useState({
@@ -221,7 +222,7 @@ export default function GalleryBoard() {
       setEditImage(null);
       setEditImagePreview(null);
       // setImgInfo(true);
-      setImgOverlay(false)
+      setImgOverlay(false);
       fetchGalleries();
     } catch (error) {
       console.error("Update error:", error);
@@ -399,8 +400,8 @@ export default function GalleryBoard() {
       </div>
 
       {imgOverlay && (
-        <div className="imgOverlay">
-          <div className="imgPopup">
+        <div className="popOverlay">
+          <div className="popupModal">
             {/* image info */}
             {imgInfo && (
               <div className="image-info">
@@ -470,7 +471,7 @@ export default function GalleryBoard() {
                   <img
                     src={editImagePreview}
                     alt="Edit Preview"
-                    className="edit-image-preview"
+                    className="image-preview"
                   />
                 )}
 
@@ -600,113 +601,142 @@ export default function GalleryBoard() {
         </div>
       )}
 
-      <div className="form-section">
-        <p className="form-title">Add New Gallery Item</p>
+      {openAddImage && (
+        <div className="popOverlay">
+          <form className="popupModal" onSubmit={handleSubmit}>
+            <div className="edit-mode">
+              <label className="info-label" htmlFor="image">
+                Image
+              </label>
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                required
+              />
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="image">Image</label>
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={handleImageChange}
-              required
-            />
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="image-preview"
+                />
+              )}
 
-            {imagePreview && (
-              <img src={imagePreview} alt="Preview" className="image-preview" />
-            )}
-          </div>
+              <label className="info-label" htmlFor="title">
+                Title
+              </label>
+              <input
+                type="text"
+                id="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+              />
 
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+              <label className="info-label" htmlFor="description">
+                Description
+              </label>
+              <textarea
+                id="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+              />
 
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+              <label className="info-label" htmlFor="category">
+                Category
+              </label>
+              <input
+                type="text"
+                id="category"
+                value={formData.category}
+                onChange={handleInputChange}
+                required
+              />
 
-          <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <input
-              type="text"
-              id="category"
-              value={formData.category}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+              <label className="info-label" htmlFor="year">
+                Year
+              </label>
+              <input
+                type="text"
+                id="year"
+                value={formData.year}
+                onChange={handleInputChange}
+                required
+              />
 
-          <div className="form-group">
-            <label htmlFor="year">Year</label>
-            <input
-              type="text"
-              id="year"
-              value={formData.year}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+              <label className="info-label" htmlFor="tags">
+                Tags (comma-separated)
+              </label>
+              <textarea
+                type="text"
+                id="tags"
+                value={formData.tags}
+                onChange={handleInputChange}
+                placeholder="tag1, tag2, tag3"
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="tags">Tags (comma-separated)</label>
-            <textarea
-              type="text"
-              id="tags"
-              value={formData.tags}
-              onChange={handleInputChange}
-              placeholder="tag1, tag2, tag3"
-              required
-            />
-          </div>
+            <div
+              className="bottom-group"
+              style={
+                error
+                  ? { justifyContent: "space-between" }
+                  : { justifyContent: "flex-end" }
+              }
+            >
+              {error && (
+                <p className="error-message">
+                  <IoWarningOutline />
+                  {error}
+                </p>
+              )}
 
-          <div
-            className="form-group"
-            style={
-              error
-                ? { justifyContent: "space-between" }
-                : { justifyContent: "flex-end" }
-            }
-          >
-            {error && (
-              <p className="error-message">
-                <IoWarningOutline />
-                {error}
-              </p>
-            )}
+              {loading && uploadProgress > 0 ? (
+                <div className="upload-progress">
+                  <div className="progress-bar">
+                    <p>Uploading: {uploadProgress}%</p>
 
-            {loading && uploadProgress > 0 ? (
-              <div className="upload-progress">
-                <div className="progress-bar">
-                  <p>Uploading: {uploadProgress}%</p>
-
-                  <div
-                    className="progress-fill"
-                    style={{ width: `${uploadProgress}%` }}
-                  ></div>
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${uploadProgress}%` }}
+                    ></div>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <button type="submit" disabled={loading}>
-                Submit
-              </button>
-            )}
-          </div>
-        </form>
+              ) : (
+                <div className="w-full flex justify-end gap-[26px]">
+                  <button
+                    disabled={loading}
+                    className="bg-[#edbdb4]"
+                    onClick={() => setOpenAddImage(false)}
+                  >
+                    <FiX />
+                    Close
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-[#c6edb4]"
+                  >
+                    <FiSave />
+                    Submit
+                  </button>
+                </div>
+              )}
+            </div>
+          </form>
+        </div>
+      )}
+
+      <div className="add-image">
+        <button onClick={() => setOpenAddImage(true)}>
+          <FiPlus />
+          Add a new image
+        </button>
       </div>
     </div>
   );
