@@ -1,21 +1,8 @@
 @import '../../../styles/variables';
 @import '../../../styles/Fonts.scss';
 
-
 .gallery-board {
     height: 100%;
-
-    // .align-image
-    // └── .image
-    //     │── img
-    //     │── .loading
-    //     └── .image-info
-    //         │── .info-box
-    //         │   │── .info-label
-    //         │   └── .info-text
-    //         └── .btns
-    //             │── .edit
-    //             └── .delete
 
     & .wobble {
         position: absolute;

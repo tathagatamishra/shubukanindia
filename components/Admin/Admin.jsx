@@ -97,10 +97,10 @@ export default function Admin() {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const editBoard = [
     { boardName: "Gallery", component: <GalleryBoard /> },
+    { boardName: "Dojo", component: <DojoBoard /> },
     { boardName: "Marksheet", component: <MarksheetBoard /> },
     { boardName: "Notice", component: <NoticeBoard /> },
     { boardName: "Registration", component: <RegBoard /> },
-    { boardName: "Dojo", component: <DojoBoard /> },
   ];
 
   return isAdmin ? (

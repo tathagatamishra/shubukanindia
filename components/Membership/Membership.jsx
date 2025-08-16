@@ -120,27 +120,6 @@ export default function Membership() {
         ],
       ],
     },
-    // {
-    //   dojoName: "Prasen Karate Academy",
-    //   instructor: ["Prasanta Dalui"],
-    //   image: ["/dojo_instructors/prasanta_dolui.jpg"],
-    //   contact: [
-    //     [
-    //       ["Phone", "9007065973"],
-    //       ["Address", "Bauria chaukashi 2 no colony, Howrah"],
-    //     ],
-    //   ],
-    //   brunch: [
-    //     [
-    //       {
-    //         mainLocation: "Howrah",
-    //         brunchAddress: [
-    //           "West Burikhali, Bauria, Howrah, West Bengal, 711310",
-    //         ],
-    //       },
-    //     ],
-    //   ],
-    // },
     {
       dojoName: "Karate Self Defense Academy",
       instructor: ["Raj Chatterjee"],

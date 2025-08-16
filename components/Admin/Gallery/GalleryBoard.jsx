@@ -601,6 +601,7 @@ export default function GalleryBoard() {
         </div>
       )}
 
+      {/* add new image */}
       {openAddImage && (
         <div className="popOverlay">
           <form className="popupModal" onSubmit={handleSubmit}>

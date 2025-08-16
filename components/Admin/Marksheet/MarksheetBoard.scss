@@ -1,0 +1,149 @@
+// components/Marksheet/MarksheetBoard.scss
+@import '../../../styles/variables';
+@import '../../../styles/Fonts.scss';
+
+.marksheet-board {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    .filter {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      select, input, button {
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-family: 'Geo';
+      }
+    }
+
+    .add-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      background: #c6edb4;
+      cursor: pointer;
+      font-family: 'Geo';
+    }
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b60;
+    font-family: 'Geo';
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fff6e8;
+      border: 1px solid #e7d3bd;
+
+      .meta {
+        .title { font-weight: 600; }
+        .sub { opacity: .8; font-size: 14px; }
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        a.download, button {
+          padding: 8px 10px;
+          border-radius: 8px;
+          border: 1px solid #bbb;
+          background: #eee;
+          font-family: 'Geo';
+        }
+
+        .danger {
+          background: #edbdb4;
+        }
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed; inset: 0;
+    background: #00000040; backdrop-filter: blur(4px);
+    display: grid; place-items: center; padding: 20px;
+    z-index: 50;
+
+    .modal {
+      width: 100%;
+      max-width: 720px;
+      background: #fffaf2;
+      border: 1px solid #e7d3bd;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 10px;
+
+      h3 { margin: 0 0 8px 0; }
+
+      label { font-size: 14px; opacity: .85; }
+
+      input, select {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #d9d9d9;
+      }
+
+      .progress {
+        position: relative;
+        width: 100%;
+        background: #eee;
+        border-radius: 8px;
+        overflow: hidden;
+
+        .bar {
+          height: 10px; background: #4CAF50;
+          transition: width .3s ease;
+        }
+        p { margin: 6px 0 0 0; font-size: 13px; color: #2e7d32; }
+      }
+
+      .rowbtn {
+        margin-top: 8px;
+        display: flex; justify-content: flex-end; gap: 12px;
+
+        .secondary { background: #edbdb4; }
+        .primary { background: #c6edb4; }
+        button {
+          padding: 10px 14px; border-radius: 8px; border: 1px solid #bbb;
+          display: inline-flex; align-items: center; gap: 8px;
+        }
+      }
+    }
+  }
+
+  .busy {
+    position: fixed; inset: 0;
+    display: grid; place-items: center;
+    color: #333; font-family: 'Geo';
+    pointer-events: none;
+  }
+}
