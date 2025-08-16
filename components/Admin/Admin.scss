@@ -64,7 +64,7 @@
   & input,
   textarea {
     width: 100%;
-    height: fit-content;
+    min-height: fit-content;
     // min-height: 24px;
 
     margin: 4px 0 10px 0;
