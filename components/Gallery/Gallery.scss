@@ -38,7 +38,6 @@
         }
     }
 
-
     & .Hero {
         width: 100%;
         height: fit-content;
@@ -123,37 +122,16 @@
         }
     }
 
+    // Original column-based layout (fallback)
     & .align-image {
-        // width: 100%;
-        // height: 40rem;
         margin: 4rem 0;
-        // border: solid #A69485;
-
         column-count: 4;
         gap: 1rem;
-
-        // & h1 {
-        //     width: 100%;
-        //     // height: 1px;
-        //     margin: 0 0 2.5rem;
-
-        //     font-family: 'Tenali Ramakrishna', sans-serif;
-
-        //     // border-bottom: solid 2px ;
-        //     color: rgba(125, 103, 97, 0.808);
-        //     background: linear-gradient(-90deg, transparent 0%, rgba(255, 128, 0, 0.514) 100%);
-        //     // transform: translate(10px, 10px);
-
-        //     &::selection {
-        //         color: $---selection-color;
-        //         background: $---selection-bg;
-        //     }
-        // }
+        width: 100%;
 
         & .image {
-            width: fit-content;
+            width: 100%;
             margin-bottom: 1rem;
-
             display: block;
             overflow: hidden;
             box-shadow: 0 0 10px #ebe1d6df;
@@ -161,18 +139,16 @@
             transition: 300ms;
             border-top: solid 1.5px transparent;
             border-left: solid 1.5px transparent;
-            transition: 300ms;
+            break-inside: avoid;
 
             & .img {
                 height: auto;
                 width: 100%;
                 border-radius: 8px;
                 filter: sepia(30%) grayscale(30%);
-
                 display: block;
                 background-size: cover;
                 transition: 300ms;
-
                 user-select: none;
             }
 
@@ -186,32 +162,85 @@
                     transform: scale(1.1);
                 }
             }
-
         }
 
         @media screen and (max-width: 810px) {
             column-count: 3;
-            --webkit-column-count: 3;
-            --moz-column-count: 3;
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
         }
 
         @media screen and (max-width: 500px) {
             column-count: 3;
-            --webkit-column-count: 3;
-            --moz-column-count: 3;
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
         }
 
         @media screen and (max-width: 400px) {
             margin: 2rem 0;
-            // column-count: 1;
-            // --webkit-column-count: 1;
-            // --moz-column-count: 1;
         }
 
         @media screen and (max-width: 330px) {
             column-count: 2;
-            --webkit-column-count: 2;
-            --moz-column-count: 2;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+        }
+    }
+
+    // New masonry layout
+    & .align-image.masonry {
+        margin: 4rem 0;
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        column-count: unset;
+
+        .masonry-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .image {
+            width: 100%;
+            margin-bottom: 1rem;
+            display: block;
+            overflow: hidden;
+            box-shadow: 0 0 10px #ebe1d6df;
+            border-radius: 8px;
+            border-top: solid 1.5px transparent;
+            border-left: solid 1.5px transparent;
+            // Specific transition properties
+            transition: all 300ms ease-in-out;
+            transition-property: box-shadow, border-radius, border-top, border-left;
+
+            & .img {
+                height: auto;
+                width: 100%;
+                border-radius: 8px;
+                filter: sepia(30%) grayscale(30%);
+                display: block;
+                background-size: cover;
+                user-select: none;
+                // Specific transform transition
+                transition: transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease;
+            }
+
+            &:hover {
+                border-radius: 2px;
+                box-shadow: 5px 5px 0px #F2E9E9;
+                border-top: solid 1.5px #403D3C;
+                border-left: solid 1.5px #403D3C;
+
+                & .img {
+                    transform: scale(1.1);
+                    filter: sepia(0%) grayscale(0%);
+                }
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            margin: 2rem 0;
         }
     }
 }

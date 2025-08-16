@@ -71,7 +71,7 @@
         justify-content: center;
         align-items: center;
         backdrop-filter: blur(2px);
-        font-family: 'Geo';
+        font-family: $font-geo;
         color: $---accent1;
         line-height: 20px;
 
@@ -179,7 +179,7 @@
                     color: #403D3C;
                     padding-bottom: 2px;
                     margin: 0;
-                    font-family: 'Geo';
+                    font-family: $font-geo;
                 }
 
                 & .info-text {
@@ -285,7 +285,7 @@
                         color: #403D3C;
                         padding-bottom: 2px;
                         margin: 0;
-                        font-family: 'Geo';
+                        font-family: $font-geo;
                     }
                 }
             }
@@ -305,7 +305,7 @@
                     color: #403D3C;
                     padding-bottom: 2px;
                     margin: 0;
-                    font-family: 'Geo';
+                    font-family: $font-geo;
                 }
 
                 & .image-preview {
@@ -361,7 +361,7 @@
 
         & .error-message {
             margin: 4px 0 20px 0;
-            font-family: 'Geo';
+            font-family: $font-geo;
             color: $---accent1;
             font-size: 16px;
             display: flex;
@@ -404,7 +404,7 @@
                 margin: 0;
                 font-size: 14px;
                 color: green;
-                font-family: 'Geo';
+                font-family: $font-geo;
 
             }
         }
@@ -434,7 +434,7 @@
                 margin: 0;
                 font-size: 14px;
                 color: black;
-                font-family: 'Geo';
+                font-family: $font-geo;
             }
         }
     }

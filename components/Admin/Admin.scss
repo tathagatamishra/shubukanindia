@@ -43,7 +43,7 @@
     align-items: center;
     gap: 10px;
 
-    font-family: 'Geo';
+    font-family: $font-geo;
     font-size: 22px;
     letter-spacing: 2px;
     transition: 200ms;
@@ -155,7 +155,7 @@
     align-items: center;
     gap: 20px;
 
-    font-family: 'Geo';
+    font-family: $font-geo;
     transition: 300ms;
 
     &::before {
@@ -179,7 +179,7 @@
     }
 
     & p {
-      font-family: 'Geo';
+      font-family: $font-geo;
       font-size: 22px;
       letter-spacing: 2px;
       transition: 200ms;
@@ -224,7 +224,7 @@
       letter-spacing: 1px;
       font-size: 20px;
       cursor: pointer;
-      font-family: 'Geo';
+      font-family: $font-geo;
     }
   }
 }

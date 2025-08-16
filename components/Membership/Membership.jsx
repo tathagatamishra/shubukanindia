@@ -36,7 +36,7 @@ export default function Membership() {
       dojoName: "Shorin Ryu Shubukan Uema dojo India",
       dojoType: "Honbu Dojo",
       instructor: ["Sensei Sabyasachi Giri"],
-      image: ["/thumbnail/sabyasachi1.jpg"],
+      image: ["/dojo_instructors/sabyasachi1.jpg"],
       contact: [
         [
           ["Phone", "9851852499"],

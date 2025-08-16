@@ -60,7 +60,7 @@ export default function GalleryBoard() {
   // get api call
   const fetchGalleries = async () => {
     try {
-      const response = await shubukan_api.get("/gallery");
+      const response = await shubukan_api.get("/gallery?limit=1000");
       setGalleries(response.data.images);
     } catch (error) {
       console.error("Full error:", error);

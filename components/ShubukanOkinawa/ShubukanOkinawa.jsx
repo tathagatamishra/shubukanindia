@@ -36,21 +36,23 @@ export default function ShubukanOkinawa() {
         </p>
 
         <div className="family">
-          <div className="child">
+          <div className="box">
             <img src="./assets/Frame 3.png" alt="" />
             <p>
               Sensei Uema Yasuhiro <br /> (10th Dan) <br /> ( DOB- 15 August
               1945 <br /> DOD- 2 January 2025 )
             </p>
           </div>
-          <div className="parent">
+
+          <div className="box">
             <img src="./assets/Frame 2.png" alt="" />
             <p>
               Sensei Uema Joki <br /> (10th Dan) <br /> ( DOB- 13 June 1920{" "}
               <br /> DOD- 20 July 2011 )
             </p>
           </div>
-          <div className="child">
+
+          <div className="box">
             <img src="./assets/Frame 1.png" alt="" />
             <p>
               Sensei Uema Takeshi <br /> (7th Dan) <br /> ( DOB- 11 February

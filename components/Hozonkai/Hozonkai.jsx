@@ -16,7 +16,7 @@ export default function Hozonkai() {
     <div className="Hozonkai">
       <section className="Hero">
         <div className="img-div">
-          <img src="/assets/ShuriKarateKobudoHozonkai.png" alt="" />
+          <img src="https://res.cloudinary.com/daspiwjet/image/upload/v1755369906/ShuriKarateKobudoHozonkai_az6i1j.png" alt="" />
         </div>
 
         <p className="heading">Shuri Karate Kobudo Hozonkai</p>
