@@ -122,76 +122,10 @@
         }
     }
 
-    // Original column-based layout (fallback)
-    & .align-image {
-        margin: 4rem 0;
-        column-count: 4;
-        gap: 1rem;
-        width: 100%;
-
-        & .image {
-            width: 100%;
-            margin-bottom: 1rem;
-            display: block;
-            overflow: hidden;
-            box-shadow: 0 0 10px #ebe1d6df;
-            border-radius: 8px;
-            transition: 300ms;
-            border-top: solid 1.5px transparent;
-            border-left: solid 1.5px transparent;
-            break-inside: avoid;
-
-            & .img {
-                height: auto;
-                width: 100%;
-                border-radius: 8px;
-                filter: sepia(30%) grayscale(30%);
-                display: block;
-                background-size: cover;
-                transition: 300ms;
-                user-select: none;
-            }
-
-            &:hover {
-                border-radius: 2px;
-                box-shadow: 5px 5px 0px #F2E9E9;
-                border-top: solid 1.5px #403D3C;
-                border-left: solid 1.5px #403D3C;
-
-                & .img {
-                    transform: scale(1.1);
-                }
-            }
-        }
-
-        @media screen and (max-width: 810px) {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-        }
-
-        @media screen and (max-width: 500px) {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-        }
-
-        @media screen and (max-width: 400px) {
-            margin: 2rem 0;
-        }
-
-        @media screen and (max-width: 330px) {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
-        }
-    }
-
-    // New masonry layout
-    & .align-image.masonry {
+    & .masonry {
         margin: 4rem 0;
         display: flex;
-        gap: 1rem;
+        gap: 10px;
         width: 100%;
         column-count: unset;
 
@@ -203,7 +137,7 @@
 
         & .image {
             width: 100%;
-            margin-bottom: 1rem;
+            margin-bottom: 10px;
             display: block;
             overflow: hidden;
             box-shadow: 0 0 10px #ebe1d6df;
@@ -218,7 +152,7 @@
                 height: auto;
                 width: 100%;
                 border-radius: 8px;
-                filter: sepia(30%) grayscale(30%);
+                // filter: sepia(30%) grayscale(30%);
                 display: block;
                 background-size: cover;
                 user-select: none;
@@ -243,4 +177,92 @@
             margin: 2rem 0;
         }
     }
+
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001;
+        overflow: hidden;
+    }
+
+    .lightbox-content {
+        position: relative;
+        max-width: 95%;
+        max-height: 95%;
+        text-align: center;
+        color: #fff;
+    }
+
+    .lightbox-img {
+        max-width: 100%;
+        max-height: 75vh;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .caption {
+        margin-top: 1rem;
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+    }
+
+    .close-btn,
+    .fullscreen-btn,
+    .nav-btn {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 0.6rem 1rem;
+        font-size: 1.4rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        transition: background 0.2s;
+    }
+
+    .close-btn {
+        top: -50px;
+        right: -50px;
+    }
+
+    .fullscreen-btn {
+        top: -50px;
+        right: 10px;
+    }
+
+    .nav-btn {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .nav-btn.left {
+        left: -60px;
+    }
+
+    .nav-btn.right {
+        right: -60px;
+    }
+
+    .close-btn:hover,
+    .fullscreen-btn:hover,
+    .nav-btn:hover {
+        background: #ddd;
+    }
+
 }

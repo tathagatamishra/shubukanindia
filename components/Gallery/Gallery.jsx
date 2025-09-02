@@ -14,13 +14,14 @@ export default function Gallery({ initialImages = [] }) {
   const [loadedImages, setLoadedImages] = useState(new Set());
   const [columns, setColumns] = useState(4);
   const [columnHeights, setColumnHeights] = useState([]);
-
+  const [selectedImgIndex, setSelectedImgIndex] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const observerRef = useRef();
   const containerRef = useRef();
 
   // Calculate number of columns based on screen width
   const calculateColumns = useCallback(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const width = window.innerWidth;
       if (width <= 330) return 2;
       if (width <= 500) return 3;
@@ -45,8 +46,8 @@ export default function Gallery({ initialImages = [] }) {
       setColumnHeights(new Array(cols).fill(0));
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [calculateColumns]);
 
   // Fetch images from backend
@@ -78,24 +79,24 @@ export default function Gallery({ initialImages = [] }) {
   // Organize images into columns for masonry layout
   const organizeImages = useCallback(() => {
     if (!containerRef.current || images.length === 0) return [];
-    
+
     const containerWidth = containerRef.current.offsetWidth;
-    const gap = 16; // 1rem gap
-    const columnWidth = (containerWidth - (gap * (columns - 1))) / columns;
-    
+    const gap = 10; // 1rem gap
+    const columnWidth = (containerWidth - gap * (columns - 1)) / columns;
+
     const columnArrays = Array.from({ length: columns }, () => []);
     const tempHeights = new Array(columns).fill(0);
 
     images.forEach((image, index) => {
       const shortestColumnIndex = tempHeights.indexOf(Math.min(...tempHeights));
       const imageHeight = calculateImageHeight(image, columnWidth);
-      
+
       columnArrays[shortestColumnIndex].push({
         ...image,
         index,
-        calculatedHeight: imageHeight
+        calculatedHeight: imageHeight,
       });
-      
+
       tempHeights[shortestColumnIndex] += imageHeight + gap;
     });
 
@@ -121,6 +122,24 @@ export default function Gallery({ initialImages = [] }) {
 
   const organizedImages = organizeImages();
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (selectedImgIndex === null) return;
+      if (e.key === "Escape") setSelectedImgIndex(null);
+      if (e.key === "ArrowRight")
+        setSelectedImgIndex((prev) =>
+          prev === images.length - 1 ? 0 : prev + 1
+        );
+      if (e.key === "ArrowLeft")
+        setSelectedImgIndex((prev) =>
+          prev === 0 ? images.length - 1 : prev - 1
+        );
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [selectedImgIndex, images.length]);
+
   return (
     <div className="Gallery">
       <section className="Hero">
@@ -128,20 +147,21 @@ export default function Gallery({ initialImages = [] }) {
         <p>Beyond the realms</p>
       </section>
 
-      <section className="align-image masonry" ref={containerRef}>
+      <section className="masonry" ref={containerRef}>
         {organizedImages.map((column, columnIndex) => (
           <div key={columnIndex} className="masonry-column">
-            {column.map((image) => {
+            {column.map((image, index) => {
               const isLoaded = loadedImages.has(image._id || image.index);
               return (
                 <div
                   key={image._id || image.index}
                   className="image"
+                  onClick={() => setSelectedImgIndex(image.index)}
                   style={{
-                    backgroundColor: isLoaded
-                      ? "transparent"
-                      : placeholderColors[image.index % placeholderColors.length],
-                    marginBottom: '1rem',
+                    backgroundColor:
+                      placeholderColors[image.index % placeholderColors.length],
+                    width: "100%",
+                    height: `${image.calculatedHeight}px`,
                   }}
                 >
                   <Image
@@ -157,11 +177,7 @@ export default function Gallery({ initialImages = [] }) {
                         return newSet;
                       });
                     }}
-                    style={{
-                      opacity: isLoaded ? 1 : 0,
-                      width: '100%',
-                      height: 'auto',
-                    }}
+                    style={{ opacity: isLoaded ? 1 : 0 }}
                   />
                 </div>
               );
@@ -171,13 +187,73 @@ export default function Gallery({ initialImages = [] }) {
       </section>
 
       {loading && <div className="text-center py-4">Loading...</div>}
-
       {hasMore && (
         <div
           id="infinite-loader"
           className="h-10 flex justify-center items-center"
         >
           <span className="loader"></span>
+        </div>
+      )}
+
+      {/* 🔥 Modal with navigation + fullscreen */}
+      {selectedImgIndex !== null && (
+        <div className="lightbox" onClick={() => setSelectedImgIndex(null)}>
+          <div
+            className="lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              className="close-btn"
+              onClick={() => setSelectedImgIndex(null)}
+            >
+              ✕
+            </button>
+
+            {/* Left Button */}
+            <button
+              className="nav-btn left"
+              onClick={() =>
+                setSelectedImgIndex(
+                  selectedImgIndex === 0
+                    ? images.length - 1
+                    : selectedImgIndex - 1
+                )
+              }
+            >
+              ❮
+            </button>
+
+            {/* Image */}
+            <Image
+              src={images[selectedImgIndex].image}
+              alt={images[selectedImgIndex].title}
+              width={1200}
+              height={800}
+              className="lightbox-img"
+            />
+
+            {/* Right Button */}
+            <button
+              className="nav-btn right"
+              onClick={() =>
+                setSelectedImgIndex(
+                  selectedImgIndex === images.length - 1
+                    ? 0
+                    : selectedImgIndex + 1
+                )
+              }
+            >
+              ❯
+            </button>
+
+            {/* Caption */}
+            <div className="caption">
+              <h2>{images[selectedImgIndex].title}</h2>
+              <p>{images[selectedImgIndex].description}</p>
+            </div>
+          </div>
         </div>
       )}
     </div>

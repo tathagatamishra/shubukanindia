@@ -34,11 +34,11 @@ export default function History() {
             wrapperProps={{
               style: { transitionDelay: "0s" },
             }}
-            src={"/web_images/shureimon_gate.jpg"}
+            src={"/web_images/shureimon_gate_low.jpg"}
             onClick={() => {
               setShowNav(false);
               setIsOpen(true);
-              setImage("/web_images/shuri_gate.jpg");
+              setImage("/web_images/shureimon_gate_high.jpg");
               setComment("Image taken by Sensei Sabyasachi Giri");
               setHeading("Shureimon Gate");
               setContent(

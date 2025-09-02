@@ -231,26 +231,26 @@ export default function Home({ setShowNav }) {
         </div>
 
         <div>
-          <div className="image" onClick={() => imgPop("/assets/chibana.jpg")}>
-            <Image src="/assets/chibana.jpg" alt="chosin chibana" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/shureimon_gate_low.jpg")}>
+            <Image src="/web_images/shureimon_gate_high.jpg" className="img" alt="shureimon gate" height={720} width={720} />
           </div>
-          <div className="image" onClick={() => imgPop("/thumbnail/oldGroup.jpg")}>
-            <Image src="/thumbnail/oldGroup.jpg" alt="image" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/chibana_high.jpg")}>
+            <Image src="/web_images/chibana_high.jpg" className="img" alt="image" height={720} width={720} />
           </div>
-          <div className="image" onClick={() => imgPop("/thumbnail/Matsumura.jpg")}>
-            <Image src="/thumbnail/Matsumura.jpg" alt="image" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/Matsumura_high.png")}>
+            <Image src="/web_images/Matsumura_low.jpg" className="img" alt="image" height={720} width={720} />
           </div>
-          <div className="image" onClick={() => imgPop("/assets/uemaImg2.svg")}>
-            <Image src="/assets/uemaImg2.svg" alt="image" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/uema_family_high.jpg")}>
+            <Image src="/web_images/uema_family_low.jpg" className="img" alt="image" height={720} width={720} />
           </div>
-          <div className="image" onClick={() => imgPop("/thumbnail/kaynChotuku.jpg")}>
-            <Image src="/thumbnail/kaynChotuku.jpg" alt="image" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/oldGroup.jpg")}>
+            <Image src="/web_images/oldGroup.jpg" className="img" alt="image" height={720} width={720} />
           </div>
-          <div className="image" onClick={() => imgPop("/thumbnail/joki_sai.jpg")}>
-            <Image src="/thumbnail/joki_sai.jpg" alt="image" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/joki_sai_high.jpg")}>
+            <Image src="/web_images/joki_sai_high.jpg" className="img" alt="image" height={720} width={720} />
           </div>
-          <div className="image" onClick={() => imgPop("/thumbnail/chibana.jpg")}>
-            <Image src="/thumbnail/chibana.jpg" alt="image" height={1920} width={1920} />
+          <div className="image" onClick={() => imgPop("/web_images/kaynChotuku_high.png")}>
+            <Image src="/web_images/kaynChotuku_high.png" className="img" alt="image" height={720} width={720} />
           </div>
         </div>
       </section>

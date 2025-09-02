@@ -41,10 +41,10 @@ export default function Hozonkai() {
           <div className="link">
             <SlGlobe className="icon" />
             <a
-              href="https://www.big-advance.site/s/172/2105"
+              href="https://www.shubukan.jp"
               target="_blank"
             >
-              www.big-advance.site/s/172/2105
+              www.shubukan.jp
             </a>
           </div>
         </div>
