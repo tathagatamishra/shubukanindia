@@ -14,7 +14,7 @@ export default function KarateAndKobudo() {
     <div className="KarateAndKobudo">
       <section className="Karate-Hero">
         <p className="heading">Karate</p>
-        <h2>空手</h2>
+        <h2 className="jap">空手</h2>
         <p>
           Karate means Empty hand. Karate makes its practitioner physically and
           mentally strong along with strong ethical and moral values. Basically
@@ -71,7 +71,7 @@ export default function KarateAndKobudo() {
               <p>Long stick. There are lot of Bo katas in shubukan.</p>
             </div>
             <div className="img">
-              <img src="./assets/Frame 19.svg" alt="" />
+              <img src="./karate&kobudo/bo.png" alt="" />
             </div>
           </div>
 
@@ -81,7 +81,7 @@ export default function KarateAndKobudo() {
               <p>It is sickle. Previously it was used in farming.</p>
             </div>
             <div className="img">
-              <img src="./assets/Frame 13.svg" alt="" />
+              <img src="./karate&kobudo/kama.png" alt="" />
             </div>
           </div>
 
@@ -94,7 +94,7 @@ export default function KarateAndKobudo() {
               </p>
             </div>
             <div className="img">
-              <img src="./assets/Frame 12.svg" alt="" />
+              <img src="./karate&kobudo/sai.png" alt="" />
             </div>
           </div>
 
@@ -104,7 +104,7 @@ export default function KarateAndKobudo() {
               <p>It is a wooden weapon. Shubukan has many tonfa katas.</p>
             </div>
             <div className="img">
-              <img src="./assets/Frame 14.svg" alt="" />
+              <img src="./karate&kobudo/tonfa2.png" alt="" />
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export default function KarateAndKobudo() {
               </p>
             </div>
             <div className="img">
-              <img src="./assets/eku.svg" alt="" />
+              <img src="./karate&kobudo/eku.png" alt="" />
             </div>
           </div>
 
@@ -129,7 +129,7 @@ export default function KarateAndKobudo() {
               </p>
             </div>
             <div className="img">
-              <img src="./assets/Frame 16.svg" alt="" />
+              <img src="./karate&kobudo/nunchuck.png" alt="" />
             </div>
           </div>
         </div>

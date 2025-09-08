@@ -5,12 +5,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
+@font-face {
+  font-family: "Yoppa_fude";
+  src: url("/jap_font/Yoppa_fude.woff2") format("woff2"),
+    url("/jap_font/Yoppa_fude.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
   outline: none;
   box-sizing: border-box;
   cursor: url(https://cur.cursors-4u.net/cursors/cur-11/cur1054.cur), auto !important;
-  
+
   @media (width >=640px) {
     cursor: none !important;
   }
@@ -94,6 +101,10 @@ body::-webkit-scrollbar-thumb {
 
   /* background-image: url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg");
   background-size: 250px 250px; */
+}
+
+.jap {
+  font-family: "Yoppa_fude", sans-serif;
 }
 
 /* input:-webkit-autofill,

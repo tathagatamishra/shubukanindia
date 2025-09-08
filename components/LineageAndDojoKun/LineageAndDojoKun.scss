@@ -951,7 +951,9 @@
             }
         }
 
-        & h2 {
+        & .jap {
+            font-size: 34px;
+
             &::selection {
                 color: $---selection-color;
                 background: $---selection-bg;
@@ -1006,7 +1008,8 @@
                 font-size: 1.3rem;
             }
 
-            & h2 {
+            & .jap {
+                font-size: 24px;
                 margin: 10px 0;
             }
         }
@@ -1014,7 +1017,7 @@
         @media screen and (max-width: 400px) {
             margin-bottom: 1rem;
 
-            & h2 {
+            & .jap {
                 margin: 5px 0;
             }
 

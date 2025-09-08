@@ -227,7 +227,7 @@ export default function LineageAndDojoKun() {
         <img src="/assets/dojokun.png" alt="" />
 
         <p className="heading">DojoKun</p>
-        <h2>道場訓</h2>
+        <h2 className="jap">道場訓</h2>
 
         <ul>
           <li>
@@ -253,7 +253,7 @@ export default function LineageAndDojoKun() {
         </ul>
 
         <p className="heading">Three pledges</p>
-        <h2>三誓</h2>
+        <h2 className="jap">三誓</h2>
 
         <ul>
           <li>
