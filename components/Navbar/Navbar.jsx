@@ -40,7 +40,8 @@ export default function Navbar() {
     { path: "/membership", label: "MEMBERSHIP" },
     { path: "/marksheet", label: "MARKSHEET" },
     { path: "/gallery", label: "GALLERY" },
-    { path: "/blog", label: "BLOG" },
+    // { path: "/blog", label: "BLOG" },
+    { path: "/blogpost/from-fist-to-force-karate-tsuki-punch", label: "BLOG" },
     { path: "/contact", label: "CONTACT" },
   ];
 
@@ -69,6 +70,7 @@ export default function Navbar() {
     "/marksheet": "",
     "/gallery": "",
     "/blog": "",
+    "/blogpost/from-fist-to-force-karate-tsuki-punch": "",
     "/about": "",
     "/contact": "",
   };
