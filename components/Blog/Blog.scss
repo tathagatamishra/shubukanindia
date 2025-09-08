@@ -4,11 +4,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
 .Blog {
-    // & * {
-    //     outline: 1px solid rgba(0, 0, 0, 0.308);
-    // }
-
-    // border: 1px solid red;
     padding-top: 10rem;
     padding-bottom: 30px;
     max-width: 1000px;
@@ -150,16 +145,8 @@
                     inset: 0;
                     border-radius: 5px;
                     filter: url(#wobble);
-                    // transform: rotate(-1deg);
                     z-index: -1;
-                    // border-top: 1px solid #A64B37;
-                    // border-left: 1px solid #A64B37;
-                    // border-bottom: 1px solid #403D3C;
-                    // border-right: 1px solid #403D3C;
                     box-shadow: 1px 2px 4px rgba(192, 83, 29, 0.116);
-                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
-                    // filter: opacity(0.1);
-                    // background-image: url("https://img.freepik.com/free-vector/aged-paper-texture-background-design_60389-141.jpg?t=st=1744568518~exp=1744572118~hmac=fa8641b63f678ff38fae64bc50dc3c06a14c48776b73ed55f44252bc7560468e&w=1380");
                     background-size: 300px;
                     transition: 300ms;
                     // border: 1px solid #A64B37;
@@ -173,8 +160,6 @@
                 }
 
                 & .swiper-pagination-bullet {
-                    // scale: 1.2;
-                    // background-color: #DE3614;
                     opacity: 0.2;
                 }
 
@@ -203,16 +188,12 @@
                         inset: 0;
                         border-radius: 5px;
                         filter: url(#wobble);
-                        // transform: rotate(-1deg);
                         z-index: -1;
                         border-top: 1px solid rgba(255, 255, 255, 0.42);
                         border-left: 1px solid rgba(255, 255, 255, 0.42);
                         border-bottom: 1px solid rgba(119, 90, 90, 0.4);
                         border-right: 1px solid rgba(119, 90, 90, 0.4);
                         box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
-                        // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
-                        // backdrop-filter: opacity(50%);
-                        // filter: opacity(0.5);
                         background-size: 100px;
                         transition: 300ms;
                     }
@@ -235,16 +216,11 @@
                     inset: 0;
                     border-radius: 5px;
                     filter: url(#wobble);
-                    // transform: rotate(-1deg);
                     z-index: -1;
                     border-top: 1px solid rgba(255, 255, 255, 0.42);
                     border-left: 1px solid rgba(255, 255, 255, 0.42);
                     border-bottom: 1px solid rgba(119, 90, 90, 0.4);
                     border-right: 1px solid rgba(119, 90, 90, 0.4);
-                    // box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
-                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
-                    // backdrop-filter: opacity(50%);
-                    // filter: opacity(0.5);
                     background-size: 100px;
                     transition: 300ms;
                 }
@@ -286,16 +262,12 @@
                 inset: 0;
                 border-radius: 5px;
                 filter: url(#wobble);
-                // transform: rotate(-1deg);
                 z-index: -1;
                 border-top: 1px solid rgba(255, 255, 255, 0.42);
                 border-left: 1px solid rgba(255, 255, 255, 0.42);
                 border-bottom: 1px solid rgba(119, 90, 90, 0.4);
                 border-right: 1px solid rgba(119, 90, 90, 0.4);
                 box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
-                // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
-                // backdrop-filter: opacity(50%);
-                // filter: opacity(0.5);
                 background-size: 100px;
                 transition: 300ms;
             }
@@ -323,16 +295,12 @@
                     inset: 0;
                     border-radius: 5px;
                     filter: url(#wobble);
-                    // transform: rotate(-1deg);
                     z-index: -1;
                     border-top: 1px solid rgba(255, 255, 255, 0.42);
                     border-left: 1px solid rgba(255, 255, 255, 0.42);
                     border-bottom: 1px solid rgba(119, 90, 90, 0.4);
                     border-right: 1px solid rgba(119, 90, 90, 0.4);
                     box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
-                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
-                    // backdrop-filter: opacity(50%);
-                    // filter: opacity(0.5);
                     background-size: 100px;
                     transition: 300ms;
                 }
@@ -371,16 +339,13 @@
                     inset: 0;
                     border-radius: 5px;
                     filter: url(#wobble);
-                    // transform: rotate(-1deg);
                     z-index: -1;
                     border-top: 1px solid rgba(255, 255, 255, 0.42);
                     border-left: 1px solid rgba(255, 255, 255, 0.42);
                     border-bottom: 1px solid rgba(119, 90, 90, 0.4);
                     border-right: 1px solid rgba(119, 90, 90, 0.4);
                     box-shadow: 1px 2px 2px rgba(24, 10, 3, 0.116);
-                    // background-image: url(https://res.cloudinary.com/dangvxnul/image/upload/v1716225651/paper-dark_fuujeq.jpg);
-                    // backdrop-filter: opacity(50%);
-                    // filter: opacity(0.5);
+
                     background-size: 100px;
                     transition: 300ms;
                 }
