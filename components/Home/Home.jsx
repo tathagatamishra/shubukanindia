@@ -107,7 +107,7 @@ export default function Home({ setShowNav }) {
   return (
     <div className="Home">
       <div className="tree">
-        <Image src="/assets/tree.svg" alt="" height={1920} width={1920} />
+        <Image src="/assets/tree.png" alt="" height={1920} width={1920} />
       </div>
       {/* <div className="line">
         <div className="lineColor"></div>
@@ -155,7 +155,7 @@ export default function Home({ setShowNav }) {
           Pure soul is the preserver of true karate<i>&nbsp;</i>
         </p>
         <div className="bird">
-          <Image src="/assets/bird.svg" alt="" height={1920} width={1920} />
+          <Image src="/assets/bird.png" alt="" height={1920} width={1920} />
         </div>
       </section>
       {console.log(windowWidth)}
