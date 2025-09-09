@@ -1,4 +1,5 @@
 import Blog from "@/components/Blog/Blog";
+import { shubukan_api } from "@/config";
 
 export const metadata = {
   title: "Blog | Shubukan India",
@@ -8,8 +9,19 @@ export const metadata = {
   },
 };
 
-export default function page() {
+async function getBlogs() {
+  try {
+    const response = await shubukan_api.get("/blogs", { cache: "no-store" });
+    return response.data.blogs;
+  } catch (error) {
+    console.error("Error fetching gallery images:", error);
+    return [];
+  }
+}
+export default async function page() {
+  const blogs = await getBlogs();
+
   return (
-    <Blog />
+    <Blog blogs={blogs} />
   );
 }

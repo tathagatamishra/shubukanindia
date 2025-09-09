@@ -2,7 +2,8 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter, usePathname, useParams } from "next/navigation";
-import { blogPosts } from "./blogData";
+// import { blogPosts } from "./blogData";
+import { shubukan_api } from "@/config";
 import Image from "next/image";
 import "./BlogPost.scss";
 
@@ -35,160 +36,281 @@ export default function BlogPost() {
   // const slug = useSlugFromPath();
   const { slug } = useParams();
 
-  const [blogs, setBlogs] = useState(blogPosts);
+  // const [blog, setBlog] = useState(blogPosts);
+
+  const [blog, setBlog] = useState(null);
   const [query, setQuery] = useState("");
 
-  // UI states
+  // states
   const [showShare, setShowShare] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
 
-  // comment + OTP states (dummy)
+  // OTP + comments
   const [email, setEmail] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otpInput, setOtpInput] = useState("");
   const [verifiedEmail, setVerifiedEmail] = useState(null);
-  const [comments, setComments] = useState({}); // { slug: [{name, email, text, date}] }
   const [commentText, setCommentText] = useState("");
+  const [comments, setComments] = useState([]);
 
+  // ✅ Fetch blog data from backend
   useEffect(() => {
-    // load like/dislike from localStorage
-    const likeKey = `like_${slug}`;
-    const dislikeKey = `dislike_${slug}`;
-    setLiked(localStorage.getItem(likeKey) === "1");
-    setDisliked(localStorage.getItem(dislikeKey) === "1");
-
-    // load comments from localStorage
-    const stored = localStorage.getItem("blog_comments_v1");
-    if (stored) setComments(JSON.parse(stored));
-
-    // load verified email
-    const storedEmail = localStorage.getItem("verified_email");
-    if (storedEmail) setVerifiedEmail(storedEmail);
+    async function fetchBlog() {
+      try {
+        const res = await shubukan_api.get(`/blog/${slug}`);
+        setBlog(res.data);
+        setComments(res.data.comments || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    if (slug) fetchBlog();
   }, [slug]);
 
-  useEffect(() => {
-    if (verifiedEmail) {
-      localStorage.setItem("verified_email", verifiedEmail);
-    } else {
-      localStorage.removeItem("verified_email");
-    }
-  }, [verifiedEmail]);
-
-  useEffect(() => {
-    // persist comments
-    localStorage.setItem("blog_comments_v1", JSON.stringify(comments));
-  }, [comments]);
-
-  const blog = useMemo(() => blogs.find((b) => b.slug === slug), [blogs, slug]);
-
-  // previous / next
-  const index = blog ? blogs.findIndex((b) => b.slug === blog.slug) : -1;
-  const prev = index > 0 ? blogs[index - 1] : null;
-  const next = index >= 0 && index < blogs.length - 1 ? blogs[index + 1] : null;
-
-  // related by tag (simple)
-  const related = blog
-    ? blogs
-        .filter(
-          (b) =>
-            b.slug !== blog.slug && b.tags.some((t) => blog.tags.includes(t))
-        )
-        .slice(0, 3)
-    : [];
-
-  function onSearch(e) {
-    e.preventDefault();
-    // filter blogs by title or tags
-    const q = query.trim().toLowerCase();
-    if (!q) return setBlogs(blogPosts);
-    const filtered = blogPosts.filter(
-      (b) =>
-        b.title.toLowerCase().includes(q) ||
-        b.tags.join(" ").toLowerCase().includes(q)
-    );
-    setBlogs(filtered);
-  }
-
-  function requireVerification(action) {
-    if (!verifiedEmail) {
-      alert("Please verify your email before you can " + action);
-      return false;
-    }
-    return true;
-  }
-
-  function toggleLike() {
-    if (!requireVerification("like")) return;
-    const likeKey = `like_${slug}`;
-    const dislikeKey = `dislike_${slug}`;
-    if (liked) {
-      setLiked(false);
-      localStorage.removeItem(likeKey);
-    } else {
-      setLiked(true);
-      setDisliked(false);
-      localStorage.setItem(likeKey, "1");
-      localStorage.removeItem(dislikeKey);
+  // 🔹 OTP APIs
+  async function sendOtp() {
+    if (!email) return alert("Enter a valid email");
+    try {
+      await shubukan_api.post("/send-otp", { email });
+      setOtpSent(true);
+      alert(`OTP sent to ${email}`);
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to send OTP");
     }
   }
 
-  function toggleDislike() {
-    if (!requireVerification("dislike")) return;
-    const likeKey = `like_${slug}`;
-    const dislikeKey = `dislike_${slug}`;
-    if (disliked) {
-      setDisliked(false);
-      localStorage.removeItem(dislikeKey);
-    } else {
-      setDisliked(true);
-      setLiked(false);
-      localStorage.setItem(dislikeKey, "1");
-      localStorage.removeItem(likeKey);
-    }
-  }
-
-  function sendOtp() {
-    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
-      return alert("Enter a valid email");
-    // dummy OTP flow: generate 4-digit code and store in sessionStorage
-    const code = String(Math.floor(1000 + Math.random() * 9000));
-    sessionStorage.setItem(`otp_for_${email}`, code);
-    setOtpSent(true);
-    alert(
-      `(Dummy) OTP sent to ${email}: ${code} — enter this to verify (in real app you will send email).`
-    );
-  }
-
-  function verifyOtp() {
-    const code = sessionStorage.getItem(`otp_for_${email}`);
-    if (code && otpInput === code) {
+  async function verifyOtp() {
+    try {
+      const res = await shubukan_api.post("/verify-otp", {
+        email,
+        otp: otpInput,
+      });
+      localStorage.setItem("verified_email", email);
+      localStorage.setItem("email_token", res.data.token);
       setVerifiedEmail(email);
       setOtpSent(false);
       setOtpInput("");
-      sessionStorage.removeItem(`otp_for_${email}`);
-      alert("Email verified (dummy)");
-    } else {
-      alert("Invalid OTP");
+      alert("Email verified ✅");
+    } catch (err) {
+      alert(err.response?.data?.message || "Invalid OTP");
     }
   }
 
-  function postComment() {
-    if (!verifiedEmail)
-      return alert("Please verify your email before commenting");
-    if (!commentText.trim()) return;
-    const newComment = {
-      email: verifiedEmail,
-      text: commentText.trim(),
-      date: new Date().toISOString(),
-    };
-    setComments((prev) => {
-      const next = { ...prev };
-      next[slug] = next[slug] ? [newComment, ...next[slug]] : [newComment];
-      return next;
-    });
-    setCommentText("");
+  // 🔹 Like / Dislike
+  async function toggleLike() {
+    if (!verifiedEmail) return alert("Verify email first");
+    try {
+      await shubukan_api.post(`/blog/${blog._id}/like`);
+      setLiked(true);
+      setDisliked(false);
+    } catch (err) {
+      alert(err.response?.data?.message || "Error liking blog");
+    }
   }
+
+  async function toggleDislike() {
+    if (!verifiedEmail) return alert("Verify email first");
+    try {
+      await shubukan_api.post(`/blog/${blog._id}/dislike`);
+      setDisliked(true);
+      setLiked(false);
+    } catch (err) {
+      alert(err.response?.data?.message || "Error disliking blog");
+    }
+  }
+
+  // 🔹 Comments
+  async function postComment() {
+    if (!verifiedEmail) return alert("Verify email first");
+    if (!commentText.trim()) return;
+
+    try {
+      const res = await shubukan_api.post(`/blog/${blog._id}/comment`, {
+        text: commentText.trim(),
+      });
+      setComments([res.data, ...comments]);
+      setCommentText("");
+    } catch (err) {
+      alert(err.response?.data?.message || "Error posting comment");
+    }
+  }
+
+  function EmailOtpBox() {
+    return (
+      <div className="p-3 border rounded mb-4">
+        <div className="flex gap-2">
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="flex-1 p-2 border rounded"
+          />
+          <button
+            onClick={sendOtp}
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            Send OTP
+          </button>
+        </div>
+        {otpSent && (
+          <div className="mt-2 flex gap-2">
+            <input
+              value={otpInput}
+              onChange={(e) => setOtpInput(e.target.value)}
+              placeholder="Enter OTP"
+              className="p-2 border rounded"
+            />
+            <button
+              onClick={verifyOtp}
+              className="px-3 py-2 bg-green-600 text-white rounded"
+            >
+              Verify
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // useEffect(() => {
+  //   // load like/dislike from localStorage
+  //   const likeKey = `like_${slug}`;
+  //   const dislikeKey = `dislike_${slug}`;
+  //   setLiked(localStorage.getItem(likeKey) === "1");
+  //   setDisliked(localStorage.getItem(dislikeKey) === "1");
+
+  //   // load comments from localStorage
+  //   const stored = localStorage.getItem("blog_comments_v1");
+  //   if (stored) setComments(JSON.parse(stored));
+
+  //   // load verified email
+  //   const storedEmail = localStorage.getItem("verified_email");
+  //   if (storedEmail) setVerifiedEmail(storedEmail);
+  // }, [slug]);
+
+  // useEffect(() => {
+  //   if (verifiedEmail) {
+  //     localStorage.setItem("verified_email", verifiedEmail);
+  //   } else {
+  //     localStorage.removeItem("verified_email");
+  //   }
+  // }, [verifiedEmail]);
+
+  // useEffect(() => {
+  //   // persist comments
+  //   localStorage.setItem("blog_comments_v1", JSON.stringify(comments));
+  // }, [comments]);
+
+  // // const blog = useMemo(() => blog.find((b) => b.slug === slug), [blog, slug]);
+
+  // // previous / next
+  // const index = blog ? blog.findIndex((b) => b.slug === blog.slug) : -1;
+  // const prev = index > 0 ? blog[index - 1] : null;
+  // const next = index >= 0 && index < blog.length - 1 ? blog[index + 1] : null;
+
+  // // related by tag (simple)
+  // const related = blog
+  //   ? blog
+  //       .filter(
+  //         (b) =>
+  //           b.slug !== blog.slug && b.tags.some((t) => blog.tags.includes(t))
+  //       )
+  //       .slice(0, 3)
+  //   : [];
+
+  // function onSearch(e) {
+  //   e.preventDefault();
+  //   // filter blog by title or tags
+  //   const q = query.trim().toLowerCase();
+  //   if (!q) return setBlog(blogPosts);
+  //   const filtered = blogPosts.filter(
+  //     (b) =>
+  //       b.title.toLowerCase().includes(q) ||
+  //       b.tags.join(" ").toLowerCase().includes(q)
+  //   );
+  //   setBlog(filtered);
+  // }
+
+  // function requireVerification(action) {
+  //   if (!verifiedEmail) {
+  //     alert("Please verify your email before you can " + action);
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // function toggleLike() {
+  //   if (!requireVerification("like")) return;
+  //   const likeKey = `like_${slug}`;
+  //   const dislikeKey = `dislike_${slug}`;
+  //   if (liked) {
+  //     setLiked(false);
+  //     localStorage.removeItem(likeKey);
+  //   } else {
+  //     setLiked(true);
+  //     setDisliked(false);
+  //     localStorage.setItem(likeKey, "1");
+  //     localStorage.removeItem(dislikeKey);
+  //   }
+  // }
+
+  // function toggleDislike() {
+  //   if (!requireVerification("dislike")) return;
+  //   const likeKey = `like_${slug}`;
+  //   const dislikeKey = `dislike_${slug}`;
+  //   if (disliked) {
+  //     setDisliked(false);
+  //     localStorage.removeItem(dislikeKey);
+  //   } else {
+  //     setDisliked(true);
+  //     setLiked(false);
+  //     localStorage.setItem(dislikeKey, "1");
+  //     localStorage.removeItem(likeKey);
+  //   }
+  // }
+
+  // function sendOtp() {
+  //   if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
+  //     return alert("Enter a valid email");
+  //   // dummy OTP flow: generate 4-digit code and store in sessionStorage
+  //   const code = String(Math.floor(1000 + Math.random() * 9000));
+  //   sessionStorage.setItem(`otp_for_${email}`, code);
+  //   setOtpSent(true);
+  //   alert(
+  //     `(Dummy) OTP sent to ${email}: ${code} — enter this to verify (in real app you will send email).`
+  //   );
+  // }
+
+  // function verifyOtp() {
+  //   const code = sessionStorage.getItem(`otp_for_${email}`);
+  //   if (code && otpInput === code) {
+  //     setVerifiedEmail(email);
+  //     setOtpSent(false);
+  //     setOtpInput("");
+  //     sessionStorage.removeItem(`otp_for_${email}`);
+  //     alert("Email verified (dummy)");
+  //   } else {
+  //     alert("Invalid OTP");
+  //   }
+  // }
+
+  // function postComment() {
+  //   if (!verifiedEmail)
+  //     return alert("Please verify your email before commenting");
+  //   if (!commentText.trim()) return;
+  //   const newComment = {
+  //     email: verifiedEmail,
+  //     text: commentText.trim(),
+  //     date: new Date().toISOString(),
+  //   };
+  //   setComments((prev) => {
+  //     const next = { ...prev };
+  //     next[slug] = next[slug] ? [newComment, ...next[slug]] : [newComment];
+  //     return next;
+  //   });
+  //   setCommentText("");
+  // }
 
   function copyLink() {
     const link = typeof window !== "undefined" ? window.location.href : "";
@@ -201,7 +323,7 @@ export default function BlogPost() {
       <div className="BlogPost">
         <div className="BlogPostPage flex flex-col justify-center items-center">
           {/* search bar */}
-          <form onSubmit={onSearch} className="w-full flex gap-2 mb-6">
+          {/* <form onSubmit={onSearch} className="w-full flex gap-2 mb-6">
             <button
               className="px-4 py-2 rounded bg-gray-200"
               onClick={() => router.push("/blog")}
@@ -211,7 +333,7 @@ export default function BlogPost() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search blogs by title or tag..."
+              placeholder="Search blog by title or tag..."
               className="flex-1 p-2 border rounded"
             />
             <button className="px-4 py-2 bg-blue-600 text-white rounded">
@@ -222,12 +344,12 @@ export default function BlogPost() {
               className="px-4 py-2 bg-gray-200 rounded"
               onClick={() => {
                 setQuery("");
-                setBlogs(blogPosts);
+                setBlog(blogPosts);
               }}
             >
               Reset
             </button>
-          </form>
+          </form> */}
           <h2 className="text-2xl font-bold">Blog not found</h2>
           <p className="mt-4">Try the search or go back to the blog listing.</p>
           <Image
@@ -284,7 +406,7 @@ export default function BlogPost() {
     <div className="BlogPost">
       <div className="BlogPostPage">
         {/* search bar */}
-        <form onSubmit={onSearch} className="flex gap-2 mb-6">
+        {/* <form onSubmit={onSearch} className="flex gap-2 mb-6">
           <button
             className="sm:flex hidden px-4 py-2 rounded bg-gray-200"
             onClick={() => router.push("/blog")}
@@ -294,7 +416,7 @@ export default function BlogPost() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search blogs by title or tag..."
+            placeholder="Search blog by title or tag..."
             className="flex-1 p-2 border rounded"
           />
           <button className="px-4 py-2 bg-blue-600 text-white rounded">
@@ -305,12 +427,12 @@ export default function BlogPost() {
             className="sm:flex hidden px-4 py-2 bg-gray-200 rounded"
             onClick={() => {
               setQuery("");
-              setBlogs(blogPosts);
+              setBlog(blogPosts);
             }}
           >
             Reset
           </button>
-        </form>
+        </form> */}
 
         {/* Cover Image */}
         <div className="relative w-full h-80 md:h-[400px] mb-8">
@@ -440,10 +562,10 @@ export default function BlogPost() {
 
         {/* Tags */}
         <div className="mt-10 flex flex-wrap gap-2">
-          {blog.tags?.map((tag, idx) => (
+          {blog.tags?.slice(0, 3).map((tag, idx) => (
             <span
               key={idx}
-              className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm"
+              className="bg-gray-200 text-gray-700 shadow-sm px-3 py-1 rounded-full text-sm"
             >
               #{tag}
             </span>
@@ -451,8 +573,8 @@ export default function BlogPost() {
         </div>
 
         {/* actions: share, like/dislike */}
-        <div className="flex flex-col gap-3 mt-6">
-          {!verifiedEmail && <EmailOtpBox />}
+        <div className="flex flex-col gap-3 my-6">
+          {/* {!verifiedEmail && <EmailOtpBox />} */}
           <div className="flex gap-3">
             <button
               onClick={() => setShowShare(true)}
@@ -460,7 +582,7 @@ export default function BlogPost() {
             >
               Share
             </button>
-            <button
+            {/* <button
               onClick={toggleLike}
               className={`px-4 py-2 border rounded ${
                 liked ? "bg-green-100" : ""
@@ -475,12 +597,12 @@ export default function BlogPost() {
               }`}
             >
               Dislike
-            </button>
+            </button> */}
           </div>
         </div>
 
         {/* prev / next */}
-        <div className="flex justify-between mt-8">
+        {/* <div className="flex justify-between mt-8">
           <div>
             {prev && (
               <button
@@ -503,10 +625,10 @@ export default function BlogPost() {
               </button>
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* related */}
-        {related.length > 0 && (
+        {/* {related.length > 0 && (
           <section className="mt-8">
             <h3 className="font-bold">Related posts</h3>
             <div className="flex gap-4 mt-3">
@@ -522,10 +644,10 @@ export default function BlogPost() {
               ))}
             </div>
           </section>
-        )}
+        )} */}
 
         {/* comments */}
-        <section className="mt-8">
+        {/* <section className="mt-8">
           <h3 className="font-bold">Comments</h3>
           <div className="mt-3">
             {!verifiedEmail && <EmailOtpBox />}
@@ -562,7 +684,6 @@ export default function BlogPost() {
               </div>
             )}
 
-            {/* comments listing */}
             <div className="flex flex-col gap-3">
               {(comments[slug] || []).map((c, idx) => (
                 <div key={idx} className="p-3 border rounded">
@@ -573,6 +694,76 @@ export default function BlogPost() {
                 </div>
               ))}
             </div>
+          </div>
+        </section> */}
+
+        {/* ✅ OTP verification */}
+        {!verifiedEmail && <EmailOtpBox />}
+
+        {/* ✅ Like / Dislike */}
+        <div className="flex gap-3 my-4">
+          <button
+            onClick={toggleLike}
+            className={`px-4 py-2 border rounded ${
+              liked ? "bg-green-100" : ""
+            }`}
+          >
+            Like
+          </button>
+          <button
+            onClick={toggleDislike}
+            className={`px-4 py-2 border rounded ${
+              disliked ? "bg-red-100" : ""
+            }`}
+          >
+            Dislike
+          </button>
+        </div>
+
+        {/* ✅ Comments */}
+        <section className="mt-8">
+          <h3 className="font-bold">Comments</h3>
+          {verifiedEmail && (
+            <div className="p-3 border rounded mb-4">
+              <textarea
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                rows={4}
+                className="w-full p-2 mt-2 border rounded"
+                placeholder="Write your comment..."
+              />
+              <div className="flex gap-2 mt-2">
+                <button
+                  onClick={postComment}
+                  className="px-4 py-2 bg-blue-600 text-white rounded"
+                >
+                  Post comment
+                </button>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("verified_email");
+                    localStorage.removeItem("email_token");
+                    setVerifiedEmail(null);
+                    setEmail("");
+                  }}
+                  className="px-4 py-2 border rounded"
+                >
+                  Sign out
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Comment list */}
+          <div className="flex flex-col gap-3">
+            {comments.map((c, idx) => (
+              <div key={idx} className="p-3 border rounded">
+                <div className="text-sm text-gray-600">
+                  {c.email} • {new Date(c.date).toLocaleString()}
+                </div>
+                <div className="mt-1">{c.text}</div>
+              </div>
+            ))}
           </div>
         </section>
 
