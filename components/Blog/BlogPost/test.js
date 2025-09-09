@@ -1,8 +1,7 @@
-//components/Blog/BlogPost/BlogPost.jsx
 "use client";
+
 import React, { useEffect, useMemo, useState } from "react";
-import { useRouter, usePathname, useParams } from "next/navigation";
-import { blogPosts } from "./blogData";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import "./BlogPost.scss";
 
@@ -24,16 +23,52 @@ import "./BlogPost.scss";
   Note: Replace dummyData with fetch from your backend when ready.
 */
 
+const blogPosts = [
+  {
+    id: 1,
+    slug: "from-fist-to-force-the-secret-behind-karate-tsuki-punch",
+    title: "From Fist to Force: The Secret Behind Karate’s Tsuki Punch",
+    excerpt:
+      "A fist is a basic weapon of karate to use for attack or counter-attack.",
+    content: `# Punch / Tsuki\n\nA fist is a basic weapon of karate to use for attack or counter-attack. Basically, it is a powerful push with a closed fist aimed for penetration through the attacking point with the knuckles of the hand.\n\n**Body parts used in the punch:** the 1st knuckle of the hand, basically the *Seiken* or 1st knuckle of the index finger and middle finger.\n\n**Use:** This is the primary weapon for attack in Karate or other striking martial arts.\n\n**Explanation:** A punch is a penetrating attack on the opponent. Knuckles should be conditioned enough for effective results. A punch should be thrown like an arrow, straight and piercing. Relaxation of muscles is very important to execute a powerful punch, along with the use of the correct muscles.\n\n**Muscles used in Punch:**\n1. Triceps\n2. Latissimus dorsi\n3. Pectoralis major\n4. Deltoid anterior\n5. Extensor of forearm\n\n**Conditionings:** Push-ups will help to condition triceps. A large variety of exercises can be done to condition, such as weight lifting exercises, lateral resistance band pulling, chest press, bench press, resistance band pulling or dip push-ups. For the forearm – *Chishi exercise*, or push-ups, will also help.\n`,
+    cover:
+      "https://res.cloudinary.com/daspiwjet/image/upload/v1757264435/District_Karate_Kobudo_Camp_-_Contai_-_2025_oryofs.jpg",
+    tags: [
+      "Karate",
+      "Tsuki",
+      "Karate Punch",
+      "Seiken",
+      "Martial Arts",
+      "Self Defense",
+      "Karate Basics",
+      "Karate Training",
+      "Traditional Karate",
+      "Shotokan",
+      "Shorin Ryu",
+      "Punch Technique",
+      "Karate Exercises",
+      "Martial Arts Conditioning",
+      "Karate Blog",
+    ],
+    date: "2025-09-01",
+  },
+];
+
 function useSlugFromPath() {
   const pathname = usePathname();
   // pathname example: /blogpost/from-fist-to-force-the-secret-behind-karate-tsuki-punch
   return pathname?.split("/").pop() || "";
 }
 
+function calcReadTime(content) {
+  const words = content.split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} min read`;
+}
+
 export default function BlogPost() {
   const router = useRouter();
-  // const slug = useSlugFromPath();
-  const { slug } = useParams();
+  const slug = useSlugFromPath();
 
   const [blogs, setBlogs] = useState(blogPosts);
   const [query, setQuery] = useState("");
@@ -61,19 +96,7 @@ export default function BlogPost() {
     // load comments from localStorage
     const stored = localStorage.getItem("blog_comments_v1");
     if (stored) setComments(JSON.parse(stored));
-
-    // load verified email
-    const storedEmail = localStorage.getItem("verified_email");
-    if (storedEmail) setVerifiedEmail(storedEmail);
   }, [slug]);
-
-  useEffect(() => {
-    if (verifiedEmail) {
-      localStorage.setItem("verified_email", verifiedEmail);
-    } else {
-      localStorage.removeItem("verified_email");
-    }
-  }, [verifiedEmail]);
 
   useEffect(() => {
     // persist comments
@@ -110,16 +133,7 @@ export default function BlogPost() {
     setBlogs(filtered);
   }
 
-  function requireVerification(action) {
-    if (!verifiedEmail) {
-      alert("Please verify your email before you can " + action);
-      return false;
-    }
-    return true;
-  }
-
   function toggleLike() {
-    if (!requireVerification("like")) return;
     const likeKey = `like_${slug}`;
     const dislikeKey = `dislike_${slug}`;
     if (liked) {
@@ -134,7 +148,6 @@ export default function BlogPost() {
   }
 
   function toggleDislike() {
-    if (!requireVerification("dislike")) return;
     const likeKey = `like_${slug}`;
     const dislikeKey = `dislike_${slug}`;
     if (disliked) {
@@ -199,98 +212,28 @@ export default function BlogPost() {
   if (!blog) {
     return (
       <div className="BlogPost">
-        <div className="BlogPostPage flex flex-col justify-center items-center">
-          {/* search bar */}
-          <form onSubmit={onSearch} className="w-full flex gap-2 mb-6">
+        <div className="BlogPostPage">
+          <h2 className="text-2xl font-bold">Post not found</h2>
+          <p className="mt-4">Try the search or go back to the blog listing.</p>
+          <div className="mt-4 flex gap-2">
             <button
               className="px-4 py-2 rounded bg-gray-200"
               onClick={() => router.push("/blog")}
             >
               Back to Blog
             </button>
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search blogs by title or tag..."
-              className="flex-1 p-2 border rounded"
-            />
-            <button className="px-4 py-2 bg-blue-600 text-white rounded">
-              Search
-            </button>
-            <button
-              type="button"
-              className="px-4 py-2 bg-gray-200 rounded"
-              onClick={() => {
-                setQuery("");
-                setBlogs(blogPosts);
-              }}
-            >
-              Reset
-            </button>
-          </form>
-          <h2 className="text-2xl font-bold">Blog not found</h2>
-          <p className="mt-4">Try the search or go back to the blog listing.</p>
-          <Image
-            src="https://res.cloudinary.com/daspiwjet/image/upload/v1757381008/Blog404_xp7liu.png"
-            alt="Sad Elephant"
-            className="notFound"
-            width={300}
-            height={300}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  function EmailOtpBox() {
-    return (
-      <div className="p-3 border rounded mb-4">
-        <div className="flex gap-2">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="flex-1 p-2 border rounded"
-          />
-          <button
-            onClick={sendOtp}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Send OTP
-          </button>
-        </div>
-        {otpSent && (
-          <div className="mt-2 flex gap-2">
-            <input
-              value={otpInput}
-              onChange={(e) => setOtpInput(e.target.value)}
-              placeholder="Enter OTP"
-              className="p-2 border rounded"
-            />
-            <button
-              onClick={verifyOtp}
-              className="px-3 py-2 bg-green-600 text-white rounded"
-            >
-              Verify
-            </button>
           </div>
-        )}
+        </div>
       </div>
     );
   }
 
   return (
-    // <div className="max-w-4xl mx-auto px-5 py-10">
+    // <div className="p-6 max-w-4xl mx-auto">
     <div className="BlogPost">
       <div className="BlogPostPage">
         {/* search bar */}
         <form onSubmit={onSearch} className="flex gap-2 mb-6">
-          <button
-            className="sm:flex hidden px-4 py-2 rounded bg-gray-200"
-            onClick={() => router.push("/blog")}
-          >
-            Back to Blog
-          </button>
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -302,7 +245,7 @@ export default function BlogPost() {
           </button>
           <button
             type="button"
-            className="sm:flex hidden px-4 py-2 bg-gray-200 rounded"
+            className="px-4 py-2 bg-gray-200 rounded"
             onClick={() => {
               setQuery("");
               setBlogs(blogPosts);
@@ -312,171 +255,58 @@ export default function BlogPost() {
           </button>
         </form>
 
-        {/* Cover Image */}
-        <div className="relative w-full h-80 md:h-[400px] mb-8">
-          <Image
-            src={blog.coverImage.url}
-            alt={blog.coverImage.altText}
-            fill
-            className="object-cover rounded-2xl shadow"
-          />
-          {blog.isFeatured && (
-            <span className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm">
-              Featured
-            </span>
-          )}
+        {/* post header */}
+        <h1 className="text-3xl font-extrabold">{blog.title}</h1>
+        <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+          <div>{new Date(blog.date).toLocaleDateString()}</div>
+          <div>•</div>
+          <div>{calcReadTime(blog.content)}</div>
+          <div>•</div>
+          <div>{blog.tags.join(", ")}</div>
         </div>
 
-        {/* Title & Meta */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">{blog.title}</h1>
-        <p className="text-gray-600 mb-2">{blog.subtitle}</p>
-        <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
-          <span>{new Date(blog.publishedDate).toDateString()}</span>
-          <span>· {blog.estimatedReadTime} min read</span>
-          <span>· {blog.viewCount} views</span>
-          <span>· {blog.likeCount} likes</span>
-        </div>
-
-        {/* Author */}
-        {blog.authors?.map((author, idx) => (
-          <div key={idx} className="flex items-center gap-3 mb-8">
+        {/* cover (if present) */}
+        {blog.cover && (
+          <div className="mt-4 w-full h-60 relative overflow-hidden rounded">
             <Image
-              src={author.avatarImage}
-              alt={author.name}
-              width={50}
-              height={50}
-              className="rounded-full aspect-square object-cover shadow-sm"
+              src={blog.cover}
+              alt={blog.title}
+              fill
+              style={{ objectFit: "cover" }}
             />
-            <div>
-              <p className="font-semibold">{author.name}</p>
-              <p className="text-sm text-gray-500">{author.title}</p>
-            </div>
           </div>
-        ))}
+        )}
 
-        {/* Sections */}
-        <div className="prose max-w-none">
-          {blog.sections?.map((section, idx) => (
-            <div key={idx} className="mb-10">
-              {section.title && (
-                <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
-              )}
-              {section.subtitle && (
-                <p className="text-lg text-gray-600 mb-4">{section.subtitle}</p>
-              )}
-
-              {section.contentBlocks.map((block, bIdx) => {
-                switch (block.type) {
-                  case "text":
-                    return (
-                      <p
-                        key={bIdx}
-                        className="mb-4 text-gray-800 leading-relaxed"
-                      >
-                        {block.text}
-                      </p>
-                    );
-                  case "image":
-                    return (
-                      <div key={bIdx} className="my-6">
-                        <Image
-                          src={block.mediaUrl}
-                          alt={block.altText}
-                          width={800}
-                          height={450}
-                          className="rounded-xl"
-                        />
-                        {block.caption && (
-                          <p className="text-sm text-gray-500 mt-2">
-                            {block.caption}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  case "quote":
-                    return (
-                      <blockquote
-                        key={bIdx}
-                        className="border-l-4 border-red-600 pl-4 italic my-6 text-gray-700"
-                      >
-                        {block.text}
-                        {block.caption && (
-                          <footer className="mt-2 text-sm text-gray-500">
-                            — {block.caption}
-                          </footer>
-                        )}
-                      </blockquote>
-                    );
-                  case "callout":
-                    return (
-                      <div
-                        key={bIdx}
-                        className={`p-4 my-6 rounded-xl bg-blue-50 border-l-4 border-blue-400`}
-                      >
-                        <p className="text-gray-700">{block.text}</p>
-                      </div>
-                    );
-                  case "list":
-                    return block.listType === "bullet" ? (
-                      <ul key={bIdx} className="list-disc ml-6 mb-4">
-                        {block.listItems.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <ol key={bIdx} className="list-decimal ml-6 mb-4">
-                        {block.listItems.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ol>
-                    );
-                  default:
-                    return null;
-                }
-              })}
-            </div>
-          ))}
-        </div>
-
-        {/* Tags */}
-        <div className="mt-10 flex flex-wrap gap-2">
-          {blog.tags?.map((tag, idx) => (
-            <span
-              key={idx}
-              className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm"
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
+        {/* content */}
+        <article className="prose max-w-none mt-6">
+          {/* For demo we display markdown-like content as plain text. Replace with MD renderer if you want. */}
+          <pre className="whitespace-pre-wrap">{blog.content}</pre>
+        </article>
 
         {/* actions: share, like/dislike */}
-        <div className="flex flex-col gap-3 mt-6">
-          {!verifiedEmail && <EmailOtpBox />}
-          <div className="flex gap-3">
-            <button
-              onClick={() => setShowShare(true)}
-              className="px-4 py-2 border rounded"
-            >
-              Share
-            </button>
-            <button
-              onClick={toggleLike}
-              className={`px-4 py-2 border rounded ${
-                liked ? "bg-green-100" : ""
-              }`}
-            >
-              Like
-            </button>
-            <button
-              onClick={toggleDislike}
-              className={`px-4 py-2 border rounded ${
-                disliked ? "bg-red-100" : ""
-              }`}
-            >
-              Dislike
-            </button>
-          </div>
+        <div className="flex gap-3 mt-6">
+          <button
+            onClick={() => setShowShare(true)}
+            className="px-4 py-2 border rounded"
+          >
+            Share
+          </button>
+          <button
+            onClick={toggleLike}
+            className={`px-4 py-2 border rounded ${
+              liked ? "bg-green-100" : ""
+            }`}
+          >
+            Like
+          </button>
+          <button
+            onClick={toggleDislike}
+            className={`px-4 py-2 border rounded ${
+              disliked ? "bg-red-100" : ""
+            }`}
+          >
+            Dislike
+          </button>
         </div>
 
         {/* prev / next */}
@@ -528,7 +358,40 @@ export default function BlogPost() {
         <section className="mt-8">
           <h3 className="font-bold">Comments</h3>
           <div className="mt-3">
-            {!verifiedEmail && <EmailOtpBox />}
+            {!verifiedEmail && (
+              <div className="p-3 border rounded mb-4">
+                <div className="flex gap-2">
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email to comment"
+                    className="flex-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={sendOtp}
+                    className="px-4 py-2 bg-blue-600 text-white rounded"
+                  >
+                    Send OTP
+                  </button>
+                </div>
+                {otpSent && (
+                  <div className="mt-2 flex gap-2">
+                    <input
+                      value={otpInput}
+                      onChange={(e) => setOtpInput(e.target.value)}
+                      placeholder="Enter OTP"
+                      className="p-2 border rounded"
+                    />
+                    <button
+                      onClick={verifyOtp}
+                      className="px-3 py-2 bg-green-600 text-white rounded"
+                    >
+                      Verify
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
 
             {verifiedEmail && (
               <div className="p-3 border rounded mb-4">
