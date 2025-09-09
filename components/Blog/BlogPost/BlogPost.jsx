@@ -435,12 +435,12 @@ export default function BlogPost() {
         </form> */}
 
         {/* Cover Image */}
-        <div className="relative w-full h-80 md:h-[400px] mb-8">
+        <div className="relative w-full md:h-[400px] h-auto aspect-video md:aspect-auto mb-8">
           <Image
             src={blog.coverImage.url}
             alt={blog.coverImage.altText}
             fill
-            className="object-cover rounded-2xl shadow"
+            className="aspect-video object-cover rounded-2xl shadow"
           />
           {blog.isFeatured && (
             <span className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm">
@@ -479,83 +479,275 @@ export default function BlogPost() {
         {/* Sections */}
         <div className="prose max-w-none">
           {blog.sections?.map((section, idx) => (
-            <div key={idx} className="mb-10">
+            <div
+              key={idx}
+              className={`mb-12 ${
+                section.layout === "full-width"
+                  ? "w-full"
+                  : section.layout === "two-column"
+                  ? "md:grid md:grid-cols-2 md:gap-8"
+                  : section.layout === "sidebar-right"
+                  ? "md:grid md:grid-cols-3 md:gap-8"
+                  : section.layout === "sidebar-left"
+                  ? "md:grid md:grid-cols-3 md:gap-8"
+                  : ""
+              }`}
+            >
               {section.title && (
-                <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
-              )}
-              {section.subtitle && (
-                <p className="text-lg text-gray-600 mb-4">{section.subtitle}</p>
+                <h2
+                  className={`text-2xl font-bold mb-4 ${
+                    section.layout === "two-column" ||
+                    section.layout === "sidebar-right" ||
+                    section.layout === "sidebar-left"
+                      ? "md:col-span-full"
+                      : ""
+                  }`}
+                >
+                  {section.title}
+                </h2>
               )}
 
-              {section.contentBlocks.map((block, bIdx) => {
-                switch (block.type) {
-                  case "text":
-                    return (
-                      <p
-                        key={bIdx}
-                        className="mb-4 text-gray-800 leading-relaxed"
-                      >
-                        {block.text}
-                      </p>
-                    );
-                  case "image":
-                    return (
-                      <div key={bIdx} className="my-6">
-                        <Image
-                          src={block.mediaUrl}
-                          alt={block.altText}
-                          width={800}
-                          height={450}
-                          className="rounded-xl"
-                        />
-                        {block.caption && (
-                          <p className="text-sm text-gray-500 mt-2">
-                            {block.caption}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  case "quote":
-                    return (
-                      <blockquote
-                        key={bIdx}
-                        className="border-l-4 border-red-600 pl-4 italic my-6 text-gray-700"
-                      >
-                        {block.text}
-                        {block.caption && (
-                          <footer className="mt-2 text-sm text-gray-500">
-                            — {block.caption}
-                          </footer>
-                        )}
-                      </blockquote>
-                    );
-                  case "callout":
-                    return (
-                      <div
-                        key={bIdx}
-                        className={`p-4 my-6 rounded-xl bg-blue-50 border-l-4 border-blue-400`}
-                      >
-                        <p className="text-gray-700">{block.text}</p>
-                      </div>
-                    );
-                  case "list":
-                    return block.listType === "bullet" ? (
-                      <ul key={bIdx} className="list-disc ml-6 mb-4">
-                        {block.listItems.map((item, i) => (
-                          <li key={i}>{item}</li>
+              {section.subtitle && (
+                <h3
+                  className={`text-xl text-gray-700 mb-4 ${
+                    section.layout === "two-column" ||
+                    section.layout === "sidebar-right" ||
+                    section.layout === "sidebar-left"
+                      ? "md:col-span-full"
+                      : ""
+                  }`}
+                >
+                  {section.subtitle}
+                </h3>
+              )}
+
+              {section.layout === "sidebar-left" ? (
+                <>
+                  <div className="md:col-span-1 bg-gray-50 p-4 rounded">
+                    {/* Sidebar content - typically additional info */}
+                    <h4 className="font-medium mb-3">Key Points</h4>
+                    <ul className="list-disc pl-5">
+                      {section.contentBlocks
+                        .filter((block) => block.type === "list")
+                        .flatMap((block) => block.listItems)
+                        .map((item, i) => (
+                          <li key={i} className="mb-2 text-sm text-gray-700">
+                            {item}
+                          </li>
                         ))}
-                      </ul>
-                    ) : (
-                      <ol key={bIdx} className="list-decimal ml-6 mb-4">
-                        {block.listItems.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ol>
-                    );
-                  default:
-                    return null;
-                }
-              })}
+                    </ul>
+                  </div>
+                  <div className="md:col-span-2">
+                    {section.contentBlocks.map((block, bIdx) => {
+                      switch (block.type) {
+                        case "text":
+                          return (
+                            <p
+                              key={bIdx}
+                              className="mb-4 text-gray-800 leading-relaxed"
+                            >
+                              {block.text}
+                            </p>
+                          );
+                        case "image":
+                          return (
+                            <div key={bIdx} className="my-6">
+                              <Image
+                                src={block.mediaUrl}
+                                alt={block.altText}
+                                width={800}
+                                height={450}
+                                className="rounded-xl"
+                              />
+                              {block.caption && (
+                                <p className="text-sm text-gray-500 mt-2">
+                                  {block.caption}
+                                </p>
+                              )}
+                            </div>
+                          );
+                        case "quote":
+                          return (
+                            <blockquote
+                              key={bIdx}
+                              className="border-l-4 border-red-600 pl-4 italic my-6 text-gray-700"
+                            >
+                              {block.text}
+                              {block.caption && (
+                                <footer className="mt-2 text-sm text-gray-500">
+                                  — {block.caption}
+                                </footer>
+                              )}
+                            </blockquote>
+                          );
+                        case "callout":
+                          return (
+                            <div
+                              key={bIdx}
+                              className={`p-4 my-6 rounded-xl bg-blue-50 border-l-4 border-blue-400`}
+                            >
+                              <p className="text-gray-700">{block.text}</p>
+                            </div>
+                          );
+                        case "list":
+                          return null; // Lists are handled in sidebar for this layout
+                        default:
+                          return null;
+                      }
+                    })}
+                  </div>
+                </>
+              ) : section.layout === "sidebar-right" ? (
+                <>
+                  <div className="md:col-span-2">
+                    {section.contentBlocks
+                      .filter((block) => block.type !== "callout")
+                      .map((block, bIdx) => {
+                        switch (block.type) {
+                          case "text":
+                            return (
+                              <p
+                                key={bIdx}
+                                className="mb-4 text-gray-800 leading-relaxed"
+                              >
+                                {block.text}
+                              </p>
+                            );
+                          case "image":
+                            return (
+                              <div key={bIdx} className="my-6">
+                                <Image
+                                  src={block.mediaUrl}
+                                  alt={block.altText}
+                                  width={800}
+                                  height={450}
+                                  className="rounded-xl"
+                                />
+                                {block.caption && (
+                                  <p className="text-sm text-gray-500 mt-2">
+                                    {block.caption}
+                                  </p>
+                                )}
+                              </div>
+                            );
+                          case "quote":
+                            return (
+                              <blockquote
+                                key={bIdx}
+                                className="border-l-4 border-red-600 pl-4 italic my-6 text-gray-700"
+                              >
+                                {block.text}
+                                {block.caption && (
+                                  <footer className="mt-2 text-sm text-gray-500">
+                                    — {block.caption}
+                                  </footer>
+                                )}
+                              </blockquote>
+                            );
+                          case "list":
+                            return block.listType === "bullet" ? (
+                              <ul key={bIdx} className="list-disc ml-6 mb-4">
+                                {block.listItems.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <ol key={bIdx} className="list-decimal ml-6 mb-4">
+                                {block.listItems.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ol>
+                            );
+                          default:
+                            return null;
+                        }
+                      })}
+                  </div>
+                  {/* <div className="md:col-span-1 bg-gray-50 p-4 rounded">
+                    <h4 className="font-medium mb-3">Additional Information</h4>
+                    {section.contentBlocks
+                      .filter((block) => block.type === "callout")
+                      .map((block, bIdx) => (
+                        <div
+                          key={bIdx}
+                          className={`p-4 my-6 rounded-xl bg-blue-50 border-l-4 border-blue-400`}
+                        >
+                          <p className="text-gray-700">{block.text}</p>
+                        </div>
+                      ))}
+                  </div> */}
+                </>
+              ) : (
+                section.contentBlocks.map((block, bIdx) => {
+                  switch (block.type) {
+                    case "text":
+                      return (
+                        <p
+                          key={bIdx}
+                          className="mb-4 text-gray-800 leading-relaxed"
+                        >
+                          {block.text}
+                        </p>
+                      );
+                    case "image":
+                      return (
+                        <div key={bIdx} className="my-6">
+                          <Image
+                            src={block.mediaUrl}
+                            alt={block.altText}
+                            width={800}
+                            height={450}
+                            className="rounded-xl"
+                          />
+                          {block.caption && (
+                            <p className="text-sm text-gray-500 mt-2">
+                              {block.caption}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    case "quote":
+                      return (
+                        <blockquote
+                          key={bIdx}
+                          className="border-l-4 border-red-600 pl-4 italic my-6 text-gray-700"
+                        >
+                          {block.text}
+                          {block.caption && (
+                            <footer className="mt-2 text-sm text-gray-500">
+                              — {block.caption}
+                            </footer>
+                          )}
+                        </blockquote>
+                      );
+                    case "callout":
+                      return (
+                        <div
+                          key={bIdx}
+                          className={`p-4 my-6 rounded-xl bg-blue-50 border-l-4 border-blue-400`}
+                        >
+                          <p className="text-gray-700">{block.text}</p>
+                        </div>
+                      );
+                    case "list":
+                      return block.listType === "bullet" ? (
+                        <ul key={bIdx} className="list-disc ml-6 mb-4">
+                          {block.listItems.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <ol key={bIdx} className="list-decimal ml-6 mb-4">
+                          {block.listItems.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ol>
+                      );
+                    default:
+                      return null;
+                  }
+                })
+              )}
             </div>
           ))}
         </div>
