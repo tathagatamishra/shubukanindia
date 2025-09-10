@@ -97,11 +97,21 @@ export default function BlogPost() {
     }
   }
 
-  // 🔹 Like / Dislike
+  // Helper to get headers
+  function getAuthHeaders() {
+    return {
+      headers: {
+        "x-email": localStorage.getItem("verified_email"),
+        "x-email-token": localStorage.getItem("email_token"),
+      },
+    };
+  }
+
+  // 🔹 Like
   async function toggleLike() {
     if (!verifiedEmail) return alert("Verify email first");
     try {
-      await shubukan_api.post(`/blog/${blog._id}/like`);
+      await shubukan_api.post(`/blog/${blog._id}/like`, {}, getAuthHeaders());
       setLiked(true);
       setDisliked(false);
     } catch (err) {
@@ -109,10 +119,15 @@ export default function BlogPost() {
     }
   }
 
+  // 🔹 Dislike
   async function toggleDislike() {
     if (!verifiedEmail) return alert("Verify email first");
     try {
-      await shubukan_api.post(`/blog/${blog._id}/dislike`);
+      await shubukan_api.post(
+        `/blog/${blog._id}/dislike`,
+        {},
+        getAuthHeaders()
+      );
       setDisliked(true);
       setLiked(false);
     } catch (err) {
@@ -126,15 +141,31 @@ export default function BlogPost() {
     if (!commentText.trim()) return;
 
     try {
-      const res = await shubukan_api.post(`/blog/${blog._id}/comment`, {
-        text: commentText.trim(),
-      });
-      setComments([res.data, ...comments]);
+      const res = await shubukan_api.post(
+        `/blog/${blog._id}/comment`,
+        {
+          text: commentText.trim(),
+          name: verifiedEmail, // 👈 use verified email as identifier
+          avatar: null, // optional
+        },
+        getAuthHeaders()
+      );
+
+      // API currently returns all comments, not just new one
+      setComments(res.data);
+
       setCommentText("");
     } catch (err) {
       alert(err.response?.data?.message || "Error posting comment");
     }
   }
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("verified_email");
+    if (savedEmail) {
+      setVerifiedEmail(savedEmail);
+    }
+  }, []);
 
   function EmailOtpBox() {
     return (
@@ -322,81 +353,9 @@ export default function BlogPost() {
     return (
       <div className="BlogPost">
         <div className="BlogPostPage flex flex-col justify-center items-center">
-          {/* search bar */}
-          {/* <form onSubmit={onSearch} className="w-full flex gap-2 mb-6">
-            <button
-              className="px-4 py-2 rounded bg-gray-200"
-              onClick={() => router.push("/blog")}
-            >
-              Back to Blog
-            </button>
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search blog by title or tag..."
-              className="flex-1 p-2 border rounded"
-            />
-            <button className="px-4 py-2 bg-blue-600 text-white rounded">
-              Search
-            </button>
-            <button
-              type="button"
-              className="px-4 py-2 bg-gray-200 rounded"
-              onClick={() => {
-                setQuery("");
-                setBlog(blogPosts);
-              }}
-            >
-              Reset
-            </button>
-          </form> */}
-          <h2 className="text-2xl font-bold">Blog not found</h2>
-          <p className="mt-4">Try the search or go back to the blog listing.</p>
-          <Image
-            src="https://res.cloudinary.com/daspiwjet/image/upload/v1757381008/Blog404_xp7liu.png"
-            alt="Sad Elephant"
-            className="notFound"
-            width={300}
-            height={300}
-          />
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p className="mt-4 text-gray-600">Loading blog post...</p>
         </div>
-      </div>
-    );
-  }
-
-  function EmailOtpBox() {
-    return (
-      <div className="p-3 border rounded mb-4">
-        <div className="flex gap-2">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="flex-1 p-2 border rounded"
-          />
-          <button
-            onClick={sendOtp}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Send OTP
-          </button>
-        </div>
-        {otpSent && (
-          <div className="mt-2 flex gap-2">
-            <input
-              value={otpInput}
-              onChange={(e) => setOtpInput(e.target.value)}
-              placeholder="Enter OTP"
-              className="p-2 border rounded"
-            />
-            <button
-              onClick={verifyOtp}
-              className="px-3 py-2 bg-green-600 text-white rounded"
-            >
-              Verify
-            </button>
-          </div>
-        )}
       </div>
     );
   }
@@ -948,14 +907,23 @@ export default function BlogPost() {
 
           {/* Comment list */}
           <div className="flex flex-col gap-3">
-            {comments.map((c, idx) => (
-              <div key={idx} className="p-3 border rounded">
-                <div className="text-sm text-gray-600">
-                  {c.email} • {new Date(c.date).toLocaleString()}
+            {comments.length > 0 &&
+              comments.map((c, idx) => (
+                <div key={idx} className="p-3 border rounded">
+                  <div className="text-sm text-gray-600">
+                    {c.name} •{" "}
+                    <p className="text-xs text-gray-400">
+                      {c.createdAt
+                        ? new Date(c.createdAt).toLocaleString("en-IN", {
+                            dateStyle: "medium",
+                            timeStyle: "short",
+                          })
+                        : ""}
+                    </p>
+                  </div>
+                  <div className="mt-1">{c.text}</div>
                 </div>
-                <div className="mt-1">{c.text}</div>
-              </div>
-            ))}
+              ))}
           </div>
         </section>
 
