@@ -728,38 +728,7 @@ export default function BlogPost({ blog }) {
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded max-w-md w-full">
               <h3 className="font-bold mb-4">Share this post</h3>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    /* placeholder social share */ alert(
-                      "Open Facebook share (placeholder)"
-                    );
-                  }}
-                  className="px-3 py-2 border rounded"
-                >
-                  Facebook
-                </button>
-                <button
-                  onClick={() => {
-                    /* placeholder social share */ alert(
-                      "Open Twitter share (placeholder)"
-                    );
-                  }}
-                  className="px-3 py-2 border rounded"
-                >
-                  Twitter
-                </button>
-                <button
-                  onClick={() => {
-                    /* placeholder social share */ alert(
-                      "Open WhatsApp share (placeholder)"
-                    );
-                  }}
-                  className="px-3 py-2 border rounded"
-                >
-                  WhatsApp
-                </button>
-              </div>
+   
               <div className="mt-4 flex gap-2">
                 <input
                   readOnly
