@@ -82,9 +82,9 @@ export default async function Page({ params }) {
   const { slug } = await params;
   const blogPost = await getCachedBlogPost(slug);
 
-  // if (!blogPost) {
-  //   redirect("/blogpost/blog-not-found");
-  // }
+  if (!blogPost) {
+    redirect("/blogpost/blog-not-found");
+  }
 
   return <BlogPost blog={blogPost} />;
 }
