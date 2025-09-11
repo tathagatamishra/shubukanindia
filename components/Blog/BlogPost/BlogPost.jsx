@@ -1,46 +1,11 @@
 //components/Blog/BlogPost/BlogPost.jsx
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
-import { useRouter, usePathname, useParams } from "next/navigation";
-// import { blogPosts } from "./blogData";
+import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
 import Image from "next/image";
 import "./BlogPost.scss";
 
-/*
-  Dynamic blog post page for Next.js 15 app directory
-  Path: app/blogpost/[slug]/page.jsx
-
-  Features implemented with dummy data:
-  - dynamic route (slug taken from pathname)
-  - renders blog content from a local dummy array
-  - search bar to filter blog list
-  - share modal (copy link + social buttons placeholder)
-  - like / dislike stored in localStorage per-slug
-  - comment flow with email+OTP verification (dummy OTP, stored in session)
-  - previous / next blog navigation
-  - read time, related posts by tag
-
-  Styling: Tailwind utility classes (project already uses Tailwind in other files)
-  Note: Replace dummyData with fetch from your backend when ready.
-*/
-
-function useSlugFromPath() {
-  const pathname = usePathname();
-  // pathname example: /blogpost/from-fist-to-force-the-secret-behind-karate-tsuki-punch
-  return pathname?.split("/").pop() || "";
-}
-
-export default function BlogPost() {
-  const router = useRouter();
-  // const slug = useSlugFromPath();
-  const { slug } = useParams();
-
-  // const [blog, setBlog] = useState(blogPosts);
-
-  const [blog, setBlog] = useState(null);
-  const [query, setQuery] = useState("");
-
+export default function BlogPost({ blog }) {
   // states
   const [showShare, setShowShare] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -53,22 +18,50 @@ export default function BlogPost() {
   const [verifiedEmail, setVerifiedEmail] = useState(null);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
+  const [likes, setLikes] = useState([]);
 
-  // ✅ Fetch blog data from backend
-  useEffect(() => {
-    async function fetchBlog() {
-      try {
-        const res = await shubukan_api.get(`/blog/${slug}`);
-        setBlog(res.data);
-        setComments(res.data.comments || []);
-      } catch (err) {
-        console.error(err);
-      }
+  // get Like/Dislike/Comments
+  async function getComments() {
+    try {
+      const res = await shubukan_api.get(`/blog/comment/${blog.slug}`);
+      setComments(res.data);
+    } catch (error) {
+      console.error("Error fetching blog:", error);
+      return [];
     }
-    if (slug) fetchBlog();
-  }, [slug]);
+  }
+  async function getLikes() {
+    try {
+      const res = await shubukan_api.get(`/blog/like/${blog.slug}`);
+      setLikes(res.data.likes);
+    } catch (error) {
+      console.error("Error fetching blog:", error);
+      return [];
+    }
+  }
 
-  // 🔹 OTP APIs
+  // restore email from localStorage
+  useEffect(() => {
+    // get data
+    getComments();
+    getLikes();
+
+    // get email
+    const savedEmail = localStorage.getItem("verified_email");
+    if (savedEmail) setVerifiedEmail(savedEmail);
+  }, []);
+
+  // auth headers helper
+  function getAuthHeaders() {
+    return {
+      headers: {
+        "x-email": localStorage.getItem("verified_email"),
+        "x-email-token": localStorage.getItem("email_token"),
+      },
+    };
+  }
+
+  // OTP APIs
   async function sendOtp() {
     if (!email) return alert("Enter a valid email");
     try {
@@ -97,21 +90,11 @@ export default function BlogPost() {
     }
   }
 
-  // Helper to get headers
-  function getAuthHeaders() {
-    return {
-      headers: {
-        "x-email": localStorage.getItem("verified_email"),
-        "x-email-token": localStorage.getItem("email_token"),
-      },
-    };
-  }
-
-  // 🔹 Like
+  // Like API
   async function toggleLike() {
     if (!verifiedEmail) return alert("Verify email first");
     try {
-      await shubukan_api.post(`/blog/${blog._id}/like`, {}, getAuthHeaders());
+      await shubukan_api.post(`/blog/like/${blog.slug}`, {}, getAuthHeaders());
       setLiked(true);
       setDisliked(false);
     } catch (err) {
@@ -119,12 +102,12 @@ export default function BlogPost() {
     }
   }
 
-  // 🔹 Dislike
+  // Dislike API
   async function toggleDislike() {
     if (!verifiedEmail) return alert("Verify email first");
     try {
       await shubukan_api.post(
-        `/blog/${blog._id}/dislike`,
+        `/blog/dislike/${blog.slug}`,
         {},
         getAuthHeaders()
       );
@@ -135,103 +118,28 @@ export default function BlogPost() {
     }
   }
 
-  // 🔹 Comments
+  // Comment API
   async function postComment() {
     if (!verifiedEmail) return alert("Verify email first");
     if (!commentText.trim()) return;
 
     try {
       const res = await shubukan_api.post(
-        `/blog/${blog._id}/comment`,
+        `/blog/comment/${blog.slug}`,
         {
           text: commentText.trim(),
-          name: verifiedEmail, // 👈 use verified email as identifier
-          avatar: null, // optional
+          name: verifiedEmail,
+          avatar: null,
         },
         getAuthHeaders()
       );
 
-      // API currently returns all comments, not just new one
-      setComments(res.data);
-
+      getComments();
       setCommentText("");
     } catch (err) {
       alert(err.response?.data?.message || "Error posting comment");
     }
   }
-
-  useEffect(() => {
-    const savedEmail = localStorage.getItem("verified_email");
-    if (savedEmail) {
-      setVerifiedEmail(savedEmail);
-    }
-  }, []);
-
-  function EmailOtpBox() {
-    return (
-      <div className="p-3 border rounded mb-4">
-        <div className="flex gap-2">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="flex-1 p-2 border rounded"
-          />
-          <button
-            onClick={sendOtp}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Send OTP
-          </button>
-        </div>
-        {otpSent && (
-          <div className="mt-2 flex gap-2">
-            <input
-              value={otpInput}
-              onChange={(e) => setOtpInput(e.target.value)}
-              placeholder="Enter OTP"
-              className="p-2 border rounded"
-            />
-            <button
-              onClick={verifyOtp}
-              className="px-3 py-2 bg-green-600 text-white rounded"
-            >
-              Verify
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // useEffect(() => {
-  //   // load like/dislike from localStorage
-  //   const likeKey = `like_${slug}`;
-  //   const dislikeKey = `dislike_${slug}`;
-  //   setLiked(localStorage.getItem(likeKey) === "1");
-  //   setDisliked(localStorage.getItem(dislikeKey) === "1");
-
-  //   // load comments from localStorage
-  //   const stored = localStorage.getItem("blog_comments_v1");
-  //   if (stored) setComments(JSON.parse(stored));
-
-  //   // load verified email
-  //   const storedEmail = localStorage.getItem("verified_email");
-  //   if (storedEmail) setVerifiedEmail(storedEmail);
-  // }, [slug]);
-
-  // useEffect(() => {
-  //   if (verifiedEmail) {
-  //     localStorage.setItem("verified_email", verifiedEmail);
-  //   } else {
-  //     localStorage.removeItem("verified_email");
-  //   }
-  // }, [verifiedEmail]);
-
-  // useEffect(() => {
-  //   // persist comments
-  //   localStorage.setItem("blog_comments_v1", JSON.stringify(comments));
-  // }, [comments]);
 
   // // const blog = useMemo(() => blog.find((b) => b.slug === slug), [blog, slug]);
 
@@ -263,86 +171,6 @@ export default function BlogPost() {
   //   setBlog(filtered);
   // }
 
-  // function requireVerification(action) {
-  //   if (!verifiedEmail) {
-  //     alert("Please verify your email before you can " + action);
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-  // function toggleLike() {
-  //   if (!requireVerification("like")) return;
-  //   const likeKey = `like_${slug}`;
-  //   const dislikeKey = `dislike_${slug}`;
-  //   if (liked) {
-  //     setLiked(false);
-  //     localStorage.removeItem(likeKey);
-  //   } else {
-  //     setLiked(true);
-  //     setDisliked(false);
-  //     localStorage.setItem(likeKey, "1");
-  //     localStorage.removeItem(dislikeKey);
-  //   }
-  // }
-
-  // function toggleDislike() {
-  //   if (!requireVerification("dislike")) return;
-  //   const likeKey = `like_${slug}`;
-  //   const dislikeKey = `dislike_${slug}`;
-  //   if (disliked) {
-  //     setDisliked(false);
-  //     localStorage.removeItem(dislikeKey);
-  //   } else {
-  //     setDisliked(true);
-  //     setLiked(false);
-  //     localStorage.setItem(dislikeKey, "1");
-  //     localStorage.removeItem(likeKey);
-  //   }
-  // }
-
-  // function sendOtp() {
-  //   if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
-  //     return alert("Enter a valid email");
-  //   // dummy OTP flow: generate 4-digit code and store in sessionStorage
-  //   const code = String(Math.floor(1000 + Math.random() * 9000));
-  //   sessionStorage.setItem(`otp_for_${email}`, code);
-  //   setOtpSent(true);
-  //   alert(
-  //     `(Dummy) OTP sent to ${email}: ${code} — enter this to verify (in real app you will send email).`
-  //   );
-  // }
-
-  // function verifyOtp() {
-  //   const code = sessionStorage.getItem(`otp_for_${email}`);
-  //   if (code && otpInput === code) {
-  //     setVerifiedEmail(email);
-  //     setOtpSent(false);
-  //     setOtpInput("");
-  //     sessionStorage.removeItem(`otp_for_${email}`);
-  //     alert("Email verified (dummy)");
-  //   } else {
-  //     alert("Invalid OTP");
-  //   }
-  // }
-
-  // function postComment() {
-  //   if (!verifiedEmail)
-  //     return alert("Please verify your email before commenting");
-  //   if (!commentText.trim()) return;
-  //   const newComment = {
-  //     email: verifiedEmail,
-  //     text: commentText.trim(),
-  //     date: new Date().toISOString(),
-  //   };
-  //   setComments((prev) => {
-  //     const next = { ...prev };
-  //     next[slug] = next[slug] ? [newComment, ...next[slug]] : [newComment];
-  //     return next;
-  //   });
-  //   setCommentText("");
-  // }
-
   function copyLink() {
     const link = typeof window !== "undefined" ? window.location.href : "";
     navigator.clipboard.writeText(link);
@@ -353,7 +181,7 @@ export default function BlogPost() {
     return (
       <div className="BlogPost">
         <div className="BlogPostPage flex flex-col justify-center items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-[3px] border-[#A64B37]"></div>
           <p className="mt-4 text-gray-600">Loading blog post...</p>
         </div>
       </div>
@@ -399,7 +227,7 @@ export default function BlogPost() {
             src={blog.coverImage.url}
             alt={blog.coverImage.altText}
             fill
-            className="aspect-video object-cover rounded-2xl shadow"
+            className="aspect-video object-cover rounded-2xl border-t-[2px] border-[#fff] shadow-sm"
           />
           {blog.isFeatured && (
             <span className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm">
@@ -415,7 +243,7 @@ export default function BlogPost() {
           <span>{new Date(blog.publishedDate).toDateString()}</span>
           <span>· {blog.estimatedReadTime} min read</span>
           <span>· {blog.viewCount} views</span>
-          <span>· {blog.likeCount} likes</span>
+          <span>· {likes} likes</span>
         </div>
 
         {/* Author */}
@@ -733,22 +561,6 @@ export default function BlogPost() {
             >
               Share
             </button>
-            {/* <button
-              onClick={toggleLike}
-              className={`px-4 py-2 border rounded ${
-                liked ? "bg-green-100" : ""
-              }`}
-            >
-              Like
-            </button>
-            <button
-              onClick={toggleDislike}
-              className={`px-4 py-2 border rounded ${
-                disliked ? "bg-red-100" : ""
-              }`}
-            >
-              Dislike
-            </button> */}
           </div>
         </div>
 
@@ -797,59 +609,43 @@ export default function BlogPost() {
           </section>
         )} */}
 
-        {/* comments */}
-        {/* <section className="mt-8">
-          <h3 className="font-bold">Comments</h3>
-          <div className="mt-3">
-            {!verifiedEmail && <EmailOtpBox />}
-
-            {verifiedEmail && (
-              <div className="p-3 border rounded mb-4">
-                <div className="text-sm text-gray-600">
-                  Commenting as: <strong>{verifiedEmail}</strong>
-                </div>
-                <textarea
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  rows={4}
-                  className="w-full p-2 mt-2 border rounded"
-                  placeholder="Write your comment..."
-                ></textarea>
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={postComment}
-                    className="px-4 py-2 bg-blue-600 text-white rounded"
-                  >
-                    Post comment
-                  </button>
-                  <button
-                    onClick={() => {
-                      setVerifiedEmail(null);
-                      setEmail("");
-                    }}
-                    className="px-4 py-2 border rounded"
-                  >
-                    Sign out
-                  </button>
-                </div>
+        {/* ✅ OTP verification */}
+        {!verifiedEmail && (
+          <div className="p-3 border rounded mb-4">
+            <div className="flex gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="flex-1 p-2 border rounded"
+                required
+              />
+              <button
+                onClick={sendOtp}
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+              >
+                Send OTP
+              </button>
+            </div>
+            {otpSent && (
+              <div className="mt-2 flex gap-2">
+                <input
+                  value={otpInput}
+                  onChange={(e) => setOtpInput(e.target.value)}
+                  placeholder="Enter OTP"
+                  className="p-2 border rounded"
+                />
+                <button
+                  onClick={verifyOtp}
+                  className="px-3 py-2 bg-green-600 text-white rounded"
+                >
+                  Verify
+                </button>
               </div>
             )}
-
-            <div className="flex flex-col gap-3">
-              {(comments[slug] || []).map((c, idx) => (
-                <div key={idx} className="p-3 border rounded">
-                  <div className="text-sm text-gray-600">
-                    {c.email} • {new Date(c.date).toLocaleString()}
-                  </div>
-                  <div className="mt-1">{c.text}</div>
-                </div>
-              ))}
-            </div>
           </div>
-        </section> */}
-
-        {/* ✅ OTP verification */}
-        {!verifiedEmail && <EmailOtpBox />}
+        )}
 
         {/* ✅ Like / Dislike */}
         <div className="flex gap-3 my-4">
