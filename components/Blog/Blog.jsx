@@ -101,7 +101,7 @@ export default function Blog({ blogs }) {
           <div
             key={blog._id || index}
             className="container w-full sm:h-[calc(100%-40px)] h-[calc(100%-30px)] p-[10px] sm:p-[20px] flex flex-col sm:gap-[20px] gap-[10px] cursor-pointer"
-            onClick={() => navigate(`/blog/${blog.slug || blog._id}`)}
+            onClick={() => navigate(`/blogpost/${blog.slug || blog._id}`)}
           >
             <h2 className="font-[700] text-[24px]">{blog.title}</h2>
             <div className="w-full h-full p-[10px] border-1 bg-[burlywood] overflow-hidden">
@@ -136,7 +136,7 @@ export default function Blog({ blogs }) {
             className={`zigzagCard flex gap-[20px] cursor-pointer ${
               index % 2 === 0 ? "flex-row" : "flex-row-reverse"
             }`}
-            onClick={() => navigate(`/blog/${blog.slug || blog._id}`)}
+            onClick={() => navigate(`/blogpost/${blog.slug || blog._id}`)}
           >
             <div className="zigzagCardContent lg:w-[70%] sm:w-[80%] w-full max-w-full flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
               <h2
@@ -197,7 +197,7 @@ export default function Blog({ blogs }) {
           <div
             key={blog._id || index}
             className="vertCard flex flex-col gap-[20px] sm:p-[20px] p-[10px] cursor-pointer"
-            onClick={() => navigate(`/blog/${blog.slug || blog._id}`)}
+            onClick={() => navigate(`/blogpost/${blog.slug || blog._id}`)}
           >
             {blog.coverImage.url && (
               <div className="w-full h-48 relative">
@@ -228,7 +228,7 @@ export default function Blog({ blogs }) {
           <div
             key={blog._id || index}
             className="bigCardDiv w-full p-[10px] cursor-pointer"
-            onClick={() => navigate(`/blog/${blog.slug || blog._id}`)}
+            onClick={() => navigate(`/blogpost/${blog.slug || blog._id}`)}
           >
             <h2 className="font-[700] text-[24px]">{blog.title}</h2>
             {blog.coverImage.url && (

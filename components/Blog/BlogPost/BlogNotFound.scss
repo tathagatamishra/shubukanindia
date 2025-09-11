@@ -1,0 +1,35 @@
+.BlogPost {
+    padding-top: 10rem;
+    padding-bottom: 140px;
+    max-width: 1000px;
+    height: fit-content;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (max-width: 800px) {
+        padding-top: 9rem;
+        padding-bottom: 100px;
+    }
+
+    @media screen and (max-width:700px) {
+        padding-top: 8rem;
+    }
+
+    @media screen and (max-width:550px) {
+        padding-top: 7rem;
+        width: 90%;
+        padding-bottom: 80px;
+    }
+
+    @media screen and (max-width: 431px) {
+        width: 90%;
+        padding-bottom: 50px;
+    }
+
+    & .BlogPostPage {
+        width: 100%;
+        
+    }
+}

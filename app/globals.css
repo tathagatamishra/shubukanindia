@@ -128,6 +128,12 @@ select:-webkit-autofill:focus {
   animation-timing-function: ease-in-out;
 }
 
+@media screen and (max-width: 500px) {
+  .notFound {
+    width: 200px;
+  }
+}
+
 @keyframes notFound {
   0% {
     filter: opacity(0);
