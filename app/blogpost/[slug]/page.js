@@ -8,18 +8,39 @@ async function getBlogPost(slug) {
     const response = await shubukan_api.get(`/blog/${slug}`, {
       cache: "no-store",
     });
+    
+    if (response.status === 400 || response.data.message === 400) {
+      return null;
+    }
+
     return response.data;
   } catch (error) {
-    console.error("Error fetching blog:", error);
+    // Handle 404 silently - this is expected for non-existent blogs
+    if (error.response?.status === 404) {
+      return null;
+    }
+    
+    // Only log unexpected errors
+    console.error("Unexpected error fetching blog:", error);
     return null;
   }
 }
 
+// Cache the blog post to avoid multiple API calls
+let blogPostCache = new Map();
+
+async function getCachedBlogPost(slug) {
+  if (!blogPostCache.has(slug)) {
+    const blogPost = await getBlogPost(slug);
+    blogPostCache.set(slug, blogPost);
+  }
+  return blogPostCache.get(slug);
+}
+
 // ✅ Add metadata for SEO + social sharing
 export async function generateMetadata({ params }) {
-  // Await params before accessing its properties
   const { slug } = await params;
-  const blogPost = await getBlogPost(slug);
+  const blogPost = await getCachedBlogPost(slug);
 
   if (!blogPost) {
     return {
@@ -58,9 +79,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  // Await params before accessing its properties
   const { slug } = await params;
-  const blogPost = await getBlogPost(slug);
+  const blogPost = await getCachedBlogPost(slug);
 
   if (!blogPost) {
     redirect("/blogpost/blog-not-found");
