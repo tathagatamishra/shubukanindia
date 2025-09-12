@@ -89,21 +89,70 @@ export default function RootLayout({ children }) {
   const showNav = false;
 
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      style={{
+        background: "rgb(231, 221, 211)",
+        overflowX: "hidden",
+        backgroundImage:
+          'url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
+        backgroundSize: "250px 250px",
+        maxWidth: "100vw",
+        margin: "0px",
+        boxSizing: "border-box",
+      }}
+    >
       <GoogleAnalytics />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          background: "rgb(231, 221, 211)",
+          overflowX: "hidden",
+          backgroundImage:
+            'url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
+          backgroundSize: "250px 250px",
+          maxWidth: "100vw",
+          margin: "0px",
+          boxSizing: "border-box",
+        }}
       >
         {isDesktop && <MouseTrail />}
-        <div className="App" id="App">
-          <Navbar />
-          <div className="webBody">{children}</div>
-          <Footer />
-          <Banner />
+        <div
+          className="App"
+          id="App"
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* <Navbar /> */}
+          <div
+            className="webBody"
+            style={{
+              position: "relative",
+              zIndex: 2,
+              height: "fit-content",
+              minHeight: "calc(100vh - 610px)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              overflowX: "hidden",
+            }}
+          >
+            {children}
+          </div>
+          {/* <Footer /> */}
+          {/* <Banner /> */}
         </div>
 
         <svg
           className="wobble"
+          style={{
+            position: "absolute",
+          }}
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           height="0"
