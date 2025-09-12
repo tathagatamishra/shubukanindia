@@ -46,6 +46,7 @@ export async function generateMetadata({ params }) {
     return {
       title: "Blog Not Found | Shubukan India",
       description: "This blog post could not be found.",
+      robots: { index: false, follow: false }, // prevent indexing missing pages
     };
   }
 
@@ -55,11 +56,19 @@ export async function generateMetadata({ params }) {
   return {
     title: blogPost.title,
     description: blogPost.summary || blogPost.subtitle,
+    keywords: blogPost.tags?.join(", "),
+    authors: blogPost.authors?.map((a) => a.name),
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title: blogPost.title,
       description: blogPost.summary || blogPost.subtitle,
       url,
       type: "article",
+      publishedTime: blogPost.publishedDate,
+      modifiedTime: blogPost.modifiedDate || blogPost.updatedAt,
+      authors: blogPost.authors?.map((a) => a.name),
       images: [
         {
           url: image,
@@ -74,6 +83,10 @@ export async function generateMetadata({ params }) {
       title: blogPost.title,
       description: blogPost.summary || blogPost.subtitle,
       images: [image],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
