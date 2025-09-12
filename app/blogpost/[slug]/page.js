@@ -8,7 +8,7 @@ async function getBlogPost(slug) {
     const response = await shubukan_api.get(`/blog/${slug}`, {
       cache: "no-store",
     });
-    
+
     if (response.status === 400 || response.data.message === 400) {
       return null;
     }
@@ -19,7 +19,7 @@ async function getBlogPost(slug) {
     if (error.response?.status === 404) {
       return null;
     }
-    
+
     // Only log unexpected errors
     console.error("Unexpected error fetching blog:", error);
     return null;
@@ -98,6 +98,10 @@ export default async function Page({ params }) {
   if (!blogPost) {
     redirect("/blogpost/blog-not-found");
   }
+
+  await shubukan_api
+    .post(`/blog/${slug}/view`)
+    .catch((err) => console.error("View track error:", err));
 
   return <BlogPost blog={blogPost} />;
 }
