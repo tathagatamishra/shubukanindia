@@ -127,7 +127,7 @@ export default function RootLayout({ children }) {
             justifyContent: "space-between",
           }}
         >
-          {/* <Navbar /> */}
+          <Navbar />
           <div
             className="webBody"
             style={{
@@ -144,8 +144,8 @@ export default function RootLayout({ children }) {
           >
             {children}
           </div>
-          {/* <Footer /> */}
-          {/* <Banner /> */}
+          <Footer />
+          <Banner />
         </div>
 
         <svg
