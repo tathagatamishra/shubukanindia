@@ -16,7 +16,17 @@ export default function Navbar() {
   const [lastScrollTop, setLastScrollTop] = useState(Infinity);
 
   const [isMenu, setIsMenu] = useState(false);
-  const [menuStyle, setMenuStyle] = useState({});
+  const [menuStyle, setMenuStyle] = useState({
+    zIndex: 4,
+    width: "8rem",
+    margin: "1.5rem 0",
+    cursor: "pointer",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    userSelect: "none",
+  });
 
   // Add state to track which logo is currently visible
   const [showFirstLogo, setShowFirstLogo] = useState(true);
@@ -176,7 +186,15 @@ export default function Navbar() {
   }
 
   return !isAdminPage ? (
-    <div id="Navbar" style={position}>
+    <div
+      id="Navbar"
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        ...position,
+      }}
+    >
       <div
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
@@ -213,23 +231,75 @@ export default function Navbar() {
         )}
       </div>
 
-      <div id="cloud-circle"></div>
+      <div
+        id="cloud-circle"
+        style={{
+          zIndex: -1,
+          width: "200vw",
+          height: "75%",
+          borderRadius: "0%",
+          filter: "url(#filter)",
+          boxShadow: "0px 8px 20px 10pxx #fff",
+          background: "#fff",
+          position: "absolute",
+          top: "-25px",
+          left: "-180px",
+        }}
+      ></div>
       <svg width="0" height="0">
         <filter id="filter">
           <feTurbulence
             type="fractalNoise"
             baseFrequency=".01"
             numOctaves="10"
+            seed={8}
           />
           <feDisplacementMap in="SourceGraphic" scale="60" />
         </filter>
       </svg>
 
-      <section className="menu">
+      <section
+        className="menu"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          transition: "200ms",
+        }}
+      >
         <div className="menuStart" style={menuStyle} onClick={lineFunc}>
-          <div className="lines"></div>
-          <p>MENU</p>
-          <div className="lines"></div>
+          <div
+            className="lines"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(42, 32, 28, 1) 100%)",
+              transition: "200ms",
+              userSelect: "none",
+            }}
+          ></div>
+          <p
+            style={{
+              margin: "0 10px 0 0",
+              textAlign: "right",
+              color: "rgba(42, 32, 28, 1)",
+              letterSpacing: "5px",
+              fontFamily: "'Geo2', sans-serif",
+              transition: "200ms",
+              userSelect: "none",
+            }}
+          >
+            MENU
+          </p>
+          <div
+            className="lines"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(42, 32, 28, 1) 100%)",
+              transition: "200ms",
+              userSelect: "none",
+            }}
+          ></div>
         </div>
 
         {isMenu && (
@@ -280,7 +350,7 @@ export default function Navbar() {
                 ))}
               </nav>
             </div>
-
+            {/* 
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
@@ -297,7 +367,7 @@ export default function Navbar() {
                   <feDisplacementMap in="SourceGraphic" scale="6" />
                 </filter>
               </defs>
-            </svg>
+            </svg> */}
           </>
         )}
       </section>

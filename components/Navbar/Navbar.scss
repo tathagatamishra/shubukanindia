@@ -39,21 +39,24 @@
         }
     }
 
-    & svg {
-        position: absolute;
-    }
+    // & svg {
+    //     position: absolute;
+    // }
 
     & #cloud-circle {
+        // border: solid 1px blueviolet;
         z-index: -1;
-        width: 200%;
-        height: 200%;
+        width: 200vw;
+        height: 75%;
         border-radius: 0%;
         filter: url(#filter);
         // X-axis, Y-axis, Blur-radius, Spread-radius, Color
-        box-shadow: 400px 400px 46px 63px #ffffff;
+        box-shadow: 0px 8px 20px 10px #ffffff;
+        background: #ffffff;
         position: absolute;
-        top: -676px;
-        left: -775px;
+        top: -25px;
+        left: -180px;
+        // transform: translate(-50%, -50%);
     }
 
     // border-bottom: solid red 1px;

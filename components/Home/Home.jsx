@@ -4,14 +4,12 @@ import { useRouter } from "next/navigation";
 import "./Home.scss";
 import Image from "next/image";
 
-
 export default function Home({ setShowNav }) {
-
   const router = useRouter();
   const navigate = (page) => {
     router.push(page);
   };
-  
+
   const [slider, setSlider] = useState(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(null);
@@ -23,7 +21,7 @@ export default function Home({ setShowNav }) {
   const [windowWidth, setWindowWidth] = useState(null);
 
   useEffect(() => {
-    if(typeof window !== undefined) {
+    if (typeof window !== undefined) {
       setWindowWidth(window.innerWidth);
     }
   }, []);
@@ -105,66 +103,431 @@ export default function Home({ setShowNav }) {
   }
 
   return (
-    <div className="Home">
-      <div className="tree">
-        <Image src="/assets/tree.png" alt="" height={1920} width={1920} />
+    <div
+      className="Home"
+      style={{
+        height: "fit-content",
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: "1000px",
+      }}
+    >
+      <div
+        className="tree"
+        style={{
+          zIndex: 1,
+          right: "0%",
+          position: "absolute",
+          transition: "300ms",
+          filter: "opacity(80%)",
+        }}
+      >
+        <Image
+          src="/assets/tree.png"
+          style={{
+            width: "100%",
+            objectFit: "contain",
+            userSelect: "none",
+          }}
+          alt=""
+          height={1920}
+          width={1920}
+        />
       </div>
-      {/* <div className="line">
-        <div className="lineColor"></div>
-      </div> */}
 
-      <section className="hero">
-        <div className="heading-div">
-          <div className="heading-box">
-            <p className="heading" id="S">S</p>
-            <p className="heading">h</p>
-            <p className="heading">u</p>
-            <p className="heading">b</p>
-            <p className="heading">u</p>
-            <p className="heading">k</p>
-            <p className="heading">a</p>
-            <p className="heading">n</p>
-            <p className="heading">&nbsp;</p>
+      <section
+        className="hero"
+        style={{
+          zIndex: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+        }}
+      >
+        <div
+          className="heading-div"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
+          <div
+            className="heading-box"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              fontFamily: "'AmanojakuZrqe3', sans-serif",
+            }}
+          >
+            <p
+              className="heading"
+              id="S"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              S
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              h
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              u
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              b
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              u
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              k
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              a
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              n
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              &nbsp;
+            </p>
           </div>
-          <div className="heading-box">
-            <p className="heading" id="U">U</p>
-            <p className="heading">e</p>
-            <p className="heading">m</p>
-            <p className="heading">a</p>
-            <p className="heading">&nbsp;</p>
+          <div
+            className="heading-box"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              fontFamily: "'AmanojakuZrqe3', sans-serif",
+            }}
+          >
+            <p
+              className="heading"
+              id="U"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              U
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              e
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              m
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              a
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              &nbsp;
+            </p>
           </div>
-          <div className="heading-box">
-            <p className="heading" id="D">D</p>
-            <p className="heading">o</p>
-            <p className="heading">j</p>
-            <p className="heading">o</p>
-            <p className="heading">&nbsp;</p>
+          <div
+            className="heading-box"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              fontFamily: "'AmanojakuZrqe3', sans-serif",
+            }}
+          >
+            <p
+              className="heading"
+              id="D"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              D
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              o
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              j
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              o
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              &nbsp;
+            </p>
           </div>
-          <div className="heading-box">
-            <p className="heading" id="I">I</p>
-            <p className="heading">n</p>
-            <p className="heading">d</p>
-            <p className="heading">i</p>
-            <p className="heading">a</p>
+          <div
+            className="heading-box"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              fontFamily: "'AmanojakuZrqe3', sans-serif",
+            }}
+          >
+            <p
+              className="heading"
+              id="I"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              I
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              n
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              d
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              i
+            </p>
+            <p
+              className="heading"
+              style={{
+                color: "#2a2727",
+                wordSpacing: "0.2rem",
+                transform: "rotate(-4deg)",
+                margin: 0,
+              }}
+            >
+              a
+            </p>
           </div>
         </div>
-        <p>
+
+        <p
+          style={{
+            margin: 0,
+            fontFamily: "'Amarante', cursive",
+          }}
+        >
           {/* <i>&nbsp;</i> Beneath the instinct to fight
         </p>
         <p> */}
           Pure soul is the preserver of true karate<i>&nbsp;</i>
         </p>
-        <div className="bird">
-          <Image src="/assets/bird.png" alt="" height={1920} width={1920} />
+
+        <div
+          className="bird"
+          style={{
+            zIndex: 1,
+            position: "absolute",
+            filter: "sepia(20%) opacity(80%)",
+            transition: "300ms",
+          }}
+        >
+          <Image
+            src="/assets/bird.png"
+            style={{
+              width: "100%",
+              height: "250px",
+              objectFit: "contain",
+              userSelect: "none",
+            }}
+            alt=""
+            height={1920}
+            width={1920}
+          />
         </div>
       </section>
-      {console.log(windowWidth)}
 
-      <section className="intro">
+      <section
+        className="intro"
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          transition: "300ms",
+        }}
+      >
         {windowWidth <= 400 ? (
-          <div className="define">
+          <div
+            className="define"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
             {/* <h1>The Way</h1> */}
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
               <p>DISCIPLINE</p>
               <div></div>
               <p>RESPECT</p>
@@ -173,9 +536,23 @@ export default function Home({ setShowNav }) {
             </div>
           </div>
         ) : (
-          <div className="define">
+          <div
+            className="define"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
             {/* <h1>The Way</h1> */}
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
               <p>Discipline</p>
               <div></div>
               <p>Respect</p>
@@ -185,20 +562,93 @@ export default function Home({ setShowNav }) {
           </div>
         )}
 
-        <div className="drogon">
-          <Image src="/assets/dragonx.png" alt="" height={1920} width={1920} />
+        <div
+          className="drogon"
+          style={{
+            zIndex: 1,
+            right: "0%",
+            position: "absolute",
+            filter: "sepia(100%) opacity(65%)",
+            transition: "300ms",
+          }}
+        >
+          <Image
+            src="/assets/dragonx.png"
+            style={{
+              width: "100%",
+              objectFit: "contain",
+              userSelect: "none",
+            }}
+            alt=""
+            height={1920}
+            width={1920}
+          />
         </div>
 
-        <div className="description">
-          <h1>THE SHUBUKAN WAY</h1>
+        <div
+          className="description"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            maxWidth: "1000px",
+          }}
+        >
+          <h1
+            style={{
+              color: "#262626da",
+              fontFamily: "'Tenali Ramakrishna', sans-serif",
+              width: "100%",
+              transition: "200ms",
+            }}
+          >
+            THE SHUBUKAN WAY
+          </h1>
 
-          <div className="offering">
-            <p>Shorin Ryu Karate</p>
-            <div></div>
-            <p>Okinawan Kobujutsu</p>
+          <div
+            className="offering"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "'GFS Neohellenic', sans-serif",
+                transition: "200ms",
+                margin: 0,
+              }}
+            >
+              Shorin Ryu Karate
+            </p>
+            <div
+              style={{
+                transform: "translateY(20%)",
+                background: "linear-gradient(#403D3C, transparent)",
+                transition: "200ms",
+              }}
+            ></div>
+            <p
+              style={{
+                fontFamily: "'GFS Neohellenic', sans-serif",
+                transition: "200ms",
+                margin: 0,
+              }}
+            >
+              Okinawan Kobujutsu
+            </p>
           </div>
 
-          <p>
+          <p
+            style={{
+              textAlign: "justify",
+              fontFamily: "'GFS Neohellenic', sans-serif",
+              transition: "200ms",
+            }}
+          >
             Okinawan Karate is simply designed for self-defense and it is the
             bearer of Okinawan tradition, culture and history. Shorin ryu of
             shubukan school carries the orthodox way of karate-kobudo and
@@ -206,11 +656,41 @@ export default function Home({ setShowNav }) {
             pure path of karate. We shubukan members are strong family, always
             trying to educate ourselves through the journey of Okinawan karate.
           </p>
-          <div className="underline"></div>
+          <div
+            className="underline"
+            style={{
+              marginTop: "2rem",
+              height: "2px",
+              width: "100%",
+              background:
+                "linear-gradient(-90deg, #905043 0%, transparent 60%)",
+              opacity: 0.3,
+              transition: "1000ms",
+            }}
+          ></div>
         </div>
 
-        <div className="drogon2">
-          <Image src="/assets/dragony.png" alt="" height={1920} width={1920} />
+        <div
+          className="drogon2"
+          style={{
+            zIndex: 1,
+            left: "0%",
+            position: "absolute",
+            filter: "sepia(100%) opacity(65%)",
+            transition: "200ms",
+          }}
+        >
+          <Image
+            src="/assets/dragony.png"
+            style={{
+              width: "100%",
+              objectFit: "contain",
+              userSelect: "none",
+            }}
+            alt=""
+            height={1920}
+            width={1920}
+          />
         </div>
       </section>
 
@@ -223,107 +703,601 @@ export default function Home({ setShowNav }) {
         </div>
       )}
 
-      <section className="gallery">
-        <div className="galleryTop">
+      <section
+        className="gallery"
+        style={{
+          margin: "5rem 0 2rem 0",
+          gap: "1rem",
+        }}
+      >
+        <div
+          className="galleryTop"
+          style={{
+            width: "100%",
+            height: "2px",
+            fontSize: "28px",
+            fontFamily: "'Tenali Ramakrishna', sans-serif",
+            color: "rgba(125, 103, 97, 0.808)",
+            background:
+              "linear-gradient(-90deg, transparent 0%, rgba(88, 78, 78, 0.514) 100%)",
+            transition: "300ms",
+          }}
+        >
           <div onClick={() => navigate("/gallery")} className="opt">
-            <h4>GALLERY</h4>
+            <h4
+              style={{
+                transition: "200ms",
+                color: "rgba(125, 103, 97, 0.808)",
+                cursor: "pointer",
+                textDecoration: "none",
+                margin: 0,
+              }}
+            >
+              GALLERY
+            </h4>
           </div>
         </div>
 
         <div>
-          <div className="image" onClick={() => imgPop("/web_images/shureimon_gate_low.jpg")}>
-            <Image src="/web_images/shureimon_gate_high.jpg" className="img" alt="shureimon gate" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/shureimon_gate_low.jpg")}
+          >
+            <Image
+              src="/web_images/shureimon_gate_high.jpg"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="shureimon gate"
+              height={720}
+              width={720}
+            />
           </div>
-          <div className="image" onClick={() => imgPop("/web_images/chibana_high.jpg")}>
-            <Image src="/web_images/chibana_high.jpg" className="img" alt="image" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/chibana_high.jpg")}
+          >
+            <Image
+              src="/web_images/chibana_high.jpg"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="image"
+              height={720}
+              width={720}
+            />
           </div>
-          <div className="image" onClick={() => imgPop("/web_images/Matsumura_high.png")}>
-            <Image src="/web_images/Matsumura_low.jpg" className="img" alt="image" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/Matsumura_high.png")}
+          >
+            <Image
+              src="/web_images/Matsumura_low.jpg"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="image"
+              height={720}
+              width={720}
+            />
           </div>
-          <div className="image" onClick={() => imgPop("/web_images/uema_family_high.jpg")}>
-            <Image src="/web_images/uema_family_low.jpg" className="img" alt="image" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/uema_family_high.jpg")}
+          >
+            <Image
+              src="/web_images/uema_family_low.jpg"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="image"
+              height={720}
+              width={720}
+            />
           </div>
-          <div className="image" onClick={() => imgPop("/web_images/oldGroup.jpg")}>
-            <Image src="/web_images/oldGroup.jpg" className="img" alt="image" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/oldGroup.jpg")}
+          >
+            <Image
+              src="/web_images/oldGroup.jpg"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="image"
+              height={720}
+              width={720}
+            />
           </div>
-          <div className="image" onClick={() => imgPop("/web_images/joki_sai_high.jpg")}>
-            <Image src="/web_images/joki_sai_high.jpg" className="img" alt="image" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/joki_sai_high.jpg")}
+          >
+            <Image
+              src="/web_images/joki_sai_high.jpg"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="image"
+              height={720}
+              width={720}
+            />
           </div>
-          <div className="image" onClick={() => imgPop("/web_images/kaynChotuku_high.png")}>
-            <Image src="/web_images/kaynChotuku_high.png" className="img" alt="image" height={720} width={720} />
+          <div
+            className="image"
+            style={{
+              width: "100%",
+              marginBottom: "10px",
+              display: "block",
+              overflow: "hidden",
+              boxShadow: "0 0 10px #ebe1d6df",
+              borderRadius: "8px",
+              borderTop: "solid 1.5px transparent",
+              borderLeft: "solid 1.5px transparent",
+              transition: "all 300ms ease-in-out",
+            }}
+            onClick={() => imgPop("/web_images/kaynChotuku_high.png")}
+          >
+            <Image
+              src="/web_images/kaynChotuku_high.png"
+              className="img"
+              style={{
+                height: "auto",
+                width: "100%",
+                borderRadius: "8px",
+                filter: "sepia(50%) grayscale(30%)",
+                display: "block",
+                backgroundSize: "cover",
+                userSelect: "none",
+                transition:
+                  "transform 300ms ease-in-out, filter 300ms ease-in-out, opacity 0.5s ease",
+              }}
+              alt="image"
+              height={720}
+              width={720}
+            />
           </div>
         </div>
       </section>
 
-      <section className="blog">
-        <div className="blogLine"></div>
+      <section
+        className="blog"
+        style={{
+          width: "100%",
+          marginBottom: "5rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          gap: "20px",
+        }}
+      >
+        <div
+          className="blogLine"
+          style={{
+            margin: "3rem 0",
+            height: "2px",
+            width: "80%",
+            background: "radial-gradient(circle, #905043 0%, transparent 100%)",
+            opacity: 0.5,
+            transition: "1000ms",
+          }}
+        ></div>
         {/* <h1>Never Fade Away</h1> */}
 
-        <div className="define">
-          <div>
-            <p>Body</p>
-            <div></div>
-            <p>Mind</p>
-            <div></div>
-            <p>Spirit</p>
+        <div
+          className="define"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "1rem",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "'Amarante', cursive",
+                transition: "200ms",
+                margin: 0,
+              }}
+            >
+              Body
+            </p>
+            <div
+              style={{
+                width: "3.5px",
+                height: "50px",
+                transform: "translateY(20%)",
+                background: "linear-gradient(#403D3C, transparent)",
+                transition: "200ms",
+              }}
+            ></div>
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "'Amarante', cursive",
+                transition: "200ms",
+                margin: 0,
+              }}
+            >
+              Mind
+            </p>
+            <div
+              style={{
+                width: "3.5px",
+                height: "50px",
+                transform: "translateY(20%)",
+                background: "linear-gradient(#403D3C, transparent)",
+                transition: "200ms",
+              }}
+            ></div>
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "'Amarante', cursive",
+                transition: "200ms",
+                margin: 0,
+              }}
+            >
+              Spirit
+            </p>
           </div>
         </div>
 
-        <div className="quotes1">
-          <div className="box1">
+        <div
+          className="quotes1"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+          }}
+        >
+          <div
+            className="box1"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
             <div className="quote">
-              <p>
+              <p
+                style={{
+                  color: "#4b423b",
+                  fontFamily: "'Bellefair', serif",
+                  margin: 0,
+                }}
+              >
                 When you block overall, imagine you are attacking. When someone
                 punches you, you don't move to evade the punch, but rather to
                 break the arm.
               </p>
-              <p className="sensei">Sensei Takeshi Uema</p>
-              <p className="sensei">7th Dan Okinawa Shorin-Ryu</p>
+              <p
+                className="sensei"
+                style={{
+                  fontStyle: "italic",
+                  margin: 0,
+                  color: "#4b423b",
+                  fontFamily: "'Bellefair', serif",
+                }}
+              >
+                Sensei Takeshi Uema
+              </p>
+              <p
+                className="sensei"
+                style={{
+                  fontStyle: "italic",
+                  margin: 0,
+                  color: "#4b423b",
+                  fontFamily: "'Bellefair', serif",
+                }}
+              >
+                7th Dan Okinawa Shorin-Ryu
+              </p>
             </div>
 
-            <Image src="/assets/quot (1).jpg" alt="" height={1920} width={1920} />
+            <Image
+              src="/assets/quot (1).jpg"
+              style={{
+                objectFit: "contain",
+                borderRadius: "10px",
+                filter: "sepia(30%) grayscale(30%)",
+              }}
+              alt=""
+              height={1920}
+              width={1920}
+            />
           </div>
-          <div className="box2">
-            <Image src="/assets/quot (2).jpg" alt="" height={1920} width={1920} />
+          <div
+            className="box2"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Image
+              src="/assets/quot (2).jpg"
+              style={{
+                objectFit: "contain",
+                borderRadius: "10px",
+                filter: "sepia(30%) grayscale(30%)",
+              }}
+              alt=""
+              height={1920}
+              width={1920}
+            />
 
-            <div className="quote">
-              <p>
+            <div
+              className="quote"
+            >
+              <p
+                style={{
+                  color: "#4b423b",
+                  fontFamily: "'Bellefair', serif",
+                  textAlign: "right",
+                  margin: 0,
+                }}
+              >
                 Our karate is not a sport but a budo. It is about tempering
                 oneself. To never give up. This spirit can be reached only if
                 one goes through hard training with all one's might. Spiritual
                 strength comes only through hard training. It is a way of
                 forging oneself.
               </p>
-              <p className="sensei">Sensei Yasuhiro Uema</p>
-              <p className="sensei">10th Dan Okinawan Shorin-Ryu</p>
+              <p
+                className="sensei"
+                style={{
+                  fontStyle: "italic",
+                  margin: 0,
+                  color: "#4b423b",
+                  fontFamily: "'Bellefair', serif",
+                  textAlign: "right",
+                }}
+              >
+                Sensei Yasuhiro Uema
+              </p>
+              <p
+                className="sensei"
+                style={{
+                  fontStyle: "italic",
+                  margin: 0,
+                  color: "#4b423b",
+                  fontFamily: "'Bellefair', serif",
+                  textAlign: "right",
+                }}
+              >
+                10th Dan Okinawan Shorin-Ryu
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="blogLine"></div>
+        <div
+          className="blogLine"
+          style={{
+            margin: "3rem 0",
+            height: "2px",
+            width: "80%",
+            background: "radial-gradient(circle, #905043 0%, transparent 100%)",
+            opacity: 0.5,
+            transition: "1000ms",
+          }}
+        ></div>
 
         <div className="quotes2">
-          <p className="story0">
+          <p
+            className="story0"
+            style={{
+              color: "#4b423b",
+              fontSize: "1.5rem",
+              fontFamily: "'Bellefair', serif",
+            }}
+          >
             Okinawan karate is for self-defence and self-development. Okinawan
             karate is not sport. It is education and for philosophical
             development.
           </p>
-          <p className="sensei">Sensei Sabyasachi</p>
+          <p
+            className="sensei"
+            style={{
+              color: "#4b423b",
+              fontFamily: "'Bellefair', serif",
+              fontStyle: "italic",
+              margin: 0,
+            }}
+          >
+            Sensei Sabyasachi
+          </p>
         </div>
 
-        <div className="img-div">
-          <Image src="/assets/sg1.jpg" alt="" height={1920} width={1920} />
-          <Image src="/assets/sg2.jpg" alt="" height={1920} width={1920} />
+        <div
+          className="img-div"
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            src="/assets/sg1.jpg"
+            style={{
+              borderRadius: "10px",
+              filter: "sepia(30%) grayscale(30%)",
+            }}
+            alt=""
+            height={1920}
+            width={1920}
+          />
+          <Image
+            src="/assets/sg2.jpg"
+            style={{
+              borderRadius: "10px",
+              filter: "sepia(30%) grayscale(30%)",
+            }}
+            alt=""
+            height={1920}
+            width={1920}
+          />
         </div>
 
-        <p className="story1">
+        <p
+          className="story1"
+          style={{
+            margin: "2rem 0",
+            color: "#4b423b",
+            fontSize: "1.5rem",
+            fontFamily: "'Bellefair', serif",
+          }}
+        >
           Karate as a martial art is about self-defense. Overcoming your own
           weaknesses, never bending in any circumstance, it is about developing
           an unshakable spirit. In karate what is important is to cultivate the
           strength to concentrate your spirit on one thing with heart and soul.
         </p>
 
-        <p className="story2">
+        <p
+          className="story2"
+          style={{
+            marginBottom: "5rem",
+            color: "#4b423b",
+            fontSize: "1.5rem",
+            fontFamily: "'Bellefair', serif",
+            textAlign: "right",
+          }}
+        >
           Empty-handed and carrying no weapon, dominating an adversary with body
           and soul only, karate, a martial art of self-defense. To master the
           way, a long and arduous journey awaits.

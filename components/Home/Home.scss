@@ -63,80 +63,6 @@
         }
     }
 
-    & .line {
-        z-index: 0;
-        height: 45rem;
-        // width: 1;
-        right: 15%;
-        top: 0%;
-        position: absolute;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-end;
-
-        transition: 300ms;
-        animation-name: anim;
-        animation-duration: 7s;
-        animation-timing-function: ease-in-out;
-
-        @keyframes anim {
-            from {
-                filter: opacity(50%);
-                transform: translateY(-50%);
-            }
-
-            to {
-                filter: opacity(100%);
-                transform: translateY(0%);
-            }
-        }
-
-        & .lineColor {
-            right: 15%;
-            top: 0%;
-            height: 45rem;
-            width: 2px;
-
-            background: linear-gradient(#A69485 90%, transparent 100%);
-        }
-
-        & img {
-            height: 100px;
-            margin: 3rem .4rem;
-            filter: opacity(60%);
-
-            animation-name: bushi;
-            animation-duration: 10s;
-            animation-timing-function: ease-in-out;
-
-            @keyframes bushi {
-                from {
-                    filter: opacity(0%);
-                    transform: translateY(-50%);
-                }
-
-                to {
-                    filter: opacity(60%);
-                    transform: translateY(0%);
-                }
-            }
-        }
-
-        @media screen and (max-width: 700px) {
-            right: 8%;
-        }
-
-        @media screen and (max-width: 400px) {
-            height: 22rem;
-        }
-
-        @media screen and (max-width: 370px) {
-            height: 20rem;
-        }
-    }
-
     & .hero {
         z-index: 1;
         width: 100%;
@@ -622,6 +548,7 @@
                 justify-content: center;
                 align-items: center;
                 width: fit-content;
+                margin-bottom: 10px;
 
                 & div {
                     width: 2px;
