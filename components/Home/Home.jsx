@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { isDesktop, isMobile } from "react-device-detect";
 import "./Home.scss";
 import Image from "next/image";
 
@@ -510,7 +511,7 @@ export default function Home({ setShowNav }) {
           transition: "300ms",
         }}
       >
-        {windowWidth <= 400 ? (
+        {isMobile ? (
           <div
             className="define"
             style={{
