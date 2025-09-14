@@ -104,7 +104,7 @@ export default function Home({ setShowNav }) {
   }
 
   return (
-    <div
+    <main
       className="Home"
       style={{
         height: "fit-content",
@@ -1159,9 +1159,7 @@ export default function Home({ setShowNav }) {
               width={1920}
             />
 
-            <div
-              className="quote"
-            >
+            <div className="quote">
               <p
                 style={{
                   color: "#4b423b",
@@ -1304,6 +1302,6 @@ export default function Home({ setShowNav }) {
           way, a long and arduous journey awaits.
         </p>
       </section>
-    </div>
+    </main>
   );
 }

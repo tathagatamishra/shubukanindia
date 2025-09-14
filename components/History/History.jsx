@@ -5,6 +5,7 @@ import "./History.scss";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import ImgPop from "../UIComponent/ImgPop";
+import Script from "next/script";
 
 export default function History() {
   // const { showNav, setShowNav } = useNav();
@@ -22,9 +23,9 @@ export default function History() {
   }, []);
 
   return (
-    <div className="History">
+    <main className="History">
       <section className="Hero">
-        <p className="heading">History</p>
+        <h1 className="heading">History</h1>
         {/* <p>Discovering the Way of Words</p> */}
         <div className="hero-content">
           <LazyLoadImage
@@ -150,6 +151,6 @@ export default function History() {
         heading={heading}
         content={content}
       />
-    </div>
+    </main>
   );
 }

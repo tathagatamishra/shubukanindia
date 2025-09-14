@@ -17,7 +17,7 @@ export default function ShubukanIndia() {
   }, []);
   
   return (
-    <div className="ShubukanIndia">
+    <main className="ShubukanIndia">
       <section className="Hero">
         <p className="heading">Shubukan India</p>
         <p>
@@ -101,6 +101,6 @@ export default function ShubukanIndia() {
           education. Thus, the symbol of Shubukan India took birth.
         </p>
       </section>
-    </div>
+    </main>
   );
 }

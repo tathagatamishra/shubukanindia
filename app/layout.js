@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 import { isDesktop } from "react-device-detect";
-// import { NavProvider } from "@/components/Context/NavContext";
 import MouseTrail from "@/components/UIComponent/MouseTrail";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -30,6 +29,8 @@ export const metadata = {
   keywords: [
     "karate",
     "shubukan india",
+    "okinawa shubukan",
+    "karate day",
     "okinawan karate",
     "traditional karate",
     "shorin ryu",
@@ -125,6 +126,7 @@ export default function RootLayout({ children }) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            overflowX: "hidden",
           }}
         >
           <Navbar />
@@ -145,29 +147,24 @@ export default function RootLayout({ children }) {
           </div>
           <Footer />
           <Banner />
-        </div>
 
-        {/* <svg
-          className="wobble"
-          style={{
-            position: "absolute",
-          }}
-          xmlns="http://www.w3.org/2000/svg"
-          version="1.1"
-          height="0"
-          width="0"
-        >
-          <defs>
-            <filter id="wobble">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="1"
-                numOctaves="3"
-              />
-              <feDisplacementMap in="SourceGraphic" scale="100" />
-            </filter>
-          </defs>
-        </svg> */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Shubukan India",
+                url: "https://www.shubukanindia.org",
+                logo: "https://www.shubukanindia.org/favicon.png",
+                sameAs: [
+                  "https://www.facebook.com/indiashubukan",
+                  "https://www.instagram.com/shubukanindia",
+                ],
+              }),
+            }}
+          />
+        </div>
       </body>
     </html>
   );

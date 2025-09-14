@@ -17,7 +17,7 @@ export default function ShubukanOkinawa() {
   }, []);
 
   return (
-    <div className="ShubukanOkinawa">
+    <main className="ShubukanOkinawa">
       <section className="Hero">
         <p className="heading">Shubukan Okinawa</p>
 
@@ -73,6 +73,6 @@ export default function ShubukanOkinawa() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
