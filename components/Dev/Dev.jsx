@@ -104,12 +104,18 @@ export default function Dev({ setShowNav }) {
 
   return (
     <>
-      <div id="Navbar" style={{ top: "0rem" }}>
+      <div
+        id="Navbar"
+        style={{
+          top: "0rem",
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <div
           style={{
             zIndex: -1,
-            width: "200%",
-            height: "200%",
             borderRadius: "0%",
             filter: "url(#filter)",
             boxShadow: "400px 400px 46px 63px #ffffff",
@@ -253,6 +259,9 @@ export default function Dev({ setShowNav }) {
           flexDirection: "column",
           paddingTop: "10rem",
           maxWidth: "1000px",
+          backgroundImage:
+            'url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
+          backgroundSize: "250px 250px",
         }}
       >
         <div
@@ -275,6 +284,8 @@ export default function Dev({ setShowNav }) {
             width={1920}
             style={{
               width: "100%",
+              height: "500px",
+              objectFit: "contain",
               userSelect: "none",
             }}
           />
@@ -726,6 +737,8 @@ export default function Dev({ setShowNav }) {
               width={1920}
               style={{
                 width: "100%",
+                height: "250px",
+                objectFit: "contain",
                 userSelect: "none",
               }}
             />
@@ -914,6 +927,8 @@ export default function Dev({ setShowNav }) {
               width={1920}
               style={{
                 width: "100%",
+                height: "340px",
+                objectFit: "contain",
                 userSelect: "none",
               }}
             />
@@ -1036,6 +1051,8 @@ export default function Dev({ setShowNav }) {
               width={1920}
               style={{
                 width: "100%",
+                height: "385px",
+                objectFit: "contain",
                 userSelect: "none",
               }}
             />
@@ -1641,6 +1658,7 @@ export default function Dev({ setShowNav }) {
           <div
             style={{
               width: "100%",
+              height: "284px",
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-around",
@@ -1654,6 +1672,8 @@ export default function Dev({ setShowNav }) {
               width={1920}
               style={{
                 width: "250px",
+                height: "284px",
+                objectFit: "contain",
                 borderRadius: "10px",
                 filter: "sepia(30%) grayscale(30%)",
               }}
@@ -1665,6 +1685,8 @@ export default function Dev({ setShowNav }) {
               width={1920}
               style={{
                 width: "250px",
+                height: "284px",
+                objectFit: "contain",
                 borderRadius: "10px",
                 filter: "sepia(30%) grayscale(30%)",
               }}

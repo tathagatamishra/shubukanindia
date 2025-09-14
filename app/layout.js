@@ -107,11 +107,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{
           background: "rgb(231, 221, 211)",
-          overflowX: "hidden",
           backgroundImage:
             'url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
           backgroundSize: "250px 250px",
           maxWidth: "100vw",
+          width: "100%",
           margin: "0px",
           boxSizing: "border-box",
         }}
@@ -127,7 +127,7 @@ export default function RootLayout({ children }) {
             justifyContent: "space-between",
           }}
         >
-          {/* <Navbar /> */}
+          <Navbar />
           <div
             className="webBody"
             style={{
@@ -139,16 +139,15 @@ export default function RootLayout({ children }) {
               flexDirection: "column",
               justifyContent: "flex-start",
               alignItems: "center",
-              overflowX: "hidden",
             }}
           >
             {children}
           </div>
-          {/* <Footer /> */}
-          {/* <Banner /> */}
+          <Footer />
+          <Banner />
         </div>
 
-        <svg
+        {/* <svg
           className="wobble"
           style={{
             position: "absolute",
@@ -168,7 +167,7 @@ export default function RootLayout({ children }) {
               <feDisplacementMap in="SourceGraphic" scale="100" />
             </filter>
           </defs>
-        </svg>
+        </svg> */}
       </body>
     </html>
   );
