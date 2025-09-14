@@ -103,7 +103,34 @@ export default function RootLayout({ children }) {
         boxSizing: "border-box",
       }}
     >
-      <GoogleAnalytics />
+      <head>
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2176046634092289"
+          crossorigin="anonymous"
+        ></script>
+
+        <GoogleAnalytics />
+        {/* SEO Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Shubukan India",
+              url: "https://www.shubukanindia.org",
+              logo: "https://www.shubukanindia.org/favicon.png",
+              sameAs: [
+                "https://www.facebook.com/indiashubukan",
+                "https://www.instagram.com/shubukanindia",
+              ],
+            }),
+          }}
+        />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{
@@ -147,23 +174,6 @@ export default function RootLayout({ children }) {
           </div>
           <Footer />
           <Banner />
-
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: "Shubukan India",
-                url: "https://www.shubukanindia.org",
-                logo: "https://www.shubukanindia.org/favicon.png",
-                sameAs: [
-                  "https://www.facebook.com/indiashubukan",
-                  "https://www.instagram.com/shubukanindia",
-                ],
-              }),
-            }}
-          />
         </div>
       </body>
     </html>
