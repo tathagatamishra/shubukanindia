@@ -141,7 +141,7 @@ export default function Gallery({ initialImages = [] }) {
   }, [selectedImgIndex, images.length]);
 
   return (
-    <div className="Gallery">
+    <main className="Gallery">
       <section className="Hero">
         <p className="heading">Gallery</p>
         <p>Beyond the realms</p>
@@ -256,6 +256,6 @@ export default function Gallery({ initialImages = [] }) {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }

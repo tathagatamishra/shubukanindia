@@ -179,18 +179,17 @@ export default function BlogPost({ blog }) {
 
   if (!blog) {
     return (
-      <div className="BlogPost">
+      <main className="BlogPost">
         <div className="BlogPostPage flex flex-col justify-center items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-[3px] border-[#A64B37]"></div>
           <p className="mt-4 text-gray-600">Loading blog post...</p>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    // <div className="max-w-4xl mx-auto px-5 py-10">
-    <div className="BlogPost">
+    <main className="BlogPost">
       <div className="BlogPostPage">
         {/* search bar */}
         {/* <form onSubmit={onSearch} className="flex gap-2 mb-6">
@@ -728,7 +727,7 @@ export default function BlogPost({ blog }) {
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded max-w-md w-full">
               <h3 className="font-bold mb-4">Share this post</h3>
-   
+
               <div className="mt-4 flex gap-2">
                 <input
                   readOnly
@@ -753,6 +752,6 @@ export default function BlogPost({ blog }) {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

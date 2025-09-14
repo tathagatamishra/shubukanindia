@@ -11,7 +11,7 @@ export default function KarateAndKobudo() {
   }, []);
 
   return (
-    <div className="KarateAndKobudo">
+    <main className="KarateAndKobudo">
       <section className="Karate-Hero">
         <p className="heading">Karate</p>
         <h2 className="jap">空手</h2>
@@ -134,6 +134,6 @@ export default function KarateAndKobudo() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

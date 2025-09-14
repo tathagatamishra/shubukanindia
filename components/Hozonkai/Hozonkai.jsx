@@ -13,7 +13,7 @@ export default function Hozonkai() {
   }, []);
 
   return (
-    <div className="Hozonkai">
+    <main className="Hozonkai">
       <section className="Hero">
         <div className="img-div">
           <img src="https://res.cloudinary.com/daspiwjet/image/upload/v1755369906/ShuriKarateKobudoHozonkai_az6i1j.png" alt="" />
@@ -49,6 +49,6 @@ export default function Hozonkai() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

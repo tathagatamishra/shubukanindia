@@ -31,7 +31,7 @@ export default function Contact() {
   }, []);
 
   return (
-    <div className="Contact">
+    <main className="Contact">
       <section className="Hero">
         <p className="heading">Contact</p>
         <p>Discover More About Us</p>
@@ -97,6 +97,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

@@ -1,49 +1,13 @@
-# Robots.txt for Next.js Application
-
-# Allow all crawlers to access public content
+# *
 User-agent: *
-
-# Block access to admin and private areas
+Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
-Disallow: /node_modules/
-
-# Block sensitive pages
-Disallow: /registration/
-Disallow: /membership/
-Disallow: /marksheet/
-
-# Block development and utility files
 Disallow: /dev/
-Disallow: /.git/
 Disallow: /*.json$
 Disallow: /*.config.js$
 Disallow: /*.config.mjs$
-
-# Allow public content
-Allow: /blog/
-Allow: /gallery/
-Allow: /contact/
-Allow: /help-and-faqs/
-Allow: /history/
-Allow: /karate-and-kobudo/
-Allow: /lineage-and-dojokun/
-Allow: /contributors/
-Allow: /shubukan-india/
-Allow: /shubukan-okinawa/
-Allow: /shubukan-world/
-Allow: /shuri-karate-kobudo-hozonkai/
-Allow: /term-and-condition/
-Allow: /services/
-
-# Allow favicons and common assets
-Allow: /favicon.ico
-Allow: /robots.txt
-Allow: /sitemap.xml
-Allow: /sitemap*.xml
-
-# Block common sensitive files
 Disallow: /.env
 Disallow: /.env.*
 Disallow: /package.json
@@ -51,9 +15,14 @@ Disallow: /package-lock.json
 Disallow: /yarn.lock
 Disallow: /.gitignore
 Disallow: /README.md
+Disallow: /registration
+Disallow: /marksheet
+Disallow: /help-and-faqs
+Disallow: /contributors
+Disallow: /term-and-condition
 
-# Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml
+# Host
+Host: https://www.shubukanindia.org
 
-# Crawl delay (optional - adjust based on server capacity)
-Crawl-delay: 1
+# Sitemaps
+Sitemap: https://www.shubukanindia.org/sitemap.xml

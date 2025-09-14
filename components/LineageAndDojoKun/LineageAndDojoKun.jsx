@@ -22,7 +22,7 @@ export default function LineageAndDojoKun() {
   }, []);
 
   return (
-    <div className="LineageAndDojoKun">
+    <main className="LineageAndDojoKun">
       <section className="Lineage-Hero">
         <p className="heading">Lineage</p>
 
@@ -272,6 +272,6 @@ export default function LineageAndDojoKun() {
           </li>
         </ul>
       </section>
-    </div>
+    </main>
   );
 }
