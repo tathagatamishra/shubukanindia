@@ -704,7 +704,7 @@ export default function BlogPost({ blog }) {
           <div className="flex flex-col gap-3">
             {comments.length > 0 &&
               comments.map((c, idx) => (
-                <div key={idx} className="p-3 border rounded">
+                <div key={idx} className="p-3 border rounded bg-white">
                   <div className="text-sm text-gray-600">
                     {c.name} •{" "}
                     <p className="text-xs text-gray-400">
