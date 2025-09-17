@@ -3,17 +3,18 @@
 
 "use client";
 import { createContext, useContext, useState } from "react";
+import Navbar from "../Navbar/Navbar";
 
 const NavContext = createContext();
 
 export const useNav = () => useContext(NavContext);
 
-export const NavProvider = ({ children }) => {
+export const NavProvider = () => {
   const [showNav, setShowNav] = useState(false); // or true if default is shown
 
   return (
     <NavContext.Provider value={{ showNav, setShowNav }}>
-      {children}
+      <Navbar />
     </NavContext.Provider>
   );
 };

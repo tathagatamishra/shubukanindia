@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/UIComponent/Banner";
 import { displayConsoleLogo } from "@/utils/console-logo";
+import { UIProvider } from "@/components/Context/UIContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -108,7 +109,7 @@ export default function RootLayout({ children }) {
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2176046634092289"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
 
         <GoogleAnalytics />
@@ -145,36 +146,38 @@ export default function RootLayout({ children }) {
         }}
       >
         {isDesktop && <MouseTrail />}
-        <div
-          className="App"
-          id="App"
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            overflowX: "hidden",
-          }}
-        >
-          <Navbar />
+        <UIProvider>
           <div
-            className="webBody"
+            className="App"
+            id="App"
             style={{
-              position: "relative",
-              zIndex: 2,
-              height: "fit-content",
-              minHeight: "calc(100vh - 610px)",
+              minHeight: "100vh",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "center",
+              justifyContent: "space-between",
+              overflowX: "hidden",
             }}
           >
-            {children}
+            <Navbar />
+            <div
+              className="webBody"
+              style={{
+                position: "relative",
+                zIndex: 2,
+                height: "fit-content",
+                minHeight: "calc(100vh - 610px)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              {children}
+            </div>
+            <Footer />
+            <Banner />
           </div>
-          <Footer />
-          <Banner />
-        </div>
+        </UIProvider>
       </body>
     </html>
   );

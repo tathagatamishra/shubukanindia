@@ -4,8 +4,13 @@ import { useRouter, usePathname } from "next/navigation";
 import useSound from "use-sound";
 import Image from "next/image";
 import "./Navbar.scss";
+import { useUI } from "../Context/UIContext";
 
 export default function Navbar() {
+  const { isModalOpen } = useUI();
+
+  if (isModalOpen) return null;
+
   const router = useRouter();
   const navigate = (page) => {
     router.push(page);
