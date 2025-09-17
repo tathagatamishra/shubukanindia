@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
 import Image from "next/image";
 import "./BlogPost.scss";
+import { IoClose } from "react-icons/io5";
+import { useUI } from "@/components/Context/UIContext";
 
 export default function BlogPost({ blog }) {
   // states
+  const { setIsModalOpen } = useUI();
   const [showShare, setShowShare] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
@@ -555,7 +558,10 @@ export default function BlogPost({ blog }) {
           {/* {!verifiedEmail && <EmailOtpBox />} */}
           <div className="flex gap-3">
             <button
-              onClick={() => setShowShare(true)}
+              onClick={() => {
+                setShowShare(true);
+                setIsModalOpen(true);
+              }}
               className="px-4 py-2 border rounded"
             >
               Share
@@ -724,34 +730,69 @@ export default function BlogPost({ blog }) {
 
         {/* Share modal */}
         {showShare && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded max-w-md w-full">
-              <h3 className="font-bold mb-4">Share this post</h3>
+          <>
+            <div className="menuBG2"></div>
+            <div
+              className="menuBG3"
+              onClick={() => {
+                setShowShare(false);
+                setIsModalOpen(false);
+              }}
+            ></div>
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="share-modal">
+                <h3 className="share-content">Share this post</h3>
 
-              <div className="mt-4 flex gap-2">
-                <input
-                  readOnly
-                  value={
-                    typeof window !== "undefined" ? window.location.href : ""
-                  }
-                  className="flex-1 p-2 border rounded"
-                />
-                <button onClick={copyLink} className="px-3 py-2 border rounded">
-                  Copy
-                </button>
-              </div>
-              <div className="mt-4 text-right">
-                <button
-                  onClick={() => setShowShare(false)}
-                  className="px-4 py-2 border rounded"
-                >
-                  Close
+                <div className="inputBox share-content flex gap-2">
+                  <input
+                    readOnly
+                    value={
+                      typeof window !== "undefined"
+                        ? window.location.href.split("//")[1]
+                        : ""
+                    }
+                    className="flex-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={copyLink}
+                    className="px-3 py-2 border rounded"
+                  >
+                    Copy
+                  </button>
+                </div>
+
+                <button className="crossBtn">
+                  <IoClose
+                    className="label"
+                    onClick={() => {
+                      setShowShare(false);
+                      setIsModalOpen(false);
+                    }}
+                  />
                 </button>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        height="0"
+        width="0"
+      >
+        <defs>
+          <filter id="wobble">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency=".06"
+              numOctaves="4"
+            />
+            <feDisplacementMap in="SourceGraphic" scale="6" />
+          </filter>
+        </defs>
+      </svg>
     </main>
   );
 }
