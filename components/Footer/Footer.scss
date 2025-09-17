@@ -359,13 +359,14 @@
         width: 450px;
         top: -240px;
         transition: 300ms;
-
+        user-select: none;
     }
 
     & .footHillRight {
         width: 450px;
         top: -265px;
         transition: 300ms;
+        user-select: none;
     }
 
     @media screen and (max-width: 1300px) {

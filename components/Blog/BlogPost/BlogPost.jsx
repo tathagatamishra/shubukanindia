@@ -554,7 +554,7 @@ export default function BlogPost({ blog }) {
         </div>
 
         {/* actions: share, like/dislike */}
-        <div className="flex flex-col gap-3 my-6">
+        <div className="share flex flex-col gap-3 mt-6">
           {/* {!verifiedEmail && <EmailOtpBox />} */}
           <div className="flex gap-3">
             <button
@@ -616,7 +616,8 @@ export default function BlogPost({ blog }) {
 
         {/* ✅ OTP verification */}
         {!verifiedEmail && (
-          <div className="p-3 border rounded mb-4">
+          <div className="verify mb-4 pb-4">
+            <h3 className="label" htmlFor="email">Verify to Like and Comment</h3>
             <div className="flex gap-2">
               <input
                 type="email"
@@ -628,11 +629,12 @@ export default function BlogPost({ blog }) {
               />
               <button
                 onClick={sendOtp}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2"
               >
                 Send OTP
               </button>
             </div>
+
             {otpSent && (
               <div className="mt-2 flex gap-2">
                 <input
@@ -643,7 +645,7 @@ export default function BlogPost({ blog }) {
                 />
                 <button
                   onClick={verifyOtp}
-                  className="px-3 py-2 bg-green-600 text-white rounded"
+                  className="px-3 py-2"
                 >
                   Verify
                 </button>
@@ -673,10 +675,10 @@ export default function BlogPost({ blog }) {
         </div>
 
         {/* ✅ Comments */}
-        <section className="mt-8">
-          <h3 className="font-bold">Comments</h3>
+        <section className="mt-8 min-h-full">
+          <h3 className="label">{comments.length} Comments</h3>
           {verifiedEmail && (
-            <div className="p-3 border rounded mb-4">
+            <div className="comment-input pb-3 mb-4">
               <textarea
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
@@ -684,13 +686,7 @@ export default function BlogPost({ blog }) {
                 className="w-full p-2 mt-2 border rounded"
                 placeholder="Write your comment..."
               />
-              <div className="flex gap-2 mt-2">
-                <button
-                  onClick={postComment}
-                  className="px-4 py-2 bg-blue-600 text-white rounded"
-                >
-                  Post comment
-                </button>
+              <div className="flex justify-end gap-2 mt-2">
                 <button
                   onClick={() => {
                     localStorage.removeItem("verified_email");
@@ -698,9 +694,16 @@ export default function BlogPost({ blog }) {
                     setVerifiedEmail(null);
                     setEmail("");
                   }}
-                  className="px-4 py-2 border rounded"
+                  className="px-4 py-2"
                 >
                   Sign out
+                </button>
+
+                <button
+                  onClick={postComment}
+                  className="px-4 py-2"
+                >
+                  Post comment
                 </button>
               </div>
             </div>
@@ -710,7 +713,7 @@ export default function BlogPost({ blog }) {
           <div className="flex flex-col gap-3">
             {comments.length > 0 &&
               comments.map((c, idx) => (
-                <div key={idx} className="p-3 border rounded bg-white">
+                <div key={idx} className="comment-card p-3">
                   <div className="text-sm text-gray-600">
                     {c.name} •{" "}
                     <p className="text-xs text-gray-400">
@@ -739,38 +742,34 @@ export default function BlogPost({ blog }) {
                 setIsModalOpen(false);
               }}
             ></div>
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="share-modal">
-                <h3 className="share-content">Share this post</h3>
 
-                <div className="inputBox share-content flex gap-2">
-                  <input
-                    readOnly
-                    value={
-                      typeof window !== "undefined"
-                        ? window.location.href.split("//")[1]
-                        : ""
-                    }
-                    className="flex-1 p-2 border rounded"
-                  />
-                  <button
-                    onClick={copyLink}
-                    className="px-3 py-2 border rounded"
-                  >
-                    Copy
-                  </button>
-                </div>
+            <div className="share-modal">
+              <h3 className="share-content">Share this post</h3>
 
-                <button className="crossBtn">
-                  <IoClose
-                    className="label"
-                    onClick={() => {
-                      setShowShare(false);
-                      setIsModalOpen(false);
-                    }}
-                  />
+              <div className="inputBox share-content flex gap-2">
+                <input
+                  readOnly
+                  value={
+                    typeof window !== "undefined"
+                      ? window.location.href.split("//")[1]
+                      : ""
+                  }
+                  className="flex-1 p-2 border rounded"
+                />
+                <button onClick={copyLink} className="px-3 py-2 border rounded">
+                  Copy
                 </button>
               </div>
+
+              <button className="crossBtn">
+                <IoClose
+                  className="icon"
+                  onClick={() => {
+                    setShowShare(false);
+                    setIsModalOpen(false);
+                  }}
+                />
+              </button>
             </div>
           </>
         )}
