@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
+import SlidingNumber from "../UIComponent/SlidingNumber";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -20,7 +21,7 @@ export default function Dashboard() {
         const [blogs, galleries, students, instructors, questions, exams] =
           await Promise.all([
             shubukan_api.get("/blogs"),
-            shubukan_api.get("/gallery?limit=1"), // just to get count
+            shubukan_api.get("/gallery?limit=1"),
             shubukan_api.get("/admin/students", {
               headers: { Authorization: `Bearer ${token}` },
             }),
@@ -58,7 +59,9 @@ export default function Dashboard() {
             key={k}
             className="bg-white shadow-md p-4 rounded-xl text-center"
           >
-            <p className="text-3xl font-bold">{v}</p>
+            <div className="text-3xl font-bold">
+              <SlidingNumber value={v} />
+            </div>
             <p className="capitalize">{k}</p>
           </div>
         ))}

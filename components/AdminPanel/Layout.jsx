@@ -50,7 +50,7 @@ export default function Layout({ children }) {
       <Sidebar open={open} setOpen={setOpen} />
       {open && (
         <div
-          className="fixed backdrop-blur-[10px] w-screen h-screen"
+          className="z-[40] fixed backdrop-blur-[10px] w-screen h-screen"
           onClick={() => setOpen(false)}
         ></div>
       )}
