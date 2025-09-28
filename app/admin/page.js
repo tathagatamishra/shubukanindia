@@ -1,5 +1,6 @@
-import Admin from "@/components/Admin/Admin";
+// app/admin/page.js
+import Dashboard from "@/components/AdminPanel/Dashboard";
 
-export default function page() {
-  return <Admin />;
+export default function AdminDashboard() {
+  return <Dashboard />;
 }

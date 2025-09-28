@@ -124,3 +124,40 @@ export default function HistoryPage() {
 | `/shuri-karate-kobudo-hozonkai`           | `WebPage`                            |
 | `/term-and-condition`                     | `WebPage` (`CreativeWork`)           |
 | `/marksheet`                              | `EducationalOccupationalCredential`  |
+
+---
+
+## 🔹 Android App Tech Stack
+
+
+### Android (Client)
+
+* Kotlin + Jetpack Compose
+* CameraX
+* TensorFlow Lite MoveNet (pose detection)
+
+### Backend
+
+* Node.js + Express
+* MongoDB (Atlas free tier)
+* JWT (auth tokens for API security)
+* Nodemailer (email notifications)
+
+### Auth & Notifications
+
+* Firebase Auth (user login/roles)
+* Firebase Cloud Messaging (push notifications)
+
+### Storage & Media
+
+* Cloudinary (event photos, blogs, gallery)
+
+### Payments
+
+* Google Play Billing Library
+
+### DevOps
+
+* GitHub (repo + CI/CD)
+
+---

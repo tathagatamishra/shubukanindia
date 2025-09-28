@@ -37,7 +37,7 @@ export default function AdminAuth() {
 
     shubukan_api
       .post(
-        `/admin/auth`,
+        `/admin/login`,
         {
           id: userName,
           password: password,
