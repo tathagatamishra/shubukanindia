@@ -16,11 +16,44 @@
 * {
   outline: none;
   box-sizing: border-box;
-  cursor: url(https://cur.cursors-4u.net/cursors/cur-11/cur1054.cur), auto !important;
+}
 
-  @media (width >=640px) {
-    cursor: none !important;
-  }
+/* Default arrow */
+body {
+  cursor: url("/cursors/NormalSelect.cur"), auto;
+}
+
+/* Links & buttons */
+a, button {
+  cursor: url("/cursors/LinkSelect.cur"), pointer;
+}
+
+/* Text inputs */
+input[type="text"], textarea {
+  cursor: url("/cursors/TextSelect.cur"), text;
+}
+input, textarea {
+  cursor: url("/cursors/TextSelect.cur"), text;
+}
+
+/* Help cursor */
+.help-cursor {
+  cursor: url("/cursors/HelpSelect.cur"), help;
+}
+
+/* Move / draggable */
+.move-cursor {
+  cursor: url("/cursors/Move.cur"), move;
+}
+
+/* Precision / crosshair */
+.precision-cursor {
+  cursor: url("/cursors/PrecisionSelect.cur"), crosshair;
+}
+
+/* Busy (ANI may not animate in all browsers) */
+.wait-cursor {
+  cursor: url("/cursors/Busy.ani"), wait;
 }
 
 html,

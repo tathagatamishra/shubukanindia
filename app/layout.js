@@ -145,7 +145,7 @@ export default function RootLayout({ children }) {
           boxSizing: "border-box",
         }}
       >
-        {isDesktop && <MouseTrail />}
+        {/* {isDesktop && <MouseTrail />} */}
         <UIProvider>
           <div
             className="App"
