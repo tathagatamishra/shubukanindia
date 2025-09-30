@@ -3,22 +3,33 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
+import { shubukan_api } from "@/config";
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push("/online-exam/instructor/verify");
+    try {
+      setLoading(true);
+      const res = await shubukan_api.post("/instructor/login", { email });
+      alert(res.data.message);
+
+      localStorage.setItem("instructor_email", email);
+      localStorage.setItem("otp_type", "login");
+      router.push("/online-exam/instructor/verify");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="ExamChild w-full h-full flex flex-col justify-center items-center">
-      <label
-        htmlFor="email"
-        className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]"
-      >
+      <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Enter Log In Details
       </label>
       <form
@@ -43,7 +54,7 @@ export default function Login() {
         />
 
         <ExamBtn
-          text="Log in"
+          text={loading ? "Sending OTP..." : "Log in"}
           type="submit"
           className="self-end"
           onClick={handleSubmit}
