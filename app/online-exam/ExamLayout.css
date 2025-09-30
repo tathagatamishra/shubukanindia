@@ -26,7 +26,7 @@ label {
 input {
     max-width: 100%;
     width: 100%;
-    height: 50px !important;
+    height: 45px !important;
     max-height: 50px;
     margin-top: 0;
     box-sizing: border-box;
@@ -98,8 +98,12 @@ select:-webkit-autofill:focus {
     display: none;
 }
 
+.ExamChild {
+    max-width: 720px;
+}
+
 .OnlineExam {
-    min-height: calc(100% - 120px);
+    /* min-height: calc(100% - 120px); */
     border: 4px solid #88807E;
     background: radial-gradient(circle at 4% 10%, #F5F0E6, #ffffff);
     /* box-shadow: 3px 3px 6px 0 rgba(3, 32, 46, 0.4); */

@@ -8,7 +8,7 @@ export default function ExamNav() {
   const router = useRouter();
 
   return (
-    <nav className="NavHolder z-[50] fixed top-0 left-0 w-full p-[20px] pb-0">
+    <nav className="NavHolder z-[50] fixed top-0 w-full p-[20px] pb-0">
       <div className="ExamNav corner-shape relative w-full h-[60px] p-[10px] flex flex-row items-center justify-between shadow-md">
         <button
           className="absolute flex items-center gap-[2px] sm:gap-[4px] font-[600] text-[12px] sm:text-[14px] text-[#64748B]"
