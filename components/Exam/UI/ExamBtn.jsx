@@ -9,15 +9,21 @@ export default function ExamBtn({
   border = "2px solid #88807E",
   cssClass = "ExamBtn btn corner-shape",
   className = "",
+  value = "",
+  type = "",
+  form = "",
   onClick,
 }) {
   return (
     <button
-      className={`${cssClass} ${className} ${padding} ${size} ${fontstyle}`}
+      type={type}
+      form={form}
+      value={value}
+      onClick={onClick}
       style={{
         border: `${border}`,
       }}
-      onClick={onClick}
+      className={`${cssClass} ${className} ${padding} ${size} ${fontstyle}`}
     >
       {text}
     </button>

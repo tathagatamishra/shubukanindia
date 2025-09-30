@@ -1,5 +1,6 @@
 .NavHolder {
     box-shadow: inset 0px 60px 20px -15px #fff;
+    max-width: 760px;
 }
 
 .ExamNav {

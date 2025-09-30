@@ -11,7 +11,7 @@ export default function LoginSignup() {
   const [userType, setUserType] = useState(null);
 
   return (
-    <div className="OnlineExam corner-shape w-full flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
+    <div className="ExamChild OnlineExam corner-shape w-full h-[calc(100%-120px)] flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
       <ExamBtn
         text="Log in"
         onClick={() => navigate("/online-exam/instructor/login")}
