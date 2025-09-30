@@ -13,6 +13,7 @@ export default function Banner({
 }) {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin");
+  const isExamPage = pathname.startsWith("/online-exam");
 
   // Default values if props aren't provided
   // const text1 = bannerText1 || "The Registration is Open";
@@ -52,7 +53,7 @@ export default function Banner({
     </>
   );
 
-  return !isAdminPage ? (
+  return !isAdminPage && !isExamPage ? (
     <div className="banner">
       <div className="track">
         <div className="content">{fullMessage}</div>

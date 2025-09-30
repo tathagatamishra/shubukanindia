@@ -12,8 +12,9 @@ export default function Footer() {
 
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin");
+  const isExamPage = pathname.startsWith("/online-exam");
 
-  return !isAdminPage ? (
+  return !isAdminPage && !isExamPage ? (
     <div className="Footer relative pt-[50px]">
       {/* <div className="footSub">
         <h1>Subscribe to our newsletter</h1>
