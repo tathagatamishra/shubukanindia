@@ -1,13 +1,19 @@
-// Exam/Instructor/LoginSignup/Verify.jsx
 "use client";
 import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
+import { shubukan_api } from "@/config";
 
 export default function Verify() {
   const router = useRouter();
-  const [otp, setOtp] = useState(new Array(5).fill("")); // 5 digits
+  const [otp, setOtp] = useState(new Array(6).fill(""));
   const inputRefs = useRef([]);
+  const email =
+    typeof window !== "undefined"
+      ? localStorage.getItem("instructor_email")
+      : "";
+  const otpType =
+    typeof window !== "undefined" ? localStorage.getItem("otp_type") : "";
 
   const handleChange = (value, index) => {
     if (/^[0-9]?$/.test(value)) {
@@ -15,25 +21,26 @@ export default function Verify() {
       newOtp[index] = value;
       setOtp(newOtp);
 
-      // Auto-focus next input
+      // auto-focus next box
       if (value && index < otp.length - 1) {
-        inputRefs.current[index + 1].focus();
+        inputRefs.current[index + 1]?.focus();
       }
     }
   };
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputRefs.current[index - 1].focus();
+      inputRefs.current[index - 1]?.focus();
     }
   };
 
   const handlePaste = (e) => {
     e.preventDefault();
     const pasted = e.clipboardData.getData("text").trim();
-    if (!/^[0-9]+$/.test(pasted)) return; // ignore non-numeric
 
-    const pastedArray = pasted.split("").slice(0, otp.length); // cut extra chars
+    if (!/^[0-9]+$/.test(pasted)) return; // only numbers
+
+    const pastedArray = pasted.split("").slice(0, otp.length);
     const newOtp = [...otp];
 
     pastedArray.forEach((char, i) => {
@@ -45,43 +52,56 @@ export default function Verify() {
 
     setOtp(newOtp);
 
-    // Focus last filled input
+    // focus last filled input
     const lastIndex = pastedArray.length - 1;
     if (inputRefs.current[lastIndex]) {
       inputRefs.current[lastIndex].focus();
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const enteredOtp = otp.join("");
-    console.log("Submitted OTP:", enteredOtp);
+    try {
+      const res = await shubukan_api.post("/instructor/verify-otp", {
+        email,
+        otp: enteredOtp,
+      });
+      alert(res.data.message);
+      localStorage.setItem("instructor_token", res.data.token);
+      router.push("/online-exam/instructor");
+    } catch (err) {
+      alert(err.response?.data?.message || "OTP verification failed");
+    }
+  };
 
-    // TODO: Verify OTP with backend
-    router.push("/online-exam/instructor");
+  const handleResend = async () => {
+    try {
+      await shubukan_api.post("/instructor/resend-otp", {
+        email,
+        type: otpType,
+      });
+      alert("OTP resent successfully");
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to resend OTP");
+    }
   };
 
   return (
     <div className="ExamChild !w-full !max-w-[540px] h-full flex flex-col justify-center items-center">
-      <label
-        htmlFor="otp"
-        className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]"
-      >
+      <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Enter OTP To Verify
       </label>
 
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[125px] shadow-md border !rounded-[40px]"
       >
-        <label
-          htmlFor="otp"
-          className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2"
-        >
+        <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
           OTP
         </label>
 
-        <div className="w-full flex justify-around mb-4">
+        <div className="w-full flex justify-around gap-[2px] mb-4">
           {otp.map((digit, index) => (
             <input
               key={index}
@@ -92,28 +112,22 @@ export default function Verify() {
               value={digit}
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
-              onPaste={index === 0 ? handlePaste : undefined} // paste only on first
+              onPaste={index === 0 ? handlePaste : undefined} // handle paste only on first
               placeholder="0"
-              className="corner-shape border font-[600] text-[16px] text-center w-[45px] sm:w-[55px] py-[8px] sm:py-[10px] mb-2"
+              className="corner-shape border font-[600] text-[16px] text-center max-w-[45px] w-full sm:w-[55px] py-[8px] sm:py-[10px] mb-2"
             />
           ))}
         </div>
 
         <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-4">
           ** <br />
-          We sent an OTP to{" "}
-          <span className="font-semibold">example@email.com</span>. Check your
-          email to get the code.
+          We sent an OTP to <span className="font-semibold">{email}</span>.
+          Check your email to get the code.
         </p>
 
         <div className="w-full flex justify-between gap-[16px]">
-          <ExamBtn text="Resend OTP" size="w-full" onClick={() => {}} />
-          <ExamBtn
-            text="Submit"
-            size="w-full"
-            type="submit"
-            onClick={handleSubmit}
-          />
+          <ExamBtn text="Resend OTP" size="w-full" onClick={handleResend} />
+          <ExamBtn text="Submit" size="w-full" type="submit" />
         </div>
       </form>
     </div>
