@@ -12,7 +12,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="ExamChild w-full h-full flex flex-col justify-center items-center">
+    <div className="ExamChild w-full h-full flex flex-col justify-start items-center">
       <label
         htmlFor="signup"
         className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]"
