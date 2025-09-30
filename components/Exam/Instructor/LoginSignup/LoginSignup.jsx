@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import "./OnlineExam.css";
-import ExamBtn from "./UI/ExamBtn";
+import ExamBtn from "../../UI/ExamBtn";
 
-export default function OnlineExam() {
+export default function LoginSignup() {
   const router = useRouter();
   const navigate = (page) => {
     router.push(page);
@@ -13,11 +12,15 @@ export default function OnlineExam() {
 
   return (
     <div className="OnlineExam corner-shape w-full flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
-      <ExamBtn text="Student" onClick={() => navigate("/online-exam/student/login-signup")} />
-
+      <ExamBtn
+        text="Log in"
+        onClick={() => navigate("/online-exam/instructor/login")}
+      />
       <p className="font-[600] text-[26px] text-[#64748B]">OR</p>
-
-      <ExamBtn text="Instructor" onClick={() => navigate("/online-exam/instructor/login-signup")} />
+      <ExamBtn
+        text="Sign up"
+        onClick={() => navigate("/online-exam/instructor/signup")}
+      />
     </div>
   );
 }

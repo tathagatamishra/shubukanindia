@@ -39,7 +39,8 @@ export default function Navbar() {
   const [currentPage, setCurrentPage] = useState("");
 
   const isAdminPage = pathname.startsWith("/admin");
-
+  const isExamPage = pathname.startsWith("/online-exam");
+  
   const pageList = [
     { path: "/history", label: "HISTORY" },
     { path: "/shubukan-india", label: "SHUBUKAN INDIA" },
@@ -190,7 +191,7 @@ export default function Navbar() {
     );
   }
 
-  return !isAdminPage ? (
+  return !isAdminPage && !isExamPage ? (
     <div
       id="Navbar"
       style={{
