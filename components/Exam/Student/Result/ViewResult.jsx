@@ -15,6 +15,7 @@ export default function ViewResult() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setResults(res.data);
+        console.log(res.data);
       } catch (err) {
         console.error(err);
         alert("Failed to fetch results");
@@ -23,30 +24,105 @@ export default function ViewResult() {
     fetchResults();
   }, []);
 
+  function formatExamDate(dateString) {
+    const examDate = new Date(dateString);
+
+    const time = examDate.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    const weekday = examDate.toLocaleDateString("en-US", { weekday: "long" });
+    const day = examDate.getDate();
+    const month = examDate.toLocaleDateString("en-US", { month: "long" });
+    const year = examDate.getFullYear();
+
+    return `${time}, ${weekday}, ${day} ${month} ${year}`;
+  }
+
   return (
-    <div className="ExamChild w-full h-full flex flex-col items-center">
-      <h2 className="font-[700] text-[18px] sm:text-[20px] mb-4">
+    <div className="ExamChild w-full h-full flex flex-col justify-start items-center">
+      <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         My Exam Results
-      </h2>
+      </label>
 
       {results.length === 0 ? (
         <p className="text-[14px] text-gray-500">No results found</p>
       ) : (
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-4 pb-[32px]">
           {results.map((res, idx) => (
             <div
               key={idx}
-              className="border shadow-md corner-shape p-4 flex flex-col"
+              className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] shadow-md border !rounded-[40px]"
             >
-              <p className="font-[600]">Exam ID: {res.examID}</p>
-              <p className="text-sm">Kyu: {res.kyu || "N/A"}</p>
-              <p className="text-sm">Marks: {res.marksObtained}</p>
-              <p className="text-sm">
-                Correct: {res.correctAnsCount} | Wrong: {res.wrongAnsCount}
-              </p>
-              <p className="text-sm">
-                Submitted At: {new Date(res.submittedAt).toLocaleString()}
-              </p>
+              <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] pb-[8px]">
+                <label className="font-[600] text-[12px] sm:text-[14px] text-[#334155]">
+                  Exam Date
+                </label>
+                <p className="text-[13px] sm:text-[14px] text-[#334155]">
+                  {formatExamDate(res.exam.examDate)}
+                </p>
+              </div>
+              <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] py-[8px]">
+                <label className="font-[600] text-[12px] sm:text-[14px] text-[#334155]">
+                  Submitted At
+                </label>
+                <p className="text-[13px] sm:text-[14px] text-[#334155]">
+                  {formatExamDate(res.submittedAt)}
+                </p>
+              </div>
+
+              <div className="w-full flex flex-col">
+                {[
+                  { label: "Kyu", data: res.kyu || "N/A" },
+                  { label: "Exam Set", data: res.examSet || "N/A" },
+                  { label: "Exam ID", data: res.examID || "N/A" },
+                  {
+                    label: "Total Questions Count",
+                    data: res.exam.totalQuestionCount || "N/A",
+                  },
+                  {
+                    label: "Total Marks",
+                    data: res.exam.totalMarks || "N/A",
+                  },
+                  {
+                    label: "Each Question Marks",
+                    data: res.exam.eachQuestionMarks || "N/A",
+                  },
+                  {
+                    label: "Marks Obtained",
+                    data: res.marksObtained || "N/A",
+                  },
+                  {
+                    label: "Correct Answers Selected",
+                    data: res.correctAnsCount || "N/A",
+                  },
+                  {
+                    label: "Wrong Answers Selected",
+                    data: res.wrongAnsCount || "N/A",
+                  },
+                  {
+                    noBorder: true,
+                    label: "Answers Not Selected",
+                    data:
+                      res.exam.totalQuestionCount -
+                      (res.correctAnsCount + res.wrongAnsCount),
+                  },
+                ].map((i, idx) => (
+                  <div
+                    key={idx}
+                    className={`w-full ${i.noBorder ? "" : "border-b-1"} border-dashed flex flex-row items-center`}
+                  >
+                    <label className="w-full font-[600] text-[12px] sm:text-[14px] text-[#334155] !m-[0px] p-[8px] pl-[2px] border-r-1 border-dashed">
+                      {i.label}
+                    </label>
+                    <p className="w-full text-center text-[13px] sm:text-[14px] text-[#334155]">
+                      {i.data}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

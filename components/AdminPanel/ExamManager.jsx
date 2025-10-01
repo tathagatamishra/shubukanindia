@@ -156,6 +156,7 @@ export default function ExamManager() {
             selected={form.examDate ? new Date(form.examDate) : null}
             onChange={(date) => setForm({ ...form, examDate: date })}
             showTimeSelect
+            timeIntervals={1}
             timeFormat="hh:mm aa"
             dateFormat="hh:mm aa - EEEE, dd MMMM yyyy"
             className="border p-2 rounded w-full"
@@ -225,22 +226,35 @@ export default function ExamManager() {
         <label className="flex flex-col">
           <span className="font-medium">Instructor</span>
           <select
-            value={form.instructorId}
+            value={
+              form.instructorId
+                ? JSON.stringify({
+                    _id: form.instructorId,
+                    name: form.instructorName,
+                  })
+                : ""
+            }
             onChange={(e) => {
-              const iid = e.target.value;
-              const ins = instructors.find((i) => i.instructorId === iid);
+              if (!e.target.value) {
+                setForm({ ...form, instructorId: "", instructorName: "" });
+                return;
+              }
+              const { _id, name } = JSON.parse(e.target.value);
               setForm({
                 ...form,
-                instructorId: iid,
-                instructorName: ins?.name || "",
+                instructorId: _id,
+                instructorName: name,
               });
             }}
             className="border p-2 rounded"
           >
             <option value="">-- Select Instructor --</option>
             {instructors.map((ins) => (
-              <option key={ins._id} value={ins.instructorId}>
-                {ins.name} ({ins.instructorId})
+              <option
+                key={ins._id}
+                value={JSON.stringify({ _id: ins._id, name: ins.name })}
+              >
+                {ins.name} ({ins.identity})
               </option>
             ))}
           </select>
