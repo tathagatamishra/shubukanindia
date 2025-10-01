@@ -13,7 +13,7 @@ export default function StudentManager() {
   });
   const [editForm, setEditForm] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
-  const [loading, setLoading] = useState(false); // ✅ loader state
+  const [loading, setLoading] = useState(false);
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
@@ -89,9 +89,7 @@ export default function StudentManager() {
           <input
             placeholder="Instructor ID"
             value={form.instructorId}
-            onChange={(e) =>
-              setForm({ ...form, instructorId: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, instructorId: e.target.value })}
             className="border p-2 rounded"
           />
         </div>
@@ -103,50 +101,64 @@ export default function StudentManager() {
         </button>
       </div>
 
-      {/* Students table */}
-      <div className="bg-white shadow rounded-xl p-4 overflow-x-auto">
+      {/* Student List styled like InstructorManager */}
+      <div className="flex flex-col gap-4">
         {loading ? (
           <div className="flex justify-center items-center h-[40vh]">
             <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
           </div>
         ) : students.length === 0 ? (
-          <div className="text-gray-500 text-center py-4">
-            No students found
-          </div>
+          <div className="text-gray-500 text-center">No students available</div>
         ) : (
-          <table className="w-full table-auto">
-            <thead>
-              <tr className="border-b">
-                <th className="p-2">Name</th>
-                <th className="p-2">Email</th>
-                <th className="p-2">Instructor</th>
-                <th className="p-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((s) => (
-                <tr key={s._id} className="border-b hover:bg-gray-50">
-                  <td className="p-2">{s.name}</td>
-                  <td className="p-2">{s.email}</td>
-                  <td className="p-2">{s.instructorName || "-"}</td>
-                  <td className="p-2 flex gap-2">
-                    <button
-                      className="text-blue-500"
-                      onClick={() => setEditForm(s)}
-                    >
-                      <FiEdit />
-                    </button>
-                    <button
-                      className="text-red-500"
-                      onClick={() => setDeleteId(s._id)}
-                    >
-                      <FiTrash2 />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          students.map((s) => (
+            <div
+              key={s._id}
+              className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-row w-full"
+            >
+              {/* Label column */}
+              <div className="border-r border-dashed border-[#334155] w-fit text-sm font-semibold">
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">Name</div>
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">Email</div>
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+                  Instructor Name
+                </div>
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+                  Instructor ID
+                </div>
+                <div className="h-[50px] p-2 flex items-center">Actions</div>
+              </div>
+
+              {/* Values column */}
+              <div className="w-full text-sm">
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+                  {s.name}
+                </div>
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center break-all">
+                  {s.email}
+                </div>
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+                  {s.instructorName || "-"}
+                </div>
+                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+                  {s.instructorId || "-"}
+                </div>
+                <div className="h-[50px] p-2 gap-2 flex items-center">
+                  <button
+                    className="text-blue-500 w-full max-w-[100px] h-full flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    onClick={() => setEditForm(s)}
+                  >
+                    <FiEdit /> Edit
+                  </button>
+                  <button
+                    className="text-red-500 w-full max-w-[100px] h-full flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    onClick={() => setDeleteId(s._id)}
+                  >
+                    <FiTrash2 /> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
         )}
       </div>
 
@@ -207,7 +219,8 @@ export default function StudentManager() {
           <div className="bg-white p-6 rounded-xl w-96">
             <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
             <p className="text-gray-700 mb-6">
-              Are you sure you want to delete this student? This cannot be undone.
+              Are you sure you want to delete this student? This cannot be
+              undone.
             </p>
             <div className="flex gap-2 justify-end">
               <button

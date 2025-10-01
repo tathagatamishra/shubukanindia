@@ -496,13 +496,13 @@ export default function ExamManager() {
                 <div className="flex items-center h-[50px] p-2 gap-2">
                   <button
                     onClick={() => editExam(ex)}
-                    className="text-blue-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-blue-500 h-full w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
                     <FiEdit /> Edit
                   </button>
                   <button
                     onClick={() => deleteExam(ex._id)}
-                    className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-red-500 h-full w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
                     <FiTrash2 /> Delete
                   </button>

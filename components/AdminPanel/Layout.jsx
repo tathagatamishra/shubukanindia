@@ -59,7 +59,7 @@ export default function Layout({ children }) {
       <div className="flex flex-col flex-1">
         {/* Topbar */}
         {
-          <div className="flex items-center justify-between bg-white shadow-md p-4">
+          <div className="z-[50] flex items-center justify-between bg-white shadow-md p-4">
             <button
               className="lg:hidden text-xl"
               onClick={() => setOpen(!open)}

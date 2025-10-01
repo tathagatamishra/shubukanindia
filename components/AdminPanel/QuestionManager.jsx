@@ -89,7 +89,7 @@ export default function QuestionManager() {
                     options: newQ.options.filter((_, i) => i !== idx),
                   })
                 }
-                className="text-red-500"
+                className="text-red-500 border rounded w-[40px] flex items-center justify-center"
                 disabled={newQ.options.length === 1} // keep at least 1
               >
                 <FiTrash2 />
@@ -171,7 +171,7 @@ export default function QuestionManager() {
                 <div className="h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex gap-2">
                   <button
                     onClick={() => setDeleteId(q._id)}
-                    className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-red-500 w-[100px] h-full flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
                     <FiTrash2 /> Delete
                   </button>
