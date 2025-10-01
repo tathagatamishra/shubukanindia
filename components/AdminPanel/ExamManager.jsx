@@ -1,12 +1,22 @@
 // components/AdminPanel/ExamManager.jsx
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
-import { FiPlus, FiTrash2, FiEdit, FiSave, FiX } from "react-icons/fi";
+import {
+  FiPlus,
+  FiTrash2,
+  FiEdit,
+  FiSave,
+  FiX,
+  FiCopy,
+  FiCheck,
+} from "react-icons/fi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function ExamManager() {
+  const router = useRouter();
   const [exams, setExams] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [questions, setQuestions] = useState([]);
@@ -20,13 +30,16 @@ export default function ExamManager() {
     instructorId: "",
     instructorName: "",
     kyu: "",
-    examSet: 1, // 🔹 add this
+    examSet: 1,
   });
   const [editingId, setEditingId] = useState(null);
+  const [copied, setCopied] = useState({ id: null, type: null });
+  const [loading, setLoading] = useState(false);
 
   // ---------------- Fetch Data ----------------
   const fetchExams = async () => {
     try {
+      setLoading(true);
       const token = localStorage.getItem("adminToken");
       const res = await shubukan_api.get("/admin/exams", {
         headers: { Authorization: `Bearer ${token}` },
@@ -34,6 +47,8 @@ export default function ExamManager() {
       setExams(res.data);
     } catch (err) {
       console.error("Fetch exams error:", err.response?.data || err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,6 +61,8 @@ export default function ExamManager() {
         "Fetch instructors error:",
         err.response?.data || err.message
       );
+      err.response?.data.error == "Invalid or expired token" &&
+        router.push("/admin/login");
     }
   };
 
@@ -61,6 +78,8 @@ export default function ExamManager() {
         "Fetch questions error:",
         err.response?.data || err.message
       );
+      err.response?.data.error == "Invalid or expired token" &&
+        router.push("/admin/login");
     }
   };
 
@@ -115,7 +134,7 @@ export default function ExamManager() {
       instructorId: exam.instructorId || "",
       instructorName: exam.instructorName || "",
       kyu: exam.kyu || "",
-      examSet: exam.examSet || 1, // 🔹 add this
+      examSet: exam.examSet || 1,
     });
 
     setEditingId(exam._id);
@@ -132,8 +151,15 @@ export default function ExamManager() {
       instructorId: "",
       instructorName: "",
       kyu: "",
-      examSet: 1, // 🔹 make sure this is always set
+      examSet: 1,
     });
+  };
+
+  // ✅ Copy to clipboard
+  const handleCopy = (text, id, type) => {
+    navigator.clipboard.writeText(text);
+    setCopied({ id, type });
+    setTimeout(() => setCopied({ id: null, type: null }), 2000);
   };
 
   // ---------------- Effects ----------------
@@ -273,12 +299,16 @@ export default function ExamManager() {
         {/* Questions list */}
         <label className="flex flex-col">
           <span className="font-medium">Select Questions</span>
-          <div className="max-h-64 overflow-y-auto border rounded p-2 space-y-2">
+          <div
+            className="min-h-64 overflow-y-auto border rounded p-2 space-y-2"
+            style={{ resize: "vertical" }}
+          >
             {questions.map((q) => (
               <div key={q._id} className="border p-2 rounded">
-                <label className="flex items-start gap-2">
+                <label className="flex items-start gap-4">
                   <input
                     type="checkbox"
+                    className="mt-2"
                     checked={form.questions.includes(q._id)}
                     onChange={(e) => {
                       if (e.target.checked) {
@@ -350,60 +380,137 @@ export default function ExamManager() {
         </div>
       </div>
 
-      {/* Exams Table */}
-      <div className="bg-white shadow rounded-xl p-4 overflow-x-auto">
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="border-b">
-              <th className="p-2">Exam ID</th>
-              <th className="p-2">Date</th>
-              <th className="p-2">Set</th>
-              <th className="p-2">Duration</th>
-              <th className="p-2">Access</th>
-              <th className="p-2">Questions</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {exams.map((ex) => (
-              <tr key={ex._id} className="border-b hover:bg-gray-50">
-                <td className="p-2">{ex.examID}</td>
-                <td className="p-2">
+      {/* Exams List */}
+      <div className="flex flex-col gap-4">
+        {loading ? (
+          <div className="flex justify-center items-center h-[40vh]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+          </div>
+        ) : exams.length === 0 ? (
+          <div className="text-gray-500 text-center">No exams available</div>
+        ) : (
+          exams.map((ex) => (
+            <div
+              key={ex._id}
+              className="hover:!outline-[#64748B] hover:!outline-2 bg-white shadow rounded-xl p-4 flex flex-row w-full"
+            >
+              {/* Labels */}
+              <div className="border-r border-dashed border-[#334155] w-fit text-[12px] sm:text-[16px] font-[600]">
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Exam ID
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Password
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Date
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Set
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Duration
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Access
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  Questions
+                </div>
+                <div className="flex items-center h-[50px] p-2">Actions</div>
+              </div>
+
+              {/* Values */}
+              <div className="w-full text-[12px] sm:text-[16px]">
+                {/* ✅ Copyable Exam ID */}
+                <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
+                  <button
+                    onClick={() => handleCopy(ex.examID, ex._id, "id")}
+                    className="text-blue-500 hover:text-blue-700 text-[14px] sm:text-[16px] font-[700] flex flex-row items-center gap-4"
+                    style={{ letterSpacing: "4px" }}
+                    title="Copy Exam ID"
+                  >
+                    {ex.examID}
+                    {copied.id === ex._id && copied.type === "id" ? (
+                      <FiCheck />
+                    ) : (
+                      <FiCopy />
+                    )}
+                  </button>
+                </div>
+
+                {/* Password */}
+                <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
+                  {ex.password ? (
+                    <button
+                      onClick={() =>
+                        handleCopy(ex.password, ex._id, "password")
+                      }
+                      className="text-red-500 hover:text-red-700 text-[14px] sm:text-[16px] font-[700] flex flex-row items-center gap-4"
+                      style={{ letterSpacing: "4px" }}
+                      title="Copy Password"
+                    >
+                      {ex.password}
+                      {copied.id === ex._id && copied.type === "password" ? (
+                        <FiCheck />
+                      ) : (
+                        <FiCopy />
+                      )}
+                    </button>
+                  ) : (
+                    <span className="text-gray-400 italic">No Password</span>
+                  )}
+                </div>
+
+                {/* Date */}
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
                   {new Date(ex.examDate).toLocaleTimeString("en-US", {
                     hour: "2-digit",
                     minute: "2-digit",
                     hour12: true,
-                  })}
-                  {" - "}
+                  })}{" "}
+                  -{" "}
                   {new Date(ex.examDate).toLocaleDateString("en-US", {
                     weekday: "long",
                     day: "numeric",
                     month: "long",
                     year: "numeric",
                   })}
-                </td>
-                <td className="p-2">{ex.examSet}</td>
-                <td className="p-2">{ex.examDuration} min</td>
-                <td className="p-2">{ex.accessability}</td>
-                <td className="p-2">{ex.totalQuestionCount}</td>
-                <td className="p-2 flex gap-2">
+                </div>
+
+                {/* Other fields */}
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  {ex.examSet}
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  {ex.examDuration} min
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  {ex.accessability}
+                </div>
+                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+                  {ex.totalQuestionCount}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center h-[50px] p-2 gap-2">
                   <button
                     onClick={() => editExam(ex)}
-                    className="text-blue-500"
+                    className="text-blue-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
-                    <FiEdit />
+                    <FiEdit /> Edit
                   </button>
                   <button
                     onClick={() => deleteExam(ex._id)}
-                    className="text-red-500"
+                    className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
-                    <FiTrash2 />
+                    <FiTrash2 /> Delete
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

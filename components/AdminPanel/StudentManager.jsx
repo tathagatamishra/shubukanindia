@@ -12,16 +12,24 @@ export default function StudentManager() {
     instructorId: "",
   });
   const [editForm, setEditForm] = useState(null);
-  const [deleteId, setDeleteId] = useState(null); // 🔴 new state for delete modal
+  const [deleteId, setDeleteId] = useState(null);
+  const [loading, setLoading] = useState(false); // ✅ loader state
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
 
   const fetchStudents = async () => {
-    const res = await shubukan_api.get("/admin/students", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setStudents(res.data);
+    setLoading(true);
+    try {
+      const res = await shubukan_api.get("/admin/students", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setStudents(res.data);
+    } catch (err) {
+      console.error("Failed to fetch students", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const addStudent = async () => {
@@ -97,39 +105,49 @@ export default function StudentManager() {
 
       {/* Students table */}
       <div className="bg-white shadow rounded-xl p-4 overflow-x-auto">
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="border-b">
-              <th className="p-2">Name</th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Instructor</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((s) => (
-              <tr key={s._id} className="border-b hover:bg-gray-50">
-                <td className="p-2">{s.name}</td>
-                <td className="p-2">{s.email}</td>
-                <td className="p-2">{s.instructorName || "-"}</td>
-                <td className="p-2 flex gap-2">
-                  <button
-                    className="text-blue-500"
-                    onClick={() => setEditForm(s)}
-                  >
-                    <FiEdit />
-                  </button>
-                  <button
-                    className="text-red-500"
-                    onClick={() => setDeleteId(s._id)} // 🔴 open confirmation modal
-                  >
-                    <FiTrash2 />
-                  </button>
-                </td>
+        {loading ? (
+          <div className="flex justify-center items-center h-[40vh]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+          </div>
+        ) : students.length === 0 ? (
+          <div className="text-gray-500 text-center py-4">
+            No students found
+          </div>
+        ) : (
+          <table className="w-full table-auto">
+            <thead>
+              <tr className="border-b">
+                <th className="p-2">Name</th>
+                <th className="p-2">Email</th>
+                <th className="p-2">Instructor</th>
+                <th className="p-2">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {students.map((s) => (
+                <tr key={s._id} className="border-b hover:bg-gray-50">
+                  <td className="p-2">{s.name}</td>
+                  <td className="p-2">{s.email}</td>
+                  <td className="p-2">{s.instructorName || "-"}</td>
+                  <td className="p-2 flex gap-2">
+                    <button
+                      className="text-blue-500"
+                      onClick={() => setEditForm(s)}
+                    >
+                      <FiEdit />
+                    </button>
+                    <button
+                      className="text-red-500"
+                      onClick={() => setDeleteId(s._id)}
+                    >
+                      <FiTrash2 />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {/* Edit modal */}
@@ -183,7 +201,7 @@ export default function StudentManager() {
         </div>
       )}
 
-      {/* 🔴 Delete confirmation modal */}
+      {/* Delete confirmation modal */}
       {deleteId && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-xl w-96">

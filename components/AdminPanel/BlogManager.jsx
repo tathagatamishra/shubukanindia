@@ -864,48 +864,63 @@ export default function BlogManager() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {blogs.map((b) => (
-          <div
-            key={b._id}
-            className="bg-white p-4 rounded-lg shadow-sm flex flex-col"
-          >
-            <div className="h-40 w-full overflow-hidden rounded-md mb-3">
-              {b.coverImage?.url ? (
-                <img
-                  src={b.coverImage.url}
-                  alt={b.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                  No image
-                </div>
-              )}
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold">{b.title}</h3>
-              <p className="text-sm text-gray-600 line-clamp-3">{b.summary}</p>
-            </div>
+      {/* Blog list */}
+      {loading ? (
+        <div className="flex justify-center items-center h-[40vh] col-span-full">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+        </div>
+      ) : blogs.length === 0 ? (
+        <div className="text-gray-500 col-span-full text-center">
+          No blogs available.
+        </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {blogs.map((b) => (
+            <div
+              key={b._id}
+              className="bg-white p-4 rounded-lg shadow-sm flex flex-col"
+            >
+              <div className="h-40 w-full overflow-hidden rounded-md mb-3">
+                {b.coverImage?.url ? (
+                  <img
+                    src={b.coverImage.url}
+                    alt={b.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                    No image
+                  </div>
+                )}
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold">{b.title}</h3>
+                <p className="text-sm text-gray-600 line-clamp-3">
+                  {b.summary}
+                </p>
+              </div>
 
-            <div className="flex items-center justify-between mt-3">
-              <div className="text-xs text-gray-500">{b.category?.primary}</div>
-              <div className="flex gap-2">
-                <button onClick={() => openEdit(b)} className="text-blue-600">
-                  <FiEdit />
-                </button>
-                <button
-                  onClick={() => setDeleteId(b._id)}
-                  className="text-red-600"
-                  title="Permanent delete"
-                >
-                  <FiTrash2 />
-                </button>
+              <div className="flex items-center justify-between mt-3">
+                <div className="text-xs text-gray-500">
+                  {b.category?.primary}
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => openEdit(b)} className="text-blue-600">
+                    <FiEdit />
+                  </button>
+                  <button
+                    onClick={() => setDeleteId(b._id)}
+                    className="text-red-600"
+                    title="Permanent delete"
+                  >
+                    <FiTrash2 />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {deleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
