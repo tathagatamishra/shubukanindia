@@ -1,3 +1,4 @@
+// Exam/Student/Student.jsx
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -34,9 +35,9 @@ export default function Student() {
   };
 
   const menuItems = [
-    { text: "Demo Exam", action: () => router.push("/online-exam/demo") },
-    { text: "View Results", action: () => router.push("/online-exam/results") },
-    { text: "Edit Profile", action: () => router.push("/online-exam/profile") },
+    { text: "Demo Exam", action: () => router.push("/online-exam/student/open-exams") },
+    { text: "View Results", action: () => router.push("/online-exam/student/results") },
+    { text: "Edit Profile", action: () => router.push("/online-exam/student/profile") },
     {
       text: "Log Out",
       fontstyle: "text-[#B23A48] font-[600] text-[14px] sm:text-[16px]",

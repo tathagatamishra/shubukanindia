@@ -94,7 +94,7 @@ export default function Verify() {
       </label>
 
       <form
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[125px] shadow-md border !rounded-[40px]"
       >
         <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
@@ -127,7 +127,7 @@ export default function Verify() {
 
         <div className="w-full flex justify-between gap-[16px]">
           <ExamBtn text="Resend OTP" size="w-full" onClick={handleResend} />
-          <ExamBtn text="Submit" size="w-full" type="submit" />
+          <ExamBtn text="Submit" size="w-full" type="submit" onClick={handleSubmit} />
         </div>
       </form>
     </div>

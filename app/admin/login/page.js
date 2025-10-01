@@ -20,7 +20,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center w-full min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center w-full min-h-screen p-[20px] bg-gray-100">
       <form
         onSubmit={handleLogin}
         className="bg-white shadow-md rounded-xl p-6 w-96"

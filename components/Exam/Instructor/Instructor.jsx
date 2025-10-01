@@ -1,17 +1,27 @@
 // Exam/Instructor/Instructor.jsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../UI/ExamBtn";
 import { shubukan_api } from "@/config";
 
 export default function Instructor() {
   const router = useRouter();
+  const [token, setToken] = useState(null);
   const [name, setName] = useState("");
-  const token =
-    typeof window !== "undefined"
-      ? localStorage.getItem("instructor_token")
-      : "";
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = localStorage.getItem("instructor_token");
+    setToken(t);
+    setLoading(false);
+
+    if (!t) {
+      router.push("/online-exam");
+    }
+  }, [router]);
+
+  if (loading) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,11 +39,25 @@ export default function Instructor() {
     }
   };
 
+  const fetchUpcoming = async () => {
+    try {
+      const res = await shubukan_api.get("/instructor/exams/upcoming", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Instructor upcoming exams:", res.data);
+    } catch (error) {
+      console.log("gg");
+    }
+  };
+
   // Instructor menu actions
   const menuItems = [
     {
       text: "Upcoming Exam",
-      action: () => router.push("/online-exam/instructor/upcoming"),
+      action: () => {
+        fetchUpcoming();
+        // router.push("/online-exam/instructor/upcoming");
+      },
     },
     {
       text: "View All Students",
@@ -54,7 +78,10 @@ export default function Instructor() {
     {
       text: "Log Out",
       fontstyle: "text-[#B23A48] font-[600] text-[14px] sm:text-[16px]",
-      action: () => router.push("/online-exam"),
+      action: () => {
+        localStorage.removeItem("instructor_token"); // clear token
+        router.push("/online-exam");
+      },
     },
   ];
 
