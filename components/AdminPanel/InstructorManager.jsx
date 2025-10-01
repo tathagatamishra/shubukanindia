@@ -1,20 +1,24 @@
 "use client";
-import { useEffect, useState } from "react";
+import { FiPlus, FiTrash2, FiEdit, FiX, FiCopy, FiCheck } from "react-icons/fi";
+import { useState, useEffect } from "react";
 import { shubukan_api } from "@/config";
-import { FiPlus, FiTrash2, FiEdit, FiX } from "react-icons/fi";
 
 export default function InstructorManager() {
   const [instructors, setInstructors] = useState([]);
   const [form, setForm] = useState({ name: "", identity: "" });
   const [editForm, setEditForm] = useState(null);
+  const [editId, setEditId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [deletePermanent, setDeletePermanent] = useState(false);
+  const [copiedId, setCopiedId] = useState(null); // ✅ state to track copied ID
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
 
   const fetchInstructors = async () => {
-    const res = await shubukan_api.get("/instructors");
+    const res = await shubukan_api.get("/admin/instructors", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     setInstructors(res.data.instructors);
   };
 
@@ -36,13 +40,21 @@ export default function InstructorManager() {
     fetchInstructors();
   };
 
-  const updateInstructor = async () => {
+  const updateInstructor = async (iid) => {
     if (!editForm) return;
-    await shubukan_api.put(`/instructor/profile`, editForm, {
+    await shubukan_api.put(`/admin/instructor/edit/${iid}`, editForm, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setEditForm(null);
+    setEditId(null)
     fetchInstructors();
+  };
+
+  // ✅ Copy to clipboard handler
+  const handleCopy = (text, iid) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(iid);
+    setTimeout(() => setCopiedId(null), 2000); // reset after 2s
   };
 
   useEffect(() => {
@@ -79,40 +91,69 @@ export default function InstructorManager() {
       </div>
 
       {/* Instructor Table */}
-      <div className="bg-white shadow rounded-xl p-4 overflow-x-auto">
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="border-b">
-              <th className="p-2">Name</th>
-              <th className="p-2">ID</th>
-              <th className="p-2">Claimed</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {instructors.map((i) => (
-              <tr key={i._id} className="border-b hover:bg-gray-50">
-                <td className="p-2">{i.name}</td>
-                <td className="p-2">{i.instructorId}</td>
-                <td className="p-2">{i.claimed ? "Yes" : "No"}</td>
-                <td className="p-2 flex gap-2">
-                  <button
-                    className="text-blue-500"
-                    onClick={() => setEditForm(i)}
-                  >
-                    <FiEdit />
-                  </button>
-                  <button
-                    className="text-red-500"
-                    onClick={() => {
-                      setDeleteId(i.instructorId);
-                      setDeletePermanent(false); // soft delete
-                    }}
-                  >
-                    <FiTrash2 />
-                  </button>
+      <div className="flex flex-col gap-4">
+        {instructors.map((i) => (
+          <div
+            key={i._id}
+            className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-row w-full"
+          >
+            <div className="border-r border-dashed border-[#334155] w-fit">
+              <div className="h-[50px] p-2 border-b border-dashed">Name</div>
+              <div className="h-[50px] p-2 border-b border-dashed">ID</div>
+              <div className="h-[50px] p-2 border-b border-dashed">
+                Identity
+              </div>
+              <div className="h-[50px] p-2 border-b border-dashed">Claimed</div>
+              <div className="h-[50px] p-2">Actions</div>
+            </div>
 
-                  {/* <button
+            <div className="w-full">
+              <div className="h-[50px] p-2 border-b border-dashed">
+                {i.name}
+              </div>
+
+              <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
+                <button
+                  onClick={() => handleCopy(i.instructorId, i._id)}
+                  className="text-blue-500 hover:text-blue-700 font-[700] flex flex-row items-center gap-4"
+                  title="Copy ID"
+                  style={{ letterSpacing: "4px" }}
+                >
+                  {i.instructorId}
+                  {copiedId === i._id ? <FiCheck /> : <FiCopy />}
+                </button>
+              </div>
+
+              <div className="h-[50px] p-2 border-b border-dashed">
+                {i.identity}
+              </div>
+
+              <div className="h-[50px] p-2 border-b border-dashed">
+                {i.claimed ? "Yes" : "No"}
+              </div>
+
+              <div className="h-[50px] p-2 flex gap-2">
+                <button
+                  className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                  onClick={() => {
+                    setDeleteId(i.instructorId);
+                    setDeletePermanent(false); // soft delete
+                  }}
+                >
+                  <FiTrash2 /> Delete
+                </button>
+
+                <button
+                  className="text-blue-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                  onClick={() => {
+                    setEditForm(i);
+                    setEditId(i.instructorId);
+                  }}
+                >
+                  <FiEdit /> Edit
+                </button>
+
+                {/* <button
                     className="text-red-700"
                     onClick={() => {
                       setDeleteId(i.instructorId);
@@ -121,15 +162,14 @@ export default function InstructorManager() {
                   >
                     <FiX />
                   </button> */}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
       {deleteId && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50  p-4">
           <div className="bg-white p-6 rounded-xl w-96 shadow-lg">
             <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
             <p className="text-gray-700 mb-6">
@@ -160,7 +200,7 @@ export default function InstructorManager() {
 
       {/* Edit Modal */}
       {editForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-white p-6 rounded-xl w-96">
             <h3 className="text-lg font-bold mb-4">Edit Instructor</h3>
             <input
@@ -185,7 +225,9 @@ export default function InstructorManager() {
                 Cancel
               </button>
               <button
-                onClick={updateInstructor}
+                onClick={() => {
+                  updateInstructor(editId);
+                }}
                 className="px-3 py-2 bg-blue-500 text-white rounded"
               >
                 Save
