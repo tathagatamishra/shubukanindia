@@ -58,7 +58,7 @@ export default function ResultManager() {
                 className="bg-white shadow rounded-xl p-4 hover:shadow-md transition"
               >
                 {/* Top section (Student + Exam ID) */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-2 mb-2">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-dashed pb-2 mb-2">
                   <div>
                     <p className="font-semibold text-lg">{r.student?.name}</p>
                     <p className="text-sm text-gray-500">{r.student?.email}</p>

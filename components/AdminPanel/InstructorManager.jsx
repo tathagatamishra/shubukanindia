@@ -154,7 +154,7 @@ export default function InstructorManager() {
 
                 <div className="h-[50px] p-2 flex gap-2">
                   <button
-                    className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-red-500 w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                     onClick={() => {
                       setDeleteId(i.instructorId);
                       setDeletePermanent(false);
@@ -164,7 +164,7 @@ export default function InstructorManager() {
                   </button>
 
                   <button
-                    className="text-blue-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-blue-500 w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                     onClick={() => {
                       setEditForm(i);
                       setEditId(i.instructorId);
