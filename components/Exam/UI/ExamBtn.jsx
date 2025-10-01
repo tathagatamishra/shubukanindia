@@ -14,12 +14,14 @@ export default function ExamBtn({
   type = "",
   form = "",
   onClick,
+  disabled = false,
 }) {
   return (
     <button
       type={type}
       form={form}
       value={value}
+      disabled={disabled}
       onClick={onClick}
       style={{
         border: `${border}`,
