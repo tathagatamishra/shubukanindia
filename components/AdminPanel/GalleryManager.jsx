@@ -278,98 +278,109 @@ export default function GalleryManager() {
       )}
 
       {/* Gallery grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {galleries.map((g) => (
-          <div key={g._id} className="bg-white shadow p-2 rounded">
-            <img
-              src={g.image}
-              alt={g.title}
-              className="w-full h-40 object-cover rounded"
-            />
-            {editMode === g._id ? (
-              <div className="space-y-2 mt-2">
-                <input
-                  id="title"
-                  value={editData.title}
-                  onChange={handleInputChange}
-                  className="w-full border p-1"
-                />
-                <textarea
-                  id="description"
-                  value={editData.description}
-                  onChange={handleInputChange}
-                  className="w-full border p-1"
-                />
-                <input
-                  id="year"
-                  value={editData.year}
-                  onChange={handleInputChange}
-                  className="w-full border p-1"
-                />
-                <input
-                  id="category"
-                  value={editData.category}
-                  onChange={handleInputChange}
-                  className="w-full border p-1"
-                />
-                <input
-                  id="tags"
-                  value={editData.tags}
-                  onChange={handleInputChange}
-                  className="w-full border p-1"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleImageChange(e, true)}
-                />
-                {editImagePreview && (
-                  <img
-                    src={editImagePreview}
-                    className="w-full h-32 object-cover"
-                  />
-                )}
-                <div className="flex justify-end gap-2">
-                  <button
-                    onClick={() => handleUpdate(g._id)}
-                    className="bg-green-500 text-white px-3 py-1 rounded"
-                  >
-                    <FiSave /> Save
-                  </button>
-                  <button
-                    onClick={() => setEditMode(null)}
-                    className="bg-gray-300 px-3 py-1 rounded"
-                  >
-                    <FiX /> Cancel
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-2 text-sm">
-                <p className="font-semibold">{g.title}</p>
-                <p>{g.description}</p>
-                <div className="flex justify-between mt-2">
-                  <button
-                    onClick={() => {
-                      setEditMode(g._id);
-                      setEditData({ ...g, tags: g.tags.join(", ") });
-                      setEditImagePreview(g.image);
-                    }}
-                    className="text-blue-500 flex items-center gap-1"
-                  >
-                    <FiEdit /> Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(g._id)}
-                    className="text-red-500 flex items-center gap-1"
-                  >
-                    <RiDeleteBin2Line /> Delete
-                  </button>
-                </div>
-              </div>
-            )}
+      <div className="mt-4">
+        {loading ? (
+          <div className="flex justify-center items-center h-[40vh]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
           </div>
-        ))}
+        ) : galleries.length === 0 ? (
+          <div className="text-gray-500 text-center">No images available</div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {galleries.map((g) => (
+              <div key={g._id} className="bg-white shadow p-2 rounded">
+                <img
+                  src={g.image}
+                  alt={g.title}
+                  className="w-full h-40 object-cover rounded"
+                />
+
+                {editMode === g._id ? (
+                  <div className="space-y-2 mt-2">
+                    <input
+                      id="title"
+                      value={editData.title}
+                      onChange={handleInputChange}
+                      className="w-full border p-1"
+                    />
+                    <textarea
+                      id="description"
+                      value={editData.description}
+                      onChange={handleInputChange}
+                      className="w-full border p-1"
+                    />
+                    <input
+                      id="year"
+                      value={editData.year}
+                      onChange={handleInputChange}
+                      className="w-full border p-1"
+                    />
+                    <input
+                      id="category"
+                      value={editData.category}
+                      onChange={handleInputChange}
+                      className="w-full border p-1"
+                    />
+                    <input
+                      id="tags"
+                      value={editData.tags}
+                      onChange={handleInputChange}
+                      className="w-full border p-1"
+                    />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageChange(e, true)}
+                    />
+                    {editImagePreview && (
+                      <img
+                        src={editImagePreview}
+                        className="w-full h-32 object-cover"
+                      />
+                    )}
+                    <div className="flex justify-end gap-2">
+                      <button
+                        onClick={() => handleUpdate(g._id)}
+                        className="bg-green-500 text-white px-3 py-1 rounded"
+                      >
+                        <FiSave /> Save
+                      </button>
+                      <button
+                        onClick={() => setEditMode(null)}
+                        className="bg-gray-300 px-3 py-1 rounded"
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mt-2 text-sm">
+                    <p className="font-semibold">{g.title}</p>
+                    <p>{g.description}</p>
+                    <div className="flex justify-between mt-2">
+                      <button
+                        onClick={() => {
+                          setEditMode(g._id);
+                          setEditData({ ...g, tags: g.tags.join(", ") });
+                          setEditImagePreview(g.image);
+                        }}
+                        className="text-blue-500 flex items-center gap-1"
+                      >
+                        <FiEdit /> Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(g._id)}
+                        className="text-red-500 flex items-center gap-1"
+                      >
+                        <RiDeleteBin2Line /> Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

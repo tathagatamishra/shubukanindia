@@ -6,15 +6,22 @@ import { FiPlus, FiTrash2 } from "react-icons/fi";
 export default function QuestionManager() {
   const [questions, setQuestions] = useState([]);
   const [newQ, setNewQ] = useState({ question: "", options: [""], answer: 0 });
-
   const [deleteId, setDeleteId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchQuestions = async () => {
     const token = localStorage.getItem("adminToken");
-    const res = await shubukan_api.get("/admin/questions", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setQuestions(res.data);
+    setLoading(true);
+    try {
+      const res = await shubukan_api.get("/admin/questions", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setQuestions(res.data);
+    } catch (err) {
+      console.error("Failed to fetch questions", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const addQuestion = async () => {
@@ -33,10 +40,14 @@ export default function QuestionManager() {
 
   const deleteQ = async (id) => {
     const token = localStorage.getItem("adminToken");
-    await shubukan_api.delete(`/admin/question/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    fetchQuestions();
+    try {
+      await shubukan_api.delete(`/admin/question/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchQuestions();
+    } catch (err) {
+      alert(err.response?.data?.message || "Delete failed");
+    }
   };
 
   useEffect(() => {
@@ -116,35 +127,60 @@ export default function QuestionManager() {
       </div>
 
       {/* List Questions */}
-      <div className="bg-white shadow rounded-xl p-4 overflow-x-auto">
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="border-b">
-              <th className="p-2">Question</th>
-              <th className="p-2">Options</th>
-              <th className="p-2">Answer</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {questions.map((q) => (
-              <tr key={q._id} className="border-b hover:bg-gray-50">
-                <td className="p-2">{q.question}</td>
-                <td className="p-2">{q.options.join(", ")}</td>
-                <td className="p-2">{q.options[q.answer]}</td>
-                <td className="p-2">
+      {loading ? (
+        <div className="flex justify-center items-center h-[30vh]">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+        </div>
+      ) : questions.length === 0 ? (
+        <div className="text-gray-500 text-center">No questions available</div>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {questions.map((q) => (
+            <div
+              key={q._id}
+              className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-col w-full"
+            >
+              {/* Label column */}
+              <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
+                <p className="min-w-[65px]">Question</p>
+                <div className="w-full h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155]">
+                  {q.question}
+                </div>
+              </div>
+              <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
+                <p className="min-w-[65px]">Options</p>
+                <div className="h-fit min-h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex flex-wrap gap-2">
+                  {q.options.map((i, n) => (
+                    <p
+                      key={n}
+                      className="border-1 border-blue-400 rounded h-fit px-2 pb-1"
+                    >
+                      {i}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
+                <p className="min-w-[65px]">Answer</p>
+                <div className="h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155]">
+                  {q.options[q.answer]}
+                </div>
+              </div>
+              <div className="flex flex-row items-center w-full h-fit border-dashed border-[#334155]">
+                <p className="min-w-[65px]">Actions</p>
+                <div className="h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex gap-2">
                   <button
                     onClick={() => setDeleteId(q._id)}
-                    className="text-red-500"
+                    className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
-                    <FiTrash2 />
+                    <FiTrash2 /> Delete
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Delete Confirmation Modal */}
       {deleteId && (

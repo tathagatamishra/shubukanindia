@@ -12,6 +12,7 @@ export default function Dashboard() {
     questions: 0,
     exams: 0,
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,11 +45,21 @@ export default function Dashboard() {
         });
       } catch (err) {
         console.error("Dashboard fetch error:", err);
+      } finally {
+        setLoading(false); // stop loader
       }
     };
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div>

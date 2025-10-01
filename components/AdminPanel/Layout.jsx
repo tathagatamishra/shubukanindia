@@ -77,7 +77,7 @@ export default function Layout({ children }) {
         }
 
         {/* Page content */}
-        <div className="p-4 overflow-y-auto">{children}</div>
+        <div className="p-4 pb-[32px] overflow-y-auto">{children}</div>
       </div>
     </div>
   );

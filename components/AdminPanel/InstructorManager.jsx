@@ -1,3 +1,4 @@
+// components/AdminPanel/InstructorManager.jsx
 "use client";
 import { FiPlus, FiTrash2, FiEdit, FiX, FiCopy, FiCheck } from "react-icons/fi";
 import { useState, useEffect } from "react";
@@ -11,15 +12,23 @@ export default function InstructorManager() {
   const [deleteId, setDeleteId] = useState(null);
   const [deletePermanent, setDeletePermanent] = useState(false);
   const [copiedId, setCopiedId] = useState(null); // ✅ state to track copied ID
+  const [loading, setLoading] = useState(false);
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
 
   const fetchInstructors = async () => {
-    const res = await shubukan_api.get("/admin/instructors", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setInstructors(res.data.instructors);
+    setLoading(true);
+    try {
+      const res = await shubukan_api.get("/admin/instructors", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setInstructors(res.data.instructors);
+    } catch (err) {
+      console.error("Failed to fetch instructors", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const generateId = async () => {
@@ -46,7 +55,7 @@ export default function InstructorManager() {
       headers: { Authorization: `Bearer ${token}` },
     });
     setEditForm(null);
-    setEditId(null)
+    setEditId(null);
     fetchInstructors();
   };
 
@@ -92,80 +101,82 @@ export default function InstructorManager() {
 
       {/* Instructor Table */}
       <div className="flex flex-col gap-4">
-        {instructors.map((i) => (
-          <div
-            key={i._id}
-            className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-row w-full"
-          >
-            <div className="border-r border-dashed border-[#334155] w-fit">
-              <div className="h-[50px] p-2 border-b border-dashed">Name</div>
-              <div className="h-[50px] p-2 border-b border-dashed">ID</div>
-              <div className="h-[50px] p-2 border-b border-dashed">
-                Identity
-              </div>
-              <div className="h-[50px] p-2 border-b border-dashed">Claimed</div>
-              <div className="h-[50px] p-2">Actions</div>
-            </div>
-
-            <div className="w-full">
-              <div className="h-[50px] p-2 border-b border-dashed">
-                {i.name}
-              </div>
-
-              <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
-                <button
-                  onClick={() => handleCopy(i.instructorId, i._id)}
-                  className="text-blue-500 hover:text-blue-700 font-[700] flex flex-row items-center gap-4"
-                  title="Copy ID"
-                  style={{ letterSpacing: "4px" }}
-                >
-                  {i.instructorId}
-                  {copiedId === i._id ? <FiCheck /> : <FiCopy />}
-                </button>
+        {loading ? (
+          <div className="flex justify-center items-center h-[40vh]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+          </div>
+        ) : instructors.length === 0 ? (
+          <div className="text-gray-500 text-center">
+            No instructors available
+          </div>
+        ) : (
+          instructors.map((i) => (
+            <div
+              key={i._id}
+              className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-row w-full"
+            >
+              <div className="border-r border-dashed border-[#334155] w-fit">
+                <div className="h-[50px] p-2 border-b border-dashed">Name</div>
+                <div className="h-[50px] p-2 border-b border-dashed">ID</div>
+                <div className="h-[50px] p-2 border-b border-dashed">
+                  Identity
+                </div>
+                <div className="h-[50px] p-2 border-b border-dashed">
+                  Claimed
+                </div>
+                <div className="h-[50px] p-2">Actions</div>
               </div>
 
-              <div className="h-[50px] p-2 border-b border-dashed">
-                {i.identity}
-              </div>
+              <div className="w-full">
+                <div className="h-[50px] p-2 border-b border-dashed">
+                  {i.name}
+                </div>
 
-              <div className="h-[50px] p-2 border-b border-dashed">
-                {i.claimed ? "Yes" : "No"}
-              </div>
+                <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
+                  <button
+                    onClick={() => handleCopy(i.instructorId, i._id)}
+                    className="text-blue-500 hover:text-blue-700 font-[700] flex flex-row items-center gap-4"
+                    title="Copy ID"
+                    style={{ letterSpacing: "4px" }}
+                  >
+                    {i.instructorId}
+                    {copiedId === i._id ? <FiCheck /> : <FiCopy />}
+                  </button>
+                </div>
 
-              <div className="h-[50px] p-2 flex gap-2">
-                <button
-                  className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
-                  onClick={() => {
-                    setDeleteId(i.instructorId);
-                    setDeletePermanent(false); // soft delete
-                  }}
-                >
-                  <FiTrash2 /> Delete
-                </button>
+                <div className="h-[50px] p-2 border-b border-dashed">
+                  {i.identity}
+                </div>
 
-                <button
-                  className="text-blue-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
-                  onClick={() => {
-                    setEditForm(i);
-                    setEditId(i.instructorId);
-                  }}
-                >
-                  <FiEdit /> Edit
-                </button>
+                <div className="h-[50px] p-2 border-b border-dashed">
+                  {i.claimed ? "Yes" : "No"}
+                </div>
 
-                {/* <button
-                    className="text-red-700"
+                <div className="h-[50px] p-2 flex gap-2">
+                  <button
+                    className="text-red-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                     onClick={() => {
                       setDeleteId(i.instructorId);
-                      setDeletePermanent(true); // permanent delete
+                      setDeletePermanent(false);
                     }}
                   >
-                    <FiX />
-                  </button> */}
+                    <FiTrash2 /> Delete
+                  </button>
+
+                  <button
+                    className="text-blue-500 w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    onClick={() => {
+                      setEditForm(i);
+                      setEditId(i.instructorId);
+                    }}
+                  >
+                    <FiEdit /> Edit
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {deleteId && (
