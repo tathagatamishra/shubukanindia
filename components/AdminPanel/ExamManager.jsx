@@ -300,7 +300,7 @@ export default function ExamManager() {
         <label className="flex flex-col">
           <span className="font-medium">Select Questions</span>
           <div
-            className="min-h-64 overflow-y-auto border rounded p-2 space-y-2"
+            className="min-h-64 max-h-[480px] overflow-y-auto border rounded p-2 space-y-2"
             style={{ resize: "vertical" }}
           >
             {questions.map((q) => (
