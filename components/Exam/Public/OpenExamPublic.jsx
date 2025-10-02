@@ -1,24 +1,24 @@
-// Exam/Student/Exam/OpenExam.jsx
+// components/Exam/Public/OpenExamPublic.jsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
-import ExamBtn from "../../UI/ExamBtn";
+import ExamBtn from "../UI/ExamBtn";
 import { useRouter } from "next/navigation";
 
-export default function OpenExam() {
+export default function OpenExamPublic() {
   const [exams, setExams] = useState([]);
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("student_token") : "";
   const router = useRouter();
 
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const res = await shubukan_api.get("/exams/upcoming"); // public upcoming exams
-        setExams(res.data);
+        const res = await shubukan_api.get(
+          "/exams/upcoming?accessability=public"
+        );
+        setExams(res.data || []);
       } catch (err) {
-        console.error(err);
-        alert("Failed to fetch exams");
+        console.error("Failed to fetch public exams:", err);
+        alert("Failed to fetch public exams");
       }
     };
     fetchExams();
@@ -26,19 +26,16 @@ export default function OpenExam() {
 
   const handleStart = async (exam) => {
     try {
-      const res = await shubukan_api.post(
-        "/student/exam/start",
-        {
-          examID: exam.examID,
-          examSet: exam.examSet,
-          password: exam.password || "", // handle optional
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      alert("Exam started!");
-      router.push(`/online-exam/${exam.examID}`);
+      // For public, we call public start endpoint (no auth)
+      const res = await shubukan_api.post("/exam/start", {
+        examID: exam.examID,
+        password: exam.password || "",
+      });
+      // If waiting, still navigate — the PublicExamPage will show waiting screen as well.
+      router.push(`/online-exam/public/${exam.examID}`);
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to start exam");
+      console.error(err);
+      alert(err?.response?.data?.message || "Failed to start public exam");
     }
   };
 
@@ -47,8 +44,9 @@ export default function OpenExam() {
       <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Demo Exams
       </label>
+
       {exams.length === 0 ? (
-        <p className="text-[14px] text-gray-500">No upcoming exams available</p>
+        <p className="text-[14px] text-gray-500">No public exams available</p>
       ) : (
         <div className="w-full flex flex-col gap-4">
           {exams.map((exam) => (

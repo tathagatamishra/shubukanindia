@@ -43,7 +43,7 @@ export default function Student() {
   const menuItems = [
     {
       text: "Demo Exam",
-      action: () => router.push("/online-exam/student/open-exams"),
+      action: () => router.push("/online-exam/public"),
     },
     {
       text: "View Results",

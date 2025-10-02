@@ -1,4 +1,4 @@
-// Exam/OnlineExam.jsx
+// components/Exam/OnlineExam.jsx
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,18 +7,40 @@ import ExamBtn from "./UI/ExamBtn";
 
 export default function OnlineExam() {
   const router = useRouter();
+
   const navigate = (page) => {
     router.push(page);
   };
-  const [userType, setUserType] = useState(null);
 
   return (
-    <div className="ExamChild OnlineExam corner-shape w-full h-[calc(100%-120px)] flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
-      <ExamBtn text="Student" onClick={() => navigate("/online-exam/student/login-signup")} />
+    <div className="w-full h-[calc(100%-120px)] flex flex-col justify-start items-center gap-4">
+      <div className="ExamChild OnlineExam corner-shape w-full h-fit flex flex-col justify-center items-center gap-4 p-[20px] pt-[40px] border !rounded-[40px] shadow-md">
+        {/* DEMO / PUBLIC (no login) */}
+        <ExamBtn
+          text="Demo Exam"
+          onClick={() => navigate("/online-exam/public")}
+          className="mt-2"
+        />
 
-      <p className="font-[600] text-[26px] text-[#64748B]">OR</p>
+        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-4">
+          ** <br /> We have created DEMO exams for you !! <br /> You can try the
+          DEMO exam without creating any account !
+        </p>
+      </div>
 
-      <ExamBtn text="Instructor" onClick={() => navigate("/online-exam/instructor/login-signup")} />
+      <div className="ExamChild OnlineExam corner-shape w-full h-full flex flex-col justify-center items-center gap-4 p-[20px] py-[40px] border !rounded-[40px] shadow-md">
+        <ExamBtn
+          text="Student"
+          onClick={() => navigate("/online-exam/student/login-signup")}
+        />
+
+        <p className="font-[600] text-[26px] text-[#64748B]">OR</p>
+
+        <ExamBtn
+          text="Instructor"
+          onClick={() => navigate("/online-exam/instructor/login-signup")}
+        />
+      </div>
     </div>
   );
 }

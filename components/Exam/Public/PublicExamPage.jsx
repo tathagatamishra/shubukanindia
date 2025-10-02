@@ -1,41 +1,24 @@
-// Exam/Student/Exam/ExamPage.jsx
+// components/Exam/Public/PublicExamPage.jsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
-import ExamBtn from "../../UI/ExamBtn";
+import ExamBtn from "../UI/ExamBtn";
 
-export default function ExamPage() {
-  const { examId } = useParams();
+export default function PublicExamPage() {
+  const { examId } = useParams(); // examID (string)
   const router = useRouter();
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("student_token") : "";
 
   const [exam, setExam] = useState(null);
   const [waitingInfo, setWaitingInfo] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [timeLeft, setTimeLeft] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState(null); // store returned result (score etc.)
 
-  const fetchExam = async () => {
+  const fetchExamStart = async () => {
     try {
-      const storedPassword =
-        typeof window !== "undefined"
-          ? localStorage.getItem("exam_password") || ""
-          : "";
-
-      if (!storedPassword) {
-        console.log("no pass");
-        router.push("/online-exam/student"); // enforce entry point
-        return;
-      }
-
-      const res = await shubukan_api.post(
-        "/student/exam/start",
-        { examID: examId, password: storedPassword },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
+      const res = await shubukan_api.post("/exam/start", { examID: examId });
       if (res.data.status === "waiting") {
         setWaitingInfo(res.data);
         setExam(null);
@@ -47,39 +30,31 @@ export default function ExamPage() {
         setTimeLeft(res.data.exam.examDuration * 60);
       }
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to load exam");
-      router.push("/online-exam/student"); // go back if bad access
+      console.error("Failed to start public exam:", err);
+      alert(err?.response?.data?.message || "Failed to start exam");
+      router.push("/online-exam/public");
     }
   };
 
-  // Initial load
   useEffect(() => {
-    const storedPassword =
-      typeof window !== "undefined"
-        ? localStorage.getItem("exam_password")
-        : "";
-    if (!storedPassword) {
-      router.push("/online-exam/student"); // force entry through Student.jsx
-    } else {
-      fetchExam();
-    }
+    fetchExamStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examId]);
 
-  // Countdown timer
+  // Timer
   useEffect(() => {
     if (timeLeft === null) return;
     if (timeLeft <= 0) {
       if (waitingInfo) {
-        // exam not started yet, recheck backend
-        fetchExam();
-      } else if (exam) {
-        // exam in progress → auto submit
+        fetchExamStart();
+      } else if (exam && !result) {
+        // Auto submit when time up
         handleSubmit();
       }
     }
     const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearInterval(timer);
-  }, [timeLeft, waitingInfo, exam]);
+  }, [timeLeft, waitingInfo, exam, result]);
 
   const handleOptionSelect = (qIndex, optionIndex) => {
     const updated = [...selectedOptions];
@@ -87,20 +62,22 @@ export default function ExamPage() {
     setSelectedOptions(updated);
   };
 
+  // Submit: call public submit endpoint which returns computed score / details but doesn't persist
   const handleSubmit = async () => {
     if (!exam) return;
+    setSubmitting(true);
     try {
-      setSubmitting(true);
-      await shubukan_api.post(
-        `/student/exam/${exam._id}/submit`,
-        { selectedOptions },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      alert("Exam submitted successfully!");
-      router.push("/online-exam/student/results");
+      // send selectedOptions to server; server computes score and returns result (but does not save)
+      const res = await shubukan_api.post(`/exam/${exam._id}/submit`, {
+        selectedOptions,
+        // optional guest fields if you want: guestName, guestEmail
+      });
+
+      // Expect server to return { score, totalMarks, correctCount, details? }
+      setResult(res.data);
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to submit exam");
-      router.push("/online-exam/student");
+      console.error("Submit failed:", err);
+      alert(err?.response?.data?.message || "Submit failed");
     } finally {
       setSubmitting(false);
     }
@@ -112,14 +89,12 @@ export default function ExamPage() {
     return `${m}:${s.toString().padStart(2, "0")}`;
   };
 
-  // Waiting Page
   if (waitingInfo) {
     return (
       <div className="ExamChild w-full h-full flex flex-col justify-center items-center">
         <div className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]">
           <h2 className="text-xl font-bold mb-2">Exam Not Started Yet</h2>
           <p>Exam ID: {waitingInfo.examID}</p>
-          <p>Exam ID: {waitingInfo.password}</p>
           <p>Set: {waitingInfo.examSet}</p>
           <p>Scheduled: {new Date(waitingInfo.examDate).toLocaleString()}</p>
           <p className="text-red-500 mt-2">
@@ -130,9 +105,67 @@ export default function ExamPage() {
     );
   }
 
-  // Exam Page
-  if (!exam) return <p className="text-center mt-10">Loading exam...</p>;
+  if (!exam && !waitingInfo) {
+    return <p className="text-center mt-10">Loading exam...</p>;
+  }
 
+  // If result exists, show instant result UI (guest result not saved)
+  if (result) {
+    return (
+      <div className="ExamChild w-full flex flex-col items-center">
+        <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">Your Result</label>
+
+        <div className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]">
+          <p className="text-lg font-semibold">
+            Score:{" "}
+            {result.score ?? result.totalMarks
+              ? `${result.score}/${result.totalMarks}`
+              : result.message}
+          </p>
+          {result.correctCount !== undefined && (
+            <p>
+              Correct: {result.correctCount} / {exam.totalQuestionCount}
+            </p>
+          )}
+
+          {/* Optional: show per-question details if backend provides it */}
+          {result.details && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">Details</h3>
+              {result.details.map((d, i) => (
+                <div key={i} className="mb-2">
+                  <p>
+                    Q{i + 1}:{" "}
+                    {d.correct
+                      ? "Correct"
+                      : `Wrong (Correct: ${d.correctOption})`}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="flex gap-3 mt-4">
+            <ExamBtn
+              text="Retake"
+              size="w-fit h-auto"
+              onClick={() => {
+                setResult(null);
+                fetchExamStart();
+              }}
+            />
+            <ExamBtn
+              text="Back to Public Exams"
+              size="w-fit min-w-[150px] h-auto"
+              onClick={() => router.push("/online-exam/public")}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Exam in progress UI
   return (
     <div className="ExamChild w-full flex flex-col items-center">
       <div className="w-full flex justify-between items-center mb-4">
@@ -180,7 +213,7 @@ export default function ExamPage() {
       </div>
 
       <ExamBtn
-        text={submitting ? "Submitting..." : "Submit Exam"}
+        text={submitting ? "Submitting..." : "Submit Answers"}
         className="mt-6 self-end"
         onClick={handleSubmit}
       />
