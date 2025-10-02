@@ -60,7 +60,7 @@ export default function QuestionManager() {
       <div className="w-full flex justify-between ">
         <h2 className="text-xl font-bold mb-4">Questions</h2>
 
-        <div className="flex items-center bg-white px-4 py-[2px] rounded-xl shadow mb-[14px]">
+        <div className="flex items-center bg-white px-4 rounded-xl shadow mb-[14px]">
           <p className="text-[14px] font-[600] text-[#64748B]">Total Questions &nbsp;&nbsp;</p>
           <SlidingNumber
             value={questions.length}

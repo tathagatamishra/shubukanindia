@@ -1,5 +1,5 @@
 // Exam/UI/ExamNav.jsx
-"use client"
+"use client";
 import React from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { FiChevronLeft } from "react-icons/fi";
@@ -16,7 +16,7 @@ export default function ExamNav() {
     } else if (window.history.length > 1) {
       router.back();
     } else {
-      router.push("/"); // fallback
+      router.push("/online-exam"); // fallback
     }
   };
 
