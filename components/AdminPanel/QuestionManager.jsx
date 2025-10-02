@@ -64,8 +64,8 @@ export default function QuestionManager() {
           <p className="text-[14px] font-[600] text-[#64748B]">Total Questions &nbsp;&nbsp;</p>
           <SlidingNumber
             value={questions.length}
-            fontStyle="text-[16px] font-[600]"
-            height="20"
+            // fontStyle="text-[16px] font-[600]"
+            // height="20"
           />
         </div>
       </div>
