@@ -52,6 +52,28 @@ input:focus {
     background-color: #efe9e5d4 !important;
 }
 
+.OptionStyle {
+    border: 2px solid #905043;
+    border-radius: 10px;
+    background-color: #efe9e5;
+    resize: none;
+    z-index: 20;
+    color: #2a2727;
+    font-family: 'Lekton';
+    letter-spacing: 1px;
+}
+
+.OptionStyle::selection {
+    color: #DE3614;
+    background: #fff;
+}
+
+.OptionStyle:focus {
+    outline: none !important;
+    border-color: #905043 !important;
+    background-color: #efe9e5d4 !important;
+}
+
 textarea {
     max-width: 100%;
     width: 100%;
