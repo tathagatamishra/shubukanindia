@@ -45,7 +45,7 @@ export default function Layout({ children }) {
   }
 
   return (
-    <div className="flex h-screen w-full bg-gray-100">
+    <div className="flex h-screen w-full bg-gray-100 text-[#334155]">
       {/* Sidebar */}
       <Sidebar open={open} setOpen={setOpen} />
       {open && (

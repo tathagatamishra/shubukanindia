@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { shubukan_api } from "@/config";
 import { FiPlus, FiTrash2 } from "react-icons/fi";
+import SlidingNumber from "../UIComponent/SlidingNumber";
 
 export default function QuestionManager() {
   const [questions, setQuestions] = useState([]);
@@ -56,7 +57,18 @@ export default function QuestionManager() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Questions</h2>
+      <div className="w-full flex justify-between ">
+        <h2 className="text-xl font-bold mb-4">Questions</h2>
+
+        <div className="flex items-center bg-white px-4 py-[2px] rounded-xl shadow mb-[14px]">
+          <p className="text-[14px] font-[600] text-[#64748B]">Total Questions &nbsp;&nbsp;</p>
+          <SlidingNumber
+            value={questions.length}
+            fontStyle="text-[16px] font-[600]"
+            height="20"
+          />
+        </div>
+      </div>
 
       {/* Create Question */}
       <div className="bg-white p-4 rounded-xl shadow mb-6 flex flex-col gap-2">
@@ -110,6 +122,7 @@ export default function QuestionManager() {
             placeholder="Correct answer index (0,1,2..)"
             type="number"
             value={newQ.answer}
+            min={0}
             onChange={(e) => setNewQ({ ...newQ, answer: e.target.value })}
             className="border p-2 rounded"
           />
@@ -135,15 +148,16 @@ export default function QuestionManager() {
         <div className="text-gray-500 text-center">No questions available</div>
       ) : (
         <div className="flex flex-col gap-4">
-          {questions.map((q) => (
+          {questions.map((q, i) => (
             <div
               key={q._id}
-              className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-col w-full"
+              className="relative hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-col w-full"
             >
+              <p className="absolute top-[-6px] left-[-6px] flex items-center justify-center w-fit h-fit min-w-[30px] min-h-[30px] px-[8px] rounded-full text-white bg-blue-500">{i+1}</p>
               {/* Label column */}
               <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
                 <p className="min-w-[65px]">Question</p>
-                <div className="w-full h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155]">
+                <div className="w-full h-fit min-h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155]">
                   {q.question}
                 </div>
               </div>
