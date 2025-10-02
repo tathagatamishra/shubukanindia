@@ -53,24 +53,29 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-[60vh]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-[60vh]">
+  //       <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
+      {loading && (
+        <div className="z-[4] bg-[#ffffff51]  backdrop-blur-[2px] flex justify-center items-center w-screen h-screen fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+        </div>
+      )}
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         {Object.entries(stats).map(([k, v]) => (
           <div
             key={k}
-            className="bg-white shadow-md p-4 rounded-xl text-center"
+            className="min-h-[96px] bg-white shadow-md p-4 rounded-xl text-center"
           >
-            <div className="text-3xl font-bold">
+            <div className="min-h-[40px] text-3xl font-bold">
               <SlidingNumber value={v} />
             </div>
             <p className="capitalize">{k}</p>

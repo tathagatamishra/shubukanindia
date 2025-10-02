@@ -11,7 +11,7 @@ function SlidingNumber({ value }) {
   return (
     <div className="flex justify-center space-x-1">
       {digits.map((digit, idx) => (
-        <div key={idx} className="m-0 overflow-hidden h-[40px] w-[24px]">
+        <div key={idx} className="m-0 overflow-hidden h-[40px] w-fit max-w-[24px]">
           <div
             className="m-0 transition-transform duration-500 ease-out"
             style={{
