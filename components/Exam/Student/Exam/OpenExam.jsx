@@ -1,4 +1,3 @@
-// Exam/Student/Exam/OpenExam.jsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
@@ -7,21 +6,44 @@ import { useRouter } from "next/navigation";
 
 export default function OpenExam() {
   const [exams, setExams] = useState([]);
+  const [loading, setLoading] = useState(true);
   const token =
     typeof window !== "undefined" ? localStorage.getItem("student_token") : "";
   const router = useRouter();
 
   useEffect(() => {
-    const fetchExams = async () => {
+    let mounted = true;
+
+    const fetchExams = async (attempt = 0) => {
+      if (!mounted) return;
+      setLoading(true);
       try {
         const res = await shubukan_api.get("/exams/upcoming"); // public upcoming exams
-        setExams(res.data);
+        if (!mounted) return;
+        const data = res.data || [];
+        setExams(data);
+        setLoading(false);
+
+        // If empty and we still have retries left, wait 1s and retry
+        if (Array.isArray(data) && data.length === 0 && attempt < 2) {
+          setTimeout(() => fetchExams(attempt + 1), 1000);
+        }
       } catch (err) {
-        console.error(err);
-        alert("Failed to fetch exams");
+        console.error("fetchExams error:", err);
+        if (attempt < 2) {
+          setTimeout(() => fetchExams(attempt + 1), 1000);
+        } else {
+          setLoading(false);
+          alert("Failed to fetch exams");
+        }
       }
     };
-    fetchExams();
+
+    fetchExams(0);
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const handleStart = async (exam) => {
@@ -31,7 +53,7 @@ export default function OpenExam() {
         {
           examID: exam.examID,
           examSet: exam.examSet,
-          password: exam.password || "", // handle optional
+          password: exam.password || "",
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -47,7 +69,10 @@ export default function OpenExam() {
       <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Demo Exams
       </label>
-      {exams.length === 0 ? (
+
+      {loading && <p className="text-[14px] text-gray-500">Loading exams...</p>}
+
+      {!loading && exams.length === 0 ? (
         <p className="text-[14px] text-gray-500">No upcoming exams available</p>
       ) : (
         <div className="w-full flex flex-col gap-4">
