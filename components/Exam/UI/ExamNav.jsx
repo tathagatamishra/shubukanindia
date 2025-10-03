@@ -10,14 +10,26 @@ export default function ExamNav() {
   const pathname = usePathname();
 
   const handleBack = () => {
-    if (pathname === "/online-exam/student/results") {
-      // Special case → always go to /online-exam/student
-      router.push("/online-exam/student");
-    } else if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/online-exam"); // fallback
+    // If on public exam list -> go to /online-exam and stop further checks
+    if (pathname && pathname.includes("/online-exam/public")) {
+      return router.push("/online-exam");
     }
+    
+    if (pathname && pathname==="/online-exam") {
+      return router.push("/");
+    }
+
+    // Special case -> always go to /online-exam/student
+    if (pathname === "/online-exam/student/results") {
+      return router.push("/online-exam/student");
+    }
+
+    // Otherwise go back if possible, else fallback to /online-exam
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      return router.back();
+    }
+
+    return router.push("/online-exam");
   };
 
   return (
