@@ -55,8 +55,8 @@ export default function Instructor() {
     {
       text: "Upcoming Exam",
       action: () => {
-        fetchUpcoming();
-        // router.push("/online-exam/instructor/upcoming");
+        // fetchUpcoming();
+        router.push("/online-exam/instructor/upcoming");
       },
     },
     {
