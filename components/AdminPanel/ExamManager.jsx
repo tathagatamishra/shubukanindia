@@ -45,6 +45,7 @@ export default function ExamManager() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setExams(res.data);
+      console.log(res.data);
     } catch (err) {
       console.error("Fetch exams error:", err.response?.data || err.message);
     } finally {
@@ -392,38 +393,11 @@ export default function ExamManager() {
           exams.map((ex) => (
             <div
               key={ex._id}
-              className="hover:!outline-[#64748B] hover:!outline-2 bg-white shadow rounded-xl p-4 flex flex-row w-full"
+              className="hover:!outline-[#64748B] hover:!outline-2 bg-white shadow rounded-xl p-4 flex flex-col w-full"
             >
-              {/* Labels */}
-              <div className="border-r border-dashed border-[#334155] w-fit text-[12px] sm:text-[16px] font-[600]">
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Exam ID
-                </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Password
-                </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Date
-                </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Set
-                </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Duration
-                </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Access
-                </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  Questions
-                </div>
-                <div className="flex items-center h-[50px] p-2">Actions</div>
-              </div>
-
-              {/* Values */}
-              <div className="w-full text-[12px] sm:text-[16px]">
-                {/* ✅ Copyable Exam ID */}
-                <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Exam ID</p>
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
                   <button
                     onClick={() => handleCopy(ex.examID, ex._id, "id")}
                     className="text-blue-500 hover:text-blue-700 text-[14px] sm:text-[16px] font-[700] flex flex-row items-center gap-4"
@@ -438,9 +412,10 @@ export default function ExamManager() {
                     )}
                   </button>
                 </div>
-
-                {/* Password */}
-                <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
+              </div>
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Password</p>{" "}
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
                   {ex.password ? (
                     <button
                       onClick={() =>
@@ -461,39 +436,73 @@ export default function ExamManager() {
                     <span className="text-gray-400 italic">No Password</span>
                   )}
                 </div>
-
-                {/* Date */}
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  {new Date(ex.examDate).toLocaleTimeString("en-US", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}{" "}
-                  -{" "}
-                  {new Date(ex.examDate).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
+              </div>
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Date</p>{" "}
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
+                  {ex.examDate ? (
+                    <>
+                      {new Date(ex.examDate).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}{" "}
+                      -{" "}
+                      {new Date(ex.examDate).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </>
+                  ) : (
+                    "Available anytime"
+                  )}
                 </div>
-
-                {/* Other fields */}
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+              </div>
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Set</p>{" "}
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
                   {ex.examSet}
                 </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+              </div>
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Duration</p>{" "}
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
                   {ex.examDuration} min
                 </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
+              </div>
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Access</p>{" "}
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
                   {ex.accessability}
                 </div>
-                <div className="flex items-center h-[50px] p-2 border-b border-dashed">
-                  {ex.totalQuestionCount}
+              </div>
+              <div className="flex flex-row w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
+                <p className="min-w-[78px] pt-[5px] sm:pt-[10px] pr-2 sm:pr-4">Questions</p>{" "}
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
+                  Total Question - {ex.totalQuestionCount}
+                  <ol className="list-decimal ml-5 text-[11px]">
+                    {ex.questions.map((q, i) => (
+                      <li
+                        key={i}
+                        className={`${
+                          i < ex.questions.length - 1 &&
+                          "border-b border-dashed border-[#33415535]"
+                        }`}
+                      >
+                        <span>{q.question}</span>
+                        <ul>
+                          <li>- {q.options[q.answer]} </li>
+                        </ul>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
-
-                {/* Actions */}
-                <div className="flex items-center h-[50px] p-2 gap-2">
+              </div>
+              <div className="flex flex-row items-center w-full h-fit min-h-[20px]">
+                <p className="min-w-[78px] pr-2 sm:pr-4">Actions</p>
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155] flex gap-2">
                   <button
                     onClick={() => editExam(ex)}
                     className="text-blue-500 h-full w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
@@ -507,6 +516,11 @@ export default function ExamManager() {
                     <FiTrash2 /> Delete
                   </button>
                 </div>
+              </div>
+
+              {/* Values */}
+              <div className="w-full text-[12px] sm:text-[16px]">
+                {/* Actions */}
               </div>
             </div>
           ))
