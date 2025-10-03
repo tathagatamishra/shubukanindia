@@ -1,11 +1,6 @@
 // app/online-exam/instructor/profile/page.js
-import Papers from "@/components/Exam/Instructor/Papers/Papers";
-import { Suspense } from "react";
+import Profile from "@/components/Exam/Instructor/Profile/Profile";
 
 export default function page() {
-  return (
-    <Suspense fallback={<div>Loading papers...</div>}>
-      <Papers />
-    </Suspense>
-  );
+  return <Profile />;
 }
