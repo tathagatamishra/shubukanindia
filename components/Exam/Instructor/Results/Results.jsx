@@ -1,4 +1,4 @@
-// File: app/online-exam/instructor/results/page.jsx
+// components/Exam/Instructor/Results/Results.jsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";

@@ -1,8 +1,10 @@
-import Results from '@/components/Exam/Instructor/Results/Results'
-import React from 'react'
+import Results from "@/components/Exam/Instructor/Results/Results";
+import { Suspense } from "react";
 
 export default function page() {
   return (
-    <Results />
-  )
+    <Suspense fallback={<div>Loading papers...</div>}>
+      <Results />
+    </Suspense>
+  );
 }
