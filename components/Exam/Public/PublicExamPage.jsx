@@ -177,7 +177,7 @@ export default function PublicExamPage() {
         </label>
       </div>
 
-      <div className="w-full flex flex-col gap-6">
+      <div className="w-full flex flex-col gap-[12px] sm:gap-[24px]">
         {exam.questions.map((q, idx) => (
           <div
             key={q._id}
