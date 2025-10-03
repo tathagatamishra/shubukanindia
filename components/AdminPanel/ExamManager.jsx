@@ -172,7 +172,7 @@ export default function ExamManager() {
 
   // ---------------- UI ----------------
   return (
-    <div>
+    <div className="text-[14px]">
       <h2 className="text-xl font-bold mb-4">Manage Exams</h2>
 
       {/* Exam Form */}
@@ -301,11 +301,11 @@ export default function ExamManager() {
         <label className="flex flex-col">
           <span className="font-medium">Select Questions</span>
           <div
-            className="min-h-64 max-h-[480px] overflow-y-auto border rounded p-2 space-y-2"
+            className="min-h-64 max-h-[480px] max-w-full overflow-y-auto border rounded p-2 space-y-2"
             style={{ resize: "vertical" }}
           >
             {questions.map((q) => (
-              <div key={q._id} className="border p-2 rounded">
+              <div key={q._id} className="border p-2 rounded text-[14px]">
                 <label className="flex items-start gap-4">
                   <input
                     type="checkbox"
@@ -328,7 +328,7 @@ export default function ExamManager() {
                     }}
                   />
                   <div>
-                    <p className="font-medium">{q.question}</p>
+                    <p className="font-medium break-normal">{q.question}</p>
                     <ul className="list-disc pl-5">
                       {q.options.map((opt, idx) => (
                         <li
@@ -479,7 +479,9 @@ export default function ExamManager() {
                 </div>
               </div>
               <div className="flex flex-row w-full h-fit min-h-[20px] border-b border-dashed border-[#334155]">
-                <p className="min-w-[78px] pt-[5px] sm:pt-[10px] pr-2 sm:pr-4">Questions</p>{" "}
+                <p className="min-w-[78px] pt-[5px] sm:pt-[10px] pr-2 sm:pr-4">
+                  Questions
+                </p>{" "}
                 <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155]">
                   Total Question - {ex.totalQuestionCount}
                   <ol className="list-decimal ml-5 text-[11px]">
@@ -505,13 +507,13 @@ export default function ExamManager() {
                 <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155] flex gap-2">
                   <button
                     onClick={() => editExam(ex)}
-                    className="text-blue-500 h-full w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-blue-500 h-full w-full max-w-[125px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
                     <FiEdit /> Edit
                   </button>
                   <button
                     onClick={() => deleteExam(ex._id)}
-                    className="text-red-500 h-full w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
+                    className="text-red-500 h-full w-full max-w-[125px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
                     <FiTrash2 /> Delete
                   </button>
