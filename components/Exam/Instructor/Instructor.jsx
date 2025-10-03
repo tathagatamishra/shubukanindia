@@ -39,23 +39,11 @@ export default function Instructor() {
     }
   };
 
-  const fetchUpcoming = async () => {
-    try {
-      const res = await shubukan_api.get("/instructor/exams/upcoming", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      console.log("Instructor upcoming exams:", res.data);
-    } catch (error) {
-      console.log("gg");
-    }
-  };
-
   // Instructor menu actions
   const menuItems = [
     {
       text: "Upcoming Exam",
       action: () => {
-        // fetchUpcoming();
         router.push("/online-exam/instructor/upcoming");
       },
     },
