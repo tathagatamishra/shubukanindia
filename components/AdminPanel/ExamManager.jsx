@@ -55,7 +55,10 @@ export default function ExamManager() {
 
   const fetchInstructors = async () => {
     try {
-      const res = await shubukan_api.get("/instructors");
+      const token = localStorage.getItem("adminToken");
+      const res = await shubukan_api.get("/admin/instructors", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setInstructors(res.data.instructors || []);
     } catch (err) {
       console.error(
