@@ -82,22 +82,55 @@ export default function Upcoming() {
               key={`${e._id}`}
               className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] shadow-md border !rounded-[40px]"
             >
-              <div className="flex justify-between items-start">
-                <div>
-                  <div className="font-semibold">KYU: {e.kyu ?? "-"}</div>
-                  <div className="text-sm">
-                    ExamID: {e.examID} - Set {e.examSet}
-                  </div>
-                  <div className="text-sm">Access: {e.accessability}</div>
+              <div className="w-full flex flex-col">
+                <div className="w-full border-b-1 border-dashed flex flex-row items-center">
+                  <label className="w-full font-[600] text-[12px] sm:text-[14px] text-[#334155] !m-[0px] p-[8px] pl-[2px] border-r-1 border-dashed">
+                    Exam ID
+                  </label>
+                  <p className="w-full text-center text-[14px] sm:text-[16px] text-[#334155]">
+                    {e.examID}
+                  </p>
                 </div>
-                <div className="text-sm text-right">
-                  <div>
-                    {e.examDate
-                      ? new Date(e.examDate).toLocaleString()
-                      : "On-demand (public)"}
-                  </div>
-                  <div>Total Qs: {e.totalQuestionCount}</div>
+
+                <div className="w-full border-b-1 border-dashed flex flex-row items-center">
+                  <label className="w-full font-[600] text-[12px] sm:text-[14px] text-[#334155] !m-[0px] p-[8px] pl-[2px] border-r-1 border-dashed">
+                    Exam Password
+                  </label>
+                  <p className="w-full text-center text-[14px] sm:text-[16px] text-[#334155]">
+                    {e.password}
+                  </p>
                 </div>
+              </div>
+
+              <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] p-[8px]">
+                <label className="w-full text-center font-[600] text-[12px] sm:text-[14px] text-[#334155]">
+                  Exam Will Start At
+                </label>
+                <p className="w-full text-center text-[18px] sm:text-[20px] font-[600] text-[#334155]">
+                  {new Date(e.examDate).toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
+                </p>
+
+                <p className="w-full text-center text-[16px] sm:text-[18px] font-[600] text-[#334155]">
+                  {new Date(e.examDate).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
+
+              <div className="w-full flex flex-col gap-[4px] p-[8px]">
+                <label className="w-full text-center font-[600] text-[12px] sm:text-[14px] text-[#334155]">
+                  Time Remains
+                </label>
+                <p className="w-full text-center text-[16px] sm:text-[18px] font-[600] text-[#334155]">
+                  1 day 24 minutes 60 seconds
+                </p>
               </div>
             </div>
           ))}
