@@ -60,9 +60,9 @@ export default function InstructorManager() {
   };
 
   // ✅ Copy to clipboard handler
-  const handleCopy = (text, iid) => {
+  const handleCopy = (text, iid, name) => {
     navigator.clipboard.writeText(text);
-    setCopiedId(iid);
+    setCopiedId(iid); // keep track of which row was copied
     setTimeout(() => setCopiedId(null), 2000); // reset after 2s
   };
 
@@ -134,7 +134,9 @@ export default function InstructorManager() {
 
                 <div className="h-[50px] p-2 border-b border-dashed flex items-center gap-2">
                   <button
-                    onClick={() => handleCopy(i.instructorId, i._id)}
+                    onClick={() =>
+                      handleCopy(`${i.name}: ${i.instructorId}`, i._id, i.name)
+                    }
                     className="text-blue-500 hover:text-blue-700 font-[700] flex flex-row items-center gap-4"
                     title="Copy ID"
                     style={{ letterSpacing: "4px" }}
