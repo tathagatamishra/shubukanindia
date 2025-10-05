@@ -11,7 +11,7 @@ export default function ExamBtn({
   cssClass = "ExamBtn btn corner-shape",
   className = "",
   value = "",
-  type = "",
+  type = "button",
   form = "",
   onClick,
   disabled = false,

@@ -32,6 +32,8 @@ export default function ExamPage() {
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      console.log(res.data);
+      
 
       if (res.data.status === "waiting") {
         setWaitingInfo(res.data);
@@ -130,6 +132,7 @@ export default function ExamPage() {
         <div className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]">
           <h2 className="text-xl font-bold mb-2">Exam Not Started Yet</h2>
           <p>Exam ID: {waitingInfo.examID}</p>
+          <p>Exam ID: {waitingInfo.password}</p>
           <p>Set: {waitingInfo.examSet}</p>
           <p>Scheduled: {new Date(waitingInfo.examDate).toLocaleString()}</p>
           <p className="text-red-500 mt-2">Time Remaining: {formatTime(timeLeft || 0)}</p>
