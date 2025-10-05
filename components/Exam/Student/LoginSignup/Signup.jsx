@@ -24,16 +24,31 @@ export default function Signup() {
 
   const dropdownRef = useRef(null);
 
+  function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+  }
+
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
         const res = await shubukan_api.get("/instructors");
-        setInstructors(res.data.instructors || []);
-        setFiltered(res.data.instructors || []); // default for dropdown button
+        let instructors = res.data.instructors || [];
+
+        // 🧹 Remove invalid entries (where name == "__" or identity == "__")
+        instructors = instructors.filter(
+          (inst) => inst.name !== "__" && inst.identity !== "__"
+        );
+
+        // 🔀 Shuffle and set
+        const shuffled = shuffle(instructors);
+
+        setInstructors(shuffled);
+        setFiltered(instructors); // default for dropdown
       } catch (err) {
         console.error("Failed to fetch instructors", err);
       }
     };
+
     fetchInstructors();
   }, []);
 
@@ -178,7 +193,7 @@ export default function Signup() {
           </div>
 
           {showDropdown && filtered.length > 0 && (
-            <ul className="OptionStyle corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[160px] overflow-y-auto z-20 border !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]">
+            <ul className="OptionStyle corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[240px] overflow-y-auto z-20 border !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]">
               {filtered.map((ins) => (
                 <li
                   key={ins._id}
