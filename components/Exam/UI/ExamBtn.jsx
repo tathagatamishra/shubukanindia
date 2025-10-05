@@ -26,7 +26,9 @@ export default function ExamBtn({
       style={{
         border: `${border}`,
       }}
-      className={`${cssClass} ${className} ${padding} ${size} ${fontstyle}`}
+      className={`${cssClass} ${className} ${padding} ${size} ${fontstyle} ${
+        disabled && "Disabled"
+      }`}
     >
       {text}
     </button>

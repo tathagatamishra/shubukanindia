@@ -1,6 +1,6 @@
 // Exam/UI/ExamNav.jsx
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { FiChevronLeft } from "react-icons/fi";
 import "./ExamNav.css";
@@ -8,14 +8,25 @@ import "./ExamNav.css";
 export default function ExamNav() {
   const router = useRouter();
   const pathname = usePathname();
+  const [studentToken, setStudentToken] = useState(null);
+
+  useEffect(() => {
+    const t = localStorage.getItem("student_token");
+    setStudentToken(t);
+  }, [router]);
 
   const handleBack = () => {
     // If on public exam list -> go to /online-exam and stop further checks
-    if (pathname && pathname.includes("/online-exam/public")) {
+    if (pathname && pathname.includes("/online-exam/public") && !studentToken) {
+      
       return router.push("/online-exam");
     }
-    
-    if (pathname && pathname==="/online-exam") {
+
+    if (pathname && pathname.includes("/online-exam/public") && studentToken) {
+      return router.push("/online-exam/student");
+    }
+
+    if (pathname && pathname === "/online-exam") {
       return router.push("/");
     }
 
