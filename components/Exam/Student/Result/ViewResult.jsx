@@ -62,13 +62,16 @@ export default function ViewResult() {
             // compute answers not selected only when totalQuestions is available
             const answersNotSelected =
               typeof totalQuestions === "number"
-                ? totalQuestions - ((res.correctAnsCount || 0) + (res.wrongAnsCount || 0))
+                ? totalQuestions -
+                  ((res.correctAnsCount || 0) + (res.wrongAnsCount || 0))
                 : "N/A";
 
             return (
               <div
                 key={res._id || idx}
-                className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] shadow-md border !rounded-[40px]"
+                className={`OnlineExam corner-shape ${
+                  idx == 0 && "!border-[#ffd771]"
+                } w-full h-fit flex flex-col p-[16px] shadow-md border !rounded-[40px]`}
               >
                 <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] pb-[8px]">
                   <label className="font-[600] text-[12px] sm:text-[14px] text-[#334155]">
@@ -125,7 +128,9 @@ export default function ViewResult() {
                   ].map((i, rowIdx) => (
                     <div
                       key={rowIdx}
-                      className={`w-full ${i.noBorder ? "" : "border-b-1"} border-dashed flex flex-row items-center`}
+                      className={`w-full ${
+                        i.noBorder ? "" : "border-b-1"
+                      } border-dashed flex flex-row items-center`}
                     >
                       <label className="w-full font-[600] text-[12px] sm:text-[14px] text-[#334155] !m-[0px] p-[8px] pl-[2px] border-r-1 border-dashed">
                         {i.label}

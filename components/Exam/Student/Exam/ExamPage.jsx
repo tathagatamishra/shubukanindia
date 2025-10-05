@@ -1,6 +1,6 @@
 // Exam/Student/Exam/ExamPage.jsx
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../../UI/ExamBtn";
@@ -19,13 +19,46 @@ export default function ExamPage() {
   const [submitting, setSubmitting] = useState(false);
   const [now, setNow] = useState(Date.now());
 
+  // sync-safe refs to prevent duplicate submits
+  const submitLockRef = useRef(false); // immediate lock (synchronous)
+  const submittedRef = useRef(false); // whether we've already submitted (persist across rerenders)
+  const sessionEndKey = `exam_${examId}_endTime`;
+  const sessionSubmittedKey = `exam_${examId}_submitted`;
+
   // single clock: tick 'now' every second
   useEffect(() => {
     const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  // on mount try to restore endTime / submitted flag from sessionStorage (prevents countdown reset)
+  useEffect(() => {
+    if (!examId || typeof window === "undefined") return;
+    try {
+      const stored = sessionStorage.getItem(sessionEndKey);
+      if (stored) {
+        const ms = Number(stored);
+        if (!Number.isNaN(ms) && ms > Date.now()) {
+          setEndTime(ms);
+        } else {
+          // expired - clean up
+          sessionStorage.removeItem(sessionEndKey);
+        }
+      }
+      const wasSubmitted = sessionStorage.getItem(sessionSubmittedKey) === "1";
+      if (wasSubmitted) {
+        submittedRef.current = true;
+      }
+    } catch (e) {
+      // ignore sessionStorage errors (e.g. private mode)
+    }
+    // then fetch fresh server state
+    fetchExam();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [examId]);
+
   const fetchExam = async () => {
+    if (!examId) return;
     try {
       const storedPassword =
         typeof window !== "undefined"
@@ -39,7 +72,7 @@ export default function ExamPage() {
       const res = await shubukan_api.post("/student/exam/start", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res.data);
+      // console.log(res.data);
 
       if (res.data.status === "waiting") {
         setWaitingInfo(res.data);
@@ -47,25 +80,43 @@ export default function ExamPage() {
         setSelectedOptions([]);
 
         // if backend provided a numeric remaining seconds, use it; otherwise use examDate timestamp
+        let computedEnd = null;
         if (typeof res.data.timeRemains === "number") {
-          setEndTime(Date.now() + Math.max(0, res.data.timeRemains) * 1000);
-        } else {
-          const examDateMs = res.data.examDate
-            ? new Date(res.data.examDate).getTime()
-            : null;
-          setEndTime(examDateMs);
+          computedEnd = Date.now() + Math.max(0, res.data.timeRemains) * 1000;
+        } else if (res.data.examDate) {
+          computedEnd = new Date(res.data.examDate).getTime();
+        }
+        if (computedEnd) {
+          setEndTime(computedEnd);
+          try {
+            sessionStorage.setItem(sessionEndKey, String(computedEnd));
+          } catch (e) {}
         }
       } else if (res.data.status === "ok") {
         setExam(res.data.exam);
         setWaitingInfo(null);
         setSelectedOptions(Array(res.data.exam.totalQuestionCount).fill(null));
 
-        // if backend returned remaining seconds, use that; otherwise use examDuration (minutes)
-        const initialSec =
-          typeof res.data.timeRemains === "number"
-            ? res.data.timeRemains
-            : (res.data.exam?.examDuration || 0) * 60;
-        setEndTime(Date.now() + Math.max(0, initialSec) * 1000);
+        // prefer server-provided absolute timestamp if available
+        // (if your backend can return an absolute end timestamp, use it)
+        let computedEnd = null;
+
+        // if backend returns an absolute examEndTime (best), use it:
+        if (res.data.examEndTime) {
+          computedEnd = new Date(res.data.examEndTime).getTime();
+        } else if (typeof res.data.timeRemains === "number") {
+          // fallback: server gave remaining seconds — compute endTime and persist
+          computedEnd = Date.now() + Math.max(0, res.data.timeRemains) * 1000;
+        } else {
+          // last fallback: use examDuration (in minutes) from exam object
+          const dur = res.data.exam?.examDuration || 0;
+          computedEnd = Date.now() + Math.max(0, dur) * 60 * 1000;
+        }
+
+        setEndTime(computedEnd);
+        try {
+          sessionStorage.setItem(sessionEndKey, String(computedEnd));
+        } catch (e) {}
       }
     } catch (err) {
       const msg =
@@ -80,13 +131,6 @@ export default function ExamPage() {
     }
   };
 
-  // Initial load
-  useEffect(() => {
-    if (!examId) return;
-    fetchExam();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [examId]);
-
   const handleOptionSelect = (qIndex, optionIndex) => {
     if (!exam) return;
     if (qIndex < 0 || qIndex >= exam.totalQuestionCount) return;
@@ -98,22 +142,54 @@ export default function ExamPage() {
 
   const handleSubmit = async () => {
     if (!exam) return;
-    if (submitting) return;
+    // synchronous lock to prevent double-calls from fast successive ticks
+    if (submitLockRef.current || submittedRef.current) return;
+    submitLockRef.current = true;
+    setSubmitting(true);
 
     try {
-      setSubmitting(true);
       await shubukan_api.post(
         `/student/exam/${exam._id}/submit`,
         { selectedOptions },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
+      // mark submitted (in ref and session) and clean up endTime
+      submittedRef.current = true;
+      try {
+        sessionStorage.setItem(sessionSubmittedKey, "1");
+        sessionStorage.removeItem(sessionEndKey);
+      } catch (e) {}
+
       alert("Exam submitted successfully!");
       router.push("/online-exam/student/results");
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to submit exam");
+      const errMsg =
+        err?.response?.data?.message || err?.message || "Failed to submit exam";
+
+      // if exam already attempted, treat as success and navigate to results quietly (avoid double alerts)
+      if (
+        /already attempted/i.test(errMsg) ||
+        /already submitted/i.test(errMsg)
+      ) {
+        submittedRef.current = true;
+        try {
+          sessionStorage.setItem(sessionSubmittedKey, "1");
+          sessionStorage.removeItem(sessionEndKey);
+        } catch (e) {}
+        // optionally show a single message (commented out to avoid duplicate alerts)
+        // alert(errMsg);
+        router.push("/online-exam/student/results");
+        return;
+      }
+
+      // otherwise show the error and send student back
+      alert(errMsg);
       router.push("/online-exam/student");
     } finally {
       setSubmitting(false);
+      // keep submitLockRef true if we've actually submitted (submittedRef), else release the lock so user can retry manually
+      if (!submittedRef.current) submitLockRef.current = false;
     }
   };
 
@@ -149,7 +225,9 @@ export default function ExamPage() {
   };
 
   // compute derived countdown seconds from single clock
-  const displayTimeLeft = endTime ? Math.max(0, Math.ceil((endTime - now) / 1000)) : null;
+  const displayTimeLeft = endTime
+    ? Math.max(0, Math.ceil((endTime - now) / 1000))
+    : null;
 
   // watch clock and trigger events when countdown hits zero
   useEffect(() => {
@@ -161,12 +239,15 @@ export default function ExamPage() {
         // exam should have started; re-check backend
         fetchExam();
       } else if (exam) {
-        if (!submitting) handleSubmit();
+        // use the synchronous ref lock to ensure only one submit attempt
+        if (!submitLockRef.current && !submittedRef.current) {
+          handleSubmit();
+        }
       }
     }
     // we intentionally depend on now so this runs each tick
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [now, endTime, waitingInfo, exam, submitting]);
+  }, [now, endTime, waitingInfo, exam]);
 
   // Waiting Page
   if (waitingInfo) {
@@ -201,8 +282,12 @@ export default function ExamPage() {
             </p>
             <div className="border-r-1 border-dashed h-full"></div>
             <p
-              className={`w-[60%] ${waitingInfo.password && "font-[700]"} text-center text-[14px] sm:text-[16px] text-[#334155]`}
-              style={{ letterSpacing: `${waitingInfo.password ? "4px" : "auto"}` }}
+              className={`w-[60%] ${
+                waitingInfo.password && "font-[700]"
+              } text-center text-[14px] sm:text-[16px] text-[#334155]`}
+              style={{
+                letterSpacing: `${waitingInfo.password ? "4px" : "auto"}`,
+              }}
             >
               {waitingInfo.password || "No Password Needed"}
             </p>
@@ -213,7 +298,10 @@ export default function ExamPage() {
               Exam Set
             </p>
             <div className="border-r-1 border-dashed h-full"></div>
-            <p className="w-[60%] font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]" style={{ letterSpacing: "4px" }}>
+            <p
+              className="w-[60%] font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]"
+              style={{ letterSpacing: "4px" }}
+            >
               {waitingInfo.examSet}
             </p>
           </div>
@@ -286,7 +374,9 @@ export default function ExamPage() {
                 <label
                   key={oIdx}
                   className={`corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4 cursor-pointer flex flex-row items-center ${
-                    selectedOptions[idx] === oIdx ? "bg-blue-100 border-blue-500" : "border-gray-300"
+                    selectedOptions[idx] === oIdx
+                      ? "bg-blue-100 border-blue-500"
+                      : "border-gray-300"
                   }`}
                 >
                   <input

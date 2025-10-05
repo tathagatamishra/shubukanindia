@@ -49,14 +49,17 @@ export default function Instructor() {
     },
     {
       text: "View All Students",
+      disabled: true,
       action: () => router.push("/online-exam/instructor/students"),
     },
     {
       text: "All Student Results",
+      disabled: true,
       action: () => router.push("/online-exam/instructor/results"),
     },
     {
       text: "Question Papers",
+      disabled: true,
       action: () => router.push("/online-exam/instructor/papers"),
     },
     {
@@ -76,7 +79,7 @@ export default function Instructor() {
   return (
     <div className="ExamChild w-full h-full flex flex-col justify-between items-center">
       {/* Search Student */}
-      <div className="w-full">
+      <div className="w-full Disabled">
         <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
           Search Student by Name
         </label>
@@ -94,12 +97,18 @@ export default function Instructor() {
             name="name"
             id="name"
             value={name}
+            disabled={true}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter student name"
             className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4"
           />
 
-          <ExamBtn text="View Result" type="submit" className="self-end" />
+          <ExamBtn
+            disabled={true}
+            text="View Result"
+            type="submit"
+            className="self-end"
+          />
         </form>
       </div>
 
@@ -111,6 +120,7 @@ export default function Instructor() {
             text={btn.text}
             type="button"
             size="w-full"
+            disabled={btn.disabled}
             fontstyle={btn.fontstyle}
             onClick={btn.action}
           />

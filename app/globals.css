@@ -122,6 +122,12 @@ body::-webkit-scrollbar-thumb {
   corner-shape: squircle !important;
 }
 
+.Disabled {
+  opacity: 30% !important;
+  user-select: none !important;
+  cursor: no-drop !important;
+}
+
 /* .App {
   min-height: 100vh;
   display: flex;

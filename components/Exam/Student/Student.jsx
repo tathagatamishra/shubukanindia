@@ -1,48 +1,56 @@
 // Exam/Student/Student.jsx
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../UI/ExamBtn";
 import { shubukan_api } from "@/config";
 
 export default function Student() {
   const router = useRouter();
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("student_token") : "";
-
+  const [token, setToken] = useState(null);
   const [examID, setExamID] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-const handleStart = async () => {
-  if (!examID) return alert("Enter Exam ID");
-  setLoading(true);
-  try {
-    // send password only if user entered something (trimmed)
-    const payload =
-      password && password.trim() ? { examID, password: password.trim() } : { examID };
-
-    const res = await shubukan_api.post(
-      "/student/exam/start",
-      payload,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-
-    if (res.data.status === "waiting" || res.data.status === "ok") {
-      // store password only if non-empty, otherwise remove any previously stored password
-      if (password && password.trim() !== "") {
-        localStorage.setItem("exam_password", password.trim());
-      } else {
-        localStorage.removeItem("exam_password");
-      }
-      router.push(`/online-exam/${examID}`);
-    }
-  } catch (err) {
-    alert(err.response?.data?.message || "Invalid exam details");
-  } finally {
+  useEffect(() => {
+    const t = localStorage.getItem("student_token");
+    setToken(t);
     setLoading(false);
-  }
-};
+
+    if (!t) {
+      router.push("/online-exam");
+    }
+  }, [router]);
+
+  const handleStart = async () => {
+    if (!examID) return alert("Enter Exam ID");
+    setLoading(true);
+    try {
+      // send password only if user entered something (trimmed)
+      const payload =
+        password && password.trim()
+          ? { examID, password: password.trim() }
+          : { examID };
+
+      const res = await shubukan_api.post("/student/exam/start", payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.data.status === "waiting" || res.data.status === "ok") {
+        // store password only if non-empty, otherwise remove any previously stored password
+        if (password && password.trim() !== "") {
+          localStorage.setItem("exam_password", password.trim());
+        } else {
+          localStorage.removeItem("exam_password");
+        }
+        router.push(`/online-exam/${examID}`);
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Invalid exam details");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const menuItems = [
     {
