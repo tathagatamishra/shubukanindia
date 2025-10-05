@@ -14,74 +14,82 @@ export default function ExamPage() {
   const [exam, setExam] = useState(null);
   const [waitingInfo, setWaitingInfo] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [timeLeft, setTimeLeft] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(null); // seconds
   const [submitting, setSubmitting] = useState(false);
 
   const fetchExam = async () => {
     try {
       const storedPassword =
         typeof window !== "undefined"
-          ? localStorage.getItem("exam_password") || ""
+          ? (localStorage.getItem("exam_password") || "").trim()
           : "";
 
-      if (!storedPassword) {
-        console.log("no pass");
-        router.push("/online-exam/student"); // enforce entry point
-        return;
-      }
+      // send password only if present; backend accepts missing password for public on-demand
+      const payload = storedPassword ? { examID: examId, password: storedPassword } : { examID: examId };
 
       const res = await shubukan_api.post(
         "/student/exam/start",
-        { examID: examId, password: storedPassword },
+        payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (res.data.status === "waiting") {
         setWaitingInfo(res.data);
         setExam(null);
-        setTimeLeft(res.data.timeRemains);
+        setSelectedOptions([]);
+        setTimeLeft(res.data.timeRemains || 0);
       } else if (res.data.status === "ok") {
         setExam(res.data.exam);
         setWaitingInfo(null);
         setSelectedOptions(Array(res.data.exam.totalQuestionCount).fill(null));
-        setTimeLeft(res.data.exam.examDuration * 60);
+        setTimeLeft((res.data.exam.examDuration || 0) * 60);
       }
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to load exam");
-      router.push("/online-exam/student"); // go back if bad access
+      // If server explicitly requires password, send the student back to entry page
+      const msg = err?.response?.data?.message || err?.message || "Failed to load exam";
+      if (err?.response?.status === 403 && /password/i.test(msg)) {
+        // force re-entry so student can provide password
+        router.push("/online-exam/student");
+        return;
+      }
+
+      alert(msg);
+      router.push("/online-exam/student");
     }
   };
 
-  // Initial load
+  // Initial load (do NOT auto-redirect if no saved password) — we try fetching and let backend decide
   useEffect(() => {
-    const storedPassword =
-      typeof window !== "undefined"
-        ? localStorage.getItem("exam_password")
-        : "";
-    if (!storedPassword) {
-      router.push("/online-exam/student"); // force entry through Student.jsx
-    } else {
-      fetchExam();
-    }
+    if (!examId) return;
+    fetchExam();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examId]);
 
   // Countdown timer
   useEffect(() => {
     if (timeLeft === null) return;
+
     if (timeLeft <= 0) {
+      // if waiting -> re-check backend
       if (waitingInfo) {
-        // exam not started yet, recheck backend
         fetchExam();
       } else if (exam) {
-        // exam in progress → auto submit
-        handleSubmit();
+        // exam in progress → auto submit (avoid double submit)
+        if (!submitting) handleSubmit();
       }
+      return; // don't create interval when time is up
     }
-    const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
+
+    const timer = setInterval(() => setTimeLeft((t) => Math.max(0, t - 1)), 1000);
     return () => clearInterval(timer);
-  }, [timeLeft, waitingInfo, exam]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft, waitingInfo, exam, submitting]);
 
   const handleOptionSelect = (qIndex, optionIndex) => {
+    // guard for bounds
+    if (!exam) return;
+    if (qIndex < 0 || qIndex >= exam.totalQuestionCount) return;
+
     const updated = [...selectedOptions];
     updated[qIndex] = optionIndex;
     setSelectedOptions(updated);
@@ -89,6 +97,8 @@ export default function ExamPage() {
 
   const handleSubmit = async () => {
     if (!exam) return;
+    if (submitting) return; // prevent duplicates
+
     try {
       setSubmitting(true);
       await shubukan_api.post(
@@ -107,6 +117,7 @@ export default function ExamPage() {
   };
 
   const formatTime = (sec) => {
+    if (sec == null) return "0:00";
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${s.toString().padStart(2, "0")}`;
@@ -119,12 +130,9 @@ export default function ExamPage() {
         <div className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]">
           <h2 className="text-xl font-bold mb-2">Exam Not Started Yet</h2>
           <p>Exam ID: {waitingInfo.examID}</p>
-          <p>Exam ID: {waitingInfo.password}</p>
           <p>Set: {waitingInfo.examSet}</p>
           <p>Scheduled: {new Date(waitingInfo.examDate).toLocaleString()}</p>
-          <p className="text-red-500 mt-2">
-            Time Remaining: {formatTime(timeLeft || 0)}
-          </p>
+          <p className="text-red-500 mt-2">Time Remaining: {formatTime(timeLeft || 0)}</p>
         </div>
       </div>
     );
@@ -150,9 +158,7 @@ export default function ExamPage() {
             key={q._id}
             className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]"
           >
-            <p className="font-semibold mb-2">
-              Q{idx + 1}. {q.question}
-            </p>
+            <p className="font-semibold mb-2">Q{idx + 1}. {q.question}</p>
             <div className="flex flex-col gap-2">
               {q.options.map((opt, oIdx) => (
                 <label

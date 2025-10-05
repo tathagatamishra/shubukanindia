@@ -341,7 +341,7 @@ export default function QuestionManager() {
                       </span>
                     ) : (
                       q.usedInExams.map((ue, idx) => (
-                        <div key={idx} className="flex items-center gap-3">
+                        <div key={idx} className="flex items-center gap-3 text-[11px]">
                           <div className="px-2 py-1 bg-gray-100 rounded">
                             <strong>
                               {ue.examID ?? (ue.exam && ue.exam.examID) ?? "—"}
@@ -350,7 +350,7 @@ export default function QuestionManager() {
                               <span> · Set {ue.examSet}</span>
                             )}
                           </div>
-                          <div className="text-sm text-gray-600">
+                          <div className="text-gray-600">
                             {ue.accessability ??
                               (ue.exam && ue.exam.accessability) ??
                               "—"}

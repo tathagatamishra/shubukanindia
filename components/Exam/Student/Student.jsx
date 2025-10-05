@@ -14,31 +14,35 @@ export default function Student() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleStart = async () => {
-    if (!examID) return alert("Enter Exam ID");
-    setLoading(true);
-    try {
-      const res = await shubukan_api.post(
-        "/student/exam/start",
-        { examID, password },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+const handleStart = async () => {
+  if (!examID) return alert("Enter Exam ID");
+  setLoading(true);
+  try {
+    // send password only if user entered something (trimmed)
+    const payload =
+      password && password.trim() ? { examID, password: password.trim() } : { examID };
 
-      if (res.data.status === "waiting") {
-        // Save password for later requests
-        localStorage.setItem("exam_password", password);
-        router.push(`/online-exam/${examID}`);
-      } else if (res.data.status === "ok") {
-        // Save password so ExamPage can fetch again
-        localStorage.setItem("exam_password", password);
-        router.push(`/online-exam/${examID}`);
+    const res = await shubukan_api.post(
+      "/student/exam/start",
+      payload,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (res.data.status === "waiting" || res.data.status === "ok") {
+      // store password only if non-empty, otherwise remove any previously stored password
+      if (password && password.trim() !== "") {
+        localStorage.setItem("exam_password", password.trim());
+      } else {
+        localStorage.removeItem("exam_password");
       }
-    } catch (err) {
-      alert(err.response?.data?.message || "Invalid exam details");
-    } finally {
-      setLoading(false);
+      router.push(`/online-exam/${examID}`);
     }
-  };
+  } catch (err) {
+    alert(err.response?.data?.message || "Invalid exam details");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const menuItems = [
     {
