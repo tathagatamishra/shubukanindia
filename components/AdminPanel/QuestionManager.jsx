@@ -334,26 +334,29 @@ export default function QuestionManager() {
                 {/* Used in exams */}
                 <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
                   <p className="min-w-[65px]">Used In</p>
-                  <div className="h-fit ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex flex-col gap-2 w-full">
+                  <div className="h-fit ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex flex-wrap gap-2 w-full">
                     {!q.usedInExams || q.usedInExams.length === 0 ? (
                       <span className="text-sm text-gray-500">
                         Not used in any exam
                       </span>
                     ) : (
                       q.usedInExams.map((ue, idx) => (
-                        <div key={idx} className="flex items-center gap-3 text-[11px]">
+                        <div
+                          key={idx}
+                          className="flex items-center gap-3 text-[11px]"
+                        >
                           <div className="px-2 py-1 bg-gray-100 rounded">
                             <strong>
                               {ue.examID ?? (ue.exam && ue.exam.examID) ?? "—"}
                             </strong>
                             {typeof ue.examSet !== "undefined" && (
-                              <span> · Set {ue.examSet}</span>
+                              <span> · Set {ue.examSet} · </span>
                             )}
-                          </div>
-                          <div className="text-gray-600">
-                            {ue.accessability ??
-                              (ue.exam && ue.exam.accessability) ??
-                              "—"}
+                            <span>
+                              {ue.accessability ??
+                                (ue.exam && ue.exam.accessability) ??
+                                ""}
+                            </span>
                           </div>
                         </div>
                       ))
