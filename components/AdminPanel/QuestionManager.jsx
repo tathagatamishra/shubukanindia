@@ -177,9 +177,9 @@ export default function QuestionManager() {
         <h2 className="text-xl font-bold mb-4">Questions</h2>
 
         <div className="flex items-center bg-white px-4 rounded-xl shadow mb-[14px]">
-          <p className="text-[14px] font-[600] text-[#64748B]">
+          {/* <p className="text-[14px] font-[600] text-[#64748B]">
             Total Questions &nbsp;&nbsp;
-          </p>
+          </p> */}
           <SlidingNumber value={questions.length} />
         </div>
       </div>
@@ -282,21 +282,21 @@ export default function QuestionManager() {
       ) : questions.length === 0 ? (
         <div className="text-gray-500 text-center">No questions available</div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 text-[11px] sm:text-[16px]">
           {questions.map((q) => {
             const editable = isEditable(q);
             return (
               <div
                 key={q._id}
-                className="relative hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-col w-full"
+                className="relative hover:bg-[#f9fcff] bg-white shadow rounded-xl p-2 sm:p-4 flex flex-col w-full"
               >
-                <p className="absolute top-[-6px] left-[-6px] flex items-center justify-center w-fit h-fit min-w-[30px] min-h-[30px] px-[8px] rounded-full text-white bg-blue-500">
+                <p className="absolute top-[-6px] left-[-6px] flex items-center justify-center w-fit h-fit min-w-[20px] min-h-[20px] sm:min-w-[30px] sm:min-h-[30px] px-[8px] rounded-full text-white bg-blue-500">
                   {q.questionID}
                 </p>
 
                 {/* Used badge */}
                 <span
-                  className={`absolute top-[-6px] right-[-6px] px-2 py-1 rounded text-sm font-medium ${
+                  className={`absolute top-[-6px] right-[-6px] px-2 py-1 rounded sm:text-sm font-medium ${
                     q.used
                       ? "bg-red-100 text-red-700 border"
                       : "bg-green-100 text-green-700 border"
@@ -307,15 +307,15 @@ export default function QuestionManager() {
 
                 {/* Label column */}
                 <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
-                  <p className="min-w-[65px]">Question</p>
-                  <div className="w-full h-fit min-h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155]">
+                  <p className="min-w-[40px] sm:min-w-[65px]">Question</p>
+                  <div className="w-full h-fit ml-[10px] p-[12px] border-l border-dashed border-[#334155]">
                     {q.question}
                   </div>
                 </div>
 
                 <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
-                  <p className="min-w-[65px]">Options</p>
-                  <div className="h-fit min-h-[50px] ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex flex-wrap gap-2">
+                  <p className="min-w-[40px] sm:min-w-[65px]">Options</p>
+                  <div className="h-fit ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex flex-wrap gap-2">
                     {q.options.map((opt, n) => (
                       <p
                         key={n}
@@ -333,17 +333,17 @@ export default function QuestionManager() {
 
                 {/* Used in exams */}
                 <div className="flex flex-row items-center w-full h-fit border-b border-dashed border-[#334155]">
-                  <p className="min-w-[65px]">Used In</p>
+                  <p className="min-w-[40px] sm:min-w-[65px]">Used In</p>
                   <div className="h-fit ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex flex-wrap gap-2 w-full">
                     {!q.usedInExams || q.usedInExams.length === 0 ? (
-                      <span className="text-sm text-gray-500">
+                      <span className="sm:text-sm text-gray-500">
                         Not used in any exam
                       </span>
                     ) : (
                       q.usedInExams.map((ue, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center gap-3 text-[11px]"
+                          className="flex items-center gap-3 text-[9px] sm:text-[11px]"
                         >
                           <div className="px-2 py-1 bg-gray-100 rounded">
                             <strong>
@@ -365,8 +365,8 @@ export default function QuestionManager() {
                 </div>
 
                 <div className="flex flex-row items-center w-full h-fit border-dashed border-[#334155]">
-                  <p className="min-w-[65px]">Actions</p>
-                  <div className="h-[50px] w-full ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex gap-2">
+                  <p className="min-w-[40px] sm:min-w-[65px]">Actions</p>
+                  <div className="sm:h-[50px] w-full ml-[10px] p-[12px] border-l border-dashed border-[#334155] flex gap-2">
                     <button
                       onClick={() => openEdit(q)}
                       className={`text-blue-600 w-full max-w-[125px] h-full flex justify-center items-center gap-2 border-2 rounded font-[600] ${
