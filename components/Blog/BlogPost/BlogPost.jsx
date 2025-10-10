@@ -6,7 +6,14 @@ import Image from "next/image";
 import "./BlogPost.scss";
 import { IoClose } from "react-icons/io5";
 import { useUI } from "@/components/Context/UIContext";
+import { Lekton } from "next/font/google";
 
+const lekton = Lekton({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lekton",
+});
+ 
 export default function BlogPost({ blog }) {
   // states
   const { setIsModalOpen } = useUI();
@@ -562,7 +569,7 @@ export default function BlogPost({ blog }) {
                 setShowShare(true);
                 setIsModalOpen(true);
               }}
-              className="px-4 py-2 border rounded"
+              className={`${lekton.className} px-4 py-2 border rounded`}
             >
               Share
             </button>
@@ -629,7 +636,7 @@ export default function BlogPost({ blog }) {
               />
               <button
                 onClick={sendOtp}
-                className="px-4 py-2"
+                className={`${lekton.className} px-4 py-2`}
               >
                 Send OTP
               </button>
@@ -645,7 +652,7 @@ export default function BlogPost({ blog }) {
                 />
                 <button
                   onClick={verifyOtp}
-                  className="px-3 py-2"
+                  className={`${lekton.className} px-3 py-2`}
                 >
                   Verify
                 </button>
@@ -658,7 +665,7 @@ export default function BlogPost({ blog }) {
         <div className="flex gap-3 my-4">
           <button
             onClick={toggleLike}
-            className={`px-4 py-2 border rounded ${
+            className={`${lekton.className} px-4 py-2 border rounded ${
               liked ? "bg-green-100" : ""
             }`}
           >
@@ -666,7 +673,7 @@ export default function BlogPost({ blog }) {
           </button>
           <button
             onClick={toggleDislike}
-            className={`px-4 py-2 border rounded ${
+            className={`${lekton.className} px-4 py-2 border rounded ${
               disliked ? "bg-red-100" : ""
             }`}
           >
@@ -694,14 +701,14 @@ export default function BlogPost({ blog }) {
                     setVerifiedEmail(null);
                     setEmail("");
                   }}
-                  className="px-4 py-2"
+                  className={`${lekton.className} px-4 py-2`}
                 >
                   Sign out
                 </button>
 
                 <button
                   onClick={postComment}
-                  className="px-4 py-2"
+                  className={`${lekton.className} px-4 py-2`}
                 >
                   Post comment
                 </button>
@@ -756,12 +763,12 @@ export default function BlogPost({ blog }) {
                   }
                   className="flex-1 p-2 border rounded"
                 />
-                <button onClick={copyLink} className="px-3 py-2 border rounded">
+                <button onClick={copyLink} className={`${lekton.className} px-3 py-2 border rounded`}>
                   Copy
                 </button>
               </div>
 
-              <button className="crossBtn">
+              <button className={`${lekton.className} crossBtn`}>
                 <IoClose
                   className="icon"
                   onClick={() => {

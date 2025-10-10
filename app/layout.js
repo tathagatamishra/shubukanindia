@@ -1,4 +1,3 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 import { isDesktop } from "react-device-detect";
@@ -8,16 +7,6 @@ import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/UIComponent/Banner";
 import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   metadataBase: new URL("https://shubukanindia.org"),
@@ -133,7 +122,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
         style={{
           background: "rgb(231, 221, 211)",
           backgroundImage:

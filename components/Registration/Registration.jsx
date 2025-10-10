@@ -3,7 +3,14 @@ import { useEffect, useState } from "react";
 import "./Registration.scss";
 import Toast from "../UIComponent/Toast";
 import { shubukan_api } from "../../config.js";
+import { Lekton } from "next/font/google";
 
+const lekton = Lekton({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lekton",
+});
+ 
 export default function Registration() {
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const [formData, setFormData] = useState({
@@ -92,7 +99,7 @@ export default function Registration() {
       <section className="data">
         <form onSubmit={handleSubmit}>
           {/* Previous input fields remain the same */}
-          <div className="inputBox">
+          <div className={`${lekton.className} inputBox`}>
             <label htmlFor="name">Name</label>
             <input
               type="text"
@@ -107,7 +114,7 @@ export default function Registration() {
             />
           </div>
 
-          <div className="inputBox">
+          <div className={`${lekton.className} inputBox`}>
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -122,7 +129,7 @@ export default function Registration() {
             />
           </div>
 
-          <div className="inputBox">
+          <div className={`${lekton.className} inputBox`}>
             <label htmlFor="phone">Phone Number</label>
             <input
               type="tel"
@@ -137,7 +144,7 @@ export default function Registration() {
             />
           </div>
 
-          <div className="inputBox">
+          <div className={`${lekton.className} inputBox`}>
             <label htmlFor="state">State</label>
             <input
               type="text"
@@ -154,7 +161,7 @@ export default function Registration() {
 
           <div className="underline"></div>
 
-          <div className="inputBox">
+          <div className={`${lekton.className} inputBox`}>
             <label htmlFor="dob">Date of Birth</label>
             <input
               type="date"
@@ -169,9 +176,9 @@ export default function Registration() {
             />
           </div>
 
-          <div className="inputBox">
+          <div className={`${lekton.className} inputBox`}>
             <label htmlFor="gender">Gender</label>
-            <div className="selectBox">
+            <div className={`${lekton.className} selectBox`}>
               <select
                 name="gender"
                 id="gender"
@@ -190,7 +197,7 @@ export default function Registration() {
 
           <div className="underline"></div>
 
-          <div className="inputBox checkbox-group">
+          <div className={`${lekton.className} inputBox checkbox-group`}>
             <label>Do you have previous experience in Karate?</label>
             <div className="checkbox-options">
               <div className="checkbox-item">
@@ -218,7 +225,7 @@ export default function Registration() {
             </div>
           </div>
 
-          <div className="inputBox checkbox-group">
+          <div className={`${lekton.className} inputBox checkbox-group`}>
             <label>
               Do you have previous experience in other Martial Arts?
             </label>
