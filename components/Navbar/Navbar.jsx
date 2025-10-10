@@ -5,6 +5,13 @@ import useSound from "use-sound";
 import Image from "next/image";
 import "./Navbar.scss";
 import { useUI } from "../Context/UIContext";
+import { Philosopher } from "next/font/google";
+
+const philosopher = Philosopher({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-philosopher",
+});
 
 export default function Navbar() {
   const { isModalOpen } = useUI();
@@ -351,7 +358,7 @@ export default function Navbar() {
                     }`}
                     onMouseEnter={play2}
                   >
-                    <p>{label}</p>
+                    <p className={`${philosopher.className}`}>{label}</p>
                   </div>
                 ))}
               </nav>

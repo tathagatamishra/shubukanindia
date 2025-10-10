@@ -2,7 +2,14 @@
 import React from "react";
 import "./Banner.scss";
 import { usePathname } from "next/navigation";
+import { Lekton } from "next/font/google";
 
+const lekton = Lekton({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lekton",
+});
+ 
 export default function Banner({
   bannerText1,
   bannerText2,
@@ -54,9 +61,9 @@ export default function Banner({
   );
 
   return !isAdminPage && !isExamPage ? (
-    <div className="banner">
+    <div className={`${lekton.className} banner`}>
       <div className="track">
-        <div className="content">{fullMessage}</div>
+        <p className={`${lekton.className} content`}>{fullMessage}</p>
       </div>
     </div>
   ) : null;

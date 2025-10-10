@@ -5,6 +5,13 @@ import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
 import { FiChevronDown } from "react-icons/fi";
+import { Lekton } from "next/font/google";
+
+const lekton = Lekton({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lekton",
+});
 
 export default function Signup() {
   const router = useRouter();
@@ -160,7 +167,7 @@ export default function Signup() {
               value={formData[f.name]}
               onChange={handleChange}
               placeholder={f.placeholder}
-              className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]"
+              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
             />
           </div>
         ))}
@@ -181,7 +188,7 @@ export default function Signup() {
               onChange={handleChange}
               onFocus={() => setShowDropdown(true)}
               placeholder="Select or type Sensei’s name"
-              className="corner-shape border w-full font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[4px]"
+              className={`${lekton.className} corner-shape border w-full font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[4px]`}
             />
             <button
               type="button"
@@ -193,7 +200,7 @@ export default function Signup() {
           </div>
 
           {showDropdown && filtered.length > 0 && (
-            <ul className="OptionStyle corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[240px] overflow-y-auto z-20 border !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]">
+            <ul className={`${lekton.className} corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[240px] overflow-y-auto z-20 border !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}>
               {filtered.map((ins) => (
                 <li
                   key={ins._id}
@@ -237,7 +244,7 @@ export default function Signup() {
               value={formData[f.name]}
               onChange={handleChange}
               placeholder={f.placeholder}
-              className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]"
+              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
             />
           </div>
         ))}
