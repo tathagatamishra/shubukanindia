@@ -1,3 +1,4 @@
+// components/Navbar.jsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -5,12 +6,18 @@ import useSound from "use-sound";
 import Image from "next/image";
 import "./Navbar.scss";
 import { useUI } from "../Context/UIContext";
-import { Philosopher } from "next/font/google";
+import { Philosopher, Geo } from "next/font/google";
 
 const philosopher = Philosopher({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-philosopher",
+});
+
+const geo = Geo({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-geo",
 });
 
 export default function Navbar() {
@@ -47,7 +54,7 @@ export default function Navbar() {
 
   const isAdminPage = pathname.startsWith("/admin");
   const isExamPage = pathname.startsWith("/online-exam");
-  
+
   const pageList = [
     { path: "/history", label: "HISTORY" },
     { path: "/shubukan-india", label: "SHUBUKAN INDIA" },
@@ -292,6 +299,7 @@ export default function Navbar() {
             }}
           ></div>
           <p
+          className={`${geo.className} `}
             style={{
               margin: "0 10px 0 0",
               textAlign: "right",
