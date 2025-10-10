@@ -52,6 +52,8 @@ input:focus {
     background-color: #efe9e5d4 !important;
 }
 
+.pass-input {}
+
 .OptionStyle {
     border: 2px solid #905043;
     border-radius: 10px;

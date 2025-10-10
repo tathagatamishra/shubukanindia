@@ -40,7 +40,7 @@ body {
 
 /* Links & buttons */
 a,
-button {
+button, .pointer {
   cursor: url("/cursors/LinkSelect.cur"), pointer;
 }
 

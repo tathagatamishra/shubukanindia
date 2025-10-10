@@ -100,11 +100,11 @@ export default function Student() {
             Exam Password
           </label>
           <input
-            type="password"
+            type="text"
             placeholder="Enter your exam password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-2"
+            className="corner-shape pass-input border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-2"
           />
 
           <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
