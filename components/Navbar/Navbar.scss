@@ -1,3 +1,4 @@
+// components/Navbar.scss
 @import '../../styles/variables.scss';
 @import '../../styles/Fonts.scss';
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
@@ -210,32 +211,14 @@
                 line-height: 24px;
                 text-align: right;
                 letter-spacing: 5px;
-                // font-family: 'Amarante', cursive;
-                // font-family: 'Andika', sans-serif;
-                // font-family: 'Bellefair', serif;
-                // font-family: 'Capriola', sans-serif;
-                // font-family: 'Flamenco', cursive;
-                // font-family: 'Fredericka the Great', cursive;
-                font-family: 'GFS Neohellenic', sans-serif;
-                // font-family: 'Pompiere', cursive;
-                // font-family: 'Tenali Ramakrishna', sans-serif;
-                font-family: 'Faster One';
-                font-family: 'Finlandica';
-                font-family: 'Foldit';
-                font-family: 'Gemunu Libre';
+
+                // font-family: 'GFS Neohellenic', sans-serif;
+                // font-family: 'Faster One';
+                // font-family: 'Finlandica';
+                // font-family: 'Foldit';
+                // font-family: 'Gemunu Libre';
                 font-family: 'Geo';
-                // font-family: 'Lekton';
-                // font-family: 'Lexend Peta';
-                // font-family: 'Lexend Tera';
-                // font-family: 'Martian Mono';
-                // font-family: 'MuseoModerno';
-                // font-family: 'Orbit';
-                // font-family: 'Rubik Dirt';
-                // font-family: 'Shippori Antique';
-                // font-family: 'Tourney';
-                // font-family: 'Train One';
-                // font-family: 'Tulpen One';
-                // font-family: 'swap';
+
                 transition: 200ms;
                 user-select: none;
             }
@@ -345,7 +328,7 @@
                 // gap: 5px;
 
                 padding: 32px;
-                margin: 50px 0 40px 0;
+                margin: 50px 0;
                 // border: solid 1px;
                 width: 100%;
                 height: 100%;
@@ -370,7 +353,7 @@
                         text-align: right;
                         text-decoration: none;
                         font-size: 18px;
-                        font-weight: 900;
+                        font-weight: 700;
                         // text-shadow: 0 0 15px rgb(163, 150, 140);
                         font-family: 'Philosopher', sans-serif;
                         // text-shadow: 0px 0px 40px #00000063;
@@ -398,7 +381,7 @@
 
                         &:hover {
                             & p {
-                                font-size: 22px;
+                                font-size: 20px;
                             }
                         }
                     }
@@ -413,7 +396,7 @@
 
                     & .opt {
                         & p {
-                            font-size: 14px;
+                            font-size: 15px;
                         }
 
                         &:hover {
@@ -434,7 +417,7 @@
                 & .nav {
                     & .opt {
                         & p {
-                            font-size: 12px;
+                            font-size: 13px;
                         }
 
                         &:hover {
@@ -470,48 +453,6 @@
                     }
                 }
             }
-
-            // @media screen and (max-height: 840px) {
-            //     & .nav {
-            //         margin-top: 25px;
-
-            //         & .opt {
-            //             height: 45px;
-            //         }
-            //     }
-            // }
-
-            // @media screen and (max-height: 700px) {
-            //     & .nav {
-            //         & .opt {
-            //             height: 45px;
-            //         }
-            //     }
-            // }
-
-            // @media screen and (max-height: 650px) {
-            //     & .nav {
-            //         & .opt {
-            //             height: 40px;
-            //         }
-            //     }
-            // }
-
-            // @media screen and (max-height: 550px) {
-            //     & .nav {
-            //         & .opt {
-            //             height: 35px;
-            //         }
-            //     }
-            // }
-
-            // @media screen and (max-height: 400px) {
-            //     & .nav {
-            //         & .opt {
-            //             height: 25px !important;
-            //         }
-            //     }
-            // }
         }
 
         /* === BACK PATTERN LAYER === */

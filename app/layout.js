@@ -1,3 +1,4 @@
+// app/layout.js
 import "./globals.css";
 import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 import { isDesktop } from "react-device-detect";
