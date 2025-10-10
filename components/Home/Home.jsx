@@ -131,8 +131,8 @@ export default function Home({ setShowNav }) {
             userSelect: "none",
           }}
           alt=""
-          height={1920}
-          width={1920}
+          height={1440}
+          width={1440}
         />
       </div>
 
@@ -494,8 +494,8 @@ export default function Home({ setShowNav }) {
               userSelect: "none",
             }}
             alt=""
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
           />
         </div>
       </section>
@@ -581,8 +581,8 @@ export default function Home({ setShowNav }) {
               userSelect: "none",
             }}
             alt=""
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
           />
         </div>
 
@@ -689,8 +689,8 @@ export default function Home({ setShowNav }) {
               userSelect: "none",
             }}
             alt=""
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
           />
         </div>
       </section>
@@ -699,7 +699,7 @@ export default function Home({ setShowNav }) {
         <div className="popUp">
           <div className="popBack" onClick={imgPop}></div>
           <div className="imgPop" onClick={imgPop}>
-            <Image src={popImg} alt="image" height={1920} width={1920} />
+            <Image src={popImg} alt="image" height={1440} width={1440} />
           </div>
         </div>
       )}
@@ -1136,8 +1136,8 @@ export default function Home({ setShowNav }) {
                 filter: "sepia(30%) grayscale(30%)",
               }}
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
             />
           </div>
           <div
@@ -1155,8 +1155,8 @@ export default function Home({ setShowNav }) {
                 filter: "sepia(30%) grayscale(30%)",
               }}
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
             />
 
             <div className="quote">
@@ -1257,8 +1257,8 @@ export default function Home({ setShowNav }) {
               filter: "sepia(30%) grayscale(30%)",
             }}
             alt=""
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
           />
           <Image
             src="/assets/sg2.jpg"
@@ -1267,8 +1267,8 @@ export default function Home({ setShowNav }) {
               filter: "sepia(30%) grayscale(30%)",
             }}
             alt=""
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
           />
         </div>
 

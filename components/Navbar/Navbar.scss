@@ -303,12 +303,12 @@
             align-items: flex-end;
             transition: 300ms;
 
-            background-image: url('/assets/menu-bg2.png');
+            background-image: url('/assets/pattern-paper.png');
             background-repeat: repeat-y;
             background-size: 100%;
             background-position: 100% 340%;
 
-            filter: drop-shadow(1px 1px 2px rgba(28, 8, 0, 1)) drop-shadow(0 0 5px #70411ac1);
+            filter: drop-shadow(1px 1px 4px rgba(28, 8, 0, 1)) drop-shadow(0 0 5px #f1d0b5c1);
 
             animation-name: menuSlide;
             animation-duration: .2s;
@@ -333,6 +333,7 @@
                 background: #fed;
                 background: linear-gradient(90deg, transparent, #fed);
                 transition: 300ms;
+                opacity: .5;
             }
 
             & .nav {
@@ -513,43 +514,16 @@
             // }
         }
 
-        & .menuBG3 {
-            z-index: 2;
-
-            background-color: rgba(255, 255, 255, 0);
-            opacity: .7;
-
-            overflow: hidden;
-            position: fixed;
-            height: 100vh;
-            width: 100vw;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
-
-            animation-name: BGBlur;
-            animation-duration: .3s;
-            animation-timing-function: cubic-bezier(0.12, 0.08, 0.31, 0.97);
-
-            @keyframes BGBlur {
-                from {
-                    opacity: 0;
-                }
-
-                to {
-                    opacity: .7;
-                }
-            }
-        }
-
+        /* === BACK PATTERN LAYER === */
         & .menuBG2 {
             z-index: 1;
-
             background-color: #f1e5d9;
             opacity: 0.7;
-            background: radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent) 10px 10px, linear-gradient(#ff8d60 0.8px, transparent 0.8px) 0 -0.4px, linear-gradient(90deg, #ff8d60 0.8px, #f1e5d9 0.8px) -0.4px 0;
+            background:
+                radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #f1e5d9 20%, #f1e5d9 80%, transparent 80%, transparent) 10px 10px,
+                linear-gradient(#ff8d60 0.8px, transparent 0.8px) 0 -0.4px,
+                linear-gradient(90deg, #ff8d60 0.8px, #f1e5d9 0.8px) -0.4px 0;
             background-size: 20px 20px, 20px 20px, 10px 10px, 10px 10px;
 
             overflow: hidden;
@@ -559,49 +533,71 @@
             left: 0;
             top: 0;
 
-            animation-name: BGBlur;
-            animation-duration: .3s;
-            animation-timing-function: cubic-bezier(0.12, 0.08, 0.31, 0.97);
-
-            @keyframes BGBlur {
-                from {
-                    opacity: 0;
-                }
-
-                to {
-                    opacity: 0.7;
-                }
-            }
+            animation: patternIn .6s ease-in-out forwards;
+            will-change: opacity, transform, filter;
         }
 
-        & .menuBG {
-            z-index: 0;
-
-            background-color: #f1e5d938;
-            opacity: .4;
-
+        /* === GLASS BLUR OVERLAY === */
+        & .menuBG3 {
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0);
+            opacity: 0;
             overflow: hidden;
             position: fixed;
             height: 100vh;
             width: 100vw;
-            left: 0;
-            top: 0;
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
-            animation-name: BGBlur;
-            animation-duration: .3s;
-            animation-timing-function: cubic-bezier(0.12, 0.08, 0.31, 0.97);
-            filter: url(#grainy-noise);
-            // filter: saturate(.5) contrast(1);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(1.02);
+            -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
 
-            @keyframes BGBlur {
-                from {
-                    opacity: 0;
-                }
+            animation: glassIn .8s ease-in-out forwards;
+            will-change: opacity, transform, filter;
+        }
 
-                to {
-                    opacity: .4;
-                }
+        /* === SMOOTH BACKGROUND ENTRY === */
+        @keyframes patternIn {
+            0% {
+                opacity: 0;
+                transform: scale(1.04);
+                filter: blur(10px);
+            }
+
+            60% {
+                opacity: 0.4;
+                transform: scale(1.01);
+                filter: blur(3px);
+            }
+
+            100% {
+                opacity: 0.7;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* === GLASS LAYER FADE/BLUR === */
+        @keyframes glassIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.05);
+                -webkit-backdrop-filter: blur(0px);
+                backdrop-filter: blur(0px);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1.01);
+                -webkit-backdrop-filter: blur(4px);
+                backdrop-filter: blur(4px);
+            }
+
+            100% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1);
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
             }
         }
     }

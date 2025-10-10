@@ -52,7 +52,7 @@ export default function Navbar() {
     },
     { path: "/lineage-and-dojokun", label: "LINEAGE & DOJO KUN" },
     { path: "/karate-and-kobudo", label: "KARATE & KOBUDO" },
-    { path: "/registration", label: "REGISTRATION" },
+    // { path: "/registration", label: "REGISTRATION" },
     { path: "/online-exam", label: "EXAM PORTAL" },
     { path: "/membership", label: "MEMBERSHIP" },
     { path: "/gallery", label: "GALLERY" },
@@ -81,7 +81,7 @@ export default function Navbar() {
     "/shuri-karate-kobudo-hozonkai": "",
     "/lineage-and-dojokun": "",
     "/karate-and-kobudo": "",
-    "/registration": "",
+    // "/registration": "",
     "/online-exam": "",
     "/membership": "",
     "/gallery": "",
@@ -213,10 +213,10 @@ export default function Navbar() {
           <>
             <Image
               className="logo1"
-              src="/assets/shubukan.png"
+              src="/assets/indiashubukan.png"
               alt="Shubukan Logo"
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               quality={100}
               // sizes="(min-width: 1180px) 80px, 64px"
             />
@@ -224,8 +224,8 @@ export default function Navbar() {
               className="logo2"
               src="/assets/logo.png"
               alt="Shubukan Text"
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               quality={100}
               // sizes="(min-width: 1180px) 142px, 85px"
             />
