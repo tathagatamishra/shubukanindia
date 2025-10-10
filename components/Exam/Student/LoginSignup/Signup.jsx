@@ -13,6 +13,20 @@ const lekton = Lekton({
   variable: "--font-lekton",
 });
 
+const KYU_OPTIONS = [
+  "10th Kyu - White Belt",
+  "9th Kyu - Yellow Belt",
+  "8th Kyu - Orange Belt",
+  "7th Kyu - Green Belt",
+  "6th Kyu - Blue Belt",
+  "5th Kyu - Purple Belt",
+  "4th Kyu - Brown Belt",
+  "3th Kyu - Brown Belt",
+  "2th Kyu - Brown Belt",
+  "1th Kyu - Brown Belt",
+  "1st Dan - Black Belt",
+];
+
 export default function Signup() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -25,45 +39,50 @@ export default function Signup() {
     mobile: "",
   });
   const [loading, setLoading] = useState(false);
-  const [instructors, setInstructors] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
 
-  const dropdownRef = useRef(null);
+  // instructors dropdown state
+  const [instructors, setInstructors] = useState([]);
+  const [filteredInstructors, setFilteredInstructors] = useState([]);
+  const [showInstructorDropdown, setShowInstructorDropdown] = useState(false);
+  const instructorRef = useRef(null);
+
+  // kyu dropdown state (mirrors instructor behaviour)
+  const [filteredKyu, setFilteredKyu] = useState(KYU_OPTIONS);
+  const [showKyuDropdown, setShowKyuDropdown] = useState(false);
+  const kyuRef = useRef(null);
 
   function shuffle(array) {
-    array.sort(() => Math.random() - 0.5);
+    const copy = [...array];
+    copy.sort(() => Math.random() - 0.5);
+    return copy;
   }
 
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
         const res = await shubukan_api.get("/instructors");
-        let instructors = res.data.instructors || [];
-
-        // 🧹 Remove invalid entries (where name == "__" or identity == "__")
-        instructors = instructors.filter(
-          (inst) => inst.name !== "__" && inst.identity !== "__"
+        let insts = res.data.instructors || [];
+        insts = insts.filter(
+          (inst) => inst && inst.name !== "__" && inst.identity !== "__"
         );
-
-        // 🔀 Shuffle and set
-        const shuffled = shuffle(instructors);
-
+        const shuffled = shuffle(insts);
         setInstructors(shuffled);
-        setFiltered(instructors); // default for dropdown
+        setFilteredInstructors(shuffled);
       } catch (err) {
         console.error("Failed to fetch instructors", err);
       }
     };
-
     fetchInstructors();
   }, []);
 
-  // Close dropdown if clicked outside
+  // click outside handler for both dropdowns
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowDropdown(false);
+      if (instructorRef.current && !instructorRef.current.contains(e.target)) {
+        setShowInstructorDropdown(false);
+      }
+      if (kyuRef.current && !kyuRef.current.contains(e.target)) {
+        setShowKyuDropdown(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -72,26 +91,41 @@ export default function Signup() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
 
+    // instructor name search & selection logic
     if (name === "instructorName") {
+      setFormData((prev) => ({ ...prev, instructorName: value }));
       const f = instructors.filter((ins) =>
         ins.name.toLowerCase().includes(value.toLowerCase())
       );
-      setFiltered(f);
-      setShowDropdown(true);
+      setFilteredInstructors(f);
+      setShowInstructorDropdown(true);
 
-      const selected = instructors.find((ins) => ins.name === value);
-      if (selected) {
+      const exact = instructors.find((ins) => ins.name === value);
+      if (exact) {
         setFormData((prev) => ({
           ...prev,
-          instructorName: selected.name,
-          instructorId: selected._id,
+          instructorName: exact.name,
+          instructorId: exact._id,
         }));
       } else {
         setFormData((prev) => ({ ...prev, instructorId: "" }));
       }
+      return;
     }
+
+    // presentKyu search & selection logic (same UX as Sensei)
+    if (name === "presentKyu") {
+      setFormData((prev) => ({ ...prev, presentKyu: value }));
+      const fk = KYU_OPTIONS.filter((k) =>
+        k.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredKyu(fk);
+      setShowKyuDropdown(true);
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSelectInstructor = (ins) => {
@@ -100,12 +134,22 @@ export default function Signup() {
       instructorName: ins.name,
       instructorId: ins._id,
     }));
-    setShowDropdown(false);
+    setShowInstructorDropdown(false);
   };
 
-  const handleDropdownToggle = () => {
-    setFiltered(instructors); // show full list
-    setShowDropdown((prev) => !prev);
+  const handleSelectKyu = (kyu) => {
+    setFormData((prev) => ({ ...prev, presentKyu: kyu }));
+    setShowKyuDropdown(false);
+  };
+
+  const handleInstructorToggle = () => {
+    setFilteredInstructors(instructors);
+    setShowInstructorDropdown((p) => !p);
+  };
+
+  const handleKyuToggle = () => {
+    setFilteredKyu(KYU_OPTIONS);
+    setShowKyuDropdown((p) => !p);
   };
 
   const handleSubmit = async (e) => {
@@ -114,7 +158,6 @@ export default function Signup() {
       setLoading(true);
       const res = await shubukan_api.post("/student/signup", formData);
       alert(res.data.message);
-
       localStorage.setItem("student_email", formData.email);
       localStorage.setItem("otp_type", "signup");
       router.push("/online-exam/student/verify");
@@ -130,55 +173,51 @@ export default function Signup() {
       <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Enter Sign up Details
       </label>
+
       <form
         // onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] shadow-md border !rounded-[40px]"
       >
-        {/* Common Inputs */}
-        {[
-          {
-            label: "Name",
-            name: "name",
-            type: "text",
-            required: true,
-            placeholder: "Enter your full name",
-          },
-          {
-            label: "Present Kyu",
-            name: "presentKyu",
-            type: "text",
-            placeholder: "Select your present kyu",
-          },
-          {
-            label: "Last Certificate No.",
-            name: "lastCertificateNum",
-            type: "text",
-            placeholder: "Enter your certificate no",
-          },
-        ].map((f, i) => (
-          <div key={i} className="w-full flex flex-col">
-            <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
-              {f.label}
-            </label>
-            <input
-              required={f.required}
-              type={f.type}
-              name={f.name}
-              value={formData[f.name]}
-              onChange={handleChange}
-              placeholder={f.placeholder}
-              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
-            />
-          </div>
-        ))}
+        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+          ** Your Name & Email id is mandatory to fill.
+        </p>
+        {/* Name */}
+        <div className="w-full flex flex-col">
+          <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+            Name *
+          </label>
+          <input
+            required
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Enter your full name"
+            className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+          />
+        </div>
 
-        {/* Hybrid Instructor Input with Dropdown Button */}
+        <div className="w-full flex flex-col">
+          <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+            Email *
+          </label>
+          <input
+            required
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Enter your or parent's email id"
+            className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+          />
+        </div>
+
         <div
-          ref={dropdownRef}
+          ref={instructorRef}
           className="relative w-full flex flex-col mb-[8px]"
         >
           <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
-            Sensei Name
+            Sensei's Name
           </label>
           <div className="relative flex items-center">
             <input
@@ -186,26 +225,28 @@ export default function Signup() {
               name="instructorName"
               value={formData.instructorName}
               onChange={handleChange}
-              onFocus={() => setShowDropdown(true)}
+              onFocus={() => setShowInstructorDropdown(true)}
               placeholder="Select or type Sensei’s name"
               className={`${lekton.className} corner-shape border w-full font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[4px]`}
             />
             <button
               type="button"
-              onClick={handleDropdownToggle}
+              onClick={handleInstructorToggle}
               className="absolute right-2 text-gray-600 hover:text-black"
             >
               <FiChevronDown size={20} />
             </button>
           </div>
 
-          {showDropdown && filtered.length > 0 && (
-            <ul className={`${lekton.className} corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[240px] overflow-y-auto z-20 border !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}>
-              {filtered.map((ins) => (
+          {showInstructorDropdown && filteredInstructors.length > 0 && (
+            <ul
+              className={`${lekton.className} corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[240px] overflow-y-auto z-20 border-2 bg-[#efe9e5] border-[#9050438d] !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+            >
+              {filteredInstructors.map((ins) => (
                 <li
                   key={ins._id}
                   className={`corner-shape px-4 py-2 hover:bg-[#fff] active:bg-[#fff] ${
-                    ins.name == formData.instructorName && "bg-[#fff]"
+                    ins.name === formData.instructorName ? "bg-[#fff]" : ""
                   } cursor-pointer text-[14px] sm:text-[16px]`}
                   onClick={() => handleSelectInstructor(ins)}
                 >
@@ -216,42 +257,82 @@ export default function Signup() {
           )}
         </div>
 
-        {/* Email & Mobile */}
-        {[
-          {
-            label: "Email",
-            name: "email",
-            type: "email",
-            required: true,
-            placeholder: "Enter your or parent's email id",
-          },
-          {
-            label: "Mobile",
-            name: "mobile",
-            type: "text",
-            required: true,
-            placeholder: "Enter your or parent’s phone no.",
-          },
-        ].map((f, i) => (
-          <div key={i} className="w-full flex flex-col">
-            <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
-              {f.label}
-            </label>
+        {/* Present Kyu - search + dropdown (same behaviour as Sensei) */}
+        <div ref={kyuRef} className="relative w-full flex flex-col mb-[8px]">
+          <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+            Present Kyu
+          </label>
+          <div className="relative flex items-center">
             <input
-              required={f.required}
-              type={f.type}
-              name={f.name}
-              value={formData[f.name]}
+              type="text"
+              name="presentKyu"
+              value={formData.presentKyu}
               onChange={handleChange}
-              placeholder={f.placeholder}
-              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+              onFocus={() => setShowKyuDropdown(true)}
+              placeholder="Select your present kyu"
+              className={`${lekton.className} corner-shape border w-full font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[4px]`}
             />
+            <button
+              type="button"
+              onClick={handleKyuToggle}
+              className="absolute right-2 text-gray-600 hover:text-black"
+            >
+              <FiChevronDown size={20} />
+            </button>
           </div>
-        ))}
+
+          {showKyuDropdown && filteredKyu.length > 0 && (
+            <ul
+              className={`${lekton.className} corner-shape absolute top-[100%] left-0 right-0 shadow-md max-h-[240px] overflow-y-auto z-20 border-2 bg-[#efe9e5] border-[#9050438d] !rounded-[30px] font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+            >
+              {filteredKyu.map((k) => (
+                <li
+                  key={k}
+                  className={`corner-shape px-4 py-2 hover:bg-[#fff] active:bg-[#fff] ${
+                    k === formData.presentKyu ? "bg-[#fff]" : ""
+                  } cursor-pointer text-[14px] sm:text-[16px]`}
+                  onClick={() => handleSelectKyu(k)}
+                >
+                  {k}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Last Certificate No. */}
+        <div className="w-full flex flex-col">
+          <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+            Last Certificate No.
+          </label>
+          <input
+            type="text"
+            name="lastCertificateNum"
+            value={formData.lastCertificateNum}
+            onChange={handleChange}
+            placeholder="Enter your certificate no"
+            className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+          />
+        </div>
+
+        <div className="w-full flex flex-col">
+          <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+            Mobile
+          </label>
+          <input
+            required
+            type="text"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            placeholder="Enter your or parent’s phone no."
+            className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+          />
+        </div>
 
         <ExamBtn
           onClick={handleSubmit}
-          text={loading ? "Registering..." : "Sign up"}
+          text={loading ? "Registering..." : "Create Account"}
           type="submit"
           className="self-end mt-[6px]"
         />

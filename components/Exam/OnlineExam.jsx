@@ -29,6 +29,10 @@ export default function OnlineExam() {
       </div>
 
       <div className="ExamChild OnlineExam corner-shape w-full h-full flex flex-col justify-center items-center gap-4 p-[20px] py-[40px] border !rounded-[40px] shadow-md">
+        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+          ** <br />
+         If you are a Student, click the Student button.
+        </p>
         <ExamBtn
           text="Student"
           onClick={() => navigate("/online-exam/student/login-signup")}
@@ -40,6 +44,10 @@ export default function OnlineExam() {
           text="Instructor"
           onClick={() => navigate("/online-exam/instructor/login-signup")}
         />
+        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+          ** <br />
+          If you are an Instructor, you can create account as an Instructor and Student !!
+        </p>
       </div>
     </div>
   );

@@ -13,6 +13,10 @@ export default function LoginSignup() {
 
   return (
     <div className="ExamChild OnlineExam corner-shape w-full h-[calc(100%-120px)] flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
+      <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+        ** <br />
+        Click Log in button to access your existing account.
+      </p>
       <ExamBtn
         text="Log in"
         onClick={() => navigate("/online-exam/student/login")}
@@ -22,6 +26,9 @@ export default function LoginSignup() {
         text="Sign up"
         onClick={() => navigate("/online-exam/student/signup")}
       />
+      <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+        ** Click Sign up button to create a new account.
+      </p>
     </div>
   );
 }
