@@ -29,8 +29,8 @@ export default function Footer() {
       <Image
         className="footHillLeft z-[0] h-auto absolute left-0"
         src="/footer-hill-l.png"
-        width={1920}
-        height={1920}
+        width={1440}
+        height={1440}
         quality={100}
         priority={true}
         sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
@@ -39,8 +39,8 @@ export default function Footer() {
       <Image
         className="footHillRight z-[0] h-auto absolute right-0 scale-x-[-1]"
         src="/footer-hill-r.png"
-        width={1920}
-        height={1920}
+        width={1440}
+        height={1440}
         quality={100}
         priority={true}
         sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
@@ -281,8 +281,8 @@ export default function Footer() {
         }}
       >
         <Image
-          height={1920}
-          width={1920}
+          height={1440}
+          width={1440}
           quality={100}
           priority={true}
           sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
@@ -301,8 +301,8 @@ export default function Footer() {
           }}
         />
         <Image
-          height={1920}
-          width={1920}
+          height={1440}
+          width={1440}
           quality={100}
           priority={true}
           src="/assets/shorinryu.svg"
@@ -320,8 +320,8 @@ export default function Footer() {
           }}
         />
         <Image
-          height={1920}
-          width={1920}
+          height={1440}
+          width={1440}
           quality={100}
           priority={true}
           src="/assets/shubukan.svg"
@@ -339,8 +339,8 @@ export default function Footer() {
           }}
         />
         <Image
-          height={1920}
-          width={1920}
+          height={1440}
+          width={1440}
           quality={100}
           priority={true}
           src="/assets/kobudo.svg"
@@ -358,8 +358,8 @@ export default function Footer() {
           }}
         />
         <Image
-          height={1920}
-          width={1920}
+          height={1440}
+          width={1440}
           quality={100}
           priority={true}
           sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"

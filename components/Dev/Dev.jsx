@@ -154,8 +154,8 @@ export default function Dev({ setShowNav }) {
             }}
             src="/assets/shubukan.png"
             alt="Shubukan Logo"
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
           />
           <Image
@@ -171,8 +171,8 @@ export default function Dev({ setShowNav }) {
             }}
             src="/assets/logo.png"
             alt="Shubukan Text"
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
           />
         </div>
@@ -280,8 +280,8 @@ export default function Dev({ setShowNav }) {
           <Image
             src="/assets/tree.png"
             alt=""
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             style={{
               width: "100%",
               height: "500px",
@@ -733,8 +733,8 @@ export default function Dev({ setShowNav }) {
             <Image
               src="/assets/bird.png"
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               style={{
                 width: "100%",
                 height: "250px",
@@ -923,8 +923,8 @@ export default function Dev({ setShowNav }) {
             <Image
               src="/assets/dragonx.png"
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               style={{
                 width: "100%",
                 height: "340px",
@@ -1047,8 +1047,8 @@ export default function Dev({ setShowNav }) {
             <Image
               src="/assets/dragony.png"
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               style={{
                 width: "100%",
                 height: "385px",
@@ -1099,8 +1099,8 @@ export default function Dev({ setShowNav }) {
               <Image
                 src={popImg}
                 alt="image"
-                height={1920}
-                width={1920}
+                height={1440}
+                width={1440}
                 style={{
                   objectFit: "contain",
                   width: "100%",
@@ -1536,8 +1536,8 @@ export default function Dev({ setShowNav }) {
               <Image
                 src="/assets/quot (1).jpg"
                 alt=""
-                height={1920}
-                width={1920}
+                height={1440}
+                width={1440}
                 style={{
                   marginTop: "30px",
                   width: "150px",
@@ -1558,8 +1558,8 @@ export default function Dev({ setShowNav }) {
               <Image
                 src="/assets/quot (2).jpg"
                 alt=""
-                height={1920}
-                width={1920}
+                height={1440}
+                width={1440}
                 style={{
                   marginTop: "60px",
                   width: "150px",
@@ -1668,8 +1668,8 @@ export default function Dev({ setShowNav }) {
             <Image
               src="/assets/sg1.jpg"
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               style={{
                 width: "250px",
                 height: "284px",
@@ -1681,8 +1681,8 @@ export default function Dev({ setShowNav }) {
             <Image
               src="/assets/sg2.jpg"
               alt=""
-              height={1920}
-              width={1920}
+              height={1440}
+              width={1440}
               style={{
                 width: "250px",
                 height: "284px",
@@ -1754,8 +1754,8 @@ export default function Dev({ setShowNav }) {
             transition: "300ms",
           }}
           src="/footer-hill-l.png"
-          width={1920}
-          height={1920}
+          width={1440}
+          height={1440}
           quality={100}
           priority={true}
           sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
@@ -1773,8 +1773,8 @@ export default function Dev({ setShowNav }) {
             transition: "300ms",
           }}
           src="/footer-hill-r.png"
-          width={1920}
-          height={1920}
+          width={1440}
+          height={1440}
           quality={100}
           priority={true}
           sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
@@ -2056,8 +2056,8 @@ export default function Dev({ setShowNav }) {
           }}
         >
           <Image
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
             priority={true}
             sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
@@ -2075,8 +2075,8 @@ export default function Dev({ setShowNav }) {
             }}
           />
           <Image
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
             priority={true}
             src="/assets/shorinryu.svg"
@@ -2093,8 +2093,8 @@ export default function Dev({ setShowNav }) {
             }}
           />
           <Image
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
             priority={true}
             src="/assets/shubukan.svg"
@@ -2111,8 +2111,8 @@ export default function Dev({ setShowNav }) {
             }}
           />
           <Image
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
             priority={true}
             src="/assets/kobudo.svg"
@@ -2129,8 +2129,8 @@ export default function Dev({ setShowNav }) {
             }}
           />
           <Image
-            height={1920}
-            width={1920}
+            height={1440}
+            width={1440}
             quality={100}
             priority={true}
             sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
