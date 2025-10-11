@@ -91,7 +91,7 @@ export default function Upcoming() {
       : "N/A";
 
     const pwd = e.password || "No Password Needed";
-    return `Exam ID: ${e.examID}\nPassword: ${pwd}\nExam Will Start At: ${timeStr} - ${dateStr}`;
+    return `Exam ID: ${e.examID}\nExam Will Start At: ${timeStr} - ${dateStr}`;
   };
 
   // Copy to clipboard (simple)
