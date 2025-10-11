@@ -93,7 +93,7 @@ export default function Student() {
             type="text"
             placeholder="Enter your exam id"
             value={examID}
-            onChange={(e) => setExamID(e.target.value)}
+            onChange={(e) => setExamID(e.target.value.toUpperCase())}
             className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4"
           />
           {/* <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">

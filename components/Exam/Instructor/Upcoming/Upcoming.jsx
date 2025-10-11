@@ -288,12 +288,12 @@ export default function Upcoming() {
                 >
                   <div className="w-full flex flex-col">
                     <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
-                      <p className="w-[40%] sm:w-[60%] font-[600] text-center text-[14px] sm:text-[16px] text-[#334155]">
+                      <p className="w-full font-[600] text-center text-[14px] sm:text-[16px] text-[#334155]">
                         Exam ID
                       </p>
                       <div className="border-r-1 border-dashed h-full"></div>
                       <p
-                        className="w-[60%] font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]"
+                        className="w-full font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]"
                         style={{ letterSpacing: "4px" }}
                       >
                         {e.examID}
