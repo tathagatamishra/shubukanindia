@@ -5,6 +5,7 @@ import { FiPlus, FiTrash2, FiEdit } from "react-icons/fi";
 
 export default function StudentManager() {
   const [students, setStudents] = useState([]);
+  const [instructors, setInstructors] = useState([]);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -32,31 +33,72 @@ export default function StudentManager() {
     }
   };
 
-  const addStudent = async () => {
-    await shubukan_api.post("/student/signup", form);
-    setForm({ name: "", email: "", instructorName: "", instructorId: "" });
-    fetchStudents();
-  };
-
-  const deleteStudent = async (sid) => {
-    await shubukan_api.delete(`/admin/student/${sid}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    fetchStudents();
-  };
-
-  const updateStudent = async () => {
-    if (!editForm) return;
-    await shubukan_api.put(`/student/profile`, editForm, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setEditForm(null);
-    fetchStudents();
+  const fetchInstructors = async () => {
+    try {
+      const res = await shubukan_api.get("/instructors", {
+        headers: { Authorization: `Bearer ${token}` }, // in case endpoint is protected
+      });
+      let insts = res.data.instructors || res.data || [];
+      // basic filter
+      insts = insts.filter((inst) => inst && inst.name && inst.identity);
+      setInstructors(insts);
+    } catch (err) {
+      console.error("Failed to fetch instructors", err);
+    }
   };
 
   useEffect(() => {
     fetchStudents();
+    fetchInstructors();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const addStudent = async () => {
+    try {
+      await shubukan_api.post("/student/signup", form);
+      setForm({ name: "", email: "", instructorName: "", instructorId: "" });
+      fetchStudents();
+    } catch (err) {
+      console.error("Add student failed", err);
+      alert(err.response?.data?.message || "Failed to add student");
+    }
+  };
+
+  const deleteStudent = async (sid) => {
+    try {
+      await shubukan_api.delete(`/admin/student/${sid}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchStudents();
+    } catch (err) {
+      console.error("Delete failed", err);
+      alert(err.response?.data?.message || "Failed to delete student");
+    }
+  };
+
+  const updateStudent = async () => {
+    if (!editForm || !editForm._id) return;
+    try {
+      await shubukan_api.put(`/admin/student/${editForm._id}`, editForm, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setEditForm(null);
+      fetchStudents();
+    } catch (err) {
+      console.error("Update failed", err);
+      alert(err.response?.data?.message || "Failed to update student");
+    }
+  };
+
+  const openEdit = (s) => {
+    // ensure boolean for isVerified
+    setEditForm({
+      ...s,
+      isVerified: !!s.isVerified,
+      // instructorIdentity might be missing; ensure presence
+      instructorIdentity: s.instructorIdentity || "",
+    });
+  };
 
   return (
     <div>
@@ -101,7 +143,7 @@ export default function StudentManager() {
         </button>
       </div>
 
-      {/* Student List styled like InstructorManager */}
+      {/* Student List */}
       <div className="flex flex-col gap-4">
         {loading ? (
           <div className="flex justify-center items-center h-[40vh]">
@@ -115,37 +157,67 @@ export default function StudentManager() {
               key={s._id}
               className="hover:bg-[#f9fcff] bg-white shadow rounded-xl p-4 flex flex-row w-full"
             >
-              {/* Label column */}
-              <div className="border-r border-dashed border-[#334155] w-fit text-sm font-semibold">
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">Name</div>
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">Email</div>
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
-                  Instructor Name
+              {/* label column */}
+              <div className="border-r border-dashed border-[#334155] w-fit text-[12px] sm:text-[14px] font-semibold">
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Name
                 </div>
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
-                  Instructor ID
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Email
                 </div>
-                <div className="h-[50px] p-2 flex items-center">Actions</div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Mobile
+                </div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Present Kyu
+                </div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Last Cert No
+                </div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Instructor (Name)
+                </div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Instructor (Identity)
+                </div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
+                  Verified
+                </div>
+                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 flex items-center">
+                  Actions
+                </div>
               </div>
 
-              {/* Values column */}
-              <div className="w-full text-sm">
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+              {/* values column */}
+              <div className="w-full text-[12px] sm:text-[14px]">
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
                   {s.name}
                 </div>
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center break-all">
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center break-all">
                   {s.email}
                 </div>
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
+                  {s.mobile || "-"}
+                </div>
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
+                  {s.presentKyu || "-"}
+                </div>
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
+                  {s.lastCertificateNum || "-"}
+                </div>
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
                   {s.instructorName || "-"}
                 </div>
-                <div className="h-[60px] p-2 border-b border-dashed flex items-center">
-                  {s.instructorId || "-"}
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
+                  {s.instructorIdentity || "-"}
                 </div>
-                <div className="h-[50px] p-2 gap-2 flex items-center">
+                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
+                  {s.isVerified ? "Yes" : "No"}
+                </div>
+                <div className="h-[40px] sm:h-[50px] p-2 gap-2 flex items-center">
                   <button
                     className="text-blue-500 w-full max-w-[100px] h-full flex justify-center items-center gap-2 border-2 rounded font-[600]"
-                    onClick={() => setEditForm(s)}
+                    onClick={() => openEdit(s)}
                   >
                     <FiEdit /> Edit
                   </button>
@@ -164,38 +236,98 @@ export default function StudentManager() {
 
       {/* Edit modal */}
       {editForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-xl w-96">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl w-full max-w-xl">
             <h3 className="text-lg font-bold mb-4">Edit Student</h3>
-            <input
-              value={editForm.name}
-              onChange={(e) =>
-                setEditForm({ ...editForm, name: e.target.value })
-              }
-              className="border p-2 rounded w-full mb-2"
-            />
-            <input
-              value={editForm.email}
-              onChange={(e) =>
-                setEditForm({ ...editForm, email: e.target.value })
-              }
-              className="border p-2 rounded w-full mb-2"
-            />
-            <input
-              value={editForm.instructorName}
-              onChange={(e) =>
-                setEditForm({ ...editForm, instructorName: e.target.value })
-              }
-              className="border p-2 rounded w-full mb-2"
-            />
-            <input
-              value={editForm.instructorId}
-              onChange={(e) =>
-                setEditForm({ ...editForm, instructorId: e.target.value })
-              }
-              className="border p-2 rounded w-full mb-4"
-            />
-            <div className="flex gap-2 justify-end">
+
+            <div className="grid grid-cols-1 gap-2">
+              <label className="text-sm">Name</label>
+              <input
+                value={editForm.name || ""}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, name: e.target.value })
+                }
+                className="border p-2 rounded w-full"
+              />
+
+              <label className="text-sm">Email</label>
+              <input
+                value={editForm.email || ""}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, email: e.target.value })
+                }
+                className="border p-2 rounded w-full"
+              />
+
+              <label className="text-sm">Mobile</label>
+              <input
+                value={editForm.mobile || ""}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, mobile: e.target.value })
+                }
+                className="border p-2 rounded w-full"
+              />
+
+              <label className="text-sm">Present Kyu</label>
+              <input
+                value={editForm.presentKyu || ""}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, presentKyu: e.target.value })
+                }
+                className="border p-2 rounded w-full"
+              />
+
+              <label className="text-sm">Last Certificate No.</label>
+              <input
+                value={editForm.lastCertificateNum || ""}
+                onChange={(e) =>
+                  setEditForm({
+                    ...editForm,
+                    lastCertificateNum: e.target.value,
+                  })
+                }
+                className="border p-2 rounded w-full"
+              />
+
+              <div>
+                <label className="text-sm">Instructor</label>
+                <select
+                  value={editForm.instructorId || ""}
+                  onChange={(e) => {
+                    const id = e.target.value;
+                    const sel = instructors.find((i) => i._id === id) || {};
+                    setEditForm({
+                      ...editForm,
+                      instructorId: sel._id || "",
+                      instructorName: sel.name || "",
+                      instructorIdentity: sel.identity || "",
+                    });
+                  }}
+                  className="border p-2 rounded w-full"
+                >
+                  <option value="">-- No instructor / outside --</option>
+                  {instructors.map((ins) => (
+                    <option key={ins._id} value={ins._id}>
+                      {ins.name} — {ins.identity}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center gap-2 mt-2">
+                <input
+                  id="isVerified"
+                  type="checkbox"
+                  checked={!!editForm.isVerified}
+                  onChange={(e) =>
+                    setEditForm({ ...editForm, isVerified: e.target.checked })
+                  }
+                />
+                <label htmlFor="isVerified">Verified</label>
+              </div>
+            </div>
+
+            <div className="flex gap-2 justify-end mt-4">
               <button
                 onClick={() => setEditForm(null)}
                 className="px-3 py-2 bg-gray-300 rounded"
@@ -215,7 +347,7 @@ export default function StudentManager() {
 
       {/* Delete confirmation modal */}
       {deleteId && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-96">
             <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
             <p className="text-gray-700 mb-6">
