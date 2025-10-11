@@ -264,19 +264,19 @@ export default function ExamPage() {
           </label>
 
           <div className="w-full h-[40px] border-b-1 border-t-1 border-dashed flex flex-row items-center">
-            <p className="w-[40%] sm:w-[60%] sm:text-center font-[600] text-[14px] sm:text-[16px] text-[#334155]">
+            <p className="w-full text-center font-[600] text-[14px] sm:text-[16px] text-[#334155]">
               Exam ID
             </p>
             <div className="border-r-1 border-dashed h-full"></div>
             <p
-              className="w-[60%] font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]"
+              className="w-full font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]"
               style={{ letterSpacing: "4px" }}
             >
               {waitingInfo.examID}
             </p>
           </div>
 
-          <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
+          {/* <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
             <p className="w-[40%] sm:w-[60%] sm:text-center font-[600] text-[14px] sm:text-[16px] text-[#334155]">
               Exam Password
             </p>
@@ -291,9 +291,9 @@ export default function ExamPage() {
             >
               {waitingInfo.password || "No Password Needed"}
             </p>
-          </div>
+          </div> */}
 
-          <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
+          {/* <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
             <p className="w-[40%] sm:w-[60%] sm:text-center font-[600] text-[14px] sm:text-[16px] text-[#334155]">
               Exam Set
             </p>
@@ -304,7 +304,7 @@ export default function ExamPage() {
             >
               {waitingInfo.examSet}
             </p>
-          </div>
+          </div> */}
 
           <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] p-[8px]">
             <label className="w-full text-center font-[600] text-[12px] sm:text-[14px] text-[#334155]">
