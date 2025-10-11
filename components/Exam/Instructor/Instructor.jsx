@@ -49,12 +49,12 @@ export default function Instructor() {
     },
     {
       text: "View All Students",
-      disabled: true,
+      // disabled: true,
       action: () => router.push("/online-exam/instructor/students"),
     },
     {
       text: "All Student Results",
-      disabled: true,
+      // disabled: true,
       action: () => router.push("/online-exam/instructor/results"),
     },
     {

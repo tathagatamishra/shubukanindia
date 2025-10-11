@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
+import ExamBtn from "../../UI/ExamBtn";
 
 export default function Students() {
   const router = useRouter();
@@ -19,7 +20,9 @@ export default function Students() {
     try {
       setLoading(true);
       const res = await shubukan_api.get("/instructor/students", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("instructor_token")}` },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("instructor_token")}`,
+        },
       });
       setStudents(res.data || []);
     } catch (err) {
@@ -34,7 +37,9 @@ export default function Students() {
     if (!confirm("Delete this student?")) return;
     try {
       await shubukan_api.delete(`/instructor/student/${sid}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("instructor_token")}` },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("instructor_token")}`,
+        },
       });
       setStudents((s) => s.filter((st) => st._id !== sid));
     } catch (err) {
@@ -43,30 +48,59 @@ export default function Students() {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">My Students</h2>
+    <div className="ExamChild w-full flex flex-col items-center">
+      <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
+        My Students
+      </label>
+
       {loading ? (
-        <div>Loading...</div>
+        <p className="text-[14px] text-gray-500">Loading...</p>
       ) : students.length === 0 ? (
-        <div>No students found</div>
+        <p className="text-[14px] text-gray-500">No students found</p>
       ) : (
-        <div className="grid gap-3">
+        <div className="w-full flex flex-col gap-4 pb-[32px]">
           {students.map((s) => (
-            <div key={s._id} className="border rounded p-3 flex justify-between items-center">
-              <div>
-                <div className="font-semibold">{s.name}</div>
-                <div className="text-sm">KYU: {s.presentKyu ?? "-"} | Email: {s.email}</div>
+            <div
+              key={s._id}
+              className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] shadow-md border !rounded-[40px]"
+            >
+              <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
+                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
+                  Name
+                </p>
+                <div className="border-r-1 border-dashed h-full"></div>
+                <p className="w-full sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
+                  {s.name}
+                </p>
               </div>
-              <div className="flex gap-2">
-                <button
-                  className="px-3 py-1 border rounded"
-                  onClick={() => router.push(`/online-exam/instructor/results?studentId=${s._id}`)}
-                >
-                  Results
-                </button>
-                <button className="px-3 py-1 border rounded" onClick={() => handleDelete(s._id)}>
-                  Delete
-                </button>
+
+              <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
+                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
+                  Present Kyu
+                </p>
+                <div className="border-r-1 border-dashed h-full"></div>
+                <p className="w-full sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
+                  {s.presentKyu ?? "Student not selected"}
+                </p>
+              </div>
+
+              <div className="w-full p-4 pb-2 flex flex-row items-end justify-center">
+                {/* <ExamBtn
+                text="Delete"
+                size="w-full sm:w-[150px]"
+                disabled={true}
+                disabled={true}
+                onClick={() => handleDelete(s._id)}
+                /> */}
+                <ExamBtn
+                  text="View Results"
+                  size="w-full sm:w-[150px] min-w-fit"
+                  onClick={() =>
+                    router.push(
+                      `/online-exam/instructor/results?studentId=${s._id}`
+                    )
+                  }
+                />
               </div>
             </div>
           ))}

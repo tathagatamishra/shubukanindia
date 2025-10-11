@@ -132,31 +132,31 @@ export default function StudentManager() {
       {/* Add student form */}
       <div className="bg-white shadow rounded-xl p-4 mb-6">
         <h3 className="font-semibold mb-2">Add Student</h3>
-        <div className="grid sm:grid-cols-2 gap-2">
+        <div className="flex flex-wrap gap-2">
           <input
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
           />
           <input
             placeholder="Email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
           />
           <input
             placeholder="Mobile"
             value={form.mobile}
             onChange={(e) => setForm({ ...form, mobile: e.target.value })}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
           />
           <select
             value={form.presentKyu}
             onChange={(e) => setForm({ ...form, presentKyu: e.target.value })}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
           >
-            <option value="">-- Select Present Kyu (optional) --</option>
+            <option value="">Select Present Kyu (optional)</option>
             {KYU_OPTIONS.map((k) => (
               <option key={k} value={k}>
                 {k}
@@ -170,7 +170,7 @@ export default function StudentManager() {
             onChange={(e) =>
               setForm({ ...form, lastCertificateNum: e.target.value })
             }
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
           />
           <select
             value={form.instructorId}
@@ -183,9 +183,9 @@ export default function StudentManager() {
                 instructorName: sel.name || "",
               });
             }}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
           >
-            <option value="">-- Select Instructor (optional) --</option>
+            <option value="">Select Instructor (optional)</option>
             {instructors.map((ins) => (
               <option key={ins._id} value={ins._id}>
                 {ins.name} — {ins.identity}
@@ -227,16 +227,13 @@ export default function StudentManager() {
                   Mobile
                 </div>
                 <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
-                  Present Kyu
+                  Kyu
                 </div>
                 <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
-                  Last Cert No
+                  Cert No
                 </div>
                 <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
-                  Instructor (Name)
-                </div>
-                <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
-                  Instructor (Identity)
+                  Instructor
                 </div>
                 <div className="h-[40px] sm:h-[50px] sm:p-2 p-1 border-b border-dashed flex items-center">
                   Verified
@@ -265,9 +262,6 @@ export default function StudentManager() {
                 </div>
                 <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
                   {s.instructorName || "-"}
-                </div>
-                <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
-                  {s.instructorIdentity || "-"}
                 </div>
                 <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
                   {s.isVerified ? "Yes" : "No"}
