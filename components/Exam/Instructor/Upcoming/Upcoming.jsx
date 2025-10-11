@@ -300,7 +300,7 @@ export default function Upcoming() {
                       </p>
                     </div>
 
-                    <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
+                    {/* <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
                       <p className="w-[40%] sm:w-[60%] font-[600] text-center text-[14px] sm:text-[16px] text-[#334155]">
                         Exam Password
                       </p>
@@ -315,7 +315,7 @@ export default function Upcoming() {
                       >
                         {e.password || "No Password Needed"}
                       </p>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] p-[8px]">

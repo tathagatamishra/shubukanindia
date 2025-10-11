@@ -3,6 +3,20 @@ import { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
 import { FiPlus, FiTrash2, FiEdit } from "react-icons/fi";
 
+const KYU_OPTIONS = [
+  "10th Kyu - White Belt",
+  "9th Kyu - Yellow Belt",
+  "8th Kyu - Orange Belt",
+  "7th Kyu - Green Belt",
+  "6th Kyu - Blue Belt",
+  "5th Kyu - Purple Belt",
+  "4th Kyu - Brown Belt",
+  "3th Kyu - Brown Belt",
+  "2th Kyu - Brown Belt",
+  "1th Kyu - Brown Belt",
+  "1st Dan - Black Belt",
+];
+
 export default function StudentManager() {
   const [students, setStudents] = useState([]);
   const [instructors, setInstructors] = useState([]);
@@ -11,6 +25,9 @@ export default function StudentManager() {
     email: "",
     instructorName: "",
     instructorId: "",
+    presentKyu: "",
+    lastCertificateNum: "",
+    mobile: "",
   });
   const [editForm, setEditForm] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -36,10 +53,9 @@ export default function StudentManager() {
   const fetchInstructors = async () => {
     try {
       const res = await shubukan_api.get("/instructors", {
-        headers: { Authorization: `Bearer ${token}` }, // in case endpoint is protected
+        headers: { Authorization: `Bearer ${token}` },
       });
       let insts = res.data.instructors || res.data || [];
-      // basic filter
       insts = insts.filter((inst) => inst && inst.name && inst.identity);
       setInstructors(insts);
     } catch (err) {
@@ -56,7 +72,15 @@ export default function StudentManager() {
   const addStudent = async () => {
     try {
       await shubukan_api.post("/student/signup", form);
-      setForm({ name: "", email: "", instructorName: "", instructorId: "" });
+      setForm({
+        name: "",
+        email: "",
+        instructorName: "",
+        instructorId: "",
+        presentKyu: "",
+        lastCertificateNum: "",
+        mobile: "",
+      });
       fetchStudents();
     } catch (err) {
       console.error("Add student failed", err);
@@ -91,12 +115,13 @@ export default function StudentManager() {
   };
 
   const openEdit = (s) => {
-    // ensure boolean for isVerified
     setEditForm({
       ...s,
       isVerified: !!s.isVerified,
-      // instructorIdentity might be missing; ensure presence
       instructorIdentity: s.instructorIdentity || "",
+      presentKyu: s.presentKyu || "",
+      lastCertificateNum: s.lastCertificateNum || "",
+      mobile: s.mobile || "",
     });
   };
 
@@ -121,19 +146,52 @@ export default function StudentManager() {
             className="border p-2 rounded"
           />
           <input
-            placeholder="Instructor Name"
-            value={form.instructorName}
+            placeholder="Mobile"
+            value={form.mobile}
+            onChange={(e) => setForm({ ...form, mobile: e.target.value })}
+            className="border p-2 rounded"
+          />
+          <select
+            value={form.presentKyu}
+            onChange={(e) => setForm({ ...form, presentKyu: e.target.value })}
+            className="border p-2 rounded"
+          >
+            <option value="">-- Select Present Kyu (optional) --</option>
+            {KYU_OPTIONS.map((k) => (
+              <option key={k} value={k}>
+                {k}
+              </option>
+            ))}
+          </select>
+
+          <input
+            placeholder="Last Certificate No."
+            value={form.lastCertificateNum}
             onChange={(e) =>
-              setForm({ ...form, instructorName: e.target.value })
+              setForm({ ...form, lastCertificateNum: e.target.value })
             }
             className="border p-2 rounded"
           />
-          <input
-            placeholder="Instructor ID"
+          <select
             value={form.instructorId}
-            onChange={(e) => setForm({ ...form, instructorId: e.target.value })}
+            onChange={(e) => {
+              const id = e.target.value;
+              const sel = instructors.find((i) => i._id === id) || {};
+              setForm({
+                ...form,
+                instructorId: sel._id || "",
+                instructorName: sel.name || "",
+              });
+            }}
             className="border p-2 rounded"
-          />
+          >
+            <option value="">-- Select Instructor (optional) --</option>
+            {instructors.map((ins) => (
+              <option key={ins._id} value={ins._id}>
+                {ins.name} — {ins.identity}
+              </option>
+            ))}
+          </select>
         </div>
         <button
           onClick={addStudent}
@@ -269,13 +327,20 @@ export default function StudentManager() {
               />
 
               <label className="text-sm">Present Kyu</label>
-              <input
+              <select
                 value={editForm.presentKyu || ""}
                 onChange={(e) =>
                   setEditForm({ ...editForm, presentKyu: e.target.value })
                 }
                 className="border p-2 rounded w-full"
-              />
+              >
+                <option value="">-- Select Present Kyu (optional) --</option>
+                {KYU_OPTIONS.map((k) => (
+                  <option key={k} value={k}>
+                    {k}
+                  </option>
+                ))}
+              </select>
 
               <label className="text-sm">Last Certificate No.</label>
               <input
