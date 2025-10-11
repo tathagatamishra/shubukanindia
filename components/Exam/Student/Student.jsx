@@ -96,7 +96,7 @@ export default function Student() {
             onChange={(e) => setExamID(e.target.value)}
             className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4"
           />
-          <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
+          {/* <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
             Exam Password
           </label>
           <input
@@ -105,11 +105,10 @@ export default function Student() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="corner-shape pass-input border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-2"
-          />
+          /> */}
 
-          <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-2">
-            ** <br />
-            Contact your Sensei to get Exam ID and Password
+          <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-[12px]">
+            ** Contact your Sensei to get Exam ID
           </p>
 
           <ExamBtn
