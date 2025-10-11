@@ -63,7 +63,7 @@ export default function Signup() {
         const res = await shubukan_api.get("/instructors");
         let insts = res.data.instructors || [];
         insts = insts.filter(
-          (inst) => inst && inst.name !== "__" && inst.identity !== "__"
+          (inst) => inst && inst.name !== "___" && inst.identity !== "___"
         );
         const shuffled = shuffle(insts);
         setInstructors(shuffled);
@@ -334,6 +334,7 @@ export default function Signup() {
           onClick={handleSubmit}
           text={loading ? "Registering..." : "Create Account"}
           type="submit"
+          size="min-w-[150px] w-fit h-auto"
           className="self-end mt-[6px]"
         />
       </form>
