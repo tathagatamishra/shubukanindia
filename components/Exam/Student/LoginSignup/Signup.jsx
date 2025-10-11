@@ -178,7 +178,7 @@ export default function Signup() {
         // onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] shadow-md border !rounded-[40px]"
       >
-        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+        <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-2">
           ** Your Name & Email id is mandatory to fill.
         </p>
         {/* Name */}

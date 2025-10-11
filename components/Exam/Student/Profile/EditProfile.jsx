@@ -361,6 +361,7 @@ export default function EditProfile() {
           text={loading ? "Saving..." : "Save Changes"}
           onClick={handleSave}
           className="self-end mt-2"
+          size="w-fit h-auto"
         />
       </form>
     </div>

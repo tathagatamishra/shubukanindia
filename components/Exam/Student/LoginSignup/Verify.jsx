@@ -116,7 +116,7 @@ export default function Verify() {
           ))}
         </div>
 
-        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-4">
+        <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-4">
           ** <br />
           We sent an OTP to <span className="font-semibold">{email}</span>.
           Check your email to get the code.
