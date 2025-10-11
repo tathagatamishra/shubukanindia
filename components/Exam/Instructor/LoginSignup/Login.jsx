@@ -56,6 +56,7 @@ export default function Login() {
         <ExamBtn
           text={loading ? "Sending OTP..." : "Log in"}
           type="submit"
+          size="min-w-[150px] w-fit h-auto"
           className="self-end"
           onClick={handleSubmit}
         />

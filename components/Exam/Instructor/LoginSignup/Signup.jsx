@@ -91,7 +91,7 @@ export default function Signup() {
           </div>
         ))}
 
-        <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-[12px]">
+        <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-[12px]">
           ** <br />
           Instructor ID number provided by your organization, if you don't have
           instructor ID, Please contact to your organization !

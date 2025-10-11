@@ -27,8 +27,6 @@ export default function Login() {
   };
 
   return (
-    // <div className="OnlineExam corner-shape w-full flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
-    // <form className="corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] border border-[#BFB2AA] !rounded-[40px] bg-[#fff] shadow-md">
     <div className="ExamChild w-full h-full flex flex-col justify-center items-center">
       <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Enter Log In Details
@@ -54,6 +52,7 @@ export default function Login() {
         <ExamBtn
           text={loading ? "Sending OTP..." : "Log in"}
           type="submit"
+          size="min-w-[150px] w-fit h-auto"
           className="self-end"
           onClick={handleSubmit}
         />

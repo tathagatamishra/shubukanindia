@@ -107,7 +107,7 @@ export default function Student() {
             className="corner-shape pass-input border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-2"
           />
 
-          <p className="text-[12px] sm:text-[14px] text-[#64748B] mb-2">
+          <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-2">
             ** <br />
             Contact your Sensei to get Exam ID and Password
           </p>
