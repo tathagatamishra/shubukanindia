@@ -15,7 +15,7 @@ export default function ViewResult() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setResults(res.data);
-        console.log(res.data);
+        console.log(token);
       } catch (err) {
         console.error(err);
         alert("Failed to fetch results");
