@@ -52,11 +52,11 @@ export default function Instructor() {
       // disabled: true,
       action: () => router.push("/online-exam/instructor/students"),
     },
-    {
-      text: "All Student Results",
-      // disabled: true,
-      action: () => router.push("/online-exam/instructor/results"),
-    },
+    // {
+    //   text: "All Student Results",
+    //   // disabled: true,
+    //   action: () => router.push("/online-exam/instructor/results"),
+    // },
     {
       text: "Question Papers",
       disabled: true,
