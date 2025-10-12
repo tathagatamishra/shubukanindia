@@ -276,36 +276,6 @@ export default function ExamPage() {
             </p>
           </div>
 
-          {/* <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
-            <p className="w-[40%] sm:w-[60%] sm:text-center font-[600] text-[14px] sm:text-[16px] text-[#334155]">
-              Exam Password
-            </p>
-            <div className="border-r-1 border-dashed h-full"></div>
-            <p
-              className={`w-[60%] ${
-                waitingInfo.password && "font-[700]"
-              } text-center text-[14px] sm:text-[16px] text-[#334155]`}
-              style={{
-                letterSpacing: `${waitingInfo.password ? "4px" : "auto"}`,
-              }}
-            >
-              {waitingInfo.password || "No Password Needed"}
-            </p>
-          </div> */}
-
-          {/* <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
-            <p className="w-[40%] sm:w-[60%] sm:text-center font-[600] text-[14px] sm:text-[16px] text-[#334155]">
-              Exam Set
-            </p>
-            <div className="border-r-1 border-dashed h-full"></div>
-            <p
-              className="w-[60%] font-[700] text-center text-[14px] sm:text-[16px] text-[#334155]"
-              style={{ letterSpacing: "4px" }}
-            >
-              {waitingInfo.examSet}
-            </p>
-          </div> */}
-
           <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] p-[8px]">
             <label className="w-full text-center font-[600] text-[12px] sm:text-[14px] text-[#334155]">
               Exam Will Start At
@@ -339,7 +309,6 @@ export default function ExamPage() {
             <p className="w-full text-center text-[16px] sm:text-[18px] font-[600] text-red-500">
               {remaining === null ? "N/A" : formatDiff(remaining)}
             </p>
-            {/* testing line removed as requested */}
           </div>
         </div>
       </div>

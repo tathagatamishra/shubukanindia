@@ -89,6 +89,17 @@ export default function Signup() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // when loading: close dropdowns and prevent body scroll
+  useEffect(() => {
+    if (loading) {
+      setShowInstructorDropdown(false);
+      setShowKyuDropdown(false);
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [loading]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -163,8 +174,8 @@ export default function Signup() {
       router.push("/online-exam/student/verify");
     } catch (err) {
       alert(err.response?.data?.message || "Signup failed");
-    } finally {
       setLoading(false);
+    } finally {
     }
   };
 
@@ -175,7 +186,7 @@ export default function Signup() {
       </label>
 
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] shadow-md border !rounded-[40px]"
       >
         <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-2">
@@ -188,6 +199,7 @@ export default function Signup() {
           </label>
           <input
             required
+            disabled={loading}
             type="text"
             name="name"
             value={formData.name}
@@ -203,6 +215,7 @@ export default function Signup() {
           </label>
           <input
             required
+            disabled={loading}
             type="email"
             name="email"
             value={formData.email}
@@ -221,17 +234,19 @@ export default function Signup() {
           </label>
           <div className="relative flex items-center">
             <input
+              disabled={loading}
               type="text"
               name="instructorName"
               value={formData.instructorName}
               onChange={handleChange}
-              onFocus={() => setShowInstructorDropdown(true)}
+              onFocus={() => !loading && setShowInstructorDropdown(true)}
               placeholder="Select or type Sensei’s name"
               className={`${lekton.className} corner-shape border w-full font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[4px]`}
             />
             <button
               type="button"
               onClick={handleInstructorToggle}
+              disabled={loading}
               className="absolute right-2 text-gray-600 hover:text-black"
             >
               <FiChevronDown size={20} />
@@ -248,7 +263,7 @@ export default function Signup() {
                   className={`corner-shape px-4 py-2 hover:bg-[#fff] active:bg-[#fff] ${
                     ins.name === formData.instructorName ? "bg-[#fff]" : ""
                   } cursor-pointer text-[14px] sm:text-[16px]`}
-                  onClick={() => handleSelectInstructor(ins)}
+                  onClick={() => !loading && handleSelectInstructor(ins)}
                 >
                   {ins.name}
                 </li>
@@ -264,17 +279,19 @@ export default function Signup() {
           </label>
           <div className="relative flex items-center">
             <input
+              disabled={loading}
               type="text"
               name="presentKyu"
               value={formData.presentKyu}
               onChange={handleChange}
-              onFocus={() => setShowKyuDropdown(true)}
+              onFocus={() => !loading && setShowKyuDropdown(true)}
               placeholder="Select your present kyu"
               className={`${lekton.className} corner-shape border w-full font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[4px]`}
             />
             <button
               type="button"
               onClick={handleKyuToggle}
+              disabled={loading}
               className="absolute right-2 text-gray-600 hover:text-black"
             >
               <FiChevronDown size={20} />
@@ -291,7 +308,7 @@ export default function Signup() {
                   className={`corner-shape px-4 py-2 hover:bg-[#fff] active:bg-[#fff] ${
                     k === formData.presentKyu ? "bg-[#fff]" : ""
                   } cursor-pointer text-[14px] sm:text-[16px]`}
-                  onClick={() => handleSelectKyu(k)}
+                  onClick={() => !loading && handleSelectKyu(k)}
                 >
                   {k}
                 </li>
@@ -306,6 +323,7 @@ export default function Signup() {
             Last Certificate No.
           </label>
           <input
+            disabled={loading}
             type="text"
             name="lastCertificateNum"
             value={formData.lastCertificateNum}
@@ -321,6 +339,7 @@ export default function Signup() {
           </label>
           <input
             required
+            disabled={loading}
             type="text"
             name="mobile"
             value={formData.mobile}
@@ -336,8 +355,23 @@ export default function Signup() {
           type="submit"
           size="min-w-[150px] w-fit h-auto"
           className="self-end mt-[6px]"
+          disabled={loading}
         />
       </form>
+
+      {/* Full page loader overlay (blocks clicks & shows spinner) */}
+      {loading && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
+          <div className="flex flex-col items-center">
+            <div
+              className="animate-spin rounded-full border-4 border-white/90 border-t-transparent w-14 h-14 mb-4"
+              role="status"
+              aria-label="Loading"
+            />
+            <p className="text-white font-[600]">Registering — please wait...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
