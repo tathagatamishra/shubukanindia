@@ -1,0 +1,165 @@
+/* Elephant loader SCSS (component-scoped file) */
+
+/* helper mixin (kept from your original) */
+@mixin fill-full($dir: 'full', $type: absolute) {
+    position: $type;
+
+    @if $dir !='bottom' {
+        top: 0;
+    }
+
+    @if $dir !='right' {
+        left: 0;
+    }
+
+    @if $dir !='left' {
+        right: 0;
+    }
+
+    @if $dir !='top' {
+        bottom: 0;
+    }
+}
+
+/* Overlay wrapper */
+.shubukan-elephant-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(2px);
+    pointer-events: auto;
+    /* blocks clicks on the page */
+    -webkit-tap-highlight-color: transparent;
+
+    /* allow consumer to override size via CSS var --elephant-max-width (default below) */
+    --elephant-max-width: 12rem;
+}
+
+/* inner box */
+.shubukan-elephant-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* overlay message */
+.shubukan-elephant-message {
+    // margin-top: 1rem;
+    // color: #ffffff;
+    // font-weight: 600;
+    // text-align: center;
+    // font-family: inherit;
+}
+
+/* rotation animation */
+@keyframes rotating {
+    from {
+        transform: rotate(720deg);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+/* the original 'elephant' structure — reused for the curled elephant */
+.elephant {
+    position: relative;
+    width: 100%;
+    max-width: 20em;
+    overflow: hidden;
+    //   background-color: #e6dcdc;
+    border-radius: 0.5rem;
+
+    &::before {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+        /* square */
+    }
+
+    &:hover>* {
+        animation-play-state: paused;
+    }
+
+    &:active>* {
+        animation-play-state: running;
+    }
+}
+
+/* shared piece style - uses CSS variable --elephant-url (fallback to /elephant.png) */
+%elephant-img {
+    @include fill-full;
+      animation: rotating 2.79s cubic-bezier(.65, .54, .12, .93) infinite;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        background-size: 200%;
+        background-repeat: no-repeat;
+        /* uses CSS var; consumer sets --elephant-url: url('/path/to/img.png') inline */
+        background-image: var(--elephant-url, url('https://res.cloudinary.com/daspiwjet/image/upload/v1760355315/elephant_tdfum0.png'));
+        display: block;
+    }
+}
+
+/* head piece */
+.elephant__head {
+    @extend %elephant-img;
+
+    &::before {
+        top: 0;
+        right: 0;
+        // background-position: 100% 0%;
+        // transform-origin: 0% 100%;
+        // transform: rotate(90deg);
+        background-position: 74% -5%;
+        transform-origin: 19% 84%;
+        transform: rotate(84deg);
+        width: 53%;
+        height: 53%;
+        background-size: 190%;
+    }
+}
+
+/* tail piece */
+.elephant__tail {
+    @extend %elephant-img;
+    animation-delay: .2s;
+
+    &::before {
+        left: 0;
+        bottom: 0;
+        background-position: 0% 100%;
+        transform-origin: 100% 0%;
+        transform: rotate(-30deg);
+    }
+}
+
+/* body pieces */
+.elephant__body {
+    @extend %elephant-img;
+    animation-delay: .1s;
+
+    &:nth-of-type(2) {
+        animation-delay: .2s;
+    }
+
+    &::before {
+        right: 0;
+        bottom: 0;
+        background-position: 100% 100%;
+        transform-origin: 0% 0%;
+    }
+}
+
+/* make overlay elephant smaller by default — adjustable via CSS var on the overlay element */
+.shubukan-elephant-overlay .elephant {
+    max-width: var(--elephant-max-width, 12rem);
+}

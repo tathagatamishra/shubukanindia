@@ -66,7 +66,7 @@ export default function Dashboard() {
   return (
     <div>
       {loading && (
-        <div className="z-[4] bg-[#ffffff51]  backdrop-blur-[2px] flex justify-center items-center w-screen h-screen fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <div className="z-[4] bg-[#ffffff51] backdrop-blur-[2px] flex justify-center items-center w-screen h-screen fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
         </div>
       )}
