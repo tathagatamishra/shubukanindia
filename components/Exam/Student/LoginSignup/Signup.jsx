@@ -6,6 +6,7 @@ import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
 import { FiChevronDown } from "react-icons/fi";
 import { Lekton } from "next/font/google";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 const lekton = Lekton({
   subsets: ["latin"],
@@ -359,19 +360,17 @@ export default function Signup() {
         />
       </form>
 
-      {/* Full page loader overlay (blocks clicks & shows spinner) */}
-      {loading && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-          <div className="flex flex-col items-center">
-            <div
-              className="animate-spin rounded-full border-4 border-white/90 border-t-transparent w-14 h-14 mb-4"
-              role="status"
-              aria-label="Loading"
-            />
-            <p className="text-white font-[600]">Registering — please wait...</p>
+      {/* Full page loader overlay (blocks clicks & shows rotating elephant) */}
+      <Loader
+        loading={loading}
+        message={
+          <div className="w-full max-w-[720px] mt-4 flex flex-col items-center">
+            <p className="text-[14px] sm:text-[16px] font-[600] text-[#252b32] mb-[12px]">We are creating your account, please wait...</p>
+            <i className="text-[14px] sm:text-[16px] text-[#555c65] mb-[12px]">——— The warrior who masters patience conquers battles before they begin.</i>
           </div>
-        </div>
-      )}
+        }
+        textStyle=""
+      />
     </div>
   );
 }
