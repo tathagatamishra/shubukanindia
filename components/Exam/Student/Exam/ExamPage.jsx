@@ -4,13 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../../UI/ExamBtn";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function ExamPage() {
   const { examId } = useParams();
   const router = useRouter();
   const token =
     typeof window !== "undefined" ? localStorage.getItem("student_token") : "";
-
+  const [loading, setLoading] = useState(false);
   const [exam, setExam] = useState(null);
   const [waitingInfo, setWaitingInfo] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -146,7 +147,7 @@ export default function ExamPage() {
     if (submitLockRef.current || submittedRef.current) return;
     submitLockRef.current = true;
     setSubmitting(true);
-
+    setLoading(true);
     try {
       await shubukan_api.post(
         `/student/exam/${exam._id}/submit`,
@@ -188,6 +189,7 @@ export default function ExamPage() {
       router.push("/online-exam/student");
     } finally {
       setSubmitting(false);
+      setLoading(false);
       // keep submitLockRef true if we've actually submitted (submittedRef), else release the lock so user can retry manually
       if (!submittedRef.current) submitLockRef.current = false;
     }
@@ -369,6 +371,8 @@ export default function ExamPage() {
         className="mt-6 self-end"
         onClick={handleSubmit}
       />
+
+      <Loader loading={loading} />
     </div>
   );
 }

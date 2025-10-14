@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../../UI/ExamBtn";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Students() {
   const router = useRouter();
@@ -106,6 +107,8 @@ export default function Students() {
           ))}
         </div>
       )}
+
+      <Loader loading={loading} />
     </div>
   );
 }

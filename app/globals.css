@@ -103,6 +103,14 @@ body::-webkit-scrollbar-thumb {
   border-bottom: solid 10px tomato;
 }
 
+/* Font Section */
+.font-mufan {
+  font-family: var(--font-mufan);
+}
+.font-amanojaku {
+  font-family: var(--font-amanojaku);
+}
+
 .rectangle-small {
   width: 10rem;
   height: 5rem;

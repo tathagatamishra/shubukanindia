@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Login() {
   const router = useRouter();
@@ -61,6 +62,8 @@ export default function Login() {
           onClick={handleSubmit}
         />
       </form>
+
+      <Loader loading={loading} />
     </div>
   );
 }

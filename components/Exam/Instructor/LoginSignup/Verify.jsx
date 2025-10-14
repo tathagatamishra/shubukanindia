@@ -4,10 +4,12 @@ import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Verify() {
   const router = useRouter();
   const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [loading, setLoading] = useState(false);
   const inputRefs = useRef([]);
   const email =
     typeof window !== "undefined"
@@ -61,6 +63,7 @@ export default function Verify() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const enteredOtp = otp.join("");
     try {
@@ -68,22 +71,27 @@ export default function Verify() {
         email,
         otp: enteredOtp,
       });
+      setLoading(false);
       alert(res.data.message);
       localStorage.setItem("instructor_token", res.data.token);
       router.push("/online-exam/instructor");
     } catch (err) {
+      setLoading(false);
       alert(err.response?.data?.message || "OTP verification failed");
     }
   };
 
   const handleResend = async () => {
+    setLoading(true);
     try {
       await shubukan_api.post("/instructor/resend-otp", {
         email,
         type: otpType,
       });
+      setLoading(false);
       alert("OTP resent successfully");
     } catch (err) {
+      setLoading(false);
       alert(err.response?.data?.message || "Failed to resend OTP");
     }
   };
@@ -128,9 +136,16 @@ export default function Verify() {
 
         <div className="w-full flex justify-between gap-[16px]">
           <ExamBtn text="Resend OTP" size="w-full" onClick={handleResend} />
-          <ExamBtn text="Submit" size="w-full" type="submit" onClick={handleSubmit} />
+          <ExamBtn
+            text="Submit"
+            size="w-full"
+            type="submit"
+            onClick={handleSubmit}
+          />
         </div>
       </form>
+
+      <Loader loading={loading} />
     </div>
   );
 }

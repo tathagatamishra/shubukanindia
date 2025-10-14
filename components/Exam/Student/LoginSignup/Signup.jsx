@@ -364,12 +364,16 @@ export default function Signup() {
       <Loader
         loading={loading}
         message={
-          <div className="w-full max-w-[720px] mt-4 flex flex-col items-center">
-            <p className="text-[14px] sm:text-[16px] font-[600] text-[#252b32] mb-[12px]">We are creating your account, please wait...</p>
-            <i className="text-[14px] sm:text-[16px] text-[#555c65] mb-[12px]">——— The warrior who masters patience conquers battles before they begin.</i>
+          <div className="loader-message w-full max-w-[720px] mt-4 flex flex-col items-center">
+            <p className="loading text-[16px] sm:text-[18px] font-[600] text-[#252b32] mb-[12px] text-center">
+              We are creating your account, <br/> please wait...
+            </p>
+            <p className="quote text-[16px] sm:text-[18px] font-[400] text-[#4d545c] mb-[12px] text-center">
+              The warrior who masters patience conquers battles before they
+              begin.
+            </p>
           </div>
         }
-        textStyle=""
       />
     </div>
   );

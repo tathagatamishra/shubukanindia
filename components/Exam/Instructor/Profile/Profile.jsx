@@ -3,6 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
+import Loader from "@/components/UIComponent/Loader/Loader";
+import { Lekton } from "next/font/google";
+import ExamBtn from "../../UI/ExamBtn";
+const lekton = Lekton({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lekton",
+});
 
 export default function Profile() {
   const router = useRouter();
@@ -20,10 +28,16 @@ export default function Profile() {
     try {
       setLoading(true);
       const res = await shubukan_api.get("/instructor/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("instructor_token")}` },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("instructor_token")}`,
+        },
       });
       setProfile(res.data);
-      setForm({ name: res.data.name || "", email: res.data.email || "", mobile: res.data.mobile || "" });
+      setForm({
+        name: res.data.name || "",
+        email: res.data.email || "",
+        mobile: res.data.mobile || "",
+      });
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || "Failed to load profile");
@@ -38,7 +52,11 @@ export default function Profile() {
       const res = await shubukan_api.put(
         "/instructor/profile",
         { name: form.name, email: form.email, mobile: form.mobile },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("instructor_token")}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("instructor_token")}`,
+          },
+        }
       );
       alert("Profile updated");
       setProfile(res.data);
@@ -49,31 +67,58 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <form onSubmit={handleUpdate} className="grid gap-3 max-w-md">
-          <label className="flex flex-col">
-            Name
-            <input className="border p-2 rounded" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-          </label>
-          <label className="flex flex-col">
-            Email
-            <input type="email" className="border p-2 rounded" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-          </label>
-          <label className="flex flex-col">
-            Mobile
-            <input className="border p-2 rounded" value={form.mobile} onChange={(e) => setForm({ ...form, mobile: e.target.value })} />
-          </label>
+    <div className="ExamChild w-full h-full flex flex-col items-center">
+      <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
+        Edit Profile
+      </label>
 
-          <div className="flex gap-2">
-            <button type="submit" className="px-3 py-1 bg-black text-white rounded">Save</button>
-            <button type="button" className="px-3 py-1 border rounded" onClick={() => router.push('/online-exam')}>Cancel</button>
+      {loading ? (
+        <Loader loading={loading} />
+      ) : (
+        <form className="OnlineExam corner-shape w-full flex flex-col p-4 shadow-md border !rounded-[40px]">
+          <div className="w-full flex flex-col">
+            <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+              Name
+            </label>
+            <input
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+            />
           </div>
+
+          <div className="w-full flex flex-col">
+            <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+              Email
+            </label>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+            />
+          </div>
+          <div className="w-full flex flex-col">
+            <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
+              Mobile
+            </label>
+            <input
+              value={form.mobile}
+              onChange={(e) => setForm({ ...form, mobile: e.target.value })}
+              className={`${lekton.className} corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-[12px]`}
+            />
+          </div>
+
+          <ExamBtn
+            text={loading ? "Saving..." : "Save Changes"}
+            onClick={handleUpdate}
+            className="self-end mt-2"
+            size="w-fit h-auto"
+          />
         </form>
       )}
+
+      <Loader loading={loading} />
     </div>
   );
 }

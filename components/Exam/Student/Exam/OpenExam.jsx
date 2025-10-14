@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../../UI/ExamBtn";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function OpenExam() {
   const [exams, setExams] = useState([]);
@@ -47,6 +48,7 @@ export default function OpenExam() {
   }, []);
 
   const handleStart = async (exam) => {
+    setLoading(true);
     try {
       const res = await shubukan_api.post(
         "/student/exam/start",
@@ -70,7 +72,7 @@ export default function OpenExam() {
         Demo Exams
       </label>
 
-      {loading && <p className="text-[14px] text-gray-500">Loading exams...</p>}
+      <Loader loading={loading} text="Loading Exams" />
 
       {!loading && exams.length === 0 ? (
         <p className="text-[14px] text-gray-500">No upcoming exams available</p>

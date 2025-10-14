@@ -8,6 +8,7 @@ import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/UIComponent/Banner";
 import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
+import localFont from "next/font/local";
 
 export const metadata = {
   metadataBase: new URL("https://shubukanindia.org"),
@@ -72,6 +73,19 @@ export const metadata = {
   },
 };
 
+const mufan = localFont({
+  src: './fonts/MufanPFS.woff2',
+  weight: '400',
+  style: 'normal',
+  variable: '--font-mufan',
+})
+const amanojaku = localFont({
+  src: './fonts/Amanojaku.woff2',
+  weight: '400',
+  style: 'normal',
+  variable: '--font-amanojaku',
+})
+
 export default function RootLayout({ children }) {
   // Only run in production and client-side
   if (typeof window !== "undefined" && process.env.NODE_ENV === "production") {
@@ -83,6 +97,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      className={`${mufan.variable} ${amanojaku.variable}`}
       style={{
         background: "rgb(231, 221, 211)",
         overflowX: "hidden",

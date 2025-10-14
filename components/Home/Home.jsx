@@ -154,325 +154,47 @@ export default function Home({ setShowNav }) {
             flexWrap: "wrap",
           }}
         >
-          <div
-            className="heading-box"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              fontFamily: "'AmanojakuZrqe3', sans-serif",
-            }}
-          >
-            <p
-              className="heading"
-              id="S"
+          {[
+            { id: "S", text: "Shubukan " },
+            { id: "U", text: "Uema " },
+            { id: "D", text: "Dojo " },
+            { id: "I", text: "India" },
+          ].map(({ id, text }) => (
+            <div
+              key={id}
+              className="font-amanojaku heading-box"
               style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
               }}
             >
-              S
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              h
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              u
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              b
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              u
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              k
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              a
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              n
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              &nbsp;
-            </p>
-          </div>
-          <div
-            className="heading-box"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              fontFamily: "'AmanojakuZrqe3', sans-serif",
-            }}
-          >
-            <p
-              className="heading"
-              id="U"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              U
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              e
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              m
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              a
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              &nbsp;
-            </p>
-          </div>
-          <div
-            className="heading-box"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              fontFamily: "'AmanojakuZrqe3', sans-serif",
-            }}
-          >
-            <p
-              className="heading"
-              id="D"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              D
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              o
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              j
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              o
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              &nbsp;
-            </p>
-          </div>
-          <div
-            className="heading-box"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              fontFamily: "'AmanojakuZrqe3', sans-serif",
-            }}
-          >
-            <p
-              className="heading"
-              id="I"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              I
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              n
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              d
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              i
-            </p>
-            <p
-              className="heading"
-              style={{
-                color: "#2a2727",
-                wordSpacing: "0.2rem",
-                transform: "rotate(-4deg)",
-                margin: 0,
-              }}
-            >
-              a
-            </p>
-          </div>
+              {text.split("").map((char, i) => (
+                <p
+                  key={i}
+                  id={i === 0 ? id : undefined}
+                  className="font-amanojaku heading"
+                  style={{
+                    color: "#2a2727",
+                    wordSpacing: "0.2rem",
+                    transform: "rotate(-4deg)",
+                    margin: 0,
+                  }}
+                >
+                  {char}
+                </p>
+              ))}
+            </div>
+          ))}
         </div>
 
         <p
+          className="sub-heading"
           style={{
             margin: 0,
             fontFamily: "'Amarante', cursive",
           }}
         >
-          {/* <i>&nbsp;</i> Beneath the instinct to fight
-        </p>
-        <p> */}
           Pure soul is the preserver of true karate<i>&nbsp;</i>
         </p>
 
