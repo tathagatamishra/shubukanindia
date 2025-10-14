@@ -71,7 +71,7 @@ export default function Navbar() {
     { path: "/membership", label: "MEMBERSHIP" },
     { path: "/gallery", label: "GALLERY" },
     // { path: "/blog", label: "BLOG" },
-    { path: "/blogpost/from-fist-to-force-karate-tsuki-punch", label: "BLOG" },
+    { path: "/blog", label: "BLOG" },
     { path: "/contact", label: "CONTACT" },
   ];
 
@@ -100,7 +100,7 @@ export default function Navbar() {
     "/membership": "",
     "/gallery": "",
     "/blog": "",
-    "/blogpost/from-fist-to-force-karate-tsuki-punch": "",
+    "/blog": "",
     "/about": "",
     "/contact": "",
   };

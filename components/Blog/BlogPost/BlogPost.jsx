@@ -151,36 +151,6 @@ export default function BlogPost({ blog }) {
     }
   }
 
-  // // const blog = useMemo(() => blog.find((b) => b.slug === slug), [blog, slug]);
-
-  // // previous / next
-  // const index = blog ? blog.findIndex((b) => b.slug === blog.slug) : -1;
-  // const prev = index > 0 ? blog[index - 1] : null;
-  // const next = index >= 0 && index < blog.length - 1 ? blog[index + 1] : null;
-
-  // // related by tag (simple)
-  // const related = blog
-  //   ? blog
-  //       .filter(
-  //         (b) =>
-  //           b.slug !== blog.slug && b.tags.some((t) => blog.tags.includes(t))
-  //       )
-  //       .slice(0, 3)
-  //   : [];
-
-  // function onSearch(e) {
-  //   e.preventDefault();
-  //   // filter blog by title or tags
-  //   const q = query.trim().toLowerCase();
-  //   if (!q) return setBlog(blogPosts);
-  //   const filtered = blogPosts.filter(
-  //     (b) =>
-  //       b.title.toLowerCase().includes(q) ||
-  //       b.tags.join(" ").toLowerCase().includes(q)
-  //   );
-  //   setBlog(filtered);
-  // }
-
   function copyLink() {
     const link = typeof window !== "undefined" ? window.location.href : "";
     navigator.clipboard.writeText(link);
@@ -201,34 +171,6 @@ export default function BlogPost({ blog }) {
   return (
     <main className="BlogPost">
       <div className="BlogPostPage">
-        {/* search bar */}
-        {/* <form onSubmit={onSearch} className="flex gap-2 mb-6">
-          <button
-            className="sm:flex hidden px-4 py-2 rounded bg-gray-200"
-            onClick={() => router.push("/blog")}
-          >
-            Back to Blog
-          </button>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search blog by title or tag..."
-            className="flex-1 p-2 border rounded"
-          />
-          <button className="px-4 py-2 bg-blue-600 text-white rounded">
-            Search
-          </button>
-          <button
-            type="button"
-            className="sm:flex hidden px-4 py-2 bg-gray-200 rounded"
-            onClick={() => {
-              setQuery("");
-              setBlog(blogPosts);
-            }}
-          >
-            Reset
-          </button>
-        </form> */}
 
         {/* Cover Image */}
         <div className="relative w-full md:h-[400px] h-auto aspect-video md:aspect-auto mb-8">
@@ -459,19 +401,6 @@ export default function BlogPost({ blog }) {
                         }
                       })}
                   </div>
-                  {/* <div className="md:col-span-1 bg-gray-50 p-4 rounded">
-                    <h4 className="font-medium mb-3">Additional Information</h4>
-                    {section.contentBlocks
-                      .filter((block) => block.type === "callout")
-                      .map((block, bIdx) => (
-                        <div
-                          key={bIdx}
-                          className={`p-4 my-6 rounded-xl bg-blue-50 border-l-4 border-blue-400`}
-                        >
-                          <p className="text-gray-700">{block.text}</p>
-                        </div>
-                      ))}
-                  </div> */}
                 </>
               ) : (
                 section.contentBlocks.map((block, bIdx) => {
@@ -575,51 +504,6 @@ export default function BlogPost({ blog }) {
             </button>
           </div>
         </div>
-
-        {/* prev / next */}
-        {/* <div className="flex justify-between mt-8">
-          <div>
-            {prev && (
-              <button
-                onClick={() => router.push(`/blogpost/${prev.slug}`)}
-                className="text-left"
-              >
-                <div className="text-sm text-gray-500">Previous</div>
-                <div className="font-semibold">{prev.title}</div>
-              </button>
-            )}
-          </div>
-          <div>
-            {next && (
-              <button
-                onClick={() => router.push(`/blogpost/${next.slug}`)}
-                className="text-right"
-              >
-                <div className="text-sm text-gray-500">Next</div>
-                <div className="font-semibold">{next.title}</div>
-              </button>
-            )}
-          </div>
-        </div> */}
-
-        {/* related */}
-        {/* {related.length > 0 && (
-          <section className="mt-8">
-            <h3 className="font-bold">Related posts</h3>
-            <div className="flex gap-4 mt-3">
-              {related.map((r) => (
-                <div
-                  key={r.slug}
-                  className="p-3 border rounded cursor-pointer"
-                  onClick={() => router.push(`/blogpost/${r.slug}`)}
-                >
-                  <div className="font-semibold">{r.title}</div>
-                  <div className="text-sm text-gray-500">{r.excerpt}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )} */}
 
         {/* ✅ OTP verification */}
         {!verifiedEmail && (
