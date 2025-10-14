@@ -5,6 +5,7 @@ import { shubukan_api } from "@/config";
 import ExamBtn from "../../UI/ExamBtn";
 import { FiChevronDown } from "react-icons/fi";
 import { Lekton } from "next/font/google";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 const lekton = Lekton({
   subsets: ["latin"],
@@ -197,7 +198,7 @@ export default function EditProfile() {
     }
   };
 
-  if (profileLoading) return <p>Loading profile...</p>;
+  if (profileLoading) return <Loader loading={profileLoading} />;
 
   return (
     <div className="ExamChild w-full h-full flex flex-col items-center">
@@ -364,6 +365,8 @@ export default function EditProfile() {
           size="w-fit h-auto"
         />
       </form>
+
+      <Loader loading={loading} />
     </div>
   );
 }

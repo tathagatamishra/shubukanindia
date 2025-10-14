@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../../UI/ExamBtn";
 import html2canvas from "html2canvas";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Upcoming() {
   const router = useRouter();
@@ -377,6 +378,8 @@ export default function Upcoming() {
           })}
         </div>
       )}
+
+      <Loader loading={loading} />
     </div>
   );
 }

@@ -29,7 +29,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0);
+    background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 80%);
     backdrop-filter: blur(2px);
     pointer-events: auto;
     /* blocks clicks on the page */
@@ -44,15 +45,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* overlay message */
-.shubukan-elephant-message {
-    // margin-top: 1rem;
-    // color: #ffffff;
-    // font-weight: 600;
-    // text-align: center;
-    // font-family: inherit;
 }
 
 /* rotation animation */
@@ -82,19 +74,19 @@
         /* square */
     }
 
-    &:hover>* {
-        animation-play-state: paused;
-    }
+    // &:hover>* {
+    //     animation-play-state: paused;
+    // }
 
     &:active>* {
-        animation-play-state: running;
+        animation-play-state: paused;
     }
 }
 
 /* shared piece style - uses CSS variable --elephant-url (fallback to /elephant.png) */
 %elephant-img {
     @include fill-full;
-      animation: rotating 2.79s cubic-bezier(.65, .54, .12, .93) infinite;
+    animation: rotating 2.79s cubic-bezier(.65, .54, .12, .93) infinite;
 
     &::before {
         content: '';
@@ -104,7 +96,7 @@
         background-size: 200%;
         background-repeat: no-repeat;
         /* uses CSS var; consumer sets --elephant-url: url('/path/to/img.png') inline */
-        background-image: var(--elephant-url, url('https://res.cloudinary.com/daspiwjet/image/upload/v1760355315/elephant_tdfum0.png'));
+        background-image: var(--elephant-url, url('https://res.cloudinary.com/daspiwjet/image/upload/v1760381402/elephant_480p_feasiv.png'));
         display: block;
     }
 }
@@ -162,4 +154,35 @@
 /* make overlay elephant smaller by default — adjustable via CSS var on the overlay element */
 .shubukan-elephant-overlay .elephant {
     max-width: var(--elephant-max-width, 12rem);
+}
+
+.loader-message {
+
+    & .loading {
+        text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+        
+        // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        // font-family: 'Times New Roman', Times, serif;
+        // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        // font-family: Arial, Helvetica, sans-serif;
+        // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        // font-family: Georgia, 'Times New Roman', Times, serif;
+        // font-family: Verdana, Geneva, Tahoma, sans-serif;
+        // font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    & .quote {
+        text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+        font-style: italic;
+        // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        // font-family: 'Times New Roman', Times, serif;
+        // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        // font-family: Arial, Helvetica, sans-serif;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        // font-family: Georgia, 'Times New Roman', Times, serif;
+        // font-family: Verdana, Geneva, Tahoma, sans-serif;
+        // font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 }

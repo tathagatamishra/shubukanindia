@@ -4,8 +4,18 @@ import "./Loader.scss";
 
 export default function Loader({
   loading = false,
-  message = <p>Loading</p>,
-  imageUrl = "https://res.cloudinary.com/daspiwjet/image/upload/v1760355315/elephant_tdfum0.png",
+  text="Loading, please wait...",
+  message = (
+    <div className="loader-message w-full max-w-[720px] mt-4 flex flex-col items-center">
+      <p className="loading text-[16px] sm:text-[18px] font-[600] text-[#252b32] mb-[12px] text-center">
+        {text}
+      </p>
+      <p className="quote text-[16px] sm:text-[18px] font-[400] text-[#4d545c] mb-[12px] text-center">
+        The warrior who masters patience conquers battles before they begin.
+      </p>
+    </div>
+  ),
+  imageUrl = "https://res.cloudinary.com/daspiwjet/image/upload/v1760381402/elephant_480p_feasiv.png",
   maxWidth = "12rem",
 }) {
   // If not loading, render nothing

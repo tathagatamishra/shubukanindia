@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../UI/ExamBtn";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function PublicExamPage() {
   const { examId } = useParams(); // examID (string)
@@ -15,10 +16,13 @@ export default function PublicExamPage() {
   const [timeLeft, setTimeLeft] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null); // store returned result (score etc.)
+  const [loading, setLoading] = useState(false);
 
   const fetchExamStart = async () => {
+    setLoading(true);
     try {
       const res = await shubukan_api.post("/exam/start", { examID: examId });
+      setLoading(false);
       if (res.data.status === "waiting") {
         setWaitingInfo(res.data);
         setExam(null);
@@ -30,6 +34,7 @@ export default function PublicExamPage() {
         setTimeLeft(res.data.exam.examDuration * 60);
       }
     } catch (err) {
+      setLoading(false);
       console.error("Failed to start public exam:", err);
       alert(err?.response?.data?.message || "Failed to start exam");
       router.push("/online-exam/public");
@@ -66,6 +71,7 @@ export default function PublicExamPage() {
   const handleSubmit = async () => {
     if (!exam) return;
     setSubmitting(true);
+    setLoading(true);
     try {
       // send selectedOptions to server; server computes score and returns result (but does not save)
       const res = await shubukan_api.post(`/exam/${exam._id}/submit`, {
@@ -80,6 +86,7 @@ export default function PublicExamPage() {
       alert(err?.response?.data?.message || "Submit failed");
     } finally {
       setSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -113,7 +120,9 @@ export default function PublicExamPage() {
   if (result) {
     return (
       <div className="ExamChild w-full flex flex-col items-center">
-        <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">Your Result</label>
+        <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
+          Your Result
+        </label>
 
         <div className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]">
           <p className="text-lg font-semibold">
@@ -217,6 +226,8 @@ export default function PublicExamPage() {
         className="mt-6 self-end"
         onClick={handleSubmit}
       />
+
+      <Loader loading={loading} />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Signup() {
   const router = useRouter();
@@ -104,6 +105,21 @@ export default function Signup() {
           onClick={handleSubmit}
         />
       </form>
+
+      <Loader
+        loading={loading}
+        message={
+          <div className="loader-message w-full max-w-[720px] mt-4 flex flex-col items-center">
+            <p className="loading text-[16px] sm:text-[18px] font-[600] text-[#252b32] mb-[12px] text-center">
+              We are creating your account, <br /> please wait...
+            </p>
+            <p className="quote text-[16px] sm:text-[18px] font-[400] text-[#4d545c] mb-[12px] text-center">
+              The warrior who masters patience conquers battles before they
+              begin.
+            </p>
+          </div>
+        }
+      />
     </div>
   );
 }

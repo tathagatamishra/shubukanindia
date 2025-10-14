@@ -3,32 +3,41 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function LoginSignup() {
   const router = useRouter();
   const navigate = (page) => {
     router.push(page);
   };
-  const [userType, setUserType] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   return (
-    <div className="ExamChild OnlineExam corner-shape w-full h-[calc(100%-120px)] flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
+    <div className="ExamChild OnlineExam corner-shape w-full h-full flex flex-col justify-center items-center gap-4 p-[20px] border !rounded-[40px] shadow-md">
       <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-2">
         ** <br />
         Click Log in button to access your existing account.
       </p>
       <ExamBtn
         text="Log in"
-        onClick={() => navigate("/online-exam/student/login")}
+        onClick={() => {
+          setLoading(true);
+          navigate("/online-exam/student/login");
+        }}
       />
       <p className="font-[600] text-[26px] text-[#64748B]">OR</p>
       <ExamBtn
         text="Sign up"
-        onClick={() => navigate("/online-exam/student/signup")}
+        onClick={() => {
+          setLoading(true);
+          navigate("/online-exam/student/signup");
+        }}
       />
       <p className="text-[14px] sm:text-[14px] text-[#64748B] mt-2">
         ** Click Sign up button to create a new account.
       </p>
+
+      <Loader loading={loading} />
     </div>
   );
 }

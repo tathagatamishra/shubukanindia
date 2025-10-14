@@ -4,37 +4,42 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Instructor() {
   const router = useRouter();
   const [token, setToken] = useState(null);
   const [name, setName] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [TokenLoading, setTokenLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const t = localStorage.getItem("instructor_token");
     setToken(t);
-    setLoading(false);
+    setTokenLoading(false);
 
     if (!t) {
       router.push("/online-exam");
     }
   }, [router]);
 
-  if (loading) return null;
+  if (TokenLoading) return null;
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const res = await shubukan_api.get("/instructor/result/search", {
         params: { name },
         headers: { Authorization: `Bearer ${token}` },
       });
+      setLoading(false);
       console.log("Search results:", res.data);
       router.push(
         `/online-exam/instructor/result?student=${encodeURIComponent(name)}`
       );
     } catch (err) {
+      setLoading(false);
       alert(err.response?.data?.message || "Search failed");
     }
   };
@@ -45,12 +50,16 @@ export default function Instructor() {
       text: "Upcoming Exam",
       action: () => {
         router.push("/online-exam/instructor/upcoming");
+        setLoading(true);
       },
     },
     {
       text: "View All Students",
       // disabled: true,
-      action: () => router.push("/online-exam/instructor/students"),
+      action: () => {
+        router.push("/online-exam/instructor/students");
+        setLoading(true);
+      },
     },
     // {
     //   text: "All Student Results",
@@ -60,16 +69,23 @@ export default function Instructor() {
     {
       text: "Question Papers",
       disabled: true,
-      action: () => router.push("/online-exam/instructor/papers"),
+      action: () => {
+        router.push("/online-exam/instructor/papers");
+        setLoading(true);
+      },
     },
     {
       text: "Edit Profile",
-      action: () => router.push("/online-exam/instructor/profile"),
+      action: () => {
+        router.push("/online-exam/instructor/profile");
+        setLoading(true);
+      },
     },
     {
       text: "Log Out",
       fontstyle: "text-[#B23A48] font-[600] text-[14px] sm:text-[16px]",
       action: () => {
+        setLoading(true);
         localStorage.removeItem("instructor_token"); // clear token
         router.push("/online-exam");
       },
@@ -126,6 +142,8 @@ export default function Instructor() {
           />
         ))}
       </div>
+
+      <Loader loading={loading} />
     </div>
   );
 }

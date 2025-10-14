@@ -4,27 +4,34 @@ import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
 import ExamBtn from "../UI/ExamBtn";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function OpenExamPublic() {
   const [exams, setExams] = useState([]);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchExams = async () => {
       try {
         const res = await shubukan_api.get(
           "/exams/upcoming?accessability=public"
         );
         setExams(res.data || []);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.error("Failed to fetch public exams:", err);
         alert("Failed to fetch public exams");
       }
     };
     fetchExams();
+    setLoading(false);
   }, []);
 
   const handleStart = async (exam) => {
+    setLoading(true);
     try {
       // For public, we call public start endpoint (no auth)
       const res = await shubukan_api.post("/exam/start", {
@@ -34,6 +41,7 @@ export default function OpenExamPublic() {
       // If waiting, still navigate — the PublicExamPage will show waiting screen as well.
       router.push(`/online-exam/public/${exam.examID}`);
     } catch (err) {
+      setLoading(false);
       console.error(err);
       alert(err?.response?.data?.message || "Failed to start public exam");
     }
@@ -44,6 +52,8 @@ export default function OpenExamPublic() {
       <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
         Demo Exams
       </label>
+
+      <Loader loading={loading} />
 
       {exams.length === 0 ? (
         <p className="text-[14px] text-gray-500">No public exams available</p>
