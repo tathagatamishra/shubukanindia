@@ -33,7 +33,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11",
-    "woff2": "^1.0.0"
+    "tailwindcss": "^4.1.11"
   }
 }
