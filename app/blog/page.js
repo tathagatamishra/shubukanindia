@@ -21,6 +21,7 @@ async function getBlogs() {
   }
 }
 
+// if the array length is less than 5 than repeating same data and make the length of the blogs array upto 5.
 /**
  * Ensure the returned array has `targetLen` items.
  * If input length is 0 => returns [] (no data to repeat).

@@ -1,258 +1,305 @@
 "use client";
-import { useEffect, useState } from "react";
-import "./Blog.scss";
-import { useRouter } from "next/navigation";
+
+import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
-import SwiperSlider from "../UIComponent/SwiperSlider";
-import {
-  Pagination,
-  Keyboard,
-  Navigation,
-  Zoom,
-  Autoplay,
-} from "swiper/modules";
-import { isDesktop, isMobile } from "react-device-detect";
-import Loader from "../UIComponent/Loader/Loader";
+import { useRouter } from "next/navigation";
+import { FiSearch, FiClock, FiChevronRight, FiX } from "react-icons/fi";
+import "./Blog.scss";
 
-export default function Blog({ blogs }) {
-  const router = useRouter();
-  const navigate = (page) => router.push(page);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-    console.log("Fetched blogs:", blogs);
-  }, [blogs]);
+function formatDate(iso) {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    return new Intl.DateTimeFormat("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(d);
+  } catch (e) {
+    return iso;
+  }
+}
 
-  // --- Swiper Props ---
-  const isDynamicBullets =
-    isMobile ||
-    blogs.length > 20 ||
-    (typeof window !== "undefined" && window.innerWidth < 500);
+function truncate(text, n = 150) {
+  if (!text) return "";
+  return text.length > n ? text.slice(0, n).trim() + "…" : text;
+}
 
-  const swiperProps = {
-    modules: [Zoom, Keyboard, Pagination, Navigation, Autoplay],
-    keyboard: { enabled: true },
-    navigation: true,
-    centeredSlides: true,
-    pagination: { dynamicBullets: isDynamicBullets, clickable: true },
-    className: "topStorySwiper",
-    spaceBetween: 20,
-    style: { height: "100%" },
-    loop: true,
-    lazy: "true",
-    autoplay: { delay: 3000, disableOnInteraction: false },
-    slidesPerView:
-      isMobile || (typeof window !== "undefined" && window.innerWidth < 500)
-        ? 1
-        : "auto",
-  };
-
-  // --- Top Story Swiper Section ---
-  const topStoryArr = blogs.map((blog, index) => (
-    <div
-      key={blog._id || index}
-      className="container w-full sm:h-[calc(100%-40px)] h-[calc(100%-30px)] p-[10px] sm:p-[20px] flex flex-col sm:gap-[20px] gap-[10px]"
-      onClick={() => {
-        navigate(`/blogpost/${blog.slug}`);
-        setLoading(true);
-      }}
+function IconButton({ children, className = "", ...props }) {
+  return (
+    <button
+      {...props}
+      className={
+        "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-300 " +
+        className
+      }
     >
-      <h2 className="font-[700] text-[24px]">{blog.title}</h2>
-      <div
-        className="relative w-full h-full p-[10px] bg-[burlywood] rounded-[5px]"
-        style={{ backgroundImage: `url(${blog.thumbnailImage})` }}
-      >
-        <p className="absolute top-0 left-0 object-cover w-full z-[2]">
-          {blog.summary}
-        </p>
-        <Image
-          src={blog.thumbnailImage?.url}
-          alt={blog.thumbnailImage?.altText || blog.title}
-          width={480}
-          height={480}
-          className="absolute top-0 left-0 object-cover w-full h-full z-[0]"
-        />
-      </div>
-    </div>
-  ));
-
-  // --- Zigzag Section ---
-  const zigzagArr = blogs.map((blog, index) => (
-    <div
-      key={blog._id || index}
-      className={`zigzagCard flex gap-[20px] ${
-        index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-      }`}
-      onClick={() => {
-        navigate(`/blogpost/${blog.slug}`);
-        setLoading(true);
-      }}
-    >
-      <div className="zigzagCardContent lg:w-[70%] sm:w-[80%] w-full max-w-full flex flex-col gap-[20px] sm:p-[20px] p-[10px]">
-        <h2
-          className={`font-[700] text-[24px] ${
-            index % 2 === 0 ? "text-left" : "text-right"
-          }`}
-        >
-          {blog.title}
-        </h2>
-
-        <div
-          className={`flex gap-[20px] ${
-            index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-          }`}
-        >
-          <div className="zigzagImage min-h-[100px] h-[100px] min-w-[100px] w-[100px] rounded-[5px] overflow-hidden">
-            <Image
-              src={blog.thumbnailImage?.url}
-              alt={blog.thumbnailImage?.altText || blog.title}
-              width={100}
-              height={100}
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <p>{blog.shortNote || blog.summary}</p>
-        </div>
-      </div>
-    </div>
-  ));
-
-  // --- Image Block Section ---
-  const imageBlockArr = blogs.flatMap(
-    (blog) =>
-      blog.sections
-        ?.filter((sec) =>
-          sec.contentBlocks.some((b) => b.type === "image" && b.mediaUrl)
-        )
-        .flatMap((sec) =>
-          sec.contentBlocks
-            .filter((b) => b.type === "image")
-            .map((b, i) => ({
-              url: b.mediaUrl,
-              alt: b.altText,
-              caption: b.caption,
-            }))
-        ) || []
+      {children}
+    </button>
   );
+}
 
-  // --- Vertical Cards ---
-  const vertArray = blogs.map((blog, index) => (
-    <div
-      key={blog._id || index}
-      className="vertCard flex flex-col gap-[20px] sm:p-[20px] p-[10px] cursor-pointer"
-      onClick={() => {
-        navigate(`/blogpost/${blog.slug}`);
-        setLoading(true);
-      }}
-    >
-      <div className="w-full h-[180px] overflow-hidden rounded-[5px]">
-        <Image
-          src={blog.coverImage?.url}
-          alt={blog.coverImage?.altText || blog.title}
-          width={600}
-          height={400}
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <h2 className="font-[700] text-[24px]">{blog.title}</h2>
-      <p>{blog.summary}</p>
-    </div>
-  ));
-
-  // --- Footer Cards ---
-  const footerArray = blogs.map((blog, index) => (
-    <div
-      key={blog._id || index}
-      className="bigCardDiv w-full p-[10px] cursor-pointer"
-      onClick={() => {
-        navigate(`/blogpost/${blog.slug}`);
-        setLoading(true);
-      }}
-    >
-      <h2 className="font-[700] text-[24px]">{blog.title}</h2>
-      <p>{blog.shortNote || blog.summary}</p>
-    </div>
-  ));
+function BlogCard({ blog, onOpen, variant = "card" }) {
+  const cover = blog.coverImage?.url || blog.thumbnailImage?.url;
+  const alt =
+    blog.coverImage?.altText ||
+    blog.thumbnailImage?.altText ||
+    blog.title ||
+    "cover";
+  const author = (blog.authors && blog.authors[0]) || null;
 
   return (
-    <div className="Blog">
-      <div className="blogPage flex flex-col gap-[30px] overflow-hidden">
-        {/* --- Top Stories Swiper --- */}
-        <section className="topStorySection w-full sm:h-[340px] h-[300px]">
-          <SwiperSlider slides={topStoryArr} swiperProps={swiperProps} />
-        </section>
+    <article
+      tabIndex={0}
+      role="article"
+      onKeyDown={(e) => e.key === "Enter" && onOpen()}
+      onClick={onOpen}
+      className="group bg-white/60 backdrop-blur-sm border border-amber-100 rounded-2xl overflow-hidden shadow hover:shadow-lg transform hover:-translate-y-1 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-300"
+    >
+      <div
+        className={`relative w-full ${variant === "card" ? "h-40" : "h-28"}`}
+      >
+        {cover ? (
+          <Image
+            src={cover}
+            alt={alt}
+            fill
+            sizes="(max-width: 640px) 100vw, 33vw"
+            style={{ objectFit: "cover" }}
+            className="group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-amber-50 to-amber-100" />
+        )}
 
-        {/* --- Nav Tabs --- */}
-        <section className="blogNav">
-          <div className="opt">Top Stories</div>
-          <div className="opt">Latest</div>
-          <div className="opt">Shubukan</div>
-        </section>
-
-        {/* --- Zigzag Section --- */}
-        <section className="zigzagSection flex flex-col gap-[30px]">
-          {zigzagArr}
-        </section>
-
-        {/* --- Image Block Section --- */}
-        <section className="imageBlock w-full flex justify-center">
-          <div className="w-full flex flex-wrap justify-center md:gap-[30px] sm:gap-[20px] gap-[10px]">
-            {imageBlockArr.slice(0, 5).map((img, index) => (
-              <img
-                key={index}
-                src={img.url}
-                alt={img.alt}
-                className="rounded-[5px] object-cover sm:w-[300px] w-[150px] h-[150px]"
-              />
-            ))}
+        <div className="absolute inset-0 flex flex-col justify-between p-3">
+          <div className="flex justify-between items-start">
+            <span className="bg-amber-50/90 text-amber-800 text-xs font-semibold px-2 py-1 rounded-full">
+              {blog.category?.primary || "General"}
+            </span>
+            {blog.estimatedReadTime ? (
+              <span className="bg-black/40 text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+                <FiClock /> {blog.estimatedReadTime}m
+              </span>
+            ) : null}
           </div>
-        </section>
 
-        {/* --- Big Card Section --- */}
-        <section
-          className="bigCardSection w-full p-[10px]"
-          onClick={() => {
-            navigate(`/blogpost/${blog.slug}`);
-            setLoading(true);
-          }}
-        >
-          <h2 className="font-[700] text-[24px]">
-            {blogs[0]?.title || "Blog Title"}
-          </h2>
-        </section>
-
-        {/* --- Vertical Cards --- */}
-        <section className="verticalCardSection w-full sm:gap-[20px] gap-[10px]">
-          {vertArray}
-        </section>
-
-        {/* --- Footer Section --- */}
-        <section className="blogFooter flex flex-col gap-[20px]">
-          {footerArray}
-        </section>
+          <h3 className="text-white text-lg font-bold drop-shadow-md leading-tight">
+            {truncate(blog.title, 80)}
+          </h3>
+        </div>
       </div>
 
-      <Loader loading={loading} />
+      <div className="p-4 flex flex-col gap-3">
+        <p className="text-gray-700 text-sm min-h-[44px]">
+          {truncate(blog.summary || blog.shortNote, 140)}
+        </p>
 
-      {/* --- SVG Filter (unchanged) --- */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        height="0"
-        width="0"
-      >
-        <defs>
-          <filter id="wobble">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency=".06"
-              numOctaves="4"
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {author?.avatarImage ? (
+              <Image
+                src={author.avatarImage}
+                alt={author.name}
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-gray-200" />
+            )}
+
+            <div className="text-xs">
+              <div className="font-semibold">{author?.name || "Shubukan"}</div>
+              <div className="text-gray-500">
+                {formatDate(blog.publishedDate)}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {blog.tags?.slice(0, 2).map((t) => (
+              <span
+                key={t}
+                className="text-xs bg-gray-100 px-2 py-1 rounded-md"
+              >
+                {t}
+              </span>
+            ))}
+            <FiChevronRight className="text-gray-400" />
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function BlogImproved({ blogs = [] }) {
+  const router = useRouter();
+  const [q, setQ] = useState("");
+  const [activeTab, setActiveTab] = useState("Top Stories");
+  const [layout, setLayout] = useState("grid");
+  const [selectedTag, setSelectedTag] = useState(null);
+
+  // safe: make a shallow copy and ensure respect to existing ordering
+  const items = Array.isArray(blogs) ? blogs : [];
+
+  useEffect(() => {
+    // reset scroll when component mounts (helps SSR -> client snap)
+    if (typeof window !== "undefined") window.scrollTo({ top: 0 });
+  }, []);
+
+  const tags = useMemo(() => {
+    const s = new Set();
+    items.forEach((b) => (b.tags || []).slice(0, 10).forEach((t) => s.add(t)));
+    return Array.from(s).slice(0, 12);
+  }, [items]);
+
+  const filtered = useMemo(() => {
+    const ql = q.trim().toLowerCase();
+    let out = items.slice();
+
+    if (activeTab === "Latest") {
+      out.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+    }
+
+    if (selectedTag) {
+      out = out.filter((b) => (b.tags || []).includes(selectedTag));
+    }
+
+    if (ql) {
+      out = out.filter((b) => {
+        const hay = (
+          b.title +
+          " " +
+          (b.summary || "") +
+          " " +
+          (b.tags || []).join(" ")
+        ).toLowerCase();
+        return hay.includes(ql);
+      });
+    }
+
+    return out;
+  }, [items, q, activeTab, selectedTag]);
+
+  function openBlog(slug) {
+    if (!slug) return;
+    router.push(`/blogpost/${slug}`);
+  }
+
+  return (
+    <div className="Blog w-full max-w-6xl mx-auto">
+      {/* HERO */}
+      <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+        <div>
+          <h1 className="font-amanojaku text-3xl sm:text-4xl leading-tight">
+            Shubukan India Blog
+          </h1>
+          <p className="text-gray-600 mt-2">
+            Traditional karate, technique breakdowns, and training notes —
+            readable, fast, and focused.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 w-full md:w-auto">
+          <div className="flex items-center w-full md:w-[360px] bg-white/70 backdrop-blur-sm border border-amber-100 rounded-full px-3 py-2 shadow-sm">
+            <FiSearch className="text-gray-500 mr-2" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search title, summary, tags..."
+              className="bg-transparent outline-none w-full text-sm"
+              aria-label="Search posts"
             />
-            <feDisplacementMap in="SourceGraphic" scale="6" />
-          </filter>
-        </defs>
-      </svg>
+            {q && (
+              <button
+                onClick={() => setQ("")}
+                aria-label="Clear search"
+                className="ml-2 text-gray-500"
+              >
+                <FiX />
+              </button>
+            )}
+          </div>
+
+          <div className="hidden md:flex items-center gap-2">
+            <IconButton
+              onClick={() => setLayout((s) => (s === "grid" ? "list" : "grid"))}
+              className="bg-amber-50"
+            >
+              {layout === "grid" ? "Compact" : "Grid"}
+            </IconButton>
+          </div>
+        </div>
+      </header>
+
+      {/* TABS + TAGS */}
+      <div className="flex flex-col gap-4 mb-6">
+        <div className="flex items-center gap-3 flex-wrap pb-1">
+          {["Top Stories", "Latest", "Techniques", "Training"].map((t) => (
+            <button
+              key={t}
+              onClick={() => {
+                setActiveTab(t);
+                setSelectedTag(null);
+              }}
+              className={`w-fit px-3 py-1 rounded-full text-sm ${
+                activeTab === t ? "bg-amber-100 text-amber-800" : "bg-white/60"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+        <div className="Dash w-full"></div>
+        <div className="flex flex-wrap items-center gap-2">
+          {tags.map((t) => (
+            <button
+              key={t}
+              onClick={() => setSelectedTag((s) => (s === t ? null : t))}
+              className={`w-fit text-sm px-3 py-1 rounded-full ${
+                selectedTag === t ? "bg-amber-200" : "bg-white/60"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* GRID / LIST */}
+      <main>
+        {filtered.length === 0 ? (
+          <div className="text-center py-20 text-gray-500">
+            No posts found. Try a different search or filter.
+          </div>
+        ) : (
+          <div
+            className={
+              layout === "grid"
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                : "flex flex-col gap-4"
+            }
+          >
+            {filtered.map((b) => (
+              <div key={b._id}>
+                <BlogCard
+                  blog={b}
+                  onOpen={() => openBlog(b.slug)}
+                  variant={layout === "grid" ? "card" : "compact"}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+
+      <footer className="mt-12 text-center text-sm text-gray-500">
+        Showing {filtered.length} post{filtered.length !== 1 ? "s" : ""} • Built
+        for readability and performance
+      </footer>
     </div>
   );
 }
