@@ -197,10 +197,10 @@ export default function BlogImproved({ blogs = [] }) {
           <h1 className="font-amanojaku text-3xl sm:text-4xl leading-tight">
             Shubukan India Blog
           </h1>
-          <p className="text-gray-600 mt-2">
+          {/* <p className="text-gray-600 mt-2">
             Traditional karate, technique breakdowns, and training notes —
             readable, fast, and focused.
-          </p>
+          </p> */}
         </div>
 
         <div className="flex items-center gap-3 w-full md:w-auto">
