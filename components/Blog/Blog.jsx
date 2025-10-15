@@ -1,11 +1,10 @@
 "use client";
-
 import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FiSearch, FiClock, FiChevronRight, FiX } from "react-icons/fi";
 import "./Blog.scss";
-
+import Loader from "../UIComponent/Loader/Loader";
 
 function formatDate(iso) {
   if (!iso) return "";
@@ -55,10 +54,12 @@ function BlogCard({ blog, onOpen, variant = "card" }) {
       role="article"
       onKeyDown={(e) => e.key === "Enter" && onOpen()}
       onClick={onOpen}
-      className="group bg-white/60 backdrop-blur-sm border border-amber-100 rounded-2xl overflow-hidden shadow hover:shadow-lg transform hover:-translate-y-1 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-300"
+      className="h-full group bg-white/60 backdrop-blur-sm border border-amber-100 rounded-2xl overflow-hidden shadow hover:shadow-lg transform hover:-translate-y-1 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-300"
     >
       <div
-        className={`relative w-full ${variant === "card" ? "h-40" : "h-28"}`}
+        className={`relative z-[0] w-full ${
+          variant === "card" ? "h-40" : "h-28"
+        }`}
       >
         {cover ? (
           <Image
@@ -73,9 +74,18 @@ function BlogCard({ blog, onOpen, variant = "card" }) {
           <div className="w-full h-full bg-gradient-to-br from-amber-50 to-amber-100" />
         )}
 
-        <div className="absolute inset-0 flex flex-col justify-between p-3">
+        <div
+          className="CardText absolute inset-0 flex flex-col justify-between p-3 pb-1"
+          style={{
+            boxShadow: `${
+              variant === "card"
+                ? "inset 0px -80px 20px -15px #f6f1ed"
+                : "inset 0px -80px 20px -40px #f6f1ed"
+            }`,
+          }}
+        >
           <div className="flex justify-between items-start">
-            <span className="bg-amber-50/90 text-amber-800 text-xs font-semibold px-2 py-1 rounded-full">
+            <span className="bg-amber-50/90 text-amber-800 text-xs font-semibold px-2 py-1 rounded-full shadow-md">
               {blog.category?.primary || "General"}
             </span>
             {blog.estimatedReadTime ? (
@@ -85,13 +95,17 @@ function BlogCard({ blog, onOpen, variant = "card" }) {
             ) : null}
           </div>
 
-          <h3 className="text-white text-lg font-bold drop-shadow-md leading-tight">
+          <h3 className="CardTitle text-[#2a2727] text-lg font-bold drop-shadow-md leading-tight">
             {truncate(blog.title, 80)}
           </h3>
         </div>
       </div>
 
-      <div className="p-4 flex flex-col gap-3">
+      <div
+        className={`CardBottom z-[2] relative ${
+          variant === "card" ? "h-[calc(100%-160px)]" : "h-[calc(100%-112px)]"
+        } p-4 flex flex-col justify-between gap-3 bg-[#f6f1ed]`}
+      >
         <p className="text-gray-700 text-sm min-h-[44px]">
           {truncate(blog.summary || blog.shortNote, 140)}
         </p>
@@ -104,7 +118,7 @@ function BlogCard({ blog, onOpen, variant = "card" }) {
                 alt={author.name}
                 width={40}
                 height={40}
-                className="rounded-full object-cover"
+                className="rounded-full object-cover shadow-sm"
               />
             ) : (
               <div className="w-10 h-10 rounded-full bg-gray-200" />
@@ -118,16 +132,16 @@ function BlogCard({ blog, onOpen, variant = "card" }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap justify-end items-center gap-2">
             {blog.tags?.slice(0, 2).map((t) => (
               <span
                 key={t}
-                className="text-xs bg-gray-100 px-2 py-1 rounded-md"
+                className="text-xs bg-gray-100 px-2 py-1 rounded-md shadow-sm"
               >
                 {t}
               </span>
             ))}
-            <FiChevronRight className="text-gray-400" />
+            {/* <FiChevronRight className="text-gray-400" /> */}
           </div>
         </div>
       </div>
@@ -141,6 +155,7 @@ export default function BlogImproved({ blogs = [] }) {
   const [activeTab, setActiveTab] = useState("Top Stories");
   const [layout, setLayout] = useState("grid");
   const [selectedTag, setSelectedTag] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // safe: make a shallow copy and ensure respect to existing ordering
   const items = Array.isArray(blogs) ? blogs : [];
@@ -186,6 +201,7 @@ export default function BlogImproved({ blogs = [] }) {
 
   function openBlog(slug) {
     if (!slug) return;
+    setLoading(true);
     router.push(`/blogpost/${slug}`);
   }
 
@@ -297,9 +313,10 @@ export default function BlogImproved({ blogs = [] }) {
       </main>
 
       <footer className="mt-12 text-center text-sm text-gray-500">
-        Showing {filtered.length} post{filtered.length !== 1 ? "s" : ""} • Built
-        for readability and performance
+        Showing {filtered.length} post{filtered.length !== 1 ? "s" : ""}
       </footer>
+
+      <Loader loading={loading} />
     </div>
   );
 }
