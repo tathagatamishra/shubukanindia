@@ -7,15 +7,18 @@ import "./BlogPost.scss";
 import { IoClose } from "react-icons/io5";
 import { useUI } from "@/components/Context/UIContext";
 import { Lekton } from "next/font/google";
+import Loader from "@/components/UIComponent/Loader/Loader";
+import { useToast } from "@/components/UIComponent/Toast/Toast";
 
 const lekton = Lekton({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-lekton",
 });
- 
+
 export default function BlogPost({ blog }) {
   // states
+  const { addToast } = useToast();
   const { setIsModalOpen } = useUI();
   const [showShare, setShowShare] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -29,6 +32,7 @@ export default function BlogPost({ blog }) {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // get Like/Dislike/Comments
   async function getComments() {
@@ -73,17 +77,21 @@ export default function BlogPost({ blog }) {
 
   // OTP APIs
   async function sendOtp() {
-    if (!email) return alert("Enter a valid email");
+    if (!email) return addToast("Enter a valid email", "warning");
+    setLoading(true);
     try {
       await shubukan_api.post("/send-otp", { email });
       setOtpSent(true);
-      alert(`OTP sent to ${email}`);
+      setLoading(false);
+      addToast(`OTP sent to ${email}`, "success");
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to send OTP");
+      setLoading(false);
+      addToast(err.response?.data?.message || "Failed to send OTP");
     }
   }
 
   async function verifyOtp() {
+    setLoading(true);
     try {
       const res = await shubukan_api.post("/verify-otp", {
         email,
@@ -94,27 +102,29 @@ export default function BlogPost({ blog }) {
       setVerifiedEmail(email);
       setOtpSent(false);
       setOtpInput("");
-      alert("Email verified ✅");
+      setLoading(false);
+      addToast("Email verified ✅", "success");
     } catch (err) {
-      alert(err.response?.data?.message || "Invalid OTP");
+      setLoading(false);
+      addToast(err.response?.data?.message || "Invalid OTP", "warning");
     }
   }
 
   // Like API
   async function toggleLike() {
-    if (!verifiedEmail) return alert("Verify email first");
+    if (!verifiedEmail) return addToast("Verify email first", "warning");
     try {
       await shubukan_api.post(`/blog/like/${blog.slug}`, {}, getAuthHeaders());
       setLiked(true);
       setDisliked(false);
     } catch (err) {
-      alert(err.response?.data?.message || "Error liking blog");
+      addToast(err.response?.data?.message || "Error liking blog", "warning");
     }
   }
 
   // Dislike API
   async function toggleDislike() {
-    if (!verifiedEmail) return alert("Verify email first");
+    if (!verifiedEmail) return addToast("Verify email first", "warning");
     try {
       await shubukan_api.post(
         `/blog/dislike/${blog.slug}`,
@@ -124,15 +134,18 @@ export default function BlogPost({ blog }) {
       setDisliked(true);
       setLiked(false);
     } catch (err) {
-      alert(err.response?.data?.message || "Error disliking blog");
+      addToast(
+        err.response?.data?.message || "Error disliking blog",
+        "warning"
+      );
     }
   }
 
   // Comment API
   async function postComment() {
-    if (!verifiedEmail) return alert("Verify email first");
+    if (!verifiedEmail) return addToast("Verify email first", "warning");
     if (!commentText.trim()) return;
-
+    setLoading(true);
     try {
       const res = await shubukan_api.post(
         `/blog/comment/${blog.slug}`,
@@ -146,15 +159,21 @@ export default function BlogPost({ blog }) {
 
       getComments();
       setCommentText("");
+      setLoading(false);
+      addToast("Comment posted", "success");
     } catch (err) {
-      alert(err.response?.data?.message || "Error posting comment");
+      setLoading(false);
+      addToast(
+        err.response?.data?.message || "Error posting comment",
+        "warning"
+      );
     }
   }
 
   function copyLink() {
     const link = typeof window !== "undefined" ? window.location.href : "";
     navigator.clipboard.writeText(link);
-    alert("Link copied to clipboard");
+    addToast("Link copied to clipboard", "success");
   }
 
   if (!blog) {
@@ -171,7 +190,6 @@ export default function BlogPost({ blog }) {
   return (
     <main className="BlogPost">
       <div className="BlogPostPage">
-
         {/* Cover Image */}
         <div className="relative w-full md:h-[400px] h-auto aspect-video md:aspect-auto mb-8">
           <Image
@@ -507,9 +525,11 @@ export default function BlogPost({ blog }) {
 
         {/* ✅ OTP verification */}
         {!verifiedEmail && (
-          <div className="verify mb-4 pb-4">
-            <h3 className="label" htmlFor="email">Verify to Like and Comment</h3>
-            <div className="flex gap-2">
+          <div className="mb-4 pb-4">
+            <h3 className="label" htmlFor="email">
+              Verify to Like and Comment
+            </h3>
+            <div className="sendOtp flex gap-2">
               <input
                 type="email"
                 value={email}
@@ -520,14 +540,14 @@ export default function BlogPost({ blog }) {
               />
               <button
                 onClick={sendOtp}
-                className={`${lekton.className} px-4 py-2`}
+                className={`${lekton.className} px-4 py-2 border rounded`}
               >
                 Send OTP
               </button>
             </div>
 
             {otpSent && (
-              <div className="mt-2 flex gap-2">
+              <div className="verifyOtp mt-2 flex gap-2">
                 <input
                   value={otpInput}
                   onChange={(e) => setOtpInput(e.target.value)}
@@ -536,7 +556,7 @@ export default function BlogPost({ blog }) {
                 />
                 <button
                   onClick={verifyOtp}
-                  className={`${lekton.className} px-3 py-2`}
+                  className={`${lekton.className} px-4 py-2 border rounded`}
                 >
                   Verify
                 </button>
@@ -548,20 +568,20 @@ export default function BlogPost({ blog }) {
         {/* ✅ Like / Dislike */}
         <div className="flex gap-3 my-4">
           <button
-            onClick={toggleLike}
-            className={`${lekton.className} px-4 py-2 border rounded ${
-              liked ? "bg-green-100" : ""
-            }`}
-          >
-            Like
-          </button>
-          <button
             onClick={toggleDislike}
             className={`${lekton.className} px-4 py-2 border rounded ${
               disliked ? "bg-red-100" : ""
             }`}
           >
             Dislike
+          </button>
+          <button
+            onClick={toggleLike}
+            className={`${lekton.className} px-4 py-2 border rounded ${
+              liked ? "bg-green-100" : ""
+            }`}
+          >
+            Like
           </button>
         </div>
 
@@ -647,7 +667,10 @@ export default function BlogPost({ blog }) {
                   }
                   className="flex-1 p-2 border rounded"
                 />
-                <button onClick={copyLink} className={`${lekton.className} px-3 py-2 border rounded`}>
+                <button
+                  onClick={copyLink}
+                  className={`${lekton.className} px-3 py-2 border rounded`}
+                >
                   Copy
                 </button>
               </div>
@@ -665,6 +688,8 @@ export default function BlogPost({ blog }) {
           </>
         )}
       </div>
+
+      <Loader loading={loading} />
 
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,4 @@
+// components/Blog/BlogPost/BlogPost.scss
 @import '../../../styles/variables';
 @import '../../../styles/Fonts';
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
@@ -14,9 +15,9 @@
     align-items: center;
 
     &::selection {
-            color: $---selection-color;
-            background: $---selection-bg;
-        }
+        color: $---selection-color;
+        background: $---selection-bg;
+    }
 
     @media screen and (max-width: 800px) {
         padding-top: 9rem;
@@ -161,6 +162,10 @@
             border-color: #905043 !important;
             background-color: #efe9e5d4 !important;
         }
+
+        @media screen and (max-width: 500px) {
+            padding: 0px 12px;
+        }
     }
 
     & textarea {
@@ -208,9 +213,23 @@
         border-bottom: 2px dashed #88807e7a;
     }
 
-    & .verify {
+    & .sendOtp {
         & button {
-            min-width: 105px;
+            min-width: fit-content;
+        }
+    }
+
+    & .verifyOtp {
+        & button {
+            min-width: 50%;
+
+            &:hover {
+                scale: 1.03;
+            }
+
+            &:active {
+                scale: 0.97;
+            }
         }
     }
 

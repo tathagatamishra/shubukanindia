@@ -9,6 +9,7 @@ import Banner from "@/components/UIComponent/Banner";
 import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
 import localFont from "next/font/local";
+import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
 
 export const metadata = {
   metadataBase: new URL("https://shubukanindia.org"),
@@ -74,17 +75,17 @@ export const metadata = {
 };
 
 const mufan = localFont({
-  src: './fonts/MufanPFS.woff2',
-  weight: '400',
-  style: 'normal',
-  variable: '--font-mufan',
-})
+  src: "./fonts/MufanPFS.woff2",
+  weight: "400",
+  style: "normal",
+  variable: "--font-mufan",
+});
 const amanojaku = localFont({
-  src: './fonts/Amanojaku.woff2',
-  weight: '400',
-  style: 'normal',
-  variable: '--font-amanojaku',
-})
+  src: "./fonts/Amanojaku.woff2",
+  weight: "400",
+  style: "normal",
+  variable: "--font-amanojaku",
+});
 
 export default function RootLayout({ children }) {
   // Only run in production and client-side
@@ -152,36 +153,38 @@ export default function RootLayout({ children }) {
       >
         {/* {isDesktop && <MouseTrail />} */}
         <UIProvider>
-          <div
-            className="App"
-            id="App"
-            style={{
-              minHeight: "100vh",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              overflowX: "hidden",
-            }}
-          >
-            <Navbar />
+          <ToastProvider>
             <div
-              className="webBody"
+              className="App"
+              id="App"
               style={{
-                position: "relative",
-                zIndex: 2,
-                height: "fit-content",
-                minHeight: "calc(100vh - 610px)",
+                minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "flex-start",
-                alignItems: "center",
+                justifyContent: "space-between",
+                overflowX: "hidden",
               }}
             >
-              {children}
+              <Navbar />
+              <div
+                className="webBody"
+                style={{
+                  position: "relative",
+                  zIndex: 2,
+                  height: "fit-content",
+                  minHeight: "calc(100vh - 610px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                {children}
+              </div>
+              <Footer />
+              <Banner />
             </div>
-            <Footer />
-            <Banner />
-          </div>
+          </ToastProvider>
         </UIProvider>
       </body>
     </html>
