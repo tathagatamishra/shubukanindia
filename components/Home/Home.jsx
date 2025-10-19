@@ -181,7 +181,7 @@ export default function Home({ setShowNav }) {
                     margin: 0,
                   }}
                 >
-                  {char}
+                  {char}{" "}
                 </p>
               ))}
             </div>
