@@ -55,7 +55,7 @@ export default function Students() {
       </label>
 
       {loading ? (
-        <p className="text-[14px] text-gray-500">Loading...</p>
+        <Loader loading={loading} />
       ) : students.length === 0 ? (
         <p className="text-[14px] text-gray-500">No students found</p>
       ) : (

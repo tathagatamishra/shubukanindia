@@ -68,7 +68,7 @@ export default function Instructor() {
     // },
     {
       text: "Question Papers",
-      disabled: true,
+      // disabled: true,
       action: () => {
         router.push("/online-exam/instructor/papers");
         setLoading(true);
