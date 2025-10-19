@@ -83,7 +83,7 @@ export default function Results() {
       <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">{`${studentName}'s Results`}</label>
 
       {loading ? (
-        <p className="text-[14px] text-gray-500">Loading...</p>
+        <Loader loading={loading} />
       ) : Xresults.length === 0 ? (
         <p className="text-[14px] text-gray-500">No results found</p>
       ) : (
