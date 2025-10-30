@@ -225,7 +225,7 @@ p {
 }
 
 .wave {
-  --size: 50px;
+  --size: 20px;
   --b: 10px;
   --m: 0.5;
   --p: calc(var(--m)*var(--size));
@@ -237,6 +237,6 @@ p {
       calc(50% - 2*var(--size)) calc(50% - var(--size)/2 - var(--b)/2)/calc(4*var(--size)) calc(var(--size) + var(--b)) repeat-x,
     radial-gradient(var(--R) at left 50% top    calc(-1*var(--p)),var(--_g)) 
       50%                       calc(50% + var(--size)/2 + var(--b)/2)/calc(4*var(--size)) calc(var(--size) + var(--b)) repeat-x;
-  background: #ffffff;
-  height: 100px;
+  background: "gray";
+  height: 80px;
 }
