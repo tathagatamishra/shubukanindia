@@ -60,7 +60,7 @@ export default function KarateAndKobudo() {
     "Gojushiho",
     "Yashu no Gojushiho",
     "Hakutsuru",
-    "Shubuno Te",
+    "Shubu no Te",
     "Shuri Sanchin",
     "Nunfa",
   ];
