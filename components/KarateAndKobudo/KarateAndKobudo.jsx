@@ -221,7 +221,8 @@ export default function KarateAndKobudo() {
 
       {/* Divider */}
       <div className="max-w-5xl mx-auto px-6">
-        <div className="h-px bg-neutral-600"></div>
+        {/* <div className="h-px bg-neutral-600"></div> */}
+        <div className="wave"></div>
       </div>
 
       {/* Kobudo Section */}
