@@ -223,3 +223,20 @@ p {
   // font-family: 'GFS Neohellenic', sans-serif;
   // font-size: 20px;
 }
+
+.wave {
+  --size: 50px;
+  --b: 10px;
+  --m: 0.5;
+  --p: calc(var(--m)*var(--size));
+  --R: calc(var(--size)*sqrt(var(--m)*var(--m) + 1) + var(--b)/2);
+  
+  --_g: #0000 calc(99% - var(--b)),#000 calc(101% - var(--b)) 99%,#0000 101%;
+  -webkit-mask:
+    radial-gradient(var(--R) at left 50% bottom calc(-1*var(--p)),var(--_g)) 
+      calc(50% - 2*var(--size)) calc(50% - var(--size)/2 - var(--b)/2)/calc(4*var(--size)) calc(var(--size) + var(--b)) repeat-x,
+    radial-gradient(var(--R) at left 50% top    calc(-1*var(--p)),var(--_g)) 
+      50%                       calc(50% + var(--size)/2 + var(--b)/2)/calc(4*var(--size)) calc(var(--size) + var(--b)) repeat-x;
+  // background: linear-gradient(90deg,red,blue);
+  height: 200px;
+}
