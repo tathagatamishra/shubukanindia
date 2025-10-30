@@ -10,6 +10,7 @@ import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
 import localFont from "next/font/local";
 import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
+import { Amarante } from 'next/font/google'
 
 export const metadata = {
   metadataBase: new URL("https://shubukanindia.org"),
@@ -86,6 +87,11 @@ const amanojaku = localFont({
   style: "normal",
   variable: "--font-amanojaku",
 });
+const amarante = Amarante({
+  subsets: ['latin'],
+  weight: ['400'],  
+  variable: '--font-amarante',
+})
 
 export default function RootLayout({ children }) {
   // Only run in production and client-side
@@ -98,7 +104,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${mufan.variable} ${amanojaku.variable}`}
+      className={`${mufan.variable} ${amanojaku.variable} ${amarante.variable}`}
       style={{
         background: "rgb(231, 221, 211)",
         overflowX: "hidden",
