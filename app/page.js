@@ -1,8 +1,9 @@
+// app/page.js
 import Home from "@/components/Home/Home";
 import Script from "next/script";
 
 export const metadata = {
-  metadataBase: new URL("https://shubukanindia.org"),
+  metadataBase: new URL("https://www.shubukanindia.org"),
   title: "Shubukan India | Traditional Okinawan Karate Dojo",
   description:
     "Shubukan India is an official dojo of Okinawa Shubukan, offering traditional Shorin Ryu Karate in India with a focus on discipline, strength, and heritage.",
@@ -22,7 +23,7 @@ export const metadata = {
   ],
   openGraph: {
     type: "website",
-    url: "https://shubukanindia.org",
+    url: "https://www.shubukanindia.org",
     siteName: "Shubukan India",
     title: "Shubukan India",
     locale: "en_IN",
@@ -30,10 +31,12 @@ export const metadata = {
       "Shubukan India is an official dojo of Okinawa Shubukan, offering traditional Shorin Ryu Karate in India with a focus on discipline, strength, and heritage.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://www.shubukanindia.org/og-image.jpg",
+        secureUrl: "https://www.shubukanindia.org/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Shubukan India",
+        type: "image/jpeg",
       },
     ],
   },

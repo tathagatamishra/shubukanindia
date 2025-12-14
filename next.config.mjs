@@ -10,6 +10,22 @@ const nextConfig = {
       },
     ],
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "shubukanindia.org",
+          },
+        ],
+        destination: "https://www.shubukanindia.org/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -13,7 +13,7 @@ import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
 import { Amarante } from 'next/font/google'
 
 export const metadata = {
-  metadataBase: new URL("https://shubukanindia.org"),
+  metadataBase: new URL("https://www.shubukanindia.org"),
   title: {
     default: "Shubukan India",
     template: "%s | Shubukan India",
@@ -33,21 +33,23 @@ export const metadata = {
   ],
   openGraph: {
     type: "website",
-    url: "https://shubukanindia.org",
+    url: "https://www.shubukanindia.org",
     siteName: "Shubukan India",
     title: "Shubukan India",
     locale: "en_IN",
     description:
       "Shubukanindia is approved dojo from Okinawa Shubukan and only sole dojo of Shubukan Okinawa school in India",
     images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Shubukan India",
-      },
-    ],
-  },
+    {
+      url: "https://www.shubukanindia.org/og-image.jpg",
+      secureUrl: "https://www.shubukanindia.org/og-image.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Shubukan India",
+      type: "image/jpeg",
+    },
+  ],
+},
   twitter: {
     card: "summary_large_image",
     title: "Shubukan India",
