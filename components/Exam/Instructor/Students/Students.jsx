@@ -26,25 +26,13 @@ export default function Students() {
         },
       });
       setStudents(res.data || []);
+      console.log(res.data);
+      
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || "Failed to load students");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleDelete = async (sid) => {
-    if (!confirm("Delete this student?")) return;
-    try {
-      await shubukan_api.delete(`/instructor/student/${sid}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("instructor_token")}`,
-        },
-      });
-      setStudents((s) => s.filter((st) => st._id !== sid));
-    } catch (err) {
-      alert(err.response?.data?.message || "Delete failed");
     }
   };
 
@@ -63,25 +51,34 @@ export default function Students() {
           {students.map((s) => (
             <div
               key={s._id}
-              className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] shadow-md border !rounded-[40px]"
+              className="OnlineExam corner-shape w-full h-fit flex flex-col sm:gap-0 gap-2 p-[16px] shadow-md border !rounded-[40px]"
             >
-              <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
-                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
+              <div className="w-full sm:h-[40px] h-[50px] border-b-1 border-dashed flex sm:flex-row flex-col sm:items-center">
+                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[12px] sm:text-[16px] pl-2 text-[#334155]">
                   Name
                 </p>
-                <div className="border-r-1 border-dashed h-full"></div>
+                <div className="hidden sm:flex border-r-1 border-dashed h-full"></div>
                 <p className="w-full sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
                   {s.name}
                 </p>
               </div>
 
-              <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
-                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
-                  Present Kyu
+              <div className="w-full sm:h-[40px] h-[50px] border-b-1 border-dashed flex sm:flex-row flex-col sm:items-center">
+                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[12px] sm:text-[16px] pl-2 text-[#334155]">
+                  Mobile
                 </p>
-                <div className="border-r-1 border-dashed h-full"></div>
+                <div className="hidden sm:flex border-r-1 border-dashed h-full"></div>
                 <p className="w-full sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
-                  {s.presentKyu ?? "Student not selected"}
+                  {s.mobile ?? "Student not selected"}
+                </p>
+              </div>
+              <div className="w-full sm:h-[40px] h-[50px] border-b-1 border-dashed flex sm:flex-row flex-col sm:items-center">
+                <p className="w-[160px] sm:w-full font-[600] sm:text-center text-[12px] sm:text-[16px] pl-2 text-[#334155]">
+                  Email
+                </p>
+                <div className="hidden sm:flex border-r-1 border-dashed h-full"></div>
+                <p className="w-full sm:text-center text-[14px] sm:text-[16px] pl-2 text-[#334155]">
+                  {s.email ?? "Student not selected"}
                 </p>
               </div>
 
