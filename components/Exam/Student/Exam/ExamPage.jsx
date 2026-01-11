@@ -247,6 +247,13 @@ export default function ExamPage() {
         }
       }
     }
+    if (exam) {
+      const endDate = new Date(exam.examEndTime);
+      console.log(exam);
+      if (Date.now() > endDate.getTime()) {
+        handleSubmit();
+      }
+    }
     // we intentionally depend on now so this runs each tick
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [now, endTime, waitingInfo, exam]);
