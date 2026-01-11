@@ -9,6 +9,7 @@ export default function Student() {
   const router = useRouter();
   const [token, setToken] = useState(null);
   const [examID, setExamID] = useState("");
+  const [isComposing, setIsComposing] = useState(false);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -93,7 +94,25 @@ export default function Student() {
             type="text"
             placeholder="Enter your exam id"
             value={examID}
-            onChange={(e) => setExamID(e.target.value.toUpperCase())}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (isComposing) {
+                // while IME is composing, keep raw value
+                setExamID(val);
+              } else {
+                // once not composing, enforce uppercase
+                setExamID(val.toUpperCase());
+              }
+            }}
+            onCompositionStart={() => setIsComposing(true)}
+            onCompositionEnd={(e) => {
+              setIsComposing(false);
+              // apply uppercase to final composed value
+              setExamID(e.currentTarget.value.toUpperCase());
+            }}
+            // helpful mobile attributes:
+            autoCapitalize="characters"
+            spellCheck={false}
             className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4"
           />
           {/* <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
