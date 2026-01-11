@@ -16,7 +16,7 @@ export default function OnlineExam() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className="w-full h-full flex flex-col justify-start items-center gap-4">
+    <div className="w-full h-dvh flex flex-col justify-start items-center gap-4">
       <div className="ExamChild OnlineExam corner-shape w-full h-fit flex flex-col justify-center items-center gap-4 p-[20px] pt-[40px] border !rounded-[40px] shadow-md">
         {/* DEMO / PUBLIC (no login) */}
         <ExamBtn
