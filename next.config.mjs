@@ -9,6 +9,8 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+    // Image with src "/../../image.png" is using quality "100" which is not configured in images.qualities. This config will be required starting in Next.js 16
+    qualities: [25, 50, 75, 100],
   },
 
   async redirects() {

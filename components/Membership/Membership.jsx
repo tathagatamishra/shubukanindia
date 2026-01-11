@@ -6,7 +6,6 @@ import "./Membership.scss";
 import { IoSearch } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 
-
 export default function Membership() {
   useEffect(() => {
     window.scrollTo({
@@ -57,7 +56,10 @@ export default function Membership() {
     {
       dojoName: "Fudoshin Martial Arts Academy",
       instructor: ["Dipak Kumar Maity", "Basundhara Bag"],
-      image: ["/dojo_instructors/dipak_maity.jpeg", "/dojo_instructors/basundhara_bag.jpg"],
+      image: [
+        "/dojo_instructors/dipak_maity.jpeg",
+        "/dojo_instructors/basundhara_bag.jpg",
+      ],
       contact: [[["Phone", "7478327686"]], [["Phone", "8537952108"]]],
       brunch: [
         [
@@ -114,31 +116,8 @@ export default function Membership() {
             mainLocation: "Kerala",
             brunchAddress: [
               "Kadakampally Lane, Anayara, Thiruvananthapuram, Kerala",
-              "Caterpillar Kinder Garten Dojo. Near Eve's cafe, Pump house junction, Anayara"
+              "Caterpillar Kinder Garten Dojo. Near Eve's cafe, Pump house junction, Anayara",
             ],
-          },
-        ],
-      ],
-    },
-    {
-      dojoName: "Karate Self Defense Academy",
-      instructor: ["Raj Chatterjee"],
-      image: ["/dojo_instructors/Raj Chatterjee.jpeg"],
-      contact: [[["Phone", "9734301071"]]],
-      brunch: [
-        [
-          {
-            mainLocation: "Hooghly",
-            brunchAddress: [
-              "Bengai Netaji Club Ground",
-              "Goghat Debangan Nursery School Ground",
-              "Patulsara Primary School Ground",
-              "Badanganj Swastik Club Ground",
-            ],
-          },
-          {
-            mainLocation: "Paschim Medinipur",
-            brunchAddress: ["Ramjibanpur Babulal High School Ground"],
           },
         ],
       ],
@@ -149,7 +128,7 @@ export default function Membership() {
   // *******  Filter is not array based, it need to changed
   const handleSearch = () => {
     setIsInput(true);
-    
+
     const filtered = dojoArr.filter((dojo) => {
       // Check if any branch location matches the search term
       const branchMatch = dojo.brunch.some(
@@ -164,7 +143,8 @@ export default function Membership() {
 
       // Check if any contact detail matches the search term
       const contactMatch = dojo.contact.some(
-        (contact) => contact[0][1].toLowerCase().includes(searchTerm.toLowerCase()) // Assuming contact[1] contains the contact detail value
+        (contact) =>
+          contact[0][1].toLowerCase().includes(searchTerm.toLowerCase()) // Assuming contact[1] contains the contact detail value
       );
 
       // Check if instructor, dojo name, branch location, branch address, or contact detail matches the search term
@@ -311,7 +291,6 @@ export default function Membership() {
               style={searchStyle}
               onClick={() => {
                 handleSearch();
-                
               }}
             />
           </div>
