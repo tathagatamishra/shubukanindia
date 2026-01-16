@@ -4,26 +4,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   FiHome,
-  FiBook,
   FiUsers,
-  FiClipboard,
   FiFileText,
-  FiBarChart,
   FiImage,
 } from "react-icons/fi";
+import { TbTorii } from "react-icons/tb";
+import { PiExam } from "react-icons/pi";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { BsQuestionSquare } from "react-icons/bs";
+import { GrArticle } from "react-icons/gr";
 
 export default function Sidebar({ open, setOpen }) {
   const pathname = usePathname();
 
   const links = [
     { name: "Dashboard", href: "/admin", icon: <FiHome /> },
-    { name: "Blogs", href: "/admin/blogs", icon: <FiBook /> },
+    { name: "Dojos", href: "/admin/dojo", icon: <TbTorii /> },
+    { name: "Blogs", href: "/admin/blogs", icon: <GrArticle /> },
     { name: "Gallery", href: "/admin/gallery", icon: <FiImage /> },
     { name: "Students", href: "/admin/students", icon: <FiUsers /> },
-    { name: "Instructors", href: "/admin/instructors", icon: <FiClipboard /> },
-    { name: "Questions", href: "/admin/questions", icon: <FiFileText /> },
-    { name: "Exams", href: "/admin/exams", icon: <FiBarChart /> },
-    { name: "Results", href: "/admin/results", icon: <FiBarChart /> },
+    { name: "Instructors", href: "/admin/instructors", icon: <FaChalkboardTeacher />,},
+    { name: "Questions", href: "/admin/questions", icon: <BsQuestionSquare /> },
+    { name: "Exams", href: "/admin/exams", icon: <FiFileText /> },
+    { name: "Results", href: "/admin/results", icon: <PiExam /> },
   ];
 
   return (
