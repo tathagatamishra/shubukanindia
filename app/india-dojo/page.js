@@ -1,8 +1,9 @@
-import Membership from "@/components/Membership/Membership";
+// app/membership/page.js
+import IndiaDojo from "@/components/IndiaDojo/IndiaDojo";
 import { shubukan_api } from "@/config";
 
 export const metadata = {
-  title: "Membership | Shubukan India",
+  title: "India Dojo | Shubukan India",
   description:
     "Become a member of Shubukan India. Discover our programs, benefits, and how to enroll in traditional karate classes.",
   alternates: {
@@ -27,20 +28,5 @@ export default async function Page() {
   // await the promise here so you pass a concrete array to the client component
   const dojos = await fetchDojos();
 
-  return (
-    <main className="min-h-screen bg-scroll-paper py-12 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-serif tracking-widest">
-            Shubukan Dojos
-          </h1>
-          <p className="mt-2 text-sm md:text-base text-gray-700">
-            Traditional dojo listings — scroll to explore
-          </p>
-        </div>
-
-        <Membership dojos={dojos} />
-      </div>
-    </main>
-  );
+  return <IndiaDojo dojoData={dojos} />;
 }

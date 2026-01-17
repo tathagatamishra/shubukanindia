@@ -1,3 +1,4 @@
+// components/KarateAndKobudo/KarateAndKobudo.jsx
 "use client";
 import { useEffect } from "react";
 import { ImageWithFallback } from "./ImageWithFallback";
