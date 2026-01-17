@@ -66,7 +66,7 @@ export default function EditProfile() {
         const res = await shubukan_api.get("/instructors");
         let insts = res.data.instructors || [];
         insts = insts.filter(
-          (inst) => inst && inst.name !== "__" && inst.identity !== "__"
+          (inst) => inst && inst.name !== "___" && inst.identity !== "___"
         );
         const shuffled = shuffle(insts);
         setInstructors(shuffled);
@@ -287,7 +287,7 @@ export default function EditProfile() {
           className="relative w-full flex flex-col mb-[8px]"
         >
           <label className="font-[600] text-[12px] sm:text-[16px] text-[#334155]">
-            Sensei Name
+            Sensei's Name
           </label>
           <div className="relative flex items-center">
             <input
