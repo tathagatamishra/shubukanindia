@@ -243,7 +243,7 @@ p {
   right: 12px;
   height: 10px;
   border-radius: 4px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.03), transparent 60%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.03), transparent 60%);
   top: -6px;
 }
 
@@ -254,10 +254,10 @@ p {
 }
 
 .scroll-sash {
-  background: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0 4px, rgba(0,0,0,0) 4px 8px);
+  background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.02) 0 4px, rgba(0, 0, 0, 0) 4px 8px);
   padding: 6px;
   border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 // .jap {
@@ -269,10 +269,17 @@ p {
   height: 6px;
   max-width: 420px;
   border-radius: 9999px;
-  background-image: linear-gradient(90deg, rgba(139,107,58,0.15), rgba(139,107,58,0.4));
+  background-image: linear-gradient(90deg, rgba(139, 107, 58, 0.15), rgba(139, 107, 58, 0.4));
 }
 
 @media (prefers-color-scheme: light) {
-  :root { --paper-bg: #171717; --paper-edge: #222; }
-  .paper-scroll { background: linear-gradient(180deg, #121212, #0a0a0a 60%); border: 1px solid rgba(255,255,255,0.04); }
+  :root {
+    --paper-bg: #171717;
+    --paper-edge: #222;
+  }
+
+  .paper-scroll {
+    background: linear-gradient(180deg, #121212, #0a0a0a 60%);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
 }

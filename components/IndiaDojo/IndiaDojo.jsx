@@ -31,6 +31,8 @@ function ImageWithFallback({ src, alt = "dojo image", className = "" }) {
 
 export default function IndiaDojo({ dojoData = [] }) {
   const dojos = Array.isArray(dojoData) ? dojoData : [];
+  console.log(dojos);
+
   const [openIdx, setOpenIdx] = useState(null);
 
   useEffect(() => {
@@ -55,189 +57,361 @@ export default function IndiaDojo({ dojoData = [] }) {
             </div>
           )}
 
-          {dojos.map((dojo, idx) => (
-            <article
-              key={dojo._id || idx}
-              className="paper-scroll p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start bg-white rounded-lg shadow-md border border-neutral-200"
-            >
-              <div className="shrink-0">
-                <div className="scroll-sash">
-                  {dojo.profileImage && (
-                    <ImageWithFallback
-                      src={dojo.profileImage}
-                      alt={dojo.dojoName}
-                      className="h-40 aspect-3/4 object-cover rounded"
-                    />
-                  )}
-                </div>
-                {/* <div className="mt-3 text-center text-sm text-neutral-600">{dojo.dojoType}</div> */}
-              </div>
+          {dojos.map((dojo, idx) => {
+            const hasContact =
+              Array.isArray(dojo.contact) && dojo.contact.length > 0;
+            const hasLandmark = !!(dojo.landmark && dojo.landmark !== "");
+            const hasTopLocations =
+              Array.isArray(dojo.location) && dojo.location.length > 0;
+            const hasMain =
+              Array.isArray(dojo.dojoLocation?.mainDojo) &&
+              dojo.dojoLocation.mainDojo.length > 0;
+            const hasSub =
+              Array.isArray(dojo.dojoLocation?.subDojo) &&
+              dojo.dojoLocation.subDojo.length > 0;
 
-              <div className="flex-1">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-2xl font-semibold">
-                      {dojo.dojoName || "Unnamed Dojo"}
-                    </h2>
-                    <p className="text-sm text-neutral-600">
-                      Instructor:{" "}
-                      <span className="font-medium text-neutral-800">
-                        {dojo.instructor || "—"}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-4 grid md:grid-cols-2 gap-4">
-                  <div>
-                    <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
-                      Contact
-                    </h3>
-                    <ul className="space-y-2">
-                      {Array.isArray(dojo.contact) &&
-                      dojo.contact.length > 0 ? (
-                        dojo.contact.map((c, i) => (
-                          <li
-                            key={i}
-                            className="flex items-center gap-3 text-neutral-700"
-                          >
-                            {c.label?.toLowerCase().includes("phone") ? (
-                              <FiPhone className="min-w-4 min-h-4" />
-                            ) : c.label?.toLowerCase().includes("email") ? (
-                              <FiMail className="min-w-4 min-h-4" />
-                            ) : (
-                              <FiMapPin className="min-w-4 min-h-4" />
-                            )}
-                            <span className="text-sm">{c.value || "—"}</span>
-                          </li>
-                        ))
-                      ) : (
-                        <li className="text-sm text-neutral-500">
-                          No contact info
-                        </li>
-                      )}
-                    </ul>
-
-                    <div className="mt-4">
-                      <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
-                        Landmark
-                      </h3>
-                      <div className="text-sm text-neutral-700">
-                        {dojo.landmark || "—"}
-                      </div>
+            return (
+              <article
+                key={dojo._id || idx}
+                className="paper-scroll p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start bg-white rounded-lg shadow-md border border-neutral-200"
+              >
+                {dojo.profileImage && (
+                  <div className="shrink-0">
+                    <div className="scroll-sash">
+                      <ImageWithFallback
+                        src={dojo.profileImage}
+                        alt={dojo.dojoName}
+                        className="h-40 aspect-3/4 object-cover rounded"
+                      />
                     </div>
                   </div>
+                )}
 
-                  <div>
-                    <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
-                      Locations
-                    </h3>
-                    <div className="space-y-2">
-                      {Array.isArray(dojo.location) &&
-                      dojo.location.length > 0 ? (
-                        dojo.location.map((loc, i) => (
-                          <div
-                            key={i}
-                            className="flex items-start gap-3 text-neutral-700"
-                          >
-                            <FiMapPin className="mt-1 min-w-4 min-h-4" />
-                            <div className="text-sm">{loc}</div>
+                <div className="flex-1">
+                  {(dojo.dojoName || dojo.instructor) && (
+                    <div>
+                      {dojo.dojoName && (
+                        <h2 className="text-2xl font-semibold">
+                          {dojo.dojoName}
+                        </h2>
+                      )}
+                      {dojo.instructor && (
+                        <p className="text-sm text-neutral-600">
+                          Instructor:{" "}
+                          <span className="font-medium text-neutral-800">
+                            {dojo.instructor}
+                          </span>
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Contact / Landmark / Top-level Locations */}
+                  {(hasContact || hasLandmark) && (
+                    <div className="mt-4 grid md:grid-cols-2 gap-4">
+                      {hasContact && (
+                        <div className="mb-4">
+                          <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                            Contact
+                          </h3>
+                          <ul className="space-y-2">
+                            {dojo.contact.map((c, i) => (
+                              <li
+                                key={c._id || i}
+                                className="flex items-center gap-3 text-neutral-700"
+                              >
+                                {c.label?.toLowerCase().includes("phone") ? (
+                                  <FiPhone className="min-w-4 min-h-4" />
+                                ) : c.label?.toLowerCase().includes("email") ? (
+                                  <FiMail className="min-w-4 min-h-4" />
+                                ) : (
+                                  <FiMapPin className="min-w-4 min-h-4" />
+                                )}
+                                <span className="text-sm">{c.value}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {hasLandmark && (
+                        <div>
+                          <div>
+                            <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                              Landmark
+                            </h3>
+                            <div className="text-sm text-neutral-700">
+                              {dojo.landmark}
+                            </div>
                           </div>
-                        ))
-                      ) : (
-                        <div className="text-sm text-neutral-500">
-                          No top-level locations
+
+                          <div className="mt-4">
+                            <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                              Locations
+                            </h3>
+                            <div className="space-y-2">
+                              {hasTopLocations ? (
+                                dojo.location.map((loc, i) => (
+                                  <div
+                                    key={loc?.id || `loc-${i}`}
+                                    className="flex items-start gap-3 text-neutral-700"
+                                  >
+                                    <FiMapPin className="mt-1 min-w-4 min-h-4" />
+                                    <div className="text-sm">{loc}</div>
+                                  </div>
+                                ))
+                              ) : (
+                                <div className="text-sm text-neutral-500">
+                                  No top-level locations
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
+                  )}
 
-                    {dojo.dojoLocation &&
-                      (dojo.dojoLocation.mainDojo?.length ||
-                      dojo.dojoLocation.subDojo?.length ? (
-                        <div className="mt-4">
-                          <button
-                            onClick={() =>
-                              setOpenIdx(openIdx === idx ? null : idx)
-                            }
-                            className="w-full flex items-center justify-between p-2 rounded-md border border-neutral-200 bg-neutral-50"
-                          >
-                            <span className="text-sm font-medium">
-                              View nested dojos
-                            </span>
-                            <span>
-                              {openIdx === idx ? (
-                                <FiChevronUp />
-                              ) : (
-                                <FiChevronDown />
-                              )}
-                            </span>
-                          </button>
-
-                          {openIdx === idx && (
-                            <div className="mt-3 space-y-3">
-                              {dojo.dojoLocation.mainDojo?.map((d, i) => (
-                                <div
-                                  key={i}
-                                  className="p-3 rounded-md border border-neutral-100 bg-white shadow-sm"
-                                >
-                                  <div className="flex items-start gap-3">
-                                    <div className="w-16 h-16 flex-shrink-0">
-                                      <ImageWithFallback
-                                        src={d.profileImage}
-                                        alt={d.dojoName || d.instructor}
-                                        className="w-16 h-16 object-cover rounded"
-                                      />
-                                    </div>
-                                    <div>
-                                      <div className="text-sm font-medium">
-                                        {d.dojoName ||
-                                          d.instructor ||
-                                          "Unnamed"}
-                                      </div>
-                                      <div className="text-xs text-neutral-500">
-                                        {d.instructor
-                                          ? `Instructor: ${d.instructor}`
-                                          : ""}
-                                      </div>
-                                      <div className="text-xs text-neutral-700 mt-2">
-                                        {Array.isArray(d.location)
-                                          ? d.location.join(", ")
-                                          : ""}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-
-                              {dojo.dojoLocation.subDojo?.map((d, i) => (
-                                <div
-                                  key={`sub-${i}`}
-                                  className="p-3 rounded-md border border-neutral-100 bg-neutral-50"
-                                >
-                                  <div className="text-sm font-medium">
-                                    {d.dojoName || d.instructor || "Unnamed"}
-                                  </div>
-                                  <div className="text-xs text-neutral-500">
-                                    {d.instructor
-                                      ? `Instructor: ${d.instructor}`
-                                      : ""}
-                                  </div>
-                                  <div className="text-xs text-neutral-700 mt-2">
-                                    {Array.isArray(d.location)
-                                      ? d.location.join(", ")
-                                      : ""}
-                                  </div>
-                                </div>
-                              ))}
+                  {/* mainDojo / subDojo */}
+                  {hasMain && (
+                    <div className="w-full flex flex-col gap-6 items-start">
+                      {(dojo.dojoLocation?.mainDojo || []).map((d, i) => (
+                        <div
+                          key={d._id || `main-${i}`}
+                          className="flex flex-col md:flex-row gap-6 items-start mt-4"
+                        >
+                          {d.profileImage && (
+                            <div className="shrink-0">
+                              <div className="scroll-sash">
+                                <ImageWithFallback
+                                  src={d.profileImage}
+                                  alt={d.dojoName || d.instructor}
+                                  className="h-40 aspect-3/4 object-cover rounded"
+                                />
+                              </div>
                             </div>
                           )}
+
+                          <div className="flex-1">
+                            {(d.dojoName || d.instructor) && (
+                              <div>
+                                {d.dojoName && (
+                                  <h2 className="text-2xl font-semibold">
+                                    {d.dojoName}
+                                  </h2>
+                                )}
+                                {d.instructor && (
+                                  <p className="text-sm text-neutral-600">
+                                    Instructor:{" "}
+                                    <span className="font-medium text-neutral-800">
+                                      {d.instructor}
+                                    </span>
+                                  </p>
+                                )}
+                              </div>
+                            )}
+
+                            {(d.contact.length > 0 ||
+                              d.landmark ||
+                              d.location.length > 0) && (
+                              <div className="mt-4 grid md:grid-cols-2 gap-4">
+                                {d.contact.length > 0 && (
+                                  <div className="mb-4">
+                                    <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                                      Contact
+                                    </h3>
+                                    <ul className="space-y-2">
+                                      {d.contact.map((c, i) => (
+                                        <li
+                                          key={c._id || i}
+                                          className="flex items-center gap-3 text-neutral-700"
+                                        >
+                                          {c.label
+                                            ?.toLowerCase()
+                                            .includes("phone") ? (
+                                            <FiPhone className="min-w-4 min-h-4" />
+                                          ) : c.label
+                                              ?.toLowerCase()
+                                              .includes("email") ? (
+                                            <FiMail className="min-w-4 min-h-4" />
+                                          ) : (
+                                            <FiMapPin className="min-w-4 min-h-4" />
+                                          )}
+                                          <span className="text-sm">
+                                            {c.value}
+                                          </span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+
+                                {(d.landmark || d.location.length > 0) && (
+                                  <div>
+                                    <div>
+                                      <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                                        Landmark
+                                      </h3>
+                                      <div className="text-sm text-neutral-700">
+                                        {d.landmark}
+                                      </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                      <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                                        Locations
+                                      </h3>
+                                      <div className="space-y-2">
+                                        {d.location.length > 0 ? (
+                                          d.location.map((loc, i) => (
+                                            <div
+                                              key={loc?.id || `loc-${i}`}
+                                              className="flex items-start gap-3 text-neutral-700"
+                                            >
+                                              <FiMapPin className="mt-1 min-w-4 min-h-4" />
+                                              <div className="text-sm">
+                                                {loc}
+                                              </div>
+                                            </div>
+                                          ))
+                                        ) : (
+                                          <div className="text-sm text-neutral-500">
+                                            No top-level locations
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      ) : null)}
-                  </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {hasSub && (
+                    <div className="w-full flex flex-col gap-6 items-start">
+                      {(dojo.dojoLocation?.subDojo || []).map((d, i) => (
+                        <div
+                          key={d._id || `sub-${i}`}
+                          className="flex flex-col md:flex-row gap-6 items-start mt-4"
+                        >
+                          {d.profileImage && (
+                            <div className="shrink-0">
+                              <div className="scroll-sash">
+                                <ImageWithFallback
+                                  src={d.profileImage}
+                                  alt={d.dojoName || d.instructor}
+                                  className="h-40 aspect-3/4 object-cover rounded"
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                          <div className="flex-1">
+                            {(d.dojoName || d.instructor) && (
+                              <div>
+                                {d.dojoName && (
+                                  <h2 className="text-2xl font-semibold">
+                                    {d.dojoName}
+                                  </h2>
+                                )}
+                                {d.instructor && (
+                                  <p className="text-sm text-neutral-600">
+                                    Instructor:{" "}
+                                    <span className="font-medium text-neutral-800">
+                                      {d.instructor}
+                                    </span>
+                                  </p>
+                                )}
+                              </div>
+                            )}
+
+                            {(d.contact.length > 0 ||
+                              d.landmark ||
+                              d.location.length > 0) && (
+                              <div className="mt-4 grid md:grid-cols-2 gap-4">
+                                {d.contact.length > 0 && (
+                                  <div className="mb-4">
+                                    <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                                      Contact
+                                    </h3>
+                                    <ul className="space-y-2">
+                                      {d.contact.map((c, i) => (
+                                        <li
+                                          key={c._id || i}
+                                          className="flex items-center gap-3 text-neutral-700"
+                                        >
+                                          {c.label
+                                            ?.toLowerCase()
+                                            .includes("phone") ? (
+                                            <FiPhone className="min-w-4 min-h-4" />
+                                          ) : c.label
+                                              ?.toLowerCase()
+                                              .includes("email") ? (
+                                            <FiMail className="min-w-4 min-h-4" />
+                                          ) : (
+                                            <FiMapPin className="min-w-4 min-h-4" />
+                                          )}
+                                          <span className="text-sm">
+                                            {c.value}
+                                          </span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+
+                                {(d.landmark || d.location.length > 0) && (
+                                  <div>
+                                    <div>
+                                      <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                                        Landmark
+                                      </h3>
+                                      <div className="text-sm text-neutral-700">
+                                        {d.landmark}
+                                      </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                      <h3 className="text-sm uppercase text-neutral-700 tracking-wider w-full mb-2">
+                                        Locations
+                                      </h3>
+                                      <div className="space-y-2">
+                                        {d.location.length > 0 ? (
+                                          d.location.map((loc, i) => (
+                                            <div
+                                              key={loc?.id || `loc-${i}`}
+                                              className="flex items-start gap-3 text-neutral-700"
+                                            >
+                                              <FiMapPin className="mt-1 min-w-4 min-h-4" />
+                                              <div className="text-sm">
+                                                {loc}
+                                              </div>
+                                            </div>
+                                          ))
+                                        ) : (
+                                          <div className="text-sm text-neutral-500">
+                                            No top-level locations
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         <footer className="text-center mt-12 text-neutral-700">
