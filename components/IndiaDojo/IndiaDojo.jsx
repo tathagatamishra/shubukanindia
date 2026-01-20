@@ -73,10 +73,10 @@ export default function IndiaDojo({ dojoData = [] }) {
             return (
               <article
                 key={dojo._id || idx}
-                className="paper-scroll p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start bg-white rounded-lg shadow-md border border-neutral-200"
+                className="paper-scroll p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start"
               >
                 {dojo.profileImage && (
-                  <div className="shrink-0">
+                  <div className="shrink-0 z-1">
                     <div className="scroll-sash">
                       <ImageWithFallback
                         src={dojo.profileImage}
@@ -87,21 +87,21 @@ export default function IndiaDojo({ dojoData = [] }) {
                   </div>
                 )}
 
-                <div className="flex-1">
+                <div className="flex-1 z-1">
                   {(dojo.dojoName || dojo.instructor) && (
                     <div>
                       {dojo.dojoName && (
-                        <h2 className="text-2xl font-semibold">
+                        <h2 className="Text-shine text-2xl font-semibold">
                           {dojo.dojoName}
                         </h2>
                       )}
                       {dojo.instructor && (
-                        <p className="text-sm text-neutral-600">
+                        <h3 className="text-neutral-600">
                           Instructor:{" "}
                           <span className="font-medium text-neutral-800">
                             {dojo.instructor}
                           </span>
-                        </p>
+                        </h3>
                       )}
                     </div>
                   )}
@@ -196,17 +196,17 @@ export default function IndiaDojo({ dojoData = [] }) {
                             {(d.dojoName || d.instructor) && (
                               <div>
                                 {d.dojoName && (
-                                  <h2 className="text-2xl font-semibold">
+                                  <h2 className="Text-shine text-2xl font-semibold">
                                     {d.dojoName}
                                   </h2>
                                 )}
                                 {d.instructor && (
-                                  <p className="text-sm text-neutral-600">
+                                  <h3 className="text-neutral-600">
                                     Instructor:{" "}
                                     <span className="font-medium text-neutral-800">
                                       {d.instructor}
                                     </span>
-                                  </p>
+                                  </h3>
                                 )}
                               </div>
                             )}
@@ -319,12 +319,12 @@ export default function IndiaDojo({ dojoData = [] }) {
                                   </h2>
                                 )}
                                 {d.instructor && (
-                                  <p className="text-sm text-neutral-600">
+                                  <h3 className="text-neutral-600">
                                     Instructor:{" "}
                                     <span className="font-medium text-neutral-800">
                                       {d.instructor}
                                     </span>
-                                  </p>
+                                  </h3>
                                 )}
                               </div>
                             )}
@@ -409,6 +409,8 @@ export default function IndiaDojo({ dojoData = [] }) {
                     </div>
                   )}
                 </div>
+
+                <div className="Texture absolute top-0 left-0 w-full h-full rounded-lg z-0 overflow-hidden"></div>
               </article>
             );
           })}
