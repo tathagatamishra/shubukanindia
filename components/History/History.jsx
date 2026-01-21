@@ -161,7 +161,7 @@ export default function History() {
           <h2 className="section-title">A Short Timeline</h2>
           <ol className="timeline">
             {timeline.map((item, i) => (
-              <li key={i} className="timeline-item">
+              <li key={i} className="timeline-item flex flex-col md:flex-row">
                 <span className="t-year">{item.year}</span>
                 <div>
                   <h4>{item.headline}</h4>
@@ -232,12 +232,16 @@ export default function History() {
 
         <div className="sketchfab-embed-wrapper">
           <iframe
-            title="Shuri Castle — 3D reconstruction"
+            title="Shuri Castle / Shurijō, Naha - Okinawa .WIP"
             frameBorder="0"
             allowFullScreen
             mozallowfullscreen="true"
             webkitallowfullscreen="true"
             allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking="true"
+            execution-while-out-of-viewport="true"
+            execution-while-not-rendered="true"
+            web-share="true"
             src="https://sketchfab.com/models/45f901e4d6fa4192a6f329e35f2dc5b8/embed?camera=0&preload=1&transparent=1"
           ></iframe>
         </div>
