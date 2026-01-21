@@ -1,231 +1,208 @@
+// components/History/History.scss
 @import '../../styles/variables';
 @import '../../styles/Fonts';
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
 .History {
-    // border: 1px solid red;
+    --paper-bg: #fbf5ea;
+    --ink: #2b2723;
+    --accent: #8a4b1b;
+
+    width: 86%;
+    position: relative;
+    color: var(--ink);
+    // background: var(--paper-bg);
+
     padding-top: 8rem;
-    max-width: 1000px;
+    max-width: 1024px;
     height: fit-content;
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
-    @media screen and (max-width:1000px) {
-        padding-top: 7rem;
-    }
+h1 {
+    color: #2a2727;
+    // letter-spacing: 0.2rem;
+    font-family: $font-rainlyregularovl7o;
+}
 
-    @media screen and (max-width: 800px) {
-        padding-top: 5rem;
-    }
+.Hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
 
-    @media screen and (max-width: 431px) {
-        width: 90%;
-    }
+.heading {
+    color: var(--accent);
+    letter-spacing: 0.12rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-    & img {
-        border-radius: 10px;
-        filter: sepia(30%) grayscale(30%);
-    }
+.heading .sub {
+    color: rgba(43, 39, 35, 0.85);
+    margin-top: 0.6rem;
+    font-family: $font-rainlyregularovl7o;
+}
 
-    & .Hero {
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        // margin-bottom: 8rem;
-        padding-top: 2rem;
+.hero-content {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
 
-        display: flex;
+.hero-img {
+    width: 45%;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+}
+
+.hero-text {
+    width: 55%;
+}
+
+.lead {
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+.caption {
+    margin-top: 0.6rem;
+    font-style: italic;
+    font-family: 'Bellefair', serif;
+    color: rgba(43, 39, 35, 0.8);
+}
+
+.content {
+    margin-top: 1.8rem;
+}
+
+.paper-block {
+    background: transparent;
+    padding: 1.8rem 1.6rem;
+    border-left: 5px solid rgba(138, 75, 27, 0.08);
+    border-right: 5px solid rgba(138, 75, 27, 0.02);
+    border-radius: 6px;
+}
+
+.section-title {
+    font-family: 'Shippori Antique', serif;
+    color: var(--accent);
+    font-size: 1.6rem;
+    margin: 0.4rem 0 0.6rem 0;
+}
+
+.mini {
+    font-weight: 700;
+    margin-top: 0.6rem;
+}
+
+.two-col {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0 0.4rem;
+}
+
+.two-col img {
+    width: 100%;
+    border-radius: 8px;
+    filter: sepia(18%) contrast(0.95);
+    cursor: pointer;
+}
+
+.comment {
+    text-align: center;
+    font-style: italic;
+    margin-top: 0.5rem;
+    font-family: 'Bellefair', serif;
+}
+
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0 1rem 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: flex-start;
+}
+
+.t-year {
+    min-width: 110px;
+    color: rgba(43, 39, 35, 0.7);
+    font-weight: 700;
+}
+
+.timeline-item h4 {
+    margin: 0 0 0.2rem 0;
+}
+
+.photo-figure {
+    margin: 2rem 0;
+}
+
+.bottom-img {
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    filter: sepia(12%);
+}
+
+.sketchfab-embed-wrapper {
+    margin: 1.6rem 0;
+}
+
+.wisdom {
+    margin: 1.2rem 0;
+    padding: 0.9rem 1rem;
+    border-left: 4px solid rgba(138, 75, 27, 0.18);
+    background: rgba(255, 248, 236, 0.6);
+    font-style: italic;
+}
+
+.note {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    color: rgba(43, 39, 35, 0.85);
+}
+
+ul {
+    margin-left: 1.2rem;
+}
+
+/* responsive */
+@media screen and (max-width: 900px) {
+    .hero-content {
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-
-        & .heading {
-            margin: 1.5rem 0 2rem;
-            color: #2a2727;
-            letter-spacing: 0.2rem;
-            font-size: 6rem;
-
-            font-family: $font-rainlyregularovl7o;
-
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
-            }
-        }
-
-        & .hero-content {
-            & .hero-img {
-                width: 100%;
-                margin: 40px 0 0 0;
-            }
-
-            & p {
-                margin: 0;
-                font-size: 20px;
-                width: 100%;
-                text-align: right;
-                font-style: italic;
-
-                font-family: 'Bellefair', serif;
-            }
-        }
-
-        @media screen and (max-width: 1000px) {
-            & .heading {
-                font-size: 5.5rem;
-                margin: 1.5rem 0 1rem;
-            }
-        }
-
-        @media screen and (max-width: 800px) {
-            & .heading {
-                font-size: 5.2rem;
-            }
-        }
-
-        @media screen and (max-width: 700px) {
-            & .heading {
-                font-size: 5rem;
-                margin: 1rem 0 0.5rem;
-            }
-
-            & .hero-content {
-                & p {
-                    font-size: 18px;
-                }
-            }
-        }
-
-        @media screen and (max-width: 500px) {
-            & .heading {
-                font-size: 4rem;
-                margin: 0rem 0 0rem;
-            }
-        }
-
-        @media screen and (max-width: 360px) {
-            & .heading {
-                font-size: 3.2rem;
-            }
-        }
     }
 
-    & .content {
-        box-sizing: border-box;
+    .hero-img {
         width: 100%;
-        height: 100%;
-        margin-bottom: 6rem;
-        padding-top: 3rem;
+    }
 
-        display: flex;
+    .hero-text {
+        width: 100%;
+    }
+
+    .two-col {
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+    }
 
-        & p {
-            font-size: 1.5rem;
-            text-align: justify;
+    .t-year {
+        min-width: 80px;
+    }
+}
 
-            font-family: 'GFS Neohellenic', sans-serif;
-
-            &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
-            }
-        }
-
-        & .comment {
-            margin: 10px 0;
-            font-size: 20px;
-            width: 100%;
-            text-align: center;
-            font-style: italic;
-
-            font-family: 'Bellefair', serif;
-
-            @media screen and (max-width: 700px) {
-                font-size: 18px;
-            }
-        }
-
-        & .maps {
-            margin: 10px 0;
-            // border: 1px solid;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-
-            & img {
-                // height: 100%;
-                width: 40%;
-                border-radius: 5px;
-            }
-        }
-
-        & .bottom-img {
-            width: 100%;
-            margin: 40px 0 10px 0;
-        }
-
-        & .sketchfab-embed-wrapper {
-            margin: 50px 0 10px 0;
-            width: 100% !important;
-            height: 480px;
-
-            & iframe {
-                border-radius: 10px;
-                width: 100%;
-                height: 100%;
-            }
-
-            @media screen and (max-width: 800px) {
-                height: 360px;
-            }
-
-            @media screen and (max-width: 600px) {
-                height: 300px;
-            }
-
-            @media screen and (max-width: 500px) {
-                height: 260px;
-            }
-
-            @media screen and (max-width: 431px) {
-                height: 250px;
-            }
-        }
-
-        @media screen and (max-width: 700px) {
-            & h1 {
-                margin: 1.5rem 0 2rem;
-                color: #2a2727;
-                font-size: 3rem;
-                letter-spacing: 0.2rem;
-            }
-        }
-
-        @media screen and (max-width: 500px) {
-            padding-top: 1.5rem;
-
-            & .maps {
-
-                & img {
-                    // height: 100%;
-                    width: 45%;
-                }
-            }
-
-            & p {
-                font-size: 1.3rem;
-            }
-        }
-
-        @media screen and (max-width: 400px) {
-            padding-top: 1rem;
-        }
+@media screen and (max-width: 480px) {
+    .lead {
+        font-size: 1rem;
     }
 }
