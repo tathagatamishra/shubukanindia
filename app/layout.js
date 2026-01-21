@@ -10,7 +10,7 @@ import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
 import localFont from "next/font/local";
 import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
-import { Amarante } from 'next/font/google'
+import { Amarante } from "next/font/google";
 
 export const metadata = {
   metadataBase: new URL("https://www.shubukanindia.org"),
@@ -40,16 +40,16 @@ export const metadata = {
     description:
       "Shubukanindia is approved dojo from Okinawa Shubukan and only sole dojo of Shubukan Okinawa school in India",
     images: [
-    {
-      url: "https://www.shubukanindia.org/og-image.jpg",
-      secureUrl: "https://www.shubukanindia.org/og-image.jpg",
-      width: 1200,
-      height: 630,
-      alt: "Shubukan India",
-      type: "image/jpeg",
-    },
-  ],
-},
+      {
+        url: "https://www.shubukanindia.org/og-image.jpg",
+        secureUrl: "https://www.shubukanindia.org/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Shubukan India",
+        type: "image/jpeg",
+      },
+    ],
+  },
   twitter: {
     card: "summary_large_image",
     title: "Shubukan India",
@@ -90,10 +90,10 @@ const amanojaku = localFont({
   variable: "--font-amanojaku",
 });
 const amarante = Amarante({
-  subsets: ['latin'],
-  weight: ['400'],  
-  variable: '--font-amarante',
-})
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-amarante",
+});
 
 export default function RootLayout({ children }) {
   // Only run in production and client-side
@@ -109,13 +109,13 @@ export default function RootLayout({ children }) {
       className={`${mufan.variable} ${amanojaku.variable} ${amarante.variable}`}
       style={{
         background: "rgb(231, 221, 211)",
-        overflowX: "hidden",
         backgroundImage:
-          'url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
+          'linear-gradient(#fbf5ea58), url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
         backgroundSize: "250px 250px",
         maxWidth: "100vw",
         margin: "0px",
         boxSizing: "border-box",
+        overflowX: "hidden",
       }}
     >
       <head>
@@ -151,7 +151,7 @@ export default function RootLayout({ children }) {
         style={{
           background: "rgb(231, 221, 211)",
           backgroundImage:
-            'url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
+            'linear-gradient(#fbf5ea58), url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
           backgroundSize: "250px 250px",
           maxWidth: "100vw",
           width: "100%",
