@@ -53,7 +53,7 @@ export default function BlogNotFound() {
         />
         <button
           className="px-4 py-2 rounded bg-gray-200"
-          onClick={() => navigate("/blog")}
+          onClick={() => navigate("/journal")}
         >
           Back to Blog
         </button>

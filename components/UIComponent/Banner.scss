@@ -41,9 +41,12 @@
         // font-family: 'Capriola', sans-serif;
         // font-family: 'GFS Neohellenic', sans-serif;
 
-        & .content::selection {
-            color: $---selection-color;
-            background: $---selection-bg;
+        & .content {
+            margin: 0 !important;
+            &::selection {
+                color: $---selection-color;
+                background: $---selection-bg;
+            }
         }
 
         & a {
