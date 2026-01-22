@@ -7,7 +7,7 @@ export const metadata = {
   description:
     "Explore insights on traditional karate, Kobudo, dojo life, training tips, and global martial arts culture from Shubukan India.",
   alternates: {
-    canonical: "https://www.shubukanindia.org/blog",
+    canonical: "https://www.shubukanindia.org/journal",
   },
 };
 

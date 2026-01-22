@@ -3,7 +3,7 @@ import IndiaDojo from "@/components/IndiaDojo/IndiaDojo";
 import { shubukan_api } from "@/config";
 
 export const metadata = {
-  title: "India Dojo | Shubukan India",
+  title: "Dojo Listicle | Shubukan India",
   description:
     "Become a member of Shubukan India. Discover our programs, benefits, and how to enroll in traditional karate classes.",
   alternates: {

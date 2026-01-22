@@ -73,7 +73,7 @@ export default function IndiaDojo({ dojoData = [] }) {
             return (
               <article
                 key={dojo._id || idx}
-                className="paper-scroll p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start"
+                className="paper-scroll p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start rounded-lg"
               >
                 {dojo.profileImage && (
                   <div className="shrink-0 z-1">

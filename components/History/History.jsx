@@ -31,7 +31,7 @@ export default function History() {
     {
       year: "Ryukyu Era",
       headline: "The Crossroads of the East China Sea",
-      body: "Okinawa — formerly the independent Ryukyu Kingdom — occupied a unique position between China, Japan and Southeast Asia. Through centuries of trade and cultural exchange, indigenous fighting arts absorbed techniques and ideas from Chinese martial systems and local island traditions. These early practices gradually evolved into what Okinawans called 'te' (手) — literally 'hand'.",
+      body: "Okinawa - formerly the independent Ryukyu Kingdom - occupied a unique position between China, Japan and Southeast Asia. Through centuries of trade and cultural exchange, indigenous fighting arts absorbed techniques and ideas from Chinese martial systems and local island traditions. These early practices gradually evolved into what Okinawans called 'te' (手) - literally 'hand'.",
     },
     {
       year: "17th–19th c.",
@@ -41,7 +41,7 @@ export default function History() {
     {
       year: "Late 19th c.",
       headline: "Modernising Forces",
-      body: "The abolition of the Ryukyu Kingdom (1879) and subsequent contacts with mainland Japan altered social structures and opened new pathways for the martial arts. Weapon bans and changing political conditions encouraged adaptation: empty-hand methods matured and were systematised. Kobudō (古武道) — the study of traditional Okinawan weapons — continued alongside empty-hand practice in many schools.",
+      body: "The abolition of the Ryukyu Kingdom (1879) and subsequent contacts with mainland Japan altered social structures and opened new pathways for the martial arts. Weapon bans and changing political conditions encouraged adaptation: empty-hand methods matured and were systematised. Kobudō (古武道) - the study of traditional Okinawan weapons - continued alongside empty-hand practice in many schools.",
     },
     {
       year: "1930s–1940s",
@@ -49,9 +49,9 @@ export default function History() {
       body: "In the 20th century Okinawan masters began to formalise styles and share their teachings outside the islands. In 1933 Master Chōshin Chibana chose the name 'Shorin-ryū' for a stream that preserved Shuri-te principles. After the war, organisations and associations assisted the transmission of practice and pedagogy to mainland Japan and beyond.",
     },
     {
-      year: "Post-war — present",
+      year: "Post-war - present",
       headline: "From Local Tradition to Global Art",
-      body: "Karate travelled the world through students, instructors and returning soldiers. Today there are countless dojos worldwide, but the living heart of karate and kobudō remains Okinawa: as heritage, everyday practice and community ritual. Shorin Ryu Shubukan — founded within this living tradition by Sensei Joki Uema — carries specific forms, etiquette and training methods that trace back to the islands' older streams.",
+      body: "Karate travelled the world through students, instructors and returning soldiers. Today there are countless dojos worldwide, but the living heart of karate and kobudō remains Okinawa: as heritage, everyday practice and community ritual. Shorin Ryu Shubukan - founded within this living tradition by Sensei Joki Uema - carries specific forms, etiquette and training methods that trace back to the islands' older streams.",
     },
   ];
 
@@ -82,21 +82,21 @@ export default function History() {
                 srcHigh: "/web_images/shureimon_gate_high.jpg",
                 srcLow: "/web_images/shureimon_gate_low.jpg",
                 credit: "Photo: Sensei Sabyasachi Giri",
-                title: "Shureimon — gate of Shuri",
-                text: "Shureimon stands at Shuri, the historical heart of the Ryukyu court. Its form and ornamentation echo the cultural connections that shaped early Okinawan society — the same currents that carried martial ideas across the sea.",
+                title: "Shureimon - gate of Shuri",
+                text: "Shureimon stands at Shuri, the historical heart of the Ryukyu court. Its form and ornamentation echo the cultural connections that shaped early Okinawan society - the same currents that carried martial ideas across the sea.",
               })
             }
           />
 
           <div className="hero-text">
-            <p className="lead">
+            <p className="lead paragraph">
               Okinawan karate and kobudō grew from island life: pragmatic,
               ritualised and transmitted within families and local communities.
               The styles you see today are the result of centuries of adaptation
-              — a living practice that balances combat efficacy, moral
+              - a living practice that balances combat efficacy, moral
               discipline and cultural tradition.
             </p>
-            <p className="caption">Shureimon Gate — Naha, Okinawa</p>
+            <p className="caption">Shureimon Gate - Naha, Okinawa</p>
           </div>
         </div>
       </section>
@@ -104,17 +104,17 @@ export default function History() {
       <section className="content">
         <article className="paper-block">
           <h2 className="section-title">Origins & Influences</h2>
-          <p>
+          <p className="paragraph">
             Okinawa's geographical position made it a meeting point for traders,
             scholars and martial traditions. Techniques and training methods
             were exchanged with Chinese styles (notably Fujian White Crane and
             other southern systems) and then localised. This exchange produced
             systems focused on both empty-hand striking and the use of simple
-            farming implements as weapons — later formalised as kobudō.
+            farming implements as weapons - later formalised as kobudō.
           </p>
 
           <h3 className="mini">What is Kobudō?</h3>
-          <p>
+          <p className="paragraph">
             Kobudō (古武道) is the collective term for Okinawan traditional
             weapons arts. Common implements include the bo (staff), sai (iron
             truncheon), tonfa, nunchaku and kama. Many weapons forms were
@@ -132,7 +132,7 @@ export default function History() {
                     srcHigh: "/assets/map.jpg",
                     srcLow: "/assets/map.jpg",
                     credit: "Map: historical sources",
-                    title: "Ryukyu Islands — geography",
+                    title: "Ryukyu Islands - geography",
                     text: "Okinawa was the political and cultural core of the Ryukyu Kingdom, a hub in the maritime routes of East Asia. Geography shaped both necessity and technique in its martial arts.",
                   })
                 }
@@ -149,7 +149,7 @@ export default function History() {
                     srcHigh: "/assets/map2.jpg",
                     srcLow: "/assets/map2.jpg",
                     credit: "Map: okinawankarate.org",
-                    title: "Shuri, Naha, Tomari — three regional streams",
+                    title: "Shuri, Naha, Tomari - three regional streams",
                     text: "Although the towns lay only miles apart, Shuri-te, Naha-te and Tomari-te developed distinctive emphases in movement, breathing and application that later became the foundations for named styles.",
                   })
                 }
@@ -165,7 +165,7 @@ export default function History() {
                 <span className="t-year">{item.year}</span>
                 <div>
                   <h4>{item.headline}</h4>
-                  <p>{item.body}</p>
+                  <p className="paragraph">{item.body}</p>
                 </div>
               </li>
             ))}
@@ -174,35 +174,43 @@ export default function History() {
           <h2 className="section-title">
             From Tradition to Shorin Ryu Shubukan
           </h2>
-          <p>
+          <p className="paragraph">
             Shorin Ryu preserves many training principles from the Shuri lineage
-            — fluidity, speed and natural posture. Masters such as Chōshin
+            - fluidity, speed and natural posture. Masters such as Chōshin
             Chibana formalised and named the style in the early 20th century,
             and after World War II associations were formed to protect technique
-            and teaching standards. Shubukan — founded by Sensei Joki Uema —
+            and teaching standards. Shubukan - founded by Sensei Joki Uema -
             continues this stewardship, emphasising katas, partner practice,
             weapons and the etiquette that ties practice back to Okinawan
             community life.
           </p>
 
           <blockquote className="wisdom">
-            空手に先手なし — "There is no first attack in karate." — a classic
+            空手に先手なし - "There is no first attack in karate." - a classic
             maxim that reminds practitioners of restraint, character and the
             moral dimensions of training.
           </blockquote>
 
           <h3 className="mini">Training & Curriculum (what to expect)</h3>
           <ul>
-            <li>Kihon — fundamentals: strikes, blocks, stances and footwork</li>
-            <li>
-              Kata — formal sequences that codify technique and principles
+            <li className="paragraph">
+              Kihon - fundamentals: strikes, blocks, stances and footwork
             </li>
-            <li>Yakusoku Kumite — prearranged partner drills</li>
-            <li>Kumite — controlled sparring for timing and application</li>
-            <li>Kobudō — weapons forms and paired practice (where taught)</li>
+            <li className="paragraph">
+              Kata - formal sequences that codify technique and principles
+            </li>
+            <li className="paragraph">
+              Yakusoku Kumite - prearranged partner drills
+            </li>
+            <li className="paragraph">
+              Kumite - controlled sparring for timing and application
+            </li>
+            <li className="paragraph">
+              Kobudō - weapons forms and paired practice (where taught)
+            </li>
           </ul>
 
-          <p className="note">
+          <p className="note paragraph">
             This page is written to give context to the living tradition of
             Okinawan karate and kobudō. For lineage-specific details, training
             methods and pedagogical emphasis please consult your dojo's senior
@@ -221,7 +229,7 @@ export default function History() {
                 srcLow: "/assets/Karate_ShuriCastle.jpg",
                 credit: "Image: historical archive",
                 title: "Karate training at Shuri Castle",
-                text: "Training and community practice in front of Shuri Castle — a powerful image of place, pedagogy and cultural continuity.",
+                text: "Training and community practice in front of Shuri Castle - a powerful image of place, pedagogy and cultural continuity.",
               })
             }
           />

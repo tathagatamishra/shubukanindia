@@ -155,7 +155,7 @@ export default function Footer() {
             transition: "200ms",
           }}
         >
-          <div onClick={() => navigate("/blog")} className="opt">
+          <div onClick={() => navigate("/journal")} className="opt">
             <p
               style={{
                 textDecoration: "none",
