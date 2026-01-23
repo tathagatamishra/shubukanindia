@@ -113,8 +113,8 @@ export default function RootLayout({ children }) {
           'linear-gradient(#fbf5ea58), url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg")',
         backgroundSize: "250px 250px",
         maxWidth: "100vw",
-        margin: "0px",
         boxSizing: "border-box",
+        margin: "0px",
         overflowX: "hidden",
       }}
     >

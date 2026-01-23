@@ -52,7 +52,8 @@
             font-size: 1.5rem;
             text-align: justify;
 
-            font-family: 'GFS Neohellenic', sans-serif;
+            color: #4b423b;
+            font-family: 'Bellefair', serif;
 
             &::selection {
                 color: $---selection-color;
@@ -235,7 +236,8 @@
         & p {
             font-size: 1.5rem;
             text-align: justify;
-            font-family: 'GFS Neohellenic', sans-serif;
+            color: #4b423b;
+            font-family: 'Bellefair', serif;
 
             // border: 1px solid red;
 
