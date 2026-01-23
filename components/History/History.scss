@@ -43,8 +43,13 @@ h4 {
 
 .paragraph {
     color: #4b423b;
-    font-size: 22px;
+    font-size: 24px;
     font-family: 'Bellefair', serif;
+    // hyphens: auto;
+    // text-align: justify;
+    text-align-last: left;
+    // text-justify: inter-word;
+    // white-space: break-spaces;
 }
 
 .Hero {
@@ -61,14 +66,15 @@ h4 {
     flex-direction: column;
 }
 
-.heading .sub {
-    color: rgba(43, 39, 35, 0.85);
-    margin-top: 0.6rem;
+.sub {
+    color: #2a2727;
+    text-align: left;
     font-family: $font-rainlyregularovl7o;
 }
 
 .hero-content {
     display: flex;
+    align-items: stretch;
     gap: 1.2rem;
     align-items: center;
 }
@@ -79,15 +85,6 @@ h4 {
     cursor: pointer;
 }
 
-.hero-text {
-    width: 55%;
-}
-
-// .lead {
-//     font-size: 1.15rem;
-//     line-height: 1.6;
-// }
-
 .caption {
     margin-top: 0.6rem;
     font-style: italic;
@@ -95,21 +92,21 @@ h4 {
     color: rgba(43, 39, 35, 0.8);
 }
 
-.content {
-    margin-top: 1.8rem;
-}
+.content {}
 
 .paper-block {
     background: transparent;
-    padding: 1.8rem 1.6rem;
     border-left: 5px solid rgba(138, 75, 27, 0.08);
     border-radius: 6px;
+    padding: 0 1.6rem;
 }
 
 .section-title {
     color: var(--accent);
     font-size: 1.6rem;
-    margin: 0.4rem 0 0.6rem 0;
+    margin-top: 1.8rem;
+    margin-bottom: .8rem;
+    padding-top: 1.8rem;
 }
 
 .mini {
@@ -226,25 +223,23 @@ ul {
 /* responsive */
 @media screen and (max-width: 1200px) {
     .paragraph {
-        font-size: 20px;
+        font-size: 24px;
     }
 }
+
 @media screen and (max-width: 1080px) {
     .paragraph {
-        font-size: 20px;
+        font-size: 22px;
     }
 }
 
 @media screen and (max-width: 900px) {
     .hero-content {
+        align-items: start;
         flex-direction: column;
     }
 
     .hero-img {
-        width: 100%;
-    }
-
-    .hero-text {
         width: 100%;
     }
 
@@ -257,16 +252,21 @@ ul {
     }
 
     .paragraph {
-        font-size: 18px;
+        font-size: 20px;
     }
 }
 
 @media screen and (max-width: 480px) {
+    .paper-block {
+        padding: 0;
+        border-left: none;
+    }
+
     .lead {
         font-size: 1rem;
     }
 
     .paragraph {
-        font-size: 16px;
+        font-size: 18px;
     }
 }

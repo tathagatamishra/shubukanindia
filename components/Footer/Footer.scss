@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    background: linear-gradient(0deg, $---accent7 10%, transparent 80%);
 
     // background-image: url("https://res.cloudinary.com/daspiwjet/image/upload/v1742818161/Shubukan/Assets/iksgnmlpeljd7mugtrba.jpg");
     // box-shadow: inset 0px -680px 80px -200px $---accent7; // original
@@ -25,7 +26,7 @@
         border-radius: 0%;
         filter: url(#filter);
         // X-axis, Y-axis, Blur-radius, Spread-radius, Color
-        box-shadow: -100px -235px 150px 50px $---accent7;
+        box-shadow: -100px -150px 150px 100px $---accent7;
         background: $---accent7;
         position: absolute;
         bottom: -5px;
