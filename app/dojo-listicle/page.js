@@ -11,18 +11,15 @@ export const metadata = {
   },
 };
 
-const fetchDojos = async () => {
+async function fetchDojos() {
   try {
-    const res = await shubukan_api.get("/dojo");
-    // some APIs return { success: true, data: [...] } or plain [...]
-    const data = res?.data?.data ?? res?.data ?? [];
-    if (!Array.isArray(data)) return [];
-    return data;
-  } catch (err) {
-    console.error("Fetch dojos err:", err);
+    const response = await shubukan_api.get("/dojo", { cache: "no-store" });
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching dojos:", error);
     return [];
   }
-};
+}
 
 export default async function Page() {
   // await the promise here so you pass a concrete array to the client component
