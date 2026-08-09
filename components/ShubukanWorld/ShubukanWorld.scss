@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/Fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/Fonts' as *;
 
 .ShubukanWorld {
     // border: 1px solid red;
@@ -43,8 +43,8 @@
             font-family: $font-rainlyregularovl7o;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 
@@ -55,8 +55,8 @@
             font-family: 'GFS Neohellenic', sans-serif;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 
@@ -141,8 +141,8 @@
                 // font-family: 'Tenali Ramakrishna', sans-serif;
 
                 &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
+                    color: $selection-color;
+                    background: $selection-bg;
                 }
             }
 
@@ -191,8 +191,8 @@
                         // font-family: 'Tenali Ramakrishna', sans-serif;
 
                         &::selection {
-                            color: $---selection-color;
-                            background: $---selection-bg;
+                            color: $selection-color;
+                            background: $selection-bg;
                         }
                     }
 
@@ -365,8 +365,8 @@
                             // font-family: 'Tenali Ramakrishna', sans-serif;
 
                             &::selection {
-                                color: $---selection-color;
-                                background: $---selection-bg;
+                                color: $selection-color;
+                                background: $selection-bg;
                             }
                         }
                     }

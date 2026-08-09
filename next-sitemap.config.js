@@ -7,7 +7,17 @@ module.exports = {
   sitemapSize: 5000,
   changefreq: "weekly",
   priority: 0.7,
-  exclude: ["/admin/*", "/api/*", "/dev/*", "/404", "/500"],
+  exclude: [
+    "/admin",
+    "/admin/*",
+    "/api/*",
+    "/dev",
+    "/dev/*",
+    "/404",
+    "/500",
+    "/registration",
+    "/marksheet",
+  ],
 
   additionalPaths: async (config) => {
     // 1. Static pages
@@ -80,9 +90,11 @@ module.exports = {
         userAgent: "*",
         allow: "/",
         disallow: [
+          "/admin",
           "/admin/",
           "/api/",
           "/_next/",
+          "/dev",
           "/dev/",
           "/*.json$",
           "/*.config.js$",
@@ -96,12 +108,8 @@ module.exports = {
           "/README.md",
           "/registration",
           "/marksheet",
-          "/help-and-faqs",
-          "/contributors",
-          "/term-and-condition",
         ],
       },
     ],
-    additionalSitemaps: ["https://www.shubukanindia.org/sitemap.xml"],
   },
 };

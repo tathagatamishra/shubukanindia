@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as *;
 
 .PDiv {
     width: 100%;
@@ -43,7 +43,7 @@ canvas.react-pdf__Page__canvas {
     cursor: pointer;
     border: 2px solid #7b4033;
     padding: 0.25em 0.5em;
-    box-shadow: 2px 2px 0px $---accent3;
+    box-shadow: 2px 2px 0px $accent3;
     position: relative;
     user-select: none;
     -webkit-user-select: none;

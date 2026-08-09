@@ -123,13 +123,14 @@ export default function RootLayout({ children }) {
         {/* Google AdSense */}
         <Script
           async
+          strategy="afterInteractive"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2176046634092289"
           crossOrigin="anonymous"
         />
 
         <GoogleAnalytics />
         {/* SEO Schema */}
-        <Script
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
