@@ -11,6 +11,7 @@ import { UIProvider } from "@/components/Context/UIContext";
 import localFont from "next/font/local";
 import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
 import { Amarante } from "next/font/google";
+import Script from "next/script";
 
 export const metadata = {
   metadataBase: new URL("https://www.shubukanindia.org"),
@@ -120,15 +121,15 @@ export default function RootLayout({ children }) {
     >
       <head>
         {/* Google AdSense */}
-        <script
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2176046634092289"
           crossOrigin="anonymous"
-        ></script>
+        />
 
         <GoogleAnalytics />
         {/* SEO Schema */}
-        <script
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
