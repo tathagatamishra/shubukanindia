@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/Fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/Fonts' as *;
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Andika&family=Bellefair&family=Capriola&family=Flamenco&family=Forum&family=Fredericka+the+Great&family=GFS+Neohellenic&family=Philosopher&family=Pompiere&family=Tenali+Ramakrishna&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Finlandica&family=Foldit&family=Fredericka+the+Great&family=Gemunu+Libre&family=Geo&family=Lekton&family=Lexend+Peta&family=Lexend+Tera&family=Martian+Mono&family=MuseoModerno&family=Orbit&family=Rubik+Dirt&family=Shippori+Antique&family=Tourney&family=Train+One&family=Tulpen+One&display=swap');
 
@@ -116,8 +116,8 @@
                 // text-transform: capitalize;
 
                 &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
+                    color: $selection-color;
+                    background: $selection-bg;
                 }
             }
         }
@@ -142,8 +142,8 @@
                 0 0 30px rgb(231, 221, 211);
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 
@@ -505,8 +505,8 @@
                     transition: 200ms;
 
                     &::selection {
-                        color: $---selection-color;
-                        background: $---selection-bg;
+                        color: $selection-color;
+                        background: $selection-bg;
                     }
                 }
             }
@@ -543,8 +543,8 @@
                 transition: 200ms;
 
                 &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
+                    color: $selection-color;
+                    background: $selection-bg;
                 }
             }
 
@@ -581,8 +581,8 @@
                     transition: 200ms;
 
                     &::selection {
-                        color: $---selection-color;
-                        background: $---selection-bg;
+                        color: $selection-color;
+                        background: $selection-bg;
                     }
                 }
             }
@@ -602,8 +602,8 @@
                 transition: 200ms;
 
                 &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
+                    color: $selection-color;
+                    background: $selection-bg;
                 }
             }
 
@@ -1318,8 +1318,8 @@
             // transform: translate(10px, 10px);
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
 
             & p {
@@ -1473,8 +1473,8 @@
 
 
                         &::selection {
-                            color: $---selection-color;
-                            background: $---selection-bg;
+                            color: $selection-color;
+                            background: $selection-bg;
                         }
                     }
 
@@ -1512,8 +1512,8 @@
                         text-align: right;
 
                         &::selection {
-                            color: $---selection-color;
-                            background: $---selection-bg;
+                            color: $selection-color;
+                            background: $selection-bg;
                         }
                     }
 
@@ -1683,8 +1683,8 @@
                     transition: 200ms;
 
                     &::selection {
-                        color: $---selection-color;
-                        background: $---selection-bg;
+                        color: $selection-color;
+                        background: $selection-bg;
                     }
                 }
             }
@@ -1699,8 +1699,8 @@
                 font-family: 'Bellefair', serif;
 
                 &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
+                    color: $selection-color;
+                    background: $selection-bg;
                 }
             }
 
@@ -1712,8 +1712,8 @@
                 margin: 0;
 
                 &::selection {
-                    color: $---selection-color;
-                    background: $---selection-bg;
+                    color: $selection-color;
+                    background: $selection-bg;
                 }
             }
         }
@@ -1764,8 +1764,8 @@
             font-family: 'Bellefair', serif;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 
@@ -1780,8 +1780,8 @@
             text-align: right;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 

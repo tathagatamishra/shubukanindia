@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/Fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/Fonts' as *;
 
 :root {
   --paper-bg: #fbf6ef;

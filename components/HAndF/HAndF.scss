@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/Fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/Fonts' as *;
 
 .HAndF {
     // border: 1px solid red;
@@ -44,8 +44,8 @@
             line-height: 80px;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 
@@ -56,8 +56,8 @@
             font-family: 'GFS Neohellenic', sans-serif;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 

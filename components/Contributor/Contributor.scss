@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/Fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/Fonts' as *;
 
 .Contributor {
     // border: 1px solid red;
@@ -41,8 +41,8 @@
             font-family: $font-rainlyregularovl7o;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 
@@ -52,8 +52,8 @@
             font-family: 'Amarante', cursive;
 
             &::selection {
-                color: $---selection-color;
-                background: $---selection-bg;
+                color: $selection-color;
+                background: $selection-bg;
             }
         }
 

@@ -1,9 +1,11 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
+Disallow: /dev
 Disallow: /dev/
 Disallow: /*.json$
 Disallow: /*.config.js$
@@ -17,9 +19,6 @@ Disallow: /.gitignore
 Disallow: /README.md
 Disallow: /registration
 Disallow: /marksheet
-Disallow: /help-and-faqs
-Disallow: /contributors
-Disallow: /term-and-condition
 
 # Host
 Host: https://www.shubukanindia.org

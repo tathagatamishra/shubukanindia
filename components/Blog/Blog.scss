@@ -1,4 +1,4 @@
-@import '../../styles/variables'; // keep your variables if needed
+@use '../../styles/variables' as *; // keep your variables if needed
 
 .Blog {
     padding-top: 10rem;
