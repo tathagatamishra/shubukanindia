@@ -1,0 +1,412 @@
+/* components/GuardianEvaluation/gef-theme.css
+   Reusable design system: refined, traditional Japanese scroll-inspired UI.
+   All rules are scoped under .gef-root so nothing leaks into the rest of the site. */
+
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap");
+
+.gef-root {
+  --gef-rice: #f5e9d8;
+  --gef-rice-soft: #faf3e7;
+  --gef-ink: #1c1a17;
+  --gef-vermillion: #a61b1b;
+  --gef-vermillion-soft: #c53a3a;
+  --gef-gold: #c6a75e;
+  --gef-charcoal: #2a2a2a;
+  --gef-line: rgba(28, 26, 23, 0.16);
+  --gef-shadow: 0 6px 18px rgba(28, 26, 23, 0.1);
+
+  --gef-font-heading: "Shippori Mincho", "Noto Serif JP", serif;
+  --gef-font-body: "Noto Sans JP", -apple-system, "Segoe UI", sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  color: var(--gef-ink);
+  font-family: var(--gef-font-body);
+  /* subtle asanoha-like hatch, layered low-opacity */
+
+  box-sizing: border-box;
+  padding: 10rem 16px 134px;
+}
+
+.gef-root *,
+.gef-root *::before,
+.gef-root *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- layout ---------- */
+.gef-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.gef-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- headings ---------- */
+.gef-eyebrow {
+  font-family: var(--gef-font-heading);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gef-vermillion);
+  margin: 0 0 4px;
+}
+
+.gef-title {
+  font-family: var(--gef-font-heading);
+  font-weight: 700;
+  font-size: clamp(24px, 5vw, 34px);
+  color: var(--gef-ink);
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.gef-subtitle {
+  font-size: 14px;
+  color: rgba(28, 26, 23, 0.65);
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+/* ---------- ink brush divider ---------- */
+.gef-divider {
+  position: relative;
+  height: 14px;
+  margin: 6px 0 18px;
+  background: transparent;
+}
+.gef-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gef-ink) 6%,
+    var(--gef-ink) 78%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  opacity: 0.75;
+  transform: skewY(-0.4deg);
+}
+.gef-divider::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--gef-ink);
+  border-radius: 50% 50% 50% 10%;
+  opacity: 0.6;
+}
+
+/* ---------- scroll card ---------- */
+.gef-card {
+  position: relative;
+  background: var(--gef-rice-soft);
+  border: 1px solid var(--gef-line);
+  border-radius: 18px 18px 22px 22px;
+  box-shadow: var(--gef-shadow);
+  padding: 24px 20px;
+}
+.gef-card::before,
+.gef-card::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: radial-gradient(circle at 30% 30%, rgba(198,167,94,0.35), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.gef-card::before { top: -8px; left: -8px; }
+.gef-card::after { bottom: -8px; right: -8px; }
+
+.gef-card-title {
+  font-family: var(--gef-font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gef-ink);
+  margin: 0 0 12px;
+}
+
+/* ---------- hanko stamp badge ---------- */
+.gef-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  padding: 6px 12px;
+  border: 2px solid var(--gef-vermillion);
+  color: var(--gef-vermillion);
+  border-radius: 6px;
+  font-family: var(--gef-font-heading);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  background: rgba(166, 27, 27, 0.05);
+}
+.gef-stamp.gef-stamp--gold { border-color: var(--gef-gold); color: #8a6d2f; background: rgba(198,167,94,0.08); }
+.gef-stamp.gef-stamp--ink { border-color: var(--gef-ink); color: var(--gef-ink); background: rgba(28,26,23,0.05); }
+
+/* ---------- buttons ---------- */
+.gef-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--gef-font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--gef-ink);
+  background: var(--gef-ink);
+  color: var(--gef-rice);
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.gef-btn:hover { opacity: 0.88; }
+.gef-btn:active { transform: scale(0.98); }
+.gef-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.gef-btn--primary {
+  border-color: var(--gef-vermillion);
+  background: var(--gef-vermillion);
+  color: #fff;
+}
+.gef-btn--outline {
+  background: transparent;
+  color: var(--gef-ink);
+}
+.gef-btn--gold {
+  border-color: var(--gef-gold);
+  background: var(--gef-gold);
+  color: var(--gef-ink);
+}
+.gef-btn--sm { padding: 8px 16px; font-size: 13px; }
+.gef-btn--block { width: 100%; }
+.gef-btn--danger {
+  border-color: var(--gef-vermillion);
+  background: transparent;
+  color: var(--gef-vermillion);
+}
+
+/* ---------- form elements ---------- */
+.gef-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.gef-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gef-charcoal);
+}
+.gef-label .gef-required { color: var(--gef-vermillion); margin-left: 2px; }
+
+.gef-input,
+.gef-select,
+.gef-textarea {
+  width: 100%;
+  font-family: var(--gef-font-body);
+  font-size: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  color: var(--gef-ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.gef-input:focus,
+.gef-select:focus,
+.gef-textarea:focus {
+  border-color: var(--gef-vermillion);
+}
+.gef-textarea { resize: vertical; min-height: 90px; }
+
+.gef-hint { font-size: 12px; color: rgba(28,26,23,0.55); }
+.gef-error { font-size: 12px; color: var(--gef-vermillion); }
+
+/* yes/no toggle */
+.gef-yesno { display: flex; gap: 10px; }
+.gef-yesno-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--gef-charcoal);
+  text-align: center;
+}
+.gef-yesno-btn.active {
+  border-color: var(--gef-vermillion);
+  background: rgba(166, 27, 27, 0.08);
+  color: var(--gef-vermillion);
+}
+
+/* checkbox chips */
+.gef-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.gef-chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--gef-charcoal);
+}
+.gef-chip.active {
+  border-color: var(--gef-gold);
+  background: rgba(198, 167, 94, 0.18);
+  color: #6f5726;
+}
+
+/* ---------- misc ---------- */
+.gef-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.gef-row > * { flex: 1; min-width: 140px; }
+
+.gef-list { display: flex; flex-direction: column; gap: 12px; }
+
+.gef-empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: rgba(28,26,23,0.55);
+  font-size: 14px;
+}
+
+.gef-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.gef-badge--draft { background: rgba(198,167,94,0.18); color: #6f5726; }
+.gef-badge--submitted { background: rgba(107,142,90,0.18); color: #3f5c34; }
+.gef-badge--pending { background: rgba(28,26,23,0.08); color: var(--gef-charcoal); }
+
+.gef-progress {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.gef-progress-step {
+  flex: 1;
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(28,26,23,0.12);
+}
+.gef-progress-step.done { background: var(--gef-vermillion); }
+.gef-progress-step.current { background: var(--gef-gold); }
+
+.gef-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* modal */
+.gef-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 26, 23, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+}
+.gef-modal {
+  width: 100%;
+  max-width: 460px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--gef-rice-soft);
+  border-radius: 20px;
+  border: 1px solid var(--gef-line);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  padding: 24px 20px;
+}
+
+/* dojo/instructor card grid */
+.gef-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.gef-picker-card {
+  border: 1.5px solid var(--gef-line);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: #fffdf8;
+}
+.gef-picker-card.active {
+  border-color: var(--gef-vermillion);
+  background: rgba(166,27,27,0.06);
+}
+.gef-picker-card img {
+  width: 100%;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: var(--gef-line);
+}
+.gef-picker-card-name { font-size: 12px; font-weight: 700; color: var(--gef-ink); }
+.gef-picker-card-sub { font-size: 11px; color: rgba(28,26,23,0.6); }
+
+/* nav bar for the module */
+.gef-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 760px;
+  margin: 0 auto 22px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gef-ink);
+}
+.gef-nav-bar-links { display: flex; gap: 14px; flex-wrap: wrap; }
+.gef-nav-bar-links a, .gef-nav-bar-links button {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gef-charcoal);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.gef-nav-bar-links a:hover, .gef-nav-bar-links button:hover { color: var(--gef-vermillion); }
+
+@media (max-width: 800px) {
+  .gef-root { padding: 9rem 12px 68px; }
+}
+@media (max-width: 700px) {
+  .gef-root { padding: 8rem 12px 68px; }
+}
+@media (max-width: 500px) {
+  .gef-root { padding: 7rem 12px 48px; }
+}
+
+@media (max-width: 480px) {
+  .gef-card { padding: 18px 14px; }
+}
