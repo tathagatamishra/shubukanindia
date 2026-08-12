@@ -17,7 +17,7 @@ export const emptyEvaluationForm = () => ({
     food: { times: {}, otherTiffinTimes: [] },
     height: null,
     weight: null,
-    sportPerformance: "",
+    sportPerformance: null,
     hobby: "",
     hobbyRemarks: "",
     karateLearningRemarks: "",

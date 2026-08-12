@@ -20,7 +20,7 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
     if (!open) return;
     setLoadingCards(true);
     shubukan_api
-      .get("/guardian/dojo-instructors", { headers: authHeader })
+      .get("/guardian/dojo-instructor-directory", { headers: authHeader })
       .then((res) => setCards(res.data.data || []))
       .catch(() => addToast("Could not load dojo list", "error"))
       .finally(() => setLoadingCards(false));
@@ -40,6 +40,7 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
           dojoId: selected.dojoId,
           dojoName: selected.dojoName,
           instructorName: selected.instructorName,
+          instructorCode: selected.instructorCode,
         },
         { headers: authHeader }
       );
@@ -78,6 +79,11 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
                   {c.profileImage ? <img src={c.profileImage} alt={c.dojoName} /> : <div style={{ height: 64, marginBottom: 8, borderRadius: 8, background: "var(--gef-line)" }} />}
                   <div className="gef-picker-card-name">{c.dojoName}</div>
                   <div className="gef-picker-card-sub">{c.instructorName}</div>
+                  {!c.instructorCode ? (
+                    <div className="gef-picker-card-sub" style={{ color: "var(--gef-vermillion)" }}>
+                      Not yet linked
+                    </div>
+                  ) : null}
                 </div>
               ))}
             </div>

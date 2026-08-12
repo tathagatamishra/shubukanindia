@@ -7,7 +7,7 @@ export const metadata = {
   description: "Shubukan India Guardian Evaluation Form portal",
 };
 
-export default function GuardianEvaluationFormLayout({ children }) {
+export default function GuardianEvaluationLayout({ children }) {
   return (
     <GuardianAuthProvider>
       <div className="gef-root">

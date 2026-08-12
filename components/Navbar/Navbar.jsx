@@ -54,6 +54,7 @@ export default function Navbar() {
 
   const isAdminPage = pathname.startsWith("/admin");
   const isExamPage = pathname.startsWith("/online-exam");
+  const isGuardianEvalPage = pathname.startsWith("/guardian-evaluation");
 
   const pageList = [
     { path: "/history", label: "HISTORY" },
@@ -69,6 +70,7 @@ export default function Navbar() {
     // { path: "/registration", label: "REGISTRATION" },
     { path: "/dojo-listicle", label: "DOJO LISTICLE" },
     { path: "/online-exam", label: "EXAM PORTAL" },
+    { path: "/guardian-evaluation", label: "GUARDIAN EVALUATION" },
     { path: "/gallery", label: "GALLERY" },
     { path: "/journal", label: "JOURNAL" },
     { path: "/contact", label: "CONTACT" },

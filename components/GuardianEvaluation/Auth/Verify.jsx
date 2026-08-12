@@ -22,16 +22,42 @@ export default function Verify() {
   }, []);
 
   const handleChange = (value, index) => {
-    if (/^[0-9]?$/.test(value)) {
+    const digitsOnly = value.replace(/\D/g, "");
+    if (digitsOnly.length > 1) {
+      // Autofill / multi-character input landed in one box - distribute it.
+      const digits = digitsOnly.slice(0, otp.length - index).split("");
       const next = [...otp];
-      next[index] = value;
+      digits.forEach((d, i) => {
+        if (index + i < next.length) next[index + i] = d;
+      });
       setOtp(next);
-      if (value && index < otp.length - 1) inputRefs.current[index + 1]?.focus();
+      inputRefs.current[Math.min(index + digits.length, otp.length - 1)]?.focus();
+      return;
+    }
+    if (/^[0-9]?$/.test(digitsOnly)) {
+      const next = [...otp];
+      next[index] = digitsOnly;
+      setOtp(next);
+      if (digitsOnly && index < otp.length - 1) inputRefs.current[index + 1]?.focus();
     }
   };
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) inputRefs.current[index - 1]?.focus();
+  };
+
+  const handlePaste = (e, index) => {
+    e.preventDefault();
+    const pasted = (e.clipboardData || window.clipboardData).getData("text");
+    const digits = pasted.replace(/\D/g, "").slice(0, otp.length - index).split("");
+    if (!digits.length) return;
+    const next = [...otp];
+    digits.forEach((d, i) => {
+      if (index + i < next.length) next[index + i] = d;
+    });
+    setOtp(next);
+    const lastFilled = Math.min(index + digits.length, otp.length - 1);
+    inputRefs.current[lastFilled]?.focus();
   };
 
   const handleSubmit = async (e) => {
@@ -83,6 +109,9 @@ export default function Verify() {
                 value={digit}
                 onChange={(e) => handleChange(e.target.value, i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
+                onPaste={(e) => handlePaste(e, i)}
+                inputMode="numeric"
+                autoComplete="one-time-code"
               />
             ))}
           </div>
