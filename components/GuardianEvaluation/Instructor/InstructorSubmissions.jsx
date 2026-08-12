@@ -5,25 +5,30 @@ import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
 import Button from "../UI/Button";
 import { downloadFormPdfByRole } from "../UI/downloadPdf";
+import InstructorLogin from "./InstructorLogin";
 
 export default function InstructorSubmissions() {
   const { addToast } = useToast();
   const [token, setToken] = useState(null);
+  const [checked, setChecked] = useState(false);
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const t = localStorage.getItem("instructor_token");
-    setToken(t);
-    if (!t) {
-      setLoading(false);
-      return;
-    }
+  const loadForms = (t) => {
+    setLoading(true);
     shubukan_api
       .get("/instructor/evaluation-form", { headers: { Authorization: `Bearer ${t}` } })
       .then((res) => setForms(res.data.data || []))
       .catch(() => addToast("Could not load your students' submissions", "error"))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    const t = localStorage.getItem("instructor_token");
+    setToken(t);
+    setChecked(true);
+    if (t) loadForms(t);
+    else setLoading(false);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDownload = async (form) => {
@@ -39,20 +44,17 @@ export default function InstructorSubmissions() {
     }
   };
 
-  if (loading) return <p className="gef-hint">Loading...</p>;
+  if (!checked || loading) return <p className="gef-hint">Loading...</p>;
+
   if (!token) {
     return (
-      <div className="gef-container">
-        <Card>
-          <p className="gef-empty">
-            Please log in at{" "}
-            <a href="/online-exam/instructor/login" style={{ color: "var(--gef-vermillion)" }}>
-              /online-exam/instructor/login
-            </a>{" "}
-            first.
-          </p>
-        </Card>
-      </div>
+      <InstructorLogin
+        onLoggedIn={() => {
+          const t = localStorage.getItem("instructor_token");
+          setToken(t);
+          loadForms(t);
+        }}
+      />
     );
   }
 

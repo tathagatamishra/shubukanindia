@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function GefNav() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function GefNav() {
       <a href="/guardian-evaluation" style={{ fontFamily: "var(--gef-font-heading)", fontWeight: 700, fontSize: 18, color: "var(--gef-ink)" }}>
         紹 Guardian Evaluation
       </a>
-      <div className="gef-nav-bar-links">
+      <div className="gef-nav-bar-links" style={{ alignItems: "center" }}>
         {guardian ? (
           <>
             <a href="/guardian-evaluation">Dashboard</a>
@@ -25,6 +26,7 @@ export default function GefNav() {
             <a href="/guardian-evaluation/signup">Sign Up</a>
           </>
         )}
+        <LanguageSwitcher />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@
   /* subtle asanoha-like hatch, layered low-opacity */
 
   box-sizing: border-box;
-  padding: 10rem 16px 134px;
+  padding: 10rem 16px 234px;
 }
 
 .gef-root *,
@@ -409,4 +409,19 @@
 
 @media (max-width: 480px) {
   .gef-card { padding: 18px 14px; }
+}
+
+/* Google Translate widget: keep functionality, hide its default UI chrome */
+.goog-te-banner-frame.skiptranslate,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
 }
