@@ -99,7 +99,7 @@
   opacity: 0.75;
   transform: skewY(-0.4deg);
 }
-.gef-divider::after {
+/* .gef-divider::after {
   content: "";
   position: absolute;
   left: 10%;
@@ -109,7 +109,7 @@
   background: var(--gef-ink);
   border-radius: 50% 50% 50% 10%;
   opacity: 0.6;
-}
+} */
 
 /* ---------- scroll card ---------- */
 .gef-card {
@@ -235,6 +235,27 @@
 }
 .gef-textarea { resize: vertical; min-height: 90px; }
 
+/* OTP entry boxes - deliberately NOT using .gef-row (its `min-width: 140px`
+   child rule would force 6 boxes to wrap onto multiple lines). */
+.gef-otp-row { display: flex; gap: 8px; justify-content: center; flex-wrap: nowrap; }
+.gef-otp-input {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 52px;
+  padding: 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+@media (max-width: 420px) {
+  .gef-otp-row { gap: 6px; }
+  .gef-otp-input { flex-basis: 40px; width: 40px; height: 48px; font-size: 17px; }
+}
+@media (max-width: 360px) {
+  .gef-otp-row { gap: 5px; }
+  .gef-otp-input { flex-basis: 34px; width: 34px; height: 44px; font-size: 15px; padding: 0; }
+}
+
 .gef-hint { font-size: 12px; color: rgba(28,26,23,0.55); }
 .gef-error { font-size: 12px; color: var(--gef-vermillion); }
 
@@ -279,6 +300,105 @@
 /* ---------- misc ---------- */
 .gef-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .gef-row > * { flex: 1; min-width: 140px; }
+.gef-mt-10 { margin-top: 10px; }
+
+/* ---------- continuous document-style form (matches the printed marksheet) ---------- */
+.gef-doc-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.gef-doc-section-heading {
+  margin: 34px 0 18px;
+}
+.gef-doc-section-heading:first-child { margin-top: 8px; }
+.gef-doc-section-title {
+  font-family: var(--gef-font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gef-ink);
+  margin: 0 0 6px;
+}
+.gef-doc-instruction {
+  font-size: 12.5px;
+  color: rgba(28,26,23,0.6);
+  margin: 0 0 10px;
+}
+.gef-doc-rule {
+  height: 2px;
+  background: var(--gef-ink);
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.gef-doc-q {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gef-charcoal);
+  margin: 4px 0 -4px;
+}
+
+/* checkbox rows, mirroring the printed marksheet's square-box checkboxes */
+.gef-checkbox-row {
+  display: inline-flex;
+  /* align-items: center; */
+  gap: 9px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  font-family: var(--gef-font-body);
+  text-align: left;
+}
+.gef-checkbox-box {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1.5px solid var(--gef-ink);
+  border-radius: 4px;
+  background: #fffdf8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.gef-checkbox-row.checked .gef-checkbox-box {
+  border: 2px solid var(--gef-ink);
+  border-color: var(--gef-vermillion);
+  background: rgba(166, 27, 27, 0.06);
+}
+.gef-checkbox-tick {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--gef-vermillion);
+}
+.gef-checkbox-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--gef-charcoal);
+}
+.gef-checkbox-row.checked .gef-checkbox-label { color: var(--gef-vermillion); font-weight: 900; }
+
+.gef-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gef-yesno-checks {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* "Or" separator between mutually-exclusive option groups */
+.gef-or {
+  font-family: var(--gef-font-heading);
+  font-style: italic;
+  font-size: 12.5px;
+  color: rgba(28,26,23,0.55);
+}
 
 .gef-list { display: flex; flex-direction: column; gap: 12px; }
 
@@ -384,8 +504,10 @@
   margin: 0 auto 22px;
   padding-bottom: 12px;
   border-bottom: 2px solid var(--gef-ink);
+  flex-wrap: wrap;
+  row-gap: 12px;
 }
-.gef-nav-bar-links { display: flex; gap: 14px; flex-wrap: wrap; }
+.gef-nav-bar-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .gef-nav-bar-links a, .gef-nav-bar-links button {
   font-size: 13px;
   font-weight: 600;
@@ -397,14 +519,54 @@
 }
 .gef-nav-bar-links a:hover, .gef-nav-bar-links button:hover { color: var(--gef-vermillion); }
 
+.gef-nav-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  color: var(--gef-ink);
+  cursor: pointer;
+  padding: 0 !important;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.gef-nav-icon-btn:hover {
+  border-color: var(--gef-vermillion);
+  color: var(--gef-vermillion) !important;
+  background: rgba(166, 27, 27, 0.06);
+}
+
 @media (max-width: 800px) {
-  .gef-root { padding: 9rem 12px 68px; }
+  .gef-root { padding: 9rem 12px 234px; }
 }
 @media (max-width: 700px) {
-  .gef-root { padding: 8rem 12px 68px; }
+  .gef-root { padding: 8rem 12px 234px; }
 }
 @media (max-width: 500px) {
-  .gef-root { padding: 7rem 12px 48px; }
+  .gef-root { padding: 7rem 12px 234px; }
+}
+
+@media (max-width: 640px) {
+  .gef-nav-bar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    padding-bottom: 14px;
+  }
+  .gef-nav-bar-links {
+    justify-content: center;
+    width: 100%;
+    gap: 10px 16px;
+  }
+  .gef-nav-bar-links select.gef-select {
+    width: auto;
+    max-width: 150px;
+    flex: 0 1 auto;
+  }
 }
 
 @media (max-width: 480px) {

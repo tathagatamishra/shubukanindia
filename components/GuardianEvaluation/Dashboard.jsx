@@ -13,7 +13,6 @@ export default function Dashboard() {
 
   return (
     <div className="gef-container">
-      <Stamp>Guardian Portal</Stamp>
       <h1 className="gef-title">Welcome, {guardian?.name}</h1>
       <p className="gef-subtitle">
         Manage your learners and complete the Guardian Evaluation Form when a submission window is open.

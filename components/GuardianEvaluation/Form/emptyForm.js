@@ -1,7 +1,7 @@
 export const emptyEvaluationForm = () => ({
   student: {
     name: "",
-    age: null,
+    age: "",
     dob: "",
     currentRank: "",
     classOf: "",
@@ -15,8 +15,8 @@ export const emptyEvaluationForm = () => ({
     screenDevice: {},
     sleep: {},
     food: { times: {}, otherTiffinTimes: [] },
-    height: null,
-    weight: null,
+    height: "",
+    weight: "",
     sportPerformance: null,
     hobby: "",
     hobbyRemarks: "",
@@ -45,22 +45,28 @@ export const emptyEvaluationForm = () => ({
   },
   guardianSignatureUrl: "",
   guardianSignaturePublicId: "",
-  studentSignatureUrl: "",
-  studentSignaturePublicId: "",
+  filledByName: "",
 });
 
-// Merge a saved form (from the API) into the wizard's expected shape,
+// Merge a saved form (from the API) into the form's expected shape,
 // filling in any gaps with defaults so controlled inputs never go undefined.
 export const mergeIntoDefaults = (saved) => {
   const base = emptyEvaluationForm();
   if (!saved) return base;
   return {
-    student: { ...base.student, ...saved.student, food: { ...base.student.food, ...saved.student?.food, times: { ...base.student.food.times, ...saved.student?.food?.times } } },
+    student: {
+      ...base.student,
+      ...saved.student,
+      food: {
+        ...base.student.food,
+        ...saved.student?.food,
+        times: { ...base.student.food.times, ...saved.student?.food?.times },
+      },
+    },
     teacher: { ...base.teacher, ...saved.teacher },
     training: { ...base.training, ...saved.training },
     guardianSignatureUrl: saved.guardianSignatureUrl || "",
     guardianSignaturePublicId: saved.guardianSignaturePublicId || "",
-    studentSignatureUrl: saved.studentSignatureUrl || "",
-    studentSignaturePublicId: saved.studentSignaturePublicId || "",
+    filledByName: saved.filledByName || "",
   };
 };

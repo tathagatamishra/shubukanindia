@@ -4,7 +4,7 @@ import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
 import Button from "../UI/Button";
-import { downloadFormPdfByRole } from "../UI/downloadPdf";
+import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
 import InstructorLogin from "./InstructorLogin";
 
 export default function InstructorSubmissions() {
@@ -44,6 +44,14 @@ export default function InstructorSubmissions() {
     }
   };
 
+  const handleView = async (form) => {
+    try {
+      await viewFormPdfByRole("instructor", form._id, { Authorization: `Bearer ${token}` });
+    } catch (err) {
+      addToast(err.message || "Could not open PDF", "error");
+    }
+  };
+
   if (!checked || loading) return <p className="gef-hint">Loading...</p>;
 
   if (!token) {
@@ -58,11 +66,23 @@ export default function InstructorSubmissions() {
     );
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("instructor_token");
+    setToken(null);
+    setForms([]);
+  };
+
   return (
     <div className="gef-container">
-      <Stamp>Instructor</Stamp>
-      <h1 className="gef-title">Your Students' Evaluations</h1>
-      <p className="gef-subtitle">Submitted Guardian Evaluation Forms for your learners.</p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
+        <div>
+          <h1 className="gef-title">Your Students' Evaluations</h1>
+          <p className="gef-subtitle">Submitted Guardian Evaluation Forms for your learners.</p>
+        </div>
+        <Button size="sm" variant="outline" onClick={handleLogout}>
+          Log Out
+        </Button>
+      </div>
       <Divider />
 
       {forms.length === 0 ? (
@@ -78,9 +98,14 @@ export default function InstructorSubmissions() {
                   <div style={{ fontWeight: 700 }}>{f.student?.name}</div>
                   <div className="gef-hint">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
                 </div>
-                <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
-                  Download PDF
-                </Button>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <Button size="sm" variant="outline" onClick={() => handleView(f)}>
+                    View
+                  </Button>
+                  <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
+                    Download PDF
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}

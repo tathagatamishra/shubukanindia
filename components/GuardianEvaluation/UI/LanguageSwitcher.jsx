@@ -1,10 +1,33 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 
+// All Indian languages currently supported by the Google Translate website widget.
 const LANGUAGES = [
   { code: "en", label: "English" },
+  { code: "hi", label: "हिन्दी (Hindi)" },
   { code: "bn", label: "বাংলা (Bengali)" },
+  { code: "as", label: "অসমীয়া (Assamese)" },
+  { code: "bho", label: "भोजपुरी (Bhojpuri)" },
+  { code: "doi", label: "डोगरी (Dogri)" },
+  { code: "gu", label: "ગુજરાતી (Gujarati)" },
+  { code: "gom", label: "कोंकणी (Konkani)" },
+  { code: "kn", label: "ಕನ್ನಡ (Kannada)" },
+  { code: "mai", label: "मैथिली (Maithili)" },
+  { code: "ml", label: "മലയാളം (Malayalam)" },
+  { code: "mni-Mtei", label: "মৈতৈলোন্ (Manipuri)" },
+  { code: "mr", label: "मराठी (Marathi)" },
+  { code: "lus", label: "Mizo ṭawng (Mizo)" },
+  { code: "ne", label: "नेपाली (Nepali)" },
+  { code: "or", label: "ଓଡ଼ିଆ (Odia)" },
+  { code: "pa", label: "ਪੰਜਾਬੀ (Punjabi)" },
+  { code: "sa", label: "संस्कृतम् (Sanskrit)" },
+  { code: "sd", label: "سنڌي (Sindhi)" },
+  { code: "ta", label: "தமிழ் (Tamil)" },
+  { code: "te", label: "తెలుగు (Telugu)" },
+  { code: "ur", label: "اردو (Urdu)" },
 ];
+
+const INCLUDED_LANGUAGES = LANGUAGES.map((l) => l.code).join(",");
 
 let widgetLoadPromise = null;
 
@@ -18,7 +41,7 @@ function loadGoogleTranslateWidget() {
     window.googleTranslateElementInit = () => {
       // eslint-disable-next-line no-new
       new window.google.translate.TranslateElement(
-        { pageLanguage: "en", includedLanguages: "en,bn", autoDisplay: false },
+        { pageLanguage: "en", includedLanguages: INCLUDED_LANGUAGES, autoDisplay: false },
         "gef-google-translate-root"
       );
       resolve();
@@ -60,12 +83,20 @@ export default function LanguageSwitcher({ compact = false }) {
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 8 }} className="notranslate">
+    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", justifyContent: "center" }} className="notranslate">
       {/* Google's widget mounts here; visually hidden but functional */}
       <div id="gef-google-translate-root" style={{ display: "none" }} ref={containerRef} />
       <select
         className="gef-select"
-        style={{ padding: "6px 10px", fontSize: 12, width: "auto" }}
+        style={{
+          padding: "6px 10px",
+          fontSize: 12,
+          width: "auto",
+          maxWidth: 140,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
         value={lang}
         onChange={(e) => setLang(e.target.value)}
       >

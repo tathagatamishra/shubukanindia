@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
@@ -11,6 +12,7 @@ export default function Signup() {
   const router = useRouter();
   const { addToast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", password: "", mobile: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const set = (key) => (v) => setForm((f) => ({ ...f, [key]: v }));
@@ -31,10 +33,12 @@ export default function Signup() {
   };
 
   return (
-    <div className="gef-container">
-      <Stamp>Guardian Portal</Stamp>
-      <h1 className="gef-title">Create your account</h1>
-      <p className="gef-subtitle">
+    <div className="gef-container" style={{ maxWidth: 420 }}>
+
+      <h1 className="gef-title" style={{ textAlign: "center" }}>
+        Create your account
+      </h1>
+      <p className="gef-subtitle" style={{ textAlign: "center" }}>
         Register as a guardian to submit the Guardian Evaluation Form for your children.
       </p>
       <Divider />
@@ -50,7 +54,36 @@ export default function Signup() {
             <TextInput value={form.mobile} onChange={set("mobile")} placeholder="Mobile number" />
           </Field>
           <Field label="Password" required>
-            <TextInput type="password" value={form.password} onChange={set("password")} placeholder="Create a password" required />
+            <div style={{ position: "relative" }}>
+              <input
+                className="gef-input"
+                style={{ paddingRight: 38 }}
+                type={showPassword ? "text" : "password"}
+                value={form.password}
+                onChange={(e) => set("password")(e.target.value)}
+                placeholder="Create a password"
+                autoComplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "rgba(28,26,23,0.55)",
+                  display: "flex",
+                }}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>
+            </div>
           </Field>
           <Button type="submit" variant="primary" block disabled={loading}>
             {loading ? "Creating account..." : "Sign Up"}

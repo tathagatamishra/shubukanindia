@@ -1,39 +1,35 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { FiLock, FiUser, FiEye, FiEyeOff } from "react-icons/fi";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
-import { useGuardianAuth } from "../Context/GuardianAuthContext";
-import { Card, Divider, Stamp } from "../UI/Basics";
-import { Field, TextInput } from "../UI/FormFields";
-import Button from "../UI/Button";
+import { Card, Divider, Stamp } from "@/components/GuardianEvaluation/UI/Basics";
+import { Field } from "@/components/GuardianEvaluation/UI/FormFields";
+import Button from "@/components/GuardianEvaluation/UI/Button";
 
-export default function Login() {
+export default function GuardianEvaluationAdminLogin() {
   const router = useRouter();
   const { addToast } = useToast();
-  const { login } = useGuardianAuth();
-  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    if (!id || !password) {
+      addToast("Please enter your admin ID and password", "warning");
+      return;
+    }
     setLoading(true);
     try {
-      const res = await shubukan_api.post("/guardian/login", { email, password });
-      login(res.data.token);
+      const { data } = await shubukan_api.post("/admin/login", { id, password });
+      localStorage.setItem("adminToken", data.token);
       addToast("Welcome back", "success");
-      router.push("/guardian-evaluation");
+      router.push("/guardian-evaluation/admin");
     } catch (err) {
-      if (err.response?.status === 403) {
-        addToast(err.response.data.message || "Please verify your email first", "warning");
-        localStorage.setItem("guardian_verify_email", email);
-        router.push("/guardian-evaluation/verify");
-      } else {
-        addToast(err.response?.data?.message || "Login failed", "error");
-      }
+      addToast(err.response?.data?.error || err.response?.data?.message || "Login failed", "error");
     } finally {
       setLoading(false);
     }
@@ -43,22 +39,50 @@ export default function Login() {
     <div className="gef-container" style={{ maxWidth: 420 }}>
 
       <h1 className="gef-title" style={{ textAlign: "center" }}>
-        Welcome back
+        Admin Login
       </h1>
       <p className="gef-subtitle" style={{ textAlign: "center" }}>
-        Log in to view and complete the Guardian Evaluation Form.
+        Sign in to manage Guardian Evaluation windows &amp; submissions.
       </p>
       <Divider />
       <Card>
-        <form onSubmit={handleSubmit} className="gef-stack">
-          <Field label="Email" required>
-            <TextInput type="email" value={email} onChange={setEmail} placeholder="you@example.com" required />
+        <form onSubmit={handleLogin} className="gef-stack">
+          <Field label="Admin ID" required>
+            <div style={{ position: "relative" }}>
+              <FiUser
+                style={{
+                  position: "absolute",
+                  left: 14,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: "rgba(28,26,23,0.45)",
+                }}
+              />
+              <input
+                className="gef-input"
+                style={{ paddingLeft: 38 }}
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                placeholder="Admin ID"
+                autoComplete="username"
+                required
+              />
+            </div>
           </Field>
           <Field label="Password" required>
             <div style={{ position: "relative" }}>
+              <FiLock
+                style={{
+                  position: "absolute",
+                  left: 14,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: "rgba(28,26,23,0.45)",
+                }}
+              />
               <input
                 className="gef-input"
-                style={{ paddingRight: 38 }}
+                style={{ paddingLeft: 38, paddingRight: 38 }}
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -87,14 +111,13 @@ export default function Login() {
             </div>
           </Field>
           <Button type="submit" variant="primary" block disabled={loading}>
-            {loading ? "Logging in..." : "Log In"}
+            {loading ? "Signing in..." : "Log In"}
           </Button>
         </form>
       </Card>
       <p className="gef-hint" style={{ marginTop: 14, textAlign: "center" }}>
-        New here?{" "}
-        <a href="/guardian-evaluation/signup" style={{ color: "var(--gef-vermillion)", fontWeight: 600 }}>
-          Create an account
+        <a href="/guardian-evaluation" style={{ color: "var(--gef-vermillion)", fontWeight: 600 }}>
+          &larr; Back to Guardian Evaluation
         </a>
       </p>
     </div>

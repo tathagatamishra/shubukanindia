@@ -6,7 +6,7 @@ import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Card, StatusBadge, Stamp, Divider } from "../UI/Basics";
 import Button from "../UI/Button";
-import { downloadFormPdfByRole } from "../UI/downloadPdf";
+import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
 
 const EDIT_WINDOW_MS = 5 * 60 * 1000;
 
@@ -33,6 +33,14 @@ export default function MySubmissions() {
     }
   };
 
+  const handleView = async (form) => {
+    try {
+      await viewFormPdfByRole("guardian", form._id, authHeader);
+    } catch (err) {
+      addToast(err.message || "Could not open PDF", "error");
+    }
+  };
+
   const canEdit = (form) => {
     if (form.status === "draft") return true;
     return Date.now() - new Date(form.submittedAt).getTime() <= EDIT_WINDOW_MS;
@@ -40,7 +48,6 @@ export default function MySubmissions() {
 
   return (
     <div className="gef-container">
-      <Stamp color="gold">Your Records</Stamp>
       <h1 className="gef-title">My Submissions</h1>
       <p className="gef-subtitle">All evaluation forms you have started or submitted.</p>
       <Divider />
@@ -76,9 +83,14 @@ export default function MySubmissions() {
                     </Button>
                   ) : null}
                   {f.status === "submitted" ? (
-                    <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
-                      Download PDF
-                    </Button>
+                    <>
+                      <Button size="sm" variant="outline" onClick={() => handleView(f)}>
+                        View
+                      </Button>
+                      <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
+                        Download PDF
+                      </Button>
+                    </>
                   ) : null}
                 </div>
               </div>
