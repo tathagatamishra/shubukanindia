@@ -105,7 +105,6 @@ export default function FormWizard({ learnerId, windowId }) {
 
   return (
     <div className="gef-container">
-      <Stamp>{windowInfo?.title}</Stamp>
       <h1 className="gef-title">Guardian Evaluation Form</h1>
       <p className="gef-subtitle">
         For <strong>{learner?.name}</strong> &middot; <StatusBadge status={status} />

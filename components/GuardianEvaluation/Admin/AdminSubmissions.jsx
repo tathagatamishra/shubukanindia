@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
 import Button from "../UI/Button";
-import { downloadFormPdfByRole } from "../UI/downloadPdf";
+import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
 
 export default function AdminSubmissions() {
+  const router = useRouter();
   const { addToast } = useToast();
   const [token, setToken] = useState(null);
   const [forms, setForms] = useState([]);
@@ -39,22 +41,24 @@ export default function AdminSubmissions() {
     }
   };
 
-  if (loading) return <p className="gef-hint">Loading...</p>;
-  if (!token) {
-    return (
-      <div className="gef-container">
-        <Card>
-          <p className="gef-empty">
-            Please log in at <a href="/admin/login" style={{ color: "var(--gef-vermillion)" }}>/admin/login</a> first.
-          </p>
-        </Card>
-      </div>
-    );
-  }
+  const handleView = async (form) => {
+    try {
+      await viewFormPdfByRole("admin", form._id, { Authorization: `Bearer ${token}` });
+    } catch (err) {
+      addToast(err.message || "Could not open PDF", "error");
+    }
+  };
+
+  useEffect(() => {
+    if (!loading && !token) {
+      router.replace("/guardian-evaluation/admin/login");
+    }
+  }, [loading, token, router]);
+
+  if (loading || !token) return <p className="gef-hint">Loading...</p>;
 
   return (
     <div className="gef-container">
-      <Stamp>Admin</Stamp>
       <h1 className="gef-title">All Submitted Forms</h1>
       <p className="gef-subtitle">Draft forms are never shown here &mdash; only fully submitted evaluations.</p>
       <Divider />
@@ -75,9 +79,14 @@ export default function AdminSubmissions() {
                   </div>
                   <div className="gef-hint">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
                 </div>
-                <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
-                  Download PDF
-                </Button>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <Button size="sm" variant="outline" onClick={() => handleView(f)}>
+                    View
+                  </Button>
+                  <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
+                    Download PDF
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}

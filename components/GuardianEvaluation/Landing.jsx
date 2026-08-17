@@ -6,7 +6,6 @@ import Button from "./UI/Button";
 export default function Landing() {
   return (
     <div className="gef-container">
-      <Stamp>Shubukan India</Stamp>
       <h1 className="gef-title">Guardian Evaluation Form</h1>
       <p className="gef-subtitle">
         A structured evaluation, filled by guardians, to help instructors understand each student's habits,

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
@@ -7,6 +8,7 @@ import { Field, TextInput, ChipMultiSelect } from "../UI/FormFields";
 import Button from "../UI/Button";
 
 export default function AdminWindowManager() {
+  const router = useRouter();
   const { addToast } = useToast();
   const [token, setToken] = useState(null);
   const [instructors, setInstructors] = useState([]);
@@ -80,24 +82,18 @@ export default function AdminWindowManager() {
     }
   };
 
-  if (loading) return <p className="gef-hint">Loading...</p>;
-  if (!token) {
-    return (
-      <div className="gef-container">
-        <Card>
-          <p className="gef-empty">
-            Please log in at <a href="/admin/login" style={{ color: "var(--gef-vermillion)" }}>/admin/login</a> first.
-          </p>
-        </Card>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!loading && !token) {
+      router.replace("/guardian-evaluation/admin/login");
+    }
+  }, [loading, token, router]);
+
+  if (loading || !token) return <p className="gef-hint">Loading...</p>;
 
   const instructorNames = new Map(instructors.map((i) => [i.instructorId, i.name]));
 
   return (
     <div className="gef-container">
-      <Stamp>Admin</Stamp>
       <h1 className="gef-title">Evaluation Windows</h1>
       <p className="gef-subtitle">Open the Guardian Evaluation Form portal for one or more instructors.</p>
       <Divider />
@@ -119,13 +115,8 @@ export default function AdminWindowManager() {
             <ChipMultiSelect
               value={selectedCodes}
               onChange={setSelectedCodes}
-              options={instructors.map((i) => i.instructorId)}
+              options={instructors.map((i) => ({ value: i.instructorId, label: i.name }))}
             />
-            {instructors.length > 0 ? (
-              <p className="gef-hint" style={{ marginTop: 6 }}>
-                {instructors.map((i) => `${i.instructorId} = ${i.name}`).join(" | ")}
-              </p>
-            ) : null}
           </Field>
           <Button type="submit" variant="primary" block disabled={creating}>
             {creating ? "Opening..." : "Open Window & Notify Guardians"}
