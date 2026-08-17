@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`html ${mufan.variable} ${amanojaku.variable} ${amarante.variable}`}
+      className={`${mufan.variable} ${amanojaku.variable} ${amarante.variable}`}
       style={{
         background: "rgb(231, 221, 211)",
         backgroundImage:
@@ -159,7 +159,6 @@ export default function RootLayout({ children }) {
           width: "100%",
           margin: "0px",
           boxSizing: "border-box",
-          overflowX: "hidden",
         }}
       >
         {/* {isDesktop && <MouseTrail />} */}
@@ -173,6 +172,7 @@ export default function RootLayout({ children }) {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                overflowX: "hidden",
               }}
             >
               <Navbar />

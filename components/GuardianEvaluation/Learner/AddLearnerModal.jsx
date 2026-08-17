@@ -21,10 +21,7 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
     setLoadingCards(true);
     shubukan_api
       .get("/guardian/dojo-instructor-directory", { headers: authHeader })
-      .then((res) => {
-        setCards(res.data.data || []);
-        console.log(res.data.data);
-      })
+      .then((res) => setCards(res.data.data || []))
       .catch(() => addToast("Could not load dojo list", "error"))
       .finally(() => {
         setLoadingCards(false);
@@ -94,7 +91,6 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
                       className={`gef-picker-card ${selected === c ? "active" : ""}`}
                       onClick={() => setSelected(c)}
                     >
-                      {console.log(c)}
                       {c.profileImage ? (
                         <img src={c.profileImage} alt={c.dojoName} />
                       ) : (
