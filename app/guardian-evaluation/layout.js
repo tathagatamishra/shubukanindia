@@ -10,7 +10,7 @@ export const metadata = {
 export default function GuardianEvaluationLayout({ children }) {
   return (
     <GuardianAuthProvider>
-      <div className="gef-root">
+      <div className="gef-root" style={{ zIndex: 2 }}>
         <GefNav />
         {children}
       </div>

@@ -19,6 +19,7 @@
   --gef-font-body: "Noto Sans JP", -apple-system, "Segoe UI", sans-serif;
 
   position: relative;
+  z-index: 2;
   min-height: 100vh;
   width: 100%;
   color: var(--gef-ink);
@@ -81,6 +82,7 @@
   margin: 6px 0 18px;
   background: transparent;
 }
+
 .gef-divider::before {
   content: "";
   position: absolute;
@@ -88,17 +90,16 @@
   right: 0;
   top: 6px;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--gef-ink) 6%,
-    var(--gef-ink) 78%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--gef-ink) 6%,
+      var(--gef-ink) 78%,
+      transparent 100%);
   border-radius: 2px;
   opacity: 0.75;
   transform: skewY(-0.4deg);
 }
+
 /* .gef-divider::after {
   content: "";
   position: absolute;
@@ -120,18 +121,27 @@
   box-shadow: var(--gef-shadow);
   padding: 24px 20px;
 }
-.gef-card::before,
+
+/* .gef-card::before,
 .gef-card::after {
   content: "";
   position: absolute;
   width: 26px;
   height: 26px;
-  background: radial-gradient(circle at 30% 30%, rgba(198,167,94,0.35), transparent 70%);
+  background: red;
   border-radius: 50%;
   pointer-events: none;
+} */
+
+.gef-card::before {
+  top: -8px;
+  left: -8px;
 }
-.gef-card::before { top: -8px; left: -8px; }
-.gef-card::after { bottom: -8px; right: -8px; }
+
+.gef-card::after {
+  bottom: -8px;
+  right: -8px;
+}
 
 .gef-card-title {
   font-family: var(--gef-font-heading);
@@ -159,8 +169,18 @@
   transform: rotate(-3deg);
   background: rgba(166, 27, 27, 0.05);
 }
-.gef-stamp.gef-stamp--gold { border-color: var(--gef-gold); color: #8a6d2f; background: rgba(198,167,94,0.08); }
-.gef-stamp.gef-stamp--ink { border-color: var(--gef-ink); color: var(--gef-ink); background: rgba(28,26,23,0.05); }
+
+.gef-stamp.gef-stamp--gold {
+  border-color: var(--gef-gold);
+  color: #8a6d2f;
+  background: rgba(198, 167, 94, 0.08);
+}
+
+.gef-stamp.gef-stamp--ink {
+  border-color: var(--gef-ink);
+  color: var(--gef-ink);
+  background: rgba(28, 26, 23, 0.05);
+}
 
 /* ---------- buttons ---------- */
 .gef-btn {
@@ -179,26 +199,46 @@
   cursor: pointer;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
-.gef-btn:hover { opacity: 0.88; }
-.gef-btn:active { transform: scale(0.98); }
-.gef-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.gef-btn:hover {
+  opacity: 0.88;
+}
+
+.gef-btn:active {
+  transform: scale(0.98);
+}
+
+.gef-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 
 .gef-btn--primary {
   border-color: var(--gef-vermillion);
   background: var(--gef-vermillion);
   color: #fff;
 }
+
 .gef-btn--outline {
   background: transparent;
   color: var(--gef-ink);
 }
+
 .gef-btn--gold {
   border-color: var(--gef-gold);
   background: var(--gef-gold);
   color: var(--gef-ink);
 }
-.gef-btn--sm { padding: 8px 16px; font-size: 13px; }
-.gef-btn--block { width: 100%; }
+
+.gef-btn--sm {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.gef-btn--block {
+  width: 100%;
+}
+
 .gef-btn--danger {
   border-color: var(--gef-vermillion);
   background: transparent;
@@ -206,13 +246,23 @@
 }
 
 /* ---------- form elements ---------- */
-.gef-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.gef-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
 .gef-label {
   font-size: 13px;
   font-weight: 600;
   color: var(--gef-charcoal);
 }
-.gef-label .gef-required { color: var(--gef-vermillion); margin-left: 2px; }
+
+.gef-label .gef-required {
+  color: var(--gef-vermillion);
+  margin-left: 2px;
+}
 
 .gef-input,
 .gef-select,
@@ -228,16 +278,27 @@
   outline: none;
   transition: border-color 0.15s ease;
 }
+
 .gef-input:focus,
 .gef-select:focus,
 .gef-textarea:focus {
   border-color: var(--gef-vermillion);
 }
-.gef-textarea { resize: vertical; min-height: 90px; }
+
+.gef-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
 
 /* OTP entry boxes - deliberately NOT using .gef-row (its `min-width: 140px`
    child rule would force 6 boxes to wrap onto multiple lines). */
-.gef-otp-row { display: flex; gap: 8px; justify-content: center; flex-wrap: nowrap; }
+.gef-otp-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
 .gef-otp-input {
   flex: 0 0 44px;
   width: 44px;
@@ -247,20 +308,50 @@
   font-size: 18px;
   font-weight: 700;
 }
+
 @media (max-width: 420px) {
-  .gef-otp-row { gap: 6px; }
-  .gef-otp-input { flex-basis: 40px; width: 40px; height: 48px; font-size: 17px; }
-}
-@media (max-width: 360px) {
-  .gef-otp-row { gap: 5px; }
-  .gef-otp-input { flex-basis: 34px; width: 34px; height: 44px; font-size: 15px; padding: 0; }
+  .gef-otp-row {
+    gap: 6px;
+  }
+
+  .gef-otp-input {
+    flex-basis: 40px;
+    width: 40px;
+    height: 48px;
+    font-size: 17px;
+  }
 }
 
-.gef-hint { font-size: 12px; color: rgba(28,26,23,0.55); }
-.gef-error { font-size: 12px; color: var(--gef-vermillion); }
+@media (max-width: 360px) {
+  .gef-otp-row {
+    gap: 5px;
+  }
+
+  .gef-otp-input {
+    flex-basis: 34px;
+    width: 34px;
+    height: 44px;
+    font-size: 15px;
+    padding: 0;
+  }
+}
+
+.gef-hint {
+  font-size: 12px;
+  color: rgba(28, 26, 23, 0.55);
+}
+
+.gef-error {
+  font-size: 12px;
+  color: var(--gef-vermillion);
+}
 
 /* yes/no toggle */
-.gef-yesno { display: flex; gap: 10px; }
+.gef-yesno {
+  display: flex;
+  gap: 10px;
+}
+
 .gef-yesno-btn {
   flex: 1;
   padding: 10px 14px;
@@ -273,6 +364,7 @@
   color: var(--gef-charcoal);
   text-align: center;
 }
+
 .gef-yesno-btn.active {
   border-color: var(--gef-vermillion);
   background: rgba(166, 27, 27, 0.08);
@@ -280,7 +372,12 @@
 }
 
 /* checkbox chips */
-.gef-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.gef-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .gef-chip {
   padding: 8px 14px;
   border-radius: 999px;
@@ -291,6 +388,7 @@
   cursor: pointer;
   color: var(--gef-charcoal);
 }
+
 .gef-chip.active {
   border-color: var(--gef-gold);
   background: rgba(198, 167, 94, 0.18);
@@ -298,9 +396,20 @@
 }
 
 /* ---------- misc ---------- */
-.gef-row { display: flex; gap: 12px; flex-wrap: wrap; }
-.gef-row > * { flex: 1; min-width: 140px; }
-.gef-mt-10 { margin-top: 10px; }
+.gef-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.gef-row>* {
+  flex: 1;
+  min-width: 140px;
+}
+
+.gef-mt-10 {
+  margin-top: 10px;
+}
 
 /* ---------- continuous document-style form (matches the printed marksheet) ---------- */
 .gef-doc-body {
@@ -311,7 +420,11 @@
 .gef-doc-section-heading {
   margin: 34px 0 18px;
 }
-.gef-doc-section-heading:first-child { margin-top: 8px; }
+
+.gef-doc-section-heading:first-child {
+  margin-top: 8px;
+}
+
 .gef-doc-section-title {
   font-family: var(--gef-font-heading);
   font-size: 20px;
@@ -319,11 +432,13 @@
   color: var(--gef-ink);
   margin: 0 0 6px;
 }
+
 .gef-doc-instruction {
   font-size: 12.5px;
-  color: rgba(28,26,23,0.6);
+  color: rgba(28, 26, 23, 0.6);
   margin: 0 0 10px;
 }
+
 .gef-doc-rule {
   height: 2px;
   background: var(--gef-ink);
@@ -350,6 +465,7 @@
   font-family: var(--gef-font-body);
   text-align: left;
 }
+
 .gef-checkbox-box {
   flex: 0 0 auto;
   width: 18px;
@@ -362,23 +478,30 @@
   align-items: center;
   justify-content: center;
 }
+
 .gef-checkbox-row.checked .gef-checkbox-box {
   border: 2px solid var(--gef-ink);
   border-color: var(--gef-vermillion);
   background: rgba(166, 27, 27, 0.06);
 }
+
 .gef-checkbox-tick {
   width: 10px;
   height: 10px;
   border-radius: 2px;
   background: var(--gef-vermillion);
 }
+
 .gef-checkbox-label {
   font-size: 13.5px;
   font-weight: 600;
   color: var(--gef-charcoal);
 }
-.gef-checkbox-row.checked .gef-checkbox-label { color: var(--gef-vermillion); font-weight: 900; }
+
+.gef-checkbox-row.checked .gef-checkbox-label {
+  color: var(--gef-vermillion);
+  font-weight: 900;
+}
 
 .gef-checklist {
   display: flex;
@@ -397,15 +520,19 @@
   font-family: var(--gef-font-heading);
   font-style: italic;
   font-size: 12.5px;
-  color: rgba(28,26,23,0.55);
+  color: rgba(28, 26, 23, 0.55);
 }
 
-.gef-list { display: flex; flex-direction: column; gap: 12px; }
+.gef-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .gef-empty {
   text-align: center;
   padding: 40px 16px;
-  color: rgba(28,26,23,0.55);
+  color: rgba(28, 26, 23, 0.55);
   font-size: 14px;
 }
 
@@ -418,23 +545,42 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.gef-badge--draft { background: rgba(198,167,94,0.18); color: #6f5726; }
-.gef-badge--submitted { background: rgba(107,142,90,0.18); color: #3f5c34; }
-.gef-badge--pending { background: rgba(28,26,23,0.08); color: var(--gef-charcoal); }
+
+.gef-badge--draft {
+  background: rgba(198, 167, 94, 0.18);
+  color: #6f5726;
+}
+
+.gef-badge--submitted {
+  background: rgba(107, 142, 90, 0.18);
+  color: #3f5c34;
+}
+
+.gef-badge--pending {
+  background: rgba(28, 26, 23, 0.08);
+  color: var(--gef-charcoal);
+}
 
 .gef-progress {
   display: flex;
   gap: 6px;
   margin-bottom: 20px;
 }
+
 .gef-progress-step {
   flex: 1;
   height: 5px;
   border-radius: 4px;
-  background: rgba(28,26,23,0.12);
+  background: rgba(28, 26, 23, 0.12);
 }
-.gef-progress-step.done { background: var(--gef-vermillion); }
-.gef-progress-step.current { background: var(--gef-gold); }
+
+.gef-progress-step.done {
+  background: var(--gef-vermillion);
+}
+
+.gef-progress-step.current {
+  background: var(--gef-gold);
+}
 
 .gef-nav {
   display: flex;
@@ -454,25 +600,34 @@
   padding: 20px;
   z-index: 2000;
 }
+
 .gef-modal {
   width: 100%;
   max-width: 460px;
-  max-height: 88vh;
+  max-height: calc(88vh - 10rem);
   overflow-y: auto;
   background: var(--gef-rice-soft);
   border-radius: 20px;
   border: 1px solid var(--gef-line);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   padding: 24px 20px;
+  scrollbar-width: none;
 }
 
 /* dojo/instructor card grid */
 .gef-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
   gap: 10px;
+  width: 100%;
 }
+
 .gef-picker-card {
+  width: calc(33% - 10px);
+  aspect-ratio: 1/1;
   border: 1.5px solid var(--gef-line);
   border-radius: 14px;
   padding: 12px;
@@ -480,20 +635,30 @@
   cursor: pointer;
   background: #fffdf8;
 }
+
 .gef-picker-card.active {
   border-color: var(--gef-vermillion);
-  background: rgba(166,27,27,0.06);
+  background: rgba(166, 27, 27, 0.06);
 }
+
 .gef-picker-card img {
-  width: 100%;
-  height: 64px;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 8px;
   background: var(--gef-line);
 }
-.gef-picker-card-name { font-size: 12px; font-weight: 700; color: var(--gef-ink); }
-.gef-picker-card-sub { font-size: 11px; color: rgba(28,26,23,0.6); }
+
+.gef-picker-card-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gef-ink);
+}
+
+.gef-picker-card-sub {
+  font-size: 11px;
+  color: rgba(28, 26, 23, 0.6);
+}
 
 /* nav bar for the module */
 .gef-nav-bar {
@@ -507,8 +672,16 @@
   flex-wrap: wrap;
   row-gap: 12px;
 }
-.gef-nav-bar-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.gef-nav-bar-links a, .gef-nav-bar-links button {
+
+.gef-nav-bar-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.gef-nav-bar-links a,
+.gef-nav-bar-links button {
   font-size: 13px;
   font-weight: 600;
   color: var(--gef-charcoal);
@@ -517,7 +690,11 @@
   cursor: pointer;
   padding: 4px 0;
 }
-.gef-nav-bar-links a:hover, .gef-nav-bar-links button:hover { color: var(--gef-vermillion); }
+
+.gef-nav-bar-links a:hover,
+.gef-nav-bar-links button:hover {
+  color: var(--gef-vermillion);
+}
 
 .gef-nav-icon-btn {
   display: inline-flex;
@@ -533,6 +710,7 @@
   padding: 0 !important;
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
+
 .gef-nav-icon-btn:hover {
   border-color: var(--gef-vermillion);
   color: var(--gef-vermillion) !important;
@@ -540,13 +718,21 @@
 }
 
 @media (max-width: 800px) {
-  .gef-root { padding: 9rem 12px 234px; }
+  .gef-root {
+    padding: 9rem 12px 234px;
+  }
 }
+
 @media (max-width: 700px) {
-  .gef-root { padding: 8rem 12px 234px; }
+  .gef-root {
+    padding: 8rem 12px 234px;
+  }
 }
+
 @media (max-width: 500px) {
-  .gef-root { padding: 7rem 12px 234px; }
+  .gef-root {
+    padding: 7rem 12px 234px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -557,11 +743,13 @@
     row-gap: 10px;
     padding-bottom: 14px;
   }
+
   .gef-nav-bar-links {
     justify-content: center;
     width: 100%;
     gap: 10px 16px;
   }
+
   .gef-nav-bar-links select.gef-select {
     width: auto;
     max-width: 150px;
@@ -570,7 +758,13 @@
 }
 
 @media (max-width: 480px) {
-  .gef-card { padding: 18px 14px; }
+  .gef-picker-card {
+    width: calc(50% - 10px);
+  }
+
+  .gef-card {
+    padding: 18px 14px;
+  }
 }
 
 /* Google Translate widget: keep functionality, hide its default UI chrome */
@@ -580,9 +774,11 @@
 .goog-tooltip:hover {
   display: none !important;
 }
+
 body {
   top: 0 !important;
 }
+
 .goog-text-highlight {
   background: none !important;
   box-shadow: none !important;

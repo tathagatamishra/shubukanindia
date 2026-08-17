@@ -24,7 +24,6 @@ export default function Navbar() {
   const { isModalOpen } = useUI();
 
   if (isModalOpen) return null;
-
   const router = useRouter();
   const navigate = (page) => {
     router.push(page);
@@ -56,24 +55,41 @@ export default function Navbar() {
   const isExamPage = pathname.startsWith("/online-exam");
   const isGuardianEvalPage = pathname.startsWith("/guardian-evaluation");
 
+  // Lock body scroll when open
+  useEffect(() => {
+    if (isMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    // Clean up when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenu]);
+
   const pageList = [
-    { path: "/history", label: "HISTORY" },
-    { path: "/shubukan-india", label: "SHUBUKAN INDIA" },
-    { path: "/shubukan-okinawa", label: "SHUBUKAN OKINAWA" },
-    { path: "/shubukan-world", label: "SHUBUKAN WORLD" },
+    { id: 1, path: "/history", label: "HISTORY" },
+    { id: 2, path: "/shubukan-india", label: "SHUBUKAN INDIA" },
+    { id: 3, path: "/shubukan-okinawa", label: "SHUBUKAN OKINAWA" },
+    { id: 4, path: "/shubukan-world", label: "SHUBUKAN WORLD" },
+    { id: 5, line: true },
     {
+      id: 6,
       path: "/shuri-karate-kobudo-hozonkai",
       label: "SHURI KARATE KOBUDO HOZONKAI",
     },
-    { path: "/lineage-and-dojokun", label: "LINEAGE & DOJO KUN" },
-    { path: "/karate-and-kobudo", label: "KARATE & KOBUDO" },
+    { id: 7, path: "/lineage-and-dojokun", label: "LINEAGE & DOJO KUN" },
+    { id: 8, path: "/karate-and-kobudo", label: "KARATE & KOBUDO" },
     // { path: "/registration", label: "REGISTRATION" },
-    { path: "/dojo-listicle", label: "DOJO LISTICLE" },
-    { path: "/online-exam", label: "EXAM PORTAL" },
-    { path: "/guardian-evaluation", label: "GUARDIAN EVALUATION" },
-    { path: "/gallery", label: "GALLERY" },
-    { path: "/journal", label: "JOURNAL" },
-    { path: "/contact", label: "CONTACT" },
+    { id: 10, path: "/dojo-listicle", label: "DOJO LISTICLE" },
+    { id: 12, line: true },
+    { id: 13, path: "/online-exam", label: "EXAM PORTAL" },
+    { id: 14, path: "/guardian-evaluation", label: "GUARDIAN EVALUATION" },
+    { id: 15, line: true },
+    { id: 16, path: "/gallery", label: "GALLERY" },
+    { id: 17, path: "/journal", label: "JOURNAL" },
+    { id: 18, path: "/contact", label: "CONTACT" },
   ];
 
   // ******************************
@@ -181,7 +197,7 @@ export default function Navbar() {
             position: "fixed",
             top: "0",
             right: "0",
-          }
+          },
     );
   }
 
@@ -201,7 +217,7 @@ export default function Navbar() {
             position: "fixed",
             top: "0",
             right: "0",
-          }
+          },
     );
   }
 
@@ -299,7 +315,7 @@ export default function Navbar() {
             }}
           ></div>
           <p
-          className={`${geo.className} `}
+            className={`${geo.className} `}
             style={{
               margin: "0 10px 0 0",
               textAlign: "right",
@@ -347,9 +363,9 @@ export default function Navbar() {
 
             <div className="menuBox">
               <nav className="nav">
-                {pageList.map(({ path, label }) => (
+                {pageList.map(({ id, path, label, line }) => (
                   <div
-                    key={path}
+                    key={id}
                     onClick={() => {
                       showMenu();
                       navigate(path);
@@ -366,7 +382,13 @@ export default function Navbar() {
                     }`}
                     onMouseEnter={play2}
                   >
-                    <p className={`${philosopher.className}`}>{label}</p>
+                    {line ? (
+                      <div className="nav-line">
+                        <div className="nav-line-in"></div>
+                      </div>
+                    ) : (
+                      <p className={`${philosopher.className}`}>{label}</p>
+                    )}
                   </div>
                 ))}
               </nav>

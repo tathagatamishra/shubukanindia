@@ -336,13 +336,14 @@
 
                 & .opt {
                     height: 100%;
+                    width: 100%;
                     // border: solid 1px red;
                     text-decoration: none;
 
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    align-items: center;
+                    align-items: flex-end;
 
                     & p {
                         // border: solid 1px;
@@ -365,6 +366,16 @@
                     &:hover {
                         & p {
                             font-size: 24px;
+                        }
+                    }
+
+                    & .nav-line {
+                        width: 60%;
+                        background: linear-gradient(90deg, rgba(119, 76, 76, 0) 0%, #e2b77c 100%);
+                        border-radius: 100px;
+
+                        & .nav-line-in {
+                            border: 2px solid #00000000;
                         }
                     }
                 }
