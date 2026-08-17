@@ -1,6 +1,6 @@
 import axios from "axios";
 const remote_api = "https://shubukanindiabackend.vercel.app"
-const local_api = "http://localhost:1234"
+const local_api = "http://localhost:8080"
 
 // axios config
 export const shubukan_api = axios.create({
