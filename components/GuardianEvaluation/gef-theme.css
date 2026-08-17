@@ -594,6 +594,7 @@
   position: fixed;
   inset: 0;
   background: rgba(28, 26, 23, 0.55);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -604,7 +605,8 @@
 .gef-modal {
   width: 100%;
   max-width: 460px;
-  max-height: calc(88vh - 10rem);
+  max-height: calc(88vh - 7rem);
+  margin-top: 2rem;
   overflow-y: auto;
   background: var(--gef-rice-soft);
   border-radius: 20px;
