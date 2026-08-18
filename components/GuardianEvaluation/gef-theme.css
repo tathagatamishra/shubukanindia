@@ -184,15 +184,22 @@
 
 /* ---------- buttons ---------- */
 .gef-btn {
-  display: inline-flex;
+  display: inline-block;
+  padding: 8px 16px;
+  /* width: 103.5px; */
+  height: 41.6px;
+  min-width: fit-content;
+  box-sizing: border-box;
+
+  /* display: inline-flex; */
   align-items: center;
   justify-content: center;
   gap: 8px;
   font-family: var(--gef-font-body);
   font-weight: 600;
   font-size: 14px;
-  padding: 12px 22px;
-  border-radius: 999px;
+  /* padding: 12px 22px; */
+  border-radius: 15px;
   border: 1.5px solid var(--gef-ink);
   background: var(--gef-ink);
   color: var(--gef-rice);
@@ -396,6 +403,12 @@
 }
 
 /* ---------- misc ---------- */
+.gef-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .gef-row {
   display: flex;
   gap: 12px;
@@ -721,19 +734,19 @@
 
 @media (max-width: 800px) {
   .gef-root {
-    padding: 9rem 12px 234px;
+    padding: 9rem 12px 104px;
   }
 }
 
 @media (max-width: 700px) {
   .gef-root {
-    padding: 8rem 12px 234px;
+    padding: 8rem 12px 64px;
   }
 }
 
 @media (max-width: 500px) {
   .gef-root {
-    padding: 7rem 12px 234px;
+    padding: 82px 12px 48px;
   }
 }
 

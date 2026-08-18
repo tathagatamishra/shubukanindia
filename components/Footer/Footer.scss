@@ -357,6 +357,7 @@
     }
 
     & .footHillLeft {
+        pointer-events: none;
         width: 450px;
         top: -240px;
         transition: 300ms;
@@ -364,6 +365,7 @@
     }
 
     & .footHillRight {
+        pointer-events: none;
         width: 450px;
         top: -265px;
         transition: 300ms;

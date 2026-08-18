@@ -267,6 +267,8 @@ export default function Navbar() {
         )}
       </div>
 
+      <div className="bg-shadow"></div>
+
       <div
         id="cloud-circle"
         style={{
@@ -300,7 +302,7 @@ export default function Navbar() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "flex-end",
           transition: "200ms",
         }}
       >
@@ -313,7 +315,9 @@ export default function Navbar() {
               transition: "200ms",
               userSelect: "none",
             }}
-          ></div>
+          >
+            <div className="line-border"></div>
+          </div>
           <p
             className={`${geo.className} `}
             style={{
@@ -336,7 +340,9 @@ export default function Navbar() {
               transition: "200ms",
               userSelect: "none",
             }}
-          ></div>
+          >
+            <div className="line-border"></div>
+          </div>
         </div>
 
         {isMenu && (

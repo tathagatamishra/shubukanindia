@@ -23,7 +23,7 @@ export default function Page() {
 
   return (
     <div className="gef-container">
-      <div className="gef-row" style={{ marginBottom: 18 }}>
+      <div className="gef-col" style={{ marginBottom: 18 }}>
         <Button variant={tab === "windows" ? "primary" : "outline"} onClick={() => setTab("windows")}>
           Evaluation Windows
         </Button>
