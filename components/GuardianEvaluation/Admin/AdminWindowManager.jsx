@@ -135,7 +135,7 @@ export default function AdminWindowManager() {
               return (
                 <div key={w._id} style={{ padding: "10px 12px", border: "1px solid var(--gef-line)", borderRadius: 12, background: "#fffdf8" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div>
+                    <div className="w-[60%]">
                       <div style={{ fontWeight: 700 }}>{w.title}</div>
                       <div className="gef-hint">
                         {new Date(w.startDate).toLocaleDateString()} - {new Date(w.endDate).toLocaleDateString()}
@@ -144,7 +144,7 @@ export default function AdminWindowManager() {
                         Instructors: {w.instructorCodes.map((c) => instructorNames.get(c) || c).join(", ")}
                       </div>
                     </div>
-                    <div style={{ textAlign: "right" }}>
+                    <div className="w-[40%]" style={{ textAlign: "right" }}>
                       <span className={`gef-badge ${isOpen ? "gef-badge--submitted" : "gef-badge--pending"}`}>
                         {isOpen ? "Open" : "Closed"}
                       </span>
