@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 
-export function Card({ title, children, className = "" }) {
+export function Card({ title, children, className = "", style }) {
   return (
-    <div className={`gef-card ${className}`}>
+    <div className={`gef-card ${className}`} style={style}>
       {title ? <h3 className="gef-card-title">{title}</h3> : null}
       {children}
     </div>

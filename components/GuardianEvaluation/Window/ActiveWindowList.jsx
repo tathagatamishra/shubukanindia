@@ -27,7 +27,10 @@ export default function ActiveWindowList() {
   if (data.length === 0) {
     return (
       <Card title="Evaluation Form">
-        <p className="gef-empty">No evaluation window is currently open for your learners.</p>
+        <p className="gef-section-note" style={{ marginBottom: 0 }}>
+          An "evaluation window" is a limited time period your instructor opens for submitting the form. There
+          isn't one open right now — check back here, or watch your email, when your instructor starts one.
+        </p>
       </Card>
     );
   }
@@ -36,26 +39,18 @@ export default function ActiveWindowList() {
     <div className="gef-stack">
       {data.map(({ window, learners }) => (
         <Card key={window._id} title={window.title}>
-          <p className="gef-hint" style={{ marginBottom: 12 }}>
-            Open until {new Date(window.endDate).toLocaleDateString()}
+          <p className="gef-section-note">
+            This form is open for submission until <strong>{new Date(window.endDate).toLocaleDateString()}</strong>.
+            Pick a learner below to fill in, continue, or review their form.
           </p>
           <div className="gef-list">
             {learners.map(({ learner, status, formId }) => (
-              <div
-                key={learner._id}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "10px 12px",
-                  border: "1px solid var(--gef-line)",
-                  borderRadius: 12,
-                  background: "#fffdf8",
-                }}
-              >
+              <div key={learner._id} className="gef-row-card">
                 <div>
-                  <div style={{ fontWeight: 700 }}>{learner.name}</div>
-                  <StatusBadge status={status} />
+                  <div className="gef-row-card-title">{learner.name}</div>
+                  <div style={{ marginTop: 4 }}>
+                    <StatusBadge status={status} />
+                  </div>
                 </div>
                 <Button
                   size="sm"

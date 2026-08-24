@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
-import { Card, Divider, Stamp } from "../UI/Basics";
+import { Card, Divider } from "../UI/Basics";
 import Button from "../UI/Button";
 
 const RESEND_COOLDOWN = 60; // seconds
@@ -131,8 +131,7 @@ export default function Verify() {
   };
 
   return (
-    <div className="gef-container" style={{ maxWidth: 420 }}>
-
+    <div className="gef-auth-shell">
       <h1 className="gef-title" style={{ textAlign: "center" }}>
         Verify your email
       </h1>
@@ -149,7 +148,7 @@ export default function Verify() {
               <input
                 key={i}
                 ref={(el) => (inputRefs.current[i] = el)}
-                className="gef-input gef-otp-input"
+                className={`gef-input gef-otp-input${digit ? " filled" : ""}`}
                 maxLength={1}
                 value={digit}
                 onChange={(e) => handleChange(e.target.value, i)}

@@ -60,7 +60,7 @@
 }
 
 .gef-title {
-  font-family: var(--gef-font-heading);
+  font-family: Philosopher, sans-serif;
   font-weight: 700;
   font-size: clamp(24px, 5vw, 34px);
   color: var(--gef-ink);
@@ -112,13 +112,13 @@
   opacity: 0.6;
 } */
 
-/* ---------- scroll card ---------- */
+/* ---------- scroll card (folded scroll-corner styling, soft single shadow) ---------- */
 .gef-card {
   position: relative;
-  background: var(--gef-rice-soft);
+  background: linear-gradient(to bottom, #fefbf5 0%, var(--gef-rice-soft) 100%);
   border: 1px solid var(--gef-line);
   border-radius: 18px 18px 22px 22px;
-  box-shadow: var(--gef-shadow);
+  box-shadow: 0 4px 14px rgba(28, 26, 23, 0.08);
   padding: 24px 20px;
 }
 
@@ -224,6 +224,17 @@
   border-color: var(--gef-vermillion);
   background: var(--gef-vermillion);
   color: #fff;
+  box-shadow: 0 3px 8px rgba(166, 27, 27, 0.22);
+}
+
+.gef-btn--primary:hover:not(:disabled) {
+  background: #8a1616;
+  opacity: 1;
+  box-shadow: 0 4px 10px rgba(166, 27, 27, 0.26);
+}
+
+.gef-btn--primary:active:not(:disabled) {
+  box-shadow: 0 1px 4px rgba(166, 27, 27, 0.2);
 }
 
 .gef-btn--outline {
@@ -240,6 +251,17 @@
 .gef-btn--sm {
   padding: 8px 16px;
   font-size: 13px;
+}
+
+.gef-btn--xsm {
+  background: #ffffff;
+  border-radius: 10px;
+  height: 29.6px;
+  padding: 0px 12px;
+  font-size: 12px;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  color: var(--gef-ink);
 }
 
 .gef-btn--block {
@@ -271,8 +293,33 @@
   margin-left: 2px;
 }
 
+/* Ink-brush underline inputs: minimal, no boxed border, a soft fill keeps
+   fields scannable in dense forms without reverting to a heavy box. */
 .gef-input,
-.gef-select,
+.gef-select {
+  width: 100%;
+  font-family: var(--gef-font-body);
+  font-size: 14px;
+  padding: 11px 12px;
+  border-radius: 8px 8px 0 0;
+  border: none;
+  border-bottom: 1.5px solid var(--gef-line);
+  background: rgba(255, 253, 248, 0.65);
+  color: var(--gef-ink);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.gef-input:focus,
+.gef-select:focus {
+  border-bottom-color: var(--gef-vermillion);
+  background: rgba(255, 253, 248, 0.95);
+}
+
+.gef-select {
+  cursor: pointer;
+}
+
 .gef-textarea {
   width: 100%;
   font-family: var(--gef-font-body);
@@ -283,18 +330,13 @@
   background: #fffdf8;
   color: var(--gef-ink);
   outline: none;
+  resize: vertical;
+  min-height: 90px;
   transition: border-color 0.15s ease;
 }
 
-.gef-input:focus,
-.gef-select:focus,
 .gef-textarea:focus {
   border-color: var(--gef-vermillion);
-}
-
-.gef-textarea {
-  resize: vertical;
-  min-height: 90px;
 }
 
 /* OTP entry boxes - deliberately NOT using .gef-row (its `min-width: 140px`
@@ -314,6 +356,21 @@
   text-align: center;
   font-size: 18px;
   font-weight: 700;
+  border-radius: 10px;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gef-otp-input:focus {
+  border-color: var(--gef-vermillion);
+  background: rgba(166, 27, 27, 0.04);
+  box-shadow: 0 0 0 3px rgba(166, 27, 27, 0.12);
+}
+
+.gef-otp-input.filled {
+  border-color: var(--gef-gold);
+  background: rgba(198, 167, 94, 0.08);
 }
 
 @media (max-width: 420px) {
@@ -400,6 +457,74 @@
   border-color: var(--gef-gold);
   background: rgba(198, 167, 94, 0.18);
   color: #6f5726;
+}
+
+/* ---------- auth shell (login / signup / verify) ---------- */
+.gef-auth-shell {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 22px;
+  padding: 28px 4px;
+}
+
+.gef-auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  background: none;
+  border: none;
+  padding: 4px 2px;
+  color: var(--gef-ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gef-auth-back:hover {
+  color: var(--gef-vermillion);
+}
+
+/* ---------- landing "how it works" steps ---------- */
+.gef-how-it-works {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gef-how-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.gef-how-step-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gef-gold);
+  background: rgba(198, 167, 94, 0.12);
+  color: #8a6d2f;
+}
+
+.gef-how-step-title {
+  font-family: var(--gef-font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gef-ink);
+  margin: 4px 0 4px;
+}
+
+.gef-how-step-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(28, 26, 23, 0.7);
+  margin: 0;
 }
 
 /* ---------- misc ---------- */
@@ -542,6 +667,49 @@
   gap: 12px;
 }
 
+/* Reusable list row (learners, windows, submissions) — replaces one-off
+   inline styles so every list in the module looks and behaves the same. */
+.gef-row-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--gef-line);
+  border-radius: 12px;
+  background: #fffdf8;
+  transition: border-color 0.15s ease;
+}
+
+.gef-row-card:hover {
+  border-color: rgba(28, 26, 23, 0.3);
+}
+
+.gef-row-card-title {
+  font-weight: 700;
+  color: var(--gef-ink);
+}
+
+.gef-row-card-sub {
+  font-size: 12px;
+  color: rgba(28, 26, 23, 0.55);
+  margin-top: 2px;
+}
+
+.gef-row-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.gef-section-note {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(28, 26, 23, 0.6);
+  margin: 0 0 14px;
+}
+
 .gef-empty {
   text-align: center;
   padding: 40px 16px;
@@ -616,17 +784,46 @@
 }
 
 .gef-modal {
+  position: relative;
   width: 100%;
   max-width: 460px;
   max-height: calc(88vh - 7rem);
   margin-top: 2rem;
   overflow-y: auto;
-  background: var(--gef-rice-soft);
-  border-radius: 20px;
+  background: linear-gradient(to bottom, #fefbf5 0%, var(--gef-rice-soft) 100%);
+  border-radius: 18px 18px 22px 22px;
   border: 1px solid var(--gef-line);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(28, 26, 23, 0.16);
   padding: 24px 20px;
   scrollbar-width: none;
+}
+
+.gef-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gef-line);
+  background: #fffdf8;
+  color: var(--gef-ink);
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.gef-modal-close:hover {
+  border-color: var(--gef-vermillion);
+  color: var(--gef-vermillion);
+  background: rgba(166, 27, 27, 0.06);
+}
+
+.gef-modal-title {
+  padding-right: 34px;
 }
 
 /* dojo/instructor card grid */
@@ -675,40 +872,148 @@
   color: rgba(28, 26, 23, 0.6);
 }
 
-/* nav bar for the module */
+/* nav bar for the module — a soft toolbar strip, not a hard divider line */
 .gef-nav-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto 26px;
+  padding: 10px 14px;
+  background: rgba(255, 253, 248, 0.7);
+  border: 1px solid var(--gef-line);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(28, 26, 23, 0.06);
+}
+
+.gef-nav-brand {
+  font-family: Philosopher, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gef-vermillion);
+  opacity: 0.85;
+}
+
+.gef-nav-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 760px;
-  margin: 0 auto 22px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--gef-ink);
+  gap: 12px;
   flex-wrap: wrap;
-  row-gap: 12px;
+  row-gap: 10px;
 }
 
 .gef-nav-bar-links {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
-.gef-nav-bar-links a,
-.gef-nav-bar-links button {
+.gef-nav-greeting {
+  font-size: 13px;
+  color: rgba(28, 26, 23, 0.55);
+  padding: 6px 4px 6px 6px;
+  white-space: nowrap;
+}
+
+.gef-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   font-weight: 600;
   color: var(--gef-charcoal);
   background: none;
-  border: none;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  padding: 6px 12px;
   cursor: pointer;
-  padding: 4px 0;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
 }
 
-.gef-nav-bar-links a:hover,
-.gef-nav-bar-links button:hover {
+.gef-nav-link:hover {
   color: var(--gef-vermillion);
+  background: rgba(166, 27, 27, 0.06);
+}
+
+.gef-nav-link.active {
+  color: var(--gef-vermillion);
+  border-color: rgba(166, 27, 27, 0.25);
+  background: rgba(166, 27, 27, 0.08);
+}
+
+.gef-nav-link--danger {
+  color: var(--gef-vermillion);
+}
+
+.gef-nav-link--danger:hover {
+  background: rgba(166, 27, 27, 0.1);
+}
+
+.gef-nav-divider-v {
+  width: 1px;
+  align-self: stretch;
+  min-height: 22px;
+  background: var(--gef-line);
+  margin: 0 4px;
+}
+
+/* language switcher: select + button fused into one capsule */
+.gef-lang-switcher {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid var(--gef-line);
+  border-radius: 999px;
+  overflow: hidden;
+  background: #fffdf8;
+  flex: 0 0 auto;
+}
+
+.gef-lang-select {
+  border: none;
+  background: transparent;
+  padding: 8px 12px 8px 16px;
+  font-family: var(--gef-font-body);
+  font-size: 13px;
+  color: var(--gef-ink);
+  outline: none;
+  cursor: pointer;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gef-lang-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--gef-line);
+}
+
+.gef-lang-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 18px;
+  font-family: var(--gef-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gef-vermillion);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.gef-lang-btn:hover:not(:disabled) {
+  background: rgba(166, 27, 27, 0.08);
+}
+
+.gef-lang-btn:disabled {
+  color: rgba(28, 26, 23, 0.4);
+  cursor: not-allowed;
 }
 
 .gef-nav-icon-btn {
@@ -717,7 +1022,7 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: 100px;
   border: 1.5px solid var(--gef-line);
   background: #fffdf8;
   color: var(--gef-ink);
@@ -751,24 +1056,47 @@
 }
 
 @media (max-width: 640px) {
-  .gef-nav-bar {
+  .gef-nav-brand {
+    text-align: center;
+  }
+
+  .gef-nav-row {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     row-gap: 10px;
-    padding-bottom: 14px;
   }
 
   .gef-nav-bar-links {
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: center;
     width: 100%;
-    gap: 10px 16px;
+  }
+
+  .gef-nav-divider-v {
+    display: none;
   }
 
   .gef-nav-bar-links select.gef-select {
     width: auto;
     max-width: 150px;
     flex: 0 1 auto;
+  }
+
+  .gef-nav-icon-btn {
+    border-radius: 10px;
+    width: 100%;
+    height: 38px;
+  }
+
+  .gef-nav-link {
+    padding: 7px 12px;
+    font-size: 14px;
+  }
+
+  .gef-how-step-icon {
+    width: 34px;
+    height: 34px;
   }
 }
 

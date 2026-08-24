@@ -1,13 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
 import Button from "../UI/Button";
 import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
-import InstructorLogin from "./InstructorLogin";
+import Loader from "../UI/Loader";
 
 export default function InstructorSubmissions() {
+  const router = useRouter();
   const { addToast } = useToast();
   const [token, setToken] = useState(null);
   const [checked, setChecked] = useState(false);
@@ -52,19 +54,13 @@ export default function InstructorSubmissions() {
     }
   };
 
-  if (!checked || loading) return <p className="gef-hint">Loading...</p>;
+  useEffect(() => {
+    if (checked && !token) {
+      router.replace("/guardian-evaluation/instructor/login");
+    }
+  }, [checked, token, router]);
 
-  if (!token) {
-    return (
-      <InstructorLogin
-        onLoggedIn={() => {
-          const t = localStorage.getItem("instructor_token");
-          setToken(t);
-          loadForms(t);
-        }}
-      />
-    );
-  }
+  if (!checked || loading || !token) return <Loader loading />;
 
   const handleLogout = () => {
     localStorage.removeItem("instructor_token");
@@ -77,7 +73,10 @@ export default function InstructorSubmissions() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
         <div>
           <h1 className="gef-title">Your Students' Evaluations</h1>
-          <p className="gef-subtitle">Submitted Guardian Evaluation Forms for your learners.</p>
+          <p className="gef-subtitle">
+            Guardian evaluation forms submitted for students training under you. Use these to understand each
+            student's habits and needs outside the dojo.
+          </p>
         </div>
         <Button size="sm" variant="outline" onClick={handleLogout}>
           Log Out
@@ -92,22 +91,20 @@ export default function InstructorSubmissions() {
       ) : (
         <div className="gef-stack">
           {forms.map((f) => (
-            <Card key={f._id}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div>
-                  <div style={{ fontWeight: 700 }}>{f.student?.name}</div>
-                  <div className="gef-hint">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
-                </div>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <Button size="sm" variant="outline" onClick={() => handleView(f)}>
-                    View
-                  </Button>
-                  <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
-                    Download PDF
-                  </Button>
-                </div>
+            <div key={f._id} className="gef-row-card">
+              <div>
+                <div className="gef-row-card-title">{f.student?.name}</div>
+                <div className="gef-row-card-sub">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
               </div>
-            </Card>
+              <div className="gef-row-card-actions">
+                <Button size="sm" variant="outline" onClick={() => handleView(f)}>
+                  View
+                </Button>
+                <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
+                  Download PDF
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
       )}

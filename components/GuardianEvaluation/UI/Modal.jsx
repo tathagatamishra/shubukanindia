@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
+import { FiX } from "react-icons/fi";
 
 export default function Modal({ open, onClose, title, children }) {
   // Lock body scroll when open
@@ -26,7 +27,10 @@ export default function Modal({ open, onClose, title, children }) {
   return (
     <div className="gef-modal-backdrop" onClick={onClose}>
       <div className="gef-modal" onClick={(e) => e.stopPropagation()}>
-        {title ? <h3 className="gef-card-title">{title}</h3> : null}
+        <button type="button" className="gef-modal-close" onClick={onClose} aria-label="Close">
+          <FiX size={16} />
+        </button>
+        {title ? <h3 className="gef-card-title gef-modal-title">{title}</h3> : null}
         {children}
       </div>
     </div>

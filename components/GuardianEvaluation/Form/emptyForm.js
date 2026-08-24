@@ -43,8 +43,6 @@ export const emptyEvaluationForm = () => ({
     onlyNeedBeltCertificateSuggestion: "",
     remarksAndSuggestion: "",
   },
-  guardianSignatureUrl: "",
-  guardianSignaturePublicId: "",
   filledByName: "",
 });
 
@@ -65,8 +63,6 @@ export const mergeIntoDefaults = (saved) => {
     },
     teacher: { ...base.teacher, ...saved.teacher },
     training: { ...base.training, ...saved.training },
-    guardianSignatureUrl: saved.guardianSignatureUrl || "",
-    guardianSignaturePublicId: saved.guardianSignaturePublicId || "",
     filledByName: saved.filledByName || "",
   };
 };

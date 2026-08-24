@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
-import { Card, Divider, Stamp } from "../UI/Basics";
+import { Card, Divider } from "../UI/Basics";
 import { Field, TextInput } from "../UI/FormFields";
 import Button from "../UI/Button";
 
@@ -132,12 +132,11 @@ export default function InstructorLogin({ onLoggedIn }) {
   };
 
   return (
-    <div className="gef-container" style={{ maxWidth: 420 }}>
-
-      <h1 className="gef-title" style={{ textAlign: stage === "otp" ? "center" : "left" }}>
+    <div className="gef-auth-shell">
+      <h1 className="gef-title" style={{ textAlign: "center" }}>
         {stage === "otp" ? "Verify your email" : "Instructor Login"}
       </h1>
-      <p className="gef-subtitle" style={{ textAlign: stage === "otp" ? "center" : "left" }}>
+      <p className="gef-subtitle" style={{ textAlign: "center" }}>
         {stage === "otp" ? (
           <>
             We sent a 6-digit code to
@@ -166,7 +165,7 @@ export default function InstructorLogin({ onLoggedIn }) {
                 <input
                   key={i}
                   ref={(el) => (inputRefs.current[i] = el)}
-                  className="gef-input gef-otp-input"
+                  className={`gef-input gef-otp-input${digit ? " filled" : ""}`}
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleChange(e.target.value, i)}

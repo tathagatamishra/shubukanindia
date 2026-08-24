@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
-import { Card, Divider, Stamp } from "../UI/Basics";
+import { Card } from "../UI/Basics";
 import Button from "../UI/Button";
 import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
 
@@ -58,10 +58,11 @@ export default function AdminSubmissions() {
   if (loading || !token) return <p className="gef-hint">Loading...</p>;
 
   return (
-    <div className="gef-container">
-      <h1 className="gef-title">All Submitted Forms</h1>
-      <p className="gef-subtitle">Draft forms are never shown here &mdash; only fully submitted evaluations.</p>
-      <Divider />
+    <div className="gef-stack">
+      <p className="gef-section-note" style={{ marginBottom: 0 }}>
+        Every evaluation form guardians have finished and submitted, across every dojo and instructor. Drafts
+        guardians haven't submitted yet are never shown here.
+      </p>
 
       {forms.length === 0 ? (
         <Card>
@@ -70,25 +71,23 @@ export default function AdminSubmissions() {
       ) : (
         <div className="gef-stack">
           {forms.map((f) => (
-            <Card key={f._id}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div>
-                  <div style={{ fontWeight: 700 }}>{f.student?.name}</div>
-                  <div className="gef-hint">
-                    {f.student?.dojoName} &middot; {f.student?.instructorName}
-                  </div>
-                  <div className="gef-hint">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
+            <div key={f._id} className="gef-row-card">
+              <div>
+                <div className="gef-row-card-title">{f.student?.name}</div>
+                <div className="gef-row-card-sub">
+                  {f.student?.dojoName} &middot; {f.student?.instructorName}
                 </div>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <Button size="sm" variant="outline" onClick={() => handleView(f)}>
-                    View
-                  </Button>
-                  <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
-                    Download PDF
-                  </Button>
-                </div>
+                <div className="gef-row-card-sub">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
               </div>
-            </Card>
+              <div className="gef-row-card-actions">
+                <Button size="sm" variant="outline" onClick={() => handleView(f)}>
+                  View
+                </Button>
+                <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
+                  Download PDF
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
       )}

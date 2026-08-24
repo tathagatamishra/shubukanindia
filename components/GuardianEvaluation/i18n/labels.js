@@ -6,7 +6,7 @@
 // instead of us maintaining per-field translations here.
 
 export const L = {
-  formTitle: "Guardian Evaluation Marksheet",
+  formTitle: "Guardian Evaluation Form",
 
   studentSectionTitle: "This Is To Evaluate Students",
   yesNoInstruction: "If there is yes or no, please choose the option.",

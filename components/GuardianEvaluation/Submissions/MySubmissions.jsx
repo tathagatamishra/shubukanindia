@@ -46,10 +46,16 @@ export default function MySubmissions() {
     return Date.now() - new Date(form.submittedAt).getTime() <= EDIT_WINDOW_MS;
   };
 
+  const editSecondsLeft = (form) => {
+    if (form.status !== "submitted") return null;
+    const left = EDIT_WINDOW_MS - (Date.now() - new Date(form.submittedAt).getTime());
+    return left > 0 ? Math.ceil(left / 1000) : null;
+  };
+
   return (
     <div className="gef-container">
       <h1 className="gef-title">My Submissions</h1>
-      <p className="gef-subtitle">All evaluation forms you have started or submitted.</p>
+      <p className="gef-subtitle">Every evaluation form you've started or submitted, across all your learners.</p>
       <Divider />
 
       {loading ? (
@@ -60,42 +66,53 @@ export default function MySubmissions() {
         </Card>
       ) : (
         <div className="gef-stack">
-          {forms.map((f) => (
-            <Card key={f._id}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 15 }}>{f.student?.name || "Unnamed"}</div>
-                  <StatusBadge status={f.status} />
-                  <div className="gef-hint" style={{ marginTop: 6 }}>
-                    {f.status === "submitted"
-                      ? `Submitted ${new Date(f.submittedAt).toLocaleString()}`
-                      : "Not yet submitted"}
+          {forms.map((f) => {
+            const secondsLeft = editSecondsLeft(f);
+            return (
+              <Card key={f._id}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15 }}>{f.student?.name || "Unnamed"}</div>
+                    <div style={{ marginTop: 4 }}>
+                      <StatusBadge status={f.status} />
+                    </div>
+                    <div className="gef-hint" style={{ marginTop: 6 }}>
+                      {f.status === "submitted"
+                        ? `Submitted ${new Date(f.submittedAt).toLocaleString()}`
+                        : "Draft saved — pick up where you left off"}
+                    </div>
+                    {secondsLeft ? (
+                      <div className="gef-hint" style={{ marginTop: 2, color: "var(--gef-vermillion)" }}>
+                        You can still edit this for {Math.ceil(secondsLeft / 60)} more minute
+                        {Math.ceil(secondsLeft / 60) === 1 ? "" : "s"}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
+                    {canEdit(f) ? (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => router.push(`/guardian-evaluation/form/${f.learnerId}/${f.windowId}`)}
+                      >
+                        {f.status === "draft" ? "Continue" : "Edit"}
+                      </Button>
+                    ) : null}
+                    {f.status === "submitted" ? (
+                      <>
+                        <Button size="sm" variant="outline" onClick={() => handleView(f)}>
+                          View
+                        </Button>
+                        <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
+                          Download PDF
+                        </Button>
+                      </>
+                    ) : null}
                   </div>
                 </div>
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
-                  {canEdit(f) ? (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => router.push(`/guardian-evaluation/form/${f.learnerId}/${f.windowId}`)}
-                    >
-                      Edit
-                    </Button>
-                  ) : null}
-                  {f.status === "submitted" ? (
-                    <>
-                      <Button size="sm" variant="outline" onClick={() => handleView(f)}>
-                        View
-                      </Button>
-                      <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
-                        Download PDF
-                      </Button>
-                    </>
-                  ) : null}
-                </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       )}
     </div>

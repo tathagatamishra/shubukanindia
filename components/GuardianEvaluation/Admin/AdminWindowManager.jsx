@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
-import { Card, Divider, Stamp } from "../UI/Basics";
+import { Card } from "../UI/Basics";
 import { Field, TextInput, ChipMultiSelect } from "../UI/FormFields";
 import Button from "../UI/Button";
 
@@ -93,25 +93,25 @@ export default function AdminWindowManager() {
   const instructorNames = new Map(instructors.map((i) => [i.instructorId, i.name]));
 
   return (
-    <div className="gef-container">
-      <h1 className="gef-title">Evaluation Windows</h1>
-      <p className="gef-subtitle">Open the Guardian Evaluation Form portal for one or more instructors.</p>
-      <Divider />
-
+    <div className="gef-stack">
       <Card title="Open a New Window">
+        <p className="gef-section-note">
+          Opening a window emails every guardian whose child trains under the instructors you select, inviting
+          them to fill the evaluation form before it closes.
+        </p>
         <form onSubmit={handleCreate} className="gef-stack">
-          <Field label="Title" required>
+          <Field label="Title" required hint="Shown to guardians, e.g. what this evaluation round is for">
             <TextInput value={title} onChange={setTitle} placeholder="e.g. Q1 2026 Evaluation" />
           </Field>
           <div className="gef-row">
             <Field label="Start Date" required>
               <TextInput type="date" value={startDate} onChange={setStartDate} />
             </Field>
-            <Field label="End Date" required>
+            <Field label="End Date" required hint="The form locks automatically after this date">
               <TextInput type="date" value={endDate} onChange={setEndDate} />
             </Field>
           </div>
-          <Field label="Instructors" required hint="Select one or more">
+          <Field label="Instructors" required hint="Only guardians of students under these instructors will be notified">
             <ChipMultiSelect
               value={selectedCodes}
               onChange={setSelectedCodes}
@@ -133,29 +133,27 @@ export default function AdminWindowManager() {
               const now = Date.now();
               const isOpen = !w.closedEarly && now >= new Date(w.startDate).getTime() && now <= new Date(w.endDate).getTime();
               return (
-                <div key={w._id} style={{ padding: "10px 12px", border: "1px solid var(--gef-line)", borderRadius: 12, background: "#fffdf8" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div className="w-[60%]">
-                      <div style={{ fontWeight: 700 }}>{w.title}</div>
-                      <div className="gef-hint">
-                        {new Date(w.startDate).toLocaleDateString()} - {new Date(w.endDate).toLocaleDateString()}
-                      </div>
-                      <div className="gef-hint">
-                        Instructors: {w.instructorCodes.map((c) => instructorNames.get(c) || c).join(", ")}
-                      </div>
+                <div key={w._id} className="gef-row-card" style={{ alignItems: "flex-start" }}>
+                  <div>
+                    <div className="gef-row-card-title">{w.title}</div>
+                    <div className="gef-row-card-sub">
+                      {new Date(w.startDate).toLocaleDateString()} - {new Date(w.endDate).toLocaleDateString()}
                     </div>
-                    <div className="w-[40%]" style={{ textAlign: "right" }}>
-                      <span className={`gef-badge ${isOpen ? "gef-badge--submitted" : "gef-badge--pending"}`}>
-                        {isOpen ? "Open" : "Closed"}
-                      </span>
-                      {isOpen ? (
-                        <div style={{ marginTop: 8 }}>
-                          <Button size="sm" variant="danger" onClick={() => handleCloseEarly(w._id)}>
-                            Close Early
-                          </Button>
-                        </div>
-                      ) : null}
+                    <div className="gef-row-card-sub">
+                      Instructors: {w.instructorCodes.map((c) => instructorNames.get(c) || c).join(", ")}
                     </div>
+                  </div>
+                  <div style={{ textAlign: "right", flex: "0 0 auto" }}>
+                    <span className={`gef-badge ${isOpen ? "gef-badge--submitted" : "gef-badge--pending"}`}>
+                      {isOpen ? "Open" : "Closed"}
+                    </span>
+                    {isOpen ? (
+                      <div style={{ marginTop: 8 }}>
+                        <Button size="sm" variant="danger" onClick={() => handleCloseEarly(w._id)}>
+                          Close Early
+                        </Button>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               );
