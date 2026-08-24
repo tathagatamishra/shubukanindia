@@ -7,7 +7,6 @@ import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Divider, StatusBadge, SectionHeading } from "../UI/Basics";
 import Button from "../UI/Button";
 import { Field, TextInput, TextArea, Select, YesNo, ChipMultiSelect, DailyOrBeforeExam, OrDivider } from "../UI/FormFields";
-import SignatureUpload from "./SignatureUpload";
 import { emptyEvaluationForm, mergeIntoDefaults } from "./emptyForm";
 import { bi } from "../i18n/labels";
 
@@ -150,7 +149,8 @@ export default function FullForm({ learnerId, windowId }) {
     <div className="gef-container gef-doc">
       <h1 className="gef-title">{bi("formTitle")}</h1>
       <p className="gef-subtitle">
-        For <strong>{learner?.name}</strong> &middot; <StatusBadge status={status} />
+        {/* For <strong>{learner?.name}</strong> &middot;  */}
+        <StatusBadge status={status} />
       </p>
       <Divider />
 
@@ -425,17 +425,9 @@ export default function FullForm({ learnerId, windowId }) {
 
         {/* ===== SIGNATURE ===== */}
         <SectionHeading title={bi("guardianSignature")} />
-        <Field label={bi("filledByName")} required hint="If you don't upload a signature below, this name is printed on the form instead">
+        <Field label={bi("filledByName")} required hint="This name is printed on the form as the guardian's signature">
           <TextInput value={data.filledByName} onChange={(v) => setData((d) => ({ ...d, filledByName: v }))} placeholder="e.g. Guardian's full name" />
         </Field>
-        <p className="gef-hint" style={{ marginBottom: 12 }}>
-          Signature upload is optional — only the guardian signs this form.
-        </p>
-        <SignatureUpload
-          label={`${bi("guardianSignature")} (optional)`}
-          value={{ url: data.guardianSignatureUrl, publicId: data.guardianSignaturePublicId }}
-          onChange={({ url, publicId }) => setData((d) => ({ ...d, guardianSignatureUrl: url, guardianSignaturePublicId: publicId }))}
-        />
 
         <ActionBar />
       </div>

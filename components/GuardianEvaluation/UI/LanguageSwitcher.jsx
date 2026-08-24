@@ -83,32 +83,20 @@ export default function LanguageSwitcher({ compact = false }) {
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", justifyContent: "center" }} className="notranslate">
+    <div className="gef-lang-switcher notranslate">
       {/* Google's widget mounts here; visually hidden but functional */}
       <div id="gef-google-translate-root" style={{ display: "none" }} ref={containerRef} />
-      <select
-        className="gef-select"
-        style={{
-          padding: "6px 10px",
-          fontSize: 12,
-          width: "auto",
-          maxWidth: 140,
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-        }}
-        value={lang}
-        onChange={(e) => setLang(e.target.value)}
-      >
+      <select className="gef-lang-select" value={lang} onChange={(e) => setLang(e.target.value)}>
         {LANGUAGES.map((l) => (
           <option key={l.code} value={l.code}>
             {l.label}
           </option>
         ))}
       </select>
+      <span className="gef-lang-divider" aria-hidden="true" />
       <button
         type="button"
-        className="gef-btn gef-btn--outline gef-btn--sm"
+        className="gef-lang-btn"
         onClick={() => applyLanguage(lang)}
         disabled={!ready}
         title="Translate this page using Google Translate"

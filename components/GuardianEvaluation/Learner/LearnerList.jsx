@@ -43,28 +43,21 @@ export default function LearnerList({ onChange }) {
 
   return (
     <Card title="Your Learners">
+      <p className="gef-section-note">
+        A "learner" is one of your children training at Shubukan. Add each child here, linked to their dojo
+        and instructor, so you can fill an evaluation form for them when one is open.
+      </p>
       {loading ? (
         <p className="gef-hint">Loading...</p>
       ) : learners.length === 0 ? (
-        <p className="gef-empty">No learners added yet.</p>
+        <p className="gef-empty">No learners added yet. Add your first child below to get started.</p>
       ) : (
         <div className="gef-list">
           {learners.map((l) => (
-            <div
-              key={l._id}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "10px 12px",
-                border: "1px solid var(--gef-line)",
-                borderRadius: 12,
-                background: "#fffdf8",
-              }}
-            >
+            <div key={l._id} className="gef-row-card">
               <div>
-                <div style={{ fontWeight: 700 }}>{l.name}</div>
-                <div className="gef-hint">
+                <div className="gef-row-card-title">{l.name}</div>
+                <div className="gef-row-card-sub">
                   {l.dojoName} &middot; {l.instructorName}
                 </div>
               </div>

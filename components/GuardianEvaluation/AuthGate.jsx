@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useGuardianAuth } from "./Context/GuardianAuthContext";
+import Loader from "./UI/Loader";
 
 export default function AuthGate({ children }) {
   const { guardian, loading } = useGuardianAuth();
@@ -13,6 +14,6 @@ export default function AuthGate({ children }) {
     }
   }, [loading, guardian, router]);
 
-  if (loading || !guardian) return <p className="gef-hint gef-container">Loading...</p>;
+  if (loading || !guardian) return <Loader loading />;
   return children;
 }

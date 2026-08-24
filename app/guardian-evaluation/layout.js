@@ -10,6 +10,10 @@ export const metadata = {
 export default function GuardianEvaluationLayout({ children }) {
   return (
     <GuardianAuthProvider>
+      {/* Rendered anywhere in the tree, Next.js hoists this into <head> and starts
+          fetching it immediately, so the loader's image is already cached/in-flight
+          by the time any loading state (route-level or client-triggered) mounts it. */}
+      <link rel="preload" as="image" href="/images/loader-elephant.png" fetchPriority="high" />
       <div className="gef-root" style={{ zIndex: 2 }}>
         <GefNav />
         {children}

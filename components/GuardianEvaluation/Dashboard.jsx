@@ -13,19 +13,20 @@ export default function Dashboard() {
 
   return (
     <div className="gef-container">
-      <h1 className="gef-title">Welcome, {guardian?.name}</h1>
+      {/* <h1 className="gef-title">Welcome, {guardian?.name}</h1>
       <p className="gef-subtitle">
         Manage your learners and complete the Guardian Evaluation Form when a submission window is open.
-      </p>
-      <Divider />
+      </p> */}
+      {/* <Divider /> */}
 
       <div className="gef-stack">
         <ActiveWindowList />
         <LearnerList />
 
         <Card title="Your Records">
-          <p className="gef-hint" style={{ marginBottom: 12 }}>
-            View or download previously filled forms.
+          <p className="gef-section-note">
+            Every evaluation form you've submitted for any of your learners is saved here — view it any time or
+            download a PDF copy for your records.
           </p>
           <Button variant="outline" block onClick={() => router.push("/guardian-evaluation/submissions")}>
             My Submissions

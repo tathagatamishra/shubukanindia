@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
-import { Card, Divider, Stamp } from "../UI/Basics";
+import { Card, Divider } from "../UI/Basics";
 import { Field, TextInput } from "../UI/FormFields";
 import Button from "../UI/Button";
 
@@ -33,8 +33,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="gef-container" style={{ maxWidth: 420 }}>
-
+    <div className="gef-auth-shell">
       <h1 className="gef-title" style={{ textAlign: "center" }}>
         Create your account
       </h1>
