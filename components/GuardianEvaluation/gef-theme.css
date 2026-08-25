@@ -83,7 +83,7 @@
   background: transparent;
     background: linear-gradient(90deg,
       transparent 0%,
-      var(--gef-ink) 50%,
+      #88807e 50%,
       transparent 100%);
 }
 
@@ -318,6 +318,104 @@
   .gef-tab-panel {
     padding: 16px 14px;
   }
+}
+
+/* ---------- belt rank select (colored dropdown, matches the physical belts) ---------- */
+.gef-rank-select {
+  position: relative;
+  width: 100%;
+}
+
+.gef-rank-select-trigger {
+  width: 100%;
+  font-family: var(--gef-font-body);
+  font-size: 14px;
+  padding: 11px 12px;
+  border-radius: 8px 8px 0 0;
+  border: none;
+  border-bottom: 1.5px solid var(--gef-line);
+  background: rgba(255, 253, 248, 0.65);
+  color: var(--gef-ink);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gef-rank-select-trigger:focus {
+  border-bottom-color: var(--gef-vermillion);
+  background: rgba(255, 253, 248, 0.95);
+}
+
+.gef-rank-select-trigger:hover {
+  filter: brightness(0.97);
+}
+
+.gef-rank-select-trigger-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.gef-rank-select-chevron {
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+
+.gef-rank-select-panel {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  /* max-height: 320px; */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  background: #fffdf8;
+  border: 1.5px solid var(--gef-line);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 30px rgba(28, 26, 23, 0.16);
+}
+
+.gef-rank-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 4px;
+  border: 1.5px solid transparent;
+  font-family: var(--gef-font-body);
+  font-size: 11px;
+  cursor: pointer;
+  text-align: left;
+  transition: filter 0.15s ease;
+}
+
+.gef-rank-option:hover {
+  filter: brightness(0.95);
+}
+
+.gef-rank-option.active {
+  outline: 2px solid var(--gef-vermillion);
+  outline-offset: 1px;
+}
+
+.gef-rank-stripes {
+  display: inline-flex;
+  gap: 3px;
+  flex: 0 0 auto;
+}
+
+.gef-rank-stripe {
+  width: 4px;
+  height: 16px;
+  border-radius: 1px;
+  background: #ff3131;
 }
 
 /* ---------- form elements ---------- */

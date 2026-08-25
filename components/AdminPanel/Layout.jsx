@@ -10,8 +10,10 @@ export default function Layout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [isLoginPage, setIsLoginPage] = useState(false);
   const [open, setOpen] = useState(false);
+  // "checking" until we know the token is actually valid — never render admin
+  // content on an unauthenticated/expired session, even for a flash.
+  const [authState, setAuthState] = useState("checking");
 
   const handleLogout = async () => {
     try {
@@ -26,26 +28,41 @@ export default function Layout({ children }) {
     } catch (err) {
       console.error("Logout error:", err.response?.data || err.message);
     } finally {
-      localStorage.removeItem("adminToken"); // always clear token
+      localStorage.removeItem("adminToken");
       router.push("/admin/login");
     }
   };
 
   useEffect(() => {
+    if (pathname === "/admin/login") return;
+
     const token = localStorage.getItem("adminToken");
-    if (!token && pathname !== "/admin/login") {
-      router.push("/admin/login");
-      setOpen(false);
+    if (!token) {
+      router.replace("/admin/login");
+      return;
     }
+
+    setAuthState("checking");
+    shubukan_api
+      .post("/admin/validate", {}, { headers: { Authorization: `Bearer ${token}` } })
+      .then(() => setAuthState("authenticated"))
+      .catch(() => {
+        // Token missing/invalid/expired, or the admin account no longer
+        // exists — never leave the panel accessible in that state.
+        localStorage.removeItem("adminToken");
+        router.replace("/admin/login");
+      });
   }, [pathname, router]);
 
-  // Don’t render layout on login page
+  // Don't render layout on login page
   if (pathname === "/admin/login") {
     return <>{children}</>;
   }
 
+  if (authState !== "authenticated") return null;
+
   return (
-    <div className="flex h-screen w-full bg-gray-100 text-[#334155]">
+    <div className="flex h-screen w-full max-w-full bg-gray-100 text-[#334155] overflow-x-hidden">
       {/* Sidebar */}
       <Sidebar open={open} setOpen={setOpen} />
       {open && (
@@ -56,7 +73,7 @@ export default function Layout({ children }) {
       )}
 
       {/* Main */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         {/* Topbar */}
         {
           <div className="z-[50] flex items-center justify-between bg-white shadow-md p-4">
@@ -77,7 +94,7 @@ export default function Layout({ children }) {
         }
 
         {/* Page content */}
-        <div className="p-4 pb-[32px] overflow-y-auto">{children}</div>
+        <div className="p-4 pb-[32px] overflow-y-auto overflow-x-hidden min-w-0">{children}</div>
       </div>
     </div>
   );

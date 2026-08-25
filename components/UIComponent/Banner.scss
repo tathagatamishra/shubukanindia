@@ -28,9 +28,11 @@
     & .track {
         color: white;
         position: absolute;
+        display: flex;
+        align-items: center;
         white-space: nowrap;
         will-change: transform;
-        animation: marquee 20s linear infinite;
+        animation: marquee 40s linear infinite;
 
         // font-family: 'Finlandica';
         font-family: 'Lekton';
@@ -41,7 +43,12 @@
         // font-family: 'Capriola', sans-serif;
         // font-family: 'GFS Neohellenic', sans-serif;
 
+        // The .track holds two identical copies of the content back to back
+        // (see Banner.jsx) so that animating exactly -50% loops seamlessly
+        // instead of jump-cutting to mismatched text every cycle.
         & .content {
+            flex: 0 0 auto;
+            white-space: nowrap;
             margin: 0 !important;
             &::selection {
                 color: $selection-color;

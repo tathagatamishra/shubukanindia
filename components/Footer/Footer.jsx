@@ -106,7 +106,7 @@ export default function Footer() {
               Contributors
             </p>
           </div>
-          <div onClick={() => navigate("/membership")} className="opt">
+          <div onClick={() => navigate("/dojo-listicle")} className="opt">
             <p
               style={{
                 textDecoration: "none",
@@ -117,7 +117,7 @@ export default function Footer() {
                 userSelect: "none",
               }}
             >
-              Membership
+              Dojo List
             </p>
           </div>
           <div onClick={() => navigate("/services")} className="opt">
@@ -140,11 +140,11 @@ export default function Footer() {
           className="midLine"
           style={{
             height: "100%",
-            width: "1px",
-            background:
-              "linear-gradient(0deg, rgba(235, 224, 214, 0) 0%, rgba(235, 224, 214, 1) 90%, rgba(235, 224, 214, 0) 100%)",
+            background: "linear-gradient(0deg, rgba(235, 224, 214, 0) 0%, rgba(235, 224, 214, 1) 90%, rgba(235, 224, 214, 0) 100%)",
           }}
-        ></div>
+        >
+          <div style={{ border: "1px solid #00000000", height: "100%"}}></div>
+        </div>
 
         <div
           className="footOptions2"
@@ -206,11 +206,11 @@ export default function Footer() {
           className="midLine"
           style={{
             height: "100%",
-            width: "1px",
-            background:
-              "linear-gradient(0deg, rgba(235, 224, 214, 0) 0%, rgba(235, 224, 214, 1) 90%, rgba(235, 224, 214, 0) 100%)",
+            background: "linear-gradient(0deg, rgba(235, 224, 214, 0) 0%, rgba(235, 224, 214, 1) 90%, rgba(235, 224, 214, 0) 100%)",
           }}
-        ></div>
+        >
+          <div style={{ border: "1px solid #00000000", height: "100%"}}></div>
+        </div>
 
         <div
           className="footOptions3"

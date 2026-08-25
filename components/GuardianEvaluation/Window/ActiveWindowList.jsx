@@ -40,7 +40,7 @@ export default function ActiveWindowList() {
       {data.map(({ window, learners }) => (
         <Card key={window._id} title={window.title}>
           <p className="gef-section-note">
-            This form is open for submission until <strong>{new Date(window.endDate).toLocaleDateString()}</strong>.
+            This form is open for submission until <strong className="text-[#c53a3a]">{new Date(window.endDate).toLocaleDateString()}</strong>.
             Pick a learner below to fill in, continue, or review their form.
           </p>
           <div className="gef-list">
