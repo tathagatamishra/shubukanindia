@@ -750,7 +750,6 @@
 .gef-doc-body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .gef-doc-section-heading {
@@ -761,38 +760,12 @@
   margin-top: 8px;
 }
 
-.gef-doc-section-heading-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 6px;
-}
-
-.gef-doc-section-icon {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1.5px solid var(--gef-gold);
-  background: rgba(198, 167, 94, 0.12);
-  color: #8a6d2f;
-}
-
-.gef-doc-section-icon--vermillion {
-  border-color: var(--gef-vermillion);
-  background: rgba(166, 27, 27, 0.08);
-  color: var(--gef-vermillion);
-}
-
 .gef-doc-section-title {
   font-family: var(--gef-font-heading);
   font-size: 20px;
   font-weight: 700;
   color: var(--gef-ink);
-  margin: 0;
+  margin: 0 0 6px;
 }
 
 .gef-doc-instruction {
@@ -818,40 +791,33 @@
 /* checkbox rows, mirroring the printed marksheet's square-box checkboxes */
 .gef-checkbox-row {
   display: inline-flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 9px;
   background: none;
   border: none;
-  border-radius: 8px;
-  padding: 6px 8px 6px 2px;
-  margin: -6px -8px -6px -2px;
+  padding: 4px 0;
   cursor: pointer;
   font-family: var(--gef-font-body);
   text-align: left;
-  transition: background 0.15s ease;
-}
-
-.gef-checkbox-row:hover {
-  background: rgba(28, 26, 23, 0.04);
 }
 
 .gef-checkbox-box {
   flex: 0 0 auto;
-  width: 19px;
-  height: 19px;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
   border: 1.5px solid var(--gef-ink);
-  border-radius: 5px;
+  border-radius: 4px;
   background: #fffdf8;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
 }
 
 .gef-checkbox-row.checked .gef-checkbox-box {
-  border: 2px solid var(--gef-vermillion);
-  background: rgba(166, 27, 27, 0.08);
-  transform: scale(1.05);
+  border: 2px solid var(--gef-ink);
+  border-color: var(--gef-vermillion);
+  background: rgba(166, 27, 27, 0.06);
 }
 
 .gef-checkbox-tick {
@@ -865,7 +831,6 @@
   font-size: 13.5px;
   font-weight: 600;
   color: var(--gef-charcoal);
-  transition: color 0.15s ease;
 }
 
 .gef-checkbox-row.checked .gef-checkbox-label {
@@ -881,10 +846,8 @@
 
 .gef-yesno-checks {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  row-gap: 8px;
-  column-gap: 14px;
+  gap: 14px;
 }
 
 /* "Or" separator between mutually-exclusive option groups */
