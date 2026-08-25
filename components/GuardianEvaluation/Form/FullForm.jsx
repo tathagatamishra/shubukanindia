@@ -1,9 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FiUser, FiEdit3 } from "react-icons/fi";
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { GiKimono } from "react-icons/gi";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
@@ -143,11 +140,11 @@ export default function FullForm({ learnerId, windowId }) {
         {/* For <strong>{learner?.name}</strong> &middot;  */}
         <StatusBadge status={status} />
       </p>
+      <Divider />
 
       <div className="gef-doc-body">
         {/* ===== FOR STUDENTS ===== */}
-        <div className="gef-card">
-        <SectionHeading title={bi("studentSectionTitle")} instruction={bi("yesNoInstruction")} icon={FiUser} tone="gold" />
+        <SectionHeading title={bi("studentSectionTitle")} instruction={bi("yesNoInstruction")} />
 
         <Field label={bi("studentName")} required>
           <TextInput value={s.name} onChange={(v) => patchStudent({ name: v })} placeholder={learner?.name} />
@@ -325,11 +322,8 @@ export default function FullForm({ learnerId, windowId }) {
           <TextArea value={s.karateLearningRemarks} onChange={(v) => patchStudent({ karateLearningRemarks: v })} rows={4} />
         </Field>
 
-        </div>
-
         {/* ===== FOR THE TEACHER ===== */}
-        <div className="gef-card">
-        <SectionHeading title={bi("teacherSectionTitle")} instruction={bi("yesNoInstruction")} icon={FaChalkboardTeacher} tone="vermillion" />
+        <SectionHeading title={bi("teacherSectionTitle")} instruction={bi("yesNoInstruction")} />
         <Field label={bi("t1")} required>
           <YesNo value={t.punctual} onChange={(v) => patchTeacher({ punctual: v })} yesLabel={bi("yes")} noLabel={bi("no")} />
         </Field>
@@ -349,11 +343,8 @@ export default function FullForm({ learnerId, windowId }) {
           <TextArea value={t.remarks} onChange={(v) => patchTeacher({ remarks: v })} rows={4} />
         </Field>
 
-        </div>
-
         {/* ===== ABOUT TRAINING ===== */}
-        <div className="gef-card">
-        <SectionHeading title={bi("trainingSectionTitle")} instruction={bi("yesNoInstruction")} icon={GiKimono} tone="gold" />
+        <SectionHeading title={bi("trainingSectionTitle")} instruction={bi("yesNoInstruction")} />
         <Field label={bi("tr1")} required hint="Select all that apply">
           <ChipMultiSelect value={tr.trainingNeeded} onChange={(v) => patchTraining({ trainingNeeded: v })} options={TRAINING_NEEDED} />
         </Field>
@@ -415,15 +406,11 @@ export default function FullForm({ learnerId, windowId }) {
           <TextArea value={tr.remarksAndSuggestion} onChange={(v) => patchTraining({ remarksAndSuggestion: v })} rows={3} />
         </Field>
 
-        </div>
-
         {/* ===== SIGNATURE ===== */}
-        <div className="gef-card">
-        <SectionHeading title={bi("guardianSignature")} icon={FiEdit3} tone="vermillion" />
+        <SectionHeading title={bi("guardianSignature")} />
         <Field label={bi("filledByName")} required hint="This name is printed on the form as the guardian's signature">
           <TextInput value={data.filledByName} onChange={(v) => setData((d) => ({ ...d, filledByName: v }))} placeholder="e.g. Guardian's full name" />
         </Field>
-        </div>
 
         <ActionBar />
       </div>
