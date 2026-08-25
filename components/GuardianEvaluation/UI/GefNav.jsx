@@ -94,72 +94,40 @@ export default function GefNav() {
           >
             <FiChevronRight size={17} />
           </button>
-        </div>
-
-        <div className="gef-nav-bar-links">
           {isAdminSection ? (
             !isAdminLoginPage && adminToken ? (
               <button
                 type="button"
-                className="gef-nav-link gef-nav-link--danger"
+                className="gef-nav-icon-btn gef-nav-link--danger"
                 onClick={handleAdminLogout}
               >
-                <FiLogOut size={14} /> Log Out
+                <FiLogOut size={14} />
               </button>
             ) : null
           ) : isInstructorSection ? (
             !isInstructorLoginPage && instructorToken ? (
               <button
                 type="button"
-                className="gef-nav-link gef-nav-link--danger"
+                className="gef-nav-icon-btn gef-nav-link--danger"
                 onClick={handleInstructorLogout}
               >
-                <FiLogOut size={14} /> Log Out
+                <FiLogOut size={14} />
               </button>
             ) : null
           ) : guardian ? (
-            <>
-              {/* {firstName ? (
-                <span className="gef-nav-greeting">Hi, {firstName}</span>
-              ) : null} */}
-              {/* <a
-                href="/guardian-evaluation"
-                className={`gef-nav-link ${pathname === "/guardian-evaluation" ? "active" : ""}`}
-              >
-                Dashboard
-              </a>
-              <a
-                href="/guardian-evaluation/submissions"
-                className={`gef-nav-link ${pathname === "/guardian-evaluation/submissions" ? "active" : ""}`}
-              >
-                Submissions
-              </a> */}
-              {/* <button
-                type="button"
-                className="gef-nav-link gef-nav-link--danger"
-                onClick={logout}
-              >
-                <FiLogOut size={14} /> Log Out
-              </button> */}
-            </>
-          ) : (
-            <>
-              <a
-                href="/guardian-evaluation/login"
-                className={`gef-nav-link ${pathname === "/guardian-evaluation/login" ? "active" : ""}`}
-              >
-                Log In
-              </a>
-              <a
-                href="/guardian-evaluation/signup"
-                className={`gef-nav-link ${pathname === "/guardian-evaluation/signup" ? "active" : ""}`}
-              >
-                Sign Up
-              </a>
-            </>
-          )}
-          {/* <span className="gef-nav-divider-v" aria-hidden="true" /> */}
+            <button
+              type="button"
+              className="gef-nav-icon-btn gef-nav-link--danger"
+              onClick={logout}
+            >
+              <FiLogOut size={14} />
+            </button>
+          ) : null}
+        </div>
+
+        <div className="gef-nav-bar-links">
           <LanguageSwitcher />
+          {/* <span className="gef-nav-divider-v" aria-hidden="true" /> */}
         </div>
       </div>
     </div>

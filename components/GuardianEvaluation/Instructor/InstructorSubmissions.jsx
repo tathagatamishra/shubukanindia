@@ -6,7 +6,7 @@ import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
 import Button from "../UI/Button";
 import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
-import Loader from "../UI/Loader";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function InstructorSubmissions() {
   const router = useRouter();

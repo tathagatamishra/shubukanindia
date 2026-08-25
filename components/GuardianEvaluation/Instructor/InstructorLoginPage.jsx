@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import InstructorLogin from "./InstructorLogin";
-import Loader from "../UI/Loader";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function InstructorLoginPage() {
   const router = useRouter();

@@ -78,39 +78,14 @@
 /* ---------- ink brush divider ---------- */
 .gef-divider {
   position: relative;
-  height: 14px;
-  margin: 6px 0 18px;
-  background: transparent;
-}
-
-.gef-divider::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 6px;
   height: 3px;
-  background: linear-gradient(90deg,
+  margin: 20px 0 32px;
+  background: transparent;
+    background: linear-gradient(90deg,
       transparent 0%,
-      var(--gef-ink) 6%,
-      var(--gef-ink) 78%,
+      var(--gef-ink) 50%,
       transparent 100%);
-  border-radius: 2px;
-  opacity: 0.75;
-  transform: skewY(-0.4deg);
 }
-
-/* .gef-divider::after {
-  content: "";
-  position: absolute;
-  left: 10%;
-  top: 0;
-  width: 6px;
-  height: 6px;
-  background: var(--gef-ink);
-  border-radius: 50% 50% 50% 10%;
-  opacity: 0.6;
-} */
 
 /* ---------- scroll card (folded scroll-corner styling, soft single shadow) ---------- */
 .gef-card {
@@ -144,7 +119,7 @@
 }
 
 .gef-card-title {
-  font-family: var(--gef-font-heading);
+  font-family: Philosopher, sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: var(--gef-ink);
@@ -256,12 +231,19 @@
 .gef-btn--xsm {
   background: #ffffff;
   border-radius: 10px;
-  height: 29.6px;
+  width: 120px;
+  height: 38px;
   padding: 0px 12px;
   font-size: 12px;
   border: 1.5px solid var(--gef-line);
   background: #fffdf8;
   color: var(--gef-ink);
+}
+
+.gef-btn--xsm:hover {
+  border-color: var(--gef-vermillion);
+  color: var(--gef-vermillion) !important;
+  background: rgba(166, 27, 27, 0.06);
 }
 
 .gef-btn--block {
@@ -272,6 +254,70 @@
   border-color: var(--gef-vermillion);
   background: transparent;
   color: var(--gef-vermillion);
+}
+
+/* ---------- browser-style tabs (e.g. admin "Evaluation Windows" / "Submitted Forms") ---------- */
+.gef-tabs {
+  display: flex;
+  /* align-items: flex-end; */
+  gap: 6px;
+  /* padding: 0 2px; */
+}
+
+.gef-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 22px;
+  font-family: var(--gef-font-body);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: rgba(28, 26, 23, 0.5);
+  background: rgba(28, 26, 23, 0.035);
+  border: 1.5px solid var(--gef-line);
+  /* border-bottom: 1.5px solid var(--gef-line); */
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.gef-tab:hover:not(.active) {
+  background: rgba(28, 26, 23, 0.07);
+  color: var(--gef-ink);
+}
+
+.gef-tab.active {
+  background: linear-gradient(to bottom, #fefbf5 0%, var(--gef-rice-soft) 100%);
+  color: var(--gef-vermillion);
+  font-weight: 700;
+  border-bottom-color: transparent;
+}
+
+.gef-tab-panel {
+  position: relative;
+  z-index: 2;
+  margin-top: -1.5px;
+  /* box-sizing: border-box; */
+  border: 1.5px solid var(--gef-line);
+  border-top: none;
+  border-radius: 0 14px 14px 14px;
+  background: linear-gradient(to bottom, #fefbf5 0%, var(--gef-rice-soft) 100%);
+  padding: 22px 20px;
+  box-shadow: 0 4px 14px rgba(28, 26, 23, 0.06);
+}
+
+@media (max-width: 480px) {
+  .gef-tab {
+    padding: 10px 14px;
+    font-size: 12.5px;
+  }
+
+  .gef-tab-panel {
+    padding: 16px 14px;
+  }
 }
 
 /* ---------- form elements ---------- */
@@ -465,7 +511,7 @@
   max-width: 420px;
   margin: 0 auto;
   border-radius: 22px;
-  padding: 28px 4px;
+  padding: 0 4px 28px 4px;
 }
 
 .gef-auth-back {
@@ -1087,6 +1133,12 @@
     border-radius: 10px;
     width: 100%;
     height: 38px;
+  }
+
+  .gef-btn--xsm {
+    border-radius: 10px;
+    width: 100%;
+    height: 29.6px;
   }
 
   .gef-nav-link {
