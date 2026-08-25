@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
+import { useFormFontSize } from "../Context/FormFontSizeContext";
 import { Divider, StatusBadge, SectionHeading } from "../UI/Basics";
 import Button from "../UI/Button";
 import { Field, TextInput, TextArea, Select, YesNo, ChipMultiSelect, DailyOrBeforeExam, OrDivider } from "../UI/FormFields";
@@ -23,6 +24,7 @@ const TRAINING_NEEDED = [
 
 export default function FullForm({ learnerId, windowId }) {
   const { authHeader } = useGuardianAuth();
+  const { fontSize } = useFormFontSize();
   const { addToast } = useToast();
   const router = useRouter();
 
@@ -132,7 +134,7 @@ export default function FullForm({ learnerId, windowId }) {
   );
 
   return (
-    <div className="gef-container gef-doc">
+    <div className="gef-container gef-doc gef-form-scale" style={{ fontSize: `${fontSize}px` }}>
       <h1 className="gef-title">{bi("formTitle")}</h1>
       <p className="gef-subtitle">
         {/* For <strong>{learner?.name}</strong> &middot;  */}
