@@ -7,6 +7,7 @@ import {
   FiUsers,
   FiFileText,
   FiImage,
+  FiVolume2,
 } from "react-icons/fi";
 import { TbTorii } from "react-icons/tb";
 import { PiExam } from "react-icons/pi";
@@ -22,6 +23,7 @@ export default function Sidebar({ open, setOpen }) {
     { name: "Dojos", href: "/admin/dojo", icon: <TbTorii /> },
     { name: "Blogs", href: "/admin/blogs", icon: <GrArticle /> },
     { name: "Gallery", href: "/admin/gallery", icon: <FiImage /> },
+    { name: "Banner", href: "/admin/banner", icon: <FiVolume2 /> },
     { name: "Students", href: "/admin/students", icon: <FiUsers /> },
     { name: "Instructors", href: "/admin/instructors", icon: <FaChalkboardTeacher />,},
     { name: "Questions", href: "/admin/questions", icon: <BsQuestionSquare /> },

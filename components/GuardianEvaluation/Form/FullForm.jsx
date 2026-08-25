@@ -7,6 +7,7 @@ import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Divider, StatusBadge, SectionHeading } from "../UI/Basics";
 import Button from "../UI/Button";
 import { Field, TextInput, TextArea, Select, YesNo, ChipMultiSelect, DailyOrBeforeExam, OrDivider } from "../UI/FormFields";
+import BeltRankSelect from "../UI/BeltRankSelect";
 import { emptyEvaluationForm, mergeIntoDefaults } from "./emptyForm";
 import { bi } from "../i18n/labels";
 
@@ -19,21 +20,6 @@ const TRAINING_NEEDED = [
   bi("seminar"),
   bi("internationalSession"),
 ];
-
-// Belt/rank ladder shown in the "Student's Current Rank" dropdown.
-const RANK_OPTIONS = [
-  "White Belt - 10th Kyu",
-  "Yellow Belt - 9th Kyu",
-  "Orange Belt - 8th Kyu",
-  "Green Belt - 7th Kyu",
-  "Blue Belt - 6th Kyu",
-  "Purple Belt - 5th Kyu",
-  "Brown Belt - 4th Kyu",
-  "Brown Belt - 3rd Kyu",
-  "Brown Belt - 2nd Kyu",
-  "Brown Belt - 1st Kyu",
-  "Black Belt - 1st Dan",
-].map((r) => ({ value: r, label: r }));
 
 export default function FullForm({ learnerId, windowId }) {
   const { authHeader } = useGuardianAuth();
@@ -170,12 +156,7 @@ export default function FullForm({ learnerId, windowId }) {
           </Field>
         </div>
         <Field label={bi("currentRank")} required>
-          <Select
-            value={s.currentRank}
-            onChange={(v) => patchStudent({ currentRank: v })}
-            options={RANK_OPTIONS}
-            placeholder="Select current rank..."
-          />
+          <BeltRankSelect value={s.currentRank} onChange={(v) => patchStudent({ currentRank: v })} />
         </Field>
 
         <div className="gef-row">

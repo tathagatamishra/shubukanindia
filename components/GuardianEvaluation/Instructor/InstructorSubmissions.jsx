@@ -78,9 +78,9 @@ export default function InstructorSubmissions() {
             student's habits and needs outside the dojo.
           </p>
         </div>
-        <Button size="sm" variant="outline" onClick={handleLogout}>
+        {/* <Button size="sm" variant="outline" onClick={handleLogout}>
           Log Out
-        </Button>
+        </Button> */}
       </div>
       <Divider />
 
