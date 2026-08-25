@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { FiUserPlus, FiEdit3, FiSend } from "react-icons/fi";
 import { Divider, Card } from "./UI/Basics";
 import Button from "./UI/Button";
@@ -23,27 +24,43 @@ const STEPS = [
 ];
 
 export default function Landing() {
+  const router = useRouter();
+  const pathname = usePathname();
+  
   return (
     <div className="gef-container">
       <p className="gef-eyebrow">For Guardians &amp; Parents</p>
       <h1 className="gef-title">Guardian Evaluation Form</h1>
       <p className="gef-subtitle">
-        A simple, structured way for parents and guardians to share how their child is doing at home — sleep,
-        food, study and training habits — so instructors can support each student better.
+        A simple, structured way for parents and guardians to share how their
+        child is doing at home — sleep, food, study and training habits — so
+        instructors can support each student better.
       </p>
       <Divider />
 
       <div className="gef-stack">
         <Card>
           <p className="gef-hint" style={{ marginBottom: 16 }}>
-            Log in or create a guardian account to add your children and complete the form when a submission
-            window is open.
+            Log in or create a guardian account to add your children and
+            complete the form when a submission window is open.
           </p>
           <div className="gef-stack">
-            <Button variant="primary" block onClick={() => (window.location.href = "/guardian-evaluation/login")}>
+            <Button
+              variant="primary"
+              block
+              onClick={() =>
+                (window.location.href = "/guardian-evaluation/login")
+              }
+            >
               Log In
             </Button>
-            <Button variant="outline" block onClick={() => (window.location.href = "/guardian-evaluation/signup")}>
+            <Button
+              variant="outline"
+              block
+              onClick={() =>
+                (window.location.href = "/guardian-evaluation/signup")
+              }
+            >
               Create Account
             </Button>
           </div>
@@ -66,15 +83,29 @@ export default function Landing() {
         </Card>
 
         <p className="gef-hint" style={{ textAlign: "center" }}>
-          Are you an instructor or dojo admin?{" "}
-          <a href="/guardian-evaluation/instructor/login" style={{ color: "var(--gef-vermillion)", fontWeight: 600 }}>
-            Instructor login
-          </a>
-          {" · "}
-          <a href="/guardian-evaluation/admin/login" style={{ color: "var(--gef-vermillion)", fontWeight: 600 }}>
-            Admin login
-          </a>
+          Are you an instructor or dojo admin?
         </p>
+
+        <div className="w-full flex flex-row justify-center items-center gap-5">
+          <button
+            type="button"
+            onClick={() => router.push("/guardian-evaluation/instructor/login")}
+            aria-label="Home"
+            title="Home"
+            className="gef-btn--xsm"
+          >
+            Instructor login
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push("/guardian-evaluation/admin/login")}
+            aria-label="Home"
+            title="Home"
+            className="gef-btn--xsm"
+          >
+            Admin login
+          </button>
+        </div>
       </div>
     </div>
   );

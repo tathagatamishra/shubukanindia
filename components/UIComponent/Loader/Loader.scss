@@ -1,27 +1,5 @@
-/* Elephant loader SCSS (component-scoped file) */
+/* Elephant loader — plain CSS (self-hosted image, no Sass mixins/Tailwind needed) */
 
-/* helper mixin (kept from your original) */
-@mixin fill-full($dir: 'full', $type: absolute) {
-    position: $type;
-
-    @if $dir !='bottom' {
-        top: 0;
-    }
-
-    @if $dir !='right' {
-        left: 0;
-    }
-
-    @if $dir !='left' {
-        right: 0;
-    }
-
-    @if $dir !='top' {
-        bottom: 0;
-    }
-}
-
-/* Overlay wrapper */
 .shubukan-elephant-overlay {
     position: fixed;
     inset: 0;
@@ -29,7 +7,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0);
     background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 80%);
     backdrop-filter: blur(2px);
     pointer-events: auto;
@@ -45,10 +22,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 32px;
 }
 
 /* rotation animation */
-@keyframes rotating {
+@keyframes elephant-rotating {
     from {
         transform: rotate(720deg);
     }
@@ -58,97 +36,91 @@
     }
 }
 
-/* the original 'elephant' structure — reused for the curled elephant */
 .elephant {
     position: relative;
     width: 100%;
     max-width: 20em;
     overflow: hidden;
-    //   background-color: #e6dcdc;
     border-radius: 0.5rem;
-
-    &::before {
-        content: '';
-        display: block;
-        padding-bottom: 100%;
-        /* square */
-    }
-
-    // &:hover>* {
-    //     animation-play-state: paused;
-    // }
-
-    &:active>* {
-        animation-play-state: paused;
-    }
+    max-width: var(--elephant-max-width, 12rem);
 }
 
-/* shared piece style - uses CSS variable --elephant-url (fallback to /elephant.png) */
-%elephant-img {
-    @include fill-full;
-    animation: rotating 2.79s cubic-bezier(.65, .54, .12, .93) infinite;
+.elephant::before {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+    /* square */
+}
 
-    &::before {
-        content: '';
-        position: absolute;
-        width: 50%;
-        height: 50%;
-        background-size: 200%;
-        background-repeat: no-repeat;
-        /* uses CSS var; consumer sets --elephant-url: url('/path/to/img.png') inline */
-        background-image: var(--elephant-url, url('https://res.cloudinary.com/daspiwjet/image/upload/v1760381402/elephant_480p_feasiv.png'));
-        display: block;
-    }
+.elephant:active > * {
+    animation-play-state: paused;
+}
+
+/* shared piece style - uses CSS variable --elephant-url (fallback to the self-hosted image) */
+.elephant__head,
+.elephant__tail,
+.elephant__body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    animation: elephant-rotating 2.79s cubic-bezier(.65, .54, .12, .93) infinite;
+}
+
+.elephant__head::before,
+.elephant__tail::before,
+.elephant__body::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    /* uses CSS var; consumer sets --elephant-url: url('/path/to/img.png') inline */
+    background-image: var(--elephant-url, url('/images/loader-elephant.png'));
+    display: block;
 }
 
 /* head piece */
-.elephant__head {
-    @extend %elephant-img;
-
-    &::before {
-        top: 0;
-        right: 0;
-        // background-position: 100% 0%;
-        // transform-origin: 0% 100%;
-        // transform: rotate(90deg);
-        background-position: 74% -5%;
-        transform-origin: 19% 84%;
-        transform: rotate(84deg);
-        width: 53%;
-        height: 53%;
-        background-size: 190%;
-    }
+.elephant__head::before {
+    top: 0;
+    right: 0;
+    background-position: 74% -5%;
+    transform-origin: 19% 84%;
+    transform: rotate(84deg);
+    width: 53%;
+    height: 53%;
+    background-size: 190%;
 }
 
 /* tail piece */
 .elephant__tail {
-    @extend %elephant-img;
     animation-delay: .2s;
+}
 
-    &::before {
-        left: 0;
-        bottom: 0;
-        background-position: 0% 100%;
-        transform-origin: 100% 0%;
-        transform: rotate(-30deg);
-    }
+.elephant__tail::before {
+    left: 0;
+    bottom: 0;
+    background-position: 0% 100%;
+    transform-origin: 100% 0%;
+    transform: rotate(-30deg);
 }
 
 /* body pieces */
 .elephant__body {
-    @extend %elephant-img;
     animation-delay: .1s;
+}
 
-    &:nth-of-type(2) {
-        animation-delay: .2s;
-    }
+.elephant__body:nth-of-type(2) {
+    animation-delay: .2s;
+}
 
-    &::before {
-        right: 0;
-        bottom: 0;
-        background-position: 100% 100%;
-        transform-origin: 0% 0%;
-    }
+.elephant__body::before {
+    right: 0;
+    bottom: 0;
+    background-position: 100% 100%;
+    transform-origin: 0% 0%;
 }
 
 /* make overlay elephant smaller by default — adjustable via CSS var on the overlay element */
@@ -157,32 +129,38 @@
 }
 
 .loader-message {
+    width: 100%;
+    max-width: 720px;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    & .loading {
-        text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
-        
-        // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        // font-family: 'Times New Roman', Times, serif;
-        // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        // font-family: Arial, Helvetica, sans-serif;
-        // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        // font-family: Georgia, 'Times New Roman', Times, serif;
-        // font-family: Verdana, Geneva, Tahoma, sans-serif;
-        // font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
+.loader-message .loading {
+    text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #252b32;
+    margin-bottom: 12px;
+    text-align: center;
+}
 
-    & .quote {
-        text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
-        font-style: italic;
-        // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        // font-family: 'Times New Roman', Times, serif;
-        // font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        // font-family: Arial, Helvetica, sans-serif;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        // font-family: Georgia, 'Times New Roman', Times, serif;
-        // font-family: Verdana, Geneva, Tahoma, sans-serif;
-        // font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.loader-message .quote {
+    text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+    font-style: italic;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #4d545c;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+@media (min-width: 640px) {
+    .loader-message .loading,
+    .loader-message .quote {
+        font-size: 18px;
     }
 }

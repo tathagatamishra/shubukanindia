@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useGuardianAuth } from "./Context/GuardianAuthContext";
-import Loader from "./UI/Loader";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function AuthGate({ children }) {
   const { guardian, loading } = useGuardianAuth();

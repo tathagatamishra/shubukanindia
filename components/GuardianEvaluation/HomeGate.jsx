@@ -3,7 +3,7 @@ import React from "react";
 import { useGuardianAuth } from "@/components/GuardianEvaluation/Context/GuardianAuthContext";
 import Dashboard from "@/components/GuardianEvaluation/Dashboard";
 import Landing from "@/components/GuardianEvaluation/Landing";
-import Loader from "@/components/GuardianEvaluation/UI/Loader";
+import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function HomeGate() {
   const { guardian, loading } = useGuardianAuth();
