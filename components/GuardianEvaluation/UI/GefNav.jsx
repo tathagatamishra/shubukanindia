@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import {
   FiHome,
@@ -19,6 +19,8 @@ export default function GefNav() {
   const { fontSize, setFontSize } = useFormFontSize();
   const [adminToken, setAdminToken] = useState(null);
   const [instructorToken, setInstructorToken] = useState(null);
+  const [isSliderStuck, setIsSliderStuck] = useState(false);
+  const sliderSentinelRef = useRef(null);
 
   const isFormRoute = pathname?.startsWith("/guardian-evaluation/form/");
   const isAdminSection = pathname?.startsWith("/guardian-evaluation/admin");
@@ -37,6 +39,27 @@ export default function GefNav() {
       setInstructorToken(localStorage.getItem("instructor_token"));
     }
   }, [isAdminSection, isInstructorSection, pathname]);
+
+  // On the evaluation form, the font-size slider lives inside gef-nav-bar by
+  // default. A zero-height sentinel sits right before it in normal flow; once
+  // scrolling carries the sentinel to the very top of the viewport, we mark
+  // the slider "stuck" and gef-theme.css switches it to `position: fixed`, so
+  // it stays reachable through the rest of the (long) form instead of being
+  // dragged away with the short nav-bar card it lives in. Scrolling back up
+  // past the sentinel's position — i.e. once gef-nav-bar is visible again —
+  // clears "stuck" and it drops back into the flow.
+  useEffect(() => {
+    if (!isFormRoute) return;
+
+    const handleScroll = () => {
+      if (!sliderSentinelRef.current) return;
+      const sentinelTop = sliderSentinelRef.current.getBoundingClientRect().top;
+      setIsSliderStuck(sentinelTop <= 0);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isFormRoute]);
 
   const goForward = () => {
     if (typeof router.forward === "function") {
@@ -138,7 +161,9 @@ export default function GefNav() {
           // Only ever shown under 640px (see .gef-form-font-slider-wrap in
           // gef-theme.css) — on the long evaluation form, small mobile text
           // is hardest to read, so this only needs to exist there.
-          <div className="gef-form-font-slider-wrap">
+          <>
+          <div ref={sliderSentinelRef} aria-hidden="true" style={{ height: 0 }} />
+          <div className={`gef-form-font-slider-wrap ${isSliderStuck ? "gef-form-font-slider-wrap--stuck" : ""}`}>
             <span className="gef-form-font-slider-label" aria-hidden="true">
               A
             </span>
@@ -172,6 +197,7 @@ export default function GefNav() {
               A
             </span>
           </div>
+          </>
         ) : null}
       </div>
     </div>
