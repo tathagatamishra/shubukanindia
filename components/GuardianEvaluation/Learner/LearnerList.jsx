@@ -6,6 +6,7 @@ import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Card } from "../UI/Basics";
 import Button from "../UI/Button";
 import AddLearnerModal from "./AddLearnerModal";
+import ConfirmModal from "../UI/ConfirmModal";
 
 export default function LearnerList({ onChange }) {
   const { authHeader } = useGuardianAuth();
@@ -13,6 +14,8 @@ export default function LearnerList({ onChange }) {
   const [learners, setLearners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingLearner, setEditingLearner] = useState(null);
+  const [removingLearner, setRemovingLearner] = useState(null);
 
   const fetchLearners = () => {
     setLoading(true);
@@ -31,13 +34,14 @@ export default function LearnerList({ onChange }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRemove = async (id) => {
-    if (!confirm("Remove this learner?")) return;
     try {
       await shubukan_api.delete(`/guardian/learner/${id}`, { headers: authHeader });
       addToast("Learner removed", "success");
       fetchLearners();
     } catch (err) {
       addToast(err.response?.data?.message || "Could not remove learner", "error");
+    } finally {
+      setRemovingLearner(null);
     }
   };
 
@@ -61,9 +65,14 @@ export default function LearnerList({ onChange }) {
                   {l.dojoName} &middot; {l.instructorName}
                 </div>
               </div>
-              <Button variant="danger" size="sm" onClick={() => handleRemove(l._id)}>
-                Remove
-              </Button>
+              <div className="gef-row-card-actions">
+                <Button variant="outline" size="sm" onClick={() => setEditingLearner(l)}>
+                  Edit
+                </Button>
+                <Button variant="danger" size="sm" onClick={() => setRemovingLearner(l)}>
+                  Remove
+                </Button>
+              </div>
             </div>
           ))}
         </div>
@@ -74,6 +83,20 @@ export default function LearnerList({ onChange }) {
         </Button>
       </div>
       <AddLearnerModal open={modalOpen} onClose={() => setModalOpen(false)} onCreated={fetchLearners} />
+      <AddLearnerModal
+        open={!!editingLearner}
+        learner={editingLearner}
+        onClose={() => setEditingLearner(null)}
+        onCreated={fetchLearners}
+      />
+      <ConfirmModal
+        open={!!removingLearner}
+        onClose={() => setRemovingLearner(null)}
+        onConfirm={() => handleRemove(removingLearner._id)}
+        title="Remove Learner"
+        message={`Remove ${removingLearner?.name || "this learner"}? This can't be undone.`}
+        confirmLabel="Remove"
+      />
     </Card>
   );
 }
