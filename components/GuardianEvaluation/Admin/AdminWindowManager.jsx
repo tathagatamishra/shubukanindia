@@ -6,6 +6,8 @@ import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card } from "../UI/Basics";
 import { Field, TextInput, ChipMultiSelect } from "../UI/FormFields";
 import Button from "../UI/Button";
+import EditWindowModal from "./EditWindowModal";
+import ConfirmModal from "../UI/ConfirmModal";
 
 export default function AdminWindowManager() {
   const router = useRouter();
@@ -20,6 +22,8 @@ export default function AdminWindowManager() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [selectedCodes, setSelectedCodes] = useState([]);
+  const [editingWindow, setEditingWindow] = useState(null);
+  const [closingWindow, setClosingWindow] = useState(null);
 
   useEffect(() => {
     const t = localStorage.getItem("adminToken");
@@ -72,13 +76,14 @@ export default function AdminWindowManager() {
   };
 
   const handleCloseEarly = async (id) => {
-    if (!confirm("Close this window early?")) return;
     try {
       await shubukan_api.patch(`/admin/evaluation-window/${id}/close`, {}, { headers: { Authorization: `Bearer ${token}` } });
       addToast("Window closed", "success");
       refreshWindows();
     } catch (err) {
       addToast(err.response?.data?.message || "Could not close window", "error");
+    } finally {
+      setClosingWindow(null);
     }
   };
 
@@ -142,25 +147,47 @@ export default function AdminWindowManager() {
                     <div className="gef-row-card-sub">
                       Instructors: {w.instructorCodes.map((c) => instructorNames.get(c) || c).join(", ")}
                     </div>
-                  </div>
-                  <div style={{ textAlign: "right", flex: "0 0 auto" }}>
-                    <span className={`gef-badge ${isOpen ? "gef-badge--submitted" : "gef-badge--pending"}`}>
+                    <span
+                      className={`gef-badge ${isOpen ? "gef-badge--submitted" : "gef-badge--pending"}`}
+                      style={{ marginTop: 8, display: "inline-block" }}
+                    >
                       {isOpen ? "Open" : "Closed"}
                     </span>
-                    {isOpen ? (
-                      <div style={{ marginTop: 8 }}>
-                        <Button size="sm" variant="danger" onClick={() => handleCloseEarly(w._id)}>
-                          Close Early
-                        </Button>
-                      </div>
-                    ) : null}
                   </div>
+                  {isOpen ? (
+                    <div className="gef-row-card-actions">
+                      <Button size="sm" variant="outline" onClick={() => setEditingWindow(w)}>
+                        Edit
+                      </Button>
+                      <Button size="sm" variant="danger" onClick={() => setClosingWindow(w)}>
+                        Close Early
+                      </Button>
+                    </div>
+                  ) : null}
                 </div>
               );
             })}
           </div>
         )}
       </Card>
+
+      <EditWindowModal
+        open={!!editingWindow}
+        evaluationWindow={editingWindow}
+        instructors={instructors}
+        token={token}
+        onClose={() => setEditingWindow(null)}
+        onUpdated={refreshWindows}
+      />
+
+      <ConfirmModal
+        open={!!closingWindow}
+        onClose={() => setClosingWindow(null)}
+        onConfirm={() => handleCloseEarly(closingWindow._id)}
+        title="Close Window Early"
+        message={`Close "${closingWindow?.title || "this window"}" now? Guardians won't be able to submit or edit forms for it anymore.`}
+        confirmLabel="Close Early"
+      />
     </div>
   );
 }

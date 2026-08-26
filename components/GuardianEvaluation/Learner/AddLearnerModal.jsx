@@ -7,9 +7,10 @@ import Modal from "../UI/Modal";
 import { Field, TextInput } from "../UI/FormFields";
 import Button from "../UI/Button";
 
-export default function AddLearnerModal({ open, onClose, onCreated }) {
+export default function AddLearnerModal({ open, onClose, onCreated, learner }) {
   const { authHeader } = useGuardianAuth();
   const { addToast } = useToast();
+  const isEdit = !!learner;
   const [cards, setCards] = useState([]);
   const [loadingCards, setLoadingCards] = useState(true);
   const [selected, setSelected] = useState(null);
@@ -18,15 +19,32 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
 
   useEffect(() => {
     if (!open) return;
+    setName(learner?.name || "");
     setLoadingCards(true);
     shubukan_api
       .get("/guardian/dojo-instructor-directory", { headers: authHeader })
-      .then((res) => setCards(res.data.data || []))
+      .then((res) => {
+        const list = res.data.data || [];
+        setCards(list);
+        if (learner) {
+          const match = list.find((c) => c.dojoId === learner.dojoId && c.instructorName === learner.instructorName);
+          setSelected(
+            match || {
+              dojoId: learner.dojoId,
+              dojoName: learner.dojoName,
+              instructorName: learner.instructorName,
+              instructorCode: learner.instructorCode,
+            },
+          );
+        } else {
+          setSelected(null);
+        }
+      })
       .catch(() => addToast("Could not load dojo list", "error"))
       .finally(() => {
         setLoadingCards(false);
       });
-  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [open, learner]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,31 +55,30 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
 
     setSaving(true);
     try {
-      const res = await shubukan_api.post(
-        "/guardian/learner",
-        {
-          name,
-          dojoId: selected.dojoId,
-          dojoName: selected.dojoName,
-          instructorName: selected.instructorName,
-          instructorCode: selected.instructorCode,
-        },
-        { headers: authHeader },
-      );
-      addToast("Learner added", "success");
+      const payload = {
+        name,
+        dojoId: selected.dojoId,
+        dojoName: selected.dojoName,
+        instructorName: selected.instructorName,
+        instructorCode: selected.instructorCode,
+      };
+      const res = isEdit
+        ? await shubukan_api.put(`/guardian/learner/${learner._id}`, payload, { headers: authHeader })
+        : await shubukan_api.post("/guardian/learner", payload, { headers: authHeader });
+      addToast(isEdit ? "Learner updated" : "Learner added", "success");
       onCreated?.(res.data.data);
       setName("");
       setSelected(null);
       onClose();
     } catch (err) {
-      addToast(err.response?.data?.message || "Could not add learner", "error");
+      addToast(err.response?.data?.message || `Could not ${isEdit ? "update" : "add"} learner`, "error");
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="Add a Learner">
+    <Modal open={open} onClose={onClose} title={isEdit ? "Edit Learner" : "Add a Learner"}>
       <form onSubmit={handleSubmit} className="gef-stack">
         <Field label="Learner's Name" required>
           <TextInput
@@ -119,7 +136,7 @@ export default function AddLearnerModal({ open, onClose, onCreated }) {
             Cancel
           </Button>
           <Button type="submit" variant="primary" disabled={saving}>
-            {saving ? "Adding..." : "Add Learner"}
+            {isEdit ? (saving ? "Saving..." : "Save Changes") : saving ? "Adding..." : "Add Learner"}
           </Button>
         </div>
       </form>

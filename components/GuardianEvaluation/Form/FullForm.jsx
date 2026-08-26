@@ -140,7 +140,7 @@ export default function FullForm({ learnerId, windowId }) {
         {/* For <strong>{learner?.name}</strong> &middot;  */}
         <StatusBadge status={status} />
       </p>
-      <Divider />
+      {/* <Divider /> */}
 
       <div className="gef-doc-body">
         {/* ===== FOR STUDENTS ===== */}
