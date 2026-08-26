@@ -54,6 +54,7 @@ export default function Navbar() {
   const isAdminPage = pathname.startsWith("/admin");
   const isExamPage = pathname.startsWith("/online-exam");
   const isGuardianEvalPage = pathname.startsWith("/guardian-evaluation");
+  const isGuardianFormPage = pathname.startsWith("/guardian-evaluation/form/");
 
   // Lock body scroll when open
   useEffect(() => {
@@ -150,6 +151,17 @@ export default function Navbar() {
 
   // Handle scroll events with useEffect to avoid direct window event listeners
   useEffect(() => {
+    // On the evaluation form, the nav should scroll away with the page like
+    // normal content — not stay pinned to the viewport. Overriding `position`
+    // (not just `top`) is what actually takes it out of fixed positioning.
+    if (isGuardianFormPage) {
+      setPosition({ 
+        position: "relative", 
+        top: "0" 
+      });
+      return;
+    }
+
     const handleScroll = () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -164,7 +176,7 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollTop]);
+  }, [lastScrollTop, isGuardianFormPage]);
 
   // Set up logo animation interval only when currentPage is not empty
   useEffect(() => {

@@ -20,7 +20,16 @@ const FALLBACK_BANNER = {
   ],
   linkUrl: "/contact",
   linkText: "www.shubukanindia.org/contact",
+  showOnAllPages: true,
+  pages: [],
 };
+
+// "/" only matches the exact homepage (otherwise it would match every page);
+// anything else matches as a prefix, so admins can target e.g. "/blogpost"
+// and have it cover every post under it.
+function pageMatches(pathname, pattern) {
+  return pattern === "/" ? pathname === "/" : pathname.startsWith(pattern);
+}
 
 export default function Banner() {
   const pathname = usePathname();
@@ -38,6 +47,8 @@ export default function Banner() {
             messages: data.messages,
             linkUrl: data.linkUrl || FALLBACK_BANNER.linkUrl,
             linkText: data.linkText || FALLBACK_BANNER.linkText,
+            showOnAllPages: data.showOnAllPages !== false,
+            pages: Array.isArray(data.pages) ? data.pages : [],
           });
         }
       })
@@ -46,7 +57,13 @@ export default function Banner() {
       });
   }, []);
 
-  if (isAdminPage || isExamPage) return null;
+  // A banner set to specific pages simply doesn't render elsewhere — it does
+  // NOT fall back to the default text there, since that would defeat the
+  // point of page targeting. The fallback text is only for "no active banner
+  // exists yet" / "the request failed", both of which are showOnAllPages.
+  const matchesCurrentPage = banner.showOnAllPages || banner.pages.some((p) => pageMatches(pathname, p));
+
+  if (isAdminPage || isExamPage || !matchesCurrentPage) return null;
 
   // Each message is followed by the link + a red bullet, matching the site's
   // original banner format ("<link>. |red dot| <message> Go to ").

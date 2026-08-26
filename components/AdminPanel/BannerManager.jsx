@@ -4,7 +4,39 @@ import { shubukan_api } from "@/config";
 import { FiEdit, FiSave, FiX, FiPlus, FiTrash2, FiCheckCircle } from "react-icons/fi";
 import { RiDeleteBin2Line } from "react-icons/ri";
 
-const emptyForm = { title: "", messages: [""], linkUrl: "/contact", linkText: "www.shubukanindia.org/contact" };
+const emptyForm = {
+  title: "",
+  messages: [""],
+  linkUrl: "/contact",
+  linkText: "www.shubukanindia.org/contact",
+  showOnAllPages: true,
+  pages: [],
+};
+
+// Known public routes an admin can target. "/" matches only the exact
+// homepage; every other entry matches as a prefix (see Banner.jsx).
+const KNOWN_PAGES = [
+  { path: "/", label: "Home" },
+  { path: "/history", label: "History" },
+  { path: "/services", label: "Services" },
+  { path: "/gallery", label: "Gallery" },
+  { path: "/contact", label: "Contact" },
+  { path: "/registration", label: "Registration" },
+  { path: "/journal", label: "Journal" },
+  { path: "/help-and-faqs", label: "Help & FAQs" },
+  { path: "/lineage-and-dojokun", label: "Lineage & Dojokun" },
+  { path: "/karate-and-kobudo", label: "Karate & Kobudo" },
+  { path: "/shubukan-india", label: "Shubukan India" },
+  { path: "/shubukan-okinawa", label: "Shubukan Okinawa" },
+  { path: "/shubukan-world", label: "Shubukan World" },
+  { path: "/shuri-karate-kobudo-hozonkai", label: "Shuri Karate Kobudo Hozonkai" },
+  { path: "/dojo-listicle", label: "Dojo Listicle" },
+  { path: "/contributors", label: "Contributors" },
+  { path: "/term-and-condition", label: "Terms & Conditions" },
+  { path: "/blogpost", label: "Blog" },
+  { path: "/marksheet", label: "Marksheet" },
+  { path: "/guardian-evaluation", label: "Guardian Evaluation" },
+];
 
 export default function BannerManager() {
   const [banners, setBanners] = useState([]);
@@ -72,7 +104,14 @@ export default function BannerManager() {
   // ---------- edit ----------
   const startEdit = (b) => {
     setEditMode(b._id);
-    setEditData({ title: b.title, messages: b.messages.length ? b.messages : [""], linkUrl: b.linkUrl, linkText: b.linkText });
+    setEditData({
+      title: b.title,
+      messages: b.messages.length ? b.messages : [""],
+      linkUrl: b.linkUrl,
+      linkText: b.linkText,
+      showOnAllPages: b.showOnAllPages !== false,
+      pages: b.pages || [],
+    });
   };
 
   const handleUpdate = async (id) => {
@@ -179,6 +218,18 @@ export default function BannerManager() {
               className="w-full border p-2"
             />
 
+            <PageTargetEditor
+              showOnAllPages={formData.showOnAllPages}
+              pages={formData.pages}
+              onToggleAll={(val) => setFormData((p) => ({ ...p, showOnAllPages: val }))}
+              onTogglePage={(path) =>
+                setFormData((p) => ({
+                  ...p,
+                  pages: p.pages.includes(path) ? p.pages.filter((x) => x !== path) : [...p.pages, path],
+                }))
+              }
+            />
+
             <div className="flex justify-end gap-2 pt-2">
               <button
                 type="button"
@@ -236,6 +287,17 @@ export default function BannerManager() {
                     onChange={(e) => setEditData((p) => ({ ...p, linkText: e.target.value }))}
                     className="w-full border p-2"
                   />
+                  <PageTargetEditor
+                    showOnAllPages={editData.showOnAllPages}
+                    pages={editData.pages}
+                    onToggleAll={(val) => setEditData((p) => ({ ...p, showOnAllPages: val }))}
+                    onTogglePage={(path) =>
+                      setEditData((p) => ({
+                        ...p,
+                        pages: p.pages.includes(path) ? p.pages.filter((x) => x !== path) : [...p.pages, path],
+                      }))
+                    }
+                  />
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => handleUpdate(b._id)}
@@ -266,6 +328,14 @@ export default function BannerManager() {
                       <p className="text-xs text-gray-500 mt-1 break-words">
                         {b.linkText} → {b.linkUrl}
                       </p>
+                      <p className="text-xs text-gray-500 mt-1 break-words">
+                        <span className="font-medium">Shown on:</span>{" "}
+                        {b.showOnAllPages !== false
+                          ? "All pages"
+                          : b.pages?.length
+                          ? b.pages.map((p) => KNOWN_PAGES.find((kp) => kp.path === p)?.label || p).join(", ")
+                          : "No pages selected"}
+                      </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
                       <button onClick={() => startEdit(b)} className="text-blue-500 flex items-center gap-1">
@@ -295,6 +365,35 @@ export default function BannerManager() {
               )}
             </div>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Lets an admin restrict a banner to specific pages instead of showing it
+// site-wide. Shared by both the "Add Banner" form and each card's inline
+// edit form.
+function PageTargetEditor({ showOnAllPages, pages, onToggleAll, onTogglePage }) {
+  return (
+    <div className="space-y-2 border rounded p-3 bg-gray-50">
+      <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+        <input type="checkbox" checked={showOnAllPages} onChange={(e) => onToggleAll(e.target.checked)} />
+        Show on all pages
+      </label>
+
+      {!showOnAllPages && (
+        <div className="pt-1">
+          <p className="text-xs text-gray-500 mb-2">Select which pages should show this banner:</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-1 max-h-48 overflow-y-auto">
+            {KNOWN_PAGES.map(({ path, label }) => (
+              <label key={path} className="flex items-center gap-2 text-sm text-gray-700">
+                <input type="checkbox" checked={pages.includes(path)} onChange={() => onTogglePage(path)} />
+                {label}
+              </label>
+            ))}
+          </div>
+          {pages.length === 0 && <p className="text-xs text-amber-600 mt-2">No pages selected — this banner won't show anywhere.</p>}
         </div>
       )}
     </div>

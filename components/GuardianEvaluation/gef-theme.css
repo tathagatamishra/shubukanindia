@@ -1252,6 +1252,20 @@
   }
 }
 
+/* /guardian-evaluation/form only (see GefRoot.jsx) — above 500px the top
+   padding is always 0, since the sticky/fixed slider handles its own
+   spacing; below 500px it uses the same side/bottom padding as everywhere
+   else but a much smaller top padding. */
+.gef-root.gef-root--form-page {
+  padding-top: 0;
+}
+
+@media (max-width: 500px) {
+  .gef-root.gef-root--form-page {
+    padding: 10px 12px 48px;
+  }
+}
+
 /* Form text-size slider — lives in GefNav, under the language switcher, but
    only ever needed (and only ever rendered) on the long evaluation form on
    small screens, so it stays hidden above the 640px breakpoint below. */
@@ -1270,12 +1284,49 @@
     row-gap: 10px;
   }
 
+  /* Lives inside gef-nav-bar by default, in normal flow. `position: sticky`
+     can't be used here for the engaged state: its containing block is this
+     short nav-bar card, so once that card itself has fully scrolled past,
+     a sticky child would be forced away with it instead of staying pinned
+     for the rest of the (much longer) form. GefNav.jsx tracks a sentinel
+     placed right before this element — once the sentinel reaches the top of
+     the viewport, it adds --stuck, switching to true `position: fixed` so it
+     stays reachable through the whole scroll. Scrolling back up past the
+     sentinel's position (i.e. back to where gef-nav-bar is visible) removes
+     --stuck and it drops back into the flow. */
   .gef-form-font-slider-wrap {
     display: flex;
     align-items: center;
     gap: 16px;
     width: 100%;
-    /* padding: 2px 10px 0; */
+    transition: background 0.2s ease, box-shadow 0.2s ease, padding 0.2s ease, border-color 0.2s ease;
+  }
+
+  .gef-form-font-slider-wrap--stuck {
+
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto 26px;
+  padding: 10px 14px;
+  background: rgba(255, 253, 248, 0.7);
+  border: 1px solid var(--gef-line);
+  /* border-radius: 14px; */
+  box-shadow: 0 2px 10px rgba(28, 26, 23, 0.06);
+
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    width: calc(100% - 24px);
+    /* max-width: calc(100% - 24px); */
+    /* margin: 0 auto; */
+    /* padding: 10px 20px; */
+    background: #fffdf8;
+    /* border: 1.5px solid var(--gef-line); */
+    border-radius: 0 0 14px 14px;
+    /* box-shadow: 0 6px 18px rgba(28, 26, 23, 0.16); */
   }
 
   .gef-form-font-slider-label {
