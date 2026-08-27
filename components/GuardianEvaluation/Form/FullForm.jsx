@@ -48,15 +48,35 @@ export default function FullForm({ learnerId, windowId }) {
         }
         setWindowInfo(match.window);
         const learnerEntry = match.learners.find((l) => l.learner._id === learnerId);
-        setLearner(learnerEntry?.learner || null);
+        const learnerData = learnerEntry?.learner || null;
+        setLearner(learnerData);
 
+        let formData;
         if (learnerEntry?.formId) {
           const formRes = await shubukan_api.get(`/guardian/evaluation-form/${learnerEntry.formId}`, { headers: authHeader });
-          setData(mergeIntoDefaults(formRes.data.data));
+          formData = mergeIntoDefaults(formRes.data.data);
           setStatus(formRes.data.data.status);
         } else {
+          formData = emptyEvaluationForm();
           setStatus("pending");
         }
+
+        // instructor/dojo are read-only fields sourced from the learner
+        // record (guardian edits them via "Edit Learner" on the dashboard,
+        // not here) — the inputs below only ever displayed learner.* as a UI
+        // fallback and never wrote it into form state, so it was saved as ""
+        // on every submit. Keep them in actual sync on every load instead.
+        if (learnerData) {
+          formData = {
+            ...formData,
+            student: {
+              ...formData.student,
+              instructorName: learnerData.instructorName || "",
+              dojoName: learnerData.dojoName || "",
+            },
+          };
+        }
+        setData(formData);
       } catch (err) {
         addToast(err.response?.data?.message || "Could not load form", "error");
       } finally {
@@ -163,10 +183,10 @@ export default function FullForm({ learnerId, windowId }) {
 
         <div className="gef-row">
           <Field label={bi("instructor")}>
-            <TextInput value={s.instructorName || learner?.instructorName || ""} onChange={() => {}} disabled />
+            <TextInput value={s.instructorName || ""} onChange={() => {}} disabled />
           </Field>
           <Field label={bi("dojo")}>
-            <TextInput value={s.dojoName || learner?.dojoName || ""} onChange={() => {}} disabled />
+            <TextInput value={s.dojoName || ""} onChange={() => {}} disabled />
           </Field>
         </div>
 

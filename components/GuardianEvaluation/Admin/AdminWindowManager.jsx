@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card } from "../UI/Basics";
@@ -9,8 +8,10 @@ import Button from "../UI/Button";
 import EditWindowModal from "./EditWindowModal";
 import ConfirmModal from "../UI/ConfirmModal";
 
+// Auth (unauthenticated + unauthorized) is gated one level up by
+// app/guardian-evaluation/admin/layout.js — by the time this mounts, adminToken
+// is guaranteed present and valid.
 export default function AdminWindowManager() {
-  const router = useRouter();
   const { addToast } = useToast();
   const [token, setToken] = useState(null);
   const [instructors, setInstructors] = useState([]);
@@ -87,13 +88,7 @@ export default function AdminWindowManager() {
     }
   };
 
-  useEffect(() => {
-    if (!loading && !token) {
-      router.replace("/guardian-evaluation/admin/login");
-    }
-  }, [loading, token, router]);
-
-  if (loading || !token) return <p className="gef-hint">Loading...</p>;
+  if (loading) return <p className="gef-hint">Loading...</p>;
 
   const instructorNames = new Map(instructors.map((i) => [i.instructorId, i.name]));
 

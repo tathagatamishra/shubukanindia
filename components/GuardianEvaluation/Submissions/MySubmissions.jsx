@@ -7,7 +7,8 @@ import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Card, StatusBadge, Stamp, Divider } from "../UI/Basics";
 import Button from "../UI/Button";
 import GefBrowserTabs from "../UI/GefBrowserTabs";
-import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
+import PdfViewerModal from "../UI/PdfViewerModal";
+import { downloadFormPdfByRole, getFormPdfBlobUrl } from "../UI/downloadPdf";
 
 const EDIT_WINDOW_MS = 5 * 60 * 1000;
 
@@ -17,6 +18,8 @@ export default function MySubmissions() {
   const router = useRouter();
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [viewingId, setViewingId] = useState(null);
+  const [pdfModal, setPdfModal] = useState(null); // { url, title }
 
   useEffect(() => {
     shubukan_api
@@ -35,11 +38,20 @@ export default function MySubmissions() {
   };
 
   const handleView = async (form) => {
+    setViewingId(form._id);
     try {
-      await viewFormPdfByRole("guardian", form._id, authHeader);
+      const url = await getFormPdfBlobUrl("guardian", form._id, authHeader);
+      setPdfModal({ url, title: `${form.student?.name || "Evaluation"}'s Evaluation Form` });
     } catch (err) {
-      addToast(err.message || "Could not open PDF", "error");
+      addToast(err.response?.data?.message || "Could not load PDF", "error");
+    } finally {
+      setViewingId(null);
     }
+  };
+
+  const closePdfModal = () => {
+    if (pdfModal?.url) window.URL.revokeObjectURL(pdfModal.url);
+    setPdfModal(null);
   };
 
   const canEdit = (form) => {
@@ -103,8 +115,13 @@ export default function MySubmissions() {
                       ) : null}
                       {f.status === "submitted" ? (
                         <>
-                          <Button size="sm" variant="outline" onClick={() => handleView(f)}>
-                            View
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            disabled={viewingId === f._id}
+                            onClick={() => handleView(f)}
+                          >
+                            {viewingId === f._id ? "Loading..." : "View"}
                           </Button>
                           <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
                             Download PDF
@@ -119,6 +136,13 @@ export default function MySubmissions() {
           </div>
         )}
       </div>
+
+      <PdfViewerModal
+        open={!!pdfModal}
+        onClose={closePdfModal}
+        pdfUrl={pdfModal?.url}
+        title={pdfModal?.title}
+      />
     </div>
   );
 }

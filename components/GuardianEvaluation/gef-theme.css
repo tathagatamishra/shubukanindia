@@ -1017,6 +1017,28 @@
   scrollbar-width: none;
 }
 
+/* Wide variant — for content that needs real screen space (the PDF viewer)
+   rather than a compact form. Much larger max-width, tighter side padding
+   (so the PDF gets that space back too instead of the modal's own chrome
+   eating it), and more vertical room. Everything else keeps the default
+   460px form-modal size. */
+.gef-modal--wide {
+  max-width: 900px;
+  max-height: calc(96vh - 1rem);
+  margin-top: 0.5rem;
+  padding: 20px 10px;
+}
+
+@media (max-width: 640px) {
+  .gef-modal-backdrop {
+    padding: 8px;
+  }
+
+  .gef-modal--wide {
+    padding: 16px 6px;
+  }
+}
+
 .gef-modal-close {
   position: absolute;
   top: 14px;

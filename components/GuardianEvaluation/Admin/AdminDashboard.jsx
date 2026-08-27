@@ -1,24 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import AdminWindowManager from "@/components/GuardianEvaluation/Admin/AdminWindowManager";
 import AdminSubmissions from "@/components/GuardianEvaluation/Admin/AdminSubmissions";
 
+// Auth (unauthenticated + unauthorized) is gated one level up by
+// app/guardian-evaluation/admin/layout.js — this never mounts otherwise.
 export default function AdminDashboard() {
-  const router = useRouter();
   const [tab, setTab] = useState("windows");
-  const [checking, setChecking] = useState(true);
-
-  useEffect(() => {
-    const t = localStorage.getItem("adminToken");
-    if (!t) {
-      router.replace("/guardian-evaluation/admin/login");
-      return;
-    }
-    setChecking(false);
-  }, [router]);
-
-  if (checking) return null;
 
   return (
     <div className="gef-container">

@@ -6,7 +6,7 @@ import { isDesktop } from "react-device-detect";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const PdfViewer = ({ pdfUrl }) => {
+const PdfViewer = ({ pdfUrl, filename }) => {
   const [numPages, setNumPages] = useState(null);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
@@ -16,7 +16,10 @@ const PdfViewer = ({ pdfUrl }) => {
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = pdfUrl.split("/").pop(); // Extract the file name from the URL
+    // A blob: URL has no real path to extract a name from, so an explicit
+    // filename must be passed in that case — falls back to the old
+    // URL-derived behavior for plain file/http(s) URLs.
+    link.download = filename || pdfUrl.split("/").pop();
     link.click();
   };
 
