@@ -23,19 +23,12 @@ export async function downloadFormPdfByRole(role, formId, headers, filename = "e
   window.URL.revokeObjectURL(url);
 }
 
-// Opens the PDF in a new tab for viewing, instead of forcing a download.
+// Fetches the PDF and returns an in-page blob: URL for it (caller owns the
+// URL and must window.URL.revokeObjectURL it once done — e.g. on modal close).
+// Used by every "View" button to show the PDF inline via PdfViewerModal.
 // role: "admin" | "instructor" | "guardian"
-export async function viewFormPdfByRole(role, formId, headers) {
+export async function getFormPdfBlobUrl(role, formId, headers) {
   const res = await shubukan_api.get(`/${role}/evaluation-form/${formId}/pdf`, { headers });
-  const { base64 } = res.data;
-  const blob = base64ToPdfBlob(base64);
-
-  const url = window.URL.createObjectURL(blob);
-  const win = window.open(url, "_blank");
-  if (!win) {
-    window.URL.revokeObjectURL(url);
-    throw new Error("Popup blocked — please allow popups for this site to view the PDF.");
-  }
-  // Give the new tab time to load the blob before releasing it.
-  setTimeout(() => window.URL.revokeObjectURL(url), 60_000);
+  const blob = base64ToPdfBlob(res.data.base64);
+  return window.URL.createObjectURL(blob);
 }

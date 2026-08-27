@@ -5,7 +5,8 @@ import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card, Divider, Stamp } from "../UI/Basics";
 import Button from "../UI/Button";
-import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
+import PdfViewerModal from "../UI/PdfViewerModal";
+import { downloadFormPdfByRole, getFormPdfBlobUrl } from "../UI/downloadPdf";
 import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function InstructorSubmissions() {
@@ -15,6 +16,8 @@ export default function InstructorSubmissions() {
   const [checked, setChecked] = useState(false);
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [viewingId, setViewingId] = useState(null);
+  const [pdfModal, setPdfModal] = useState(null); // { url, title }
 
   const loadForms = (t) => {
     setLoading(true);
@@ -47,11 +50,20 @@ export default function InstructorSubmissions() {
   };
 
   const handleView = async (form) => {
+    setViewingId(form._id);
     try {
-      await viewFormPdfByRole("instructor", form._id, { Authorization: `Bearer ${token}` });
+      const url = await getFormPdfBlobUrl("instructor", form._id, { Authorization: `Bearer ${token}` });
+      setPdfModal({ url, title: `${form.student?.name || "Evaluation"}'s Evaluation Form` });
     } catch (err) {
-      addToast(err.message || "Could not open PDF", "error");
+      addToast(err.response?.data?.message || "Could not load PDF", "error");
+    } finally {
+      setViewingId(null);
     }
+  };
+
+  const closePdfModal = () => {
+    if (pdfModal?.url) window.URL.revokeObjectURL(pdfModal.url);
+    setPdfModal(null);
   };
 
   useEffect(() => {
@@ -97,8 +109,8 @@ export default function InstructorSubmissions() {
                 <div className="gef-row-card-sub">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
               </div>
               <div className="gef-row-card-actions">
-                <Button size="sm" variant="outline" onClick={() => handleView(f)}>
-                  View
+                <Button size="sm" variant="outline" disabled={viewingId === f._id} onClick={() => handleView(f)}>
+                  {viewingId === f._id ? "Loading..." : "View"}
                 </Button>
                 <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
                   Download PDF
@@ -108,6 +120,8 @@ export default function InstructorSubmissions() {
           ))}
         </div>
       )}
+
+      <PdfViewerModal open={!!pdfModal} onClose={closePdfModal} pdfUrl={pdfModal?.url} title={pdfModal?.title} />
     </div>
   );
 }

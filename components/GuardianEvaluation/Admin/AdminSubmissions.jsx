@@ -1,18 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { Card } from "../UI/Basics";
 import Button from "../UI/Button";
-import { downloadFormPdfByRole, viewFormPdfByRole } from "../UI/downloadPdf";
+import PdfViewerModal from "../UI/PdfViewerModal";
+import { downloadFormPdfByRole, getFormPdfBlobUrl } from "../UI/downloadPdf";
 
+// Auth (unauthenticated + unauthorized) is gated one level up by
+// app/guardian-evaluation/admin/layout.js — by the time this mounts, adminToken
+// is guaranteed present and valid.
 export default function AdminSubmissions() {
-  const router = useRouter();
   const { addToast } = useToast();
   const [token, setToken] = useState(null);
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [viewingId, setViewingId] = useState(null);
+  const [pdfModal, setPdfModal] = useState(null); // { url, title }
 
   useEffect(() => {
     const t = localStorage.getItem("adminToken");
@@ -42,20 +46,23 @@ export default function AdminSubmissions() {
   };
 
   const handleView = async (form) => {
+    setViewingId(form._id);
     try {
-      await viewFormPdfByRole("admin", form._id, { Authorization: `Bearer ${token}` });
+      const url = await getFormPdfBlobUrl("admin", form._id, { Authorization: `Bearer ${token}` });
+      setPdfModal({ url, title: `${form.student?.name || "Evaluation"}'s Evaluation Form` });
     } catch (err) {
-      addToast(err.message || "Could not open PDF", "error");
+      addToast(err.response?.data?.message || "Could not load PDF", "error");
+    } finally {
+      setViewingId(null);
     }
   };
 
-  useEffect(() => {
-    if (!loading && !token) {
-      router.replace("/guardian-evaluation/admin/login");
-    }
-  }, [loading, token, router]);
+  const closePdfModal = () => {
+    if (pdfModal?.url) window.URL.revokeObjectURL(pdfModal.url);
+    setPdfModal(null);
+  };
 
-  if (loading || !token) return <p className="gef-hint">Loading...</p>;
+  if (loading) return <p className="gef-hint">Loading...</p>;
 
   return (
     <div className="gef-stack">
@@ -80,8 +87,8 @@ export default function AdminSubmissions() {
                 <div className="gef-row-card-sub">Submitted {new Date(f.submittedAt).toLocaleString()}</div>
               </div>
               <div className="gef-row-card-actions">
-                <Button size="sm" variant="outline" onClick={() => handleView(f)}>
-                  View
+                <Button size="sm" variant="outline" disabled={viewingId === f._id} onClick={() => handleView(f)}>
+                  {viewingId === f._id ? "Loading..." : "View"}
                 </Button>
                 <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
                   Download PDF
@@ -91,6 +98,8 @@ export default function AdminSubmissions() {
           ))}
         </div>
       )}
+
+      <PdfViewerModal open={!!pdfModal} onClose={closePdfModal} pdfUrl={pdfModal?.url} title={pdfModal?.title} />
     </div>
   );
 }
