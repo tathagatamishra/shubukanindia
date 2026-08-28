@@ -169,7 +169,7 @@ export default function BlogPost() {
     sessionStorage.setItem(`otp_for_${email}`, code);
     setOtpSent(true);
     alert(
-      `(Dummy) OTP sent to ${email}: ${code} — enter this to verify (in real app you will send email).`
+      `(Dummy) OTP sent to ${email}: ${code} - enter this to verify (in real app you will send email).`
     );
   }
 

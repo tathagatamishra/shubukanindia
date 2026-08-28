@@ -4,7 +4,7 @@ import AdminWindowManager from "@/components/GuardianEvaluation/Admin/AdminWindo
 import AdminSubmissions from "@/components/GuardianEvaluation/Admin/AdminSubmissions";
 
 // Auth (unauthenticated + unauthorized) is gated one level up by
-// app/guardian-evaluation/admin/layout.js — this never mounts otherwise.
+// app/guardian-evaluation/admin/layout.js - this never mounts otherwise.
 export default function AdminDashboard() {
   const [tab, setTab] = useState("windows");
 

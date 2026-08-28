@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const STORAGE_KEY = "gef_form_font_scale";
-export const MIN_FONT_SIZE = 9;
+export const MIN_FONT_SIZE = 6;
 export const MAX_FONT_SIZE = 22;
 export const DEFAULT_FONT_SIZE = 14; // matches the form's normal base text size
 

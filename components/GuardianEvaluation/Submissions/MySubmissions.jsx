@@ -7,8 +7,7 @@ import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Card, StatusBadge, Stamp, Divider } from "../UI/Basics";
 import Button from "../UI/Button";
 import GefBrowserTabs from "../UI/GefBrowserTabs";
-import PdfViewerModal from "../UI/PdfViewerModal";
-import { downloadFormPdfByRole, getFormPdfBlobUrl } from "../UI/downloadPdf";
+import { downloadFormPdfByRole } from "../UI/downloadPdf";
 
 const EDIT_WINDOW_MS = 5 * 60 * 1000;
 
@@ -18,8 +17,6 @@ export default function MySubmissions() {
   const router = useRouter();
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [viewingId, setViewingId] = useState(null);
-  const [pdfModal, setPdfModal] = useState(null); // { url, title }
 
   useEffect(() => {
     shubukan_api
@@ -35,23 +32,6 @@ export default function MySubmissions() {
     } catch (err) {
       addToast("Could not download PDF", "error");
     }
-  };
-
-  const handleView = async (form) => {
-    setViewingId(form._id);
-    try {
-      const url = await getFormPdfBlobUrl("guardian", form._id, authHeader);
-      setPdfModal({ url, title: `${form.student?.name || "Evaluation"}'s Evaluation Form` });
-    } catch (err) {
-      addToast(err.response?.data?.message || "Could not load PDF", "error");
-    } finally {
-      setViewingId(null);
-    }
-  };
-
-  const closePdfModal = () => {
-    if (pdfModal?.url) window.URL.revokeObjectURL(pdfModal.url);
-    setPdfModal(null);
   };
 
   const canEdit = (form) => {
@@ -94,7 +74,7 @@ export default function MySubmissions() {
                       <div className="gef-hint" style={{ marginTop: 6 }}>
                         {f.status === "submitted"
                           ? `Submitted ${new Date(f.submittedAt).toLocaleString()}`
-                          : "Draft saved — pick up where you left off"}
+                          : "Draft saved - pick up where you left off"}
                       </div>
                       {secondsLeft ? (
                         <div className="gef-hint" style={{ marginTop: 2, color: "var(--gef-vermillion)" }}>
@@ -118,10 +98,9 @@ export default function MySubmissions() {
                           <Button
                             size="sm"
                             variant="outline"
-                            disabled={viewingId === f._id}
-                            onClick={() => handleView(f)}
+                            onClick={() => router.push(`/guardian-evaluation/form/${f.learnerId}/${f.windowId}`)}
                           >
-                            {viewingId === f._id ? "Loading..." : "View"}
+                            View
                           </Button>
                           <Button size="sm" variant="gold" onClick={() => handleDownload(f)}>
                             Download PDF
@@ -136,13 +115,6 @@ export default function MySubmissions() {
           </div>
         )}
       </div>
-
-      <PdfViewerModal
-        open={!!pdfModal}
-        onClose={closePdfModal}
-        pdfUrl={pdfModal?.url}
-        title={pdfModal?.title}
-      />
     </div>
   );
 }

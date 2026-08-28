@@ -12,7 +12,7 @@ const lekton = Lekton({
 });
 
 // Shown until the API responds, and kept if the request fails or no banner
-// is currently marked active — the strip should never just disappear.
+// is currently marked active - the strip should never just disappear.
 const FALLBACK_BANNER = {
   messages: [
     "The Shubukan Dojo in Okinawa, the heart of Shorin-ryu Karate, has stood strong for many years, preserving tradition and shaping countless lives. Now, as the dojo ages, it needs renovation to carry its legacy forward.",
@@ -53,11 +53,11 @@ export default function Banner() {
         }
       })
       .catch(() => {
-        // No active banner set, or the request failed — keep the fallback.
+        // No active banner set, or the request failed - keep the fallback.
       });
   }, []);
 
-  // A banner set to specific pages simply doesn't render elsewhere — it does
+  // A banner set to specific pages simply doesn't render elsewhere - it does
   // NOT fall back to the default text there, since that would defeat the
   // point of page targeting. The fallback text is only for "no active banner
   // exists yet" / "the request failed", both of which are showOnAllPages.
@@ -77,7 +77,7 @@ export default function Banner() {
     <div className={`${lekton.className} banner`}>
       <div className="track">
         <p className={`${lekton.className} content`}>{content}</p>
-        {/* An exact duplicate of the same content (not different text) — this is
+        {/* An exact duplicate of the same content (not different text) - this is
             what makes translateX(-50%) loop seamlessly instead of jump-cutting
             back to a mismatched start every cycle. */}
         <p className={`${lekton.className} content`} aria-hidden="true">

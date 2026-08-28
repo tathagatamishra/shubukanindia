@@ -14,12 +14,12 @@ const STEPS = [
   {
     icon: FiEdit3,
     title: "2. Fill the form when it opens",
-    text: "When your instructor opens an evaluation window, you'll be notified. Answer questions about sleep, food, study, physical health and training at home — you can save a draft and finish later.",
+    text: "When your instructor opens an evaluation window, you'll be notified. Answer questions about sleep, food, study, physical health and training at home - you can save a draft and finish later.",
   },
   {
     icon: FiSend,
     title: "3. Submit & keep a copy",
-    text: "Sign and submit the form before the window closes. Your instructor and dojo will use it to better understand your child — and you can download a PDF copy any time.",
+    text: "Sign and submit the form before the window closes. Your instructor and dojo will use it to better understand your child - and you can download a PDF copy any time.",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function Landing() {
       <h1 className="gef-title">Guardian Evaluation Form</h1>
       <p className="gef-subtitle">
         A simple, structured way for parents and guardians to share how their
-        child is doing at home — sleep, food, study and training habits — so
+        child is doing at home - sleep, food, study and training habits - so
         instructors can support each student better.
       </p>
       <Divider />

@@ -7,7 +7,8 @@ import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { useFormFontSize } from "../Context/FormFontSizeContext";
 import { Divider, StatusBadge, SectionHeading } from "../UI/Basics";
 import Button from "../UI/Button";
-import { Field, TextInput, TextArea, Select, YesNo, ChipMultiSelect, DailyOrBeforeExam, OrDivider } from "../UI/FormFields";
+import Modal from "../UI/Modal";
+import { Field, TextInput, TextArea, Select, YesNo, ChipMultiSelect, DailyOrBeforeExam, OrDivider, ReadOnlyProvider } from "../UI/FormFields";
 import BeltRankSelect from "../UI/BeltRankSelect";
 import { emptyEvaluationForm, mergeIntoDefaults } from "./emptyForm";
 import { bi } from "../i18n/labels";
@@ -22,6 +23,11 @@ const TRAINING_NEEDED = [
   bi("internationalSession"),
 ];
 
+// Mirrors the backend's own EDIT_WINDOW_MS (evaluationCtrl.js) — a submitted
+// form stays editable for 5 minutes after submission, then locks for good
+// and this page renders read-only instead (see `readOnly` below).
+const EDIT_WINDOW_MS = 5 * 60 * 1000;
+
 export default function FullForm({ learnerId, windowId }) {
   const { authHeader } = useGuardianAuth();
   const { fontSize } = useFormFontSize();
@@ -33,29 +39,43 @@ export default function FullForm({ learnerId, windowId }) {
   const [submitting, setSubmitting] = useState(false);
   const [data, setData] = useState(emptyEvaluationForm());
   const [status, setStatus] = useState("pending");
+  const [submittedAt, setSubmittedAt] = useState(null);
   const [learner, setLearner] = useState(null);
-  const [windowInfo, setWindowInfo] = useState(null);
+  const [draftSavedModalOpen, setDraftSavedModalOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
       try {
-        const activeRes = await shubukan_api.get("/guardian/evaluation-window/active", { headers: authHeader });
-        const match = (activeRes.data.data || []).find((w) => w.window._id === windowId);
-        if (!match) {
-          addToast("This evaluation window is not open for this learner", "error");
+        // Loads the learner and the (learnerId, windowId) form independently
+        // of whether the evaluation window is still open — the old approach
+        // only looked inside /guardian/evaluation-window/active, so viewing
+        // an already-submitted form after its window closed (the common
+        // case for anything but a very recent submission) would fail with
+        // "not open for this learner" even though the guardian is only
+        // trying to *view* it, never fill or edit it. Any actual write
+        // (draft save / finalize) is still fully guarded server-side.
+        const [learnersRes, formsRes] = await Promise.all([
+          shubukan_api.get("/guardian/learner", { headers: authHeader }),
+          shubukan_api.get("/guardian/evaluation-form", { headers: authHeader }),
+        ]);
+
+        const learnerData = (learnersRes.data.data || []).find((l) => l._id === learnerId) || null;
+        if (!learnerData) {
+          addToast("Learner not found", "error");
           router.push("/guardian-evaluation");
           return;
         }
-        setWindowInfo(match.window);
-        const learnerEntry = match.learners.find((l) => l.learner._id === learnerId);
-        const learnerData = learnerEntry?.learner || null;
         setLearner(learnerData);
 
+        const existingForm = (formsRes.data.data || []).find(
+          (f) => f.learnerId === learnerId && f.windowId === windowId
+        );
+
         let formData;
-        if (learnerEntry?.formId) {
-          const formRes = await shubukan_api.get(`/guardian/evaluation-form/${learnerEntry.formId}`, { headers: authHeader });
-          formData = mergeIntoDefaults(formRes.data.data);
-          setStatus(formRes.data.data.status);
+        if (existingForm) {
+          formData = mergeIntoDefaults(existingForm);
+          setStatus(existingForm.status);
+          setSubmittedAt(existingForm.submittedAt || null);
         } else {
           formData = emptyEvaluationForm();
           setStatus("pending");
@@ -63,19 +83,15 @@ export default function FullForm({ learnerId, windowId }) {
 
         // instructor/dojo are read-only fields sourced from the learner
         // record (guardian edits them via "Edit Learner" on the dashboard,
-        // not here) — the inputs below only ever displayed learner.* as a UI
-        // fallback and never wrote it into form state, so it was saved as ""
-        // on every submit. Keep them in actual sync on every load instead.
-        if (learnerData) {
-          formData = {
-            ...formData,
-            student: {
-              ...formData.student,
-              instructorName: learnerData.instructorName || "",
-              dojoName: learnerData.dojoName || "",
-            },
-          };
-        }
+        // not here) — keep them in sync with the live learner on every load.
+        formData = {
+          ...formData,
+          student: {
+            ...formData.student,
+            instructorName: learnerData.instructorName || "",
+            dojoName: learnerData.dojoName || "",
+          },
+        };
         setData(formData);
       } catch (err) {
         addToast(err.response?.data?.message || "Could not load form", "error");
@@ -89,6 +105,13 @@ export default function FullForm({ learnerId, windowId }) {
   const s = data.student;
   const t = data.teacher;
   const tr = data.training;
+
+  // A submitted form is only editable within EDIT_WINDOW_MS of submission;
+  // past that (or for a form loaded purely to review it), every field
+  // renders locked and Save/Submit disappear — "View" and "Edit" both land
+  // here now, this just decides which one it behaves as.
+  const withinEditWindow = submittedAt ? Date.now() - new Date(submittedAt).getTime() <= EDIT_WINDOW_MS : false;
+  const readOnly = status === "submitted" && !withinEditWindow;
 
   const patchStudent = (p) => setData((d) => ({ ...d, student: { ...d.student, ...p } }));
   const patchFood = (p) => setData((d) => ({ ...d, student: { ...d.student, food: { ...d.student.food, ...p } } }));
@@ -110,7 +133,13 @@ export default function FullForm({ learnerId, windowId }) {
     try {
       const res = await shubukan_api.put(`/guardian/evaluation-form/${learnerId}/${windowId}`, data, { headers: authHeader });
       setStatus(res.data.data.status);
-      if (!silent) addToast("Draft saved", "success");
+      setSubmittedAt(res.data.data.submittedAt || null);
+      // A toast is easy to miss and dismisses on its own — a guardian could
+      // walk away thinking they're done. Saving a draft is a silent
+      // "in-progress" state the instructor can't see, so the explicit
+      // "Save Draft" click (never the silent auto-save before submit) gets a
+      // modal they have to actively dismiss instead.
+      if (!silent) setDraftSavedModalOpen(true);
       return true;
     } catch (err) {
       addToast(err.response?.data?.message || "Could not save draft", "error");
@@ -125,16 +154,28 @@ export default function FullForm({ learnerId, windowId }) {
     if (!savedOk) return;
     setSubmitting(true);
     try {
-      await shubukan_api.post(`/guardian/evaluation-form/${learnerId}/${windowId}/finalize`, {}, { headers: authHeader });
+      const res = await shubukan_api.post(`/guardian/evaluation-form/${learnerId}/${windowId}/finalize`, {}, { headers: authHeader });
       addToast("Form submitted successfully", "success");
       setStatus("submitted");
+      setSubmittedAt(res.data.data.submittedAt);
       router.push("/guardian-evaluation/submissions");
     } catch (err) {
       const missing = err.response?.data?.missingFields;
-      addToast(
-        (err.response?.data?.message || "Could not submit form") + (missing ? `: ${missing.length} field(s) missing` : ""),
-        "error"
-      );
+      if (missing?.length) {
+        // Name a handful of the actual missing questions rather than just a
+        // count — "37 field(s) missing" tells the guardian nothing about
+        // where to look. Longer message, so it gets more time on screen too.
+        const PREVIEW_COUNT = 4;
+        const preview = missing.slice(0, PREVIEW_COUNT).join(", ");
+        const rest = missing.length - PREVIEW_COUNT;
+        addToast(
+          `Please fill in: ${preview}${rest > 0 ? `, and ${rest} more required field${rest === 1 ? "" : "s"}` : ""}.`,
+          "error",
+          8000
+        );
+      } else {
+        addToast(err.response?.data?.message || "Could not submit form", "error");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -157,12 +198,16 @@ export default function FullForm({ learnerId, windowId }) {
     <div className="gef-container gef-doc gef-form-scale" style={{ fontSize: `${fontSize}px` }}>
       <h1 className="gef-title">{bi("formTitle")}</h1>
       <p className="gef-subtitle">
-        {/* For <strong>{learner?.name}</strong> &middot;  */}
         <StatusBadge status={status} />
       </p>
-      {/* <Divider /> */}
+      {readOnly ? (
+        <p className="gef-section-note">
+          This form has been submitted and can no longer be edited. This is a read-only copy of what was submitted.
+        </p>
+      ) : null}
 
-      <div className="gef-doc-body">
+      <ReadOnlyProvider value={readOnly}>
+        <fieldset disabled={readOnly} className="gef-doc-body gef-fieldset-reset">
         {/* ===== FOR STUDENTS ===== */}
         <SectionHeading title={bi("studentSectionTitle")} instruction={bi("yesNoInstruction")} />
 
@@ -432,8 +477,22 @@ export default function FullForm({ learnerId, windowId }) {
           <TextInput value={data.filledByName} onChange={(v) => setData((d) => ({ ...d, filledByName: v }))} placeholder="e.g. Guardian's full name" />
         </Field>
 
-        <ActionBar />
-      </div>
+        {!readOnly ? <ActionBar /> : null}
+        </fieldset>
+      </ReadOnlyProvider>
+
+      <Modal open={draftSavedModalOpen} onClose={() => setDraftSavedModalOpen(false)} title="Draft Saved">
+        <p className="gef-section-note">
+          Your information has been saved, but it has <strong>not been submitted</strong> yet — your instructor can't
+          see it until you submit. Please make sure every question is filled in, then click{" "}
+          <strong>{bi("submitForm")}</strong>.
+        </p>
+        <div className="gef-row">
+          <Button type="button" variant="primary" block onClick={() => setDraftSavedModalOpen(false)}>
+            Yes, I Understand
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 }

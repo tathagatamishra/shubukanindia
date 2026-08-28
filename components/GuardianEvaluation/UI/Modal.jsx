@@ -7,7 +7,7 @@ export default function Modal({ open, onClose, title, children, wide = false }) 
   const { setIsModalOpen } = useUI();
 
   // Lock body scroll when open, and hide the site Navbar (same convention as
-  // BlogPost.jsx's share modal — Navbar.jsx bails out early on isModalOpen).
+  // BlogPost.jsx's share modal - Navbar.jsx bails out early on isModalOpen).
   // Since every GEF modal (Add/Edit Learner, Confirm, Edit Window, PdfViewer,
   // ...) is a thin wrapper around this one component, this covers all of them.
   useEffect(() => {

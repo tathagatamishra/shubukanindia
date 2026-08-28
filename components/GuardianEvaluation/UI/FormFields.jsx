@@ -1,6 +1,19 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, createContext, useContext } from "react";
 import { FiCalendar } from "react-icons/fi";
+
+// Lets TextInput/TextArea render as plain wrapped text instead of an actual
+// form control when they're inside a read-only submitted form
+// (FullForm.jsx's <fieldset disabled>). Native <input>/<textarea> can never
+// wrap or grow to fit long content, and — since disabling happens via the
+// ancestor fieldset, not a `disabled` prop these components receive — the
+// guardian couldn't scroll to see whatever silently overflowed either,
+// which clipped long answers (remarks, suggestions, ...) especially on a
+// small screen with little room to begin with. Read via context rather than
+// a prop on every one of FullForm.jsx's ~50 field call sites, so it only
+// has to be set once.
+const ReadOnlyContext = createContext(false);
+export const ReadOnlyProvider = ReadOnlyContext.Provider;
 
 export function Field({ label, required, hint, error, children }) {
   return (
@@ -144,6 +157,17 @@ function DateField({ value, onChange, className = "", ...rest }) {
 }
 
 export function TextInput({ value, onChange, type = "text", placeholder = "", className = "", ...rest }) {
+  const readOnly = useContext(ReadOnlyContext);
+
+  if (readOnly) {
+    const text = type === "date" ? isoToDisplay(value) : value !== null && value !== undefined && value !== "" ? String(value) : "";
+    return (
+      <div className={`gef-input gef-input--readonly ${className}`}>
+        {text || <span className="gef-input--readonly-empty">{placeholder || "—"}</span>}
+      </div>
+    );
+  }
+
   if (type === "date") {
     return <DateField value={value} onChange={onChange} className={className} {...rest} />;
   }
@@ -160,6 +184,16 @@ export function TextInput({ value, onChange, type = "text", placeholder = "", cl
 }
 
 export function TextArea({ value, onChange, placeholder = "", rows = 4 }) {
+  const readOnly = useContext(ReadOnlyContext);
+
+  if (readOnly) {
+    return (
+      <div className="gef-textarea gef-textarea--readonly">
+        {value || <span className="gef-input--readonly-empty">{placeholder || "—"}</span>}
+      </div>
+    );
+  }
+
   return (
     <textarea
       className="gef-textarea"

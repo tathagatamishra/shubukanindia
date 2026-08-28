@@ -1,7 +1,7 @@
 import React from "react";
 import "./Loader.scss";
 
-// No "use client" — purely presentational (no hooks, no browser APIs), so it can be
+// No "use client" - purely presentational (no hooks, no browser APIs), so it can be
 // server-rendered wherever it's used (a route-level `loading.js`, or as a child of
 // any client component that toggles the `loading` prop from its own state).
 export default function Loader({

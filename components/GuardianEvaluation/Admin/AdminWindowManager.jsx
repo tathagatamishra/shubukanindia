@@ -9,7 +9,7 @@ import EditWindowModal from "./EditWindowModal";
 import ConfirmModal from "../UI/ConfirmModal";
 
 // Auth (unauthenticated + unauthorized) is gated one level up by
-// app/guardian-evaluation/admin/layout.js — by the time this mounts, adminToken
+// app/guardian-evaluation/admin/layout.js - by the time this mounts, adminToken
 // is guaranteed present and valid.
 export default function AdminWindowManager() {
   const { addToast } = useToast();

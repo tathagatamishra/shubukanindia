@@ -20,6 +20,12 @@ export default function GefNav() {
   const [adminToken, setAdminToken] = useState(null);
   const [instructorToken, setInstructorToken] = useState(null);
   const [isSliderStuck, setIsSliderStuck] = useState(false);
+  // The font-size slider only ever makes sense under 640px (see
+  // .gef-form-font-slider-wrap in gef-theme.css) — tracked here as real
+  // state, not just a CSS media query, so the sentinel/slider markup is
+  // fully absent from the DOM above that width instead of merely
+  // display:none, matching how it's actually used.
+  const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const sliderSentinelRef = useRef(null);
 
   const isFormRoute = pathname?.startsWith("/guardian-evaluation/form/");
@@ -40,16 +46,26 @@ export default function GefNav() {
     }
   }, [isAdminSection, isInstructorSection, pathname]);
 
+  useEffect(() => {
+    if (!isFormRoute) return;
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsNarrowScreen(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [isFormRoute]);
+
   // On the evaluation form, the font-size slider lives inside gef-nav-bar by
   // default. A zero-height sentinel sits right before it in normal flow; once
   // scrolling carries the sentinel to the very top of the viewport, we mark
   // the slider "stuck" and gef-theme.css switches it to `position: fixed`, so
   // it stays reachable through the rest of the (long) form instead of being
   // dragged away with the short nav-bar card it lives in. Scrolling back up
-  // past the sentinel's position — i.e. once gef-nav-bar is visible again —
-  // clears "stuck" and it drops back into the flow.
+  // past the sentinel's position - i.e. once gef-nav-bar is visible again -
+  // clears "stuck" and it drops back into the flow. Only attached at all
+  // when the slider itself is actually in the DOM (isNarrowScreen).
   useEffect(() => {
-    if (!isFormRoute) return;
+    if (!isFormRoute || !isNarrowScreen) return;
 
     const handleScroll = () => {
       if (!sliderSentinelRef.current) return;
@@ -59,7 +75,7 @@ export default function GefNav() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isFormRoute]);
+  }, [isFormRoute, isNarrowScreen]);
 
   const goForward = () => {
     if (typeof router.forward === "function") {
@@ -157,10 +173,12 @@ export default function GefNav() {
           {/* <span className="gef-nav-divider-v" aria-hidden="true" /> */}
         </div>
 
-        {isFormRoute ? (
-          // Only ever shown under 640px (see .gef-form-font-slider-wrap in
-          // gef-theme.css) — on the long evaluation form, small mobile text
-          // is hardest to read, so this only needs to exist there.
+        {isFormRoute && isNarrowScreen ? (
+          // Only ever rendered under 640px (see .gef-form-font-slider-wrap in
+          // gef-theme.css) - on the long evaluation form, small mobile text
+          // is hardest to read, so this only needs to exist there. Gated on
+          // real matchMedia state (isNarrowScreen above), not just CSS, so
+          // it's absent from the DOM entirely at wider widths.
           <>
           <div ref={sliderSentinelRef} aria-hidden="true" style={{ height: 0 }} />
           <div className={`gef-form-font-slider-wrap ${isSliderStuck ? "gef-form-font-slider-wrap--stuck" : ""}`}>

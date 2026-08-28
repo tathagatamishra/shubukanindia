@@ -1,4 +1,4 @@
-/* Elephant loader — plain CSS (self-hosted image, no Sass mixins/Tailwind needed) */
+/* Elephant loader - plain CSS (self-hosted image, no Sass mixins/Tailwind needed) */
 
 .shubukan-elephant-overlay {
     position: fixed;
@@ -123,7 +123,7 @@
     transform-origin: 0% 0%;
 }
 
-/* make overlay elephant smaller by default — adjustable via CSS var on the overlay element */
+/* make overlay elephant smaller by default - adjustable via CSS var on the overlay element */
 .shubukan-elephant-overlay .elephant {
     max-width: var(--elephant-max-width, 12rem);
 }

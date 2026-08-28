@@ -11,7 +11,7 @@ export default function Layout({ children }) {
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
-  // "checking" until we know the token is actually valid — never render admin
+  // "checking" until we know the token is actually valid - never render admin
   // content on an unauthenticated/expired session, even for a flash.
   const [authState, setAuthState] = useState("checking");
 
@@ -48,7 +48,7 @@ export default function Layout({ children }) {
       .then(() => setAuthState("authenticated"))
       .catch(() => {
         // Token missing/invalid/expired, or the admin account no longer
-        // exists — never leave the panel accessible in that state.
+        // exists - never leave the panel accessible in that state.
         localStorage.removeItem("adminToken");
         router.replace("/admin/login");
       });
