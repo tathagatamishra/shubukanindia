@@ -323,7 +323,7 @@
 /* ---------- form text-size scaling ----------
    .gef-form-scale sets its own `font-size` in px inline (from the slider in
    GefNav). Every text element below is sized in `em`, so it scales with that
-   root value via normal CSS inheritance — no JS re-styling of each element
+   root value via normal CSS inheritance - no JS re-styling of each element
    needed. Values are tuned to match each element's current px size at the
    default 14px root. */
 .gef-form-scale .gef-title {
@@ -518,6 +518,22 @@
   cursor: pointer;
 }
 
+/* Read-only rendering (FullForm.jsx's submitted-form view, via
+   ReadOnlyContext in FormFields.jsx): a <div>, not an <input>, specifically
+   so long content wraps and the box grows to fit it instead of native
+   single-line clipping the guardian would have no way to scroll past (the
+   field is disabled, not just readonly). */
+.gef-input--readonly {
+  white-space: pre-wrap;
+  word-break: break-word;
+  cursor: text;
+  user-select: text;
+}
+
+.gef-input--readonly-empty {
+  color: rgba(28, 26, 23, 0.4);
+}
+
 .gef-textarea {
   width: 100%;
   font-family: var(--gef-font-body);
@@ -535,6 +551,18 @@
 
 .gef-textarea:focus {
   border-color: var(--gef-vermillion);
+}
+
+/* Read-only rendering — see .gef-input--readonly above. A <textarea>'s
+   min-height/resize handle exist for editing; a submitted remark just needs
+   to grow to fit whatever length it actually is. */
+.gef-textarea--readonly {
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 0;
+  resize: none;
+  cursor: text;
+  user-select: text;
 }
 
 /* OTP entry boxes - deliberately NOT using .gef-row (its `min-width: 140px`
@@ -753,6 +781,34 @@
   flex-direction: column;
 }
 
+/* FullForm.jsx wraps the whole field area in <fieldset disabled={readOnly}>
+   to lock every field/button at once for a submitted, view-only form —
+   native fieldset cascading reaches every input/select/textarea/button
+   without touching each one individually. Browsers give <fieldset> a
+   default border/padding/min-width, which this strips back to plain
+   .gef-doc-body's own flex layout. */
+.gef-fieldset-reset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.gef-fieldset-reset:disabled {
+  opacity: 1;
+}
+
+/* Reset the browser's default "grayed out" look for every disabled control
+   inside — a read-only submitted form should look exactly like it did when
+   filled in (a faithful copy to read, since the PDF is no longer shown here
+   so the site's Translate button can work on real text), not dimmed. */
+.gef-fieldset-reset :disabled {
+  opacity: 1;
+  cursor: default;
+  color: var(--gef-ink);
+  -webkit-text-fill-color: var(--gef-ink);
+}
+
 .gef-doc-section-heading {
   margin: 34px 0 18px;
 }
@@ -870,7 +926,7 @@
   gap: 12px;
 }
 
-/* Reusable list row (learners, windows, submissions) — replaces one-off
+/* Reusable list row (learners, windows, submissions) - replaces one-off
    inline styles so every list in the module looks and behaves the same. */
 .gef-row-card {
   display: flex;
@@ -1017,7 +1073,7 @@
   scrollbar-width: none;
 }
 
-/* Wide variant — for content that needs real screen space (the PDF viewer)
+/* Wide variant - for content that needs real screen space (the PDF viewer)
    rather than a compact form. Much larger max-width, tighter side padding
    (so the PDF gets that space back too instead of the modal's own chrome
    eating it), and more vertical room. Everything else keeps the default
@@ -1113,7 +1169,7 @@
   color: rgba(28, 26, 23, 0.6);
 }
 
-/* nav bar for the module — a soft toolbar strip, not a hard divider line */
+/* nav bar for the module - a soft toolbar strip, not a hard divider line */
 .gef-nav-bar {
   display: flex;
   flex-direction: column;
@@ -1304,7 +1360,7 @@
   }
 }
 
-/* /guardian-evaluation/form only (see GefRoot.jsx) — above 500px the top
+/* /guardian-evaluation/form only (see GefRoot.jsx) - above 500px the top
    padding is always 0, since the sticky/fixed slider handles its own
    spacing; below 500px it uses the same side/bottom padding as everywhere
    else but a much smaller top padding. */
@@ -1318,7 +1374,7 @@
   }
 }
 
-/* Form text-size slider — lives in GefNav, under the language switcher, but
+/* Form text-size slider - lives in GefNav, under the language switcher, but
    only ever needed (and only ever rendered) on the long evaluation form on
    small screens, so it stays hidden above the 640px breakpoint below. */
 .gef-form-font-slider-wrap {
@@ -1347,7 +1403,7 @@
      short nav-bar card, so once that card itself has fully scrolled past,
      a sticky child would be forced away with it instead of staying pinned
      for the rest of the (much longer) form. GefNav.jsx tracks a sentinel
-     placed right before this element — once the sentinel reaches the top of
+     placed right before this element - once the sentinel reaches the top of
      the viewport, it adds --stuck, switching to true `position: fixed` so it
      stays reachable through the whole scroll. Scrolling back up past the
      sentinel's position (i.e. back to where gef-nav-bar is visible) removes

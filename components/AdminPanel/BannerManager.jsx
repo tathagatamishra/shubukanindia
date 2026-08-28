@@ -170,7 +170,7 @@ export default function BannerManager() {
       <h1 className="text-2xl font-bold mb-2">Banner Manager</h1>
       <p className="text-sm text-gray-500 mb-6">
         Manage the scrolling message strip shown at the bottom of the site. Only one banner can be active at a
-        time — the site always shows whichever one is marked "Active".
+        time - the site always shows whichever one is marked "Active".
       </p>
 
       <button
@@ -393,7 +393,7 @@ function PageTargetEditor({ showOnAllPages, pages, onToggleAll, onTogglePage }) 
               </label>
             ))}
           </div>
-          {pages.length === 0 && <p className="text-xs text-amber-600 mt-2">No pages selected — this banner won't show anywhere.</p>}
+          {pages.length === 0 && <p className="text-xs text-amber-600 mt-2">No pages selected - this banner won't show anywhere.</p>}
         </div>
       )}
     </div>

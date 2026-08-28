@@ -152,7 +152,7 @@ export default function Navbar() {
   // Handle scroll events with useEffect to avoid direct window event listeners
   useEffect(() => {
     // On the evaluation form, the nav should scroll away with the page like
-    // normal content — not stay pinned to the viewport. Overriding `position`
+    // normal content - not stay pinned to the viewport. Overriding `position`
     // (not just `top`) is what actually takes it out of fixed positioning.
     if (isGuardianFormPage) {
       setPosition({ 

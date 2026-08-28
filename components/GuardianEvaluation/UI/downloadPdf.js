@@ -24,7 +24,7 @@ export async function downloadFormPdfByRole(role, formId, headers, filename = "e
 }
 
 // Fetches the PDF and returns an in-page blob: URL for it (caller owns the
-// URL and must window.URL.revokeObjectURL it once done — e.g. on modal close).
+// URL and must window.URL.revokeObjectURL it once done - e.g. on modal close).
 // Used by every "View" button to show the PDF inline via PdfViewerModal.
 // role: "admin" | "instructor" | "guardian"
 export async function getFormPdfBlobUrl(role, formId, headers) {

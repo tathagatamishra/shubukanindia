@@ -38,7 +38,7 @@ export default function OpenExamPublic() {
         examID: exam.examID,
         password: exam.password || "",
       });
-      // If waiting, still navigate — the PublicExamPage will show waiting screen as well.
+      // If waiting, still navigate - the PublicExamPage will show waiting screen as well.
       router.push(`/online-exam/public/${exam.examID}`);
     } catch (err) {
       setLoading(false);

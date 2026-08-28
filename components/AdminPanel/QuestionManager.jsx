@@ -163,7 +163,7 @@ export default function QuestionManager() {
   };
 
   const fmtDate = (d) => {
-    if (!d) return "—";
+    if (!d) return "-";
     try {
       return new Date(d).toLocaleString("en-IN");
     } catch {
@@ -347,7 +347,7 @@ export default function QuestionManager() {
                         >
                           <div className="px-2 py-1 bg-gray-100 rounded">
                             <strong>
-                              {ue.examID ?? (ue.exam && ue.exam.examID) ?? "—"}
+                              {ue.examID ?? (ue.exam && ue.exam.examID) ?? "-"}
                             </strong>
                             {typeof ue.examSet !== "undefined" && (
                               <span> · Set {ue.examSet} · </span>

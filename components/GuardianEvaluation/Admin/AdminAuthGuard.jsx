@@ -30,7 +30,7 @@ export default function AdminAuthGuard({ children }) {
       .then(() => setAuthState("authenticated"))
       .catch(() => {
         // Missing/invalid/expired token, or the admin account no longer
-        // exists — never leave the panel accessible in that state.
+        // exists - never leave the panel accessible in that state.
         localStorage.removeItem("adminToken");
         router.replace(LOGIN_PATH);
       });

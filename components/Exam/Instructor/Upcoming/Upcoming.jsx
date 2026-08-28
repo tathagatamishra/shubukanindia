@@ -132,7 +132,7 @@ export default function Upcoming() {
 
     // --- Mobile: try navigator.share / file share as before
     if (isMobile) {
-      // keep your mobile flow (text share or file share) — fall back to waLink
+      // keep your mobile flow (text share or file share) - fall back to waLink
       if (navigator.share && !navigator.canShare) {
         try {
           await navigator.share({ title: `Exam ${e.examID}`, text: shareText });

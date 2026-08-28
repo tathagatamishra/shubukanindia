@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
@@ -16,6 +16,10 @@ export default function LearnerList({ onChange }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingLearner, setEditingLearner] = useState(null);
   const [removingLearner, setRemovingLearner] = useState(null);
+  // Only notify the parent (Dashboard's refresh trigger for ActiveWindowList)
+  // on a real add/edit/remove — not the initial mount fetch, which would
+  // otherwise fire a redundant window refetch immediately after its own.
+  const isInitialLoad = useRef(true);
 
   const fetchLearners = () => {
     setLoading(true);
@@ -23,7 +27,11 @@ export default function LearnerList({ onChange }) {
       .get("/guardian/learner", { headers: authHeader })
       .then((res) => {
         setLearners(res.data.data || []);
-        onChange?.(res.data.data || []);
+        if (isInitialLoad.current) {
+          isInitialLoad.current = false;
+        } else {
+          onChange?.(res.data.data || []);
+        }
       })
       .catch(() => addToast("Could not load learners", "error"))
       .finally(() => setLoading(false));

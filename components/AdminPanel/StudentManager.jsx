@@ -188,7 +188,7 @@ export default function StudentManager() {
             <option value="">Select Instructor (optional)</option>
             {instructors.map((ins) => (
               <option key={ins._id} value={ins._id}>
-                {ins.name} — {ins.identity}
+                {ins.name} - {ins.identity}
               </option>
             ))}
           </select>
@@ -367,7 +367,7 @@ export default function StudentManager() {
                   <option value="">-- No instructor / outside --</option>
                   {instructors.map((ins) => (
                     <option key={ins._id} value={ins._id}>
-                      {ins.name} — {ins.identity}
+                      {ins.name} - {ins.identity}
                     </option>
                   ))}
                 </select>

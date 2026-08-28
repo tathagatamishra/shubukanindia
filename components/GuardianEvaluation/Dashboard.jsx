@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGuardianAuth } from "./Context/GuardianAuthContext";
 import { Stamp, Divider, Card } from "./UI/Basics";
@@ -11,6 +11,11 @@ import ActiveWindowList from "./Window/ActiveWindowList";
 export default function Dashboard() {
   const { guardian, logout } = useGuardianAuth();
   const router = useRouter();
+  // Bumped whenever a learner is added, edited, or removed. ActiveWindowList's
+  // per-learner window/status list depends on the learner list (a changed
+  // instructor can add/remove which windows apply), so it needs to refetch
+  // too instead of going stale next to the just-updated learner list.
+  const [learnersVersion, setLearnersVersion] = useState(0);
 
   return (
     <div className="gef-container">
@@ -23,12 +28,12 @@ export default function Dashboard() {
       <GefBrowserTabs />
       <div className="gef-tab-panel">
         <div className="gef-stack">
-          <ActiveWindowList />
-          <LearnerList />
+          <ActiveWindowList refreshKey={learnersVersion} />
+          <LearnerList onChange={() => setLearnersVersion((v) => v + 1)} />
 
           <Card title="Your Records">
             <p className="gef-section-note">
-              Every evaluation form you've submitted for any of your learners is saved here — view it any time or
+              Every evaluation form you've submitted for any of your learners is saved here - view it any time or
               download a PDF copy for your records.
             </p>
             <Button variant="outline" block onClick={() => router.push("/guardian-evaluation/submissions")}>

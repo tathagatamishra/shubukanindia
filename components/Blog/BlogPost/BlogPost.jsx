@@ -331,7 +331,7 @@ export default function BlogPost({ blog }) {
                               {block.text}
                               {block.caption && (
                                 <footer className="mt-2 text-sm text-gray-500">
-                                  — {block.caption}
+                                  - {block.caption}
                                 </footer>
                               )}
                             </blockquote>
@@ -395,7 +395,7 @@ export default function BlogPost({ blog }) {
                                 {block.text}
                                 {block.caption && (
                                   <footer className="mt-2 text-sm text-gray-500">
-                                    — {block.caption}
+                                    - {block.caption}
                                   </footer>
                                 )}
                               </blockquote>
@@ -458,7 +458,7 @@ export default function BlogPost({ blog }) {
                           {block.text}
                           {block.caption && (
                             <footer className="mt-2 text-sm text-gray-500">
-                              — {block.caption}
+                              - {block.caption}
                             </footer>
                           )}
                         </blockquote>

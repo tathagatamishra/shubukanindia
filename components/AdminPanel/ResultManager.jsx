@@ -448,7 +448,7 @@ export default function ResultManager() {
       {!groupView && total > 0 && (
         <div className="flex items-center justify-between mt-4">
           <div>
-            Showing page {page} of {Math.ceil(total / limit)} — total {total}{" "}
+            Showing page {page} of {Math.ceil(total / limit)} - total {total}{" "}
             results
           </div>
           <div className="flex gap-2">
@@ -488,7 +488,7 @@ export default function ResultManager() {
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-bold">
-                Result — {selectedResult.student?.name}
+                Result - {selectedResult.student?.name}
               </h3>
               <button
                 onClick={() => setSelectedResult(null)}

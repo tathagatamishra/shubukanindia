@@ -214,7 +214,7 @@ export default function BlogImproved({ blogs = [] }) {
             Shubukan India Blog
           </h1>
           {/* <p className="text-gray-600 mt-2">
-            Traditional karate, technique breakdowns, and training notes —
+            Traditional karate, technique breakdowns, and training notes -
             readable, fast, and focused.
           </p> */}
         </div>

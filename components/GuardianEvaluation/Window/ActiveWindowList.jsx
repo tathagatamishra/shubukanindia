@@ -1,34 +1,43 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Card, StatusBadge } from "../UI/Basics";
 import Button from "../UI/Button";
-import PdfViewerModal from "../UI/PdfViewerModal";
-import { getFormPdfBlobUrl } from "../UI/downloadPdf";
 
-// Mirrors the backend's own EDIT_WINDOW_MS (evaluationCtrl.js) — a submitted
+// Mirrors the backend's own EDIT_WINDOW_MS (evaluationCtrl.js) - a submitted
 // form stays editable for 5 minutes after submission, then locks for good.
 const EDIT_WINDOW_MS = 5 * 60 * 1000;
 
-export default function ActiveWindowList() {
+// `refreshKey` is bumped by Dashboard.jsx whenever a learner is added,
+// edited, or removed — which windows/learners show up here depends on that
+// list (e.g. a changed instructor can add/remove which windows apply), so
+// this needs to refetch too instead of going stale next to it.
+export default function ActiveWindowList({ refreshKey }) {
   const { authHeader } = useGuardianAuth();
   const { addToast } = useToast();
   const router = useRouter();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [viewingId, setViewingId] = useState(null);
-  const [pdfModal, setPdfModal] = useState(null); // { url, title }
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     shubukan_api
       .get("/guardian/evaluation-window/active", { headers: authHeader })
       .then((res) => setData(res.data.data || []))
       .catch(() => addToast("Could not load evaluation windows", "error"))
-      .finally(() => setLoading(false));
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+      .finally(() => {
+        // Only the very first fetch shows the "Checking..." placeholder — a
+        // learner-triggered refresh swaps the data in silently instead of
+        // flashing the whole section back to a loading state.
+        if (isInitialLoad.current) {
+          isInitialLoad.current = false;
+          setLoading(false);
+        }
+      });
+  }, [refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Drafts and not-yet-started forms are always editable; a submitted form
   // is only editable within EDIT_WINDOW_MS of its submittedAt timestamp.
@@ -38,23 +47,6 @@ export default function ActiveWindowList() {
     return Date.now() - new Date(submittedAt).getTime() <= EDIT_WINDOW_MS;
   };
 
-  const handleView = async (formId, learnerName) => {
-    setViewingId(formId);
-    try {
-      const url = await getFormPdfBlobUrl("guardian", formId, authHeader);
-      setPdfModal({ url, title: `${learnerName}'s Evaluation Form` });
-    } catch (err) {
-      addToast(err.response?.data?.message || "Could not load PDF", "error");
-    } finally {
-      setViewingId(null);
-    }
-  };
-
-  const closePdfModal = () => {
-    if (pdfModal?.url) window.URL.revokeObjectURL(pdfModal.url);
-    setPdfModal(null);
-  };
-
   if (loading) return <p className="gef-hint">Checking for open evaluation windows...</p>;
 
   if (data.length === 0) {
@@ -62,7 +54,7 @@ export default function ActiveWindowList() {
       <Card title="Evaluation Form">
         <p className="gef-section-note" style={{ marginBottom: 0 }}>
           An "evaluation window" is a limited time period your instructor opens for submitting the form. There
-          isn't one open right now — check back here, or watch your email, when your instructor starts one.
+          isn't one open right now - check back here, or watch your email, when your instructor starts one.
         </p>
       </Card>
     );
@@ -77,7 +69,7 @@ export default function ActiveWindowList() {
             Pick a learner below to fill in, continue, or review their form.
           </p>
           <div className="gef-list">
-            {learners.map(({ learner, status, formId, submittedAt }) => {
+            {learners.map(({ learner, status, submittedAt }) => {
               const editable = canStillEdit(status, submittedAt);
               return (
                 <div key={learner._id} className="gef-row-card">
@@ -92,10 +84,9 @@ export default function ActiveWindowList() {
                       <Button
                         size="sm"
                         variant="outline"
-                        disabled={viewingId === formId}
-                        onClick={() => handleView(formId, learner.name)}
+                        onClick={() => router.push(`/guardian-evaluation/form/${learner._id}/${window._id}`)}
                       >
-                        {viewingId === formId ? "Loading..." : "View"}
+                        View
                       </Button>
                     ) : null}
                     {editable ? (
@@ -116,13 +107,6 @@ export default function ActiveWindowList() {
           </div>
         </Card>
       ))}
-
-      <PdfViewerModal
-        open={!!pdfModal}
-        onClose={closePdfModal}
-        pdfUrl={pdfModal?.url}
-        title={pdfModal?.title}
-      />
     </div>
   );
 }
