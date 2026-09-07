@@ -10,7 +10,7 @@ import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
 import localFont from "next/font/local";
 import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
-import { Amarante } from "next/font/google";
+import { Amarante, Bellefair } from "next/font/google";
 import Script from "next/script";
 
 export const metadata = {
@@ -78,22 +78,33 @@ export const metadata = {
   },
 };
 
+// Google fonts
+const amarante = Amarante({
+  variable: "--font-amarante",
+  subsets: ["latin"],
+  weight: "400", // Amarante only ships weight 400; next/font/google requires it explicit
+});
+const bellefair = Bellefair({
+  variable: "--font-bellefair",
+  subsets: ["latin"],
+  weight: "400", // Bellefair only ships weight 400; next/font/google requires it explicit
+});
+
+// Custom fonts
+const kouzan = localFont({
+  src: "./fonts/KouzanBrushFontGyousyo.woff2",
+  variable: "--font-kouzan",
+  display: "swap",
+});
 const mufan = localFont({
   src: "./fonts/MufanPFS.woff2",
-  weight: "400",
-  style: "normal",
   variable: "--font-mufan",
+  display: "swap",
 });
 const amanojaku = localFont({
   src: "./fonts/Amanojaku.woff2",
-  weight: "400",
-  style: "normal",
   variable: "--font-amanojaku",
-});
-const amarante = Amarante({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-amarante",
+  display: "swap",
 });
 
 export default function RootLayout({ children }) {
@@ -107,7 +118,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${mufan.variable} ${amanojaku.variable} ${amarante.variable}`}
+      className={`${mufan.variable} ${amanojaku.variable} ${amarante.variable} ${bellefair.variable} ${kouzan.variable}`}
       style={{
         background: "rgb(231, 221, 211)",
         backgroundImage:
@@ -180,7 +191,7 @@ export default function RootLayout({ children }) {
                 className="webBody"
                 style={{
                   position: "relative",
-                  zIndex: 2,
+                  // zIndex: 2,
                   height: "fit-content",
                   minHeight: "calc(100vh - 610px)",
                   display: "flex",

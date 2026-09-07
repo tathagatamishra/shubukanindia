@@ -2,6 +2,12 @@
 
 ---
 
+## Design System
+
+See [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) for the full visual design system — brand concept, color palettes, typography, components, motion, and guidelines for extending the UI consistently. Companion Figma file: ["Shubukan Design"](https://www.figma.com/design/iqLgm5otKiE5ElphZqQLe8).
+
+---
+
 ## SEO
 
 ### 🔹 1. Metadata Template (Next.js App Router)
