@@ -306,9 +306,9 @@ export default async function page() {
           </div>
 
           <img
-            src="/assets/homepage/brush-divider-accent.png"
+            src="/assets/home/red_line_2.webp"
             alt=""
-            className="divider divider--accent"
+            className="underline underline--3 remove-bg"
           />
 
           <div className="quote quote--solo">
