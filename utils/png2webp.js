@@ -2,9 +2,9 @@ const sharp = require("sharp");
 
 async function main() {
   try {
-    await sharp("pattern-paper.png")
-      .toFormat("webp", { quality: 85 }) // or .webp({ lossless: true })
-      .toFile("pattern-paper.webp");
+    await sharp("uemadojoindia.jpeg")
+      .webp({ lossless: true }) // or .webp({ lossless: true })
+      .toFile("uemadojoindia.webp");
   } catch (error) {}
 }
 main();
