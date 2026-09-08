@@ -146,7 +146,7 @@ export default async function page() {
             />
           </div>
           <span className="tagline text-center font-(family-name:--font-babylonica)">
-            Pure soul is the preserver of true karate
+            Pure soul is the preserver of true Karate
           </span>
           <img
             src="/assets/home/red_line_1.webp"
