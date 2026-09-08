@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Lets the dev server (HMR websocket, Server Actions/RSC fetches) fully
+  // trust requests coming from the phone over LAN — without this, the page
+  // loads over http://192.168.0.104:3000 but hot reload and anything doing
+  // a cross-origin fetch back to the dev server gets silently blocked.
+  allowedDevOrigins: ["192.168.0.104"],
   images: {
     remotePatterns: [
       {

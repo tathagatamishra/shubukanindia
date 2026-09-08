@@ -63,8 +63,8 @@
         border-radius: 0%;
         // filter: url(#filter);
         // X-axis, Y-axis, Blur-radius, Spread-radius, Color
-        box-shadow: 0px 8px 20px 10px #ffffff;
-        background: #ffffff;
+        box-shadow: 0px 8px 20px 10px #fff;
+        background: #fff;
         position: absolute;
         top: -25px;
         left: -180px;
@@ -659,7 +659,11 @@
 
         // height: 7rem;
         & .bg-shadow {
-            box-shadow: 0px 50px 30px rgb(255, 255, 255);
+            box-shadow: 0px 50px 30px #fff;
+        }
+
+        #cloud-circle {
+            box-shadow: 0px 40px 20px 0px #fff;
         }
 
         & .logo {

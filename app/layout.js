@@ -10,7 +10,16 @@ import { displayConsoleLogo } from "@/utils/console-logo";
 import { UIProvider } from "@/components/Context/UIContext";
 import localFont from "next/font/local";
 import { ToastProvider } from "@/components/UIComponent/Toast/Toast";
-import { Amarante, Bellefair } from "next/font/google";
+import {
+  Amarante,
+  Bellefair,
+  Island_Moments,
+  Qwigley,
+  Waterfall,
+  Qwitcher_Grypen,
+  Estonia,
+  Babylonica,
+} from "next/font/google";
 import Script from "next/script";
 
 export const metadata = {
@@ -87,7 +96,37 @@ const amarante = Amarante({
 const bellefair = Bellefair({
   variable: "--font-bellefair",
   subsets: ["latin"],
-  weight: "400", // Bellefair only ships weight 400; next/font/google requires it explicit
+  weight: "400",
+});
+const island = Island_Moments({
+  variable: "--font-island",
+  subsets: ["latin"],
+  weight: "400",
+});
+const waterfall = Waterfall({
+  variable: "--font-waterfall",
+  subsets: ["latin"],
+  weight: "400",
+});
+const qwigley = Qwigley({
+  variable: "--font-qwigley",
+  subsets: ["latin"],
+  weight: "400",
+});
+const qwitcher = Qwitcher_Grypen({
+  variable: "--font-qwitcher",
+  subsets: ["latin"],
+  weight: "400",
+});
+const estonia = Estonia({
+  variable: "--font-estonia",
+  subsets: ["latin"],
+  weight: "400",
+});
+const babylonica = Babylonica({
+  variable: "--font-babylonica",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 // Custom fonts
@@ -118,7 +157,18 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${mufan.variable} ${amanojaku.variable} ${amarante.variable} ${bellefair.variable} ${kouzan.variable}`}
+      className={`
+        ${mufan.variable} 
+        ${amanojaku.variable} 
+        ${amarante.variable} 
+        ${bellefair.variable} 
+        ${island.variable} 
+        ${qwitcher.variable} 
+        ${estonia.variable} 
+        ${qwigley.variable} 
+        ${waterfall.variable} 
+        ${babylonica.variable} 
+        ${kouzan.variable}`}
       style={{
         background: "rgb(231, 221, 211)",
         backgroundImage:
