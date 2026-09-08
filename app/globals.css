@@ -246,7 +246,7 @@ select:-webkit-autofill:focus {
 .Home {
   max-width: 1080px;
   width: 100%;
-  padding: 10rem 100px 234px;
+  padding: 170px 100px 234px;
   font-family: 'Bellefair', serif;
   position: relative;
   gap: 20px;
@@ -259,6 +259,10 @@ select:-webkit-autofill:focus {
 .remove-bg {
   display: block;
   mix-blend-mode: multiply;
+}
+
+.hero-section {
+  margin-bottom: 68px;
 }
 
 .hero-img {
@@ -285,6 +289,14 @@ select:-webkit-autofill:focus {
   width: 100%;
 }
 
+.tagline {
+  font-size: 36px;
+  word-spacing: 6;
+  color: #111010;
+  text-shadow: 0px 2px 1px #be311818;
+  mix-blend-mode: color-burn;
+}
+
 .underline--1 {
   max-width: 500px;
   width: 40%;
@@ -293,7 +305,6 @@ select:-webkit-autofill:focus {
 .values-section {
   height: 126px;
   gap: 46px;
-  margin-top: 48px;
   margin-bottom: 20px;
 }
 
@@ -306,7 +317,8 @@ select:-webkit-autofill:focus {
 
 .value-eng {
   font-size: 20px;
-  color: #3f3531;
+  color: #111010;
+  text-shadow: 0px 2px 1px #be311818;
   mix-blend-mode: color-burn;
 }
 
@@ -357,6 +369,7 @@ select:-webkit-autofill:focus {
 .underline--3 {
   max-width: 360px;
   width: 32%;
+  margin-left: -10px;
 }
 
 .gallery-section {
@@ -455,16 +468,100 @@ select:-webkit-autofill:focus {
 }
 
 .quotes-section {
-  margin-bottom: 40px;
+  margin-bottom: 80px;
+  gap: 40px;
+}
+
+.quotes-head {
+  width: 90%;
+  max-width: 460px;
+  height: 36px;
 }
 
 .quote-photo {
   min-width: 30%;
 }
 
+.quote-row {
+  gap: 40px;
+}
+
+.quote-wrap {
+  display: flow-root;
+}
+
+.quote-photo-1 img {
+  border-radius: 30px 60px 30px 0;
+}
+
+.quote-photo-2 {
+  width: 30%;
+  height: auto;
+  float: left;
+  margin: 0 28px 12px 0;
+  /* shape-outside: circle(); */
+  border-radius: 60px 30px 0 30px;
+  object-fit: cover;
+}
+
+.quote-1,
+.quote-2 {
+  margin-bottom: 20px;
+}
+
+.quotes-section span {
+  font-size: 20px;
+}
+
+.journal-nav {
+  margin-bottom: 20px;
+}
+
+.journal-list {
+  gap: 40px;
+}
+
+.journal-title {
+  font-size: 18px;
+}
+
+/* `.journal-title` is also used on the unrelated section-heading wrapper div
+   above (Journal heading + underline), so the clamp is scoped to the h3 post
+   title specifically rather than the bare class. */
+h3.journal-title,
+.journal-summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.journal-summary {
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #4b423b;
+}
+
+.journal-date {
+  color: #4b423b;
+  font-size: 14px;
+}
+
+.journal-meta {
+  margin-bottom: 10px;
+}
+
+.journal-card {
+  border-bottom: 2px solid #BFB2AA;
+  border-radius: 10px 0 0 10px;
+  overflow: hidden;
+}
+
 @media (max-width: 800px) {
   .Home {
-    padding: 9rem 100px 104px;
+    padding: 150px 100px 104px;
   }
 
   .Home p {
@@ -496,6 +593,10 @@ select:-webkit-autofill:focus {
     font-size: 22px;
   }
 
+  .underline--3 {
+    margin-left: 0px;
+  }
+
   .collage {
     gap: 4%;
     /* width: 90%; */
@@ -517,7 +618,7 @@ select:-webkit-autofill:focus {
 
   .p3 {
     z-index: 7;
-    transform: translate(28px, 2px);
+    transform: translate(25px, 8px);
   }
 
   .p4 {
@@ -539,11 +640,23 @@ select:-webkit-autofill:focus {
     z-index: 5;
     transform: scale(90%) translate(-30px, 10px);
   }
+
+  .journal-summary {
+    display: none;
+  }
+
+  .journal-title {
+    font-size: 16px;
+  }
+
+  .journal-meta {
+    margin-bottom: 4px;
+  }
 }
 
 @media (max-width: 700px) {
   .Home {
-    padding: 8rem 60px 64px;
+    padding: 136px 60px 64px;
   }
 
   .Home p {
@@ -552,6 +665,11 @@ select:-webkit-autofill:focus {
 
   .hero-img-holder {
     max-width: 400px;
+  }
+
+  .tagline {
+    font-size: 32px;
+    word-spacing: 4;
   }
 
   .heading--way {
@@ -580,22 +698,63 @@ select:-webkit-autofill:focus {
     height: 27px;
   }
 
+  .link {
+    font-size: 14px;
+  }
+
   .heading--sm {
     font-size: 20px;
+  }
+
+  .quotes-section {
+    margin-bottom: 40px;
+  }
+
+  .journal-section {
+    margin-bottom: 30px;
+  }
+
+  .journal-list {
+    gap: 30px;
+  }
+
+  .journal-title {
+    font-size: 14px;
+  }
+
+  .journal-date {
+    font-size: 14px;
+  }
+
+  .journal-meta {
+    margin-bottom: 2px;
+  }
+
+  .journal-card {
+    border-bottom: 1px solid #BFB2AA;
   }
 }
 
 @media (max-width: 500px) {
   .Home {
-    padding: 82px 30px 48px;
+    padding: 100px 30px 48px;
   }
 
   .Home p {
     font-size: 16px;
   }
 
+  .hero-section {
+    margin-bottom: 68px;
+  }
+
   .hero-img-holder {
     max-width: 360px;
+  }
+
+  .tagline {
+    font-size: 26px;
+    word-spacing: 2;
   }
 
   .heading--way {
@@ -634,6 +793,44 @@ select:-webkit-autofill:focus {
   }
 
   .link {
+    font-size: 11px;
+  }
+
+  .quote-row {
+    gap: 10px;
+  }
+
+  .quote-1 {
+    margin-bottom: 10px;
+  }
+
+  .quote-2 {
+    margin-bottom: 0px;
+  }
+
+  .quote-photo-1 img {
+    border-radius: 15px 30px 15px 0;
+  }
+
+  .quote-photo-2 {
+    margin: 0 20px 6px 0;
+    border-radius: 30px 15px 0 15px;
+  }
+
+  .quotes-section span {
+    font-size: 14px;
+  }
+
+  .quote-dan {
+    font-size: 14px;
+  }
+
+  .journal-title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .journal-date {
     font-size: 11px;
   }
 }

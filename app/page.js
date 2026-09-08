@@ -81,6 +81,8 @@ async function getLatestPosts() {
 
 export default async function page() {
   const posts = await getLatestPosts();
+  console.log(posts);
+
   function formatPostDate(dateStr) {
     if (!dateStr) return "";
     try {
@@ -127,6 +129,7 @@ export default async function page() {
           }),
         }}
       />
+
       <div className="Home w-full flex flex-col justify-start items-center">
         {/* section 1 */}
         <section className="hero-section flex flex-col justify-start items-center">
@@ -142,9 +145,9 @@ export default async function page() {
               className="hero-img hero-img--2"
             />
           </div>
-          <p className="tagline italic text-center">
+          <span className="tagline text-center font-(family-name:--font-babylonica)">
             Pure soul is the preserver of true karate
-          </p>
+          </span>
           <img
             src="/assets/home/red_line_1.webp"
             alt=""
@@ -264,65 +267,97 @@ export default async function page() {
         </section>
 
         {/* section 5 */}
-        <section className="quotes-section flex flex-col items-center gap-4">
-          <div className="bms w-full flex justify-center gap-4 mb-[20px]">
-            <span className="heading heading--sm font-(family-name:--font-amarante)">Body</span>
-            <span className="bms-bar" aria-hidden="true" />
-            <span className="heading heading--sm font-(family-name:--font-amarante)">Mind</span>
-            <span className="bms-bar" aria-hidden="true" />
-            <span className="heading heading--sm font-(family-name:--font-amarante)">Spirit</span>
+        <section className="quotes-section flex flex-col items-center">
+          <div className="quotes-head flex flex-row justify-evenly items-start">
+            <h2 className="heading heading--sm font-(family-name:--font-amarante)">
+              Body
+            </h2>
+            <div className="line-vert line-vert--2">
+              <div className="line-in"></div>
+            </div>
+            <h2 className="heading heading--sm font-(family-name:--font-amarante)">
+              Mind
+            </h2>
+            <div className="line-vert line-vert--2">
+              <div className="line-in"></div>
+            </div>
+            <h2 className="heading heading--sm font-(family-name:--font-amarante)">
+              Spirit
+            </h2>
           </div>
 
-          <div className="quote-row flex gap-2">
-            <div className="quote">
-              <p>
+          <div className="quote-row flex">
+            <div className="flex flex-col">
+              <p className="quote-1 font-(family-name:--font-bellefair)">
                 When you block overall, imagine you are attacking. When someone
                 punches you, you don't move to evade the punch, but rather to
                 break the arm.
               </p>
-              <p className="quote-sensei">Sensei Takeshi Uema</p>
-              <p className="quote-sensei">7th Dan Okinawa Shorin-Ryu</p>
+              <span className="quote-name italic font-(family-name:--font-bellefair)">
+                &mdash; Sensei Takeshi Uema
+              </span>
+              <span className="quote-dan italic font-(family-name:--font-bellefair)">
+                7th Dan Okinawa Shorin-Ryu
+              </span>
             </div>
-            <div className="quote-photo">
+
+            <div className="quote-photo quote-photo-1">
               <img src="/assets/quot (1).jpg" alt="Sensei Takeshi Uema" />
             </div>
           </div>
 
-          <div className="quote-row quote-row--reverse flex gap-2">
-            <div className="quote-photo">
-              <img src="/assets/quot (2).jpg" alt="Sensei Yasuhiro Uema" />
-            </div>
-            <div className="quote quote--right">
-              <p>
-                Our karate is not a sport but a budo. It is about tempering
-                oneself. To never give up. This spirit can be reached only if
-                one goes through hard training with all one's might. Spiritual
-                strength comes only through hard training. It is a way of
-                forging oneself.
-              </p>
-              <p className="quote-sensei">Sensei Yasuhiro Uema</p>
-              <p className="quote-sensei">10th Dan Okinawan Shorin-Ryu</p>
-            </div>
+          <div className="quote-row quote-wrap">
+            <p className="quote-2 w-full font-(family-name:--font-bellefair)">
+              <img
+                src="/assets/quot (2).jpg"
+                alt="Sensei Yasuhiro Uema"
+                className="quote-photo quote-photo-2"
+              />
+              Our karate is not a sport but a budo. It is about tempering
+              oneself. To never give up. This spirit can be reached only if one
+              goes through hard training with all one's might. Spiritual
+              strength comes only through hard training. It is a way of forging
+              oneself.
+            </p>
+
+            <span className="flex flex-col">
+              <span className="quote-name italic text-right font-(family-name:--font-bellefair)">
+                &mdash; Sensei Yasuhiro Uema
+              </span>
+              <span className="quote-dan italic text-right font-(family-name:--font-bellefair)">
+                10th Dan Okinawan Shorin-Ryu
+              </span>
+            </span>
           </div>
 
           <img
             src="/assets/home/red_line_2.webp"
             alt=""
-            className="underline underline--3 remove-bg"
+            className="underline underline--3 remove-bg my-[5vw]"
           />
 
-          <div className="quote quote--solo">
-            <p>
+          <div className="quote-solo">
+            <p className="quote-1">
               Okinawan karate is for self-defence and self-development. Okinawan
               karate is not sport. It is education and for philosophical
               development.
             </p>
-            <p className="quote-sensei">Sensei Sabyasachi</p>
+            <span className="quote-name italic font-(family-name:--font-bellefair)">
+              &mdash; Sensei Sabyasachi
+            </span>
           </div>
 
           <div className="photo-pair flex justify-around">
-            <img src="/assets/sg1.jpg" alt="" className="w-[48%]" />
-            <img src="/assets/sg2.jpg" alt="" className="w-[48%]" />
+            <img
+              src="/assets/sg1.jpg"
+              alt=""
+              className="w-[38%] max-w-[300px] rounded-lg"
+            />
+            <img
+              src="/assets/sg2.jpg"
+              alt=""
+              className="w-[38%] max-w-[300px] rounded-lg"
+            />
           </div>
 
           <p className="body-text story">
@@ -341,47 +376,70 @@ export default async function page() {
         </section>
 
         {/* section 6 */}
-        <section className="journal-section">
-          {posts.length > 0 ? (
-            <section className="journal">
-              <div className="journal-nav flex flex-row items-center justify-between">
-                <div className="journal-title w-[50%] flex flex-col">
-                  <h2 className="heading heading--sm font-(family-name:--font-amarante)">
-                    Journal
-                  </h2>
-                  <img
-                    src="/assets/home/red_line_3.webp"
-                    alt=""
-                    className="underline underline--3 remove-bg"
-                  />
-                </div>
-              </div>
+        <section className="journal-section w-full flex flex-col">
+          <div className="journal-nav w-full flex flex-row items-center justify-between">
+            <div className="journal-title w-[50%] flex flex-col">
+              <h2 className="heading heading--sm font-(family-name:--font-amarante)">
+                Journal
+              </h2>
+              <img
+                src="/assets/home/red_line_3.webp"
+                alt=""
+                className="underline underline--3 remove-bg"
+              />
+            </div>
 
-              <div className="journal-list">
-                {posts.map((post) => (
-                  <div className="journal-card" key={post._id}>
-                    {post.thumbnailImage?.url || post.coverImage?.url ? (
+            <a
+              href="/journal"
+              className="link w-[50%] text-right font-(family-name:--font-amarante)"
+            >
+              View Journals →
+            </a>
+          </div>
+
+          {posts.length > 0 ? (
+            <div className="journal-list w-full flex flex-col">
+              {posts.map((post) => (
+                <div
+                  className="journal-card w-full flex flex-row justify-between"
+                  key={post._id}
+                >
+                  {post.thumbnailImage?.url || post.coverImage?.url ? (
+                    <div className="journal-thumb w-[48%] aspect-video h-auto object-cover relative z-1">
                       <img
                         src={post.thumbnailImage?.url || post.coverImage?.url}
                         alt=""
-                        className="journal-thumb"
+                        className="relative z-1"
                       />
-                    ) : null}
-                    <div className="journal-info">
-                      <h3 className="journal-title">{post.title}</h3>
-                      <div className="journal-meta">
-                        <span className="journal-date">
-                          {formatPostDate(post.publishedDate)}
-                        </span>
-                        <a href={`/blogpost/${post.slug}`} className="link">
-                          Read More →
-                        </a>
-                      </div>
+                    </div>
+                  ) : null}
+
+                  <div className="journal-info w-[48%] h-auto aspect-video flex flex-col justify-between relative z-2">
+                    <div>
+                      <h3 className="journal-title font-(family-name:--font-amarante)">
+                        {post.title}
+                      </h3>
+
+                      <span className="journal-summary font-(family-name:--font-bellefair)">
+                        {post.summary || post.shortNote}
+                      </span>
+                    </div>
+
+                    <div className="journal-meta w-full flex justify-between">
+                      <span className="journal-date font-(family-name:--font-bellefair)">
+                        {formatPostDate(post.publishedDate)}
+                      </span>
+                      <a
+                        href={`/blogpost/${post.slug}`}
+                        className="link w-[60%] text-right font-(family-name:--font-amarante)"
+                      >
+                        Read More →
+                      </a>
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
+              ))}
+            </div>
           ) : null}
         </section>
       </div>
