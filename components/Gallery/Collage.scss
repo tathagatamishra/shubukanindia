@@ -1,0 +1,74 @@
+.collage-photo {
+  cursor: pointer;
+}
+
+.collage-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collage-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 22, 19, 0.75);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.collage-lightbox.is-open .collage-lightbox-backdrop {
+  opacity: 1;
+}
+
+.collage-lightbox-img {
+  position: relative;
+  max-width: 88vw;
+  max-height: 86vh;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  will-change: transform;
+  z-index: 1;
+}
+
+.collage-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1613;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.1s, transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+.collage-lightbox.is-open .collage-lightbox-close {
+  opacity: 1;
+}
+
+@media (max-width: 500px) {
+  .collage-lightbox-close {
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+}
