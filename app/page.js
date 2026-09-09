@@ -1,5 +1,6 @@
 // app/page.js
 import Script from "next/script";
+import Collage from "@/components/Gallery/Collage";
 import { shubukan_api } from "@/config";
 
 export const metadata = {
@@ -249,21 +250,7 @@ export default async function page() {
             </a>
           </div>
 
-          <div className="collage">
-            {[
-              GALLERY_PHOTOS.slice(0, 3), // column 1: p1, p2, p3
-              GALLERY_PHOTOS.slice(3, 5), // column 2: p4, p5
-              GALLERY_PHOTOS.slice(5, 7), // column 3: p6, p7
-            ].map((col, i) => (
-              <div className="collage-col" key={i}>
-                {col.map((p) => (
-                  <div className={`collage-photo ${p.cls}`} key={p.src}>
-                    <img src={p.src} alt="" />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+          <Collage photos={GALLERY_PHOTOS} />
         </section>
 
         {/* section 5 */}
