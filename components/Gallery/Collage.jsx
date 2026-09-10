@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { lockScroll, unlockScroll } from "@/utils/scrollLock";
 import "./Collage.scss";
 
 // Click-to-open gallery collage. The lightbox image is FLIP-animated with
@@ -49,8 +50,15 @@ export default function Collage({ photos }) {
     if (animRef.current) animRef.current.cancel();
     setClosing(true);
     const anim = el.animate(
-      [{ transform: "translate(0, 0) scale(1, 1)" }, { transform: flipDelta(el) }],
-      { duration: 420, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "forwards" }
+      [
+        { transform: "translate(0, 0) scale(1, 1)" },
+        { transform: flipDelta(el) },
+      ],
+      {
+        duration: 420,
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        fill: "forwards",
+      },
     );
     animRef.current = anim;
     anim.onfinish = () => {
@@ -77,8 +85,15 @@ export default function Collage({ photos }) {
       if (cancelled) return;
       if (animRef.current) animRef.current.cancel();
       const anim = el.animate(
-        [{ transform: flipDelta(el) }, { transform: "translate(0, 0) scale(1, 1)" }],
-        { duration: 420, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "both" }
+        [
+          { transform: flipDelta(el) },
+          { transform: "translate(0, 0) scale(1, 1)" },
+        ],
+        {
+          duration: 420,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          fill: "both",
+        },
       );
       animRef.current = anim;
     };
@@ -96,25 +111,17 @@ export default function Collage({ photos }) {
     };
   }, [active]);
 
-  // Esc to close + lock background scroll while the lightbox is up.
-  // The page's actual scroll container is <html> here (document.scrollingElement
-  // is HTML, not BODY — body itself has overflow:visible), so that's the
-  // element that needs locking; body is included too for safety since some
-  // browsers/layouts scroll there instead.
+  // Esc to close + lock background scroll (with scrollbar-width compensation
+  // so the page doesn't shift — see utils/scrollLock).
   useEffect(() => {
     if (!active) return;
-    const root = document.documentElement;
-    const prevRootOverflow = root.style.overflow;
-    const prevBodyOverflow = document.body.style.overflow;
-    root.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    lockScroll();
     function onKey(e) {
       if (e.key === "Escape") closePhoto();
     }
     window.addEventListener("keydown", onKey);
     return () => {
-      root.style.overflow = prevRootOverflow;
-      document.body.style.overflow = prevBodyOverflow;
+      unlockScroll();
       window.removeEventListener("keydown", onKey);
     };
   }, [active, closePhoto]);
@@ -156,7 +163,12 @@ export default function Collage({ photos }) {
           >
             ×
           </button>
-          <img ref={overlayImgRef} src={active.src} alt="" className="collage-lightbox-img" />
+          <img
+            ref={overlayImgRef}
+            src={active.src}
+            alt=""
+            className="collage-lightbox-img"
+          />
         </div>
       )}
     </>

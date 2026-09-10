@@ -6,6 +6,7 @@ import useSound from "use-sound";
 import Image from "next/image";
 import "./Navbar.scss";
 import { useUI } from "../Context/UIContext";
+import { lockScroll, unlockScroll } from "@/utils/scrollLock";
 import { Philosopher, Geo } from "next/font/google";
 
 const philosopher = Philosopher({
@@ -34,6 +35,10 @@ export default function Navbar() {
   const [lastScrollTop, setLastScrollTop] = useState(Infinity);
 
   const [isMenu, setIsMenu] = useState(false);
+  // Keeps the menu in the DOM through its close animation. isMenu drives the
+  // open/closing CSS state; menuRender keeps it mounted for the ~400ms the
+  // exit animation needs before it's actually removed.
+  const [menuRender, setMenuRender] = useState(false);
   const [menuStyle, setMenuStyle] = useState({
     zIndex: 4,
     width: "8rem",
@@ -56,17 +61,24 @@ export default function Navbar() {
   const isGuardianEvalPage = pathname.startsWith("/guardian-evaluation");
   const isGuardianFormPage = pathname.startsWith("/guardian-evaluation/form/");
 
-  // Lock body scroll when open
+  // Mount immediately on open; delay unmount until the close animation finishes.
   useEffect(() => {
     if (isMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
+      setMenuRender(true);
+      return;
     }
-    // Clean up when component unmounts
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    const t = setTimeout(() => setMenuRender(false), 400);
+    return () => clearTimeout(t);
+  }, [isMenu]);
+
+  // Lock background scroll while the menu is open. scrollLock measures and
+  // compensates the scrollbar's width so the page doesn't shift — and
+  // measures 0 on mobile / overlay-scrollbar devices, so no shift there
+  // either (which the static `scrollbar-gutter: stable` approach got wrong).
+  useEffect(() => {
+    if (!isMenu) return;
+    lockScroll();
+    return () => unlockScroll();
   }, [isMenu]);
 
   const pageList = [
@@ -155,9 +167,9 @@ export default function Navbar() {
     // normal content - not stay pinned to the viewport. Overriding `position`
     // (not just `top`) is what actually takes it out of fixed positioning.
     if (isGuardianFormPage) {
-      setPosition({ 
-        position: "relative", 
-        top: "0" 
+      setPosition({
+        position: "relative",
+        top: "0",
       });
       return;
     }
@@ -357,8 +369,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {isMenu && (
-          <>
+        {menuRender && (
+          <div className={`menu-overlay ${isMenu ? "is-open" : "is-closing"}`}>
             {/* <div className="menuBG"></div> */}
             <div className="menuBG2"></div>
             <div className="menuBG3" onClick={showMenu}></div>
@@ -429,7 +441,7 @@ export default function Navbar() {
                 </filter>
               </defs>
             </svg> */}
-          </>
+          </div>
         )}
       </section>
     </div>
