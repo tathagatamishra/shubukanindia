@@ -145,7 +145,7 @@ export default function Collage({ photos }) {
                   }
                 }}
               >
-                <img src={p.src} alt="" />
+                <img src={p.src} alt="" loading="lazy" decoding="async" />
               </div>
             ))}
           </div>

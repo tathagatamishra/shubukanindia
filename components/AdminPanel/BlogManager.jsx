@@ -122,7 +122,10 @@ export default function BlogManager() {
   const fetchBlogs = async () => {
     setLoading(true);
     try {
-      const res = await shubukan_api.get("/blogs?limit=50");
+      // admin endpoint: includes drafts and full article content
+      const res = await shubukan_api.get("/admin/blogs?limit=100", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
+      });
       setBlogs(res.data.blogs || []);
     } catch (err) {
       console.error("Fetch blogs error:", err);

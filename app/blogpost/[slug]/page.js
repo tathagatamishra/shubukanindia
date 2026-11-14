@@ -2,6 +2,20 @@
 import BlogPost from "@/components/Blog/BlogPost/BlogPost";
 import { shubukan_api } from "@/config";
 import { redirect } from "next/navigation";
+import { cache } from "react";
+
+// Re-render this page in the background at most every 5 minutes, so new
+// content from the admin panel shows up without a redeploy, while visitors
+// still get a cached page instantly. (axios ignores `cache: "no-store"`, so
+// before this the page was frozen at build time.)
+export const revalidate = 300;
+
+// No posts are pre-built at deploy time; each post is rendered on its first
+// visit and then cached (and refreshed every 5 minutes) instead of hitting the
+// backend on every single page view.
+export async function generateStaticParams() {
+  return [];
+}
 
 async function getBlogPost(slug) {
   try {
@@ -26,16 +40,10 @@ async function getBlogPost(slug) {
   }
 }
 
-// Cache the blog post to avoid multiple API calls
-let blogPostCache = new Map();
-
-async function getCachedBlogPost(slug) {
-  if (!blogPostCache.has(slug)) {
-    const blogPost = await getBlogPost(slug);
-    blogPostCache.set(slug, blogPost);
-  }
-  return blogPostCache.get(slug);
-}
+// Dedupe the API call between generateMetadata and the page within ONE
+// request. (A module-level Map used to cache posts - including "not found" -
+// forever per server instance, so edits and newly published posts went stale.)
+const getCachedBlogPost = cache(getBlogPost);
 
 // ✅ Add metadata for SEO + social sharing
 export async function generateMetadata({ params }) {

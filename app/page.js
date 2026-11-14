@@ -5,6 +5,13 @@ import Collage from "@/components/Gallery/Collage";
 // uncomment this import and the "section 0" block below.
 // import DragonPath from "@/components/UIComponent/dragon/DragonPath";
 import { shubukan_api } from "@/config";
+import { cld } from "@/utils/cloudinary";
+
+// Re-render this page in the background at most every 5 minutes, so new
+// content from the admin panel shows up without a redeploy, while visitors
+// still get a cached page instantly. (axios ignores `cache: "no-store"`, so
+// before this the page was frozen at build time.)
+export const revalidate = 300;
 
 export const metadata = {
   metadataBase: new URL("https://www.shubukanindia.org"),
@@ -101,7 +108,7 @@ export default async function page() {
   const GALLERY_PHOTOS = [
     { src: "/web_images/shureimon_gate_low.jpg", cls: "p1" },
     { src: "/web_images/chibana_low.jpg", cls: "p2" },
-    { src: "/web_images/oldGroup.jpg", cls: "p3" },
+    { src: "/web_images/oldGroup.webp", cls: "p3" },
     { src: "/web_images/uema_family_low.jpg", cls: "p4" },
     { src: "/web_images/joki_sai_low.jpg", cls: "p5" },
     { src: "/web_images/Matsumura_low.jpg", cls: "p6" },
@@ -224,6 +231,8 @@ export default async function page() {
           </h2>
 
           <img
+              loading="lazy"
+              decoding="async"
             src="/assets/home/red_line_2.webp"
             alt=""
             className="underline underline--2 remove-bg"
@@ -259,6 +268,8 @@ export default async function page() {
                 Gallery
               </h2>
               <img
+              loading="lazy"
+              decoding="async"
                 src="/assets/home/red_line_3.webp"
                 alt=""
                 className="underline underline--3 remove-bg"
@@ -312,13 +323,17 @@ export default async function page() {
             </div>
 
             <div className="quote-photo quote-photo-1">
-              <img src="/assets/quot (1).jpg" alt="Sensei Takeshi Uema" />
+              <img
+              loading="lazy"
+              decoding="async" src="/assets/quot (1).jpg" alt="Sensei Takeshi Uema" />
             </div>
           </div>
 
           <div className="quote-row quote-wrap">
             <p className="quote-2 w-full font-(family-name:--font-bellefair)">
               <img
+              loading="lazy"
+              decoding="async"
                 src="/assets/quot (2).jpg"
                 alt="Sensei Yasuhiro Uema"
                 className="quote-photo quote-photo-2"
@@ -341,6 +356,8 @@ export default async function page() {
           </div>
 
           <img
+              loading="lazy"
+              decoding="async"
             src="/assets/home/red_line_2.webp"
             alt=""
             className="underline underline--3 remove-bg my-[5vw]"
@@ -359,12 +376,16 @@ export default async function page() {
 
           <div className="photo-pair flex justify-around">
             <img
-              src="/assets/sg1.jpg"
+              loading="lazy"
+              decoding="async"
+              src="/assets/sg1.webp"
               alt=""
               className="w-[38%] max-w-[300px] rounded-lg"
             />
             <img
-              src="/assets/sg2.jpg"
+              loading="lazy"
+              decoding="async"
+              src="/assets/sg2.webp"
               alt=""
               className="w-[38%] max-w-[300px] rounded-lg"
             />
@@ -393,6 +414,8 @@ export default async function page() {
                 Journal
               </h2>
               <img
+              loading="lazy"
+              decoding="async"
                 src="/assets/home/red_line_3.webp"
                 alt=""
                 className="underline underline--3 remove-bg"
@@ -417,7 +440,11 @@ export default async function page() {
                   {post.thumbnailImage?.url || post.coverImage?.url ? (
                     <div className="journal-thumb w-[48%] aspect-video h-auto object-cover relative z-1">
                       <img
-                        src={post.thumbnailImage?.url || post.coverImage?.url}
+              loading="lazy"
+              decoding="async"
+                        src={cld(post.thumbnailImage?.url || post.coverImage?.url, {
+                          width: 640,
+                        })}
                         alt=""
                         className="relative z-1"
                       />
