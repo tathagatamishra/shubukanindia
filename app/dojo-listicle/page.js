@@ -2,6 +2,12 @@
 import IndiaDojo from "@/components/IndiaDojo/IndiaDojo";
 import { shubukan_api } from "@/config";
 
+// Re-render this page in the background at most every 5 minutes, so new
+// content from the admin panel shows up without a redeploy, while visitors
+// still get a cached page instantly. (axios ignores `cache: "no-store"`, so
+// before this the page was frozen at build time.)
+export const revalidate = 300;
+
 export const metadata = {
   title: "Dojo Listicle | Shubukan India",
   description:

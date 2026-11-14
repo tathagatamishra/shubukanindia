@@ -32,7 +32,7 @@ export default function Footer() {
         width={1440}
         height={1440}
         quality={100}
-        priority={true}
+        // priority={true}
         sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
         alt=""
       />
@@ -42,7 +42,7 @@ export default function Footer() {
         width={1440}
         height={1440}
         quality={100}
-        priority={true}
+        // priority={true}
         sizes="(min-width: 1320px) 450px, (min-width: 820px) 400px, (min-width: 680px) 330px, (min-width: 580px) 290px, (min-width: 480px) 250px, (min-width: 380px) 220px, calc(16.67vw + 130px)"
         alt=""
       />
@@ -284,7 +284,7 @@ export default function Footer() {
           height={1440}
           width={1440}
           quality={100}
-          priority={true}
+          // priority={true}
           sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
           src="/assets/shubukanIndia-white.png"
           alt=""
@@ -304,7 +304,7 @@ export default function Footer() {
           height={1440}
           width={1440}
           quality={100}
-          priority={true}
+          // priority={true}
           src="/assets/shorinryu.svg"
           alt=""
           className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
@@ -323,7 +323,7 @@ export default function Footer() {
           height={1440}
           width={1440}
           quality={100}
-          priority={true}
+          // priority={true}
           src="/assets/shubukan.svg"
           alt=""
           className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
@@ -342,7 +342,7 @@ export default function Footer() {
           height={1440}
           width={1440}
           quality={100}
-          priority={true}
+          // priority={true}
           src="/assets/kobudo.svg"
           alt=""
           className="z-1 invert-[90%] grayscale-[50%] sepia-[50%]"
@@ -361,7 +361,7 @@ export default function Footer() {
           height={1440}
           width={1440}
           quality={100}
-          priority={true}
+          // priority={true}
           sizes="(min-width: 820px) 192px, (min-width: 720px) 160px, (min-width: 620px) 144px, (min-width: 520px) 128px, (min-width: 380px) calc(6.67vw + 79px), 80px"
           src="/assets/Hozonkai-white.png"
           alt=""

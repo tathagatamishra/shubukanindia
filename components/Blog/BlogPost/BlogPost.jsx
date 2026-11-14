@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { shubukan_api } from "@/config";
 import Image from "next/image";
+import { cloudinaryLoader, isCloudinaryUrl } from "@/utils/cloudinary";
 import "./BlogPost.scss";
 import { IoClose } from "react-icons/io5";
 import { useUI } from "@/components/Context/UIContext";
@@ -75,6 +76,17 @@ export default function BlogPost({ blog }) {
     };
   }
 
+  // Saved login no longer valid (expired / server reset) -> forget it so the
+  // reader sees the verify form again instead of being stuck.
+  function handleAuthError(err) {
+    if (err.response?.status !== 401) return false;
+    localStorage.removeItem("verified_email");
+    localStorage.removeItem("email_token");
+    setVerifiedEmail(null);
+    addToast("Please verify your email again", "warning");
+    return true;
+  }
+
   // OTP APIs
   async function sendOtp() {
     if (!email) return addToast("Enter a valid email", "warning");
@@ -118,6 +130,8 @@ export default function BlogPost({ blog }) {
       setLiked(true);
       setDisliked(false);
     } catch (err) {
+      setLoading(false);
+      if (handleAuthError(err)) return;
       addToast(err.response?.data?.message || "Error liking blog", "warning");
     }
   }
@@ -134,6 +148,8 @@ export default function BlogPost({ blog }) {
       setDisliked(true);
       setLiked(false);
     } catch (err) {
+      setLoading(false);
+      if (handleAuthError(err)) return;
       addToast(
         err.response?.data?.message || "Error disliking blog",
         "warning"
@@ -163,6 +179,7 @@ export default function BlogPost({ blog }) {
       addToast("Comment posted", "success");
     } catch (err) {
       setLoading(false);
+      if (handleAuthError(err)) return;
       addToast(
         err.response?.data?.message || "Error posting comment",
         "warning"
@@ -194,6 +211,9 @@ export default function BlogPost({ blog }) {
         <div className="relative w-full md:h-[400px] h-auto aspect-video md:aspect-auto mb-8">
           <Image
             src={blog.coverImage.url}
+            loader={isCloudinaryUrl(blog.coverImage.url) ? cloudinaryLoader : undefined}
+            sizes="(max-width: 768px) 100vw, 1000px"
+            priority
             alt={blog.coverImage.altText}
             fill
             className="aspect-video object-cover rounded-2xl border-t-[2px] border-[#fff] shadow-sm"
@@ -310,6 +330,7 @@ export default function BlogPost({ blog }) {
                             <div key={bIdx} className="my-6">
                               <Image
                                 src={block.mediaUrl}
+                                loader={isCloudinaryUrl(block.mediaUrl) ? cloudinaryLoader : undefined}
                                 alt={block.altText}
                                 width={800}
                                 height={450}
@@ -374,6 +395,7 @@ export default function BlogPost({ blog }) {
                               <div key={bIdx} className="my-6">
                                 <Image
                                   src={block.mediaUrl}
+                                  loader={isCloudinaryUrl(block.mediaUrl) ? cloudinaryLoader : undefined}
                                   alt={block.altText}
                                   width={800}
                                   height={450}
@@ -437,6 +459,7 @@ export default function BlogPost({ blog }) {
                         <div key={bIdx} className="my-6">
                           <Image
                             src={block.mediaUrl}
+                            loader={isCloudinaryUrl(block.mediaUrl) ? cloudinaryLoader : undefined}
                             alt={block.altText}
                             width={800}
                             height={450}

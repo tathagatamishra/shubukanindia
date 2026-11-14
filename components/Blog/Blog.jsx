@@ -1,6 +1,7 @@
 "use client";
 import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
+import { cloudinaryLoader, isCloudinaryUrl } from "@/utils/cloudinary";
 import { useRouter } from "next/navigation";
 import { FiSearch, FiClock, FiChevronRight, FiX } from "react-icons/fi";
 import "./Blog.scss";
@@ -64,6 +65,7 @@ function BlogCard({ blog, onOpen, variant = "card" }) {
         {cover ? (
           <Image
             src={cover}
+            loader={isCloudinaryUrl(cover) ? cloudinaryLoader : undefined}
             alt={alt}
             fill
             sizes="(max-width: 640px) 100vw, 33vw"

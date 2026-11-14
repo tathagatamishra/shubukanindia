@@ -43,12 +43,10 @@ export default function Registration() {
     e.preventDefault();
 
     try {
-      const data = shubukan_api.post(`/registration`, formData);
+      // axios resolves only on 2xx and throws on 4xx/5xx
+      const { data } = await shubukan_api.post(`/registration`, formData);
 
-      if (data.status === 409) {
-        // Duplicate registration
-        showToast("This registration already exists in our system.", "error");
-      } else if (data.success) {
+      if (data?.success) {
         showToast(
           "Registration successful! A confirmation email has been sent to you.",
           "success"
@@ -66,15 +64,25 @@ export default function Registration() {
         });
       } else {
         showToast(
-          data.message || "Fill all the required fields and try again.",
+          data?.message || "Fill all the required fields and try again.",
           "error"
         );
-        // || "Fill all the required fields and try again.",
       }
     } catch (error) {
-      console.error("Error:", error);
-      showToast("Something went wrong. Please try again later.", "error");
-      // "Something went wrong. Please try again later."
+      const status = error.response?.status;
+      const body = error.response?.data || {};
+      if (status === 409) {
+        // Duplicate registration
+        showToast("This registration already exists in our system.", "error");
+      } else if (status === 400) {
+        showToast(
+          body.message || body.error || "Fill all the required fields and try again.",
+          "error"
+        );
+      } else {
+        console.error("Error:", error);
+        showToast("Something went wrong. Please try again later.", "error");
+      }
     }
   };
 

@@ -1,11 +1,14 @@
 import axios from "axios";
-const remote_api = "https://shubukanindiabackend.vercel.app"
-const local_api = "http://localhost:8080"
+
+// Which backend to talk to. Set NEXT_PUBLIC_API_URL in .env.local for local
+// development (e.g. http://localhost:8080); production falls back to the
+// deployed backend.
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://shubukanindiabackend.vercel.app";
 
 // axios config
 export const shubukan_api = axios.create({
-  // baseURL: local_api,
-  baseURL: remote_api,
+  baseURL: API_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

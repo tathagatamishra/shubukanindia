@@ -9,6 +9,7 @@ import {
   FiChevronUp,
 } from "react-icons/fi";
 import "./IndiaDojo.scss";
+import { cld } from "@/utils/cloudinary";
 
 function ImageWithFallback({ src, alt = "dojo image", className = "" }) {
   const [img, setImg] = useState(src || "");
@@ -21,7 +22,9 @@ function ImageWithFallback({ src, alt = "dojo image", className = "" }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={img || ""}
+      src={cld(img, { width: 480 }) || ""}
+      loading="lazy"
+      decoding="async"
       alt={alt}
       onError={handleError}
       className={className}

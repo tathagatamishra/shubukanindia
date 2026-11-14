@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
+import { cloudinaryLoader, isCloudinaryUrl } from "@/utils/cloudinary";
 import axios from "axios";
 import { shubukan_api } from "@/config";
 import "./Gallery.scss";
@@ -166,8 +167,11 @@ export default function Gallery({ initialImages = [] }) {
                 >
                   <Image
                     src={image.image}
+                    loader={isCloudinaryUrl(image.image) ? cloudinaryLoader : undefined}
                     alt={image.title}
                     width={image.width}
+                    // 2-4 masonry columns: download a column-sized image, not the original
+                    sizes="(max-width: 330px) 50vw, (max-width: 810px) 34vw, 25vw"
                     height={image.height}
                     className="img"
                     onLoad={() => {
@@ -228,6 +232,11 @@ export default function Gallery({ initialImages = [] }) {
             {/* Image */}
             <Image
               src={images[selectedImgIndex].image}
+              loader={
+                isCloudinaryUrl(images[selectedImgIndex].image)
+                  ? cloudinaryLoader
+                  : undefined
+              }
               alt={images[selectedImgIndex].title}
               width={1200}
               height={800}

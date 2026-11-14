@@ -23,7 +23,9 @@ export default function Dashboard() {
 
         const [blogs, gallery, students, instructors, questions, exams] =
           await Promise.all([
-            shubukan_api.get("/blogs"),
+            shubukan_api.get("/admin/blogs?limit=1", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
             shubukan_api.get("/gallery?limit=1"),
             shubukan_api.get("/admin/students", {
               headers: { Authorization: `Bearer ${token}` },
