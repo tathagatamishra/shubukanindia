@@ -8,8 +8,7 @@ import { Card, StatusBadge, Stamp, Divider } from "../UI/Basics";
 import Button from "../UI/Button";
 import GefBrowserTabs from "../UI/GefBrowserTabs";
 import { downloadFormPdfByRole } from "../UI/downloadPdf";
-
-const EDIT_WINDOW_MS = 5 * 60 * 1000;
+import { useEditWindowTime } from "../Form/useEditWindowTime";
 
 export default function MySubmissions() {
   const { authHeader } = useGuardianAuth();
@@ -17,6 +16,7 @@ export default function MySubmissions() {
   const router = useRouter();
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const now = useEditWindowTime(forms.map((form) => form.editableUntil));
 
   useEffect(() => {
     shubukan_api
@@ -32,17 +32,6 @@ export default function MySubmissions() {
     } catch (err) {
       addToast("Could not download PDF", "error");
     }
-  };
-
-  const canEdit = (form) => {
-    if (form.status === "draft") return true;
-    return Date.now() - new Date(form.submittedAt).getTime() <= EDIT_WINDOW_MS;
-  };
-
-  const editSecondsLeft = (form) => {
-    if (form.status !== "submitted") return null;
-    const left = EDIT_WINDOW_MS - (Date.now() - new Date(form.submittedAt).getTime());
-    return left > 0 ? Math.ceil(left / 1000) : null;
   };
 
   return (
@@ -62,7 +51,8 @@ export default function MySubmissions() {
         ) : (
           <div className="gef-stack">
             {forms.map((f) => {
-              const secondsLeft = editSecondsLeft(f);
+              const deadline = Date.parse(f.editableUntil);
+              const canEditSubmission = f.status === "submitted" && now < deadline;
               return (
                 <Card key={f._id}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -76,15 +66,16 @@ export default function MySubmissions() {
                           ? `Submitted ${new Date(f.submittedAt).toLocaleString()}`
                           : "Draft saved - pick up where you left off"}
                       </div>
-                      {secondsLeft ? (
+                      {canEditSubmission ? (
                         <div className="gef-hint" style={{ marginTop: 2, color: "var(--gef-vermillion)" }}>
-                          You can still edit this for {Math.ceil(secondsLeft / 60)} more minute
-                          {Math.ceil(secondsLeft / 60) === 1 ? "" : "s"}
+                          Editable until {new Date(deadline).toLocaleString(undefined, {
+                            month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
+                          })}
                         </div>
                       ) : null}
                     </div>
                     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
-                      {canEdit(f) ? (
+                      {f.status === "draft" || canEditSubmission ? (
                         <Button
                           size="sm"
                           variant="outline"

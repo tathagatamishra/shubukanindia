@@ -5,12 +5,13 @@ import { shubukan_api } from "@/config";
 import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { useFormFontSize } from "../Context/FormFontSizeContext";
-import { Divider, StatusBadge, SectionHeading } from "../UI/Basics";
+import { StatusBadge, SectionHeading } from "../UI/Basics";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import { Field, TextInput, TextArea, Select, YesNo, ChipMultiSelect, DailyOrBeforeExam, OrDivider, ReadOnlyProvider } from "../UI/FormFields";
 import BeltRankSelect from "../UI/BeltRankSelect";
 import { emptyEvaluationForm, mergeIntoDefaults } from "./emptyForm";
+import { useEditWindowTime } from "./useEditWindowTime";
 import { bi } from "../i18n/labels";
 
 const TRAINING_AREAS = [bi("kihon"), bi("kata"), bi("idoKihon"), bi("kumite"), bi("theory")];
@@ -23,10 +24,21 @@ const TRAINING_NEEDED = [
   bi("internationalSession"),
 ];
 
-// Mirrors the backend's own EDIT_WINDOW_MS (evaluationCtrl.js) — a submitted
-// form stays editable for 5 minutes after submission, then locks for good
-// and this page renders read-only instead (see `readOnly` below).
-const EDIT_WINDOW_MS = 5 * 60 * 1000;
+const sectionHeadingId = (section) => `evaluation-section-${section}`;
+const getAnswer = (data, path) => path.split(".").reduce((value, key) => value?.[key], data);
+
+function groupMissingAnswers(data, fields) {
+  const sections = new Map();
+  for (const { section, path, label, when } of fields) {
+    if (when && getAnswer(data, when.path) !== when.value) continue;
+    const answer = getAnswer(data, path);
+    if (answer == null || (typeof answer === "string" && !answer.trim()) || (Array.isArray(answer) && !answer.length)) {
+      if (!sections.has(section)) sections.set(section, []);
+      sections.get(section).push(label);
+    }
+  }
+  return sections;
+}
 
 export default function FullForm({ learnerId, windowId }) {
   const { authHeader } = useGuardianAuth();
@@ -39,11 +51,28 @@ export default function FullForm({ learnerId, windowId }) {
   const [submitting, setSubmitting] = useState(false);
   const [data, setData] = useState(emptyEvaluationForm());
   const [status, setStatus] = useState("pending");
-  const [submittedAt, setSubmittedAt] = useState(null);
+  const [editableUntil, setEditableUntil] = useState(null);
   const [learner, setLearner] = useState(null);
   const [draftSavedModalOpen, setDraftSavedModalOpen] = useState(false);
+  const [missingFields, setMissingFields] = useState([]);
+  const now = useEditWindowTime([editableUntil]);
+  const readOnly = status === "submitted" && !(now < Date.parse(editableUntil));
+  const missingBySection = groupMissingAnswers(data, missingFields);
+  const isEditing = status === "submitted";
+  const busy = saving || submitting;
+  const formUrl = `/guardian/evaluation-form/${learnerId}/${windowId}`;
 
   useEffect(() => {
+    const firstSection = missingFields[0]?.section;
+    if (!firstSection) return;
+
+    const heading = document.getElementById(sectionHeadingId(firstSection));
+    heading?.scrollIntoView({ block: "start" });
+    heading?.focus({ preventScroll: true });
+  }, [missingFields]);
+
+  useEffect(() => {
+    setMissingFields([]);
     const load = async () => {
       try {
         // Loads the learner and the (learnerId, windowId) form independently
@@ -75,10 +104,11 @@ export default function FullForm({ learnerId, windowId }) {
         if (existingForm) {
           formData = mergeIntoDefaults(existingForm);
           setStatus(existingForm.status);
-          setSubmittedAt(existingForm.submittedAt || null);
+          setEditableUntil(existingForm.editableUntil || null);
         } else {
           formData = emptyEvaluationForm();
           setStatus("pending");
+          setEditableUntil(null);
         }
 
         // instructor/dojo are read-only fields sourced from the learner
@@ -106,13 +136,6 @@ export default function FullForm({ learnerId, windowId }) {
   const t = data.teacher;
   const tr = data.training;
 
-  // A submitted form is only editable within EDIT_WINDOW_MS of submission;
-  // past that (or for a form loaded purely to review it), every field
-  // renders locked and Save/Submit disappear — "View" and "Edit" both land
-  // here now, this just decides which one it behaves as.
-  const withinEditWindow = submittedAt ? Date.now() - new Date(submittedAt).getTime() <= EDIT_WINDOW_MS : false;
-  const readOnly = status === "submitted" && !withinEditWindow;
-
   const patchStudent = (p) => setData((d) => ({ ...d, student: { ...d.student, ...p } }));
   const patchFood = (p) => setData((d) => ({ ...d, student: { ...d.student, food: { ...d.student.food, ...p } } }));
   const patchTimes = (p) =>
@@ -128,40 +151,41 @@ export default function FullForm({ learnerId, windowId }) {
     patchFood({ otherTiffinTimes: [...others, { no, time }].sort((a, b) => a.no.localeCompare(b.no)) });
   };
 
-  const saveDraft = async (silent = false) => {
+  const saveForm = async () => {
+    const { data: response } = await shubukan_api.put(formUrl, data, { headers: authHeader });
+    setStatus(response.data.status);
+    return response.data;
+  };
+
+  const saveDraft = async () => {
+    if (busy) return;
     setSaving(true);
     try {
-      const res = await shubukan_api.put(`/guardian/evaluation-form/${learnerId}/${windowId}`, data, { headers: authHeader });
-      setStatus(res.data.data.status);
-      setSubmittedAt(res.data.data.submittedAt || null);
-      // A toast is easy to miss and dismisses on its own — a guardian could
-      // walk away thinking they're done. Saving a draft is a silent
-      // "in-progress" state the instructor can't see, so the explicit
-      // "Save Draft" click (never the silent auto-save before submit) gets a
-      // modal they have to actively dismiss instead.
-      if (!silent) setDraftSavedModalOpen(true);
-      return true;
+      await saveForm();
+      setDraftSavedModalOpen(true);
     } catch (err) {
       addToast(err.response?.data?.message || "Could not save draft", "error");
-      return false;
     } finally {
       setSaving(false);
     }
   };
 
   const handleSubmit = async () => {
-    const savedOk = await saveDraft(true);
-    if (!savedOk) return;
+    if (busy || readOnly) return;
     setSubmitting(true);
     try {
-      const res = await shubukan_api.post(`/guardian/evaluation-form/${learnerId}/${windowId}/finalize`, {}, { headers: authHeader });
-      addToast("Form submitted successfully", "success");
-      setStatus("submitted");
-      setSubmittedAt(res.data.data.submittedAt);
+      const savedForm = await saveForm();
+      if (savedForm.status !== "submitted") {
+        await shubukan_api.post(`${formUrl}/finalize`, {}, { headers: authHeader });
+      }
+      setMissingFields([]);
+      addToast(savedForm.status === "submitted" ? "Changes saved" : "Form submitted successfully", "success");
       router.push("/guardian-evaluation/submissions");
     } catch (err) {
-      const missing = err.response?.data?.missingFields;
+      const response = err.response?.data;
+      const missing = response?.missingFields;
       if (missing?.length) {
+        setMissingFields(response.missingFieldDetails || []);
         // Name a handful of the actual missing questions rather than just a
         // count — "37 field(s) missing" tells the guardian nothing about
         // where to look. Longer message, so it gets more time on screen too.
@@ -174,7 +198,7 @@ export default function FullForm({ learnerId, windowId }) {
           8000
         );
       } else {
-        addToast(err.response?.data?.message || "Could not submit form", "error");
+        addToast(response?.message || (isEditing ? "Could not save changes" : "Could not submit form"), "error");
       }
     } finally {
       setSubmitting(false);
@@ -182,17 +206,6 @@ export default function FullForm({ learnerId, windowId }) {
   };
 
   if (loading) return <p className="gef-hint gef-container">Loading form...</p>;
-
-  const ActionBar = () => (
-    <div className="gef-nav" style={{ position: "sticky", bottom: 10, paddingTop: 10 }}>
-      <Button variant="outline" disabled={saving} onClick={() => saveDraft(false)}>
-        {saving ? "Saving..." : bi("saveDraft")}
-      </Button>
-      <Button variant="primary" disabled={submitting} onClick={handleSubmit}>
-        {submitting ? "Submitting..." : bi("submitForm")}
-      </Button>
-    </div>
-  );
 
   return (
     <div className="gef-container gef-doc gef-form-scale" style={{ fontSize: `${fontSize}px` }}>
@@ -207,9 +220,14 @@ export default function FullForm({ learnerId, windowId }) {
       ) : null}
 
       <ReadOnlyProvider value={readOnly}>
-        <fieldset disabled={readOnly} className="gef-doc-body gef-fieldset-reset">
+        <fieldset disabled={readOnly || busy} aria-busy={busy} className="gef-doc-body gef-fieldset-reset">
         {/* ===== FOR STUDENTS ===== */}
-        <SectionHeading title={bi("studentSectionTitle")} instruction={bi("yesNoInstruction")} />
+        <SectionHeading
+          id={sectionHeadingId("student")}
+          title={bi("studentSectionTitle")}
+          instruction={bi("yesNoInstruction")}
+          missingFields={missingBySection.get("student")}
+        />
 
         <Field label={bi("studentName")} required>
           <TextInput value={s.name} onChange={(v) => patchStudent({ name: v })} placeholder={learner?.name} />
@@ -388,7 +406,12 @@ export default function FullForm({ learnerId, windowId }) {
         </Field>
 
         {/* ===== FOR THE TEACHER ===== */}
-        <SectionHeading title={bi("teacherSectionTitle")} instruction={bi("yesNoInstruction")} />
+        <SectionHeading
+          id={sectionHeadingId("teacher")}
+          title={bi("teacherSectionTitle")}
+          instruction={bi("yesNoInstruction")}
+          missingFields={missingBySection.get("teacher")}
+        />
         <Field label={bi("t1")} required>
           <YesNo value={t.punctual} onChange={(v) => patchTeacher({ punctual: v })} yesLabel={bi("yes")} noLabel={bi("no")} />
         </Field>
@@ -409,7 +432,12 @@ export default function FullForm({ learnerId, windowId }) {
         </Field>
 
         {/* ===== ABOUT TRAINING ===== */}
-        <SectionHeading title={bi("trainingSectionTitle")} instruction={bi("yesNoInstruction")} />
+        <SectionHeading
+          id={sectionHeadingId("training")}
+          title={bi("trainingSectionTitle")}
+          instruction={bi("yesNoInstruction")}
+          missingFields={missingBySection.get("training")}
+        />
         <Field label={bi("tr1")} required hint="Select all that apply">
           <ChipMultiSelect value={tr.trainingNeeded} onChange={(v) => patchTraining({ trainingNeeded: v })} options={TRAINING_NEEDED} />
         </Field>
@@ -472,12 +500,29 @@ export default function FullForm({ learnerId, windowId }) {
         </Field>
 
         {/* ===== SIGNATURE ===== */}
-        <SectionHeading title={bi("guardianSignature")} />
+        <SectionHeading
+          id={sectionHeadingId("signature")}
+          title={bi("guardianSignature")}
+          missingFields={missingBySection.get("signature")}
+        />
         <Field label={bi("filledByName")} required hint="This name is printed on the form as the guardian's signature">
           <TextInput value={data.filledByName} onChange={(v) => setData((d) => ({ ...d, filledByName: v }))} placeholder="e.g. Guardian's full name" />
         </Field>
 
-        {!readOnly ? <ActionBar /> : null}
+        {!readOnly && (
+          <div className="gef-nav" style={{ position: "sticky", bottom: 10, paddingTop: 10 }}>
+            {!isEditing && (
+              <Button variant="outline" disabled={busy} onClick={saveDraft}>
+                {saving ? "Saving..." : bi("saveDraft")}
+              </Button>
+            )}
+            <Button variant="primary" disabled={busy} onClick={handleSubmit}>
+              {isEditing
+                ? submitting ? "Saving..." : "Save Changes"
+                : submitting ? "Submitting..." : bi("submitForm")}
+            </Button>
+          </div>
+        )}
         </fieldset>
       </ReadOnlyProvider>
 

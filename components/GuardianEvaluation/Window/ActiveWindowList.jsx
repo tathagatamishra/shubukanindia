@@ -6,10 +6,7 @@ import { useToast } from "@/components/UIComponent/Toast/Toast";
 import { useGuardianAuth } from "../Context/GuardianAuthContext";
 import { Card, StatusBadge } from "../UI/Basics";
 import Button from "../UI/Button";
-
-// Mirrors the backend's own EDIT_WINDOW_MS (evaluationCtrl.js) - a submitted
-// form stays editable for 5 minutes after submission, then locks for good.
-const EDIT_WINDOW_MS = 5 * 60 * 1000;
+import { useEditWindowTime } from "../Form/useEditWindowTime";
 
 // `refreshKey` is bumped by Dashboard.jsx whenever a learner is added,
 // edited, or removed — which windows/learners show up here depends on that
@@ -22,6 +19,7 @@ export default function ActiveWindowList({ refreshKey }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const isInitialLoad = useRef(true);
+  const now = useEditWindowTime(data.flatMap(({ learners }) => learners.map(({ editableUntil }) => editableUntil)));
 
   useEffect(() => {
     shubukan_api
@@ -38,14 +36,6 @@ export default function ActiveWindowList({ refreshKey }) {
         }
       });
   }, [refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Drafts and not-yet-started forms are always editable; a submitted form
-  // is only editable within EDIT_WINDOW_MS of its submittedAt timestamp.
-  const canStillEdit = (status, submittedAt) => {
-    if (status !== "submitted") return true;
-    if (!submittedAt) return false;
-    return Date.now() - new Date(submittedAt).getTime() <= EDIT_WINDOW_MS;
-  };
 
   if (loading) return <p className="gef-hint">Checking for open evaluation windows...</p>;
 
@@ -69,8 +59,8 @@ export default function ActiveWindowList({ refreshKey }) {
             Pick a learner below to fill in, continue, or review their form.
           </p>
           <div className="gef-list">
-            {learners.map(({ learner, status, submittedAt }) => {
-              const editable = canStillEdit(status, submittedAt);
+            {learners.map(({ learner, status, editableUntil }) => {
+              const editable = status !== "submitted" || now < Date.parse(editableUntil);
               return (
                 <div key={learner._id} className="gef-row-card">
                   <div>

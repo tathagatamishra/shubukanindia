@@ -16,12 +16,30 @@ export function Divider() {
 
 // Plain section heading for a long, continuous form (no boxed card),
 // mirroring the printed marksheet's section titles + instruction line.
-export function SectionHeading({ title, instruction }) {
+export function SectionHeading({ id, title, instruction, missingFields = [] }) {
+  const incomplete = missingFields.length > 0;
   return (
-    <div className="gef-doc-section-heading">
-      <h2 className="gef-doc-section-title">{title}</h2>
+    <div className={`gef-doc-section-heading${incomplete ? " gef-doc-section-heading--incomplete" : ""}`}>
+      <h2
+        id={id}
+        tabIndex={id ? -1 : undefined}
+        aria-describedby={incomplete ? `${id}-missing` : undefined}
+        className="gef-doc-section-title"
+      >
+        {title}
+      </h2>
       {instruction ? <p className="gef-doc-instruction">{instruction}</p> : null}
       <div className="gef-doc-rule" />
+      {incomplete && (
+        <details className="gef-section-issues">
+          <summary id={`${id}-missing`}>
+            {missingFields.length} required {missingFields.length === 1 ? "answer" : "answers"} missing
+          </summary>
+          <ul>
+            {missingFields.map((label) => <li key={label}>{label}</li>)}
+          </ul>
+        </details>
+      )}
     </div>
   );
 }
