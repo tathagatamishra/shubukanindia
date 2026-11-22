@@ -835,12 +835,37 @@
   margin-top: 8px;
 }
 
+.gef-doc-section-heading--incomplete {
+  padding: 12px 14px;
+  border-inline-start: 4px solid var(--gef-vermillion);
+  border-radius: 8px;
+  background: rgba(166, 27, 27, 0.07);
+}
+
+.gef-section-issues {
+  color: var(--gef-vermillion);
+  font-size: 0.875em;
+}
+
+.gef-section-issues summary {
+  margin: 8px 0 4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gef-section-issues ul {
+  margin: 0;
+  padding-inline-start: 18px;
+  list-style: disc;
+}
+
 .gef-doc-section-title {
   font-family: var(--gef-font-heading);
   font-size: 20px;
   font-weight: 700;
   color: var(--gef-ink);
   margin: 0 0 6px;
+  scroll-margin-top: 110px;
 }
 
 .gef-doc-instruction {
