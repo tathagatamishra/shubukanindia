@@ -15,11 +15,11 @@ import { FiCalendar } from "react-icons/fi";
 const ReadOnlyContext = createContext(false);
 export const ReadOnlyProvider = ReadOnlyContext.Provider;
 
-export function Field({ label, required, hint, error, children }) {
+export function Field({ label, htmlFor, required, hint, error, children }) {
   return (
     <div className="gef-field">
       {label ? (
-        <label className="gef-label">
+        <label className="gef-label" htmlFor={htmlFor}>
           {label}
           {required ? <span className="gef-required">*</span> : null}
         </label>
