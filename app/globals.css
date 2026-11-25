@@ -106,6 +106,10 @@ body::-webkit-scrollbar-thumb {
   border-bottom: solid 10px tomato;
 }
 
+img {
+  user-select: none;
+}
+
 /* Font Section */
 .font-mufan {
   font-family: var(--font-mufan);
@@ -248,6 +252,11 @@ select:-webkit-autofill:focus {
   font-family: "Bellefair", serif;
   position: relative;
   gap: 20px;
+}
+
+.Home * {
+  user-select: none;
+  box-shadow: none;
 }
 
 .d-path {
