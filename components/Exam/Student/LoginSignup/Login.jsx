@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import { saveExamCodeFlow } from "../../examCodeFlow";
 import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Login() {
@@ -14,11 +15,9 @@ export default function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await shubukan_api.post("/student/login", { email });
-      alert(res.data.message);
+      await shubukan_api.post("/student/login", { email });
 
-      localStorage.setItem("student_email", email); // save for OTP
-      localStorage.setItem("otp_type", "login");
+      saveExamCodeFlow("student", email.trim(), "login");
       router.push("/online-exam/student/verify");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
@@ -33,7 +32,7 @@ export default function Login() {
         Enter Log In Details
       </label>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[125px] shadow-md border !rounded-[40px]"
       >
         <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
@@ -55,7 +54,7 @@ export default function Login() {
           type="submit"
           size="min-w-[150px] w-fit h-auto"
           className="self-end"
-          onClick={handleSubmit}
+          disabled={loading}
         />
       </form>
 

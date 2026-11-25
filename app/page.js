@@ -1,6 +1,8 @@
 // app/page.js
 import Script from "next/script";
 import Collage from "@/components/Gallery/Collage";
+import PaintedCloud from "@/components/UIComponent/PaintedCloud/PaintedCloud";
+import "./home-clouds.css";
 // Dragon animation is unfinished - disabled for production. To bring it back,
 // uncomment this import and the "section 0" block below.
 // import DragonPath from "@/components/UIComponent/dragon/DragonPath";
@@ -226,6 +228,9 @@ export default async function page() {
 
         {/* section 3 */}
         <section className="ways-section w-full flex flex-col items-center justify-start">
+          <PaintedCloud small layer="way-rear" className="home-cloud home-cloud--way home-cloud--rear" />
+          <PaintedCloud layer="way-large" className="home-cloud home-cloud--way" />
+          <PaintedCloud small layer="way-front" className="home-cloud home-cloud--way home-cloud--front" />
           <h2 className="heading heading--way font-(family-name:--font-amarante)">
             The Shubukan Way
           </h2>
@@ -263,6 +268,9 @@ export default async function page() {
         {/* section 4 */}
         <section className="gallery-section w-full relative flex flex-col items-center">
           <div className="gallery-nav flex flex-row items-center justify-between">
+            <PaintedCloud small layer="gallery-rear" className="home-cloud home-cloud--gallery home-cloud--rear" />
+            <PaintedCloud layer="gallery-large" className="home-cloud home-cloud--gallery" />
+            <PaintedCloud small layer="gallery-front" className="home-cloud home-cloud--gallery home-cloud--front" />
             <div className="gallery-title w-[50%] flex flex-col">
               <h2 className="heading heading--sm font-(family-name:--font-amarante)">
                 Gallery

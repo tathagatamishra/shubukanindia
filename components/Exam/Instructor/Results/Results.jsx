@@ -93,7 +93,14 @@ export default function Results() {
             const totalQuestions = exam?.totalQuestionCount ?? null;
             const totalMarks = exam?.totalMarks ?? "N/A";
             const eachMarks = exam?.eachQuestionMarks ?? "N/A";
-            console.log(res);
+            if (res.availableAt) {
+              return (
+                <div key={res._id} className="OnlineExam rounded-3xl border p-4">
+                  <p>Exam {exam?.examID} submitted</p>
+                  <p>Results and answers are available after {formatExamDate(res.availableAt)}.</p>
+                </div>
+              );
+            }
 
             // compute answers not selected only when totalQuestions is available
             const answersNotSelected =

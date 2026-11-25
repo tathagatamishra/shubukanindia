@@ -1,0 +1,81 @@
+.painted-cloud {
+  position: absolute;
+  aspect-ratio: 3;
+  pointer-events: none;
+  opacity: var(--cloud-layout-opacity, var(--cloud-base-opacity, 1));
+}
+
+.painted-cloud[data-cloud-layer] {
+  /* Preserve the saved offsets at each reference width. */
+  --cloud-offset-unit: clamp(0.8px, calc(100vw / 390), 1.5px);
+  --cloud-layout-x: var(--cloud-mobile-x);
+  --cloud-layout-y: var(--cloud-mobile-y);
+  --cloud-layout-size: var(--cloud-mobile-size);
+  --cloud-layout-flip-x: var(--cloud-mobile-flip-x);
+  --cloud-layout-flip-y: var(--cloud-mobile-flip-y);
+  --cloud-layout-opacity: var(--cloud-mobile-opacity);
+  transform: translate(
+    calc(var(--cloud-layout-x) * var(--cloud-offset-unit)),
+    calc(var(--cloud-layout-y) * var(--cloud-offset-unit))
+  ) scale(var(--cloud-layout-size));
+}
+
+@media (min-width: 801px) {
+  .painted-cloud[data-cloud-layer] {
+    --cloud-offset-unit: clamp(0.55px, calc(100vw / 1440), 1.4px);
+    --cloud-layout-x: var(--cloud-desktop-x);
+    --cloud-layout-y: var(--cloud-desktop-y);
+    --cloud-layout-size: var(--cloud-desktop-size);
+    --cloud-layout-flip-x: var(--cloud-desktop-flip-x);
+    --cloud-layout-flip-y: var(--cloud-desktop-flip-y);
+    --cloud-layout-opacity: var(--cloud-desktop-opacity);
+  }
+}
+
+.painted-cloud--small {
+  aspect-ratio: 648 / 186;
+  --cloud-duration: 22s;
+  --cloud-rise: 2px;
+}
+
+.painted-cloud__art {
+  position: absolute;
+  inset: 0;
+  background: var(--cloud-art) center / 100% 100% no-repeat;
+  scale:
+    calc(var(--cloud-flip-x, 1) * var(--cloud-layout-flip-x, 1))
+    calc(var(--cloud-flip-y, 1) * var(--cloud-layout-flip-y, 1));
+  filter: saturate(0.72);
+  animation: painted-cloud-drift var(--cloud-duration, 18s) ease-in-out var(--cloud-phase, 0s) infinite alternate;
+}
+
+.painted-cloud__art:has(canvas[data-ready]) {
+  background-image: none;
+}
+
+.painted-cloud canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.painted-cloud canvas[data-ready] {
+  visibility: visible;
+}
+
+@keyframes painted-cloud-drift {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(var(--cloud-sway, 8px), var(--cloud-rise, 3px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .painted-cloud__art {
+    animation: none;
+  }
+}

@@ -91,8 +91,12 @@ export default function Upcoming() {
         })
       : "N/A";
 
-    const pwd = e.password || "No Password Needed";
-    return `Exam ID: ${e.examID}\nExam Will Start At: ${timeStr} - ${dateStr}`;
+    return [
+      `Exam ID: ${e.examID}`,
+      `Set: ${e.examSet}`,
+      e.examDate ? `Exam starts at ${timeStr} - ${dateStr}` : "Available anytime",
+      ...(e.passwordRequired ? ["Ask your instructor for the exam password."] : []),
+    ].join("\n");
   };
 
   // Copy to clipboard (simple)
@@ -301,22 +305,9 @@ export default function Upcoming() {
                       </p>
                     </div>
 
-                    {/* <div className="w-full h-[40px] border-b-1 border-dashed flex flex-row items-center">
-                      <p className="w-[40%] sm:w-[60%] font-[600] text-center text-[14px] sm:text-[16px] text-[#334155]">
-                        Exam Password
-                      </p>
-                      <div className="border-r-1 border-dashed h-full"></div>
-                      <p
-                        className={`w-[60%] ${
-                          e.password && "font-[700]"
-                        } text-center text-[14px] sm:text-[16px] text-[#334155]`}
-                        style={{
-                          letterSpacing: `${e.password ? "4px" : "auto"}`,
-                        }}
-                      >
-                        {e.password || "No Password Needed"}
-                      </p>
-                    </div> */}
+                    <p className="text-center text-sm py-2">
+                      Set {e.examSet}{e.passwordRequired ? " · Password required" : ""}
+                    </p>
                   </div>
 
                   <div className="w-full border-b-1 border-dashed flex flex-col gap-[4px] p-[8px]">

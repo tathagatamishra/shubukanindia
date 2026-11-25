@@ -3,14 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../UI/ExamBtn";
-import { shubukan_api } from "@/config";
 
 export default function Student() {
   const router = useRouter();
   const [token, setToken] = useState(null);
   const [examID, setExamID] = useState("");
   const [isComposing, setIsComposing] = useState(false);
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -23,37 +21,18 @@ export default function Student() {
     }
   }, [router]);
 
-  const handleStart = async () => {
-    if (!examID) return alert("Enter Exam ID");
+  const handleStart = (event) => {
+    event.preventDefault();
+    if (!token || loading) return;
+    const code = examID.trim().toUpperCase();
+    if (!/^[A-Z0-9]{6}$/.test(code)) return alert("Enter the six-character exam ID.");
     setLoading(true);
-    try {
-      // send password only if user entered something (trimmed)
-      const payload =
-        password && password.trim()
-          ? { examID, password: password.trim() }
-          : { examID };
-
-      const res = await shubukan_api.post("/student/exam/start", payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (res.data.status === "waiting" || res.data.status === "ok") {
-        // store password only if non-empty, otherwise remove any previously stored password
-        if (password && password.trim() !== "") {
-          localStorage.setItem("exam_password", password.trim());
-        } else {
-          localStorage.removeItem("exam_password");
-        }
-        router.push(`/online-exam/${examID}`);
-      }
-    } catch (err) {
-      alert(err.response?.data?.message || "Invalid exam details");
-    } finally {
-      setLoading(false);
-    }
+    localStorage.removeItem("exam_password");
+    router.push(`/online-exam/${code}`);
   };
 
   const menuItems = [
+    { text: "Available Exams", action: () => router.push("/online-exam/student/open-exams") },
     {
       text: "Demo Exam",
       action: () => router.push("/online-exam/public"),
@@ -71,6 +50,7 @@ export default function Student() {
       fontstyle: "text-[#B23A48] font-[600] text-[14px] sm:text-[16px]",
       action: () => {
         localStorage.removeItem("student_token");
+        localStorage.removeItem("exam_password");
         router.push("/online-exam");
       },
     },
@@ -84,7 +64,7 @@ export default function Student() {
         </label>
 
         <form
-          // onSubmit={handleSubmit}
+          onSubmit={handleStart}
           className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] mb-[16px] shadow-md border !rounded-[40px]"
         >
           <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
@@ -94,6 +74,7 @@ export default function Student() {
             type="text"
             placeholder="Enter your exam id"
             value={examID}
+            required
             onChange={(e) => {
               const val = e.target.value;
               if (isComposing) {
@@ -115,23 +96,11 @@ export default function Student() {
             spellCheck={false}
             className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4"
           />
-          {/* <label className="font-[600] text-[14px] sm:text-[16px] text-[#334155] mb-2">
-            Exam Password
-          </label>
-          <input
-            type="text"
-            placeholder="Enter your exam password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="corner-shape pass-input border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-2"
-          /> */}
-
           <p className="text-[14px] sm:text-[14px] text-[#64748B] mb-[12px]">
             ** Contact your Sensei to get Exam ID
           </p>
 
           <ExamBtn
-            onClick={handleStart}
             disabled={loading}
             text={loading ? "Checking..." : "Start Exam"}
             type="submit"

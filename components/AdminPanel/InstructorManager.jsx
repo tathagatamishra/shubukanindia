@@ -6,13 +6,14 @@ import { shubukan_api } from "@/config";
 
 export default function InstructorManager() {
   const [instructors, setInstructors] = useState([]);
-  const [form, setForm] = useState({ name: "", identity: "" });
+  const [form, setForm] = useState({ name: "", identity: "", email: "" });
   const [editForm, setEditForm] = useState(null);
   const [editId, setEditId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [deletePermanent, setDeletePermanent] = useState(false);
   const [copiedId, setCopiedId] = useState(null); // ✅ state to track copied ID
   const [loading, setLoading] = useState(false);
+  const [inviteError, setInviteError] = useState("");
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("adminToken") : null;
@@ -31,12 +32,18 @@ export default function InstructorManager() {
     }
   };
 
-  const generateId = async () => {
-    await shubukan_api.post("/admin/instructor/generate", form, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setForm({ name: "", identity: "" });
-    fetchInstructors();
+  const generateId = async (event) => {
+    event.preventDefault();
+    setInviteError("");
+    try {
+      await shubukan_api.post("/admin/instructor/generate", form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setForm({ name: "", identity: "", email: "" });
+      fetchInstructors();
+    } catch (error) {
+      setInviteError(error.response?.data?.message || "Could not create the instructor invitation.");
+    }
   };
 
   const deleteInstructor = async (iid, permanent = false) => {
@@ -51,12 +58,17 @@ export default function InstructorManager() {
 
   const updateInstructor = async (iid) => {
     if (!editForm) return;
-    await shubukan_api.put(`/admin/instructor/edit/${iid}`, editForm, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setEditForm(null);
-    setEditId(null);
-    fetchInstructors();
+    setInviteError("");
+    try {
+      await shubukan_api.put(`/admin/instructor/edit/${iid}`, editForm, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setEditForm(null);
+      setEditId(null);
+      fetchInstructors();
+    } catch (error) {
+      setInviteError(error.response?.data?.message || "Could not update the instructor invitation.");
+    }
   };
 
   // ✅ Copy to clipboard handler
@@ -77,26 +89,31 @@ export default function InstructorManager() {
       {/* Create ID */}
       <div className="bg-white shadow rounded-xl p-4 mb-6">
         <h3 className="font-semibold mb-2">Generate Instructor ID</h3>
-        <div className="flex flex-col gap-2 sm:flex-row">
+        <form onSubmit={generateId} className="flex flex-col gap-2 sm:flex-row">
           <input
             placeholder="Name"
+            required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             className="border p-2 rounded flex-1"
           />
           <input
             placeholder="Identity"
+            required
             value={form.identity}
             onChange={(e) => setForm({ ...form, identity: e.target.value })}
             className="border p-2 rounded flex-1"
           />
+          <input type="email" required placeholder="Invitation email" value={form.email}
+            onChange={(event) => setForm({ ...form, email: event.target.value })} className="border p-2 rounded flex-1" />
           <button
-            onClick={generateId}
+            type="submit"
             className="bg-blue-500 text-white px-3 py-2 rounded flex items-center gap-1"
           >
             <FiPlus /> Generate
           </button>
-        </div>
+        </form>
+        {inviteError && !editForm && <p role="alert" className="text-red-700 mt-2">{inviteError}</p>}
       </div>
 
       {/* Instructor Table */}
@@ -169,6 +186,7 @@ export default function InstructorManager() {
                     className="text-blue-500 w-full max-w-[100px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                     onClick={() => {
                       setEditForm(i);
+                      setInviteError("");
                       setEditId(i.instructorId);
                     }}
                   >
@@ -230,6 +248,14 @@ export default function InstructorManager() {
               }
               className="border p-2 rounded w-full mb-4"
             />
+            {!editForm.claimed && (
+              <label className="block mb-4">Invitation email
+                <input type="email" value={editForm.email || ""} onChange={(event) =>
+                  setEditForm({ ...editForm, email: event.target.value })
+                } className="border p-2 rounded w-full" />
+              </label>
+            )}
+            {inviteError && <p role="alert" className="text-red-700 mb-2">{inviteError}</p>}
             <div className="flex gap-2 justify-end">
               <button
                 onClick={() => setEditForm(null)}

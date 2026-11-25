@@ -262,6 +262,7 @@ export default function StudentManager() {
                 </div>
                 <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
                   {s.instructorName || "-"}
+                  {s.instructorId && s.instructorApproved === false && <span className="ml-2 text-amber-700">Pending approval</span>}
                 </div>
                 <div className="h-[40px] sm:h-[50px] p-2 sm:py-2 py-1 border-b border-dashed flex items-center">
                   {s.isVerified ? "Yes" : "No"}
@@ -397,7 +398,7 @@ export default function StudentManager() {
                 onClick={updateStudent}
                 className="px-3 py-2 bg-blue-500 text-white rounded"
               >
-                Save
+                {editForm.instructorId && editForm.instructorApproved === false ? "Save and Approve" : "Save"}
               </button>
             </div>
           </div>

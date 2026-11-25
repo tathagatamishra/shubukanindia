@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import { saveExamCodeFlow } from "../../examCodeFlow";
 import Loader from "@/components/UIComponent/Loader/Loader";
 
 export default function Signup() {
@@ -24,14 +25,16 @@ export default function Signup() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await shubukan_api.post("/instructor/signup", formData);
-      alert(res.data.message);
+      await shubukan_api.post("/instructor/signup", formData);
 
-      localStorage.setItem("instructor_email", formData.email);
-      localStorage.setItem("otp_type", "signup");
+      saveExamCodeFlow("instructor", formData.email.trim(), "signup");
       router.push("/online-exam/instructor/verify");
     } catch (err) {
       alert(err.response?.data?.message || "Signup failed");
+      if (err.response?.data?.code === "OTP_DELIVERY_FAILED") {
+        saveExamCodeFlow("instructor", formData.email.trim(), "signup");
+        router.push("/online-exam/instructor/verify");
+      }
     } finally {
       setLoading(false);
     }
@@ -43,7 +46,7 @@ export default function Signup() {
         Enter Sign up Details
       </label>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="OnlineExam corner-shape w-full h-fit flex flex-col p-[16px] pb-[32px] shadow-md border !rounded-[40px]"
       >
         {[
@@ -55,8 +58,8 @@ export default function Signup() {
             required: true,
           },
           {
-            label: "Email",
-            placeholder: "Enter your email id",
+            label: "Invitation email",
+            placeholder: "Enter the email assigned by your organization",
             name: "email",
             type: "email",
             required: true,
@@ -102,7 +105,7 @@ export default function Signup() {
           text={loading ? "Registering..." : "Sign up"}
           type="submit"
           className="self-end"
-          onClick={handleSubmit}
+          disabled={loading}
         />
       </form>
 
