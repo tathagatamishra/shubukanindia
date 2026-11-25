@@ -1,0 +1,53 @@
+.ways-section,
+.gallery-nav,
+.ways-section > :not(.home-cloud),
+.gallery-nav > :not(.home-cloud) {
+  position: relative;
+}
+
+.home-cloud {
+  --cloud-overhang: calc((100% - 100vw) / 2 - clamp(60px, 7.5vw, 124px));
+  top: 0;
+  width: clamp(209px, 42vw, 612px);
+  --cloud-base-opacity: 0.55;
+  translate: 0 -52%;
+}
+
+.home-cloud--way {
+  right: calc(var(--cloud-overhang) + var(--cloud-inset, 0px));
+  --cloud-phase: -12s;
+}
+
+.home-cloud--gallery {
+  left: calc(max(-390px, var(--cloud-overhang)) + var(--cloud-inset, 0px));
+  --cloud-flip-x: -1;
+  --cloud-sway: -8px;
+  --cloud-phase: -20s;
+}
+
+.home-cloud.painted-cloud--small {
+  width: clamp(130px, 21vw, 276px);
+  translate: none;
+}
+
+.home-cloud--rear {
+  --cloud-inset: clamp(16px, 3vw, 50px);
+  top: clamp(-139px, -9.5vw, -62px);
+  --cloud-base-opacity: 0.53;
+}
+
+.home-cloud--front {
+  --cloud-inset: 14px;
+  top: clamp(35px, 4.4vw, 64px);
+  --cloud-base-opacity: 0.61;
+}
+
+.home-cloud--way.home-cloud--front {
+  --cloud-flip-x: -1;
+  --cloud-phase: -4s;
+}
+
+.home-cloud--gallery.home-cloud--front {
+  --cloud-flip-x: 1;
+  --cloud-phase: -15s;
+}

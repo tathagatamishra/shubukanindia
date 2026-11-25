@@ -18,6 +18,11 @@ function formatDate(d) {
     : "-";
 }
 
+function appendDateRange(params, fromDate, toDate) {
+  if (fromDate) params.append("from", new Date(`${fromDate}T00:00:00`).toISOString());
+  if (toDate) params.append("to", new Date(`${toDate}T23:59:59.999`).toISOString());
+}
+
 function downloadCSV(filename, rows) {
   if (!rows || !rows.length) return;
   const header = Object.keys(rows[0]);
@@ -113,8 +118,7 @@ export default function ResultManager() {
       if (search) params.append("q", search);
       if (examFilter) params.append("examID", examFilter);
       if (instructorFilter) params.append("instructorId", instructorFilter);
-      if (fromDate) params.append("from", new Date(fromDate).toISOString());
-      if (toDate) params.append("to", new Date(toDate).toISOString());
+      appendDateRange(params, fromDate, toDate);
       if (minMarks) params.append("minMarks", minMarks);
       if (maxMarks) params.append("maxMarks", maxMarks);
       params.append("sortBy", sortBy);
@@ -146,8 +150,7 @@ export default function ResultManager() {
       // choose groupBy based on UI selection (for demo we group by examID)
       // you can expose groupBy as a dropdown for admin
       params.append("groupBy", "examID");
-      if (fromDate) params.append("from", new Date(fromDate).toISOString());
-      if (toDate) params.append("to", new Date(toDate).toISOString());
+      appendDateRange(params, fromDate, toDate);
       params.append("limit", 200);
 
       const token = tokenRef.current;

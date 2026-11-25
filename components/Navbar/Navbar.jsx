@@ -6,6 +6,7 @@ import useSound from "use-sound";
 import Image from "next/image";
 import "./Navbar.scss";
 import { useUI } from "../Context/UIContext";
+import PaintedCloud from "@/components/UIComponent/PaintedCloud/PaintedCloud";
 import { lockScroll, unlockScroll } from "@/utils/scrollLock";
 import { Philosopher, Geo } from "next/font/google";
 
@@ -23,17 +24,18 @@ const geo = Geo({
 
 export default function Navbar() {
   const { isModalOpen } = useUI();
+  return isModalOpen ? null : <SiteNavbar />;
+}
 
-  if (isModalOpen) return null;
+function SiteNavbar() {
   const router = useRouter();
   const navigate = (page) => {
     router.push(page);
   };
 
   const pathname = usePathname();
-  const [position, setPosition] = useState({ top: "0rem" });
-  const [lastScrollTop, setLastScrollTop] = useState(Infinity);
 
+  const [isScrollHidden, setIsScrollHidden] = useState(false);
   const [isMenu, setIsMenu] = useState(false);
   // Keeps the menu in the DOM through its close animation. isMenu drives the
   // open/closing CSS state; menuRender keeps it mounted for the ~400ms the
@@ -58,8 +60,33 @@ export default function Navbar() {
 
   const isAdminPage = pathname.startsWith("/admin");
   const isExamPage = pathname.startsWith("/online-exam");
-  const isGuardianEvalPage = pathname.startsWith("/guardian-evaluation");
   const isGuardianFormPage = pathname.startsWith("/guardian-evaluation/form/");
+  const isFixedHeader = !isAdminPage && !isExamPage && !isGuardianFormPage;
+  const headerHidden = isFixedHeader && !isMenu && !menuRender && isScrollHidden;
+
+  useEffect(() => {
+    setIsScrollHidden(false);
+    if (!isFixedHeader || menuRender) return;
+
+    let lastY = window.scrollY;
+    let wasHidden = false;
+
+    function handleScroll() {
+      const maxY = document.documentElement.scrollHeight - window.innerHeight;
+      const y = Math.max(0, Math.min(window.scrollY, maxY));
+      if (y > 24 && Math.abs(y - lastY) < 8) return;
+
+      const shouldHide = y > 24 && y > lastY;
+      lastY = y;
+      if (shouldHide !== wasHidden) {
+        wasHidden = shouldHide;
+        setIsScrollHidden(shouldHide);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname, isFixedHeader, menuRender]);
 
   // Mount immediately on open; delay unmount until the close animation finishes.
   useEffect(() => {
@@ -161,35 +188,6 @@ export default function Navbar() {
     setCurrentPage(pathToTitle[path] || "");
   }, [pathname]);
 
-  // Handle scroll events with useEffect to avoid direct window event listeners
-  useEffect(() => {
-    // On the evaluation form, the nav should scroll away with the page like
-    // normal content - not stay pinned to the viewport. Overriding `position`
-    // (not just `top`) is what actually takes it out of fixed positioning.
-    if (isGuardianFormPage) {
-      setPosition({
-        position: "relative",
-        top: "0",
-      });
-      return;
-    }
-
-    const handleScroll = () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop > lastScrollTop) {
-        setPosition({ top: "-10rem" });
-      } else {
-        setPosition({ top: "0rem" });
-      }
-
-      setLastScrollTop(scrollTop);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollTop, isGuardianFormPage]);
-
   // Set up logo animation interval only when currentPage is not empty
   useEffect(() => {
     // Only set up the animation interval if we're not on the home page
@@ -248,13 +246,19 @@ export default function Navbar() {
   return !isAdminPage && !isExamPage ? (
     <div
       id="Navbar"
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        ...position,
-      }}
+      className={isGuardianFormPage ? "navbar--in-flow" : undefined}
+      data-scroll-hidden={headerHidden || undefined}
+      inert={headerHidden || undefined}
     >
+      <div className="navbar-clouds" aria-hidden="true">
+        <PaintedCloud small layer="header-left-rear" className="navbar-cloud navbar-cloud--left navbar-cloud--rear" />
+        <PaintedCloud small layer="header-right-rear" className="navbar-cloud navbar-cloud--right navbar-cloud--rear" />
+        <PaintedCloud layer="header-left-large" className="navbar-cloud navbar-cloud--left" />
+        <PaintedCloud layer="header-right-large" className="navbar-cloud navbar-cloud--right" />
+        <PaintedCloud small layer="header-left-front" className="navbar-cloud navbar-cloud--left navbar-cloud--front" />
+        <PaintedCloud small layer="header-right-front" className="navbar-cloud navbar-cloud--right navbar-cloud--front" />
+      </div>
+
       <div
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
@@ -290,35 +294,6 @@ export default function Navbar() {
           </p>
         )}
       </div>
-
-      <div className="bg-shadow"></div>
-
-      <div
-        id="cloud-circle"
-        style={{
-          zIndex: -1,
-          width: "200vw",
-          height: "75%",
-          borderRadius: "0%",
-          filter: "url(#filter)",
-          boxShadow: "0px 8px 20px 10pxx #fff",
-          background: "#fff",
-          position: "absolute",
-          top: "-25px",
-          left: "-180px",
-        }}
-      ></div>
-      <svg width="0" height="0">
-        <filter id="filter">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency=".01"
-            numOctaves="10"
-            seed={8}
-          />
-          <feDisplacementMap in="SourceGraphic" scale="60" />
-        </filter>
-      </svg>
 
       <section
         className="menu"

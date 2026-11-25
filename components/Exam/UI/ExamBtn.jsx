@@ -12,7 +12,7 @@ export default function ExamBtn({
   className = "",
   value = "",
   type = "button",
-  form = "",
+  form,
   onClick,
   disabled = false,
 }) {

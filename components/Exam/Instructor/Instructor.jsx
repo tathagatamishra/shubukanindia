@@ -12,6 +12,7 @@ export default function Instructor() {
   const [name, setName] = useState("");
   const [TokenLoading, setTokenLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [matches, setMatches] = useState(null);
 
   useEffect(() => {
     const t = localStorage.getItem("instructor_token");
@@ -26,21 +27,19 @@ export default function Instructor() {
   if (TokenLoading) return null;
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    if (!name.trim() || loading) return;
+    setLoading(true);
     try {
-      const res = await shubukan_api.get("/instructor/result/search", {
-        params: { name },
+      const res = await shubukan_api.get("/instructor/student/search", {
+        params: { name: name.trim() },
         headers: { Authorization: `Bearer ${token}` },
       });
-      setLoading(false);
-      console.log("Search results:", res.data);
-      router.push(
-        `/online-exam/instructor/result?student=${encodeURIComponent(name)}`
-      );
+      setMatches(res.data);
     } catch (err) {
-      setLoading(false);
       alert(err.response?.data?.message || "Search failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -95,7 +94,7 @@ export default function Instructor() {
   return (
     <div className="ExamChild w-full h-full flex flex-col justify-between items-center">
       {/* Search Student */}
-      <div className="w-full Disabled">
+      <div className="w-full">
         <label className="w-full font-[600] text-[14px] sm:text-[16px] text-[#334155]">
           Search Student by Name
         </label>
@@ -113,19 +112,29 @@ export default function Instructor() {
             name="name"
             id="name"
             value={name}
-            disabled={true}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter student name"
             className="corner-shape border font-[600] text-[14px] sm:text-[16px] px-[10px] sm:px-[18px] py-[8px] mb-4"
           />
 
           <ExamBtn
-            disabled={true}
-            text="View Result"
+            disabled={loading}
+            text="Search"
             type="submit"
             className="self-end"
           />
         </form>
+        {matches && (matches.length ? (
+          <ul className="mb-4 flex flex-col gap-2">
+            {matches.map((student) => (
+              <li key={student._id}>
+                <button type="button" className="underline" onClick={() =>
+                  router.push(`/online-exam/instructor/results?studentId=${student._id}`)
+                }>{student.name}</button>
+              </li>
+            ))}
+          </ul>
+        ) : <p>No matching students.</p>)}
       </div>
 
       {/* Instructor Actions */}

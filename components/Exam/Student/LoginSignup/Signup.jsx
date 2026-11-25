@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import ExamBtn from "../../UI/ExamBtn";
 import { shubukan_api } from "@/config";
+import { saveExamCodeFlow } from "../../examCodeFlow";
 import { FiChevronDown } from "react-icons/fi";
 import { Lekton } from "next/font/google";
 import Loader from "@/components/UIComponent/Loader/Loader";
@@ -168,13 +169,15 @@ export default function Signup() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await shubukan_api.post("/student/signup", formData);
-      alert(res.data.message);
-      localStorage.setItem("student_email", formData.email);
-      localStorage.setItem("otp_type", "signup");
+      await shubukan_api.post("/student/signup", formData);
+      saveExamCodeFlow("student", formData.email.trim(), "signup");
       router.push("/online-exam/student/verify");
     } catch (err) {
       alert(err.response?.data?.message || "Signup failed");
+      if (err.response?.data?.code === "OTP_DELIVERY_FAILED") {
+        saveExamCodeFlow("student", formData.email.trim(), "signup");
+        router.push("/online-exam/student/verify");
+      }
       setLoading(false);
     } finally {
     }
@@ -351,7 +354,6 @@ export default function Signup() {
         </div>
 
         <ExamBtn
-          onClick={handleSubmit}
           text={loading ? "Registering..." : "Create Account"}
           type="submit"
           size="min-w-[150px] w-fit h-auto"

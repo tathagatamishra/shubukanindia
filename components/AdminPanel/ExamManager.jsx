@@ -36,6 +36,8 @@ export default function ExamManager() {
     examSet: 1,
   });
   const [editingId, setEditingId] = useState(null);
+  const [addingSetTo, setAddingSetTo] = useState(null);
+  const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState({ id: null, type: null });
   const [loading, setLoading] = useState(false);
 
@@ -97,19 +99,27 @@ export default function ExamManager() {
 
   // ---------------- CRUD ----------------
   const createExam = async () => {
+    if (saving) return;
+    setSaving(true);
     try {
       const token = localStorage.getItem("adminToken");
-      await shubukan_api.post("/admin/exam", form, {
+      const path = addingSetTo ? `/admin/exam/${encodeURIComponent(addingSetTo)}/set` : "/admin/exam";
+      await shubukan_api.post(path, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       resetForm();
+      setAddingSetTo(null);
       fetchExams();
     } catch (err) {
       alert(err.response?.data?.message || "Create failed");
+    } finally {
+      setSaving(false);
     }
   };
 
   const updateExam = async () => {
+    if (saving) return;
+    setSaving(true);
     try {
       const token = localStorage.getItem("adminToken");
       await shubukan_api.put(`/admin/exam/${editingId}`, form, {
@@ -120,6 +130,8 @@ export default function ExamManager() {
       fetchExams();
     } catch (err) {
       alert(err.response?.data?.message || "Update failed");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -151,7 +163,16 @@ export default function ExamManager() {
     });
 
     setEditingId(exam._id);
-    // scroll to form or focus could be added here
+    setAddingSetTo(null);
+    document.getElementById("exam-editor")?.scrollIntoView();
+  };
+
+  const addExamSet = (exam) => {
+    editExam(exam);
+    const lastSet = Math.max(...exams.filter((item) => item.examID === exam.examID).map((item) => item.examSet || 1));
+    setForm((previous) => ({ ...previous, examDate: "", examSet: lastSet + 1, questions: [] }));
+    setEditingId(null);
+    setAddingSetTo(exam.examID);
   };
 
   const resetForm = () => {
@@ -231,7 +252,8 @@ export default function ExamManager() {
       <h2 className="text-xl font-bold mb-4">Manage Exams</h2>
 
       {/* Exam Form */}
-      <div className="bg-white shadow rounded-xl p-4 mb-6 flex flex-col gap-3">
+      <div id="exam-editor" className="bg-white shadow rounded-xl p-4 mb-6 flex flex-col gap-3">
+        {addingSetTo && <h3 className="font-semibold">Add a set to {addingSetTo}</h3>}
         <label className="flex flex-col">
           <span className="font-medium">Exam Date & Time</span>
           <DatePicker
@@ -298,16 +320,18 @@ export default function ExamManager() {
           </select>
         </label>
 
-        {/* <label className="flex flex-col">
+        <label className="flex flex-col">
           <span className="font-medium">Password (optional)</span>
           <input
+            type="password"
+            autoComplete="new-password"
             value={form.password}
             onChange={(e) =>
               setForm((prev) => ({ ...prev, password: e.target.value }))
             }
             className="border p-2 rounded"
           />
-        </label> */}
+        </label>
 
         {/* Instructor selector */}
         <label className="flex flex-col">
@@ -478,6 +502,7 @@ export default function ExamManager() {
             <>
               <button
                 onClick={updateExam}
+                disabled={saving}
                 className="bg-green-500 text-white px-3 py-2 rounded flex items-center gap-1"
               >
                 <FiSave /> Save
@@ -495,11 +520,16 @@ export default function ExamManager() {
           ) : (
             <button
               onClick={createExam}
+              disabled={saving}
               className="bg-blue-500 text-white px-3 py-2 rounded flex items-center gap-1"
             >
-              <FiPlus /> Create Exam
+              <FiPlus /> {addingSetTo ? "Create Set" : "Create Exam"}
             </button>
           )}
+          {addingSetTo && <button type="button" disabled={saving} onClick={() => {
+            setAddingSetTo(null);
+            resetForm();
+          }} className="border rounded px-3">Cancel</button>}
         </div>
       </div>
 
@@ -629,12 +659,15 @@ export default function ExamManager() {
 
               <div className="flex flex-row items-center w-full h-fit min-h-[20px]">
                 <p className="min-w-[78px] pr-2 sm:pr-4">Actions</p>
-                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155] flex gap-2">
+                <div className="w-full h-fit min-h-[20px] sm:ml-[10px] p-[5px] sm:p-[10px] border-l border-dashed border-[#334155] flex flex-wrap gap-2">
                   <button
                     onClick={() => editExam(ex)}
                     className="text-blue-500 h-full w-full max-w-[125px] flex justify-center items-center gap-2 border-2 rounded font-[600]"
                   >
                     <FiEdit /> Edit
+                  </button>
+                  <button onClick={() => addExamSet(ex)} className="px-2 border-2 rounded font-semibold">
+                    Add Set
                   </button>
                   <button
                     onClick={() => deleteExam(ex._id)}

@@ -15,7 +15,6 @@ export default function ViewResult() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setResults(res.data);
-        console.log(token);
       } catch (err) {
         console.error(err);
         alert("Failed to fetch results");
@@ -58,6 +57,14 @@ export default function ViewResult() {
             const totalQuestions = exam?.totalQuestionCount ?? null;
             const totalMarks = exam?.totalMarks ?? "N/A";
             const eachMarks = exam?.eachQuestionMarks ?? "N/A";
+            if (res.availableAt) {
+              return (
+                <div key={res._id} className="OnlineExam rounded-3xl border p-4">
+                  <p>Exam {exam?.examID} submitted</p>
+                  <p>Results are available after {formatExamDate(res.availableAt)}.</p>
+                </div>
+              );
+            }
 
             // compute answers not selected only when totalQuestions is available
             const answersNotSelected =

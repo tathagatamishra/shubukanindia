@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shubukan India · Cloud layout editor</title>
+  <style>
+    :root { color-scheme: light; font: 14px/1.5 system-ui, sans-serif; color: #282622; background: #f5f3ef; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; }
+    button, input, select, textarea { font: inherit; }
+    button, select { cursor: pointer; }
+    button, select, input[type="number"] { border: 1px solid #d4cec4; border-radius: 6px; background: #fffdfa; color: inherit; padding: 6px 10px; }
+    button:disabled { cursor: default; opacity: .55; }
+    button:hover:not(:disabled) { background: #eee8de; }
+    button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible,
+    .workspace:focus-visible { outline: 2px solid #286778; outline-offset: 2px; }
+    .editor { max-width: 1520px; margin: auto; padding: 20px clamp(12px, 3vw, 36px) 28px; }
+    .masthead, .toolbar, .actions, .mode-switch, .viewport-controls { display: flex; align-items: center; gap: 8px; }
+    .masthead { justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    h1 { margin: 0; font-size: clamp(21px, 4vw, 29px); font-weight: 650; letter-spacing: -.03em; }
+    .save { background: #244d48; border-color: #244d48; color: white; font-weight: 600; }
+    .save:hover:not(:disabled) { background: #193b37; }
+    .toolbar { flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
+    .mode-switch { border: 1px solid #d4cec4; border-radius: 8px; gap: 3px; padding: 3px; background: #eae5dd; }
+    .mode-switch button { border-color: transparent; background: transparent; padding: 5px 10px; white-space: nowrap; }
+    .mode-switch [aria-pressed="true"] { background: #fffdfa; border-color: #d4cec4; font-weight: 600; }
+    .viewport-controls { gap: 12px; flex-wrap: wrap; }
+    .check { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 244px; gap: 12px; }
+    .workspace {
+      position: relative; height: clamp(510px, 75vh, 900px); overflow: auto;
+      border: 1px solid #373835; border-radius: 9px; background: #4b4b46;
+      scrollbar-color: #8a877f #4b4b46; color: #fffdfa;
+    }
+    .workspace-message { margin: 20px; }
+    .sizer { position: relative; margin: 16px auto; }
+    .stage { position: absolute; inset: 0 auto auto 0; transform-origin: top left; overflow: clip; }
+    .frame { display: block; position: absolute; border: 0; pointer-events: none; background: #eee5d9; }
+    .frame-outline { position: absolute; pointer-events: none; box-shadow: 0 0 0 1px #aaa49a, 0 12px 40px #0006; }
+    .cloud-target {
+      position: absolute; display: block; border: 0; background: transparent;
+      border-radius: 0; padding: 0; cursor: grab; touch-action: none; user-select: none;
+    }
+    .cloud-target:hover:not(:disabled), .cloud-target:focus-visible { background: #c0eff911; }
+    .cloud-target:active { cursor: grabbing; }
+    .cloud-target[aria-pressed="true"] { z-index: 1; box-shadow: inset 0 0 0 var(--outline-size, 2px) #4eb3ca; }
+    .cloud-target .outside, .cloud-target .outside-art { position: absolute; inset: 0; pointer-events: none; }
+    .outside-art { background-position: center; background-size: 100% 100%; background-repeat: no-repeat; }
+    .resize-handle {
+      position: absolute; z-index: 2; width: var(--handle-size, 16px); height: var(--handle-size, 16px);
+      transform: translate(-50%, -50%); border: var(--outline-size, 2px) solid #fffdfa;
+      border-radius: 3px; background: #286778; padding: 0; cursor: nwse-resize; touch-action: none;
+    }
+    .resize-handle:hover:not(:disabled) { background: #174b5b; }
+    .stage.preview-only :is(.cloud-target, .resize-handle) { visibility: hidden; }
+    .controls { min-width: 0; border: 1px solid #d4cec4; border-radius: 9px; background: #fffcf8; padding: 14px; }
+    .controls h2 { margin: 0 0 8px; font-size: 15px; }
+    .layer-group { margin: 0 0 10px; }
+    .layer-group p { margin: 0 0 4px; color: #5f5a51; font-size: 12px; font-weight: 600; }
+    .layer-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .layer-buttons button { padding: 5px 3px; font-size: 12px; }
+    .layer-buttons [aria-pressed="true"] { border-color: #367878; background: #e5f0ee; font-weight: 600; }
+    .inspector { border-top: 1px solid #e7e0d7; margin-top: 14px; padding-top: 12px; }
+    .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .fields label { display: grid; gap: 3px; font-size: 12px; }
+    .fields input { width: 100%; }
+    .opacity-control { display: grid; gap: 3px; font-size: 12px; margin-bottom: 10px; }
+    .opacity-inputs { display: grid; grid-template-columns: minmax(0, 1fr) 66px; gap: 8px; align-items: center; }
+    .opacity-inputs input { width: 100%; margin: 0; }
+    .opacity-inputs input[type="range"] { accent-color: #286778; cursor: ew-resize; }
+    .flip-controls { display: flex; gap: 6px; margin-bottom: 10px; }
+    .flip-controls button { flex: 1; padding-inline: 4px; font-size: 12px; }
+    .flip-controls [aria-pressed="true"] { border-color: #367878; background: #e5f0ee; font-weight: 600; }
+    .hint, .status { color: #625c53; font-size: 12px; }
+    .hint { margin: 12px 0; }
+    .status { margin: 8px 0 0; min-height: 1.5em; }
+    details { border-top: 1px solid #e7e0d7; margin-top: 14px; padding-top: 10px; }
+    summary { cursor: pointer; font-size: 13px; }
+    textarea { display: block; width: 100%; min-height: 130px; margin-top: 8px; resize: vertical; }
+    @media (max-width: 750px) {
+      .layout { grid-template-columns: 1fr; }
+      .workspace { height: 63vh; min-height: 360px; }
+      .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="editor">
+    <div class="masthead">
+      <h1>Cloud layout editor</h1>
+      <div class="actions">
+        <button id="copy" type="button" disabled>Copy layout</button>
+        <button class="save" id="save" type="button" disabled>Save layout</button>
+      </div>
+    </div>
+    <p id="access-error" hidden>This editor is available on the local Shubukan India preview.</p>
+    <div id="editor-controls">
+      <div class="toolbar">
+        <div class="mode-switch" aria-label="Layout size">
+          <button type="button" data-profile="desktop" aria-pressed="true">Desktop · 1440 px</button>
+          <button type="button" data-profile="mobile" aria-pressed="false">Mobile · 390 px</button>
+        </div>
+        <div class="viewport-controls">
+          <label>Zoom
+            <select id="zoom">
+              <option value="fit">Fit width</option>
+              <option value=".5">50%</option>
+              <option value=".75">75%</option>
+              <option value="1">100%</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="preview-only"> Preview only</label>
+        </div>
+      </div>
+      <div class="layout">
+        <div class="workspace" id="workspace" tabindex="0" aria-label="Scrollable cloud placement canvas">
+          <p class="workspace-message" id="loading" role="status">Loading the homepage preview…</p>
+          <div class="sizer" id="sizer" hidden>
+            <div class="stage" id="stage">
+              <div class="frame-outline" id="frame-outline"></div>
+              <iframe class="frame" id="site-preview" title="Shubukan India homepage mockup" sandbox="allow-same-origin" tabindex="-1"></iframe>
+              <button type="button" class="resize-handle" id="resize-handle" aria-label="Resize selected cloud" hidden></button>
+            </div>
+          </div>
+        </div>
+        <aside class="controls" aria-label="Cloud placement controls">
+          <h2>Cloud layers</h2>
+          <div class="layers" id="layers"></div>
+          <div class="inspector">
+            <h2 id="selection-label">Selected cloud</h2>
+            <div class="fields">
+              <label>Horizontal (px)<input id="offset-x" type="number" step="1" disabled></label>
+              <label>Vertical (px)<input id="offset-y" type="number" step="1" disabled></label>
+              <label>Size (%)<input id="cloud-size" type="number" min="25" max="200" step="1" disabled></label>
+            </div>
+            <div class="opacity-control">
+              <label for="cloud-opacity">Opacity (%)</label>
+              <div class="opacity-inputs">
+                <input id="cloud-opacity-slider" type="range" min="0" max="100" step="1" aria-label="Cloud opacity slider" disabled>
+                <input id="cloud-opacity" type="number" min="0" max="100" step="1" disabled>
+              </div>
+            </div>
+            <div class="flip-controls">
+              <button type="button" id="flip-x" aria-pressed="false" disabled>Flip horizontal</button>
+              <button type="button" id="flip-y" aria-pressed="false" disabled>Flip vertical</button>
+            </div>
+            <button type="button" id="reset" disabled>Reset selected cloud</button>
+            <p class="hint">Drag a cloud to move it. Drag its corner handle to resize. Use the layer list to select overlapping clouds.</p>
+            <p class="status" id="status" role="status"></p>
+          </div>
+          <details id="layout-details">
+            <summary>Layout data</summary>
+            <textarea id="layout-data" aria-label="Saved cloud layout" readonly spellcheck="false"></textarea>
+          </details>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script>
+    (() => {
+      const byId = (id) => document.getElementById(id);
+      if (!["localhost", "127.0.0.1", "[::1]"].includes(location.hostname)) {
+        byId("editor-controls").hidden = true;
+        byId("access-error").hidden = false;
+        return;
+      }
+
+      const profiles = {
+        desktop: { width: 1440, height: 2020, left: 218, top: 120, bottom: 55 },
+        mobile: { width: 390, height: 1470, left: 126, top: 76, bottom: 45 },
+      };
+      const layerGroups = [
+        { id: "header-left", label: "Header left", selector: ".navbar-cloud--left", prefix: "navbar" },
+        { id: "header-right", label: "Header right", selector: ".navbar-cloud--right", prefix: "navbar" },
+        { id: "way", label: "The Shubukan Way", selector: ".home-cloud--way", prefix: "home" },
+        { id: "gallery", label: "Gallery", selector: ".home-cloud--gallery", prefix: "home" },
+      ];
+      const variants = [
+        { id: "rear", label: "Upper" },
+        { id: "large", label: "Large" },
+        { id: "front", label: "Lower" },
+      ];
+      const layerDefinitions = new Map();
+      const geometry = new Map();
+      const storageKey = "shubukan.cloud-layout.v1";
+      const workspace = byId("workspace");
+      const stage = byId("stage");
+      const sizer = byId("sizer");
+      const frame = byId("site-preview");
+      const offsetX = byId("offset-x");
+      const offsetY = byId("offset-y");
+      const cloudSize = byId("cloud-size");
+      const minSize = Number(cloudSize.min);
+      const maxSize = Number(cloudSize.max);
+      const cloudOpacity = byId("cloud-opacity");
+      const opacitySlider = byId("cloud-opacity-slider");
+      const flipX = byId("flip-x");
+      const flipY = byId("flip-y");
+      const resizeHandle = byId("resize-handle");
+      const layoutData = byId("layout-data");
+      const zoomControl = byId("zoom");
+      const defaultPlacement = { x: 0, y: 0, size: 100, flipX: false, flipY: false, opacity: null };
+      let profile = "desktop";
+      let selected = "header-left-large";
+      let frameDocument;
+      let zoom = 1;
+      let drag;
+      const positions = { desktop: {}, mobile: {} };
+
+      function readSavedLayout() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(storageKey));
+          if (![1, 2, 3].includes(stored?.version)) return;
+          for (const view of Object.keys(profiles)) {
+            for (const id of layerDefinitions.keys()) {
+              const point = stored.layouts?.[view]?.offsets?.[id];
+              if (!Number.isFinite(point?.x) || !Number.isFinite(point?.y)) continue;
+              positions[view][id] = {
+                x: point.x,
+                y: point.y,
+                size: Number.isFinite(point.size) ? clamp(point.size, minSize, maxSize) : 100,
+                flipX: point.flipX === true,
+                flipY: point.flipY === true,
+                opacity: Number.isFinite(point.opacity) ? clamp(Math.round(point.opacity), 0, 100) : null,
+              };
+            }
+          }
+          byId("status").textContent = "Saved layout loaded.";
+        } catch {
+          byId("status").textContent = "Saved layouts are unavailable in this browser.";
+        }
+      }
+
+      function placement(id, view = profile) {
+        return positions[view][id] ?? defaultPlacement;
+      }
+
+      function renderedOpacity(id) {
+        const { opacity } = placement(id);
+        return opacity === null ? geometry.get(id)?.baseOpacity ?? 1 : opacity / 100;
+      }
+
+      function exportLayout() {
+        const layouts = Object.fromEntries(Object.entries(profiles).map(([name, view]) => [
+          name,
+          {
+            viewportWidth: view.width,
+            offsets: Object.fromEntries([...layerDefinitions.keys()].map((id) => [
+              id, placement(id, name),
+            ])),
+          },
+        ]));
+        return JSON.stringify({ version: 3, layouts }, null, 2);
+      }
+
+      function saveLayout() {
+        const json = exportLayout();
+        layoutData.value = json;
+        try {
+          localStorage.setItem(storageKey, json);
+          byId("status").textContent = "Desktop and mobile layouts saved.";
+        } catch {
+          byId("layout-details").open = true;
+          byId("status").textContent = "Copy the layout data to keep these edits.";
+        }
+        return json;
+      }
+
+      function syncSelection() {
+        for (const [id, { button, target }] of layerDefinitions) {
+          button.setAttribute("aria-pressed", String(id === selected));
+          target.setAttribute("aria-pressed", String(id === selected));
+        }
+        const point = placement(selected);
+        byId("selection-label").textContent = layerDefinitions.get(selected).name;
+        offsetX.value = point.x;
+        offsetY.value = point.y;
+        cloudSize.value = point.size;
+        const opacity = Math.round(renderedOpacity(selected) * 100);
+        cloudOpacity.value = opacity;
+        opacitySlider.value = opacity;
+        flipX.setAttribute("aria-pressed", String(point.flipX));
+        flipY.setAttribute("aria-pressed", String(point.flipY));
+        positionResizeHandle();
+      }
+
+      function selectLayer(id, reveal = false) {
+        selected = id;
+        syncSelection();
+        if (!reveal || !geometry.has(id)) return;
+        const { left, top, width, height } = layerDefinitions.get(id).target.getBoundingClientRect();
+        const viewport = workspace.getBoundingClientRect();
+        const centerX = left + width / 2;
+        const centerY = top + height / 2;
+        if (centerX < viewport.left || centerX > viewport.right || centerY < viewport.top || centerY > viewport.bottom) {
+          workspace.scrollBy({
+            left: centerX - viewport.left - workspace.clientWidth / 2,
+            top: centerY - viewport.top - workspace.clientHeight / 2,
+            behavior: "instant",
+          });
+        }
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function positionLayer(id) {
+        const { element, art, x, y, width: baseWidth, height: baseHeight } = geometry.get(id);
+        const { target, outside, outsideArt } = layerDefinitions.get(id);
+        const view = profiles[profile];
+        const point = placement(id);
+        const scale = point.size / 100;
+        const width = baseWidth * scale;
+        const height = baseHeight * scale;
+        const left = x + point.x + (baseWidth - width) / 2;
+        const top = y + point.y + (baseHeight - height) / 2;
+        const flip = `scale(${point.flipX ? -1 : 1}, ${point.flipY ? -1 : 1})`;
+        element.style.transform = `translate(${point.x}px, ${point.y}px) scale(${scale})`;
+        element.style.opacity = point.opacity === null ? "" : point.opacity / 100;
+        art.style.transform = flip;
+        outsideArt.style.transform = flip;
+        outsideArt.style.opacity = renderedOpacity(id) * .82;
+        target.style.left = `${view.left + left}px`;
+        target.style.top = `${view.top + top}px`;
+        target.style.width = `${width}px`;
+        target.style.height = `${height}px`;
+
+        // The ghost shows only the portion outside the live page.
+        const x1 = clamp(-left, 0, width);
+        const y1 = clamp(-top, 0, height);
+        const x2 = clamp(view.width - left, 0, width);
+        const y2 = clamp(view.height - top, 0, height);
+        outside.style.clipPath = `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${x1}px ${y1}px, ${x2}px ${y1}px, ${x2}px ${y2}px, ${x1}px ${y2}px, ${x1}px ${y1}px, 0 0)`;
+      }
+
+      function positionResizeHandle() {
+        resizeHandle.hidden = !geometry.has(selected);
+        if (resizeHandle.hidden) return;
+        const { target } = layerDefinitions.get(selected);
+        const view = profiles[profile];
+        const inset = 9 / zoom;
+        resizeHandle.style.left = `${clamp(target.offsetLeft + target.offsetWidth, inset, view.width + view.left * 2 - inset)}px`;
+        resizeHandle.style.top = `${clamp(target.offsetTop + target.offsetHeight, inset, view.height + view.top + view.bottom - inset)}px`;
+      }
+
+      function updateLayer(id, change) {
+        if (!geometry.has(id)) return;
+        positions[profile][id] = { ...placement(id), ...change };
+        positionLayer(id);
+        syncSelection();
+        byId("status").textContent = "Unsaved changes";
+      }
+
+      function moveLayer(id, x, y) {
+        const box = geometry.get(id);
+        if (!box || !Number.isFinite(x) || !Number.isFinite(y)) return;
+        const view = profiles[profile];
+        const centerX = box.x + box.width / 2;
+        const centerY = box.y + box.height / 2;
+        updateLayer(id, {
+          x: clamp(Math.round(x), Math.ceil(-view.left - centerX), Math.floor(view.width + view.left - centerX)),
+          y: clamp(Math.round(y), Math.ceil(-view.top - centerY), Math.floor(view.height + view.bottom - centerY)),
+        });
+      }
+
+      function resizeLayer(id, size) {
+        if (!Number.isFinite(size)) {
+          syncSelection();
+          return;
+        }
+        const nextSize = clamp(Math.round(size), minSize, maxSize);
+        if (nextSize === placement(id).size) {
+          syncSelection();
+          return;
+        }
+        updateLayer(id, { size: nextSize });
+      }
+
+      function setOpacity(value) {
+        if (!Number.isFinite(value)) {
+          syncSelection();
+          return;
+        }
+        const opacity = clamp(Math.round(value), 0, 100);
+        if (opacity === placement(selected).opacity) return;
+        updateLayer(selected, { opacity });
+      }
+
+      function dragStart(event, id, isResize = false) {
+        if (event.button !== 0 || drag || !geometry.has(id)) return;
+        selectLayer(id);
+        drag = { id, isResize, pointer: event.pointerId, startX: event.clientX, startY: event.clientY, ...placement(id) };
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
+
+      function dragMove(event) {
+        if (!drag || event.pointerId !== drag.pointer) return;
+        const dx = (event.clientX - drag.startX) / zoom;
+        const dy = (event.clientY - drag.startY) / zoom;
+        if (drag.isResize) {
+          const { width, height } = geometry.get(drag.id);
+          const sizeDelta = 200 * (dx * width + dy * height) / (width * width + height * height);
+          resizeLayer(drag.id, drag.size + sizeDelta);
+        } else {
+          moveLayer(drag.id, drag.x + dx, drag.y + dy);
+        }
+      }
+
+      function endDrag() {
+        drag = undefined;
+      }
+
+      function makeLayers() {
+        for (const group of layerGroups) {
+          const section = document.createElement("section");
+          section.className = "layer-group";
+          const title = document.createElement("p");
+          title.textContent = group.label;
+          const buttons = document.createElement("div");
+          buttons.className = "layer-buttons";
+          section.append(title, buttons);
+          byId("layers").append(section);
+
+          for (const variant of variants) {
+            const id = `${group.id}-${variant.id}`;
+            const name = `${group.label} · ${variant.label}`;
+            const selector = variant.id === "large"
+              ? `${group.selector}:not(.painted-cloud--small)`
+              : `${group.selector}.${group.prefix}-cloud--${variant.id}`;
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = variant.label;
+            button.setAttribute("aria-label", `Select ${name}`);
+            button.addEventListener("click", () => selectLayer(id, true));
+            buttons.append(button);
+
+            const target = document.createElement("button");
+            target.type = "button";
+            target.className = "cloud-target";
+            target.setAttribute("aria-label", `Move ${name} cloud`);
+            target.addEventListener("focus", () => selectLayer(id));
+            target.addEventListener("pointerdown", (event) => dragStart(event, id));
+            target.addEventListener("pointermove", dragMove);
+            target.addEventListener("lostpointercapture", endDrag);
+            target.addEventListener("keydown", (event) => {
+              const direction = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[event.key];
+              if (!direction) return;
+              event.preventDefault();
+              const point = placement(id);
+              const step = event.shiftKey ? 10 : 1;
+              moveLayer(id, point.x + direction[0] * step, point.y + direction[1] * step);
+            });
+            const outside = document.createElement("span");
+            outside.className = "outside";
+            outside.setAttribute("aria-hidden", "true");
+            const outsideArt = document.createElement("span");
+            outsideArt.className = "outside-art";
+            outside.append(outsideArt);
+            target.append(outside);
+            stage.append(target);
+            layerDefinitions.set(id, { name, selector, button, target, outside, outsideArt });
+          }
+        }
+      }
+
+      function fitStage() {
+        const view = profiles[profile];
+        const stageWidth = view.width + view.left * 2;
+        const stageHeight = view.height + view.top + view.bottom;
+        zoom = zoomControl.value === "fit" ? Math.min(1, (workspace.clientWidth - 24) / stageWidth) : Number(zoomControl.value);
+        stage.style.width = `${stageWidth}px`;
+        stage.style.height = `${stageHeight}px`;
+        stage.style.transform = `scale(${zoom})`;
+        stage.style.setProperty("--outline-size", `${1.5 / zoom}px`);
+        stage.style.setProperty("--handle-size", `${16 / zoom}px`);
+        sizer.style.width = `${Math.ceil(stageWidth * zoom)}px`;
+        sizer.style.height = `${Math.ceil(stageHeight * zoom)}px`;
+        positionResizeHandle();
+      }
+
+      function measureLayers() {
+        if (!frameDocument) return;
+        for (const { element } of geometry.values()) {
+          element.style.transform = "";
+          element.style.opacity = "";
+        }
+        geometry.clear();
+        for (const [id, definition] of layerDefinitions) {
+          const element = frameDocument.querySelector(definition.selector);
+          if (!element) throw new Error(`Missing cloud layer ${id}`);
+          const { x, y, width, height } = element.getBoundingClientRect();
+          const art = element.firstElementChild;
+          const style = frame.contentWindow.getComputedStyle(art);
+          const baseOpacity = Number(frame.contentWindow.getComputedStyle(element).opacity);
+          geometry.set(id, { element, art, x, y, width, height, baseOpacity });
+          definition.outsideArt.style.backgroundImage = style.backgroundImage;
+          definition.outsideArt.style.scale = style.scale;
+          definition.outsideArt.style.filter = style.filter;
+          positionLayer(id);
+        }
+        positionResizeHandle();
+      }
+
+      function setProfile(name) {
+        profile = name;
+        const view = profiles[name];
+        for (const target of [frame, byId("frame-outline")]) {
+          Object.assign(target.style, {
+            left: `${view.left}px`, top: `${view.top}px`, width: `${view.width}px`, height: `${view.height}px`,
+          });
+        }
+        document.querySelectorAll("[data-profile]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.profile === name));
+        });
+        measureLayers();
+        fitStage();
+        syncSelection();
+        workspace.scrollTo(0, 0);
+      }
+
+      makeLayers();
+      readSavedLayout();
+      layoutData.value = exportLayout();
+      setProfile("desktop");
+      frame.addEventListener("load", async () => {
+        try {
+          frameDocument = frame.contentDocument;
+          const style = frameDocument.createElement("style");
+          style.textContent = `
+            html, body { overflow: hidden !important; scrollbar-width: none !important; }
+            #Navbar { position: absolute !important; top: 0 !important; }
+            #Navbar .navbar-clouds { overflow: visible !important; }
+            #Navbar .logo img, .painted-cloud__art { animation: none !important; }
+            .painted-cloud { transform-origin: center; }
+            /* Apply the editable offsets to the original positions. */
+            .painted-cloud[data-cloud-layer] {
+              --cloud-layout-x: 0;
+              --cloud-layout-y: 0;
+              --cloud-layout-size: 1;
+              --cloud-layout-flip-x: 1;
+              --cloud-layout-flip-y: 1;
+              --cloud-layout-opacity: initial;
+            }
+            .banner { display: none !important; }
+          `;
+          frameDocument.head.append(style);
+          await frameDocument.fonts.ready;
+          sizer.hidden = false;
+          setProfile(profile);
+          byId("loading").hidden = true;
+          for (const id of ["save", "copy", "reset", "offset-x", "offset-y", "cloud-size", "cloud-opacity", "cloud-opacity-slider", "flip-x", "flip-y"]) {
+            byId(id).disabled = false;
+          }
+          new ResizeObserver(fitStage).observe(workspace);
+          new ResizeObserver(measureLayers).observe(frameDocument.querySelector(".Home"));
+        } catch {
+          sizer.hidden = true;
+          byId("loading").textContent = "Could not load the cloud layers. Refresh this editor with the homepage preview running.";
+        }
+      });
+      frame.src = "/";
+
+      document.querySelectorAll("[data-profile]").forEach((button) => {
+        button.addEventListener("click", () => setProfile(button.dataset.profile));
+      });
+      zoomControl.addEventListener("change", () => {
+        fitStage();
+        selectLayer(selected, true);
+      });
+      byId("preview-only").addEventListener("change", (event) => stage.classList.toggle("preview-only", event.target.checked));
+      byId("reset").addEventListener("click", () => updateLayer(selected, defaultPlacement));
+      offsetX.addEventListener("change", () => moveLayer(selected, offsetX.valueAsNumber, placement(selected).y));
+      offsetY.addEventListener("change", () => moveLayer(selected, placement(selected).x, offsetY.valueAsNumber));
+      cloudSize.addEventListener("input", () => {
+        const size = cloudSize.valueAsNumber;
+        if (Number.isInteger(size) && size >= minSize && size <= maxSize) resizeLayer(selected, size);
+      });
+      cloudSize.addEventListener("change", () => resizeLayer(selected, cloudSize.valueAsNumber));
+      opacitySlider.addEventListener("input", () => setOpacity(opacitySlider.valueAsNumber));
+      cloudOpacity.addEventListener("input", () => {
+        const opacity = cloudOpacity.valueAsNumber;
+        if (Number.isInteger(opacity) && opacity >= 0 && opacity <= 100) setOpacity(opacity);
+      });
+      cloudOpacity.addEventListener("change", () => setOpacity(cloudOpacity.valueAsNumber));
+      flipX.addEventListener("click", () => updateLayer(selected, { flipX: !placement(selected).flipX }));
+      flipY.addEventListener("click", () => updateLayer(selected, { flipY: !placement(selected).flipY }));
+      resizeHandle.addEventListener("pointerdown", (event) => dragStart(event, selected, true));
+      resizeHandle.addEventListener("pointermove", dragMove);
+      resizeHandle.addEventListener("lostpointercapture", endDrag);
+      resizeHandle.addEventListener("keydown", (event) => {
+        const direction = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1 }[event.key];
+        if (!direction) return;
+        event.preventDefault();
+        resizeLayer(selected, placement(selected).size + direction * (event.shiftKey ? 10 : 1));
+      });
+      byId("save").addEventListener("click", saveLayout);
+      byId("copy").addEventListener("click", async () => {
+        const json = saveLayout();
+        try {
+          await navigator.clipboard.writeText(json);
+          byId("status").textContent = "Layout copied.";
+        } catch {
+          byId("layout-details").open = true;
+          layoutData.select();
+          byId("status").textContent = "Copy the selected layout data.";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
