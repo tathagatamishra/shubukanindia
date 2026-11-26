@@ -1,0 +1,82 @@
+.d-path {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 752 / 1449;
+  pointer-events: none;
+}
+
+.d-path > svg {
+  position: absolute;
+  width: 133%;
+  height: auto;
+  aspect-ratio: 752 / 1449;
+  top: -43%;
+  left: -5%;
+  overflow: visible;
+}
+
+.home-dragon-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+  opacity: .87;
+}
+
+.Home > section:not(.d-path) {
+  position: relative;
+}
+
+/* The hero follows the canvas in paint order. Leaving its stacking context open
+   lets the ink images reach the paper behind the homepage. */
+.Home > section:not(.d-path, .hero-section) {
+  z-index: 1;
+}
+
+.d-path[data-dragon-editor-ready] {
+  z-index: 20;
+}
+
+.home-dragon-actions {
+  position: absolute;
+  top: clamp(35px, 5vw, 66px);
+  right: clamp(12px, 3vw, 32px);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.home-dragon-actions button {
+  border: 1px solid #786957;
+  border-radius: 4px;
+  padding: 4px 9px;
+  background: #f5e9d8ed;
+  color: #3b3127;
+  font: 13px/1.4 system-ui, sans-serif;
+}
+
+.home-dragon-actions button:focus-visible {
+  outline: 2px solid #286778;
+  outline-offset: 2px;
+}
+
+.home-dragon-actions button:disabled {
+  opacity: .7;
+}
+
+@media (min-width: 651px) {
+  .home-dragon-canvas {
+    filter: blur(.18px);
+  }
+}
+
+@media (max-width: 500px) {
+  .d-path > svg {
+    top: -30%;
+    left: -3%;
+  }
+}

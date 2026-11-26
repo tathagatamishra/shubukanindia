@@ -51,3 +51,11 @@
   --cloud-flip-x: 1;
   --cloud-phase: -15s;
 }
+
+.home-filter-defs {
+  position: absolute;
+}
+
+.Home img.underline.remove-bg {
+  filter: url(#home-underline-ink);
+}
