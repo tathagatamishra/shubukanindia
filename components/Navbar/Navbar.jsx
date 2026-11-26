@@ -259,6 +259,9 @@ function SiteNavbar() {
         <PaintedCloud small layer="header-right-front" className="navbar-cloud navbar-cloud--right navbar-cloud--front" />
       </div>
 
+      {/* <div className="Cloud-light sm:top-[-50px] top-[-10px] sm:left-[-50px] left-[-30px] sm:w-[50%] w-[60%] sm:h-full h-[80%] rounded-br-[100%] sm:blur-[100px] blur-[20px]"></div>
+      <div className="Cloud-light sm:top-[-50px] top-[-10px] sm:right-[-50px] right-[-30px] sm:w-[40%] w-[50%] sm:h-full h-[80%] rounded-bl-[100%] sm:blur-[100px] blur-[20px]"></div> */}
+
       <div
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });

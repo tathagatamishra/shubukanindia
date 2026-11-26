@@ -167,3 +167,17 @@ export default function HistoryPage() {
 * GitHub (repo + CI/CD)
 
 ---
+
+## Homepage dragon
+
+Start the site with `npm run dev` and open [Dragon Path Editor](http://localhost:3000/dragon-path-editor.html). The editor uses the original `.d-path` as the starting layout for desktop and mobile. Select a profile, drag its anchors and Bézier handles, then scrub the flight to check the route against the homepage. Use Full route to reach points outside the visible homepage.
+
+Under Body twist, choose a segment and scrub the flight or click Pick on route. Changing the angle adds or updates a keyframe. Use Add keyframe to keep the current angle at a position. Opening flight and Full lap have separate keys and share their resting pose.
+
+Save layout applies both profiles to the local homepage in your current browser. To share or deploy the edit, download `flight-paths.json` and replace `public/dragon/flight-paths.json` with it.
+
+The site loads `public/dragon/dragon-full.glb`, a skinned export of `DragonStudy/Backup/dragon-full.blend` with reduced geometry and the Blender material colors baked into the mesh. To regenerate the GLB, run the following from the website project with Blender 5.2 available.
+
+~~~powershell
+blender -b --factory-startup --python-exit-code 1 --python scripts/export-full-dragon.py -- --source 'C:\Users\johni\Games\DragonAnimation\DragonStudy\Backup\dragon-full.blend' --output 'public/dragon/dragon-full.glb'
+~~~

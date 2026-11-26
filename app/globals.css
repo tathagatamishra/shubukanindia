@@ -259,38 +259,6 @@ select:-webkit-autofill:focus {
   box-shadow: none;
 }
 
-.d-path {
-  position: absolute;
-  width: 100%;
-  aspect-ratio: 752/1449;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.d-path svg {
-  position: absolute;
-  width: 133%;
-  top: -43%;
-  left: -5%;
-}
-
-/* section 0 - the animated dragon overlay (DragonPath). Matches .d-path
-   above exactly (same width:100%/aspect-ratio, no top/left/right/padding -
-   both are the first child of .Home, so they land at the identical static
-   position) - that's the tested rig this now reproduces; DragonPath.scss's
-   .dragon-path-stage is the equivalent of .d-path svg. */
-.dragon-section {
-  /* mix-blend-mode: color-burn; */
-  position: absolute;
-  width: 100%;
-  aspect-ratio: 752 / 1449;
-  z-index: 0;
-  pointer-events: none;
-  /* DragonPath's own stage re-enables this - see DragonPath.scss */
-}
-
 .Home p {
   font-size: 24px;
 }
@@ -776,13 +744,6 @@ h3.journal-title,
 @media (max-width: 500px) {
   .Home {
     padding: 100px 30px 48px;
-  }
-
-  .d-path svg {
-    position: absolute;
-    width: 133%;
-    top: -30%;
-    left: -3%;
   }
 
   .Home p {
