@@ -168,16 +168,36 @@ export default function HistoryPage() {
 
 ---
 
-## Homepage dragon
+## Homepage editors
 
-Start the site with `npm run dev` and open [Dragon Path Editor](http://localhost:3000/dragon-path-editor.html). The editor uses the original `.d-path` as the starting layout for desktop and mobile. Select a profile, drag its anchors and Bézier handles, then scrub the flight to check the route against the homepage. Use Full route to reach points outside the visible homepage.
+Start the frontend with `npm run dev` and open [Homepage editors](http://localhost:3000/editors). Both editors offer **Desktop** (1440 px), **Tablet** (768 px), and **Mobile** (390 px) previews. On the homepage, mobile applies through 500 px, tablet through 800 px, and desktop above 800 px.
+
+- `public/editors/` contains the hub, editor HTML, and editor-only scripts.
+- `public/data/homepage/` contains the JSON layouts used by the homepage and editors.
+- `public/homepage/` contains shared cloud layout and device profile logic. `public/dragon/` contains the shared flight logic and dragon model.
+
+Both editors load the current JSON when the file changes. A browser preview saved against the current file reopens automatically. Use **Open JSON layout** to view the file directly or **Open saved layout** to recover an older browser preview. These links open a separate tab so you can keep editing the current layout.
+
+### Dragon path editor
+
+Select a device, drag its anchors and Bézier handles, then scrub or play the flight. **Homepage** shows the dragon in the page. **Full route preview** shows the homepage inside the dashed device frame and keeps the dragon visible as it flies outside it. Scroll in **Homepage** to change the part of the page shown inside the frame. Clear **Show guide** for an unobstructed view of the flight.
+
+Use **Dragon size** to adjust the model’s length and scale for the selected device. The slider ranges from 50% to 200%, and 100% matches the original size. Each device’s value is saved and exported in the `dragonSize` section of the layout JSON.
 
 Under Body twist, choose a segment and scrub the flight or click Pick on route. Changing the angle adds or updates a keyframe. Use Add keyframe to keep the current angle at a position. Opening flight and Full lap have separate keys and share their resting pose.
 
-Save layout applies both profiles to the local homepage in your current browser. To share or deploy the edit, download `flight-paths.json` and replace `public/dragon/flight-paths.json` with it.
+Under Legs, claws and whiskers, choose a part and adjustment, then set its value at the current flight position. These adjustments are relative to the automatic motion and save with the layout. At the resting pose, use Preview idle to see the grasp and whisker cycles in the editor.
+
+**Save layout** applies all three profiles to the local homepage in your browser. To update the site defaults, use **Copy JSON** or **Download path file** and replace `public/data/homepage/flight-paths.json` with the exported layout.
 
 The site loads `public/dragon/dragon-full.glb`, a skinned export of `DragonStudy/Backup/dragon-full.blend` with reduced geometry and the Blender material colors baked into the mesh. To regenerate the GLB, run the following from the website project with Blender 5.2 available.
 
 ~~~powershell
 blender -b --factory-startup --python-exit-code 1 --python scripts/export-full-dragon.py -- --source 'C:\Users\johni\Games\DragonAnimation\DragonStudy\Backup\dragon-full.blend' --output 'public/dragon/dragon-full.glb'
 ~~~
+
+### Cloud layout editor
+
+Select a device and adjust each cloud’s position, size, flips, and opacity. **Save layout** previews all three profiles on the local site in your browser.
+
+To update the site defaults, use **Copy layout** or **Download layout file** and replace `public/data/homepage/cloud-position.json` with the exported layout. You can also edit the file directly. Refresh the local site to see the file changes.

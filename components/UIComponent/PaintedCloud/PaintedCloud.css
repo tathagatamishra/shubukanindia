@@ -20,7 +20,20 @@
   ) scale(var(--cloud-layout-size));
 }
 
-@media (min-width: 801px) {
+@media (width > 500px) and (width <= 800px) {
+  .painted-cloud[data-cloud-layer] {
+    /* Match the previous offset scaling across the tablet range. */
+    --cloud-offset-unit: min(calc(100vw / 585), 1px);
+    --cloud-layout-x: var(--cloud-tablet-x);
+    --cloud-layout-y: var(--cloud-tablet-y);
+    --cloud-layout-size: var(--cloud-tablet-size);
+    --cloud-layout-flip-x: var(--cloud-tablet-flip-x);
+    --cloud-layout-flip-y: var(--cloud-tablet-flip-y);
+    --cloud-layout-opacity: var(--cloud-tablet-opacity);
+  }
+}
+
+@media (width > 800px) {
   .painted-cloud[data-cloud-layer] {
     --cloud-offset-unit: clamp(0.55px, calc(100vw / 1440), 1.4px);
     --cloud-layout-x: var(--cloud-desktop-x);

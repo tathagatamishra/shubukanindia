@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import defaults from "../../../public/dragon/flight-paths.json";
+import defaults from "../../../public/data/homepage/flight-paths.json";
+import { MOBILE_QUERY, TABLET_QUERY } from "../../../public/homepage/device-profiles.mjs";
 import {
-  FRAME, MOBILE_QUERY, PREVIEW_EVENT, STORAGE_KEY, isLocal, loadLayout, parsePath,
+  FRAME, PREVIEW_EVENT, STORAGE_KEY, isLocal, loadLayout, normalizeDragonSize, normalizeIdleMotion, parsePath,
 } from "../../../public/dragon/flight-path.mjs";
 import { normalizeTwists } from "../../../public/dragon/dragon-twist.mjs";
+import { normalizeAppendageKeys } from "../../../public/dragon/dragon-appendage-keys.mjs";
 import "./full-dragon.css";
 
 export default function FullDragon() {
@@ -18,31 +20,75 @@ export default function FullDragon() {
   useEffect(() => {
     const path = pathRef.current;
     const canvas = canvasRef.current;
-    const profile = window.matchMedia(MOBILE_QUERY);
+    const mobile = window.matchMedia(MOBILE_QUERY);
+    const tablet = window.matchMedia(TABLET_QUERY);
     const local = isLocal(window.location.hostname);
     const preview = local && window.parent !== window &&
       new URLSearchParams(window.location.search).get("dragonPathPreview") === "1";
-    let layout = local ? loadLayout(window.localStorage, defaults) : defaults;
+    let layout = loadLayout(local ? window.localStorage : null, defaults);
     let lastPreview;
     let disposed = false;
+    let mount;
+    let overviewRuntime;
+    let view = "site";
+    const previewStatus = { site: "loading", overview: "loading" };
 
-    function activeProfile() { return profile.matches ? "mobile" : "desktop"; }
+    function report(surface, value) {
+      previewStatus[surface] = value;
+      if (view === surface) setStatus(value);
+    }
+
+    function activeProfile() {
+      if (mobile.matches) return "mobile";
+      return tablet.matches ? "tablet" : "desktop";
+    }
 
     function applyLayout() {
-      path.setAttribute("d", layout[activeProfile()]);
-      runtime.current?.setTwists(normalizeTwists(layout.twists?.[activeProfile()]));
+      const name = activeProfile();
+      path.setAttribute("d", layout[name]);
+      runtime.current?.setTwists(normalizeTwists(layout.twists?.[name]));
+      runtime.current?.setAppendageKeys(normalizeAppendageKeys(layout.appendages?.[name]));
+      runtime.current?.setIdleMotion(normalizeIdleMotion(layout.idleMotion?.[name]));
+      runtime.current?.setDragonSize(layout.dragonSize[name]);
       runtime.current?.refresh();
     }
     function applyPreview({ detail }) {
       if (!detail || !parsePath(detail.d) || !Number.isFinite(detail.progress)) return;
       lastPreview = detail;
+      const { overview, progress, opening, fly, idle } = detail;
+      const nextView = overview ? "overview" : "site";
+      if (view !== nextView) {
+        const previous = view === "site" ? runtime.current : overviewRuntime;
+        view = nextView;
+        canvas.hidden = Boolean(overview);
+        previous?.scrub(progress, opening);
+        setStatus(previewStatus[view]);
+      }
       if (path.getAttribute("d") !== detail.d) path.setAttribute("d", detail.d);
-      runtime.current?.setTwists(normalizeTwists(detail.twists));
-      if (detail.fly) {
-        runtime.current?.refresh();
-        runtime.current?.setFlight(detail.opening === true);
+      const twists = normalizeTwists(detail.twists);
+      const appendageKeys = normalizeAppendageKeys(detail.appendages);
+      const idleMotion = normalizeIdleMotion(detail.idleMotion);
+      const dragonSize = normalizeDragonSize(detail.dragonSize);
+      if (overview) {
+        if (overview.path.getAttribute("d") !== detail.d) overview.path.setAttribute("d", detail.d);
+        if (overviewRuntime === undefined && mount) {
+          overviewRuntime = mount({
+            canvas: overview.canvas, path: overview.path, preview: true, twists, appendageKeys, idleMotion, dragonSize,
+            report: (value) => report("overview", value),
+            getViewportWidth: () => lastPreview?.overview?.viewportWidth,
+          });
+        }
+      }
+      const active = overview ? overviewRuntime : runtime.current;
+      active?.setTwists(twists);
+      active?.setAppendageKeys(appendageKeys);
+      active?.setIdleMotion(idleMotion);
+      active?.setDragonSize(dragonSize);
+      if (fly) {
+        active?.refresh();
+        active?.setFlight(opening === true);
       } else {
-        runtime.current?.scrub(detail.progress, detail.opening === true);
+        active?.scrub(progress, opening === true, idle === true);
       }
     }
     function syncStored(event) {
@@ -70,7 +116,8 @@ export default function FullDragon() {
       window.addEventListener(PREVIEW_EVENT, applyPreview);
       path.closest(".d-path").dataset.dragonEditorReady = "true";
     } else {
-      profile.addEventListener("change", applyLayout);
+      mobile.addEventListener("change", applyLayout);
+      tablet.addEventListener("change", applyLayout);
       if (local) window.addEventListener("storage", syncStored);
       window.addEventListener("pointerdown", pointerDown, { passive: true });
       window.addEventListener("pointerup", pointerUp, { passive: true });
@@ -79,8 +126,15 @@ export default function FullDragon() {
 
     import("./full-dragon-scene").then(({ mountDragon }) => {
       if (disposed) return;
-      const twists = normalizeTwists(layout.twists?.[activeProfile()]);
-      runtime.current = mountDragon({ canvas, path, report: setStatus, preview, twists });
+      mount = mountDragon;
+      const name = activeProfile();
+      const twists = normalizeTwists(layout.twists?.[name]);
+      const appendageKeys = normalizeAppendageKeys(layout.appendages?.[name]);
+      const idleMotion = normalizeIdleMotion(layout.idleMotion?.[name]);
+      runtime.current = mountDragon({
+        canvas, path, preview, twists, appendageKeys, idleMotion, dragonSize: layout.dragonSize[name],
+        report: (value) => report("site", value),
+      });
       if (lastPreview) applyPreview({ detail: lastPreview });
     }).catch((error) => {
       if (disposed) return;
@@ -90,14 +144,17 @@ export default function FullDragon() {
 
     return () => {
       disposed = true;
+      canvas.hidden = false;
       delete path.closest(".d-path")?.dataset.dragonEditorReady;
       window.removeEventListener(PREVIEW_EVENT, applyPreview);
-      profile.removeEventListener("change", applyLayout);
+      mobile.removeEventListener("change", applyLayout);
+      tablet.removeEventListener("change", applyLayout);
       window.removeEventListener("storage", syncStored);
       window.removeEventListener("pointerdown", pointerDown);
       window.removeEventListener("pointerup", pointerUp);
       window.removeEventListener("pointercancel", pointerCancel);
       runtime.current?.dispose();
+      overviewRuntime?.dispose();
       runtime.current = null;
     };
   }, []);

@@ -7,6 +7,9 @@ import sys
 import bpy
 from mathutils import Vector, noise
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from dragon_appendages import Appendages, WHISKERS, islands, center
+
 
 ROOT_X = .38
 AXIS_Z = 1.32
@@ -27,28 +30,16 @@ def anchor_for(mod):
     return None
 
 
-LIMBS = {
-    "Front left": 1, "Front right": -1, "Hind left": 1, "Hind right": -1,
-}
-
-
 JAW_PIVOT = Vector((-.53, 0, 1.32))
 JAW_ATTACHMENTS = ("Lower jaw", "Tongue")
-MIXED_MOUTH_PARTS = ("Upper and lower lip", "Ivory teeth", "Palate", "Facial scales", "Two pairs of pale whiskers")
+MIXED_MOUTH_PARTS = ("Upper and lower lip", "Ivory teeth", "Palate", "Facial scales")
 
 
 def gesture_parts(source, anchor, length):
     name = source.name
-    side = LIMBS.get(name.split(" · ")[0])
-    if side is not None:
-        x = ROOT_X - anchor * length - .19
-        return [("leg", side, Vector((x, side * .56, AXIS_Z + .05)))]
     if name.startswith(("Amber corneas", "Wrinkled orbital lids")):
         kind = "eye" if name.startswith("Amber") else "lid"
         return [(kind, side, Vector((.774, side * .594, 1.747))) for side in (-1, 1)]
-    if name.startswith("Two pairs of pale whiskers"):
-        return [("jaw", 0, JAW_PIVOT)] + [
-            ("whisker", side, Vector((2.37, side * .475, 1.486))) for side in (-1, 1)]
     if name.startswith(JAW_ATTACHMENTS + MIXED_MOUTH_PARTS):
         return [("jaw", 0, JAW_PIVOT)]
     return []
@@ -65,43 +56,21 @@ def eased(value):
 
 
 def island_centers(mesh):
-    # Dental rows, facial plates and orbital folds share objects with adjacent
-    # parts. Keep each disconnected piece together when assigning its weight.
-    parents = list(range(len(mesh.vertices)))
-
-    def root(index):
-        while index != parents[index]:
-            parents[index] = parents[parents[index]]
-            index = parents[index]
-        return index
-
-    for edge in mesh.edges:
-        a, b = edge.vertices
-        parents[root(b)] = root(a)
-    sums, counts = {}, {}
-    for vertex in mesh.vertices:
-        group = root(vertex.index)
-        if group not in sums:
-            sums[group] = Vector()
-            counts[group] = 0
-        sums[group] += vertex.co
-        counts[group] += 1
-    centers = {group: total / counts[group] for group, total in sums.items()}
-    return [centers[root(vertex.index)] for vertex in mesh.vertices]
-
+    result = [None] * len(mesh.vertices)
+    for indices in islands(mesh):
+        midpoint = center(mesh, indices)
+        for index in indices:
+            result[index] = midpoint
+    return result
 
 def gesture_influence(name, point, center, kinds):
     side = 1 if point.y > 0 else -1
-    if "leg" in kinds:
-        return "leg", side, eased((abs(point.y) - .53) / .65)
     if "eye" in kinds:
         return "eye", side, 1
     if "lid" in kinds:
         return "lid", side, .17 + .83 * eased((abs(center.y) - .663) / .045)
     if name.startswith(JAW_ATTACHMENTS):
         return "jaw", 0, 1
-    if "whisker" in kinds and center.z > .45:
-        return "whisker", side, eased((2.13 - point.x) / 3.64)
     if name.startswith("Palate") and .8 <= center.z < 1.09:
         return "jaw", 0, eased((1.18 - point.z) / .40)
     return "jaw", 0, 1 if center.z < .96 else 0
@@ -143,7 +112,7 @@ def mesh_part(source, material):
     obj = bpy.data.objects.new(source.name, source.data.copy())
     bpy.context.collection.objects.link(obj)
     bpy.context.view_layer.objects.active = obj
-    if len(obj.data.polygons) > 1200:
+    if len(obj.data.polygons) > 1200 and not source.name.startswith(WHISKERS):
         modifier = obj.modifiers.new("Web geometry reduction", "DECIMATE")
         modifier.ratio = reduction(source)
         modifier.use_collapse_triangulate = True
@@ -219,7 +188,7 @@ def groom_part(source, material):
     return obj
 
 
-def make_rig(length, meshes):
+def make_rig(length, meshes, appendages):
     data = bpy.data.armatures.new("Dragon spine")
     rig = bpy.data.objects.new("Dragon rig", data)
     bpy.context.collection.objects.link(rig)
@@ -227,35 +196,48 @@ def make_rig(length, meshes):
     rig.select_set(True)
     bpy.ops.object.mode_set(mode="EDIT")
     regular = [(i / SPINE_STEPS, f"spine_{i:02d}") for i in range(SPINE_STEPS + 1)]
-    anchors = sorted({anchor for _, anchor, _ in meshes if anchor is not None})
+    anchors = sorted({anchor for _, anchor, _, _ in meshes if anchor is not None})
     rigid = {fraction: f"anchor_{round(fraction * 10000):04d}" for fraction in anchors}
     locations = {name: (-fraction * length, 0, 0) for fraction, name in regular + list(rigid.items())}
-    for _, anchor, gestures in meshes:
+    for _, anchor, gestures, _ in meshes:
         for kind, side, pivot in gestures:
             name = gesture_name(kind, anchor, side)
             locations[name] = (pivot.x - ROOT_X, pivot.y, pivot.z - AXIS_Z)
+    for name, (point, _) in appendages.bones.items():
+        locations[name] = (point.x - ROOT_X, point.y, point.z - AXIS_Z)
     for name, location in locations.items():
         bone = data.edit_bones.new(name)
         bone.head = location
         bone.tail = bone.head + Vector((0, .12, 0))
+    for name, (_, parent) in appendages.bones.items():
+        if parent:
+            data.edit_bones[name].parent = data.edit_bones[parent]
     bpy.ops.object.mode_set(mode="OBJECT")
     return rig, regular, rigid
 
 
 def skin(meshes, rig, regular, rigid, length):
     bpy.ops.object.select_all(action="DESELECT")
-    for obj, anchor, gestures in meshes:
+    for obj, anchor, gestures, appendage_weights in meshes:
         groups = {name: obj.vertex_groups.new(name=name) for _, name in regular} if anchor is None else {
             rigid[anchor]: obj.vertex_groups.new(name=rigid[anchor])}
         gesture_groups = {
             (kind, side): obj.vertex_groups.new(name=gesture_name(kind, anchor, side))
             for kind, side, _ in gestures
         }
+        appendage_groups = {}
+        if appendage_weights:
+            for name in sorted({name for weights in appendage_weights for name, weight in weights if weight > 0}):
+                appendage_groups[name] = (groups.get(name) or obj.vertex_groups.new(name=name))
         kinds = {kind for kind, _, _ in gestures}
         centers = island_centers(obj.data) if obj.name.startswith(MIXED_MOUTH_PARTS + ("Wrinkled orbital lids",)) else None
         for vertex in obj.data.vertices:
             index = vertex.index
-            if anchor is not None:
+            if appendage_weights:
+                for name, weight in appendage_weights[index]:
+                    if weight > 0:
+                        appendage_groups[name].add([index], weight, 'REPLACE')
+            elif anchor is not None:
                 weight = 0.
                 if kinds:
                     center = centers[index] if centers is not None else vertex.co
@@ -308,15 +290,19 @@ def main():
     color.layer_name = "Pigment"
     material.node_tree.links.new(color.outputs["Color"], bsdf.inputs["Base Color"])
 
-    meshes = [(mesh_part(obj, material) if obj.type == "MESH" else groom_part(obj, material),
-               anchor, gesture_parts(obj, anchor, length)) for obj, anchor in sources]
-    rig, regular, rigid = make_rig(length, meshes)
+    appendages = Appendages(sources)
+    meshes = []
+    for source, anchor in sources:
+        obj = mesh_part(source, material) if source.type == 'MESH' else groom_part(source, material)
+        meshes.append((obj, anchor, gesture_parts(source, anchor, length), appendages.weights(source.name, obj.data)))
+    rig, regular, rigid = make_rig(length, meshes, appendages)
     skin(meshes, rig, regular, rigid, length)
     rig["spineLength"] = length
     args.output.parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.export_scene.gltf(filepath=str(args.output.resolve()), export_format="GLB", use_selection=True,
                               export_extras=True, export_animations=False, export_texcoords=False,
-                              export_vertex_color="MATERIAL", export_meshopt_compression_enable=True)
+                              export_attributes=True, export_vertex_color="MATERIAL",
+                              export_meshopt_compression_enable=True)
 
 
 if __name__ == "__main__":

@@ -33,6 +33,20 @@ const nextConfig = {
         destination: "https://www.shubukanindia.org/:path*",
         permanent: true,
       },
+      ...[
+        ["/dragon-path-editor.html", "/editors/dragon-path"],
+        ["/cloud-layout-editor.html", "/editors/cloud-layout"],
+        ["/dragon/flight-paths.json", "/data/homepage/flight-paths.json"],
+        ["/cloud-position.json", "/data/homepage/cloud-position.json"],
+      ].map(([source, destination]) => ({ source, destination, permanent: true })),
+    ];
+  },
+
+  async rewrites() {
+    return [
+      { source: "/editors", destination: "/editors/index.html" },
+      { source: "/editors/dragon-path", destination: "/editors/dragon-path.html" },
+      { source: "/editors/cloud-layout", destination: "/editors/cloud-layout.html" },
     ];
   },
 };
