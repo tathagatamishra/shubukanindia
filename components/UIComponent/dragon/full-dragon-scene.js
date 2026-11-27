@@ -14,6 +14,9 @@ import { sampleAppendageKeys } from "../../../public/dragon/dragon-appendage-key
 import { createAppendageMotion } from "./full-dragon-appendages";
 import { applyPaperPigment } from "./full-dragon-material";
 
+const IDLE_FRAME_INTERVAL = 1000 / 60 - 1;
+const MAX_BUFFER_PIXELS = 1_800_000;
+
 function sample(track, distance, target) {
   sampleRoute(track, distance, target);
   target.y = -target.y;
@@ -219,13 +222,14 @@ export function mountDragon({
   let idleMix = 0;
   let flightMix = 0;
   let whiskerTime = 0;
-  let idleTimer = 0;
   let frame = 0;
   let lastTime = 0;
   let elapsed = 0;
   let width = 0;
   let height = 0;
   let pixelRatio = 0;
+  let viewDirty = true;
+  let inViewport = false;
   let shown = false;
   let disposed = false;
   let canRender = true;
@@ -238,8 +242,12 @@ export function mountDragon({
   let forceFrame = true;
 
   function schedule() {
-    clearTimeout(idleTimer);
     if (!frame && !disposed && canRender) frame = win.requestAnimationFrame(draw);
+  }
+
+  function invalidateView() {
+    viewDirty = true;
+    schedule();
   }
 
   function setFlight(opening = false) {
@@ -254,19 +262,47 @@ export function mountDragon({
     schedule();
   }
 
-  function draw(time) {
-    frame = 0;
-    if (!rig || !track || doc.hidden) return;
+  function updateViewport() {
+    viewDirty = false;
+    inViewport = false;
     const matrix = stage.getScreenCTM();
     if (!matrix?.a || !matrix.d) return;
     const canvasBounds = canvas.getBoundingClientRect();
-    transform = { a: matrix.a, d: matrix.d, e: matrix.e - canvasBounds.left, f: matrix.f - canvasBounds.top };
     const bounds = stage.getBoundingClientRect();
     const viewWidth = canvas.clientWidth;
     const viewHeight = canvas.clientHeight;
-    const visible = viewWidth > 0 && viewHeight > 0 &&
+    inViewport = viewWidth > 0 && viewHeight > 0 &&
       bounds.bottom > canvasBounds.top - 120 && bounds.top < canvasBounds.bottom + 120;
-    if (!visible) {
+    if (!inViewport) return;
+    transform = { a: matrix.a, d: matrix.d, e: matrix.e - canvasBounds.left, f: matrix.f - canvasBounds.top };
+
+    const nativeRatio = win.devicePixelRatio || 1;
+    const preferredRatio = viewWidth <= 650
+      ? MathUtils.clamp(nativeRatio, 1.75, 2.25)
+      : Math.min(nativeRatio, 1.5);
+    const nextRatio = Math.min(preferredRatio, Math.sqrt(MAX_BUFFER_PIXELS / (viewWidth * viewHeight)));
+    if (width !== viewWidth || height !== viewHeight || pixelRatio !== nextRatio) {
+      width = viewWidth;
+      height = viewHeight;
+      pixelRatio = nextRatio;
+      renderer.setDrawingBufferSize(width, height, pixelRatio);
+    }
+    camera.left = -transform.e / transform.a;
+    camera.right = (width - transform.e) / transform.a;
+    camera.top = transform.f / transform.d;
+    camera.bottom = (transform.f - height) / transform.d;
+    camera.updateProjectionMatrix();
+  }
+
+  function draw(time) {
+    frame = 0;
+    if (!rig || !track || doc.hidden) return;
+    if (!moving && !viewDirty && !forceFrame && lastTime && time - lastTime < IDLE_FRAME_INTERVAL) {
+      schedule();
+      return;
+    }
+    if (viewDirty) updateViewport();
+    if (!inViewport) {
       if (shown) renderer.clear();
       shown = false;
       lastTime = 0;
@@ -282,10 +318,11 @@ export function mountDragon({
         report("flying");
       }
     }
-    const delta = lastTime ? Math.min((time - lastTime) / 1000, .08) : 0;
+    const frameDelta = lastTime ? (time - lastTime) / 1000 : 0;
+    const delta = Math.min(frameDelta, .12);
     const previousProgress = progress;
     if (moving && !paused) {
-      elapsed += delta;
+      elapsed += frameDelta;
       const duration = firstFlight ? 5.2 : 8.4;
       progress = Math.min(1, elapsed / duration);
       if (progress === 1) {
@@ -313,23 +350,6 @@ export function mountDragon({
     }
     const animatingRest = !moving && (flightMix > 0 || (hasIdleMotion && (couldIdle || idleMix > 0)));
 
-    const nativeRatio = win.devicePixelRatio || 1;
-    const nextRatio = viewWidth <= 650
-      ? Math.min(MathUtils.clamp(nativeRatio, 2.25, 3), Math.sqrt(4_200_000 / (viewWidth * viewHeight)))
-      : Math.min(nativeRatio, 1.5);
-    if (width !== viewWidth || height !== viewHeight || pixelRatio !== nextRatio) {
-      pixelRatio = nextRatio;
-      renderer.setPixelRatio(pixelRatio);
-      width = viewWidth;
-      height = viewHeight;
-      renderer.setSize(width, height, false);
-    }
-    camera.left = -transform.e / transform.a;
-    camera.right = (width - transform.e) / transform.a;
-    camera.top = transform.f / transform.d;
-    camera.bottom = (transform.f - height) / transform.d;
-    camera.updateProjectionMatrix();
-
     if (progress !== previousProgress || moving || animatingRest || previousIdleMix !== idleMix ||
         previousFlightMix !== flightMix || forceFrame || !shown) {
       const flight = firstFlight ? "opening" : "lap";
@@ -348,17 +368,14 @@ export function mountDragon({
       idle.travel = (flight === "opening" ? (track.start - track.rest) / track.length : 1) * eased / bodyFraction;
       idle.flightGape = .09 * Math.sin(Math.PI * progress) ** 2;
       const bank = .25 + .23 * Math.sin(eased * Math.PI * 2);
-      model.scale.setScalar(rig.pose(track, headDistance, bodyLength, bank, twistAngles, idle, getViewportWidth?.() ?? viewWidth));
+      model.scale.setScalar(rig.pose(track, headDistance, bodyLength, bank, twistAngles, idle, getViewportWidth?.() ?? width));
       forceFrame = false;
     }
     renderer.render(scene, camera);
     shown = true;
-    if (moving && !paused) {
+    if ((moving && !paused) || (animatingRest && spineInView())) {
       lastTime = time;
       schedule();
-    } else if (animatingRest && spineInView()) {
-      lastTime = time;
-      idleTimer = setTimeout(schedule, 25);
     } else {
       lastTime = 0;
     }
@@ -380,7 +397,7 @@ export function mountDragon({
       trackSource = source;
     }
     forceFrame = true;
-    schedule();
+    invalidateView();
   }
   function scrub(value, opening, animateIdle = false) {
     const next = MathUtils.clamp(value, 0, 1);
@@ -409,8 +426,7 @@ export function mountDragon({
   }
   function visibilityChanged() {
     lastTime = 0;
-    clearTimeout(idleTimer);
-    if (!doc.hidden) schedule();
+    if (!doc.hidden) invalidateView();
   }
   function hit(x, y) {
     if (!shown || !track || !transform || !rig) return false;
@@ -428,7 +444,6 @@ export function mountDragon({
     event.preventDefault();
     canRender = false;
     lastTime = 0;
-    clearTimeout(idleTimer);
     win.cancelAnimationFrame(frame);
     frame = 0;
     report("unavailable");
@@ -438,18 +453,18 @@ export function mountDragon({
     forceFrame = true;
     width = height = 0;
     report(rig ? (moving ? (paused ? "paused" : "flying") : "ready") : "loading");
-    schedule();
+    invalidateView();
   }
 
-  const observer = new win.ResizeObserver(schedule);
+  const observer = new win.ResizeObserver(invalidateView);
   observer.observe(stage);
   observer.observe(canvas);
   const homepage = stage.closest(".Home");
   if (homepage) observer.observe(homepage);
-  const viewBoxObserver = new win.MutationObserver(schedule);
+  const viewBoxObserver = new win.MutationObserver(invalidateView);
   viewBoxObserver.observe(stage, { attributes: true, attributeFilter: ["viewBox"] });
-  win.addEventListener("resize", schedule, { passive: true });
-  win.addEventListener("scroll", schedule, { passive: true });
+  win.addEventListener("resize", invalidateView, { passive: true });
+  win.addEventListener("scroll", invalidateView, { passive: true, capture: true });
   doc.addEventListener("visibilitychange", visibilityChanged);
   canvas.addEventListener("webglcontextlost", contextLost);
   canvas.addEventListener("webglcontextrestored", contextRestored);
@@ -499,12 +514,11 @@ export function mountDragon({
     },
     dispose() {
       disposed = true;
-      clearTimeout(idleTimer);
       win.cancelAnimationFrame(frame);
       observer.disconnect();
       viewBoxObserver.disconnect();
-      win.removeEventListener("resize", schedule);
-      win.removeEventListener("scroll", schedule);
+      win.removeEventListener("resize", invalidateView);
+      win.removeEventListener("scroll", invalidateView, true);
       doc.removeEventListener("visibilitychange", visibilityChanged);
       canvas.removeEventListener("webglcontextlost", contextLost);
       canvas.removeEventListener("webglcontextrestored", contextRestored);
