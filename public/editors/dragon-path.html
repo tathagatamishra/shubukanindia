@@ -23,6 +23,7 @@
     :focus-visible { outline: 2px solid #286778; outline-offset: 2px; }
     .masthead, .actions, .toolbar, .switch, .viewport-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .masthead, .toolbar { justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .back { display: inline-block; margin-bottom: 5px; color: #244d48; text-underline-offset: 3px; }
     .save { background: #244d48; border-color: #244d48; color: #fff; font-weight: 650; }
     .save:hover:not(:disabled) { background: #193b37; }
     .switch { gap: 3px; padding: 3px; border: 1px solid #d4cec4; border-radius: 8px; background: #eae5dd; }
@@ -34,13 +35,21 @@
       border: 1px solid #373835; border-radius: 9px; color: #fffdfa;
     }
     .workspace[data-view="site"] { height: clamp(330px, var(--preview-height, 65vh), max(330px, 78vh)); }
+    .workspace[data-view="route"] { overflow: clip; background: #ded6c9; }
+    .workspace[data-view="route"] .sizer {
+      position: absolute; top: 0; left: 0; margin: 0; pointer-events: none;
+    }
+    .workspace[data-view="route"] .sizer:not([data-aligned]) { visibility: hidden; }
+    .workspace[data-view="route"] iframe { outline: none; }
     .message { position: absolute; z-index: 1; margin: 20px; padding: 6px 10px; background: #373835; border-radius: 6px; }
     .sizer { position: relative; margin: 12px auto; }
     iframe {
       position: absolute; inset: 0 auto auto 0; display: block; border: 0; transform-origin: top left;
       background: #eee5d9; outline: 1px solid #aaa49a;
     }
-    .route { display: block; width: 100%; height: 100%; background: #e8e0d1; border-radius: 8px; }
+    .overview { position: relative; height: 100%; overflow: hidden; }
+    .overview canvas, .route { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+    .overview canvas { pointer-events: none; mix-blend-mode: multiply; opacity: .87; }
     aside { min-width: 0; border: 1px solid #d4cec4; border-radius: 9px; background: #fffcf8; padding: 14px; }
     .inspector + .inspector, details { border-top: 1px solid #e7e0d7; margin-top: 14px; padding-top: 12px; }
     .field { display: grid; gap: 3px; font-size: 13px; }
@@ -49,16 +58,28 @@
     .hint, .status { color: #625c53; font-size: 12px; margin: 9px 0 0; }
     .status { min-height: 1.5em; }
     .progress { display: grid; gap: 4px; }
+    .dragon-size { margin-bottom: 10px; }
+    .dragon-size output { float: right; font-variant-numeric: tabular-nums; }
+    .dragon-size input { margin-inline: 0; }
+    .idle-motion { min-inline-size: 0; margin: 12px 0 0; padding: 0; border: 0; }
+    .idle-motion legend { padding: 0; }
+    .idle-sliders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin-top: 6px; }
+    .idle-motion output { float: right; font-variant-numeric: tabular-nums; }
+    .idle-motion input { width: 100%; margin-inline: 0; }
     input[type="range"] { accent-color: #286778; }
     textarea { display: block; width: 100%; min-height: 100px; margin-top: 8px; resize: vertical; font-family: ui-monospace, monospace; }
-    #twist-panel summary { margin-bottom: 8px; font-size: 15px; font-weight: 650; }
+    :is(#twist-panel, #appendage-panel) summary { margin-bottom: 8px; font-size: 15px; font-weight: 650; }
     .twist-angle { display: grid; grid-template-columns: 1fr 64px auto; align-items: center; gap: 5px; margin-top: 8px; }
-    .twist-angle input, #twist-slider { width: 100%; }
-    #twist-position { margin-top: 0; margin-bottom: 7px; }
+    .twist-angle input, #twist-slider, #appendage-slider { width: 100%; }
+    #twist-position, #appendage-position { margin-top: 0; margin-bottom: 7px; }
+    #appendage-panel .field + .field { margin-top: 8px; }
     .twist-keys:empty { display: none; }
     .twist-keys { margin-top: 8px; gap: 4px; }
     .twist-keys button { font-size: 12px; padding: 3px 6px; }
-    .twist-keys [aria-pressed="true"], #pick-position[aria-pressed="true"] { border-color: #286778; background: #e5f0ee; }
+    .twist-keys [aria-pressed="true"], #pick-position[aria-pressed="true"], #preview-idle[aria-pressed="true"] { border-color: #286778; background: #e5f0ee; }
+    @media (min-width: 761px) {
+      .workspace { position: sticky; top: 12px; align-self: start; }
+    }
     @media (max-width: 760px) {
       .layout { grid-template-columns: 1fr; }
       .workspace { height: 58vh; min-height: 330px; }
@@ -68,8 +89,13 @@
 <body>
   <main>
     <header class="masthead">
-      <h1>Dragon path editor</h1>
+      <div>
+        <a class="back" href="/editors">All editors</a>
+        <h1>Dragon path editor</h1>
+      </div>
       <div class="actions" id="save-actions" hidden>
+        <a class="back" id="alternate-layout" target="_blank" rel="noopener" hidden></a>
+        <button type="button" id="copy">Copy JSON</button>
         <button type="button" id="download">Download path file</button>
         <button class="save" type="button" id="save">Save layout</button>
       </div>
@@ -79,12 +105,13 @@
       <div class="toolbar">
         <div class="switch" aria-label="Layout size">
           <button type="button" data-profile="desktop" aria-pressed="true">Desktop · 1440 px</button>
+          <button type="button" data-profile="tablet" aria-pressed="false">Tablet · 768 px</button>
           <button type="button" data-profile="mobile" aria-pressed="false">Mobile · 390 px</button>
         </div>
         <div class="viewport-tools">
           <div class="switch" aria-label="Preview view">
             <button type="button" data-view="site" aria-pressed="true">Homepage</button>
-            <button type="button" data-view="route" aria-pressed="false">Full route</button>
+            <button type="button" data-view="route" aria-pressed="false">Full route preview</button>
           </div>
           <label>Zoom
             <select id="zoom">
@@ -103,7 +130,14 @@
           <div class="sizer" id="sizer">
             <iframe id="preview" title="Shubukan India homepage preview"></iframe>
           </div>
-          <svg class="route" id="full-route" viewBox="-115 -120 1080 1695" aria-label="Full dragon flight route" hidden></svg>
+          <div class="overview" id="overview" hidden>
+            <canvas id="route-dragon" aria-hidden="true"></canvas>
+            <svg class="route" id="full-route" aria-label="Full dragon flight route">
+              <path id="route-path" fill="none" stroke="none"></path>
+              <rect id="device-frame" fill="none" stroke="#655b4d" stroke-dasharray="6 4"
+                vector-effect="non-scaling-stroke" pointer-events="none" visibility="hidden"></rect>
+            </svg>
+          </div>
         </div>
         <aside aria-label="Dragon path controls">
           <section class="inspector">
@@ -124,6 +158,10 @@
           </section>
           <section class="inspector">
             <h2>Dragon preview</h2>
+            <div class="progress dragon-size">
+              <div><label for="dragon-size">Dragon size</label> <output id="dragon-size-value" for="dragon-size">100%</output></div>
+              <input type="range" id="dragon-size" step="1" value="100">
+            </div>
             <label class="field">Flight
               <select id="flight">
                 <option value="lap">Full lap</option>
@@ -135,10 +173,54 @@
             </label>
             <div class="actions">
               <button type="button" id="fly" disabled>Play flight</button>
+              <button type="button" id="preview-idle" aria-pressed="false" disabled>Preview idle</button>
               <button type="button" id="pick-position" aria-pressed="false">Pick on route</button>
             </div>
+            <fieldset class="idle-motion" id="idle-motion">
+              <legend>Idle animation strength</legend>
+              <div class="idle-sliders">
+                <div class="progress">
+                  <div><label for="idle-whiskers">Whiskers</label> <output id="idle-whiskers-value" for="idle-whiskers">100%</output></div>
+                  <input type="range" id="idle-whiskers" min="0" max="100" value="100">
+                </div>
+                <div class="progress">
+                  <div><label for="idle-paws">Paws</label> <output id="idle-paws-value" for="idle-paws">100%</output></div>
+                  <input type="range" id="idle-paws" min="0" max="100" value="100">
+                </div>
+                <div class="progress">
+                  <div><label for="idle-head">Head</label> <output id="idle-head-value" for="idle-head">100%</output></div>
+                  <input type="range" id="idle-head" min="0" max="100" value="100">
+                </div>
+                <div class="progress">
+                  <div><label for="idle-tail">Tail</label> <output id="idle-tail-value" for="idle-tail">100%</output></div>
+                  <input type="range" id="idle-tail" min="0" max="100" value="100">
+                </div>
+              </div>
+            </fieldset>
             <p class="hint" id="pick-help" hidden>Choose a point on the highlighted route.</p>
+            <p class="hint" id="overview-help" hidden>The dashed outline frames the homepage. Scroll in Homepage view to change which part of the page appears here.</p>
           </section>
+          <details class="inspector" id="appendage-panel">
+            <summary>Legs, claws and whiskers</summary>
+            <label class="field">Part
+              <select id="appendage-part"></select>
+            </label>
+            <label class="field">Adjustment
+              <select id="appendage-control"></select>
+            </label>
+            <label class="twist-angle">Amount
+              <input id="appendage-value" type="number" step="0.1" value="0">
+              <span id="appendage-unit" aria-hidden="true">°</span>
+            </label>
+            <input id="appendage-slider" type="range" aria-label="Adjustment amount slider" step="1" value="0">
+            <p class="hint" id="appendage-position"></p>
+            <div class="actions">
+              <button type="button" id="appendage-set">Add keyframe</button>
+              <button type="button" id="appendage-remove" disabled>Remove keyframe</button>
+            </div>
+            <div class="actions twist-keys" id="appendage-keys" aria-label="Keyframes for selected adjustment"></div>
+            <p class="hint">Scrub or pick a point on the route, then set an adjustment. Zero uses the automatic motion. Positive claw curl closes the paw.</p>
+          </details>
           <details class="inspector" id="twist-panel" open>
             <summary>Body twist</summary>
             <label class="field">Body segment
@@ -157,16 +239,21 @@
             <div class="actions twist-keys" id="twist-keys" aria-label="Keyframes for selected segment"></div>
             <p class="hint">Scrub or pick a spot on the route, then change the angle. Twist blends along the body and between keyframes.</p>
           </details>
+
           <details>
             <summary>SVG path data</summary>
             <textarea id="path-data" aria-label="SVG path data" spellcheck="false"></textarea>
             <button type="button" id="apply">Apply SVG path</button>
+          </details>
+          <details id="json-output" hidden>
+            <summary>Flight paths JSON</summary>
+            <textarea id="json-data" aria-label="Flight paths JSON" readonly spellcheck="false"></textarea>
           </details>
           <p id="status" class="status" role="status"></p>
         </aside>
       </div>
     </div>
   </main>
-  <script type="module" src="/dragon/path-editor.mjs"></script>
+  <script type="module" src="/editors/dragon-path/path-editor.mjs"></script>
 </body>
 </html>

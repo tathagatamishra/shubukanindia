@@ -27,6 +27,10 @@
   opacity: .87;
 }
 
+.home-dragon-canvas[hidden] {
+  display: none;
+}
+
 .Home > section:not(.d-path) {
   position: relative;
 }

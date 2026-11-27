@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { cloudArtwork, watchCloud } from "./cloudMotion";
-import { cloudPlacementStyle } from "./cloudPlacements";
+import { cloudPlacementStyle, getCloudLayout, getDefaultCloudLayout, subscribeCloudLayout } from "./cloudPlacements";
 import "./PaintedCloud.css";
 
 export default function PaintedCloud({ className, layer, small = false }) {
   const cloudRef = useRef(null);
   const canvasRef = useRef(null);
   const artwork = small ? "/assets/painted-cloud-wisp.webp" : cloudArtwork;
+  const layout = useSyncExternalStore(subscribeCloudLayout, getCloudLayout, getDefaultCloudLayout);
 
   useEffect(() => {
     if (small) return;
@@ -47,7 +48,7 @@ export default function PaintedCloud({ className, layer, small = false }) {
       ref={cloudRef}
       className={`painted-cloud${small ? " painted-cloud--small" : ""} ${className}`}
       data-cloud-layer={layer}
-      style={cloudPlacementStyle(layer)}
+      style={cloudPlacementStyle(layer, layout)}
       aria-hidden="true"
     >
       <span

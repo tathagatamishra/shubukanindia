@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Shubukan India · Cloud layout editor</title>
+  <style>
+    :root { color-scheme: light; font: 14px/1.5 system-ui, sans-serif; color: #282622; background: #f5f3ef; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; }
+    button, input, select, textarea { font: inherit; }
+    button, select { cursor: pointer; }
+    button, select, input[type="number"] { border: 1px solid #d4cec4; border-radius: 6px; background: #fffdfa; color: inherit; padding: 6px 10px; }
+    button:disabled { cursor: default; opacity: .55; }
+    button:hover:not(:disabled) { background: #eee8de; }
+    button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible,
+    .workspace:focus-visible { outline: 2px solid #286778; outline-offset: 2px; }
+    .editor { max-width: 1520px; margin: auto; padding: 20px clamp(12px, 3vw, 36px) 28px; }
+    .masthead, .toolbar, .actions, .mode-switch, .viewport-controls { display: flex; align-items: center; gap: 8px; }
+    .masthead { justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .back { display: inline-block; margin-bottom: 5px; color: #244d48; text-underline-offset: 3px; }
+    .actions, .mode-switch { flex-wrap: wrap; }
+    h1 { margin: 0; font-size: clamp(21px, 4vw, 29px); font-weight: 650; letter-spacing: -.03em; }
+    .save { background: #244d48; border-color: #244d48; color: white; font-weight: 600; }
+    .save:hover:not(:disabled) { background: #193b37; }
+    .toolbar { flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
+    .mode-switch { border: 1px solid #d4cec4; border-radius: 8px; gap: 3px; padding: 3px; background: #eae5dd; }
+    .mode-switch button { border-color: transparent; background: transparent; padding: 5px 10px; white-space: nowrap; }
+    .mode-switch [aria-pressed="true"] { background: #fffdfa; border-color: #d4cec4; font-weight: 600; }
+    .viewport-controls { gap: 12px; flex-wrap: wrap; }
+    .check { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 244px; gap: 12px; }
+    .workspace {
+      position: relative; height: clamp(510px, 75vh, 900px); overflow: auto;
+      border: 1px solid #373835; border-radius: 9px; background: #4b4b46;
+      scrollbar-color: #8a877f #4b4b46; color: #fffdfa;
+    }
+    .workspace-message { margin: 20px; }
+    .sizer { position: relative; margin: 16px auto; }
+    .stage { position: absolute; inset: 0 auto auto 0; transform-origin: top left; overflow: clip; }
+    .frame { display: block; position: absolute; border: 0; pointer-events: none; background: #eee5d9; }
+    .frame-outline { position: absolute; pointer-events: none; box-shadow: 0 0 0 1px #aaa49a, 0 12px 40px #0006; }
+    .cloud-target {
+      position: absolute; display: block; border: 0; background: transparent;
+      border-radius: 0; padding: 0; cursor: grab; touch-action: none; user-select: none;
+    }
+    .cloud-target:hover:not(:disabled), .cloud-target:focus-visible { background: #c0eff911; }
+    .cloud-target:active { cursor: grabbing; }
+    .cloud-target[aria-pressed="true"] { z-index: 1; box-shadow: inset 0 0 0 var(--outline-size, 2px) #4eb3ca; }
+    .cloud-target .outside, .cloud-target .outside-art { position: absolute; inset: 0; pointer-events: none; }
+    .outside-art { background-position: center; background-size: 100% 100%; background-repeat: no-repeat; }
+    .resize-handle {
+      position: absolute; z-index: 2; width: var(--handle-size, 16px); height: var(--handle-size, 16px);
+      transform: translate(-50%, -50%); border: var(--outline-size, 2px) solid #fffdfa;
+      border-radius: 3px; background: #286778; padding: 0; cursor: nwse-resize; touch-action: none;
+    }
+    .resize-handle:hover:not(:disabled) { background: #174b5b; }
+    .stage.preview-only :is(.cloud-target, .resize-handle) { visibility: hidden; }
+    .controls { min-width: 0; border: 1px solid #d4cec4; border-radius: 9px; background: #fffcf8; padding: 14px; }
+    .controls h2 { margin: 0 0 8px; font-size: 15px; }
+    .layer-group { margin: 0 0 10px; }
+    .layer-group p { margin: 0 0 4px; color: #5f5a51; font-size: 12px; font-weight: 600; }
+    .layer-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .layer-buttons button { padding: 5px 3px; font-size: 12px; }
+    .layer-buttons [aria-pressed="true"] { border-color: #367878; background: #e5f0ee; font-weight: 600; }
+    .inspector { border-top: 1px solid #e7e0d7; margin-top: 14px; padding-top: 12px; }
+    .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .fields label { display: grid; gap: 3px; font-size: 12px; }
+    .fields input { width: 100%; }
+    .opacity-control { display: grid; gap: 3px; font-size: 12px; margin-bottom: 10px; }
+    .opacity-inputs { display: grid; grid-template-columns: minmax(0, 1fr) 66px; gap: 8px; align-items: center; }
+    .opacity-inputs input { width: 100%; margin: 0; }
+    .opacity-inputs input[type="range"] { accent-color: #286778; cursor: ew-resize; }
+    .flip-controls { display: flex; gap: 6px; margin-bottom: 10px; }
+    .flip-controls button { flex: 1; padding-inline: 4px; font-size: 12px; }
+    .flip-controls [aria-pressed="true"] { border-color: #367878; background: #e5f0ee; font-weight: 600; }
+    .hint, .status { color: #625c53; font-size: 12px; }
+    .hint { margin: 12px 0; }
+    .status { margin: 8px 0 0; min-height: 1.5em; }
+    details { border-top: 1px solid #e7e0d7; margin-top: 14px; padding-top: 10px; }
+    summary { cursor: pointer; font-size: 13px; }
+    textarea { display: block; width: 100%; min-height: 130px; margin-top: 8px; resize: vertical; }
+    @media (max-width: 750px) {
+      .layout { grid-template-columns: 1fr; }
+      .workspace { height: 63vh; min-height: 360px; }
+      .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="editor">
+    <div class="masthead">
+      <div>
+        <a class="back" href="/editors">All editors</a>
+        <h1>Cloud layout editor</h1>
+      </div>
+      <div class="actions">
+        <a class="back" id="alternate-layout" target="_blank" rel="noopener" hidden></a>
+        <button id="copy" type="button" disabled>Copy layout</button>
+        <button id="download" type="button" disabled>Download layout file</button>
+        <button class="save" id="save" type="button" disabled>Save layout</button>
+      </div>
+    </div>
+    <p id="access-error" hidden>This editor is available on the local Shubukan India preview.</p>
+    <div id="editor-controls">
+      <div class="toolbar">
+        <div class="mode-switch" aria-label="Layout size">
+          <button type="button" data-profile="desktop" aria-pressed="true">Desktop · 1440 px</button>
+          <button type="button" data-profile="tablet" aria-pressed="false">Tablet · 768 px</button>
+          <button type="button" data-profile="mobile" aria-pressed="false">Mobile · 390 px</button>
+        </div>
+        <div class="viewport-controls">
+          <label>Zoom
+            <select id="zoom">
+              <option value="fit">Fit width</option>
+              <option value=".5">50%</option>
+              <option value=".75">75%</option>
+              <option value="1">100%</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="preview-only"> Preview only</label>
+        </div>
+      </div>
+      <div class="layout">
+        <div class="workspace" id="workspace" tabindex="0" aria-label="Scrollable cloud placement canvas">
+          <p class="workspace-message" id="loading" role="status">Loading the homepage preview…</p>
+          <div class="sizer" id="sizer" hidden>
+            <div class="stage" id="stage">
+              <div class="frame-outline" id="frame-outline"></div>
+              <iframe class="frame" id="site-preview" title="Shubukan India homepage mockup" sandbox="allow-same-origin" tabindex="-1"></iframe>
+              <button type="button" class="resize-handle" id="resize-handle" aria-label="Resize selected cloud" hidden></button>
+            </div>
+          </div>
+        </div>
+        <aside class="controls" aria-label="Cloud placement controls">
+          <h2>Cloud layers</h2>
+          <div class="layers" id="layers"></div>
+          <div class="inspector">
+            <h2 id="selection-label">Selected cloud</h2>
+            <div class="fields">
+              <label>Horizontal (px)<input id="offset-x" type="number" step="1" disabled></label>
+              <label>Vertical (px)<input id="offset-y" type="number" step="1" disabled></label>
+              <label>Size (%)<input id="cloud-size" type="number" min="25" max="200" step="1" disabled></label>
+            </div>
+            <div class="opacity-control">
+              <label for="cloud-opacity">Opacity (%)</label>
+              <div class="opacity-inputs">
+                <input id="cloud-opacity-slider" type="range" min="0" max="100" step="1" aria-label="Cloud opacity slider" disabled>
+                <input id="cloud-opacity" type="number" min="0" max="100" step="1" disabled>
+              </div>
+            </div>
+            <div class="flip-controls">
+              <button type="button" id="flip-x" aria-pressed="false" disabled>Flip horizontal</button>
+              <button type="button" id="flip-y" aria-pressed="false" disabled>Flip vertical</button>
+            </div>
+            <button type="button" id="reset" disabled>Reset selected cloud</button>
+            <p class="hint">Drag a cloud to move it. Drag its corner handle to resize. Use the layer list to select overlapping clouds.</p>
+            <p class="status" id="status" role="status"></p>
+          </div>
+          <details id="layout-details">
+            <summary>Layout data</summary>
+            <textarea id="layout-data" aria-label="Saved cloud layout" readonly spellcheck="false"></textarea>
+          </details>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/editors/cloud-layout/editor.mjs"></script>
+</body>
+</html>

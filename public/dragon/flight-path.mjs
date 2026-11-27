@@ -1,12 +1,29 @@
 import { normalizeTwists } from "./dragon-twist.mjs";
+import { normalizeAppendageKeys } from "./dragon-appendage-keys.mjs";
+import { DEVICE_PROFILES } from "../homepage/device-profiles.mjs";
 
 export const FRAME = [752, 1449];
-export const MOBILE_QUERY = "(max-width: 500px)";
 export const STORAGE_KEY = "shubukan-dragon-path-v1";
 export const PREVIEW_EVENT = "shubukan:dragon-preview";
-export const PROFILES = ["desktop", "mobile"];
+export const IDLE_PARTS = ["whiskers", "paws", "head", "tail"];
 export const START_VERTEX = 9;
 export const REST_VERTEX = 1;
+export const DRAGON_SIZE_MIN = 50;
+export const DRAGON_SIZE_MAX = 200;
+export const DRAGON_SIZE_DEFAULT = 100;
+
+export function normalizeDragonSize(value) {
+  return Number.isFinite(value)
+    ? Math.round(Math.min(DRAGON_SIZE_MAX, Math.max(DRAGON_SIZE_MIN, value)))
+    : DRAGON_SIZE_DEFAULT;
+}
+
+export function normalizeIdleMotion(value) {
+  return Object.fromEntries(IDLE_PARTS.map((part) => {
+    const strength = typeof value === "number" ? value : value?.[part];
+    return [part, Number.isFinite(strength) ? Math.round(Math.min(100, Math.max(0, strength))) : 100];
+  }));
+}
 
 export function isLocal(hostname) {
   return ["localhost", "127.0.0.1", "[::1]"].includes(hostname);
@@ -45,24 +62,52 @@ export function pathString([start, ...curves], close = true) {
   return ["M" + pair(start), ...curves.map((curve) => "C" + curve.map(pair).join(" ")), close ? "Z" : ""].join("");
 }
 
-export function loadLayout(storage, defaults) {
-  let saved;
-  try {
-    saved = JSON.parse(storage.getItem(STORAGE_KEY));
-  } catch {
-    saved = null;
-  }
-  const layout = { twists: {} };
-  for (const profile of PROFILES) {
-    layout[profile] = parsePath(saved?.[profile]) ? saved[profile] : defaults[profile];
-    layout.twists[profile] = normalizeTwists(saved?.twists?.[profile] ?? defaults.twists?.[profile]);
+function normalizeLayout(defaults, saved) {
+  const layout = { twists: {}, appendages: {}, idleMotion: {}, dragonSize: {} };
+  for (const profile of DEVICE_PROFILES) {
+    // Before tablet layouts existed, the desktop settings applied at tablet widths.
+    const source = profile === "tablet" && saved?.tablet == null && parsePath(saved?.desktop) ? "desktop" : profile;
+    const fallback = profile === "tablet" ? "desktop" : profile;
+    layout[profile] = parsePath(saved?.[source]) ? saved[source] : defaults[profile] ?? defaults[fallback];
+    layout.twists[profile] = normalizeTwists(saved?.twists?.[source] ?? defaults.twists?.[profile] ?? defaults.twists?.[fallback]);
+    layout.appendages[profile] = normalizeAppendageKeys(saved?.appendages?.[source] ?? defaults.appendages?.[profile] ?? defaults.appendages?.[fallback]);
+    layout.idleMotion[profile] = normalizeIdleMotion(saved?.idleMotion?.[source] ?? defaults.idleMotion?.[profile] ?? defaults.idleMotion?.[fallback]);
+    const savedSize = saved?.dragonSize?.[profile];
+    layout.dragonSize[profile] = normalizeDragonSize(Number.isFinite(savedSize) ? savedSize : defaults.dragonSize?.[profile]);
   }
   return layout;
 }
 
-export const LAP_BODY_FRACTION = .145;
+export function serializeFlightPreview(layout, fileLayout) {
+  return JSON.stringify({ ...layout, source: JSON.stringify(fileLayout) });
+}
+
+export function readFlightPreview(raw, fileLayout, allowOlder = false) {
+  try {
+    const saved = JSON.parse(raw);
+    if (!saved || !DEVICE_PROFILES.some((profile) => parsePath(saved[profile]))) return null;
+    if (!allowOlder && saved.source !== JSON.stringify(fileLayout)) return null;
+    return normalizeLayout(fileLayout, saved);
+  } catch {
+    return null;
+  }
+}
+
+export function loadLayout(storage, defaults) {
+  const fileLayout = normalizeLayout(defaults);
+  try {
+    return readFlightPreview(storage?.getItem(STORAGE_KEY), fileLayout) ?? fileLayout;
+  } catch {
+    return fileLayout;
+  }
+}
+
 const SAMPLE_COUNT = 1200;
 const lerp = (a, b, t) => a + (b - a) * t;
+
+export function dragonBodyFraction(size) {
+  return .145 * (size / DRAGON_SIZE_DEFAULT);
+}
 
 export function flightEase(progress) {
   return progress * progress * (3 - 2 * progress);
