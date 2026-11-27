@@ -95,10 +95,14 @@ def reduction(obj):
     if "Facial scales" in name or "Rust-copper" in name:
         return .13
     if "Skull" in name:
-        return .085
+        return .043
+    if "antler" in name or "shoulder to articulated wrist" in name:
+        return .12
+    if any(part in name for part in ("three phalanges", "phalange pads", "gunmetal claws")):
+        return .24
     if "Dorsal fin" in name or "dorsal fin" in name or "scutes" in name.lower():
-        return .16
-    return .26 if len(obj.data.polygons) > 8000 else .57
+        return .12
+    return .17 if len(obj.data.polygons) > 8000 else .36
 
 
 def pigment_source(material):
@@ -158,10 +162,10 @@ def groom_part(source, material):
     root = Vector((.26, .22, .18))
     vertices, faces, colors = [], [], []
     for index, strand in enumerate(data.curves):
-        if (index * 37 % 101) >= (23 if "crown" in source.name.lower() else 14):
+        if (index * 37 % 101) >= (21 if "crown" in source.name.lower() else 12):
             continue
         start = strand.first_point_index
-        indices = list(range(start, start + strand.points_length, 4))
+        indices = list(range(start, start + strand.points_length, 6))
         if indices[-1] != start + strand.points_length - 1:
             indices.append(start + strand.points_length - 1)
         points = [positions[i].vector.copy() for i in indices]
